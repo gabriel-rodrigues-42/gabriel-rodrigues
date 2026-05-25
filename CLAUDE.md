@@ -66,16 +66,16 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 ## Build & Dev Commands
 
 ```bash
-npm run dev          # Start dev server
-npm run build        # Production build (static output)
-npm run preview      # Preview production build
-npm run lint         # ESLint check
-npm run lint:fix     # ESLint auto-fix
-npm run format       # Prettier format all files
-npm run format:check # Prettier check formatting
-npm run test         # Run Playwright E2E tests
-npm run test:ui      # Playwright tests with UI
-npm run test:headed  # Playwright tests in headed browser
+pnpm dev          # Start dev server
+pnpm build        # Production build (static output)
+pnpm preview      # Preview production build
+pnpm lint         # ESLint check
+pnpm lint:fix     # ESLint auto-fix
+pnpm format       # Prettier format all files
+pnpm format:check # Prettier check formatting
+pnpm test         # Run Playwright E2E tests
+pnpm test:ui      # Playwright tests with UI
+pnpm test:headed  # Playwright tests in headed browser
 ```
 
 ## Architecture
