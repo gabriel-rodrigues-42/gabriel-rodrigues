@@ -65,15 +65,42 @@ function nameHash(s: string): number {
 }
 
 const INDUSTRY_PALETTES: Record<IndustryCategory, [string, string, string][]> = {
-  tech:        [['#00e5ff', '#8eff71', '#7c3aed'], ['#8eff71', '#00e5ff', '#a855f7']],
-  finance:     [['#ffd709', '#1a56db', '#059669'], ['#60a5fa', '#ffd709', '#10b981']],
-  health:      [['#10b981', '#60a5fa', '#f59e0b'], ['#34d399', '#38bdf8', '#fbbf24']],
-  retail:      [['#f97316', '#ec4899', '#8b5cf6'], ['#fb923c', '#f472b6', '#a78bfa']],
-  creative:    [['#8eff71', '#f43f5e', '#fbbf24'], ['#a3e635', '#fb7185', '#fcd34d']],
-  food:        [['#f97316', '#84cc16', '#fcd34d'], ['#fb923c', '#a3e635', '#fde68a']],
-  education:   [['#6366f1', '#0ea5e9', '#f59e0b'], ['#818cf8', '#38bdf8', '#fbbf24']],
-  hospitality: [['#f59e0b', '#ec4899', '#8b5cf6'], ['#fbbf24', '#f472b6', '#a78bfa']],
-  other:       [['#8eff71', '#00e5ff', '#ffd709'], ['#00e5ff', '#8eff71', '#a855f7']],
+  tech: [
+    ['#00e5ff', '#8eff71', '#7c3aed'],
+    ['#8eff71', '#00e5ff', '#a855f7'],
+  ],
+  finance: [
+    ['#ffd709', '#1a56db', '#059669'],
+    ['#60a5fa', '#ffd709', '#10b981'],
+  ],
+  health: [
+    ['#10b981', '#60a5fa', '#f59e0b'],
+    ['#34d399', '#38bdf8', '#fbbf24'],
+  ],
+  retail: [
+    ['#f97316', '#ec4899', '#8b5cf6'],
+    ['#fb923c', '#f472b6', '#a78bfa'],
+  ],
+  creative: [
+    ['#8eff71', '#f43f5e', '#fbbf24'],
+    ['#a3e635', '#fb7185', '#fcd34d'],
+  ],
+  food: [
+    ['#f97316', '#84cc16', '#fcd34d'],
+    ['#fb923c', '#a3e635', '#fde68a'],
+  ],
+  education: [
+    ['#6366f1', '#0ea5e9', '#f59e0b'],
+    ['#818cf8', '#38bdf8', '#fbbf24'],
+  ],
+  hospitality: [
+    ['#f59e0b', '#ec4899', '#8b5cf6'],
+    ['#fbbf24', '#f472b6', '#a78bfa'],
+  ],
+  other: [
+    ['#8eff71', '#00e5ff', '#ffd709'],
+    ['#00e5ff', '#8eff71', '#a855f7'],
+  ],
 };
 
 const INDUSTRY_MOOD: Record<IndustryCategory, CompanyMood> = {
@@ -89,55 +116,56 @@ const INDUSTRY_MOOD: Record<IndustryCategory, CompanyMood> = {
 };
 
 const INDUSTRY_DEFAULTS: Record<IndustryCategory, string[]> = {
-  tech:        ['software', 'cloud', 'data'],
-  finance:     ['capital', 'markets', 'invest'],
-  health:      ['wellness', 'clinical', 'pharma'],
-  retail:      ['products', 'shop', 'brand'],
-  creative:    ['design', 'media', 'content'],
-  food:        ['cuisine', 'dining', 'flavor'],
-  education:   ['learning', 'campus', 'skills'],
+  tech: ['software', 'cloud', 'data'],
+  finance: ['capital', 'markets', 'invest'],
+  health: ['wellness', 'clinical', 'pharma'],
+  retail: ['products', 'shop', 'brand'],
+  creative: ['design', 'media', 'content'],
+  food: ['cuisine', 'dining', 'flavor'],
+  education: ['learning', 'campus', 'skills'],
   hospitality: ['travel', 'service', 'guest'],
-  other:       ['growth', 'global', 'vision'],
+  other: ['growth', 'global', 'vision'],
 };
 
 const MOOD_PARAMS: Record<CompanyMood, { speed: number; density: number; complexity: number }> = {
-  bold:    { speed: 1.4, density: 0.8,  complexity: 0.75 },
-  dynamic: { speed: 1.2, density: 0.7,  complexity: 0.65 },
-  playful: { speed: 1.1, density: 0.75, complexity: 0.6  },
-  elegant: { speed: 0.8, density: 0.55, complexity: 0.5  },
-  minimal: { speed: 0.7, density: 0.45, complexity: 0.4  },
+  bold: { speed: 1.4, density: 0.8, complexity: 0.75 },
+  dynamic: { speed: 1.2, density: 0.7, complexity: 0.65 },
+  playful: { speed: 1.1, density: 0.75, complexity: 0.6 },
+  elegant: { speed: 0.8, density: 0.55, complexity: 0.5 },
+  minimal: { speed: 0.7, density: 0.45, complexity: 0.4 },
 };
 
 // Animation style selection mirrors the frontend's style-selector.ts logic
 const V1_STYLE_MATRIX: Record<IndustryCategory, AnimationStyle> = {
-  tech:        'particles',
-  finance:     'geometric',
-  health:      'flowing',
-  retail:      'typographic',
-  creative:    'constellation',
-  food:        'flowing',
-  education:   'typographic',
+  tech: 'particles',
+  finance: 'geometric',
+  health: 'flowing',
+  retail: 'typographic',
+  creative: 'constellation',
+  food: 'flowing',
+  education: 'typographic',
   hospitality: 'spotlight',
-  other:       'particles',
+  other: 'particles',
 };
 
 const V2_STYLE_MATRIX: Record<IndustryCategory, AnimationStyle> = {
-  tech:        'signal',
-  finance:     'pulse',
-  health:      'orbit',
-  retail:      'narrative',
-  creative:    'timeline',
-  food:        'narrative',
-  education:   'narrative',
+  tech: 'signal',
+  finance: 'pulse',
+  health: 'orbit',
+  retail: 'narrative',
+  creative: 'timeline',
+  food: 'narrative',
+  education: 'narrative',
   hospitality: 'orbit',
-  other:       'signal',
+  other: 'signal',
 };
 
 // ─── Derivation helpers ────────────────────────────────────────────────────
 
 function detectIndustryCategory(text: string): IndustryCategory {
   const t = text.toLowerCase();
-  if (/tech|software|cloud|computing|digital|internet|\bai\b|artificial intelligence|data/.test(t)) return 'tech';
+  if (/tech|software|cloud|computing|digital|internet|\bai\b|artificial intelligence|data/.test(t))
+    return 'tech';
   if (/bank|financ|invest|capital|insurance|trading|fund|asset/.test(t)) return 'finance';
   if (/health|pharma|medical|hospital|clinic|biotech|drug|therapeut/.test(t)) return 'health';
   if (/retail|shop|store|commerce|fashion|apparel|consumer goods/.test(t)) return 'retail';
@@ -167,9 +195,15 @@ function hexToHsl(hex: string): [number, number, number] {
     const d = max - min;
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
     switch (max) {
-      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
-      case g: h = ((b - r) / d + 2) / 6; break;
-      case b: h = ((r - g) / d + 4) / 6; break;
+      case r:
+        h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
+        break;
+      case g:
+        h = ((b - r) / d + 2) / 6;
+        break;
+      case b:
+        h = ((r - g) / d + 4) / 6;
+        break;
     }
   }
   return [h, s, l];
@@ -196,7 +230,10 @@ function hslToHex(h: number, s: number, l: number): string {
     g = hue2rgb(h);
     b = hue2rgb(h - 1 / 3);
   }
-  const toHex = (x: number) => Math.round(x * 255).toString(16).padStart(2, '0');
+  const toHex = (x: number) =>
+    Math.round(x * 255)
+      .toString(16)
+      .padStart(2, '0');
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
 
@@ -224,12 +261,55 @@ function deriveTagline(description: string): string {
 }
 
 const STOP_WORDS = new Set([
-  'the', 'and', 'for', 'that', 'this', 'with', 'from', 'have', 'been', 'also',
-  'its', 'are', 'was', 'were', 'will', 'has', 'had', 'not', 'but', 'they',
-  'which', 'their', 'into', 'more', 'than', 'such', 'when', 'about', 'other',
-  'over', 'after', 'before', 'between', 'through', 'during', 'including',
-  'based', 'known', 'well', 'founded', 'american', 'company', 'corporation',
-  'incorporated', 'limited', 'group', 'holdings', 'international', 'global',
+  'the',
+  'and',
+  'for',
+  'that',
+  'this',
+  'with',
+  'from',
+  'have',
+  'been',
+  'also',
+  'its',
+  'are',
+  'was',
+  'were',
+  'will',
+  'has',
+  'had',
+  'not',
+  'but',
+  'they',
+  'which',
+  'their',
+  'into',
+  'more',
+  'than',
+  'such',
+  'when',
+  'about',
+  'other',
+  'over',
+  'after',
+  'before',
+  'between',
+  'through',
+  'during',
+  'including',
+  'based',
+  'known',
+  'well',
+  'founded',
+  'american',
+  'company',
+  'corporation',
+  'incorporated',
+  'limited',
+  'group',
+  'holdings',
+  'international',
+  'global',
 ]);
 
 function extractVisualElements(
@@ -309,8 +389,7 @@ async function fetchWikipedia(companyName: string): Promise<WikiResult> {
     const timeout = setTimeout(() => controller.abort(), 3000);
 
     const url =
-      `https://en.wikipedia.org/api/rest_v1/page/summary/` +
-      encodeURIComponent(companyName);
+      `https://en.wikipedia.org/api/rest_v1/page/summary/` + encodeURIComponent(companyName);
 
     const res = await fetch(url, { signal: controller.signal });
     clearTimeout(timeout);
@@ -339,11 +418,9 @@ async function generateFromWeb(companyName: string, version: string): Promise<Ge
     fetchWikipedia(companyName),
   ]);
 
-  const description =
-    ddg.abstract || wiki.extract || `${companyName} is a company.`;
+  const description = ddg.abstract || wiki.extract || `${companyName} is a company.`;
 
-  const industryText =
-    ddg.infoboxIndustry || ddg.abstract || wiki.description || description;
+  const industryText = ddg.infoboxIndustry || ddg.abstract || wiki.description || description;
 
   const industryCategory = detectIndustryCategory(industryText);
   const mood = INDUSTRY_MOOD[industryCategory];
@@ -351,9 +428,9 @@ async function generateFromWeb(companyName: string, version: string): Promise<Ge
   const energyLevel = +(0.3 + (hash % 60) / 100).toFixed(2);
   const rawColors = deriveColors(industryCategory, hash);
   const colors = {
-    primary:    ensureMinLightness(rawColors.primary),
-    secondary:  ensureMinLightness(rawColors.secondary),
-    accent:     ensureMinLightness(rawColors.accent),
+    primary: ensureMinLightness(rawColors.primary),
+    secondary: ensureMinLightness(rawColors.secondary),
+    accent: ensureMinLightness(rawColors.accent),
     background: rawColors.background,
   };
   const animationStyle = selectAnimationStyle(version, industryCategory);
@@ -415,12 +492,28 @@ function jsonResponse(data: unknown, status: number, headers: HeadersInit): Resp
 
 const VALID_MOODS: CompanyMood[] = ['bold', 'elegant', 'playful', 'minimal', 'dynamic'];
 const VALID_INDUSTRY_CATEGORIES: IndustryCategory[] = [
-  'tech', 'finance', 'health', 'retail', 'creative',
-  'food', 'education', 'hospitality', 'other',
+  'tech',
+  'finance',
+  'health',
+  'retail',
+  'creative',
+  'food',
+  'education',
+  'hospitality',
+  'other',
 ];
 const VALID_ANIMATION_STYLES: AnimationStyle[] = [
-  'particles', 'flowing', 'geometric', 'typographic', 'narrative',
-  'timeline', 'constellation', 'spotlight', 'orbit', 'pulse', 'signal',
+  'particles',
+  'flowing',
+  'geometric',
+  'typographic',
+  'narrative',
+  'timeline',
+  'constellation',
+  'spotlight',
+  'orbit',
+  'pulse',
+  'signal',
 ];
 
 function sanitizeMood(value: unknown): CompanyMood {

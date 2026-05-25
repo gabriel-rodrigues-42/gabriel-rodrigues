@@ -19,7 +19,14 @@ function detectConfigDir(baseDir) {
   if (envDir && fs.existsSync(path.join(envDir, 'get-shit-done', 'VERSION'))) {
     return envDir;
   }
-  for (const dir of ['.config/kilo', '.kilo', '.config/opencode', '.opencode', '.gemini', '.claude']) {
+  for (const dir of [
+    '.config/kilo',
+    '.kilo',
+    '.config/opencode',
+    '.opencode',
+    '.gemini',
+    '.claude',
+  ]) {
     if (fs.existsSync(path.join(baseDir, dir, 'get-shit-done', 'VERSION'))) {
       return path.join(baseDir, dir);
     }
@@ -45,7 +52,11 @@ if (!fs.existsSync(cacheDir)) {
 }
 
 // Run check in background (spawn background process, windowsHide prevents console flash)
-const child = spawn(process.execPath, ['-e', `
+const child = spawn(
+  process.execPath,
+  [
+    '-e',
+    `
   const fs = require('fs');
   const path = require('path');
   const { execSync } = require('child_process');
@@ -120,10 +131,13 @@ const child = spawn(process.execPath, ['-e', `
   };
 
   fs.writeFileSync(cacheFile, JSON.stringify(result));
-`], {
-  stdio: 'ignore',
-  windowsHide: true,
-  detached: true  // Required on Windows for proper process detachment
-});
+`,
+  ],
+  {
+    stdio: 'ignore',
+    windowsHide: true,
+    detached: true, // Required on Windows for proper process detachment
+  },
+);
 
 child.unref();

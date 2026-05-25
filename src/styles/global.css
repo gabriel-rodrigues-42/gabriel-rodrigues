@@ -159,7 +159,6 @@ body::after {
   border-left: 1px solid color-mix(in oklab, var(--color-neon) 10%, transparent);
 }
 
-
 /* === CASINOCRAFTZ LOBBY LAYOUT === */
 .ccz-lobby-grid {
   display: block;
@@ -1042,7 +1041,10 @@ body::after {
     linear-gradient(180deg, rgba(16, 21, 19, 0.94), rgba(10, 13, 12, 0.98));
   background-position: center, center, center;
   background-repeat: no-repeat, no-repeat, no-repeat;
-  background-size: 100% auto, cover, cover;
+  background-size:
+    100% auto,
+    cover,
+    cover;
   border: 1px solid rgba(184, 255, 44, 0.24);
   border-radius: 0.7rem;
   box-shadow:
@@ -1170,7 +1172,10 @@ body::after {
     var(--slots-cell-symbol),
     radial-gradient(circle at 50% 32%, rgba(184, 255, 44, 0.12), rgba(184, 255, 44, 0) 60%),
     linear-gradient(180deg, rgba(16, 21, 19, 0.96), rgba(10, 13, 12, 1));
-  background-size: 100% auto, cover, cover;
+  background-size:
+    100% auto,
+    cover,
+    cover;
   background-position: center, center, center;
   background-repeat: no-repeat, no-repeat, no-repeat;
 }
@@ -2184,7 +2189,10 @@ body.slots-drawer-open {
     linear-gradient(180deg, rgba(18, 26, 23, 0.94), rgba(8, 13, 11, 0.98));
   background-position: center, center, center;
   background-repeat: no-repeat, no-repeat, no-repeat;
-  background-size: 100% auto, cover, cover;
+  background-size:
+    100% auto,
+    cover,
+    cover;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.05),
     inset 0 -16px 32px rgba(0, 0, 0, 0.46),
@@ -2615,7 +2623,10 @@ body.slots-drawer-open {
   background: var(--ccz-chamber-bg);
   border: 1px solid var(--ccz-chamber-border);
   color: var(--ccz-chamber-text);
-  transition: border-color 220ms ease, box-shadow 220ms ease, background-color 220ms ease;
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background-color 220ms ease;
 }
 
 .ccz-chamber-card:hover {

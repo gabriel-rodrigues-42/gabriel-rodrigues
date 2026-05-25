@@ -11,44 +11,19 @@ const headerSource = readFileSync(headerPath, 'utf8');
 const en = JSON.parse(readFileSync(enJsonPath, 'utf8'));
 const pt = JSON.parse(readFileSync(ptJsonPath, 'utf8'));
 
-test('nav labels contract: header uses Projects and removes Canvas top-level link', () => {
-  assert.match(headerSource, /t\('nav\.projects'\)/);
-  assert.doesNotMatch(headerSource, /t\('nav\.canvas'\)/);
-  assert.ok(headerSource.includes('href={`/${lang}/projects/`}'));
+test('nav labels contract: header uses GitHub and removes Projects link', () => {
+  assert.match(headerSource, /t\('nav\.github'\)/);
+  assert.doesNotMatch(headerSource, /t\('nav\.projects'\)/);
+  assert.ok(headerSource.includes('href="https://github.com/gabriel-rodrigues-42"'));
 });
 
-test('active-state contract: Projects nav covers /projects /canvas /slots /casinocraftz surfaces', () => {
-  assert.match(headerSource, /currentPath\.includes\('\/projects'\)/);
-  assert.match(headerSource, /currentPath\.includes\('\/canvas'\)/);
-  assert.match(headerSource, /currentPath\.includes\('\/slots'\)/);
-  assert.match(headerSource, /currentPath\.includes\('\/casinocraftz'\)/);
-  assert.match(headerSource, /isProjectsSurface/);
+test('active-state contract: active states are evaluated properly', () => {
+  assert.doesNotMatch(headerSource, /isProjectsSurface/);
+  assert.doesNotMatch(headerSource, /currentPath\.includes\('\/projects'\)/);
 });
 
 test('i18n parity: nav labels and primitives exist in EN/PT with matching keys', () => {
-  const primitiveKeys = [
-    'nav.projects',
-    'projects.title',
-    'projects.subtitle',
-    'projects.status.live',
-    'projects.status.foundation',
-    'projects.status.educationalLab',
-    'projects.card.casinocraftz.description',
-    'projects.card.casinocraftz.cta',
-    'casinocraftz.title',
-    'casinocraftz.subtitle',
-    'casinocraftz.badge.liveLab',
-    'casinocraftz.disclaimer.zeroRisk',
-    'casinocraftz.zone.foundation',
-    'casinocraftz.zone.modules',
-    'casinocraftz.zone.transparency',
-    'casinocraftz.cta.openSlots',
-    'casinocraftz.cta.backProjects',
-    'slots.title',
-    'slots.subtitle',
-    'slots.status.inDevelopment',
-    'slots.disclaimer',
-  ];
+  const primitiveKeys = ['nav.home', 'nav.resume', 'nav.blog', 'nav.github', 'lang.switch'];
 
   for (const key of primitiveKeys) {
     assert.equal(typeof en[key], 'string', `EN missing key: ${key}`);

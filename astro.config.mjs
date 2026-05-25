@@ -16,7 +16,8 @@ export default defineConfig({
           if (
             warning.code === 'UNUSED_EXTERNAL_IMPORT' &&
             warning.exporter?.includes('node_modules/astro')
-          ) return;
+          )
+            return;
           warn(warning);
         },
         output: {

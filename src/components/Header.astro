@@ -5,11 +5,6 @@ import LanguageSwitcher from './LanguageSwitcher.astro';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const currentPath = Astro.url.pathname;
-const isProjectsSurface =
-  currentPath.includes('/projects') ||
-  currentPath.includes('/canvas') ||
-  currentPath.includes('/slots') ||
-  currentPath.includes('/casinocraftz');
 ---
 
 <header class="sticky top-0 z-50 bg-surface-dim/80 backdrop-blur-md hud-line-bottom">
@@ -56,13 +51,12 @@ const isProjectsSurface =
         {t('nav.blog')}
       </a>
       <a
-        href={`/${lang}/projects/`}
-        class:list={[
-          'inline-flex items-center min-h-11 px-1 text-xs font-mono uppercase tracking-normal sm:tracking-wider transition-colors',
-          isProjectsSurface ? 'nav-active text-neon' : 'text-text-secondary hover:text-neon',
-        ]}
+        href="https://github.com/gabriel-rodrigues-42"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center min-h-11 px-1 text-xs font-mono uppercase tracking-normal sm:tracking-wider transition-colors text-text-secondary hover:text-neon"
       >
-        {t('nav.projects')}
+        {t('nav.github')}
       </a>
       <LanguageSwitcher />
     </div>

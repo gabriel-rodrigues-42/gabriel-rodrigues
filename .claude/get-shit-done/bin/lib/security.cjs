@@ -128,7 +128,7 @@ const INJECTION_PATTERNS = [
 
   // Role/identity manipulation
   /you\s+are\s+now\s+(?:a|an|the)\s+/i,
-  /act\s+as\s+(?:a|an|the)\s+(?!plan|phase|wave)/i,  // allow "act as a plan"
+  /act\s+as\s+(?:a|an|the)\s+(?!plan|phase|wave)/i, // allow "act as a plan"
   /pretend\s+(?:you(?:'re| are)\s+|to\s+be\s+)/i,
   /from\s+now\s+on,?\s+you\s+(?:are|will|should|must)/i,
 
@@ -185,7 +185,9 @@ function scanForInjection(text, opts = {}) {
     // Normalize CRLF → LF before measuring so Windows checkouts don't inflate the count.
     const normalizedLength = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').length;
     if (normalizedLength > 50000) {
-      findings.push(`Suspicious text length: ${normalizedLength} chars (potential prompt stuffing)`);
+      findings.push(
+        `Suspicious text length: ${normalizedLength} chars (potential prompt stuffing)`,
+      );
     }
   }
 
@@ -213,8 +215,10 @@ function sanitizeForPrompt(text) {
   // Neutralize XML/HTML tags that mimic system boundaries
   // Replace < > with full-width equivalents to prevent tag interpretation
   // Note: <instructions> is excluded — GSD uses it as legitimate prompt structure
-  sanitized = sanitized.replace(/<(\/?)(?:system|assistant|human)>/gi,
-    (_, slash) => `＜${slash || ''}system-text＞`);
+  sanitized = sanitized.replace(
+    /<(\/?)(?:system|assistant|human)>/gi,
+    (_, slash) => `＜${slash || ''}system-text＞`,
+  );
 
   // Neutralize [SYSTEM] / [INST] markers
   sanitized = sanitized.replace(/\[(SYSTEM|INST)\]/gi, '[$1-TEXT]');
@@ -244,7 +248,7 @@ function sanitizeForDisplay(text) {
 
   sanitized = sanitized
     .split('\n')
-    .filter(line => !protocolLeakPatterns.some(pattern => pattern.test(line)))
+    .filter((line) => !protocolLeakPatterns.some((pattern) => pattern.test(line)))
     .join('\n');
 
   return sanitized;
@@ -300,7 +304,10 @@ function safeJsonParse(text, opts = {}) {
   }
 
   if (text.length > maxLength) {
-    return { ok: false, error: `${label}: input exceeds ${maxLength} byte limit (got ${text.length})` };
+    return {
+      ok: false,
+      error: `${label}: input exceeds ${maxLength} byte limit (got ${text.length})`,
+    };
   }
 
   try {
