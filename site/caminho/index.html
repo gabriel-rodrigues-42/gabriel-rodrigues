@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Qual caminho faz sentido pra mim?</title>
+<meta name="description" content="Um questionário para descobrir qual caminho na política ou na tecnologia cívica combina com você, com dados reais de Goiânia e Goiás.">
+<style>
+  :root {
+    --verde: #009c3b;
+    --verde-escuro: #00602a;
+    --amarelo: #ffdf00;
+    --amarelo-claro: #fff6b8;
+    --azul: #002776;
+    --azul-claro: #e6ecf7;
+    --branco: #ffffff;
+    --creme: #fbf8ef;
+    --texto: #14213d;
+    --texto-suave: #4a5470;
+    --raio-organico: 42% 58% 55% 45% / 48% 40% 60% 52%;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--creme);
+    color: var(--texto);
+    line-height: 1.5;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .bolha {
+    position: fixed; z-index: -1; border-radius: var(--raio-organico);
+    filter: blur(2px); opacity: .9;
+  }
+  .b1 { width: 340px; height: 300px; background: var(--amarelo-claro); top: -120px; right: -100px; }
+  .b2 { width: 260px; height: 240px; background: #d6f2df; bottom: -90px; left: -80px; border-radius: 55% 45% 38% 62% / 52% 60% 40% 48%; }
+  main { max-width: 680px; margin: 0 auto; padding: 32px 16px 64px; }
+  header .selo {
+    display: inline-block; background: var(--verde); color: var(--branco);
+    font-weight: 800; font-size: 13px; letter-spacing: .06em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 999px 999px 999px 4px;
+  }
+  h1 { font-size: clamp(28px, 6vw, 40px); line-height: 1.15; margin: 16px 0 8px; color: var(--azul); }
+  h1 em { font-style: normal; background: linear-gradient(transparent 60%, var(--amarelo) 60%); }
+  .intro { color: var(--texto-suave); margin: 0 0 24px; }
+  .cartao {
+    background: var(--branco); border-radius: 28px 34px 30px 26px;
+    padding: 24px; box-shadow: 0 10px 0 -2px var(--azul-claro), 0 2px 18px rgba(0,39,118,.08);
+  }
+  .progresso { height: 10px; background: var(--azul-claro); border-radius: 999px; overflow: hidden; margin-bottom: 16px; }
+  .progresso div { height: 100%; background: var(--verde); border-radius: 999px; transition: width .3s; }
+  .contador { font-size: 14px; color: var(--texto-suave); font-weight: 700; }
+  h2 { font-size: 22px; margin: 4px 0 18px; color: var(--azul); }
+  .opcoes { display: grid; gap: 10px; }
+  .opcao {
+    text-align: left; font: inherit; color: inherit; cursor: pointer;
+    background: var(--creme); border: 2px solid transparent;
+    padding: 14px 16px; border-radius: 18px 22px 20px 16px;
+    transition: border-color .15s, background .15s, transform .15s;
+  }
+  .opcao:hover { border-color: var(--verde); transform: translateX(3px); }
+  .opcao:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+  .opcao.marcada { background: #e3f6ea; border-color: var(--verde); font-weight: 700; }
+  .acoes { display: flex; justify-content: space-between; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
+  .botao {
+    font: inherit; font-weight: 800; cursor: pointer; border: none;
+    padding: 12px 20px; border-radius: 999px; background: var(--azul); color: var(--branco);
+  }
+  .botao.secundario { background: transparent; color: var(--azul); border: 2px solid var(--azul-claro); }
+  .botao:disabled { opacity: .4; cursor: default; }
+  .resultado h2 { margin-bottom: 4px; }
+  .vencedor { border-top: 8px solid var(--amarelo); }
+  .quando { display: inline-block; font-weight: 800; color: var(--verde-escuro); margin-bottom: 8px; }
+  dl { display: grid; grid-template-columns: minmax(120px, 40%) 1fr; gap: 6px 12px; margin: 14px 0; font-size: 15px; }
+  dt { color: var(--texto-suave); }
+  dd { margin: 0; font-weight: 700; }
+  ol { padding-left: 20px; margin: 8px 0 0; }
+  .barra { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; align-items: center; margin: 10px 0; }
+  .barra .trilho { grid-column: 1 / -1; height: 12px; background: var(--azul-claro); border-radius: 999px; overflow: hidden; }
+  .barra .trilho div { height: 100%; background: var(--verde); border-radius: 999px; }
+  .barra.primeiro .trilho div { background: var(--amarelo); }
+  .outros { margin-top: 20px; }
+  details { margin-top: 12px; background: var(--creme); border-radius: 16px; padding: 10px 14px; }
+  summary { cursor: pointer; font-weight: 800; color: var(--azul); }
+  .nota { font-size: 13px; color: var(--texto-suave); margin-top: 24px; }
+  .copiado { font-size: 14px; color: var(--verde-escuro); font-weight: 700; }
+  @media (max-width: 480px) { dl { grid-template-columns: 1fr; } dd { margin-bottom: 6px; } }
+</style>
+</head>
+<body>
+<div class="bolha b1"></div><div class="bolha b2"></div>
+<main>
+  <header>
+    <span class="selo">Questionário aberto</span>
+    <h1>Qual caminho faz <em>sentido</em> pra mim?</h1>
+    <p class="intro">Sete perguntas para quem quer melhorar o Brasil e não sabe por onde começar: candidatura, tecnologia cívica ou aprender por dentro. Os números são de Goiânia e Goiás.</p>
+  </header>
+  <section id="app" class="cartao" aria-live="polite"></section>
+  <p class="nota" id="nota"></p>
+</main>
+<script src="dados.js"></script>
+<script>
+(() => {
+  const D = window.CAMINHO;
+  const app = document.getElementById("app");
+  document.getElementById("nota").textContent =
+    "Números de referência de " + D.atualizado + ", tirados de eleições anteriores. Confira sempre no TSE e no TRE-GO antes de decidir. Nada aqui é orientação jurídica.";
+
+  let respostas = lerHash();
+  let atual = respostas.length >= D.perguntas.length ? D.perguntas.length : Math.max(0, respostas.findIndex(r => r == null));
+  if (atual < 0) atual = respostas.length;
+
+  function lerHash() {
+    const m = location.hash.match(/r=([0-9]+)/);
+    if (!m) return [];
+    return m[1].split("").map(Number).slice(0, D.perguntas.length)
+      .map((v, i) => v < D.perguntas[i].opcoes.length ? v : null);
+  }
+  function salvarHash() {
+    history.replaceState(null, "", "#r=" + respostas.map(r => r ?? "").join(""));
+  }
+
+  function el(tag, attrs = {}, ...filhos) {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (v == null) continue;
+      if (k === "class") n.className = v; else if (k.startsWith("on")) n.addEventListener(k.slice(2), v); else n.setAttribute(k, v);
+    }
+    for (const f of filhos.flat(Infinity)) if (f != null) n.append(f);
+    return n;
+  }
+
+  function render() {
+    app.replaceChildren();
+    if (atual >= D.perguntas.length) return renderResultado();
+    const p = D.perguntas[atual];
+    app.className = "cartao";
+    app.append(
+      el("div", { class: "progresso" }, el("div", { style: `width:${(atual / D.perguntas.length) * 100}%` })),
+      el("div", { class: "contador" }, `Pergunta ${atual + 1} de ${D.perguntas.length}`),
+      el("h2", {}, p.texto),
+      el("div", { class: "opcoes", role: "group" },
+        p.opcoes.map(([texto], i) => el("button", {
+          class: "opcao" + (respostas[atual] === i ? " marcada" : ""),
+          type: "button",
+          onclick: () => { respostas[atual] = i; salvarHash(); atual++; render(); },
+        }, texto))
+      ),
+      el("div", { class: "acoes" },
+        el("button", { class: "botao secundario", type: "button", disabled: atual === 0 ? "" : null,
+          onclick: () => { atual--; render(); } }, "Voltar")
+      )
+    );
+  }
+
+  function pontuar() {
+    const pts = Object.fromEntries(Object.keys(D.caminhos).map(k => [k, 0]));
+    const max = Object.fromEntries(Object.keys(D.caminhos).map(k => [k, 0]));
+    D.perguntas.forEach((p, i) => {
+      for (const k in pts) max[k] += Math.max(0, ...p.opcoes.map(o => o[1][k] || 0));
+      const r = respostas[i];
+      if (r != null) for (const [k, v] of Object.entries(p.opcoes[r][1])) pts[k] += v;
+    });
+    return Object.keys(pts)
+      .map(k => ({ k, pct: max[k] ? Math.round((pts[k] / max[k]) * 100) : 0 }))
+      .sort((a, b) => b.pct - a.pct);
+  }
+
+  function cartaoCaminho(k, vencedor) {
+    const c = D.caminhos[k];
+    return el("div", {},
+      el("span", { class: "quando" }, c.quando),
+      el("p", {}, c.resumo),
+      el("dl", {}, c.fatos.map(([a, b]) => [el("dt", {}, a), el("dd", {}, b)])),
+      el("strong", {}, vencedor ? "Seus próximos passos" : "Primeiros passos"),
+      el("ol", {}, c.passos.map(s => el("li", {}, s)))
+    );
+  }
+
+  function renderResultado() {
+    const rank = pontuar();
+    const top = rank[0];
+    app.className = "cartao resultado vencedor";
+    const copiado = el("span", { class: "copiado" });
+    app.append(
+      el("div", { class: "contador" }, "Seu caminho mais provável"),
+      el("h2", {}, D.caminhos[top.k].nome),
+      cartaoCaminho(top.k, true),
+      el("div", { class: "outros" },
+        el("strong", {}, "Como cada caminho combinou com você"),
+        rank.map((r, i) => el("div", { class: "barra" + (i === 0 ? " primeiro" : "") },
+          el("span", {}, D.caminhos[r.k].nome), el("span", {}, r.pct + "%"),
+          el("div", { class: "trilho" }, el("div", { style: `width:${r.pct}%` }))
+        ))
+      ),
+      ...rank.slice(1).map(r => el("details", {}, el("summary", {}, D.caminhos[r.k].nome), cartaoCaminho(r.k, false))),
+      el("div", { class: "acoes" },
+        el("button", { class: "botao secundario", type: "button",
+          onclick: () => { respostas = []; atual = 0; history.replaceState(null, "", location.pathname); render(); } }, "Refazer"),
+        el("button", { class: "botao", type: "button",
+          onclick: async () => {
+            try { await navigator.clipboard.writeText(location.href); copiado.textContent = "Link copiado"; }
+            catch { copiado.textContent = location.href; }
+          } }, "Copiar link do resultado"),
+        copiado
+      )
+    );
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>
