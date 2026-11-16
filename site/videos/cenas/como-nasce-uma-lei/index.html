@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Cena teste: Como nasce uma lei</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;800;900&display=swap">
+<link rel="stylesheet" href="../../kit/clay.css">
+<style>
+  /* ===== Linha do tempo da cena (segundos) =====
+     0.0  fundo brota
+     0.4  Gabriel surge e acena
+     1.4  balão "Como nasce uma lei?"
+     4.6  balão some
+     5.0  etapas caem uma a uma, com setas
+     10.8 frase final */
+
+  #bolha-amarela { animation: brotar .8s 0s both, flutuar 6s .8s infinite ease-in-out; }
+  #bolha-verde   { animation: brotar .8s .15s both, flutuar 7s 1s infinite ease-in-out; }
+  #bolha-azul    { animation: brotar .8s .3s both, flutuar 5s 1.2s infinite ease-in-out; }
+  #chao          { animation: brotar .6s .1s both; }
+
+  #gabriel-corpo   { animation: surgir .9s .4s both, respirar 2.4s 1.3s infinite ease-in-out; }
+  #gabriel-braco-d { animation: acenar .5s 1.2s 4 ease-in-out; }
+  #gabriel-olhos   { animation: piscar 3.2s 0s infinite; }
+  #gabriel-boca    { animation: falar .32s 1.5s 9 linear, falar .32s 5.1s 14 linear; }
+
+  #balao { animation: brotar .7s 1.4s both, sumir .5s 4.6s forwards; }
+
+  .etapa:nth-of-type(1) { animation: surgir .8s 5.0s both; }
+  .etapa:nth-of-type(2) { animation: surgir .8s 6.2s both; }
+  .etapa:nth-of-type(3) { animation: surgir .8s 7.4s both; }
+  .etapa:nth-of-type(4) { animation: surgir .8s 8.6s both; }
+  #seta-1 { animation: desenhar .5s 5.8s both; }
+  #seta-2 { animation: desenhar .5s 7.0s both; }
+  #seta-3 { animation: desenhar .5s 8.2s both; }
+
+  #final { animation: brotar .7s 10.8s both; }
+</style>
+</head>
+<body>
+<div class="palco">
+  <svg class="cena" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+    <!-- Fundo -->
+    <g filter="url(#clay-plano)">
+      <path id="bolha-amarela" d="M1500 -80 C1820 -120 2040 120 1960 340 C1880 560 1560 520 1420 360 C1280 200 1300 -50 1500 -80 Z" fill="var(--amarelo-claro)"/>
+      <path id="bolha-verde" d="M-120 760 C40 640 300 700 340 880 C380 1060 160 1160 -40 1120 C-240 1080 -280 880 -120 760 Z" fill="var(--verde-claro)"/>
+      <path id="bolha-azul" d="M180 120 C260 60 380 90 400 180 C420 270 320 330 230 300 C140 270 100 180 180 120 Z" fill="var(--azul-claro)"/>
+      <path id="chao" d="M-50 930 C400 900 1500 900 1970 940 L1970 1130 L-50 1130 Z" fill="var(--areia)"/>
+    </g>
+
+    <g id="lugar-gabriel"></g>
+
+    <g id="lugar-balao"></g>
+
+    <!-- Etapas -->
+    <g id="etapas">
+      <g class="etapa" transform="translate(0 0)">
+        <g transform="translate(900 560)">
+          <g filter="url(#clay)"><rect x="-110" y="-110" width="220" height="220" rx="60" fill="var(--amarelo)"/></g>
+          <text class="texto-cena" y="-10" text-anchor="middle" font-size="70">💡</text>
+          <text class="texto-cena" y="70" text-anchor="middle" font-size="34">Ideia</text>
+        </g>
+      </g>
+      <g class="etapa">
+        <g transform="translate(1200 560)">
+          <g filter="url(#clay)"><rect x="-110" y="-110" width="220" height="220" rx="60" fill="var(--verde)"/></g>
+          <text class="texto-cena claro" y="-10" text-anchor="middle" font-size="70">🏛️</text>
+          <text class="texto-cena claro" y="70" text-anchor="middle" font-size="34">Câmara</text>
+        </g>
+      </g>
+      <g class="etapa">
+        <g transform="translate(1500 560)">
+          <g filter="url(#clay)"><rect x="-110" y="-110" width="220" height="220" rx="60" fill="var(--azul)"/></g>
+          <text class="texto-cena claro" y="-10" text-anchor="middle" font-size="70">⚖️</text>
+          <text class="texto-cena claro" y="70" text-anchor="middle" font-size="34">Senado</text>
+        </g>
+      </g>
+      <g class="etapa">
+        <g transform="translate(1780 560)">
+          <g filter="url(#clay)"><rect x="-100" y="-110" width="200" height="220" rx="60" fill="var(--branco)"/></g>
+          <text class="texto-cena" y="-10" text-anchor="middle" font-size="70">✍️</text>
+          <text class="texto-cena" y="70" text-anchor="middle" font-size="34">Sanção</text>
+        </g>
+      </g>
+      <g fill="none" stroke="var(--azul)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+        <path id="seta-1" class="desenhavel" pathLength="1" d="M1020 560 L1080 560 M1062 540 L1082 560 L1062 580"/>
+        <path id="seta-2" class="desenhavel" pathLength="1" d="M1320 560 L1380 560 M1362 540 L1382 560 L1362 580"/>
+        <path id="seta-3" class="desenhavel" pathLength="1" d="M1618 560 L1672 560 M1654 540 L1674 560 L1654 580"/>
+      </g>
+    </g>
+
+    <g id="final">
+      <text class="texto-cena" x="1300" y="850" text-anchor="middle" font-size="50">Cada etapa tem regras. Vamos ver uma por uma?</text>
+    </g>
+  </svg>
+</div>
+<script src="../../kit/clay.js"></script>
+<script>
+  document.getElementById("lugar-gabriel").outerHTML = Clay.personagem({ id: "gabriel", x: 420, y: 930, escala: 1.15 });
+  document.getElementById("lugar-balao").outerHTML = Clay.balao({ x: 1180, y: 300, largura: 900, texto: "Como nasce uma lei?", tamanho: 80 });
+  Clay.iniciar({ duracao: 13 });
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+/* Brasil orgânico — tokens do design system
+   Fonte única de cores, formas e tipografia para o site e para as animações.
+   Use sempre as variáveis; nunca escreva uma cor solta numa página. */
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap");
+
+:root {
+  /* Cores da bandeira */
+  --verde: #009c3b;
+  --verde-escuro: #00602a;   /* texto verde sobre fundo claro (contraste AA) */
+  --verde-claro: #d6f2df;
+  --amarelo: #ffdf00;
+  --amarelo-escuro: #c9a800;
+  --amarelo-claro: #fff6b8;
+  --azul: #002776;
+  --azul-medio: #2f5bb7;
+  --azul-claro: #e6ecf7;
+  --branco: #ffffff;
+
+  /* Neutros */
+  --creme: #fbf8ef;          /* fundo padrão: papel, não branco puro */
+  --areia: #efe6cf;
+  --texto: #14213d;
+  --texto-suave: #4a5470;
+
+  /* Tipografia */
+  --fonte: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --peso-normal: 400;
+  --peso-forte: 800;
+  --tamanho-1: 13px;
+  --tamanho-2: 15px;
+  --tamanho-3: 18px;
+  --tamanho-4: 22px;
+  --tamanho-5: clamp(28px, 6vw, 40px);
+  --tamanho-6: clamp(32px, 7vw, 48px);
+
+  /* Espaços (escala de 4) */
+  --espaco-1: 4px;
+  --espaco-2: 8px;
+  --espaco-3: 12px;
+  --espaco-4: 16px;
+  --espaco-5: 24px;
+  --espaco-6: 32px;
+  --espaco-7: 56px;
+
+  /* Formas orgânicas: nenhum canto é igual ao outro */
+  --forma-cartao: 28px 34px 30px 26px;
+  --forma-opcao: 18px 22px 20px 16px;
+  --forma-selo: 999px 999px 999px 4px;
+  --forma-pilula: 999px;
+  --forma-bolha-1: 42% 58% 55% 45% / 48% 40% 60% 52%;
+  --forma-bolha-2: 55% 45% 38% 62% / 52% 60% 40% 48%;
+  --forma-bolha-3: 63% 37% 47% 53% / 41% 56% 44% 59%;
+
+  /* Sombras: uma "base" deslocada, como massinha apoiada na mesa */
+  --sombra-cartao: 0 10px 0 -2px var(--azul-claro), 0 2px 18px rgba(0, 39, 118, .08);
+  --sombra-clay: inset -6px -8px 0 rgba(0, 0, 0, .12), inset 6px 6px 0 rgba(255, 255, 255, .35), 0 8px 0 -2px rgba(0, 0, 0, .12);
+
+  /* Legado: nomes usados nas primeiras páginas */
+  --raio-organico: var(--forma-bolha-1);
+}

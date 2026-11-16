@@ -1,0 +1,95 @@
+/* Kit de animação clay — estilos e movimentos reutilizáveis.
+   As cores vêm do design system (site/design-system/tokens.css). */
+@import url("../../design-system/tokens.css");
+
+html, body { margin: 0; background: var(--creme); }
+body { font-family: var(--fonte); }
+
+/* Palco 1920x1080. No preview ele encolhe para caber na janela. */
+.palco {
+  position: relative; width: 1920px; height: 1080px; overflow: hidden;
+  background: var(--creme); transform-origin: 0 0;
+}
+.palco svg.cena { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* Toda peça anima a partir do próprio centro */
+.palco svg * { transform-box: fill-box; transform-origin: center; }
+.pe { transform-origin: center bottom !important; }       /* pivô na base: pulos e balanço */
+.ombro { transform-origin: left center !important; }      /* pivô no ombro: acenar */
+
+/* Texto de cena */
+.texto-cena { font-family: var(--fonte); font-weight: 900; fill: var(--azul); }
+.texto-cena.claro { fill: var(--branco); }
+
+/* ===== Movimentos =====
+   Use com animation: <nome> <duração> <atraso> both;
+   O atraso é o momento (em segundos) em que o movimento começa no vídeo. */
+
+/* Surge com squash & stretch, como massinha caindo na mesa */
+@keyframes surgir {
+  0%   { transform: translateY(-120px) scale(.6, 1.3); opacity: 0; }
+  45%  { transform: translateY(0) scale(1.25, .75); opacity: 1; }
+  65%  { transform: scale(.92, 1.1); }
+  82%  { transform: scale(1.04, .96); }
+  100% { transform: scale(1, 1); opacity: 1; }
+}
+/* Cresce do nada (para bolhas e cenário) */
+@keyframes brotar {
+  0%   { transform: scale(0); opacity: 0; }
+  60%  { transform: scale(1.12); opacity: 1; }
+  80%  { transform: scale(.96); }
+  100% { transform: scale(1); opacity: 1; }
+}
+/* Sai encolhendo */
+@keyframes sumir {
+  0%   { transform: scale(1); opacity: 1; }
+  30%  { transform: scale(1.08); }
+  100% { transform: scale(0); opacity: 0; }
+}
+/* Respiração leve, para nada ficar parado */
+@keyframes respirar {
+  0%, 100% { transform: scale(1, 1); }
+  50%      { transform: scale(1.02, .98); }
+}
+/* Flutuar devagar */
+@keyframes flutuar {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-14px) rotate(2deg); }
+}
+/* Piscar os olhos */
+@keyframes piscar {
+  0%, 92%, 100% { transform: scaleY(1); }
+  96%           { transform: scaleY(.1); }
+}
+/* Boca falando */
+@keyframes falar {
+  0%, 100% { transform: scaleY(.35); }
+  25%      { transform: scaleY(1); }
+  50%      { transform: scaleY(.55); }
+  75%      { transform: scaleY(.9); }
+}
+/* Acenar com o braço */
+@keyframes acenar {
+  0%, 100% { transform: rotate(-20deg); }
+  50%      { transform: rotate(-60deg); }
+}
+/* Balançar de leve (pivô na base) */
+@keyframes balancar {
+  0%, 100% { transform: rotate(-3deg); }
+  50%      { transform: rotate(3deg); }
+}
+/* Seta ou linha se desenhando (use pathLength="1" no path) */
+@keyframes desenhar {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}
+.desenhavel { stroke-dasharray: 1; stroke-dashoffset: 1; }
+
+/* ===== Barra de preview (some na renderização) ===== */
+.preview {
+  position: fixed; left: 0; right: 0; bottom: 0; display: flex; gap: 12px; align-items: center;
+  padding: 10px 16px; background: rgba(0, 0, 0, .8); color: #fff; font: 14px system-ui, sans-serif; z-index: 10;
+}
+.preview button { font: inherit; padding: 6px 14px; border-radius: 999px; border: none; cursor: pointer; }
+.preview input[type=range] { flex: 1; }
+.renderizando .preview { display: none; }
