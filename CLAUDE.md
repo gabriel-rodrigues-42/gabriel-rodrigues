@@ -8,8 +8,8 @@ Site gabriel-rodrigues.com, design system e vídeos do Gabriel Rodrigues, desenv
   - `design-system/`: `tokens.css` (cores, formas, tipografia) e `componentes.css`. Vitrine em `/design-system/`.
   - `caminho/`: questionário "Qual caminho faz sentido pra mim?". Dados em `dados.js`.
   - `projetos/`: páginas de projeto. Modelo em `projetos/_modelo/`.
-  - `videos/kit/`: kit de animação em massinha (`clay.css`, `clay.js`). `videos/cenas/<slug>/`: uma cena por vídeo.
-- `videos/`: ferramentas de vídeo (não publicado). `render.js` gera MP4, `roteiros/` guarda os roteiros. `out/` e `audio/` ficam fora do Git.
+- `videos/`: vídeos (não publicado). `blender/gabriel.py` tem o boneco do Gabriel, as cores e o cenário; `blender/cenas/` tem um script por plano; `roteiros/` guarda os roteiros. `out/` e `audio/` ficam fora do Git.
+- `.claude/skills/blender-claymation/`: skill de stop motion no Blender (MIT, de angrypenguinpng/blender-claymation-skill).
 - `.github/workflows/deploy.yml`: publica `site/` no Cloudflare Pages. Cada PR ganha prévia em `<branch>.gabriel-rodrigues.pages.dev`; a `main` vai para produção.
 
 ## Regras
@@ -21,12 +21,13 @@ Site gabriel-rodrigues.com, design system e vídeos do Gabriel Rodrigues, desenv
 
 ## Skills
 
-- `novo-video`: do tema ao MP4.
+- `novo-video`: do tema ao MP4, usando `blender-claymation`.
 - `pagina-de-projeto`: página de referência em `site/projetos/`.
 
 ## Conferir localmente
 
 ```bash
 python3 -m http.server 8000 -d site
-cd videos && node render.js como-nasce-uma-lei --quadro 6
+uv venv -p 3.13 .bpy && VIRTUAL_ENV=.bpy uv pip install bpy==5.2.4   # Blender como módulo, uma vez
+.bpy/bin/python videos/blender/cenas/como_nasce_uma_lei.py -- --still 60 --res 960 540 --samples 24 --out videos/out/renders/teste
 ```

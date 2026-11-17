@@ -1,11 +1,13 @@
 ---
 name: novo-video
-description: Produz um vídeo explicativo em massinha para o canal do Gabriel, do tema ao MP4 (roteiro, cena animada, narração e renderização). Use quando ele pedir um vídeo novo, um roteiro ou uma cena animada.
+description: Produz um vídeo explicativo em massinha (stop motion no Blender) para o canal do Gabriel, do tema ao MP4 (roteiro, cena, narração e renderização). Use quando ele pedir um vídeo novo, um roteiro ou uma cena animada.
 ---
 
 # Novo vídeo em massinha
 
 Objetivo: explicar um sistema brasileiro (leis, impostos, serviços públicos) de forma descomplicada, com a mentalidade de um desenvolvedor e a didática de um professor. Todo vídeo vira também uma página de projeto no site.
+
+As cenas são feitas no **Blender**, com a skill `blender-claymation` (em `.claude/skills/blender-claymation/`). Leia o `SKILL.md` e o `references/look-guide.md` dela antes de montar uma cena.
 
 ## 1. Roteiro
 
@@ -17,46 +19,58 @@ Objetivo: explicar um sistema brasileiro (leis, impostos, serviços públicos) d
 3. **Regras de pré-campanha** (Lei 9.504/97, art. 36-A): pode falar de ideias e projetos; **não pode** pedir voto, dizer que é candidato nem usar número de urna. Critique sistemas, nunca pessoas ou partidos. Se tiver dúvida, marque no roteiro e pergunte ao Gabriel.
 4. Mostre o roteiro ao Gabriel e espere aprovação antes de animar.
 
-## 2. Cena animada
+## 2. Cena no Blender
 
-1. Copie `site/videos/cenas/como-nasce-uma-lei/` para `site/videos/cenas/<slug>/` e use como base.
-2. Mantenha no topo do `<style>` o comentário com a **linha do tempo** (segundo → o que acontece). Ele é o mapa para editar depois.
-3. Use o kit (`site/videos/kit/`):
-   - `Clay.personagem({ id, x, y, escala })` é o Gabriel em massinha. Partes animáveis: `#<id>-corpo`, `-olhos`, `-boca`, `-braco-d`, `-braco-e`.
-   - `Clay.balao({ x, y, largura, texto, tamanho })` cria um balão de fala.
-   - `filter="url(#clay)"` em qualquer forma dá volume de massinha; `url(#clay-plano)` serve para fundos.
-   - Movimentos prontos em `clay.css`: `surgir`, `brotar`, `sumir`, `respirar`, `flutuar`, `piscar`, `falar`, `acenar`, `balancar`, `desenhar` (setas com `pathLength="1"` e classe `desenhavel`).
-   - O atraso da animação CSS é o segundo do vídeo em que ela começa. Ex.: `animation: surgir .8s 5s both`.
-   - Para animar um elemento que tem `transform` no SVG, ponha a posição num `<g>` externo e anime o `<g>` de dentro.
-4. Só cores e formas de `site/design-system/tokens.css`. Fundo creme, chão `--areia`.
-5. Termine com `Clay.iniciar({ duracao: <segundos> })`.
+1. Divida o roteiro em planos de 5 a 20 segundos. Cada plano é um script em `videos/blender/cenas/<slug>_<n>.py`.
+2. Copie `videos/blender/cenas/como_nasce_uma_lei.py` como base. Ele usa `videos/blender/gabriel.py`, que tem:
+   - `COR`: as cores do design system, ajustadas para o render.
+   - `gabriel(x, y)`: o boneco do Gabriel. Retorna os pivôs `raiz`, `corpo`, `cabeca`, `ombro_e`, `ombro_d`, `olhos_abertos`, `olhos_fechados`.
+   - `bloco(texto, cor, cor_texto, x)`: bloco de massinha com texto em relevo. `seta(x)`: seta azul.
+   - `cenario_brasil(rnd)` e `luzes_e_camera()`: a mesa, o fundo creme, o sol e os morros, e a câmera padrão.
+3. Escreva a **linha do tempo em quadros** (12 fps) no topo do script. 10 s = 120 quadros.
+4. Siga o look-guide: tudo "em dois" com `constant_interp()`, `Boil` no boneco, poses seguradas por 4 a 8 quadros, squash & stretch, piscadas de 2 quadros.
+5. Texto na tela: no máximo 2 ou 3 palavras por bloco. Frases longas vão na narração ou na legenda.
 
-## 3. Conferir
+## 3. Conferir com quadros baratos
+
+Se o Blender não estiver instalado, use-o como módulo Python (uma vez):
 
 ```bash
-python3 -m http.server 8000 -d site   # abra http://localhost:8000/videos/cenas/<slug>/
-cd videos && node render.js <slug> --quadro 3.5   # PNG de um instante, em videos/out/
+uv venv -p 3.13 .bpy && VIRTUAL_ENV=.bpy uv pip install bpy==5.2.4
 ```
 
-Confira alguns quadros (início, meio, fim de cada cena): nada cortado, texto legível, nada sobreposto.
+Depois, para cada momento importante da linha do tempo:
 
-## 4. Narração e render
+```bash
+.bpy/bin/python videos/blender/cenas/<cena>.py -- --still 60 --res 960 540 --samples 24 --out videos/out/renders/<cena>_teste
+```
+
+Olhe os quadros: exposição (cor desbotada = luz demais), pés tocando a mesa, olhos legíveis, texto legível, nada atravessando nada.
+
+## 4. Narração e render final
 
 1. O Gabriel grava a narração e salva em `videos/audio/<slug>.mp3` (a pasta não vai para o Git).
-2. Meça a duração: `ffprobe -v error -show_entries format=duration -of csv=p=0 videos/audio/<slug>.mp3`.
-3. Ajuste `duracao` e os atrasos da linha do tempo para bater com a fala.
-4. Renderize:
+2. Meça a duração: `ffprobe -v error -show_entries format=duration -of csv=p=0 videos/audio/<slug>.mp3`. Ajuste o número de quadros de cada plano (duração × 12).
+3. Renderize em segundo plano e acompanhe:
 
 ```bash
-cd videos
-npm install && npx playwright install chromium   # só na primeira vez
-node render.js <slug> --audio audio/<slug>.mp3   # gera videos/out/<slug>.mp4
-node render.js <slug> --quadro 2 --saida out/<slug>-thumb.png   # miniatura
+nohup .bpy/bin/python videos/blender/cenas/<cena>.py -- --res 1920 1080 --samples 80 --out videos/out/renders/<cena> > videos/out/<cena>.log 2>&1 &
+ls videos/out/renders/<cena> | wc -l
 ```
 
-O render é quadro a quadro e pode levar alguns minutos. O MP4 sai em 1920x1080, 30 fps.
+Num Mac com chip M, cerca de 6 s por quadro em 1600x900. Na CPU da nuvem, cerca de 2 min por quadro em 1280x720.
+
+4. Junte os quadros e o áudio:
+
+```bash
+.claude/skills/blender-claymation/scripts/encode.sh videos/out/renders/<cena> videos/out/<cena>.mp4
+ffmpeg -i videos/out/<cena>.mp4 -i videos/audio/<slug>.mp3 -c:v copy -c:a aac -shortest videos/out/<slug>-final.mp4
+.claude/skills/blender-claymation/scripts/contact_sheet.sh videos/out/renders/<cena> videos/out/<cena>_folha.jpg 20
+```
+
+Confira a folha de contato antes de entregar.
 
 ## 5. Publicar
 
 1. Crie a página de projeto com a skill `pagina-de-projeto`.
-2. Abra um PR com o roteiro, a cena e a página. O PR gera uma prévia no Cloudflare Pages.
+2. Abra um PR com o roteiro, os scripts das cenas e a página. O PR gera uma prévia no Cloudflare Pages. MP4 e quadros não vão para o Git.
