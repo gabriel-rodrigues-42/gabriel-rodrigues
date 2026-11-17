@@ -62,12 +62,12 @@ def gabriel(x=0.0, y=0.0, giro=12, camisa=None):
     corpo = empty('g_corpo', (0, 0, 0), raiz)
     corpo.rotation_euler = (0, 0, math.radians(giro))
     for s in (-1, 1):
-        _parte(f'g_perna{s}', (s * 0.0085, 0, 0.014), (0.0075, 0.0075, 0.016), calca, corpo)
-        _parte(f'g_sapato{s}', (s * 0.0085, -0.004, 0.003), (0.008, 0.011, 0.004), calca, corpo, lump=0.01)
-    _parte('g_tronco', (0, 0, 0.042), (0.021, 0.016, 0.022), cam_m, corpo)
-    _parte('g_pescoco', (0, 0, 0.063), (0.006, 0.006, 0.005), pele, corpo, lump=0)
+        _parte(f'g_perna{s}', (s * 0.0065, 0, 0.016), (0.0058, 0.0058, 0.018), calca, corpo)
+        _parte(f'g_sapato{s}', (s * 0.0065, -0.004, 0.003), (0.0065, 0.0105, 0.0038), calca, corpo, lump=0.01)
+    _parte('g_tronco', (0, 0, 0.046), (0.0145, 0.0105, 0.021), cam_m, corpo)
+    _parte('g_pescoco', (0, 0, 0.068), (0.005, 0.005, 0.005), pele, corpo, lump=0)
 
-    cabeca = empty('g_cabeca', (0, 0, 0.066), corpo)
+    cabeca = empty('g_cabeca', (0, 0, 0.07), corpo)
     _parte('g_rosto', (0, 0, 0.02), (0.021, 0.019, 0.021), pele, cabeca)
     _parte('g_cabelo', (0, 0.003, 0.03), (0.0222, 0.0205, 0.016), cab_m, cabeca, lump=0.03)
     abertos, fechados = [], []
@@ -88,10 +88,10 @@ def gabriel(x=0.0, y=0.0, giro=12, camisa=None):
 
     ombros = {}
     for s, nome in ((-1, 'ombro_e'), (1, 'ombro_d')):
-        piv = empty(f'g_{nome}', (s * 0.019, 0, 0.055), corpo)
+        piv = empty(f'g_{nome}', (s * 0.0135, 0, 0.059), corpo)
         piv.rotation_euler = (0, math.radians(-60), 0)
-        _parte(f'g_braco{s}', (s * 0.012, 0, 0), (0.012, 0.0055, 0.0055), cam_m, piv)
-        _parte(f'g_mao{s}', (s * 0.025, 0, 0), (0.0048, 0.0045, 0.005), pele, piv, lump=0.01)
+        _parte(f'g_braco{s}', (s * 0.012, 0, 0), (0.012, 0.0042, 0.0042), cam_m, piv)
+        _parte(f'g_mao{s}', (s * 0.025, 0, 0), (0.0042, 0.004, 0.0045), pele, piv, lump=0.01)
         ombros[nome] = piv
     # os dois braços começam para baixo
     ombros['ombro_d'].rotation_euler = (0, math.radians(60), 0)
