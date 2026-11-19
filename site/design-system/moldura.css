@@ -1,0 +1,56 @@
+/* Moldura do site: cabeçalho e rodapé iguais em todas as páginas.
+   Depende de tokens.css. Use junto com moldura.js:
+     <link rel="stylesheet" href="/design-system/moldura.css">
+     <script src="/design-system/moldura.js"></script>
+     <gr-cabecalho></gr-cabecalho> logo depois de <body>
+     <gr-rodape></gr-rodape> logo antes de </body> */
+
+gr-cabecalho, gr-rodape { display: block; font-family: var(--fonte); }
+
+/* ---------- Cabeçalho ---------- */
+.moldura-topo {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--creme-vidro); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-bottom: 2px solid var(--azul-claro);
+}
+.moldura-topo-dentro {
+  max-width: 960px; margin: 0 auto; padding: var(--espaco-2) var(--espaco-4);
+  display: flex; align-items: center; justify-content: space-between; gap: var(--espaco-3); flex-wrap: wrap;
+}
+.moldura-marca { display: flex; align-items: center; gap: var(--espaco-3); text-decoration: none; color: var(--azul); min-width: 0; }
+.moldura-marca img {
+  width: 40px; height: 40px; flex: none; object-fit: cover;
+  border-radius: var(--forma-bolha-1); background: var(--verde-claro);
+}
+.moldura-marca strong { display: block; font-size: var(--tamanho-3); font-weight: 900; line-height: 1.1; }
+.moldura-marca span { display: block; font-size: var(--tamanho-1); color: var(--texto-suave); line-height: 1.2; }
+.moldura-menu { display: flex; align-items: center; gap: var(--espaco-1); flex-wrap: wrap; }
+.moldura-menu a {
+  font-size: var(--tamanho-2); font-weight: var(--peso-forte); color: var(--azul); text-decoration: none;
+  padding: 6px 12px; border-radius: var(--forma-pilula);
+}
+.moldura-menu a:hover, .moldura-menu a[aria-current="page"] { background: var(--azul-claro); }
+.moldura-menu a.moldura-apoiar { background: var(--verde); color: var(--branco); }
+.moldura-menu a.moldura-apoiar:hover { background: var(--verde-escuro); }
+.moldura-menu a:focus-visible, .moldura-marca:focus-visible, .moldura-rodape a:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+
+@media (max-width: 560px) {
+  .moldura-topo { position: static; }
+  .moldura-topo-dentro { padding: var(--espaco-3) var(--espaco-4) var(--espaco-2); }
+  .moldura-menu { width: 100%; justify-content: space-between; flex-wrap: nowrap; gap: 0; }
+  .moldura-menu a { padding: 6px 9px; font-size: var(--tamanho-1); white-space: nowrap; }
+}
+
+/* ---------- Rodapé ---------- */
+.moldura-rodape { background: var(--azul); color: var(--branco); margin-top: var(--espaco-7); }
+.moldura-rodape-dentro {
+  max-width: 960px; margin: 0 auto; padding: var(--espaco-6) var(--espaco-4);
+  display: grid; gap: var(--espaco-5); grid-template-columns: 1.4fr 1fr;
+}
+.moldura-rodape strong { font-size: var(--tamanho-4); font-weight: 900; }
+.moldura-rodape p { margin: var(--espaco-2) 0 0; font-size: var(--tamanho-2); color: var(--branco); opacity: .85; max-width: 460px; }
+.moldura-rodape ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--espaco-2); font-size: var(--tamanho-2); }
+.moldura-rodape a { color: var(--branco); font-weight: 700; text-decoration-color: var(--amarelo); text-underline-offset: 3px; }
+.moldura-rodape .moldura-aviso { grid-column: 1 / -1; font-size: var(--tamanho-1); opacity: .7; border-top: 1px solid var(--branco-vidro); padding-top: var(--espaco-4); margin: 0; max-width: none; }
+
+@media (max-width: 560px) { .moldura-rodape-dentro { grid-template-columns: 1fr; } }
