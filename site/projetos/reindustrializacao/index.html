@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reindustrializar o Brasil · Gabriel Rodrigues</title>
+<meta name="description" content="Fundo Soberano de Reindustrialização e Inovação (FSRI): como transformar o crédito que os grandes patrimônios já usam em fábricas, patentes e plataformas brasileiras.">
+<link rel="stylesheet" href="/design-system/tokens.css">
+<link rel="stylesheet" href="/design-system/componentes.css">
+<style>
+  main { max-width: 760px; margin: 0 auto; padding: var(--espaco-7) var(--espaco-4) var(--espaco-7); }
+  nav a { font-weight: var(--peso-forte); text-decoration: none; color: var(--azul); }
+  a { color: var(--azul); }
+  h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); }
+  h2 { font-size: var(--tamanho-5); line-height: 1.15; color: var(--azul); margin: 0 0 var(--espaco-3); }
+  h3 { font-size: var(--tamanho-4); color: var(--azul); margin: 0 0 var(--espaco-2); line-height: 1.25; }
+  p { margin: 0 0 var(--espaco-3); }
+  .lead { font-size: var(--tamanho-3); color: var(--texto-suave); }
+  .grande { font-size: var(--tamanho-4); font-weight: var(--peso-forte); line-height: 1.35; }
+  .suave { color: var(--texto-suave); }
+  .pequeno { font-size: var(--tamanho-2); }
+
+  /* Capítulos */
+  .capitulo { margin-top: var(--espaco-7); }
+  .ato { display: inline-block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); letter-spacing: .08em; text-transform: uppercase; color: var(--verde-escuro); margin-bottom: var(--espaco-2); }
+  .pausa { text-align: center; padding: var(--espaco-6) var(--espaco-4); font-size: var(--tamanho-5); font-weight: var(--peso-forte); line-height: 1.2; color: var(--azul); }
+
+  /* Capa */
+  .capa-acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-3); margin-top: var(--espaco-5); }
+  .botao { display: inline-flex; align-items: center; gap: var(--espaco-2); }
+  .icone { width: 18px; height: 18px; fill: currentColor; flex: none; }
+  .rolar { margin-top: var(--espaco-6); font-size: var(--tamanho-1); font-weight: var(--peso-forte); color: var(--texto-suave); text-transform: uppercase; letter-spacing: .08em; }
+
+  /* Três passos do Buy, Borrow, Die */
+  .passos { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--espaco-3); margin: var(--espaco-4) 0; }
+  .passo { text-align: center; padding: var(--espaco-4) var(--espaco-3); }
+  .passo .bola { width: 64px; height: 64px; margin: 0 auto var(--espaco-3); display: grid; place-items: center; font-size: var(--tamanho-4); font-weight: var(--peso-forte); box-shadow: var(--sombra-clay); }
+  .passo:nth-child(1) .bola { background: var(--verde); color: var(--branco); border-radius: var(--forma-bolha-1); }
+  .passo:nth-child(2) .bola { background: var(--amarelo); color: var(--azul); border-radius: var(--forma-bolha-2); }
+  .passo:nth-child(3) .bola { background: var(--azul); color: var(--branco); border-radius: var(--forma-bolha-3); }
+  .passo strong { display: block; color: var(--azul); }
+  .passo em { display: block; font-style: normal; font-size: var(--tamanho-1); color: var(--texto-suave); }
+  @media (max-width: 520px) { .passos { grid-template-columns: 1fr; } .passo { display: grid; grid-template-columns: 64px 1fr; gap: var(--espaco-3); text-align: left; align-items: center; } .passo .bola { margin: 0; } }
+
+  /* Comparação lado a lado */
+  .duas { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-4); margin-top: var(--espaco-4); }
+  .duas .cartao { padding: var(--espaco-4); }
+  .duas .contra { background: var(--areia); box-shadow: none; }
+  .duas .pro { background: var(--verde-claro); box-shadow: none; }
+  .duas ul { margin: var(--espaco-2) 0 0; padding-left: 1.1em; }
+  @media (max-width: 560px) { .duas { grid-template-columns: 1fr; } }
+
+  /* Fluxo do dinheiro */
+  .fluxo { list-style: none; padding: 0; margin: var(--espaco-5) 0 0; position: relative; }
+  .fluxo::before { content: ""; position: absolute; left: 27px; top: 20px; bottom: 20px; width: 6px; background: var(--amarelo); border-radius: var(--forma-pilula); }
+  .fluxo li { position: relative; display: grid; grid-template-columns: 60px 1fr; gap: var(--espaco-4); align-items: start; padding-bottom: var(--espaco-5); }
+  .fluxo li:last-child { padding-bottom: 0; }
+  .fluxo .n { width: 60px; height: 60px; display: grid; place-items: center; background: var(--verde); color: var(--branco); font-weight: var(--peso-forte); font-size: var(--tamanho-4); border-radius: var(--forma-bolha-1); box-shadow: var(--sombra-clay); position: relative; }
+  .fluxo li:nth-child(even) .n { background: var(--azul); border-radius: var(--forma-bolha-2); }
+  .fluxo li:last-child .n { background: var(--amarelo); color: var(--azul); border-radius: var(--forma-bolha-3); }
+  .fluxo strong { display: block; color: var(--azul); font-size: var(--tamanho-3); margin-top: var(--espaco-2); }
+
+  /* Faixas de risco */
+  .abas { display: flex; flex-wrap: wrap; gap: var(--espaco-2); margin: var(--espaco-4) 0; }
+  .aba { font: inherit; font-weight: var(--peso-forte); font-size: var(--tamanho-2); cursor: pointer; border: 2px solid var(--azul-claro); background: var(--branco); color: var(--azul); padding: 10px 16px; border-radius: var(--forma-opcao); }
+  .aba[aria-selected="true"] { background: var(--azul); border-color: var(--azul); color: var(--branco); }
+  .aba:focus-visible { outline: 3px solid var(--amarelo); outline-offset: 2px; }
+  .faixa-painel[hidden] { display: none; }
+  .faixa-painel .selo { margin-bottom: var(--espaco-3); }
+  .fatos { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--espaco-3); margin: var(--espaco-4) 0; }
+  .fato { background: var(--creme); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); }
+  .fato small { display: block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); text-transform: uppercase; letter-spacing: .05em; color: var(--texto-suave); }
+  .fato b { display: block; font-size: var(--tamanho-4); color: var(--verde-escuro); line-height: 1.2; }
+  .setores { display: flex; flex-wrap: wrap; gap: var(--espaco-2); padding: 0; list-style: none; margin: 0 0 var(--espaco-3); }
+  .setores li { background: var(--azul-claro); color: var(--azul); font-weight: var(--peso-forte); font-size: var(--tamanho-1); padding: 6px 12px; border-radius: var(--forma-pilula); }
+
+  /* Simulador do prejuízo */
+  .simulador { margin-top: var(--espaco-5); }
+  .simulador .opcoes { display: flex; flex-wrap: wrap; gap: var(--espaco-2); margin: var(--espaco-3) 0 var(--espaco-4); }
+  .simulador .opcoes .opcao { width: auto; padding: 10px 14px; }
+  .barra-divisao { display: flex; height: 56px; border-radius: var(--forma-opcao); overflow: hidden; background: var(--creme); }
+  .barra-divisao div { display: grid; place-items: center; font-weight: var(--peso-forte); font-size: var(--tamanho-2); transition: flex-basis .5s ease; white-space: nowrap; overflow: hidden; }
+  .barra-divisao .privado { background: var(--azul); color: var(--branco); }
+  .barra-divisao .estado { background: var(--amarelo); color: var(--azul); }
+  .legenda-barra { display: flex; flex-wrap: wrap; gap: var(--espaco-4); margin-top: var(--espaco-3); font-size: var(--tamanho-2); }
+  .legenda-barra span::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: var(--forma-bolha-1); margin-right: 6px; vertical-align: -1px; }
+  .legenda-barra .l-privado::before { background: var(--azul); }
+  .legenda-barra .l-estado::before { background: var(--amarelo); }
+
+  /* Haltere (barbell) */
+  .haltere { display: grid; grid-template-columns: 1fr 2fr 1fr; align-items: center; margin: var(--espaco-5) 0 var(--espaco-3); }
+  .peso { aspect-ratio: 1; display: grid; place-items: center; text-align: center; padding: var(--espaco-2); font-weight: var(--peso-forte); font-size: var(--tamanho-2); line-height: 1.2; box-shadow: var(--sombra-clay); }
+  .peso.rapido { background: var(--verde); color: var(--branco); border-radius: var(--forma-bolha-1); }
+  .peso.longo { background: var(--azul); color: var(--branco); border-radius: var(--forma-bolha-3); }
+  .barra-haltere { height: 14px; background: var(--amarelo); border-radius: var(--forma-pilula); box-shadow: var(--sombra-clay); }
+  .haltere-texto { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-4); font-size: var(--tamanho-2); }
+  .haltere-texto p:last-child { text-align: right; }
+  @media (max-width: 520px) { .haltere-texto { grid-template-columns: 1fr; } .haltere-texto p:last-child { text-align: left; } }
+
+  /* Travas */
+  .travas { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--espaco-4); margin-top: var(--espaco-4); }
+  .trava { padding: var(--espaco-4) var(--espaco-5); }
+  .trava .cadeado { width: 40px; height: 40px; display: grid; place-items: center; background: var(--verde-claro); color: var(--verde-escuro); border-radius: var(--forma-bolha-2); margin-bottom: var(--espaco-3); }
+  .trava .cadeado svg { width: 22px; height: 22px; fill: currentColor; }
+  .trava strong { display: block; color: var(--azul); font-size: var(--tamanho-3); margin-bottom: var(--espaco-1); }
+  .trava p { margin: 0; font-size: var(--tamanho-2); }
+
+  /* Jornada (história ilustrativa) */
+  .historia { background: var(--azul); color: var(--branco); border-radius: var(--forma-cartao); padding: var(--espaco-6) var(--espaco-5); }
+  .historia h2, .historia h3 { color: var(--branco); }
+  .historia .ato { color: var(--amarelo); }
+  .historia .aviso-ficcao { font-size: var(--tamanho-1); opacity: .8; }
+  .cenas { list-style: none; padding: 0; margin: var(--espaco-5) 0 0; display: grid; gap: var(--espaco-4); }
+  .cena { background: var(--branco-vidro); border-radius: var(--forma-opcao); padding: var(--espaco-4); }
+  .cena .quando { display: inline-block; background: var(--amarelo); color: var(--azul); font-weight: var(--peso-forte); font-size: var(--tamanho-1); text-transform: uppercase; letter-spacing: .05em; padding: 4px 10px; border-radius: var(--forma-selo); margin-bottom: var(--espaco-2); }
+  .cena p { margin: 0; }
+  .cena p + p { margin-top: var(--espaco-2); }
+
+  /* Predação: antes e depois */
+  .linha-tempo { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--espaco-3); margin-top: var(--espaco-4); }
+  .quadro { background: var(--areia); border-radius: var(--forma-opcao); padding: var(--espaco-4); }
+  .quadro b { display: block; color: var(--azul); margin-bottom: var(--espaco-1); }
+  .quadro p { margin: 0; font-size: var(--tamanho-2); }
+  .quadro.bom { background: var(--verde-claro); }
+  @media (max-width: 600px) { .linha-tempo { grid-template-columns: 1fr; } }
+  .seta-baixo { text-align: center; font-size: var(--tamanho-5); color: var(--verde); line-height: 1; margin: var(--espaco-4) 0; }
+
+  /* Quem ganha */
+  .ganhadores { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--espaco-3); margin-top: var(--espaco-4); }
+  .ganhador { padding: var(--espaco-4); }
+  .ganhador strong { display: block; color: var(--verde-escuro); font-size: var(--tamanho-3); }
+  .ganhador p { margin: var(--espaco-1) 0 0; font-size: var(--tamanho-2); }
+
+  /* Goiás */
+  .goias { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-4); margin-top: var(--espaco-4); }
+  .goias .cartao { padding: var(--espaco-4) var(--espaco-5); }
+  .goias .onde { display: block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); text-transform: uppercase; letter-spacing: .05em; color: var(--verde-escuro); }
+  .goias p { margin: 0; font-size: var(--tamanho-2); }
+  @media (max-width: 560px) { .goias { grid-template-columns: 1fr; } }
+
+  /* Críticas */
+  .critica { background: var(--branco); border-radius: var(--forma-opcao); box-shadow: var(--sombra-cartao); margin-top: var(--espaco-4); }
+  .critica summary { cursor: pointer; list-style: none; padding: var(--espaco-4) var(--espaco-5); font-weight: var(--peso-forte); color: var(--azul); display: flex; gap: var(--espaco-3); justify-content: space-between; align-items: center; }
+  .critica summary::-webkit-details-marker { display: none; }
+  .critica summary::after { content: "+"; flex: none; width: 32px; height: 32px; display: grid; place-items: center; background: var(--amarelo); color: var(--azul); border-radius: var(--forma-bolha-1); font-size: var(--tamanho-4); }
+  .critica[open] summary::after { content: "−"; }
+  .critica summary:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; border-radius: var(--forma-opcao); }
+  .critica .resposta { padding: 0 var(--espaco-5) var(--espaco-4); }
+  .critica .resposta p:last-child { margin-bottom: 0; }
+
+  /* Lei */
+  .esferas { display: grid; gap: var(--espaco-4); margin-top: var(--espaco-4); }
+  .esferas .selo { margin-bottom: var(--espaco-2); }
+  .esferas ul { margin: 0; padding-left: 1.1em; }
+
+  .conversa { background: var(--amarelo-claro); border-radius: var(--forma-cartao); padding: var(--espaco-6) var(--espaco-5); text-align: center; }
+  .conversa p.grande { color: var(--azul); }
+  .conversa .capa-acoes { justify-content: center; }
+  .fontes { font-size: var(--tamanho-2); color: var(--texto-suave); }
+
+  /* Revelar ao rolar */
+  .revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .revelar.visivel { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .revelar { opacity: 1; transform: none; transition: none; }
+    .barra-divisao div { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5c0-1.1 1.2-1.8 2.2-1.2l9 6.5c.8.6.8 1.8 0 2.4l-9 6.5c-1 .6-2.2-.1-2.2-1.2z"/></symbol>
+  <symbol id="i-cadeado" viewBox="0 0 24 24"><path d="M7 10V8a5 5 0 0 1 10 0v2h.5c1.4 0 2.5 1.1 2.5 2.5v6c0 1.4-1.1 2.5-2.5 2.5h-11C5.1 21 4 19.9 4 18.5v-6C4 11.1 5.1 10 6.5 10zm2 0h6V8a3 3 0 0 0-6 0z"/></symbol>
+</svg>
+
+<main>
+  <nav><a href="/projetos/">← Projetos</a></nav>
+
+  <!-- CAPA -->
+  <header>
+    <span class="selo" style="margin-top: var(--espaco-5)">Proposta em estudo</span>
+    <h1>O dinheiro para reindustrializar o Brasil <span class="destaque">já existe</span>. Ele só está parado.</h1>
+    <p class="lead">Esta é a história de uma proposta: o Fundo Soberano de Reindustrialização e Inovação, o FSRI. A ideia é pegar o crédito que os grandes patrimônios já usam todo dia e fazer esse dinheiro virar fábrica, patente e plataforma brasileira.</p>
+    <div class="capa-acoes">
+      <a class="botao verde" href="/ideias/#reindustrializacao"><svg class="icone"><use href="#i-play"/></svg>Ouvir o resumo com legendas</a>
+      <a class="botao secundario" href="#criticas">Ir direto às críticas</a>
+    </div>
+    <p class="rolar">Role para ler a história ↓</p>
+  </header>
+
+  <!-- ATO 1 -->
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 1 · O Brasil que compra pronto</span>
+    <h2>A gente exporta o bruto e importa o que vale mais</h2>
+    <p>Pense no chip do seu celular, no equipamento do hospital da sua cidade, na bateria que guarda energia, no aplicativo que leva você para casa. Quase tudo isso é feito, ou controlado, lá fora.</p>
+    <p>Quando o Brasil depende de fora para o que é estratégico, o valor fica lá fora também. Os empregos qualificados, as patentes e o lucro.</p>
+    <p class="grande">A proposta mira cinco frentes: tecnologia da informação, semicondutores, equipamentos médicos, mineração avançada e mobilidade.</p>
+  </section>
+
+  <!-- ATO 2 -->
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 2 · O segredo de quem tem muito</span>
+    <h2>Compra, pega emprestado, nunca vende</h2>
+    <p>Quem tem um patrimônio muito grande quase nunca vende as próprias ações. Vender gera imposto sobre ganho de capital. Então a estratégia é outra, conhecida lá fora como <em>Buy, Borrow, Die</em>.</p>
+    <div class="passos">
+      <div class="cartao passo"><div class="bola">1</div><div><strong>Compra</strong><em>Buy</em>Junta ações e participações em empresas.</div></div>
+      <div class="cartao passo"><div class="bola">2</div><div><strong>Pega emprestado</strong><em>Borrow</em>Usa essas ações como garantia para tomar crédito no banco.</div></div>
+      <div class="cartao passo"><div class="bola">3</div><div><strong>Nunca vende</strong><em>Die</em>Vive desse crédito. O patrimônio fica parado e quase não paga imposto.</div></div>
+    </div>
+    <p>A reação mais comum é dizer: então vamos taxar as grandes fortunas. O problema é que essa ideia costuma esbarrar em duas paredes.</p>
+    <div class="duas">
+      <div class="cartao contra">
+        <strong>Por que só taxar esbarra</strong>
+        <ul>
+          <li>O capital se muda. A pessoa troca de residência fiscal e leva o patrimônio junto.</li>
+          <li>Patrimônio não é dinheiro na conta. Ações e participações não viram imposto fácil sem serem vendidas.</li>
+        </ul>
+      </div>
+      <div class="cartao pro">
+        <strong>O que o FSRI faz diferente</strong>
+        <ul>
+          <li>Não pune o patrimônio parado. Dá um motivo para ele trabalhar aqui.</li>
+          <li>Usa o mesmo empréstimo que já existe, só que apontado para indústria nova.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <p class="pausa revelar">E se o mesmo empréstimo<br>construísse uma <span class="destaque">fábrica</span>?</p>
+
+  <!-- ATO 3 -->
+  <section class="capitulo revelar" style="margin-top: 0">
+    <span class="ato">Capítulo 3 · A virada</span>
+    <h2>O caminho do dinheiro</h2>
+    <p>O investidor continua fazendo o que já faz: pega crédito dando as ações como garantia. A diferença está no destino desse dinheiro.</p>
+    <ol class="fluxo">
+      <li><span class="n">1</span><div><strong>O crédito sai do banco</strong>O investidor de alta renda toma uma linha de crédito privada, com as próprias ações ou participações como garantia.</div></li>
+      <li><span class="n">2</span><div><strong>Vai para projetos habilitados</strong>Em vez de ficar parado, o dinheiro é aportado em projetos aprovados pelo FSRI.</div></li>
+      <li><span class="n">3</span><div><strong>O imposto vira prêmio por produtividade</strong>Se o capital ficar investido pelo prazo mínimo, o investidor ganha isenção ou desconto progressivo no imposto sobre ganho de capital futuro e sobre dividendos e juros sobre capital próprio. Sem investimento produtivo real no país, não tem benefício.</div></li>
+      <li><span class="n">4</span><div><strong>A empresa cresce e abre capital na B3</strong>Quando amadurece, a empresa vai para a bolsa brasileira. O investidor vende a parte dele com isenção, quita o empréstimo original e realiza o lucro.</div></li>
+    </ol>
+  </section>
+
+  <!-- ATO 4 -->
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 4 · Risco do tamanho certo</span>
+    <h2>Três faixas, do aplicativo ao chip</h2>
+    <p>Ninguém sério coloca dinheiro num chip brasileiro que leva 15 anos para dar retorno. A não ser que o risco seja dividido. Por isso o Estado, via BNDES e FINEP e com recursos do próprio fundo, entra como garantidor parcial, e a proteção cresce junto com o risco.</p>
+
+    <div class="abas" role="tablist" aria-label="Faixas de risco">
+      <button class="aba" role="tab" id="aba-1" aria-controls="faixa-1" aria-selected="true" type="button">Faixa 1</button>
+      <button class="aba" role="tab" id="aba-2" aria-controls="faixa-2" aria-selected="false" tabindex="-1" type="button">Faixa 2</button>
+      <button class="aba" role="tab" id="aba-3" aria-controls="faixa-3" aria-selected="false" tabindex="-1" type="button">Faixa 3</button>
+    </div>
+
+    <div class="cartao faixa-painel" role="tabpanel" id="faixa-1" aria-labelledby="aba-1">
+      <span class="selo">Baixo risco · retorno rápido</span>
+      <h3>Plataformas digitais e infraestrutura</h3>
+      <ul class="setores"><li>Mobilidade urbana</li><li>Bilheteria de eventos</li><li>Nuvem nacional</li><li>Cartórios digitais em blockchain</li><li>Software B2B</li><li>Fintechs de infraestrutura</li></ul>
+      <div class="fatos">
+        <div class="fato"><small>Maturação</small><b>2 a 4 anos</b></div>
+        <div class="fato"><small>Seguro estatal</small><b>até 20%</b></div>
+        <div class="fato"><small>Na carteira</small><b>no mínimo 40%</b></div>
+      </div>
+      <p class="pequeno suave">É o motor de caixa: gera dividendos rápidos para o investidor pagar os juros e amortizar o crédito original.</p>
+    </div>
+    <div class="cartao faixa-painel" role="tabpanel" id="faixa-2" aria-labelledby="aba-2" hidden>
+      <span class="selo azul">Médio risco · indústria de base</span>
+      <h3>O que o país precisa fabricar</h3>
+      <ul class="setores"><li>Equipamentos médicos e hospitalares</li><li>Baterias e armazenamento de energia</li><li>Drones e automação agrícola</li><li>Refino de minerais estratégicos</li></ul>
+      <div class="fatos">
+        <div class="fato"><small>Maturação</small><b>5 a 8 anos</b></div>
+        <div class="fato"><small>Seguro estatal</small><b>até 35%</b></div>
+        <div class="fato"><small>Contrapartida</small><b>patente no Brasil</b></div>
+      </div>
+      <p class="pequeno suave">O dinheiro é liberado conforme patentes e propriedade intelectual são registradas aqui. O conhecimento fica no país.</p>
+    </div>
+    <div class="cartao faixa-painel" role="tabpanel" id="faixa-3" aria-labelledby="aba-3" hidden>
+      <span class="selo amarelo">Alto risco · deep tech</span>
+      <h3>As apostas que mudam um país</h3>
+      <ul class="setores"><li>Semicondutores</li><li>Biotecnologia avançada</li><li>Mobilidade elétrica nacional</li><li>Computação quântica</li><li>Aeroespacial</li></ul>
+      <div class="fatos">
+        <div class="fato"><small>Maturação</small><b>10 a 15 anos</b></div>
+        <div class="fato"><small>Seguro estatal</small><b>até 50%</b></div>
+        <div class="fato"><small>Regra</small><b>obrigatória</b></div>
+      </div>
+      <p class="pequeno suave">Ter pelo menos um projeto nesta faixa é obrigatório para destravar as isenções das Faixas 1 e 2.</p>
+    </div>
+
+    <h3 style="margin-top: var(--espaco-6)">O haltere: um peso leve, um peso pesado</h3>
+    <p>Cada aporte incentivado precisa ter pelo menos dois projetos de perfis opostos. Um que dá retorno rápido e um que leva anos. É a estratégia <em>barbell</em>, ou haltere.</p>
+    <div class="haltere" aria-hidden="true">
+      <div class="peso rapido">Faixa 1<br>rápido</div>
+      <div class="barra-haltere"></div>
+      <div class="peso longo">Faixa 3<br>longo</div>
+    </div>
+    <div class="haltere-texto">
+      <p><strong>Paga as contas.</strong> O retorno rápido cobre os juros do empréstimo do investidor.</p>
+      <p><strong>Constrói o futuro.</strong> O capital paciente financia a indústria pesada e a tecnologia de ponta.</p>
+    </div>
+  </section>
+
+  <!-- ATO 5 -->
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 5 · Sem farra com dinheiro público</span>
+    <h2>Se o projeto quebrar, quem paga?</h2>
+    <p>Esta é a pergunta que todo mundo deveria fazer. A resposta da proposta: o investidor sempre paga a maior parte. Escolha uma faixa e veja como fica um prejuízo, a cada R$ 100 aportados, num projeto que faliu de verdade.</p>
+    <div class="cartao simulador">
+      <div class="opcoes" role="radiogroup" aria-label="Escolha a faixa">
+        <button class="opcao" type="button" role="radio" aria-checked="false" data-estado="20">Faixa 1</button>
+        <button class="opcao" type="button" role="radio" aria-checked="false" data-estado="35">Faixa 2</button>
+        <button class="opcao marcada" type="button" role="radio" aria-checked="true" data-estado="50">Faixa 3</button>
+      </div>
+      <div class="barra-divisao" id="divisao">
+        <div class="privado" id="parte-privada" style="flex-basis: 50%">R$ 50</div>
+        <div class="estado" id="parte-estado" style="flex-basis: 50%">R$ 50</div>
+      </div>
+      <div class="legenda-barra"><span class="l-privado">Investidor: no mínimo</span><span class="l-estado">Seguro estatal: no máximo</span></div>
+      <p class="pequeno suave" id="divisao-texto" aria-live="polite" style="margin-top: var(--espaco-3)">Na Faixa 3, o seguro cobre até R$ 50. O investidor arca com pelo menos R$ 50.</p>
+    </div>
+
+    <div class="travas">
+      <div class="cartao trava"><div class="cadeado"><svg><use href="#i-cadeado"/></svg></div><strong>Pele em jogo</strong><p>Mesmo na faixa mais arriscada, o investidor arca com pelo menos metade do prejuízo. Quem arrisca o próprio dinheiro escolhe e fiscaliza melhor.</p></div>
+      <div class="cartao trava"><div class="cadeado"><svg><use href="#i-cadeado"/></svg></div><strong>Só falência auditada</strong><p>O seguro não cobre lucro que não veio. Só paga em liquidação comprovada por auditoria independente, sem sinal de má-fé ou desvio.</p></div>
+      <div class="cartao trava"><div class="cadeado"><svg><use href="#i-cadeado"/></svg></div><strong>Se der certo, o Estado ganha junto</strong><p>Nos projetos da Faixa 3 que fizerem sucesso, o Estado fica com 10% a 15%, por golden shares ou royalties, e esse dinheiro volta para o fundo de seguros.</p></div>
+      <div class="cartao trava"><div class="cadeado"><svg><use href="#i-cadeado"/></svg></div><strong>Nada de investir em si mesmo</strong><p>É proibido aplicar dinheiro incentivado em empresas ou setores onde o investidor já tem participação relevante ou controle. O fundo cria concorrentes, não monopólios.</p></div>
+    </div>
+  </section>
+
+  <!-- ATO 6: história ilustrativa -->
+  <section class="capitulo revelar">
+    <div class="historia">
+      <span class="ato">Capítulo 6 · A jornada de uma ideia</span>
+      <h2>De um problema real até a bolsa</h2>
+      <p>O dinheiro não vai para quem conhece alguém. Ele passa por um funil público, em quatro etapas. Para ver como seria, acompanhe uma equipe imaginária.</p>
+      <p class="aviso-ficcao">História ilustrativa. A equipe é inventada; as etapas e as regras são as da proposta.</p>
+      <ol class="cenas">
+        <li class="cena">
+          <span class="quando">Etapa 1 · Hackathon nacional</span>
+          <h3>O desafio é publicado</h3>
+          <p>O Estado e os conselhos setoriais publicam um problema concreto: desenvolver sensores hospitalares nacionais.</p>
+          <p>Uma equipe de três pessoas, uma engenheira, um técnico de enfermagem e um programador, se inscreve. Pela primeira vez, uma equipe assim tem um caminho aberto até o investidor.</p>
+        </li>
+        <li class="cena">
+          <span class="quando">Etapa 2 · Aceleração · 4 meses</span>
+          <h3>Do papel ao protótipo</h3>
+          <p>A equipe vence e recebe capital semente, na faixa de R$ 200 mil a R$ 500 mil, mais mentoria numa instituição de excelência, como ITA, Unicamp, USP, Fiocruz, CEITEC ou uma universidade federal.</p>
+          <p>Em quatro meses, sai um protótipo funcional e um plano de negócios auditado.</p>
+        </li>
+        <li class="cena">
+          <span class="quando">Etapa 3 · Banca pública</span>
+          <h3>O Shark Tank técnico, ao vivo</h3>
+          <p>A equipe apresenta o projeto numa sessão transmitida para todo mundo ver. Na banca, engenheiros sêniores, especialistas do setor e os investidores habilitados no fundo.</p>
+          <p>Qualquer pessoa pode assistir e entender por que um projeto foi aprovado e outro não.</p>
+        </li>
+        <li class="cena">
+          <span class="quando">Etapa 4 · Liberação por metas</span>
+          <h3>O dinheiro chega em partes</h3>
+          <p>O investimento aprovado não cai na conta de uma vez. Cada parte só é liberada quando a equipe cumpre uma meta técnica, regulatória e financeira, conferida por auditoria.</p>
+        </li>
+        <li class="cena">
+          <span class="quando">Anos depois</span>
+          <h3>Um sensor brasileiro no hospital da sua cidade</h3>
+          <p>A empresa amadurece e abre capital na B3. O investidor vende a parte dele, quita o empréstimo e lucra. A patente está registrada no Brasil. Os empregos estão aqui.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ATO 7 -->
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 7 · A briga desigual</span>
+    <h2>Quando o gigante vende abaixo do custo</h2>
+    <p>Uma plataforma brasileira nova costuma quebrar não por ser pior, mas por enfrentar um jogo conhecido: o vencedor leva tudo.</p>
+    <div class="linha-tempo">
+      <div class="quadro"><b>Primeiro</b><p>Uma gigante estrangeira subsidia tarifas artificialmente baixas por anos.</p></div>
+      <div class="quadro"><b>Depois</b><p>As concorrentes locais não aguentam queimar caixa e fecham.</p></div>
+      <div class="quadro"><b>No fim</b><p>Sem concorrência, vêm o monopólio e as taxas altas para quem trabalha e para quem consome.</p></div>
+    </div>
+    <div class="seta-baixo" aria-hidden="true">↓</div>
+    <h3>O antídoto: uma defesa automática</h3>
+    <div class="linha-tempo">
+      <div class="quadro bom"><b>O CADE enxerga</b><p>Cruzando nota fiscal eletrônica e dados do Pix, monitora margens e preços médios de cada setor, em cada praça.</p></div>
+      <div class="quadro bom"><b>A taxa dispara sozinha</b><p>Se a empresa opera sistematicamente abaixo do custo para eliminar concorrentes, incide a CIDE-Concorrencial sobre as transações dela naquela cidade.</p></div>
+      <div class="quadro bom"><b>O dinheiro equilibra o jogo</b><p>O que é arrecadado reduz tributos e a taxa da plataforma nacional atacada, enquanto durar o ataque.</p></div>
+    </div>
+    <p style="margin-top: var(--espaco-4)">A lógica é simples. A queima de caixa de quem ataca passa a financiar a defesa de quem é atacado.</p>
+  </section>
+
+  <!-- ATO 8 -->
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 8 · Quem ganha</span>
+    <h2>Mais renda fica com quem trabalha</h2>
+    <p>As plataformas da Faixa 1 nascem integradas ao Gov.br e ao Pix. Isso derruba o custo de conquistar cada cliente e permite cobrar microtaxas. A proposta fala em algo como 2% a 5%, contra os 25% a 30% que estima para os oligopólios estrangeiros.</p>
+    <div class="ganhadores">
+      <div class="cartao ganhador"><strong>O motorista</strong><p>Fica com uma parte maior de cada corrida.</p></div>
+      <div class="cartao ganhador"><strong>O produtor cultural</strong><p>Vende ingresso sem entregar uma fatia enorme para a bilheteria.</p></div>
+      <div class="cartao ganhador"><strong>O consumidor</strong><p>Paga menos taxa e ganha concorrência de verdade.</p></div>
+      <div class="cartao ganhador"><strong>O pesquisador</strong><p>Vê o laboratório virar produto, com patente registrada no Brasil.</p></div>
+      <div class="cartao ganhador"><strong>O investidor</strong><p>Troca imposto por investimento produtivo e sai pela bolsa brasileira.</p></div>
+      <div class="cartao ganhador"><strong>O país</strong><p>Depende menos de fora e guarda o valor que hoje vai embora.</p></div>
+    </div>
+  </section>
+
+  <!-- ATO 9 -->
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 9 · Começando por Goiás</span>
+    <h2>Goiás como laboratório</h2>
+    <p>O modelo pode ganhar um braço regional, aproveitando o que Goiás já tem de vocação.</p>
+    <div class="goias">
+      <div class="cartao"><span class="onde">Norte e Nordeste goiano</span><h3>Terras raras com valor agregado</h3><p>Goiás tem reservas relevantes de minerais críticos e terras raras, como em Minaçu e região. Aportes das Faixas 2 e 3 podem financiar refino local, em vez de exportar só minério bruto.</p></div>
+      <div class="cartao"><span class="onde">Anápolis · DAIA</span><h3>Remédio e equipamento feito aqui</h3><p>Aproveitar o polo farmoquímico do Distrito Agroindustrial de Anápolis para fabricar insumos farmacêuticos ativos e equipamentos médico-hospitalares.</p></div>
+      <div class="cartao"><span class="onde">Sudoeste goiano</span><h3>Do agro à agtech</h3><p>Hackathons de agricultura de precisão, drones, sensores de solo e bioinsumos, com UFG, IF Goiano e centros de pesquisa. O capital do agro financia tecnologia nova, sem conflito de interesses.</p></div>
+      <div class="cartao"><span class="onde">Todo o estado</span><h3>Soberania digital em teste</h3><p>Programas piloto, com compras públicas de inovação do Marco Legal das Startups, para testar cartórios digitais, mobilidade e gestão pública nascidos nos hackathons locais.</p></div>
+    </div>
+  </section>
+
+  <!-- CRÍTICAS -->
+  <section class="capitulo revelar" id="criticas">
+    <span class="ato">Capítulo 10 · Pode criticar</span>
+    <h2>As críticas mais duras, e as respostas</h2>
+    <p>Uma ideia boa precisa aguentar pancada. Estas são as objeções que eu esperaria ouvir, respondidas com as regras da própria proposta.</p>
+
+    <details class="critica">
+      <summary>Isso é isenção de imposto para rico.</summary>
+      <div class="resposta">
+        <p>Hoje esse patrimônio já paga pouco imposto, porque não é vendido. A isenção do FSRI só existe se o dinheiro virar investimento produtivo real no país, ficar aplicado pelo prazo mínimo e incluir pelo menos um projeto de alto risco tecnológico.</p>
+        <p>Sem fábrica, patente ou plataforma nova, não tem benefício.</p>
+      </div>
+    </details>
+
+    <details class="critica">
+      <summary>O Estado vai pagar a conta quando der errado.</summary>
+      <div class="resposta">
+        <p>O seguro tem teto: 20%, 35% ou 50%, conforme o risco. O investidor arca com pelo menos metade do prejuízo, mesmo no pior caso.</p>
+        <p>O seguro só é acionado em falência auditada, sem má-fé. E quando um projeto de alto risco dá certo, o Estado fica com 10% a 15% para reabastecer o fundo.</p>
+      </div>
+    </details>
+
+    <details class="critica">
+      <summary>Vai virar cabide para os mesmos grupos de sempre.</summary>
+      <div class="resposta">
+        <p>A seleção é pública: hackathon aberto, banca transmitida ao vivo e dinheiro liberado só por metas auditadas.</p>
+        <p>E o investidor não pode colocar dinheiro incentivado em empresa ou setor onde já manda. O fundo existe para criar concorrentes.</p>
+      </div>
+    </details>
+
+    <details class="critica">
+      <summary>Taxa automática sobre empresa estrangeira afasta investimento.</summary>
+      <div class="resposta">
+        <p>A CIDE-Concorrencial não incide sobre empresa estrangeira por ser estrangeira. Ela só incide quando se constata operação sistemática abaixo do custo com a finalidade de eliminar a concorrência, e só naquela localidade.</p>
+        <p>Quem compete de forma honesta não paga nada.</p>
+      </div>
+    </details>
+
+    <details class="critica">
+      <summary>Chip brasileiro? O Brasil não tem como competir nisso.</summary>
+      <div class="resposta">
+        <p>Por isso a Faixa 3 tem o horizonte mais longo, de 10 a 15 anos, e a maior proteção. E por isso é obrigatória: sem ela, ninguém escolheria a aposta difícil.</p>
+        <p>O haltere garante que o investidor tenha retorno rápido na Faixa 1 enquanto espera a Faixa 3 amadurecer.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- LEI -->
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 11 · Como sai do papel</span>
+    <h2>O roteiro para virar lei</h2>
+    <div class="esferas">
+      <div class="cartao">
+        <span class="selo azul">Federal · Câmara dos Deputados</span>
+        <p>Um Projeto de Lei Complementar que institui o FSRI e define:</p>
+        <ul>
+          <li>as regras da isenção condicionada sobre ganho de capital;</li>
+          <li>o seguro soberano via BNDES e FINEP;</li>
+          <li>o gatilho da CIDE-Concorrencial dentro do Sistema Brasileiro de Defesa da Concorrência (Lei nº 12.529/2011).</li>
+        </ul>
+      </div>
+      <div class="cartao">
+        <span class="selo">Estadual · Assembleia Legislativa de Goiás</span>
+        <ul>
+          <li>Fundo Estadual de Co-investimento e Inovação Industrial, como braço regional;</li>
+          <li>regras para o Estado comprar soluções inovadoras;</li>
+          <li>Circuito Goiano de Hackathons Industriais, com FAPEG, UFG e setor produtivo.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FECHO -->
+  <section class="capitulo revelar">
+    <div class="conversa">
+      <span class="ato">Pra conversar</span>
+      <p class="grande">Se você pudesse escolher um produto que o Brasil passasse a fabricar aqui, qual seria?</p>
+      <p class="suave">Esta proposta está em estudo e aberta a críticas. Discorda de algum ponto? É exatamente isso que eu quero ouvir.</p>
+      <div class="capa-acoes">
+        <a class="botao verde" href="/ideias/#reindustrializacao"><svg class="icone"><use href="#i-play"/></svg>Ouvir com legendas</a>
+        <a class="botao secundario" href="/ideias/">Ver outras ideias</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="capitulo">
+    <h3>Fontes e referências</h3>
+    <ul class="fontes">
+      <li>Proposta de Política Pública: Fundo Soberano de Reindustrialização e Inovação (FSRI), documento de trabalho, 2026. Todos os percentuais, prazos e valores desta página vêm dela e são parâmetros propostos, não dados medidos.</li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12529.htm">Lei nº 12.529, de 30 de novembro de 2011</a>, que estrutura o Sistema Brasileiro de Defesa da Concorrência (Planalto).</li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp182.htm">Lei Complementar nº 182, de 1º de junho de 2021</a>, o Marco Legal das Startups (Planalto).</li>
+    </ul>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  // Revelar capítulos ao rolar
+  const revelar = document.querySelectorAll(".revelar");
+  if ("IntersectionObserver" in window) {
+    const obs = new IntersectionObserver((entradas) => {
+      entradas.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("visivel"); obs.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    revelar.forEach((el) => obs.observe(el));
+  } else {
+    revelar.forEach((el) => el.classList.add("visivel"));
+  }
+
+  // Abas das faixas
+  const abas = [...document.querySelectorAll(".aba")];
+  function abrir(aba) {
+    abas.forEach((a) => {
+      const ativa = a === aba;
+      a.setAttribute("aria-selected", String(ativa));
+      a.tabIndex = ativa ? 0 : -1;
+      document.getElementById(a.getAttribute("aria-controls")).hidden = !ativa;
+    });
+  }
+  abas.forEach((a, i) => {
+    a.addEventListener("click", () => abrir(a));
+    a.addEventListener("keydown", (e) => {
+      const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (!d) return;
+      const prox = abas[(i + d + abas.length) % abas.length];
+      abrir(prox); prox.focus();
+    });
+  });
+
+  // Quem paga o prejuízo
+  const opcoes = [...document.querySelectorAll(".simulador .opcao")];
+  const privada = document.getElementById("parte-privada");
+  const estatal = document.getElementById("parte-estado");
+  const texto = document.getElementById("divisao-texto");
+  opcoes.forEach((op, i) => op.addEventListener("click", () => {
+    const estado = +op.dataset.estado;
+    const investidor = 100 - estado;
+    opcoes.forEach((o) => { o.classList.toggle("marcada", o === op); o.setAttribute("aria-checked", String(o === op)); });
+    privada.style.flexBasis = investidor + "%";
+    estatal.style.flexBasis = estado + "%";
+    privada.textContent = "R$ " + investidor;
+    estatal.textContent = "R$ " + estado;
+    texto.textContent = "Na Faixa " + (i + 1) + ", o seguro cobre até R$ " + estado + ". O investidor arca com pelo menos R$ " + investidor + ".";
+  }));
+})();
+</script>
+</body>
+</html>
