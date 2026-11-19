@@ -158,11 +158,13 @@ def por_ue(por_eleicao: dict) -> dict:
 def escolher_eleicao(n_vagas: int, detalhe: dict, cand: dict):
     """Uma cidade pode ter mais de uma eleição no ano (a de prefeito anulada e refeita,
     ou uma eleição suplementar parcial). Usa a mais recente que elegeu todas as vagas;
-    se nenhuma elegeu, a mais recente."""
+    se nenhuma completou, a que elegeu mais gente."""
     codigos = sorted(set(detalhe) | set(cand), reverse=True)
     if not codigos:
         return {}, {}
-    completo = next((c for c in codigos if cand.get(c, {}).get("eleitos") == n_vagas), codigos[0])
+    completo = next((c for c in codigos if cand.get(c, {}).get("eleitos") == n_vagas), None)
+    if completo is None:  # nenhuma completa: a que elegeu mais gente (a mais recente, no empate)
+        completo = max(codigos, key=lambda c: (cand.get(c, {}).get("eleitos", 0), c))
     # O 2º turno tem código de eleição próprio no TSE; os votos válidos vêm do 1º turno,
     # que é o código mais recente do detalhe até o escolhido.
     cod_detalhe = max((c for c in detalhe if c <= completo), default=None)
