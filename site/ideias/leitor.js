@@ -104,6 +104,17 @@
         h3.style.marginTop = "0";
         registrar(h3, "Pra conversar.", n);
         escrever(criar("p", "", conversa), ideia.pergunta, n);
+        if (ideia.hashtag) {
+          const tags = criar("div", "hashtags", conversa);
+          [ideia.hashtag, window.HASHTAG_GERAL].filter(Boolean).forEach((t) => {
+            criar("span", "hashtag", tags).textContent = t;
+          });
+          const copiar = criar("button", "botao secundario copiar", tags);
+          copiar.type = "button";
+          copiar.textContent = "Copiar para postar";
+          copiar.addEventListener("click", () => copiarPost(ideia, copiar));
+          registrarSo(tags, "Pra conversar nas redes, use a hashtag " + falarHashtag(ideia.hashtag) + ".", n);
+        }
       }
 
       if (ideia.links && ideia.links.length) {
@@ -115,6 +126,46 @@
         });
       }
     });
+  }
+
+  // Registra uma fala que destaca um elemento sem quebrar o texto dele em frases.
+  function registrarSo(el, fala, ideia) {
+    el.classList.add("frase");
+    registrar(el, fala, ideia);
+  }
+
+  // "#ReindustrializaBrasil" vira "Reindustrializa Brasil" para a voz não soletrar.
+  function falarHashtag(t) {
+    return t.replace(/^#/, "").replace(/([a-zà-ú])([A-ZÀ-Ú0-9])/g, "$1 $2");
+  }
+
+  function textoDoPost(ideia) {
+    const url = location.origin + "/ideias/#" + ideia.id;
+    const tags = [ideia.hashtag, window.HASHTAG_GERAL].filter(Boolean).join(" ");
+    return ideia.titulo + "\n\n" + ideia.pergunta + "\n\n" + url + "\n\n" + tags;
+  }
+
+  function copiarPost(ideia, botao) {
+    const texto = textoDoPost(ideia);
+    const pronto = () => {
+      botao.textContent = "Copiado!";
+      setTimeout(() => (botao.textContent = "Copiar para postar"), 1800);
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(texto).then(pronto, () => copiarAntigo(texto, pronto));
+    } else {
+      copiarAntigo(texto, pronto);
+    }
+  }
+
+  function copiarAntigo(texto, pronto) {
+    const area = criar("textarea", "", document.body);
+    area.value = texto;
+    area.style.position = "fixed";
+    area.style.opacity = "0";
+    area.select();
+    try { document.execCommand("copy"); pronto(); } catch (e) { window.prompt("Copie o texto:", texto); }
+    area.remove();
   }
 
   function secao(art, titulo, n) {
@@ -129,24 +180,56 @@
   let vozes = [];
   let voz = null;
 
+  // Vozes "de brincadeira" do macOS (e algumas antigas): ficam fora da lista, ninguém entende.
+  const NOVIDADE = /^(Albert|Bad News|Bahh|Bells|Boing|Bubbles|Cellos|Eddy|Flo|Fred|Good News|Grandma|Grandpa|Jester|Junior|Kathy|Organ|Ralph|Reed|Rocko|Sandy|Shelley|Superstar|Trinoids|Whisper|Wobble|Zarvox)\b/i;
+  const CHAVE_VOZ = "ideias-voz";
+
+  // Quanto maior, melhor. As vozes neurais (Edge, Chrome, macOS Premium) vêm primeiro;
+  // as de Portugal ficam no fim, mas continuam na lista.
   function pontuar(v) {
-    let p = 0;
-    if (/^pt[-_]BR$/i.test(v.lang)) p += 10;
-    else if (/^pt/i.test(v.lang)) p += 5;
-    if (/natural|online|neural|google|luciana|francisca|thalita/i.test(v.name)) p += 2;
+    const nome = v.name;
+    const br = /^pt[-_]BR$/i.test(v.lang);
+    let p = br ? 50 : 10;
+    if (/online|natural|neural/i.test(nome)) p += 50;          // Edge: Francisca, Antonio, Thalita
+    else if (/^Google/i.test(nome)) p += 40;                    // Chrome: "Google português do Brasil"
+    else if (/premium/i.test(nome)) p += 38;                    // macOS: Luciana (Premium)
+    else if (/enhanced|melhorad|aprimorad/i.test(nome)) p += 30; // macOS: Luciana/Felipe (Enhanced)
+    if (/luciana|francisca|thalita/i.test(nome)) p += 2;
+    if (v.localService === false) p += 1;
     return p;
+  }
+
+  function rotulo(v) {
+    let nome = v.name
+      .replace(/^(Microsoft|Google)\s+/i, "")
+      .replace(/\s*[-–]\s*Portugu[eê]s?e?.*$/i, "")
+      .replace(/\s*\((Portugu[eê]s?e?|Português)[^)]*\)+\s*$/i, "")
+      .replace(/\s*Online\s*\(Natural\)/i, " (natural)")
+      .trim();
+    if (/^português do brasil$/i.test(nome)) nome = "Google (natural)";
+    if (!/^pt[-_]BR$/i.test(v.lang)) nome += " · Portugal";
+    return nome.slice(0, 36);
+  }
+
+  function lerPreferida() {
+    try { return localStorage.getItem(CHAVE_VOZ); } catch (e) { return null; }
+  }
+  function salvarPreferida(nome) {
+    try { localStorage.setItem(CHAVE_VOZ, nome); } catch (e) { /* sem armazenamento: tudo bem */ }
   }
 
   function carregarVozes() {
     if (!synth) return;
-    vozes = synth.getVoices().filter((v) => /^pt/i.test(v.lang)).sort((a, b) => pontuar(b) - pontuar(a));
+    vozes = synth.getVoices()
+      .filter((v) => /^pt/i.test(v.lang) && !NOVIDADE.test(v.name))
+      .sort((a, b) => pontuar(b) - pontuar(a));
     const sel = $("c-voz");
-    const atual = voz && voz.name;
+    const atual = (voz && voz.name) || lerPreferida();
     sel.innerHTML = "";
     vozes.forEach((v, i) => {
       const op = criar("option", "", sel);
       op.value = i;
-      op.textContent = v.name.replace(/^Microsoft |^Google /, "").slice(0, 32);
+      op.textContent = rotulo(v);
     });
     sel.hidden = vozes.length < 2;
     voz = vozes.find((v) => v.name === atual) || vozes[0] || null;
@@ -156,6 +239,8 @@
 
   function avisar() {
     const aviso = $("aviso");
+    // Só vozes simples (sem neural/Premium)? Mostra a dica de como instalar uma melhor.
+    $("dica-voz").hidden = !!synth && vozes.some((v) => pontuar(v) >= 80);
     if (!synth) aviso.textContent = "Seu navegador não lê em voz alta. As legendas passam sozinhas no ritmo de leitura.";
     else if (synth.getVoices().length && !vozes.length) aviso.textContent = "Não achei uma voz em português neste aparelho. Vou tentar ler mesmo assim.";
     else aviso.textContent = "";
@@ -356,6 +441,7 @@
   $("c-velocidade").addEventListener("change", () => estado.tocando && falar());
   $("c-voz").addEventListener("change", (e) => {
     voz = vozes[+e.target.value] || null;
+    if (voz) salvarPreferida(voz.name);
     if (estado.tocando) falar();
   });
   document.addEventListener("keydown", (e) => {

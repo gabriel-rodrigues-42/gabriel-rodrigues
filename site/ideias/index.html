@@ -47,6 +47,15 @@
   .critica .pendente { color: var(--texto-suave); font-style: italic; }
   .conversa { background: var(--azul-claro); border-radius: var(--forma-cartao); padding: var(--espaco-4); margin-top: var(--espaco-5); }
   .conversa p { margin: 0; font-weight: var(--peso-forte); color: var(--azul); font-size: var(--tamanho-3); }
+  .hashtags { display: flex; flex-wrap: wrap; gap: var(--espaco-2); align-items: center; margin-top: var(--espaco-4); padding: 2px; }
+  .hashtag { background: var(--branco); color: var(--verde-escuro); font-weight: var(--peso-forte); padding: 6px 12px; border-radius: var(--forma-selo); }
+  .copiar { padding: 6px 14px; font-size: var(--tamanho-1); background: var(--branco); }
+
+  .dica { margin-top: var(--espaco-3); font-size: var(--tamanho-2); color: var(--texto-suave); background: var(--branco); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); }
+  .dica[hidden] { display: none; }
+  .dica summary { cursor: pointer; font-weight: var(--peso-forte); color: var(--azul); }
+  .dica ul { margin: var(--espaco-2) 0 0; padding-left: var(--espaco-5); }
+  .dica li { margin-bottom: var(--espaco-2); }
   .links { margin-top: var(--espaco-4); display: flex; flex-wrap: wrap; gap: var(--espaco-3); }
   .links a { color: var(--verde-escuro); font-weight: var(--peso-forte); }
 
@@ -105,6 +114,15 @@
     <button class="botao verde" id="ouvir-todas" type="button"><svg class="icone"><use href="#i-play"/></svg>Ouvir todas</button>
   </div>
   <p class="aviso" id="aviso"></p>
+  <details class="dica" id="dica-voz" hidden>
+    <summary>A voz está robótica? Dá para instalar uma melhor, de graça</summary>
+    <ul>
+      <li><strong>Chrome</strong> (qualquer computador): escolha a voz <strong>Google (natural)</strong> na barra de legendas. Ela precisa de internet.</li>
+      <li><strong>Edge</strong> (Windows ou Mac): escolha <strong>Francisca (natural)</strong> ou <strong>Antonio (natural)</strong>. São as vozes mais naturais em português do Brasil.</li>
+      <li><strong>Mac e iPhone</strong> (Safari): abra Ajustes do Sistema › Acessibilidade › Conteúdo Falado › Voz do Sistema › Gerenciar Vozes, procure Português (Brasil) e baixe <strong>Luciana (Premium)</strong> ou <strong>Felipe (Melhorada)</strong>. Depois recarregue esta página.</li>
+      <li><strong>Android</strong>: em Configurações › Conversão de texto em voz, use o mecanismo do Google e baixe a voz em Português (Brasil).</li>
+    </ul>
+  </details>
 
   <ul class="indice" id="indice"></ul>
   <div class="ideias" id="ideias"></div>

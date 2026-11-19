@@ -156,6 +156,8 @@
   .conversa { background: var(--amarelo-claro); border-radius: var(--forma-cartao); padding: var(--espaco-6) var(--espaco-5); text-align: center; }
   .conversa p.grande { color: var(--azul); }
   .conversa .capa-acoes { justify-content: center; }
+  .hashtags { display: flex; flex-wrap: wrap; gap: var(--espaco-2); justify-content: center; margin-top: var(--espaco-4); }
+  .hashtag { background: var(--branco); color: var(--verde-escuro); font-weight: var(--peso-forte); padding: 6px 12px; border-radius: var(--forma-selo); }
   .fontes { font-size: var(--tamanho-2); color: var(--texto-suave); }
 
   /* Revelar ao rolar */
@@ -495,6 +497,8 @@
       <span class="ato">Pra conversar</span>
       <p class="grande">Se você pudesse escolher um produto que o Brasil passasse a fabricar aqui, qual seria?</p>
       <p class="suave">Esta proposta está em estudo e aberta a críticas. Discorda de algum ponto? É exatamente isso que eu quero ouvir.</p>
+      <p class="suave">Postou sobre isso? Use as hashtags para a conversa se encontrar:</p>
+      <div class="hashtags"><span class="hashtag">#ReindustrializaBrasil</span><span class="hashtag">#SistemasMelhores</span></div>
       <div class="capa-acoes">
         <a class="botao verde" href="/ideias/#reindustrializacao"><svg class="icone"><use href="#i-play"/></svg>Ouvir com legendas</a>
         <a class="botao secundario" href="/ideias/">Ver outras ideias</a>

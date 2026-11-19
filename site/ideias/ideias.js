@@ -9,13 +9,19 @@
 //   faria nos comentários e a sua resposta honesta. Se ainda não tem resposta, deixe resposta: "" e a
 //   página mostra "Resposta em construção".
 // - "pergunta" fecha a ideia com uma pergunta para puxar conversa nas redes.
+// - "hashtag" fecha a ideia: é a tag para as pessoas postarem e conversarem sobre ela. Uma por ideia,
+//   sem espaço e sem acento (ex.: "#GaleraClub"). A HASHTAG_GERAL entra junto em todas.
 // - "estado" aparece no selo: "rascunho", "em teste" ou "pronta para postar".
 // - Números sempre com fonte e ano, no próprio texto.
 // - Pré-campanha: nada de pedido de voto, número de urna ou ataque a pessoas e partidos. Critique sistemas.
 
+// Hashtag comum a todas as ideias, para juntar a conversa num lugar só.
+window.HASHTAG_GERAL = "#SistemasMelhores";
+
 window.IDEIAS = [
   {
     id: "reindustrializacao",
+    hashtag: "#ReindustrializaBrasil",
     titulo: "Reindustrializar o Brasil com o dinheiro que já existe",
     estado: "rascunho",
     gancho: "O dinheiro para reindustrializar o Brasil já existe. Ele só está parado.",
@@ -55,6 +61,7 @@ window.IDEIAS = [
 
   {
     id: "galera-club",
+    hashtag: "#GaleraClub",
     titulo: "galera.club",
     estado: "rascunho",
     gancho: "E se o link na bio do pequeno negócio já vendesse pelo WhatsApp e pelo Pix?",
@@ -87,6 +94,7 @@ window.IDEIAS = [
 
   {
     id: "leis-com-mentalidade-de-software",
+    hashtag: "#LeiComMeta",
     titulo: "Leis com mentalidade de software",
     estado: "rascunho",
     gancho: "No software, ninguém coloca uma mudança no ar sem saber como medir se ela funcionou. Por que com as leis é diferente?",
@@ -118,6 +126,7 @@ window.IDEIAS = [
 
   {
     id: "qual-caminho",
+    hashtag: "#QualCaminho",
     titulo: "Qual caminho faz sentido pra mim?",
     estado: "em teste",
     gancho: "Muita gente quer melhorar o Brasil e não sabe por onde começar. E se existisse um questionário honesto, com dados de verdade?",
@@ -146,6 +155,7 @@ window.IDEIAS = [
 
   {
     id: "canal-do-youtube",
+    hashtag: "#BrasilExplicado",
     titulo: "O Brasil explicado de um jeito simples",
     estado: "rascunho",
     gancho: "Você sabe como nasce uma lei? Quase ninguém aprendeu isso na escola, e isso decide a vida de todo mundo.",
