@@ -143,6 +143,19 @@ def data_geracao(l: dict, atual: str) -> str:
     return max(atual, iso)
 
 
+def cod_eleicao(l: dict) -> int:
+    return inteiro(l.get("CD_ELEICAO"))
+
+
+def mais_recente(por_eleicao: dict) -> dict:
+    """(ue, cargo, eleição) -> valor  vira  (ue, cargo) -> valor da eleição mais recente.
+    Onde a eleição de prefeito foi anulada e refeita (eleição suplementar), vale a nova."""
+    out = {}
+    for (ue, cargo, el) in sorted(por_eleicao, key=lambda k: k[2]):
+        out[(ue, cargo)] = por_eleicao[(ue, cargo, el)]
+    return out
+
+
 def ler_vagas(zip_path: Path):
     vagas = {}
     gerado = ""
@@ -176,11 +189,11 @@ def ler_detalhe(zip_path: Path):
                 else:
                     coluna = ("QT_VOTOS_NOMINAIS", "QT_VOTOS_LEGENDA")
             log(f"  votos válidos = soma de {coluna}")
-        s = soma[(l["SG_UE"].strip(), cargo)]
+        s = soma[(l["SG_UE"].strip(), cargo, cod_eleicao(l))]
         s["aptos"] += inteiro(l.get("QT_APTOS"))
         s["validos"] += sum(inteiro(l.get(c)) for c in coluna)
         gerado = data_geracao(l, gerado)
-    return dict(soma), gerado
+    return mais_recente(dict(soma)), gerado
 
 
 def ler_candidatos(zip_path: Path):
@@ -199,21 +212,22 @@ def ler_candidatos(zip_path: Path):
         ue = l["SG_UE"].strip()
         sq = l["SQ_CANDIDATO"].strip()
         turno = inteiro(l.get("NR_TURNO") or 1)
-        votos[(ue, cargo, sq, turno)] += inteiro(l.get(coluna))
+        el = cod_eleicao(l)
+        votos[(ue, cargo, el, sq, turno)] += inteiro(l.get(coluna))
         if (l.get("DS_SIT_TOT_TURNO") or "").upper().startswith("ELEITO"):
-            eleito[(ue, cargo, sq)] = turno
+            eleito[(ue, cargo, el, sq)] = turno
         gerado = data_geracao(l, gerado)
 
     resultado = defaultdict(lambda: {"eleitos": 0, "menor_eleito": None, "maior_eleito": None, "segundo_turno": False})
-    for (ue, cargo, sq), turno in eleito.items():
-        v = votos[(ue, cargo, sq, turno)]
-        r = resultado[(ue, cargo)]
+    for (ue, cargo, el, sq), turno in eleito.items():
+        v = votos[(ue, cargo, el, sq, turno)]
+        r = resultado[(ue, cargo, el)]
         r["eleitos"] += 1
         r["menor_eleito"] = v if r["menor_eleito"] is None else min(r["menor_eleito"], v)
         r["maior_eleito"] = v if r["maior_eleito"] is None else max(r["maior_eleito"], v)
         if turno == 2:
             r["segundo_turno"] = True
-    return dict(resultado), gerado
+    return mais_recente(dict(resultado)), gerado
 
 
 # ---------------------------------------------------------------- regras
