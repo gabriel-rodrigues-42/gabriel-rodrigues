@@ -20,6 +20,7 @@
 
   /* Neutros */
   --creme: #fbf8ef;          /* fundo padrão: papel, não branco puro */
+  --creme-vidro: rgba(251, 248, 239, .92); /* cabeçalho fixo sobre o conteúdo */
   --areia: #efe6cf;
   --texto: #14213d;
   --texto-suave: #4a5470;

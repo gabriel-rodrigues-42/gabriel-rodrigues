@@ -4,56 +4,241 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gabriel Rodrigues</title>
-<meta name="description" content="Gabriel Rodrigues: desenvolvedor de Goiás que quer melhorar os sistemas do Brasil com mentalidade de engenharia de software.">
+<meta name="description" content="Gabriel Rodrigues: desenvolvedor de Inhumas (GO) que estuda política para levar a engenharia de software para o governo.">
 <link rel="stylesheet" href="/design-system/tokens.css">
+<link rel="stylesheet" href="/design-system/componentes.css">
+<link rel="stylesheet" href="/design-system/moldura.css">
+<script src="/design-system/moldura.js"></script>
 <style>
-  * { box-sizing: border-box; }
-  body { margin:0; font-family:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif; background:var(--creme); color:var(--texto); line-height:1.55; min-height:100vh; overflow-x:hidden; }
-  .bolha { position:fixed; z-index:-1; border-radius:42% 58% 55% 45% / 48% 40% 60% 52%; }
-  .b1 { width:380px; height:340px; background:var(--amarelo-claro); top:-140px; right:-120px; }
-  .b2 { width:280px; height:260px; background:#d6f2df; bottom:-100px; left:-90px; border-radius:55% 45% 38% 62% / 52% 60% 40% 48%; }
-  main { max-width:680px; margin:0 auto; padding:56px 16px 64px; }
-  .selo { display:inline-block; background:var(--verde); color:#fff; font-weight:800; font-size:13px; letter-spacing:.06em; text-transform:uppercase; padding:6px 14px; border-radius:999px 999px 999px 4px; }
-  h1 { font-size:clamp(32px,7vw,48px); line-height:1.1; margin:16px 0 12px; color:var(--azul); }
-  h1 em { font-style:normal; background:linear-gradient(transparent 60%, var(--amarelo) 60%); }
-  p { color:var(--texto-suave); font-size:18px; }
-  .cartao { display:block; text-decoration:none; color:inherit; background:#fff; border-radius:28px 34px 30px 26px; padding:24px; margin-top:28px; box-shadow:0 10px 0 -2px #e6ecf7, 0 2px 18px rgba(0,39,118,.08); transition:transform .15s; }
-  .cartao:hover { transform:translateY(-3px); }
-  .cartao strong { display:block; font-size:22px; color:var(--azul); margin-bottom:4px; }
-  .cartao span { color:var(--verde); font-weight:800; }
-  footer { margin-top:40px; font-size:14px; color:var(--texto-suave); }
-  footer a { color:var(--azul); }
+  main { max-width: 760px; margin: 0 auto; padding: var(--espaco-6) var(--espaco-4) 0; }
+  section { scroll-margin-top: 80px; }
+  h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); }
+  h2 { font-size: var(--tamanho-5); line-height: 1.15; color: var(--azul); margin: 0 0 var(--espaco-2); }
+  .lead { font-size: var(--tamanho-3); color: var(--texto-suave); margin: 0 0 var(--espaco-3); }
+  a { color: var(--azul); }
+
+  /* Sobre */
+  .sobre { display: grid; grid-template-columns: 1fr 150px; gap: var(--espaco-5); align-items: center; }
+  .sobre img { width: 150px; height: 150px; object-fit: cover; border-radius: var(--forma-bolha-3); box-shadow: var(--sombra-clay); background: var(--verde-claro); }
+  .jeito { list-style: none; padding: 0; margin: var(--espaco-5) 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--espaco-3); }
+  .jeito li { background: var(--branco); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); box-shadow: var(--sombra-cartao); font-size: var(--tamanho-2); color: var(--texto-suave); }
+  .jeito strong { display: block; color: var(--verde-escuro); font-size: var(--tamanho-3); }
+  @media (max-width: 560px) {
+    .sobre { grid-template-columns: 1fr; }
+    .sobre img { width: 110px; height: 110px; grid-row: 1; }
+    .jeito { grid-template-columns: 1fr; }
+  }
+
+  /* Publicações */
+  #publicacoes { margin-top: var(--espaco-7); }
+  .filtros { display: flex; flex-wrap: wrap; gap: var(--espaco-2); margin: var(--espaco-4) 0; }
+  .filtros button { font: inherit; font-size: var(--tamanho-2); font-weight: var(--peso-forte); cursor: pointer; color: var(--azul); background: transparent; border: 2px solid var(--azul-claro); padding: 6px 14px; border-radius: var(--forma-pilula); }
+  .filtros button[aria-pressed="true"] { background: var(--azul); border-color: var(--azul); color: var(--branco); }
+  .filtros button:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+  .posts { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--espaco-4); }
+  .posts a.cartao { padding: var(--espaco-4) var(--espaco-5); }
+  .posts .tipo { display: inline-block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); letter-spacing: .06em; text-transform: uppercase; padding: 2px 10px; border-radius: var(--forma-selo); background: var(--verde-claro); color: var(--verde-escuro); }
+  .posts .tipo.ideia { background: var(--amarelo-claro); color: var(--azul); }
+  .posts .tipo.ferramenta { background: var(--azul-claro); color: var(--azul); }
+  .posts strong { display: block; font-size: var(--tamanho-4); line-height: 1.25; color: var(--azul); margin: var(--espaco-2) 0 var(--espaco-1); }
+  .posts p { margin: 0; color: var(--texto-suave); }
+  .posts .ir { display: inline-block; margin-top: var(--espaco-2); font-weight: var(--peso-forte); color: var(--verde-escuro); }
+
+  /* galera.club */
+  .galera { margin-top: var(--espaco-7); display: flex; align-items: center; justify-content: space-between; gap: var(--espaco-4); flex-wrap: wrap; background: var(--amarelo-claro); }
+  .galera p { margin: 0; color: var(--texto-suave); }
+  .galera strong { display: block; color: var(--azul); font-size: var(--tamanho-4); }
+
+  /* Apoio */
+  #apoiar { margin-top: var(--espaco-7); }
+  .apoio { background: var(--azul); color: var(--branco); border-radius: var(--forma-cartao); padding: var(--espaco-6) var(--espaco-5); box-shadow: var(--sombra-clay); }
+  .apoio h2 { color: var(--branco); }
+  .apoio .lead { color: var(--branco); opacity: .9; }
+  .apoio .destaque { background: none; color: var(--amarelo); }
+  .campos { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-3); margin-top: var(--espaco-4); }
+  .campos .largo { grid-column: 1 / -1; }
+  .campos label { display: grid; gap: var(--espaco-1); font-size: var(--tamanho-2); font-weight: 700; }
+  .campos input, .campos select { font: inherit; color: var(--texto); background: var(--branco); border: 2px solid transparent; padding: 10px 14px; border-radius: var(--forma-opcao); width: 100%; min-width: 0; }
+  .campos input:focus, .campos select:focus { outline: none; border-color: var(--amarelo); }
+  .cidade { display: grid; grid-template-columns: 1fr 90px; gap: var(--espaco-3); }
+  .consentimento { display: flex; gap: var(--espaco-3); align-items: flex-start; margin-top: var(--espaco-4); font-size: var(--tamanho-2); background: var(--branco-vidro); padding: var(--espaco-3) var(--espaco-4); border-radius: var(--forma-opcao); }
+  .consentimento input { width: 22px; height: 22px; flex: none; margin: 2px 0 0; accent-color: var(--amarelo); }
+  .apoio a { color: var(--amarelo); }
+  .apoio .botao { margin-top: var(--espaco-4); background: var(--amarelo); color: var(--azul); }
+  .apoio .botao:focus-visible { outline-color: var(--amarelo); }
+  .opcional { font-weight: var(--peso-normal); opacity: .8; }
+  .nota { font-size: var(--tamanho-1); opacity: .8; margin: var(--espaco-3) 0 0; }
+  .resposta { font-weight: 700; margin: var(--espaco-3) 0 0; min-height: 1.5em; }
+  .resposta.ok { color: var(--amarelo); }
+  .armadilha { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  @media (max-width: 560px) { .campos { grid-template-columns: 1fr; } .apoio { padding: var(--espaco-5) var(--espaco-4); } }
 </style>
 </head>
 <body>
-<div class="bolha b1"></div><div class="bolha b2"></div>
+<gr-cabecalho></gr-cabecalho>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
 <main>
-  <span class="selo">Em construção</span>
-  <h1>Gabriel Rodrigues<br><em>sistemas melhores</em> para o Brasil</h1>
-  <p>Sou desenvolvedor, nasci em Inhumas (GO) e passei anos construindo plataformas na Europa. Voltei para o Brasil para aplicar o que aprendi onde faz diferença: nos sistemas que todo mundo usa.</p>
-  <a class="cartao" href="/ideias/">
-    <strong>Ideias para conversar</strong>
-    O problema, a proposta e as críticas mais duras de cada ideia. Aperte play e ouça com legendas.
-    <br><span>Ouvir →</span>
+
+  <section id="sobre" class="sobre" aria-labelledby="titulo-sobre">
+    <div>
+      <span class="selo">Inhumas · Goiás · Brasil</span>
+      <h1 id="titulo-sobre">Oi, eu sou o <span class="destaque">Gabriel</span>.</h1>
+      <p class="lead">Sou desenvolvedor de software. Passei anos construindo plataformas na Europa e voltei para Goiás.</p>
+      <p class="lead">Hoje estudo política. Quero me preparar para disputar uma vaga de deputado federal por Goiás em 2030 e levar para o governo o jeito de trabalhar de quem constrói software.</p>
+    </div>
+    <img src="/design-system/img/gabriel-avatar.jpg" alt="Boneco de massinha do Gabriel, de óculos e camiseta verde" width="150" height="150">
+  </section>
+
+  <ul class="jeito" aria-label="Como eu trabalho">
+    <li><strong>Medir</strong>Saber o problema em números antes de mudar.</li>
+    <li><strong>Testar</strong>Começar pequeno, ver se funciona, corrigir.</li>
+    <li><strong>Abrir</strong>Tudo em público, com fonte e com crítica.</li>
+  </ul>
+
+  <section id="publicacoes" aria-labelledby="titulo-publicacoes">
+    <h2 id="titulo-publicacoes">Projetos e <span class="destaque">ideias</span></h2>
+    <p class="lead">O que estou estudando e propondo. Cada ideia traz as críticas mais duras e a minha resposta.</p>
+    <div class="filtros" role="group" aria-label="Filtrar publicações">
+      <button type="button" data-filtro="" aria-pressed="true">Tudo</button>
+      <button type="button" data-filtro="projeto" aria-pressed="false">Projetos</button>
+      <button type="button" data-filtro="ideia" aria-pressed="false">Ideias</button>
+    </div>
+    <!-- Projetos e ferramentas entram aqui à mão (novos no topo). As ideias vêm de /ideias/ideias.js.
+         data-ideia esconde a ideia de mesmo id, para não repetir o que já tem página própria. -->
+    <ul class="posts" id="posts">
+      <li data-tipo="projeto" data-ideia="reindustrializacao"><a class="cartao" href="/projetos/reindustrializacao/">
+        <span class="tipo">Projeto</span>
+        <strong>Reindustrializar o Brasil com o dinheiro que já existe</strong>
+        <p>Como fazer o crédito que os grandes patrimônios já usam virar fábrica, patente e plataforma brasileira.</p>
+        <span class="ir">Ler a história →</span>
+      </a></li>
+      <li data-tipo="projeto" data-ideia="qual-caminho"><a class="cartao" href="/caminho/">
+        <span class="tipo ferramenta">Ferramenta</span>
+        <strong>Qual caminho faz sentido pra mim?</strong>
+        <p>Sete perguntas para quem quer melhorar o Brasil e não sabe por onde começar.</p>
+        <span class="ir">Responder →</span>
+      </a></li>
+      <li data-tipo="ideia" id="todas-ideias"><a class="cartao" href="/ideias/">
+        <span class="tipo ideia">Ideias</span>
+        <strong>Ideias para conversar</strong>
+        <p>Todas as ideias, para ler ou ouvir com legendas.</p>
+        <span class="ir">Ver todas →</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <a class="cartao galera" href="https://galera.club/gabriel">
+    <div>
+      <strong>galera.club/gabriel</strong>
+      <p>Todos os meus links e redes num lugar só.</p>
+    </div>
+    <span class="botao">Abrir →</span>
   </a>
-  <a class="cartao" href="/caminho/">
-    <strong>Qual caminho faz sentido pra mim?</strong>
-    Um questionário aberto para quem quer melhorar o Brasil e não sabe por onde começar.
-    <br><span>Responder →</span>
-  </a>
-  <a class="cartao" href="/projetos/">
-    <strong>Projetos para o Brasil</strong>
-    Sistemas que todo mundo usa, onde eles travam e como melhorar, com dados e fontes.
-    <br><span>Ver projetos →</span>
-  </a>
-  <a class="cartao" href="/design-system/">
-    <strong>Design system Brasil orgânico</strong>
-    As cores, formas e o kit de animação em massinha que uso no site e nos vídeos.
-    <br><span>Ver →</span>
-  </a>
-  <footer>
-    <a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues">Código aberto no GitHub</a> · <a href="https://galera.club/gabriel">galera.club/gabriel</a>
-  </footer>
+
+  <section id="apoiar" aria-labelledby="titulo-apoio">
+    <div class="apoio">
+      <h2 id="titulo-apoio">Acredita que eu devo <span class="destaque">tentar</span>?</h2>
+      <p class="lead">Se você acha que o Brasil precisa de gente que constrói sistemas dentro do governo, deixe seu email. Eu conto como vai a preparação e peço sua opinião sobre as ideias.</p>
+      <form id="form-apoio" action="/api/apoio" method="post" novalidate>
+        <div class="campos">
+          <label><span>Nome <span class="opcional">(opcional)</span></span>
+            <input name="nome" autocomplete="name" maxlength="80">
+          </label>
+          <label>Email
+            <input name="email" type="email" autocomplete="email" maxlength="254" required>
+          </label>
+          <div class="cidade largo">
+            <label><span>Cidade <span class="opcional">(opcional)</span></span>
+              <input name="cidade" autocomplete="address-level2" maxlength="80">
+            </label>
+            <label>UF
+              <select name="uf" autocomplete="address-level1">
+                <option value=""></option>
+                <option>AC</option><option>AL</option><option>AM</option><option>AP</option><option>BA</option><option>CE</option><option>DF</option><option>ES</option><option selected>GO</option><option>MA</option><option>MG</option><option>MS</option><option>MT</option><option>PA</option><option>PB</option><option>PE</option><option>PI</option><option>PR</option><option>RJ</option><option>RN</option><option>RO</option><option>RR</option><option>RS</option><option>SC</option><option>SE</option><option>SP</option><option>TO</option><option value="EX">Exterior</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <label class="armadilha" aria-hidden="true">Não preencha<input name="site" tabindex="-1" autocomplete="off"></label>
+        <label class="consentimento">
+          <input type="checkbox" name="consentimento" value="sim" required>
+          <span>Autorizo o Gabriel a guardar meu nome, email e cidade para mandar novidades sobre a preparação e as ideias deste site. Sei que isso mostra que apoio a tentativa dele e que posso pedir para sair quando quiser. Li a <a href="/privacidade/">política de privacidade</a>.</span>
+        </label>
+        <button class="botao" type="submit">Quero que você tente</button>
+        <p class="resposta" id="resposta" role="status" aria-live="polite"></p>
+        <p class="nota">Não peço CPF, título de eleitor nem telefone. Não é pedido de voto nem lista de assinaturas. Seus dados não são vendidos nem compartilhados.</p>
+      </form>
+    </div>
+  </section>
 </main>
+<gr-rodape></gr-rodape>
+
+<script src="/ideias/ideias.js"></script>
+<script>
+(() => {
+  "use strict";
+
+  // Ideias: uma entrada por ideia de ideias.js, antes do cartão "Ver todas".
+  const lista = document.getElementById("posts");
+  const todas = document.getElementById("todas-ideias");
+  const comPagina = new Set([...lista.querySelectorAll("[data-ideia]")].map((li) => li.dataset.ideia));
+  (window.IDEIAS || []).filter((ideia) => !comPagina.has(ideia.id)).forEach((ideia) => {
+    const li = document.createElement("li");
+    li.dataset.tipo = "ideia";
+    const a = document.createElement("a");
+    a.className = "cartao";
+    a.href = "/ideias/#" + encodeURIComponent(ideia.id);
+    const tipo = document.createElement("span");
+    tipo.className = "tipo ideia";
+    tipo.textContent = "Ideia" + (ideia.estado ? " · " + ideia.estado : "");
+    const titulo = document.createElement("strong");
+    titulo.textContent = ideia.titulo;
+    const gancho = document.createElement("p");
+    gancho.textContent = ideia.gancho;
+    const ir = document.createElement("span");
+    ir.className = "ir";
+    ir.textContent = "Ler ou ouvir →";
+    a.append(tipo, titulo, gancho, ir);
+    li.append(a);
+    lista.insertBefore(li, todas);
+  });
+
+  // Filtros
+  const botoes = document.querySelectorAll(".filtros button");
+  botoes.forEach((b) => b.addEventListener("click", () => {
+    const filtro = b.dataset.filtro;
+    botoes.forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+    lista.querySelectorAll("li").forEach((li) => { li.hidden = !!filtro && li.dataset.tipo !== filtro; });
+  }));
+
+  // Formulário de apoio
+  const form = document.getElementById("form-apoio");
+  const resposta = document.getElementById("resposta");
+  const botao = form.querySelector("button[type=submit]");
+  const avisar = (texto, ok) => { resposta.textContent = texto; resposta.classList.toggle("ok", !!ok); };
+
+  if (new URLSearchParams(location.search).get("apoio") === "ok") avisar("Obrigado! Recebi seu apoio.", true);
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const dados = Object.fromEntries(new FormData(form));
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dados.email || "")) return avisar("Confira o email.");
+    if (dados.consentimento !== "sim") return avisar("Marque a autorização para eu poder guardar seu email.");
+    botao.disabled = true;
+    avisar("Enviando…");
+    try {
+      const r = await fetch(form.action, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(dados) });
+      const corpo = await r.json().catch(() => ({}));
+      if (r.ok) { form.reset(); avisar("Obrigado! Recebi seu apoio. Em breve mando novidades.", true); }
+      else if (r.status === 503) avisar("O formulário ainda está sendo ligado. Volte em alguns dias.");
+      else avisar(corpo.erro || "Não consegui enviar. Tente de novo.");
+    } catch {
+      avisar("Sem conexão. Tente de novo.");
+    } finally {
+      botao.disabled = false;
+    }
+  });
+})();
+</script>
 </body>
 </html>
