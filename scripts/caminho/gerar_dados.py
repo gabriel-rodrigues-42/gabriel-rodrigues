@@ -163,7 +163,10 @@ def escolher_eleicao(n_vagas: int, detalhe: dict, cand: dict):
     if not codigos:
         return {}, {}
     completo = next((c for c in codigos if cand.get(c, {}).get("eleitos") == n_vagas), codigos[0])
-    return detalhe.get(completo, {}), cand.get(completo, {})
+    # O 2º turno tem código de eleição próprio no TSE; os votos válidos vêm do 1º turno,
+    # que é o código mais recente do detalhe até o escolhido.
+    cod_detalhe = max((c for c in detalhe if c <= completo), default=None)
+    return detalhe.get(cod_detalhe, {}), cand.get(completo, {})
 
 
 def ler_vagas(zip_path: Path):
