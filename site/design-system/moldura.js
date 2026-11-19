@@ -13,6 +13,28 @@
     { href: "/#sobre", texto: "Sobre", ativo: () => false },
   ];
 
+  // Logo do Gabriel: um G com duas pessoas e estrelas. As cores vêm de tokens.css
+  // (--logo-g, --logo-pessoas, --logo-estrelas). Cópia em arquivo: /design-system/img/logo.svg.
+  const LOGO = `
+  <g fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <g class="logo-g" stroke="var(--logo-g, #009c3b)">
+      <path d="M45.15 34.99H57.78A25.83 25.83 0 1 1 44.91 11.1C40.1 12.69 36.58 15.04 32.82 17.38C28.13 21.14 22.26 20.91 14.39 21.84"/>
+      <path d="M30.24 11.28C23.66 12.45 17.56 15.86 13.98 21.97A21.25 21.25 0 1 0 52.29 39.57H45.15"/>
+    </g>
+    <g class="logo-pessoas" stroke="var(--logo-pessoas, #002776)">
+      <path d="M29.65 32.76H23.9A3.99 3.99 0 0 0 19.91 36.75V43.21A1.41 1.41 0 0 0 22.73 43.21M22.73 38.28V52.25M26.6 45.44V53.78"/>
+      <path d="M33.53 36.17V54.01M33.53 42.98A1.41 1.41 0 0 1 30.71 42.98M30.71 53.54V36.17C30.71 32.29 32.82 30.3 36.93 30.06C41.04 29.83 44.33 27.01 46.68 23.49C47.61 22.08 49.96 22.78 49.02 24.66C47.14 28.18 43.97 31.71 43.15 32.65C42.45 33.58 42.33 34.64 42.33 35.46V51.66M37.64 44.27V53.54"/>
+      <circle cx="26.31" cy="28.07" r="2.76"/>
+      <circle cx="37.17" cy="25.37" r="2.76"/>
+    </g>
+  </g>
+  <g class="logo-estrelas" fill="var(--logo-estrelas, #c9a800)">
+    <path d="M50.43 10.1Q51.02 12.81 53.72 13.39Q51.02 13.98 50.43 16.68Q49.84 13.98 47.14 13.39Q49.84 12.81 50.43 10.1Z"/>
+    <path d="M54.42 18.32Q54.78 19.85 56.3 20.2Q54.78 20.55 54.42 22.08Q54.07 20.55 52.55 20.2Q54.07 19.85 54.42 18.32Z"/>
+    <path d="M44.56 15.74Q44.91 17.27 46.44 17.62Q44.91 17.97 44.56 19.5Q44.21 17.97 42.68 17.62Q44.21 17.27 44.56 15.74Z"/>
+  </g>
+`;
+
   const caminho = location.pathname;
 
   class Cabecalho extends HTMLElement {
@@ -26,8 +48,8 @@
         <header class="moldura-topo">
           <div class="moldura-topo-dentro">
             <a class="moldura-marca" href="/" aria-label="Gabriel Rodrigues, página inicial">
-              <img src="/design-system/img/gabriel-avatar.jpg" alt="" width="40" height="40">
-              <span><strong>Gabriel Rodrigues</strong><span>Engenharia de software no serviço público</span></span>
+              <svg class="moldura-logo" viewBox="4 5 56 55" aria-hidden="true" focusable="false">${LOGO}</svg>
+              <span class="moldura-oculto">Gabriel Rodrigues</span>
             </a>
             <nav class="moldura-menu" aria-label="Menu principal">${links}</nav>
             <a class="moldura-apoiar" href="/#apoiar">Apoiar</a>

@@ -18,6 +18,11 @@
   --branco: #ffffff;
   --branco-vidro: rgba(255, 255, 255, .08); /* cartão claro sobre fundo azul */
 
+  /* Logo: G verde, pessoas azuis, estrelas amarelas */
+  --logo-g: var(--verde);
+  --logo-pessoas: var(--azul);
+  --logo-estrelas: var(--amarelo-escuro);
+
   /* Neutros */
   --creme: #fbf8ef;          /* fundo padrão: papel, não branco puro */
   --creme-vidro: rgba(251, 248, 239, .92); /* cabeçalho fixo sobre o conteúdo */
