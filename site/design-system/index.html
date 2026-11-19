@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brasil orgânico · design system</title>
+<meta name="description" content="Cores, formas, componentes e kit de animação em massinha usados no site e nos vídeos de Gabriel Rodrigues.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="componentes.css">
+<style>
+  main { max-width: 960px; margin: 0 auto; padding: var(--espaco-7) var(--espaco-4) var(--espaco-7); }
+  h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); }
+  h2 { font-size: var(--tamanho-5); color: var(--azul); margin: var(--espaco-7) 0 var(--espaco-2); }
+  .lead { font-size: var(--tamanho-3); color: var(--texto-suave); max-width: 640px; }
+  .principios { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--espaco-4); margin-top: var(--espaco-5); }
+  .principios strong { display: block; color: var(--azul); font-size: var(--tamanho-3); }
+  .grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--espaco-4); }
+  .cor { background: var(--branco); border-radius: var(--forma-cartao); overflow: hidden; box-shadow: var(--sombra-cartao); font-size: var(--tamanho-2); }
+  .cor div { height: 90px; border-radius: 0 0 40% 60% / 0 0 30% 22%; }
+  .cor p { margin: 0; padding: 10px 14px 14px; }
+  .cor code { color: var(--texto-suave); font-size: var(--tamanho-1); }
+  .formas { display: flex; flex-wrap: wrap; gap: var(--espaco-5); align-items: center; }
+  .forma { width: 140px; height: 120px; display: grid; place-items: center; font-size: var(--tamanho-1); font-weight: 800; color: var(--azul); }
+  .vitrine { display: grid; gap: var(--espaco-4); }
+  .linha { display: flex; flex-wrap: wrap; gap: var(--espaco-3); align-items: center; }
+  .tipo p { margin: 6px 0; }
+  .video { position: relative; aspect-ratio: 16 / 9; border-radius: var(--forma-cartao); overflow: hidden; box-shadow: var(--sombra-cartao); background: #1b1b1b; }
+  .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  code.bloco { display: block; white-space: pre; overflow-x: auto; background: var(--azul); color: var(--branco); padding: var(--espaco-4); border-radius: var(--forma-opcao); font-size: var(--tamanho-2); }
+  a { color: var(--azul); }
+</style>
+</head>
+<body>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
+<main>
+  <span class="selo">Design system</span>
+  <h1>Brasil <span class="destaque">orgânico</span></h1>
+  <p class="lead">Cores da bandeira, formas que parecem feitas à mão e uma linguagem simples. O mesmo sistema vale para o site e para os vídeos em massinha.</p>
+
+  <div class="principios">
+    <div class="cartao"><strong>Feito à mão</strong>Nenhum canto é igual ao outro. Formas orgânicas deixam a interface menos fria.</div>
+    <div class="cartao"><strong>Claro antes de bonito</strong>Uma ideia por tela, frases curtas, contraste alto. Quem lê não precisa ser especialista.</div>
+    <div class="cartao"><strong>Do Brasil</strong>Verde, amarelo e azul com papel creme de fundo. Brasileiro sem virar propaganda.</div>
+  </div>
+
+  <h2>Cores</h2>
+  <div class="grade" id="cores"></div>
+
+  <h2>Tipografia</h2>
+  <div class="cartao tipo">
+    <p style="font-size: var(--tamanho-6); font-weight: 900; color: var(--azul); line-height: 1.1">Nunito 900, títulos</p>
+    <p style="font-size: var(--tamanho-4); font-weight: 800; color: var(--azul)">Nunito 800, subtítulos e botões</p>
+    <p style="font-size: var(--tamanho-3)">Nunito 400, texto corrido. Arredondada, amigável e fácil de ler no celular.</p>
+    <p style="font-size: var(--tamanho-2); color: var(--texto-suave)">Texto suave, para notas e legendas.</p>
+  </div>
+
+  <h2>Formas</h2>
+  <div class="formas">
+    <div class="forma" style="background: var(--amarelo-claro); border-radius: var(--forma-bolha-1)">bolha-1</div>
+    <div class="forma" style="background: var(--verde-claro); border-radius: var(--forma-bolha-2)">bolha-2</div>
+    <div class="forma" style="background: var(--azul-claro); border-radius: var(--forma-bolha-3)">bolha-3</div>
+    <div class="forma" style="background: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao)">cartão</div>
+    <div class="forma" style="background: var(--verde); color: var(--branco); border-radius: var(--forma-selo); height: 60px">selo</div>
+  </div>
+
+  <h2>Componentes</h2>
+  <div class="vitrine">
+    <div class="linha">
+      <span class="selo">Selo verde</span><span class="selo azul">Selo azul</span><span class="selo amarelo">Selo amarelo</span>
+    </div>
+    <div class="linha">
+      <button class="botao">Botão</button><button class="botao verde">Botão verde</button><button class="botao secundario">Secundário</button>
+    </div>
+    <div class="cartao">
+      <strong style="color: var(--azul); font-size: var(--tamanho-4)">Cartão com <span class="destaque">destaque</span></strong>
+      <p style="margin: 8px 0 16px">Use para agrupar uma ideia. A base azul clara embaixo imita massinha apoiada na mesa.</p>
+      <div class="progresso" style="margin-bottom: 16px"><div style="width: 60%"></div></div>
+      <div style="display: grid; gap: 10px">
+        <button class="opcao">Opção de escolha</button>
+        <button class="opcao marcada">Opção marcada</button>
+      </div>
+    </div>
+  </div>
+
+  <h2>Animação em massinha</h2>
+  <p>Os vídeos são stop motion de verdade, feitos no Blender: um cenário de mesa e o boneco do Gabriel em massinha, montados por scripts Python com as mesmas cores deste sistema. A animação roda a 12 quadros por segundo, "em dois", com o tremido leve das mãos do animador.</p>
+  <img src="img/gabriel-massinha.jpg" alt="Gabriel em massinha acenando ao lado de quatro blocos: Ideia, Câmara, Senado e Sanção" style="width: 100%; height: auto; border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao)">
+  <p>Os scripts ficam em <a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/tree/main/videos/blender"><code>videos/blender/</code></a>.</p>
+
+  <h2>Como usar</h2>
+  <code class="bloco">&lt;link rel="stylesheet" href="/design-system/tokens.css"&gt;
+&lt;link rel="stylesheet" href="/design-system/componentes.css"&gt;</code>
+  <p>Regra única: use sempre as variáveis de <code>tokens.css</code>. Se precisar de uma cor ou forma nova, adicione lá primeiro.</p>
+</main>
+<script>
+  const cores = [
+    ["--verde", "Ação principal, progresso"], ["--verde-escuro", "Texto verde sobre fundo claro"], ["--verde-claro", "Fundos e bolhas"],
+    ["--amarelo", "Destaque, marca-texto"], ["--amarelo-claro", "Fundos e bolhas"],
+    ["--azul", "Títulos e botões"], ["--azul-medio", "Links e detalhes"], ["--azul-claro", "Trilhos e sombras"],
+    ["--creme", "Fundo das páginas"], ["--areia", "Chão nas animações"], ["--texto", "Texto principal"], ["--texto-suave", "Notas e legendas"],
+  ];
+  const estilo = getComputedStyle(document.documentElement);
+  document.getElementById("cores").innerHTML = cores.map(([v, uso]) =>
+    `<div class="cor"><div style="background: var(${v})"></div><p><strong>${v.slice(2)}</strong><br><code>${estilo.getPropertyValue(v).trim()}</code><br>${uso}</p></div>`
+  ).join("");
+</script>
+</body>
+</html>

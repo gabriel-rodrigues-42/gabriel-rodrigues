@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<!-- MODELO: copie esta pasta para site/projetos/<slug>/ e troque tudo que está entre [colchetes]. -->
+<title>[Título curto do projeto] · Gabriel Rodrigues</title>
+<meta name="description" content="[Uma frase: qual problema este projeto resolve]">
+<link rel="stylesheet" href="/design-system/tokens.css">
+<link rel="stylesheet" href="/design-system/componentes.css">
+<style>
+  main { max-width: 760px; margin: 0 auto; padding: var(--espaco-7) var(--espaco-4); }
+  h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); }
+  h2 { font-size: var(--tamanho-4); color: var(--azul); margin: var(--espaco-6) 0 var(--espaco-2); }
+  .lead { font-size: var(--tamanho-3); color: var(--texto-suave); }
+  .video { position: relative; aspect-ratio: 16 / 9; border-radius: var(--forma-cartao); overflow: hidden; box-shadow: var(--sombra-cartao); margin-top: var(--espaco-5); background: var(--azul-claro); }
+  .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--espaco-4); }
+  .numeros strong { display: block; font-size: var(--tamanho-5); color: var(--verde-escuro); line-height: 1.1; }
+  .fontes { font-size: var(--tamanho-2); color: var(--texto-suave); }
+  a { color: var(--azul); }
+  nav a { font-weight: 800; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
+<main>
+  <nav><a href="/projetos/">← Projetos</a></nav>
+  <span class="selo" style="margin-top: var(--espaco-5)">[Status: Ideia | Em estudo | Proposta pronta]</span>
+  <h1>[Título com uma <span class="destaque">palavra</span> em destaque]</h1>
+  <p class="lead">[Uma ou duas frases: o problema, para quem, e por que importa.]</p>
+
+  <!-- Vídeo: troque VIDEO_ID pelo ID do YouTube, ou apague este bloco -->
+  <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID" title="[Título do vídeo]" allowfullscreen loading="lazy"></iframe></div>
+
+  <h2>Como funciona hoje</h2>
+  <p>[Descreva o sistema atual como um fluxo: quem faz o quê, em que ordem, onde trava. Pense como engenheiro: entradas, saídas, gargalos.]</p>
+
+  <h2>Os números</h2>
+  <div class="numeros">
+    <div class="cartao"><strong>[número]</strong>[o que ele mede] <span class="fontes">[fonte]</span></div>
+    <div class="cartao"><strong>[número]</strong>[o que ele mede] <span class="fontes">[fonte]</span></div>
+    <div class="cartao"><strong>[número]</strong>[o que ele mede] <span class="fontes">[fonte]</span></div>
+  </div>
+
+  <h2>O que proponho</h2>
+  <p>[A mudança em linguagem simples. Se for lei: o que muda, quem é afetado, como medir se funcionou.]</p>
+
+  <h2>Como medir se deu certo</h2>
+  <p>[Um ou dois indicadores públicos e onde acompanhar.]</p>
+
+  <h2>Fontes</h2>
+  <ul class="fontes">
+    <li><a href="[link oficial]">[Nome da fonte, órgão e ano]</a></li>
+  </ul>
+</main>
+</body>
+</html>

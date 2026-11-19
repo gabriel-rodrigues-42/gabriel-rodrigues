@@ -1,0 +1,53 @@
+/* Brasil orgânico — componentes base. Depende de tokens.css. */
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; font-family: var(--fonte); background: var(--creme); color: var(--texto);
+  line-height: 1.55; min-height: 100vh; overflow-x: hidden;
+}
+
+/* Bolhas de fundo */
+.bolha { position: fixed; z-index: -1; border-radius: var(--forma-bolha-1); pointer-events: none; }
+.bolha.amarela { width: 360px; height: 320px; background: var(--amarelo-claro); top: -130px; right: -110px; }
+.bolha.verde { width: 270px; height: 250px; background: var(--verde-claro); bottom: -95px; left: -85px; border-radius: var(--forma-bolha-2); }
+
+/* Selo */
+.selo {
+  display: inline-block; background: var(--verde); color: var(--branco);
+  font-weight: var(--peso-forte); font-size: var(--tamanho-1); letter-spacing: .06em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: var(--forma-selo);
+}
+.selo.azul { background: var(--azul); }
+.selo.amarelo { background: var(--amarelo); color: var(--azul); }
+
+/* Destaque de marca-texto amarelo */
+.destaque { font-style: normal; background: linear-gradient(transparent 60%, var(--amarelo) 60%); }
+
+/* Cartão */
+.cartao { background: var(--branco); border-radius: var(--forma-cartao); padding: var(--espaco-5); box-shadow: var(--sombra-cartao); }
+a.cartao { display: block; text-decoration: none; color: inherit; transition: transform .15s; }
+a.cartao:hover { transform: translateY(-3px); }
+
+/* Botões */
+.botao {
+  font: inherit; font-weight: var(--peso-forte); cursor: pointer; border: none; text-decoration: none; display: inline-block;
+  padding: 12px 20px; border-radius: var(--forma-pilula); background: var(--azul); color: var(--branco);
+}
+.botao.verde { background: var(--verde); }
+.botao.secundario { background: transparent; color: var(--azul); border: 2px solid var(--azul-claro); }
+.botao:disabled { opacity: .4; cursor: default; }
+.botao:focus-visible, .opcao:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+
+/* Opção de escolha */
+.opcao {
+  display: block; width: 100%; text-align: left; font: inherit; color: inherit; cursor: pointer;
+  background: var(--creme); border: 2px solid transparent; padding: 14px 16px; border-radius: var(--forma-opcao);
+  transition: border-color .15s, background .15s, transform .15s;
+}
+.opcao:hover { border-color: var(--verde); transform: translateX(3px); }
+.opcao.marcada { background: #e3f6ea; border-color: var(--verde); font-weight: 700; }
+
+/* Barra de progresso */
+.progresso { height: 10px; background: var(--azul-claro); border-radius: var(--forma-pilula); overflow: hidden; }
+.progresso > div { height: 100%; background: var(--verde); border-radius: var(--forma-pilula); transition: width .3s; }
+.progresso.amarelo > div { background: var(--amarelo); }
