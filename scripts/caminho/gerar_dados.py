@@ -232,7 +232,9 @@ def cargo(ue: str, nome: str, vagas, detalhe, cand, ano: int):
         return None
     d = detalhe.get((ue, nome), {})
     c = cand.get((ue, nome), {})
-    out = {"ano": ano, "vagas": n, "validos": d.get("validos"), "menor_eleito": c.get("menor_eleito")}
+    # Com uma vaga, o número que importa é o do vencedor. Com várias, o do eleito com menos votos.
+    eleito = c.get("maior_eleito") if n == 1 else c.get("menor_eleito")
+    out = {"ano": ano, "vagas": n, "validos": d.get("validos"), "menor_eleito": eleito}
     if nome in PROPORCIONAIS:
         out["qe"] = quociente_eleitoral(d.get("validos") or 0, n) if d.get("validos") else None
     else:
@@ -261,6 +263,13 @@ def nomes_tse(zip_path: Path):
     return out
 
 
+# Municípios com nome diferente no IBGE e no TSE, que nem a semelhança resolve.
+APELIDOS_TSE = {
+    ("RR", "São Luiz do Anauá"): "SÃO LUIZ",
+    ("RN", "Januário Cicco"): "BOA SAÚDE",
+}
+
+
 def casar(ibge_por_uf, tse_nomes):
     """IBGE -> código TSE, por nome normalizado dentro da UF; o que sobrar vai por semelhança."""
     mapa = {}
@@ -272,7 +281,7 @@ def casar(ibge_por_uf, tse_nomes):
         livres = dict(por_uf.get(uf, {}))
         pendentes = []
         for m in muns:
-            k = chave(m["nome"])
+            k = chave(APELIDOS_TSE.get((uf, m["nome"]), m["nome"]))
             if k in livres:
                 mapa[m["id"]] = livres.pop(k)
             else:
