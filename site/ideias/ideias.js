@@ -11,7 +11,7 @@
 // - "pergunta" fecha a ideia com uma pergunta para puxar conversa nas redes.
 // - "hashtag" fecha a ideia: é a tag para as pessoas postarem e conversarem sobre ela. Uma por ideia,
 //   sem espaço e sem acento (ex.: "#GaleraClub"). A HASHTAG_GERAL entra junto em todas.
-// - "estado" aparece no selo: "rascunho", "em teste" ou "pronta para postar".
+// - "estado" aparece no selo: "rascunho", "em teste", "pronta para postar" ou "no ar" (já funciona de verdade).
 // - Números sempre com fonte e ano, no próprio texto.
 // - Pré-campanha: nada de pedido de voto, número de urna ou ataque a pessoas e partidos. Critique sistemas.
 
@@ -62,34 +62,52 @@ window.IDEIAS = [
   {
     id: "galera-club",
     hashtag: "#GaleraClub",
-    titulo: "galera.club",
-    estado: "rascunho",
-    gancho: "E se o link na bio do pequeno negócio já vendesse pelo WhatsApp e pelo Pix?",
+    titulo: "galera.club: uma plataforma brasileira que já está no ar",
+    estado: "no ar",
+    gancho: "Soberania digital não começa num discurso. Começa numa plataforma brasileira que já funciona, e eu construí uma.",
     problema: [
-      "Quem vende no Brasil vende pelo Instagram e pelo WhatsApp. O cliente vê a foto, chama no privado, pergunta o preço e espera a resposta.",
-      "As ferramentas de link na bio mais usadas foram feitas lá fora. Elas mostram uma lista de links, mas não sabem o que é Pix, não montam um pedido e não ajudam ninguém a ser encontrado na própria cidade.",
+      "Quem vende no Brasil vende pelo Instagram e pelo WhatsApp. O link na bio, que é a vitrine dessa pessoa, quase sempre é de uma empresa de fora.",
+      "As ferramentas estrangeiras cobram em dólar e vendem pelo cartão. No Linktree, toda venda paga 2,9% mais 30 centavos de dólar ao Stripe, em qualquer plano, segundo a central de ajuda do próprio Linktree, atualizada em outubro de 2026.",
+      "Enquanto isso, o Brasil criou um dos melhores sistemas de pagamento do mundo. O Pix tem 154 milhões de usuários pessoas físicas, segundo o Banco Central, em outubro de 2026. A maioria das plataformas de fora não foi feita em volta dele.",
     ],
     proposta: [
-      "O galera.club é uma página para cada pessoa ou negócio. Ela mostra o catálogo, monta o pedido e manda tudo pronto para o WhatsApp, com o pagamento por Pix.",
-      "Além da página, existe um mural da cidade, onde as pessoas descobrem quem vende perto delas. O mural é moderado com ajuda de inteligência artificial, com regras públicas.",
-      "A ideia começa por Goiânia. Primeiro dar certo numa cidade, depois crescer.",
+      "O galera.club é uma página de link na bio feita no Brasil. Cada pessoa ganha um endereço com o próprio nome, com links, produtos e preços.",
+      "O Pix é gerado na própria página, no padrão do Banco Central. O dinheiro vai direto do comprador para o vendedor, sem intermediário. A plataforma não cobra nada por venda.",
+      "O pedido chega pronto no WhatsApp ou num chat próprio da página, com respostas que o dono escreve. E existe o Mercado, onde as pessoas descobrem quem vende na própria cidade.",
+      "Isso não é rascunho. A versão 2.60 foi publicada em galera.club em 16 de novembro de 2026. Foram 67 versões desde agosto. Cada publicação faz backup do banco antes e volta sozinha se algo der errado.",
+      "É o tipo de plataforma que o Fundo Soberano de Reindustrialização foi pensado para multiplicar. Quanto mais o dinheiro do brasileiro passa por ferramentas brasileiras, mais renda e mais dados ficam aqui.",
     ],
     criticas: [
       {
         critica: "Já existe Linktree e um monte de concorrente. Por que mais um?",
-        resposta: "Porque nenhum deles foi pensado para o jeito que o brasileiro compra. Pedido no WhatsApp, pagamento no Pix e descoberta local são o centro do produto, não um extra.",
-      },
-      {
-        critica: "Moderação por inteligência artificial é censura disfarçada.",
-        resposta: "As regras do mural ficam públicas, e qualquer decisão da máquina pode ser revista por uma pessoa. A inteligência artificial filtra golpe e spam, não opinião.",
+        resposta: "Porque o centro do produto é o jeito que o brasileiro compra. Pix sem taxa da plataforma, pedido no WhatsApp e descoberta por cidade. Nas ferramentas de fora, isso é extra ou não existe.",
       },
       {
         critica: "Por que alguém pagaria por isso, se o WhatsApp é de graça?",
-        resposta: "",
+        resposta: "Hoje ninguém paga. Tudo que ajuda a vender é grátis e vai continuar grátis. O plano pago planejado vende aparência e espaço, como tirar a marca da página. Nunca a ferramenta de ganhar dinheiro.",
+      },
+      {
+        critica: "Soberania digital usando WhatsApp, que é americano?",
+        resposta: "É justo. O WhatsApp é onde o cliente já está, então ele é uma opção. Mas a página tem um chat próprio, e o dono escolhe. O pagamento, que é o que mais importa, passa pelo Pix, que é brasileiro.",
+      },
+      {
+        critica: "Então tudo já é brasileiro?",
+        resposta: "Ainda não, e eu prefiro dizer. Os backups do banco ficam na Cloudflare, uma empresa americana. A moderação usa inteligência artificial de fora. Trocar isso por nuvem e modelos nacionais custa dinheiro, e é exatamente o que a primeira faixa do fundo deveria financiar.",
+      },
+      {
+        critica: "Moderação por inteligência artificial é censura disfarçada.",
+        resposta: "No galera.club a máquina só sinaliza. Quem decide são pessoas da comunidade, e uma pessoa sozinha não derruba a publicação de ninguém. A inteligência artificial procura golpe, ódio e spam, não opinião.",
+      },
+      {
+        critica: "Plataforma pronta sem gente usando não prova nada.",
+        resposta: "Verdade. O código está pronto e no ar, o que falta é gente. A próxima meta é ter muitas páginas numa mesma cidade, começando por Goiânia, e mostrar os números em público.",
       },
     ],
-    pergunta: "Você compraria de uma loja que só tem um link na bio? O que faria você confiar nela?",
-    links: [{ texto: "galera.club/gabriel", url: "https://galera.club/gabriel" }],
+    pergunta: "Se uma ferramenta brasileira fizesse o mesmo que uma estrangeira, sem cobrar por venda, você trocaria? O que te faria ficar na de fora?",
+    links: [
+      { texto: "Ler o projeto completo", url: "/projetos/galera-club/" },
+      { texto: "Ver galera.club/gabriel", url: "https://galera.club/gabriel" },
+    ],
   },
 
   {
