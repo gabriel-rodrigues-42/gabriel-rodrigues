@@ -55,3 +55,20 @@ h1, h2, h3 { hyphens: auto; }
 .moldura-rodape .moldura-aviso { grid-column: 1 / -1; font-size: var(--tamanho-1); opacity: .7; border-top: 1px solid var(--branco-vidro); padding-top: var(--espaco-4); margin: 0; max-width: none; }
 
 @media (min-width: 720px) { .moldura-rodape-dentro { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); } }
+
+/* ---------- Aviso de cookies ---------- */
+.moldura-cookies {
+  position: fixed; z-index: 30; left: var(--espaco-3); right: var(--espaco-3); bottom: var(--espaco-3);
+  max-width: 560px; margin: 0 auto; padding: var(--espaco-4);
+  background: var(--branco); color: var(--texto); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao);
+  border: 2px solid var(--azul-claro); font-family: var(--fonte); font-size: var(--tamanho-2);
+}
+.moldura-cookies p { margin: 0 0 var(--espaco-3); }
+.moldura-cookies a { color: var(--azul); font-weight: var(--peso-forte); }
+.moldura-cookies-botoes { display: flex; flex-wrap: wrap; gap: var(--espaco-2); justify-content: flex-end; }
+.moldura-cookies button {
+  font: inherit; font-weight: var(--peso-forte); cursor: pointer; padding: 8px 18px; border-radius: var(--forma-pilula);
+  border: 2px solid var(--azul-claro); background: transparent; color: var(--azul);
+}
+.moldura-cookies button[data-escolha="aceito"] { background: var(--azul); border-color: var(--azul); color: var(--branco); }
+.moldura-cookies button:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }

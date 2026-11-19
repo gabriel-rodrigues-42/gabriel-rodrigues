@@ -73,13 +73,71 @@
               <li><a href="/#apoiar">Acredita que eu devo tentar?</a></li>
               <li><a href="https://galera.club/gabriel">galera.club/gabriel</a></li>
               <li><a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues">Código aberto no GitHub</a></li>
-              <li><a href="/privacidade/">Privacidade</a> · <a href="/design-system/">Design system</a></li>
+              <li><a href="/privacidade/">Privacidade</a> · <a href="#" data-cookies>Cookies</a> · <a href="/design-system/">Design system</a></li>
             </ul>
             <p class="moldura-aviso">Site pessoal e informativo de pré-campanha. Não há pedido de voto. Ideias em construção, abertas a crítica.</p>
           </div>
         </footer>`;
     }
   }
+
+  // ---------- Medição (Google Tag Manager) só com consentimento ----------
+  // LGPD: nada de Google até a pessoa aceitar. Com o aceite, o GTM carrega e o Consent Mode
+  // libera só a medição de visitas (analytics_storage); anúncios ficam sempre negados.
+  // A escolha fica no navegador (localStorage) e pode ser mudada pelo link "Cookies" do rodapé.
+  const GTM_ID = "GTM-KQKJVCCZ";
+  const CHAVE = "gr-consentimento"; // "aceito" | "recusado"
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { window.dataLayer.push(arguments); }
+  gtag("consent", "default", { analytics_storage: "denied", ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" });
+
+  const lerEscolha = () => { try { return localStorage.getItem(CHAVE); } catch { return null; } };
+  const salvarEscolha = (v) => { try { localStorage.setItem(CHAVE, v); } catch { /* sem armazenamento: pergunta de novo na próxima visita */ } };
+
+  let gtmCarregado = false;
+  function carregarGtm() {
+    if (gtmCarregado) return;
+    gtmCarregado = true;
+    gtag("consent", "update", { analytics_storage: "granted" });
+    window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
+    const s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtm.js?id=" + GTM_ID;
+    document.head.appendChild(s);
+  }
+
+  function mostrarAviso() {
+    if (document.querySelector(".moldura-cookies")) return;
+    const aviso = document.createElement("div");
+    aviso.className = "moldura-cookies";
+    aviso.setAttribute("role", "dialog");
+    aviso.setAttribute("aria-label", "Cookies de medição");
+    aviso.innerHTML = `
+      <p>Posso contar as visitas com o Google Analytics para saber quais ideias interessam mais? Sem anúncios. <a href="/privacidade/#cookies">Saiba mais</a></p>
+      <div class="moldura-cookies-botoes">
+        <button type="button" data-escolha="recusado">Recusar</button>
+        <button type="button" data-escolha="aceito">Aceitar</button>
+      </div>`;
+    aviso.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-escolha]");
+      if (!b) return;
+      salvarEscolha(b.dataset.escolha);
+      if (b.dataset.escolha === "aceito") carregarGtm();
+      else if (gtmCarregado) location.reload(); // recusou depois de aceitar: recarrega sem o GTM
+      aviso.remove();
+    });
+    document.body.appendChild(aviso);
+  }
+
+  const escolha = lerEscolha();
+  if (escolha === "aceito") carregarGtm();
+  document.addEventListener("DOMContentLoaded", () => { if (!lerEscolha()) mostrarAviso(); });
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("[data-cookies]")) return;
+    e.preventDefault();
+    mostrarAviso();
+  });
 
   if (!customElements.get("gr-cabecalho")) customElements.define("gr-cabecalho", Cabecalho);
   if (!customElements.get("gr-rodape")) customElements.define("gr-rodape", Rodape);
