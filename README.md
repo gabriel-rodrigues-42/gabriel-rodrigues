@@ -1,6 +1,6 @@
 # gabriel-rodrigues
 
-Site, design system e projetos de Gabriel Rodrigues: um desenvolvedor de Inhumas (GO) que quer melhorar os sistemas do Brasil com mentalidade de engenharia de software.
+Site, design system e projetos de Gabriel Rodrigues: um desenvolvedor de software em Goiânia (GO) que quer melhorar os sistemas do Brasil com mentalidade de engenharia de software.
 
 Este repositório vai reunir:
 

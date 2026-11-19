@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gabriel Rodrigues</title>
-<meta name="description" content="Gabriel Rodrigues: desenvolvedor de Inhumas (GO) que estuda política para levar a engenharia de software para o governo.">
+<meta name="description" content="Gabriel Rodrigues: desenvolvedor de software em Goiânia (GO) que estuda política para levar a engenharia de software para o governo.">
 <link rel="stylesheet" href="/design-system/tokens.css">
 <link rel="stylesheet" href="/design-system/componentes.css">
 <link rel="stylesheet" href="/design-system/moldura.css">
@@ -18,15 +18,18 @@
   a { color: var(--azul); }
 
   /* Sobre */
-  .sobre { display: grid; grid-template-columns: 1fr 150px; gap: var(--espaco-5); align-items: center; }
-  .sobre img { width: 150px; height: 150px; object-fit: cover; border-radius: var(--forma-bolha-3); box-shadow: var(--sombra-clay); background: var(--verde-claro); }
-  .jeito { list-style: none; padding: 0; margin: var(--espaco-5) 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--espaco-3); }
+  /* Mobile first: foto em cima, texto embaixo. A partir de 720px, foto à direita. */
+  .sobre { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-4); }
+  .sobre-foto { width: 140px; height: 140px; object-fit: cover; border-radius: var(--forma-bolha-3); box-shadow: var(--sombra-cartao); background: var(--azul-claro); }
+  .objetivo { margin: 0 0 var(--espaco-4); padding: var(--espaco-3) var(--espaco-4); background: var(--branco); border-radius: var(--forma-opcao); box-shadow: var(--sombra-cartao); color: var(--azul); font-weight: var(--peso-forte); }
+  .objetivo span { display: block; font-weight: var(--peso-normal); color: var(--texto-suave); font-size: var(--tamanho-2); }
+  .jeito { list-style: none; padding: 0; margin: var(--espaco-5) 0 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-3); }
   .jeito li { background: var(--branco); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); box-shadow: var(--sombra-cartao); font-size: var(--tamanho-2); color: var(--texto-suave); }
   .jeito strong { display: block; color: var(--verde-escuro); font-size: var(--tamanho-3); }
-  @media (max-width: 560px) {
-    .sobre { grid-template-columns: 1fr; }
-    .sobre img { width: 110px; height: 110px; grid-row: 1; }
-    .jeito { grid-template-columns: 1fr; }
+  @media (min-width: 720px) {
+    .sobre { grid-template-columns: minmax(0, 1fr) 200px; gap: var(--espaco-6); align-items: center; }
+    .sobre-foto { width: 200px; height: 200px; grid-column: 2; grid-row: 1; }
+    .jeito { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
 
   /* Publicações */
@@ -55,12 +58,12 @@
   .apoio h2 { color: var(--branco); }
   .apoio .lead { color: var(--branco); opacity: .9; }
   .apoio .destaque { background: none; color: var(--amarelo); }
-  .campos { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-3); margin-top: var(--espaco-4); }
+  .campos { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-3); margin-top: var(--espaco-4); }
   .campos .largo { grid-column: 1 / -1; }
   .campos label { display: grid; gap: var(--espaco-1); font-size: var(--tamanho-2); font-weight: 700; }
   .campos input, .campos select { font: inherit; color: var(--texto); background: var(--branco); border: 2px solid transparent; padding: 10px 14px; border-radius: var(--forma-opcao); width: 100%; min-width: 0; }
   .campos input:focus, .campos select:focus { outline: none; border-color: var(--amarelo); }
-  .cidade { display: grid; grid-template-columns: 1fr 90px; gap: var(--espaco-3); }
+  .cidade { display: grid; grid-template-columns: minmax(0, 1fr) 96px; gap: var(--espaco-3); }
   .consentimento { display: flex; gap: var(--espaco-3); align-items: flex-start; margin-top: var(--espaco-4); font-size: var(--tamanho-2); background: var(--branco-vidro); padding: var(--espaco-3) var(--espaco-4); border-radius: var(--forma-opcao); }
   .consentimento input { width: 22px; height: 22px; flex: none; margin: 2px 0 0; accent-color: var(--amarelo); }
   .apoio a { color: var(--amarelo); }
@@ -71,7 +74,8 @@
   .resposta { font-weight: 700; margin: var(--espaco-3) 0 0; min-height: 1.5em; }
   .resposta.ok { color: var(--amarelo); }
   .armadilha { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-  @media (max-width: 560px) { .campos { grid-template-columns: 1fr; } .apoio { padding: var(--espaco-5) var(--espaco-4); } }
+  .apoio { padding: var(--espaco-5) var(--espaco-4); }
+  @media (min-width: 720px) { .campos { grid-template-columns: repeat(2, minmax(0, 1fr)); } .apoio { padding: var(--espaco-6) var(--espaco-5); } }
 </style>
 </head>
 <body>
@@ -80,13 +84,14 @@
 <main>
 
   <section id="sobre" class="sobre" aria-labelledby="titulo-sobre">
+    <img class="sobre-foto" src="/design-system/img/gabriel-foto.jpg" alt="Foto de Gabriel Rodrigues sorrindo, de terno azul e gravata vinho" width="200" height="200">
     <div>
-      <span class="selo">Inhumas · Goiás · Brasil</span>
+      <span class="selo">Goiânia · Goiás · Brasil</span>
       <h1 id="titulo-sobre">Oi, eu sou o <span class="destaque">Gabriel</span>.</h1>
-      <p class="lead">Sou desenvolvedor de software. Passei anos construindo plataformas na Europa e voltei para Goiás.</p>
-      <p class="lead">Hoje estudo política. Quero me preparar para disputar uma vaga de deputado federal por Goiás em 2030 e levar para o governo o jeito de trabalhar de quem constrói software.</p>
+      <p class="objetivo">Quero disputar uma vaga de deputado federal por Goiás em 2030.<span>Se as ideias fizerem sentido para as pessoas, talvez antes: vereador de Goiânia em 2028.</span></p>
+      <p class="lead">Sou desenvolvedor de software. Passei anos construindo plataformas na Europa e voltei para Goiânia.</p>
+      <p class="lead">Hoje estudo política para levar ao governo o jeito de trabalhar de quem constrói software.</p>
     </div>
-    <img src="/design-system/img/gabriel-avatar.jpg" alt="Boneco de massinha do Gabriel, de óculos e camiseta verde" width="150" height="150">
   </section>
 
   <ul class="jeito" aria-label="Como eu trabalho">
