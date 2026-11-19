@@ -6,6 +6,7 @@ Site gabriel-rodrigues.com, design system e vídeos do Gabriel Rodrigues, desenv
 
 - `site/`: tudo que é publicado. HTML, CSS e JS puros, sem build.
   - `design-system/`: `tokens.css` (cores, formas, tipografia) e `componentes.css`. Vitrine em `/design-system/`.
+  - `ideias/`: portfólio de ideias lido em voz alta com legendas (Web Speech API). Conteúdo só em `ideias.js`; `leitor.js` monta a página e faz a leitura.
   - `caminho/`: questionário "Qual caminho faz sentido pra mim?". Dados em `dados.js`.
   - `projetos/`: páginas de projeto. Modelo em `projetos/_modelo/`.
 - `videos/`: vídeos (não publicado). `blender/gabriel.py` tem o boneco do Gabriel, as cores e o cenário; `blender/cenas/` tem um script por plano; `roteiros/` guarda os roteiros. `out/` e `audio/` ficam fora do Git.
@@ -18,6 +19,10 @@ Site gabriel-rodrigues.com, design system e vídeos do Gabriel Rodrigues, desenv
 - Páginas precisam funcionar em 390px de largura sem rolagem lateral.
 - Números sempre com fonte oficial e ano.
 - Pré-campanha: nada de pedido de voto, número de urna ou ataque a pessoas e partidos. Critique sistemas.
+
+## Ideias
+
+Para criar ou melhorar uma ideia, edite `site/ideias/ideias.js` (o formato está explicado no topo do arquivo). Cada ideia tem gancho, problema, proposta, críticas com resposta e uma pergunta para puxar conversa. Frases curtas: cada frase vira uma legenda.
 
 ## Skills
 

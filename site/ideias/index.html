@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ideias · Gabriel Rodrigues</title>
+<meta name="description" content="Portfólio de ideias do Gabriel Rodrigues. Aperte play e ouça cada ideia com legendas.">
+<link rel="stylesheet" href="/design-system/tokens.css">
+<link rel="stylesheet" href="/design-system/componentes.css">
+<style>
+  main { max-width: 760px; margin: 0 auto; padding: var(--espaco-7) var(--espaco-4) 200px; }
+  nav a { font-weight: var(--peso-forte); text-decoration: none; color: var(--azul); }
+  h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-5) 0 var(--espaco-3); }
+  .lead { font-size: var(--tamanho-3); color: var(--texto-suave); margin: 0 0 var(--espaco-5); }
+
+  .topo { display: flex; flex-wrap: wrap; gap: var(--espaco-3); align-items: center; }
+  .botao { display: inline-flex; align-items: center; gap: var(--espaco-2); }
+  .icone { width: 18px; height: 18px; fill: currentColor; flex: none; }
+  .aviso { font-size: var(--tamanho-1); color: var(--texto-suave); margin-top: var(--espaco-3); }
+  .aviso:empty { display: none; }
+
+  .indice { list-style: none; padding: 0; margin: var(--espaco-5) 0 0; display: flex; flex-wrap: wrap; gap: var(--espaco-2); }
+  .indice a { display: inline-block; text-decoration: none; color: var(--azul); background: var(--branco); font-weight: var(--peso-forte); font-size: var(--tamanho-1); padding: 6px 12px; border-radius: var(--forma-pilula); border: 2px solid var(--azul-claro); }
+
+  .ideias { display: grid; gap: var(--espaco-6); margin-top: var(--espaco-6); }
+  .ideia { scroll-margin-top: var(--espaco-5); transition: box-shadow .2s; }
+  .ideia.tocando { box-shadow: 0 10px 0 -2px var(--amarelo), 0 2px 18px rgba(0, 39, 118, .12); }
+  .ideia-topo { display: flex; gap: var(--espaco-3); align-items: flex-start; justify-content: space-between; }
+  .ideia h2 { font-size: var(--tamanho-5); line-height: 1.15; color: var(--azul); margin: var(--espaco-3) 0 0; }
+  .ideia h3 { font-size: var(--tamanho-2); text-transform: uppercase; letter-spacing: .06em; color: var(--verde-escuro); margin: var(--espaco-5) 0 var(--espaco-2); }
+  .ideia p { margin: 0 0 var(--espaco-3); }
+  .gancho { font-size: var(--tamanho-4); font-weight: var(--peso-forte); color: var(--texto); line-height: 1.35; margin-top: var(--espaco-4) !important; }
+
+  .tocar {
+    flex: none; width: 60px; height: 60px; border: none; cursor: pointer; display: grid; place-items: center;
+    background: var(--verde); color: var(--branco); border-radius: var(--forma-bolha-1); box-shadow: var(--sombra-clay);
+    transition: transform .15s, border-radius .4s;
+  }
+  .tocar:hover { transform: scale(1.06); border-radius: var(--forma-bolha-3); }
+  .tocar:focus-visible { outline: 3px solid var(--azul); outline-offset: 3px; }
+  .tocar .icone { width: 26px; height: 26px; }
+  .tocar[aria-pressed="true"] { background: var(--amarelo); color: var(--azul); }
+
+  .critica { background: var(--creme); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); margin-bottom: var(--espaco-3); }
+  .critica .rotulo { display: block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); text-transform: uppercase; letter-spacing: .05em; color: var(--texto-suave); }
+  .critica .pergunta-critica { font-weight: var(--peso-forte); }
+  .critica .pendente { color: var(--texto-suave); font-style: italic; }
+  .conversa { background: var(--azul-claro); border-radius: var(--forma-cartao); padding: var(--espaco-4); margin-top: var(--espaco-5); }
+  .conversa p { margin: 0; font-weight: var(--peso-forte); color: var(--azul); font-size: var(--tamanho-3); }
+  .links { margin-top: var(--espaco-4); display: flex; flex-wrap: wrap; gap: var(--espaco-3); }
+  .links a { color: var(--verde-escuro); font-weight: var(--peso-forte); }
+
+  .frase { border-radius: 6px; transition: background .15s; cursor: pointer; }
+  .frase.atual { background: var(--amarelo-claro); box-shadow: 0 0 0 3px var(--amarelo-claro); }
+
+  /* Barra de legendas */
+  .legenda {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; padding: var(--espaco-3) var(--espaco-4) var(--espaco-4);
+    background: var(--azul); color: var(--branco); border-radius: 28px 34px 0 0;
+    transform: translateY(110%); visibility: hidden; transition: transform .3s, visibility .3s;
+  }
+  .legenda.aberta { transform: none; visibility: visible; }
+  .legenda-controles [hidden] { display: none; }
+  .legenda-dentro { max-width: 760px; margin: 0 auto; }
+  .legenda-titulo { font-size: var(--tamanho-1); font-weight: var(--peso-forte); text-transform: uppercase; letter-spacing: .06em; color: var(--amarelo); }
+  .legenda-texto { font-size: var(--tamanho-4); font-weight: var(--peso-forte); line-height: 1.35; min-height: 2.7em; margin: var(--espaco-2) 0 var(--espaco-3); }
+  .legenda-texto .palavra.dita { color: var(--amarelo); }
+  .legenda-controles { display: flex; flex-wrap: wrap; gap: var(--espaco-2); align-items: center; }
+  .legenda-controles button, .legenda-controles select {
+    font: inherit; font-size: var(--tamanho-1); font-weight: var(--peso-forte); cursor: pointer;
+    background: rgba(255, 255, 255, .12); color: var(--branco); border: none; border-radius: var(--forma-pilula);
+    padding: 8px 12px; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .legenda-controles select option { color: var(--texto); }
+  .legenda-controles button:focus-visible, .legenda-controles select:focus-visible { outline: 3px solid var(--amarelo); outline-offset: 2px; }
+  .legenda-controles .icone { width: 16px; height: 16px; }
+  .legenda-progresso { margin-left: auto; font-size: var(--tamanho-1); opacity: .8; }
+  .legenda-barra { height: 4px; background: rgba(255, 255, 255, .2); border-radius: var(--forma-pilula); margin-bottom: var(--espaco-3); overflow: hidden; }
+  .legenda-barra > div { height: 100%; width: 0; background: var(--amarelo); transition: width .3s; }
+
+  @media (max-width: 480px) {
+    .legenda-texto { font-size: var(--tamanho-3); }
+    .legenda-progresso { width: 100%; margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5c0-1.1 1.2-1.8 2.2-1.2l9 6.5c.8.6.8 1.8 0 2.4l-9 6.5c-1 .6-2.2-.1-2.2-1.2z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="5" width="4.5" height="14" rx="2"/><rect x="13.5" y="5" width="4.5" height="14" rx="2"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="3"/></symbol>
+  <symbol id="i-prev" viewBox="0 0 24 24"><rect x="5" y="5" width="3" height="14" rx="1.5"/><path d="M19 6.5c0-.9-1-1.4-1.7-.9l-7.5 5.5c-.6.4-.6 1.4 0 1.8l7.5 5.5c.7.5 1.7 0 1.7-.9z"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><rect x="16" y="5" width="3" height="14" rx="1.5"/><path d="M5 6.5c0-.9 1-1.4 1.7-.9l7.5 5.5c.6.4.6 1.4 0 1.8l-7.5 5.5c-.7.5-1.7 0-1.7-.9z"/></symbol>
+</svg>
+
+<main>
+  <nav><a href="/">← Início</a></nav>
+  <span class="selo amarelo" style="margin-top: var(--espaco-5)">Portfólio de ideias</span>
+  <h1>Ideias para <span class="destaque">conversar</span></h1>
+  <p class="lead">Cada ideia diz o problema, a proposta e as críticas mais duras que eu já ouvi, com a minha resposta. Aperte play para ouvir com legendas, ou ouça todas em sequência.</p>
+
+  <div class="topo">
+    <button class="botao verde" id="ouvir-todas" type="button"><svg class="icone"><use href="#i-play"/></svg>Ouvir todas</button>
+  </div>
+  <p class="aviso" id="aviso"></p>
+
+  <ul class="indice" id="indice"></ul>
+  <div class="ideias" id="ideias"></div>
+</main>
+
+<div class="legenda" id="legenda" role="region" aria-label="Legendas">
+  <div class="legenda-dentro">
+    <div class="legenda-barra"><div id="legenda-barra"></div></div>
+    <div class="legenda-titulo" id="legenda-titulo"></div>
+    <div class="legenda-texto" id="legenda-texto" aria-live="polite"></div>
+    <div class="legenda-controles">
+      <button type="button" id="c-anterior" aria-label="Frase anterior"><svg class="icone"><use href="#i-prev"/></svg></button>
+      <button type="button" id="c-pausa"><svg class="icone"><use href="#i-pause"/></svg><span>Pausar</span></button>
+      <button type="button" id="c-proxima" aria-label="Próxima frase"><svg class="icone"><use href="#i-next"/></svg></button>
+      <button type="button" id="c-parar"><svg class="icone"><use href="#i-stop"/></svg>Parar</button>
+      <select id="c-velocidade" aria-label="Velocidade">
+        <option value="0.85">0,85×</option>
+        <option value="1" selected>1×</option>
+        <option value="1.2">1,2×</option>
+        <option value="1.5">1,5×</option>
+      </select>
+      <select id="c-voz" aria-label="Voz" hidden></select>
+      <span class="legenda-progresso" id="legenda-progresso"></span>
+    </div>
+  </div>
+</div>
+
+<script src="ideias.js"></script>
+<script src="leitor.js"></script>
+</body>
+</html>
