@@ -11,7 +11,7 @@ Site gabriel-rodrigues.com, design system e vídeos do Gabriel Rodrigues, desenv
   - `ideias/`: portfólio de ideias lido em voz alta com legendas (Web Speech API). Conteúdo só em `ideias.js`; `leitor.js` monta a página e faz a leitura.
   - `caminho/`: questionário "Qual caminho faz sentido pra mim?". Dados em `dados.js`.
   - `projetos/`: páginas de projeto. Modelo em `projetos/_modelo/`.
-- `functions/api/apoio.js`: Pages Function do formulário "Acredita que eu devo tentar?" da home. Grava no D1 ligado como `DB`; tabela em `db/apoios.sql`. Sem CPF: só email, nome, cidade e UF, com consentimento.
+- `functions/api/apoio.js`: Pages Function do formulário "Acredita que eu devo tentar?" da home. Grava na tabela `apoios` (`db/apoios.sql`) do D1 `gabriel-rodrigues`, ligado como `DB`. O banco é do site todo: recurso novo ganha tabela e arquivo próprios em `db/`. Sem CPF: só email, nome, cidade e UF, com consentimento.
 - `videos/`: vídeos (não publicado). `blender/gabriel.py` tem o boneco do Gabriel, as cores e o cenário; `blender/cenas/` tem um script por plano; `roteiros/` guarda os roteiros. `out/` e `audio/` ficam fora do Git.
 - `.claude/skills/blender-claymation/`: skill de stop motion no Blender (MIT, de angrypenguinpng/blender-claymation-skill).
 - `.github/workflows/deploy.yml`: publica `site/` no Cloudflare Pages. Cada PR ganha prévia em `<branch>.gabriel-rodrigues.pages.dev`; a `main` vai para produção.

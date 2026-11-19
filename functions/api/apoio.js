@@ -1,6 +1,6 @@
 // POST /api/apoio — guarda o apoio de quem acredita que o Gabriel deve tentar.
-// Roda como Cloudflare Pages Function. Precisa de um banco D1 ligado ao projeto com o nome DB
-// (Pages > Settings > Bindings) e da tabela de db/apoios.sql.
+// Roda como Cloudflare Pages Function. Precisa do banco D1 gabriel-rodrigues ligado ao projeto
+// com o nome DB (Pages > Settings > Bindings) e da tabela de db/apoios.sql.
 // Guarda só o necessário (LGPD, art. 6º, III): email, nome, cidade, UF e quando a pessoa consentiu.
 // Não guarda CPF, telefone nem IP.
 

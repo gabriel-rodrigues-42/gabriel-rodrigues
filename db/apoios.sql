@@ -1,6 +1,8 @@
 -- Tabela do formulário "Acredita que eu devo tentar?" (functions/api/apoio.js).
--- Rodar uma vez no console do D1 (Cloudflare > Storage & Databases > D1 > apoios > Console)
--- ou: npx wrangler d1 execute apoios --remote --file=db/apoios.sql
+-- O banco D1 se chama gabriel-rodrigues e serve para o site todo: cada recurso novo ganha
+-- a sua tabela e o seu arquivo em db/.
+-- Rodar uma vez no console do D1 (Cloudflare > Storage & Databases > D1 > gabriel-rodrigues > Console)
+-- ou: npx wrangler d1 execute gabriel-rodrigues --remote --file=db/apoios.sql
 CREATE TABLE IF NOT EXISTS apoios (
   email              TEXT PRIMARY KEY,
   nome               TEXT,
