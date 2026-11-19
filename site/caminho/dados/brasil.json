@@ -1,0 +1,855 @@
+{
+ "gerado_em": "2026-11-19",
+ "eleicao_municipal": 2024,
+ "eleicao_geral": 2026,
+ "arquivos_tse_gerados_em": {
+  "2026": "2026-11-19",
+  "2024": "2026-11-19"
+ },
+ "fontes": {
+  "vagas": "https://cdn.tse.jus.br/estatistica/sead/odsele/consulta_vagas/",
+  "votos_validos": "https://cdn.tse.jus.br/estatistica/sead/odsele/detalhe_votacao_munzona/",
+  "votos_candidatos": "https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_candidato_munzona/",
+  "municipios": "https://servicodados.ibge.gov.br/api/v1/localidades/municipios",
+  "populacao": "https://sidra.ibge.gov.br/tabela/4709"
+ },
+ "total_municipios": 5571,
+ "municipios_com_eleicao": 5569,
+ "estados": {
+  "AC": {
+   "nome": "Acre",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 439647,
+    "menor_eleito": 272635,
+    "segundo_turno": true
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 730058,
+    "menor_eleito": 157104,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 8,
+    "validos": 462485,
+    "menor_eleito": 13732,
+    "qe": 57811
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 24,
+    "validos": 470012,
+    "menor_eleito": 4933,
+    "qe": 19584
+   }
+  },
+  "AL": {
+   "nome": "Alagoas",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 1709614,
+    "menor_eleito": 892484,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 3286601,
+    "menor_eleito": 926860,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 9,
+    "validos": 1798341,
+    "menor_eleito": 63061,
+    "qe": 199816
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 27,
+    "validos": 1803374,
+    "menor_eleito": 17178,
+    "qe": 66792
+   }
+  },
+  "AM": {
+   "nome": "Amazonas",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 2071985,
+    "menor_eleito": 1273975,
+    "segundo_turno": true
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 3841845,
+    "menor_eleito": 948793,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 8,
+    "validos": 2119252,
+    "menor_eleito": 59271,
+    "qe": 264906
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 24,
+    "validos": 2125121,
+    "menor_eleito": 21896,
+    "qe": 88547
+   }
+  },
+  "AP": {
+   "nome": "Amapá",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 448747,
+    "menor_eleito": 281595,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 883225,
+    "menor_eleito": 213948,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 8,
+    "validos": 459680,
+    "qe": 57460
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 24,
+    "validos": 450731,
+    "qe": 18780
+   }
+  },
+  "BA": {
+   "nome": "Bahia",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 8291090,
+    "menor_eleito": 4626509,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 14418409,
+    "menor_eleito": 3986690,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 39,
+    "validos": 8281816,
+    "menor_eleito": 60159,
+    "qe": 212354
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 63,
+    "validos": 8163705,
+    "menor_eleito": 47216,
+    "qe": 129583
+   }
+  },
+  "CE": {
+   "nome": "Ceará",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 5406095,
+    "menor_eleito": 2875573,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 9715006,
+    "menor_eleito": 2822806,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 22,
+    "validos": 5521642,
+    "menor_eleito": 56068,
+    "qe": 250984
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 46,
+    "validos": 5455572,
+    "menor_eleito": 28316,
+    "qe": 118599
+   }
+  },
+  "DF": {
+   "nome": "Distrito Federal",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 1651394,
+    "menor_eleito": 987142,
+    "segundo_turno": true
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 3226319,
+    "menor_eleito": 886616,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 8,
+    "validos": 1659057,
+    "menor_eleito": 43179,
+    "qe": 207382
+   },
+   "deputado_distrital": {
+    "ano": 2026,
+    "vagas": 24,
+    "validos": 1698609,
+    "menor_eleito": 15440,
+    "qe": 70775
+   }
+  },
+  "ES": {
+   "nome": "Espírito Santo",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 2112171,
+    "menor_eleito": 1151818,
+    "segundo_turno": true
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 4029927,
+    "menor_eleito": 982978,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 10,
+    "validos": 2134985,
+    "menor_eleito": 43973,
+    "qe": 213498
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 30,
+    "validos": 2142789,
+    "menor_eleito": 17775,
+    "qe": 71426
+   }
+  },
+  "GO": {
+   "nome": "Goiás",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 3630576,
+    "menor_eleito": 2148218,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 6681994,
+    "menor_eleito": 1458522,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 17,
+    "validos": 3607744,
+    "menor_eleito": 43643,
+    "qe": 212220
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 41,
+    "validos": 3637985,
+    "menor_eleito": 18628,
+    "qe": 88731
+   }
+  },
+  "MA": {
+   "nome": "Maranhão",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 3846156,
+    "menor_eleito": 2104122,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 7117850,
+    "menor_eleito": 1471859,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 18,
+    "validos": 3970967,
+    "menor_eleito": 54953,
+    "qe": 220609
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 42,
+    "validos": 3921986,
+    "menor_eleito": 27328,
+    "qe": 93381
+   }
+  },
+  "MG": {
+   "nome": "Minas Gerais",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 11410371,
+    "menor_eleito": 6321590,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 20522302,
+    "menor_eleito": 3990864,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 53,
+    "validos": 11380151,
+    "menor_eleito": 25090,
+    "qe": 214720
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 77,
+    "validos": 11309326,
+    "menor_eleito": 32872,
+    "qe": 146874
+   }
+  },
+  "MS": {
+   "nome": "Mato Grosso do Sul",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 1363298,
+    "menor_eleito": 914323,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 2608059,
+    "menor_eleito": 856045,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 8,
+    "validos": 1420762,
+    "menor_eleito": 56217,
+    "qe": 177595
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 24,
+    "validos": 1381806,
+    "menor_eleito": 19516,
+    "qe": 57575
+   }
+  },
+  "MT": {
+   "nome": "Mato Grosso",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 1856293,
+    "menor_eleito": 1128099,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 3575264,
+    "menor_eleito": 977777,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 8,
+    "validos": 1901719,
+    "menor_eleito": 47195,
+    "qe": 237715
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 24,
+    "validos": 1925830,
+    "menor_eleito": 18842,
+    "qe": 80243
+   }
+  },
+  "PA": {
+   "nome": "Pará",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 4564841,
+    "menor_eleito": 2345721,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 8957562,
+    "menor_eleito": 2014409,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 17,
+    "validos": 4832237,
+    "menor_eleito": 63285,
+    "qe": 284249
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 41,
+    "validos": 4825120,
+    "menor_eleito": 32467,
+    "qe": 117686
+   }
+  },
+  "PB": {
+   "nome": "Paraíba",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 2286622,
+    "menor_eleito": 1470252,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 4282762,
+    "menor_eleito": 974550,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 12,
+    "validos": 2399949,
+    "menor_eleito": 50922,
+    "qe": 199996
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 36,
+    "validos": 2399388,
+    "menor_eleito": 23756,
+    "qe": 66650
+   }
+  },
+  "PE": {
+   "nome": "Pernambuco",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 5266852,
+    "menor_eleito": 2805438,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 9292778,
+    "menor_eleito": 2325127,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 25,
+    "validos": 5264503,
+    "menor_eleito": 59951,
+    "qe": 210580
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 49,
+    "validos": 5248293,
+    "menor_eleito": 32200,
+    "qe": 107108
+   }
+  },
+  "PI": {
+   "nome": "Piauí",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 2021200,
+    "menor_eleito": 1436697,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 3640949,
+    "menor_eleito": 989146,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 10,
+    "validos": 2109063,
+    "menor_eleito": 82543,
+    "qe": 210906
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 30,
+    "validos": 2104590,
+    "menor_eleito": 29628,
+    "qe": 70153
+   }
+  },
+  "PR": {
+   "nome": "Paraná",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 6242274,
+    "menor_eleito": 3127911,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 11543639,
+    "menor_eleito": 2904594,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 30,
+    "validos": 6217229,
+    "menor_eleito": 44029,
+    "qe": 207241
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 54,
+    "validos": 6180261,
+    "menor_eleito": 30467,
+    "qe": 114449
+   }
+  },
+  "RJ": {
+   "nome": "Rio de Janeiro",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 8394627,
+    "menor_eleito": 4271199,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 15923657,
+    "menor_eleito": 3912405,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 46,
+    "validos": 8745126,
+    "menor_eleito": 46780,
+    "qe": 190111
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 70,
+    "validos": 8537743,
+    "menor_eleito": 24651,
+    "qe": 121968
+   }
+  },
+  "RN": {
+   "nome": "Rio Grande do Norte",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 1986441,
+    "menor_eleito": 1073024,
+    "segundo_turno": true
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 3606806,
+    "menor_eleito": 635924,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 8,
+    "validos": 1967700,
+    "menor_eleito": 92743,
+    "qe": 245962
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 24,
+    "validos": 1938293,
+    "menor_eleito": 31438,
+    "qe": 80762
+   }
+  },
+  "RO": {
+   "nome": "Rondônia",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 945058,
+    "menor_eleito": 537370,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 1759898,
+    "menor_eleito": 474226,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 8,
+    "validos": 932939,
+    "menor_eleito": 35398,
+    "qe": 116617
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 24,
+    "validos": 942021,
+    "menor_eleito": 9553,
+    "qe": 39251
+   }
+  },
+  "RR": {
+   "nome": "Roraima",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 319336,
+    "menor_eleito": 220809,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 603365,
+    "menor_eleito": 117270,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 8,
+    "validos": 318821,
+    "menor_eleito": 14972,
+    "qe": 39853
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 24,
+    "validos": 320928,
+    "menor_eleito": 4469,
+    "qe": 13372
+   }
+  },
+  "RS": {
+   "nome": "Rio Grande do Sul",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 6055306,
+    "menor_eleito": 3516048,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 11465782,
+    "menor_eleito": 3449053,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 31,
+    "validos": 6102644,
+    "menor_eleito": 40406,
+    "qe": 196859
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 55,
+    "validos": 6106995,
+    "menor_eleito": 21615,
+    "qe": 111036
+   }
+  },
+  "SC": {
+   "nome": "Santa Catarina",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 4265641,
+    "menor_eleito": 2942386,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 8041100,
+    "menor_eleito": 2041840,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 16,
+    "validos": 4231498,
+    "menor_eleito": 74603,
+    "qe": 264469
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 40,
+    "validos": 4271084,
+    "menor_eleito": 25647,
+    "qe": 106777
+   }
+  },
+  "SE": {
+   "nome": "Sergipe",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 1189927,
+    "menor_eleito": 727291,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 2254769,
+    "menor_eleito": 399775,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 8,
+    "validos": 1283700,
+    "menor_eleito": 58289,
+    "qe": 160462
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 24,
+    "validos": 1236582,
+    "menor_eleito": 18751,
+    "qe": 51524
+   }
+  },
+  "SP": {
+   "nome": "São Paulo",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 23130513,
+    "menor_eleito": 14491874,
+    "segundo_turno": false
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 43377903,
+    "menor_eleito": 12703089,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 70,
+    "validos": 23674188,
+    "menor_eleito": 54207,
+    "qe": 338203
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 94,
+    "validos": 23290014,
+    "menor_eleito": 53644,
+    "qe": 247766
+   }
+  },
+  "TO": {
+   "nome": "Tocantins",
+   "governador": {
+    "ano": 2026,
+    "vagas": 1,
+    "validos": 848629,
+    "menor_eleito": 562083,
+    "segundo_turno": true
+   },
+   "senador": {
+    "ano": 2026,
+    "vagas": 2,
+    "validos": 1650411,
+    "menor_eleito": 316786,
+    "segundo_turno": false
+   },
+   "deputado_federal": {
+    "ano": 2026,
+    "vagas": 8,
+    "validos": 902567,
+    "menor_eleito": 25302,
+    "qe": 112821
+   },
+   "deputado_estadual": {
+    "ano": 2026,
+    "vagas": 24,
+    "validos": 909289,
+    "menor_eleito": 9733,
+    "qe": 37887
+   }
+  }
+ }
+}

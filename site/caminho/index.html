@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Qual caminho faz sentido pra mim? · Gabriel Rodrigues</title>
-<meta name="description" content="Um questionário para descobrir qual caminho na política ou na tecnologia cívica combina com você, com dados reais de Goiânia e Goiás.">
+<meta name="description" content="Diga onde você vota e descubra quais cargos eletivos combinam com você: vagas, votos do último eleito, quociente eleitoral, idade mínima e prazos, com dados do TSE e do IBGE para todos os municípios do Brasil.">
 <link rel="canonical" href="https://gabriel-rodrigues.com/caminho/">
 <meta name="author" content="Gabriel Rodrigues">
 <meta name="theme-color" content="#fbf8ef">
@@ -17,212 +17,121 @@
 <meta property="og:site_name" content="Gabriel Rodrigues">
 <meta property="og:url" content="https://gabriel-rodrigues.com/caminho/">
 <meta property="og:title" content="Qual caminho faz sentido pra mim? · Gabriel Rodrigues">
-<meta property="og:description" content="Um questionário para descobrir qual caminho na política ou na tecnologia cívica combina com você, com dados reais de Goiânia e Goiás.">
+<meta property="og:description" content="Diga onde você vota e descubra quais cargos eletivos combinam com você: vagas, votos do último eleito, quociente eleitoral, idade mínima e prazos, com dados do TSE e do IBGE para todos os municípios do Brasil.">
 <meta property="og:image" content="https://gabriel-rodrigues.com/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Gabriel Rodrigues, engenharia de software a serviço do Brasil">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Qual caminho faz sentido pra mim? · Gabriel Rodrigues">
-<meta name="twitter:description" content="Um questionário para descobrir qual caminho na política ou na tecnologia cívica combina com você, com dados reais de Goiânia e Goiás.">
+<meta name="twitter:description" content="Diga onde você vota e descubra quais cargos eletivos combinam com você: vagas, votos do último eleito, quociente eleitoral, idade mínima e prazos, com dados do TSE e do IBGE para todos os municípios do Brasil.">
 <meta name="twitter:image" content="https://gabriel-rodrigues.com/og.jpg">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "Qual caminho faz sentido pra mim?",
+ "description": "Diga onde você vota e descubra quais cargos eletivos combinam com você: vagas, votos do último eleito, quociente eleitoral, idade mínima e prazos, com dados do TSE e do IBGE para todos os municípios do Brasil.",
+ "url": "https://gabriel-rodrigues.com/caminho/",
+ "inLanguage": "pt-BR",
+ "applicationCategory": "EducationalApplication",
+ "isAccessibleForFree": true,
+ "author": { "@type": "Person", "name": "Gabriel Rodrigues", "url": "https://gabriel-rodrigues.com/" }
+}
+</script>
 <link rel="stylesheet" href="/design-system/tokens.css">
+<link rel="stylesheet" href="/design-system/componentes.css">
 <link rel="stylesheet" href="/design-system/moldura.css">
 <script src="/design-system/moldura.js"></script>
-<style>
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
-    background: var(--creme);
-    color: var(--texto);
-    line-height: 1.5;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-  .bolha {
-    position: fixed; z-index: -1; border-radius: var(--raio-organico);
-    filter: blur(2px); opacity: .9;
-  }
-  .b1 { width: 340px; height: 300px; background: var(--amarelo-claro); top: -120px; right: -100px; }
-  .b2 { width: 260px; height: 240px; background: #d6f2df; bottom: -90px; left: -80px; border-radius: 55% 45% 38% 62% / 52% 60% 40% 48%; }
-  main { max-width: 680px; margin: 0 auto; padding: 32px 16px 64px; }
-  header .selo {
-    display: inline-block; background: var(--verde); color: var(--branco);
-    font-weight: 800; font-size: 13px; letter-spacing: .06em; text-transform: uppercase;
-    padding: 6px 14px; border-radius: 999px 999px 999px 4px;
-  }
-  h1 { font-size: clamp(28px, 6vw, 40px); line-height: 1.15; margin: 16px 0 8px; color: var(--azul); }
-  h1 em { font-style: normal; background: linear-gradient(transparent 60%, var(--amarelo) 60%); }
-  .intro { color: var(--texto-suave); margin: 0 0 24px; }
-  .cartao {
-    background: var(--branco); border-radius: 28px 34px 30px 26px;
-    padding: 24px; box-shadow: 0 10px 0 -2px var(--azul-claro), 0 2px 18px rgba(0,39,118,.08);
-  }
-  .progresso { height: 10px; background: var(--azul-claro); border-radius: 999px; overflow: hidden; margin-bottom: 16px; }
-  .progresso div { height: 100%; background: var(--verde); border-radius: 999px; transition: width .3s; }
-  .contador { font-size: 14px; color: var(--texto-suave); font-weight: 700; }
-  h2 { font-size: 22px; margin: 4px 0 18px; color: var(--azul); }
-  .opcoes { display: grid; gap: 10px; }
-  .opcao {
-    text-align: left; font: inherit; color: inherit; cursor: pointer;
-    background: var(--creme); border: 2px solid transparent;
-    padding: 14px 16px; border-radius: 18px 22px 20px 16px;
-    transition: border-color .15s, background .15s, transform .15s;
-  }
-  .opcao:hover { border-color: var(--verde); transform: translateX(3px); }
-  .opcao:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
-  .opcao.marcada { background: #e3f6ea; border-color: var(--verde); font-weight: 700; }
-  .acoes { display: flex; justify-content: space-between; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
-  .botao {
-    font: inherit; font-weight: 800; cursor: pointer; border: none;
-    padding: 12px 20px; border-radius: 999px; background: var(--azul); color: var(--branco);
-  }
-  .botao.secundario { background: transparent; color: var(--azul); border: 2px solid var(--azul-claro); }
-  .botao:disabled { opacity: .4; cursor: default; }
-  .resultado h2 { margin-bottom: 4px; }
-  .vencedor { border-top: 8px solid var(--amarelo); }
-  .quando { display: inline-block; font-weight: 800; color: var(--verde-escuro); margin-bottom: 8px; }
-  dl { display: grid; grid-template-columns: minmax(120px, 40%) 1fr; gap: 6px 12px; margin: 14px 0; font-size: 15px; }
-  dt { color: var(--texto-suave); }
-  dd { margin: 0; font-weight: 700; }
-  ol { padding-left: 20px; margin: 8px 0 0; }
-  .barra { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; align-items: center; margin: 10px 0; }
-  .barra .trilho { grid-column: 1 / -1; height: 12px; background: var(--azul-claro); border-radius: 999px; overflow: hidden; }
-  .barra .trilho div { height: 100%; background: var(--verde); border-radius: 999px; }
-  .barra.primeiro .trilho div { background: var(--amarelo); }
-  .outros { margin-top: 20px; }
-  details { margin-top: 12px; background: var(--creme); border-radius: 16px; padding: 10px 14px; }
-  summary { cursor: pointer; font-weight: 800; color: var(--azul); }
-  .nota { font-size: 13px; color: var(--texto-suave); margin-top: 24px; }
-  .copiado { font-size: 14px; color: var(--verde-escuro); font-weight: 700; }
-  @media (max-width: 480px) { dl { grid-template-columns: 1fr; } dd { margin-bottom: 6px; } }
-</style>
+<link rel="stylesheet" href="caminho.css">
 </head>
 <body>
 <gr-cabecalho></gr-cabecalho>
-<div class="bolha b1"></div><div class="bolha b2"></div>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
 <main>
   <header>
     <span class="selo">Questionário aberto</span>
-    <h1>Qual caminho faz <em>sentido</em> pra mim?</h1>
-    <p class="intro">Sete perguntas para quem quer melhorar o Brasil e não sabe por onde começar: candidatura, tecnologia cívica ou aprender por dentro. Os números são de Goiânia e Goiás.</p>
+    <h1>Qual caminho faz <em class="destaque">sentido</em> pra mim?</h1>
+    <p class="intro">Diga onde você vota e o que quer mudar. Você recebe os cargos que combinam com você, com os números reais da sua cidade e do seu estado: vagas, votos do último eleito, quociente eleitoral, idade mínima e prazos. Vale para todos os municípios do Brasil.</p>
+    <a class="exemplo cartao" href="#exemplo=gabriel">
+      <img src="/design-system/img/gabriel-foto.jpg" alt="" width="56" height="56">
+      <span><strong>Veja um exemplo: o caminho do Gabriel</strong>
+      Vereador em Goiânia em 2028, deputado federal por Goiás em 2030.</span>
+    </a>
   </header>
-  <section id="app" class="cartao" aria-live="polite"></section>
-  <p class="nota" id="nota"></p>
+
+  <section id="app" class="cartao" aria-live="polite">
+    <p>Carregando o questionário…</p>
+    <noscript>Este questionário precisa de JavaScript ligado.</noscript>
+  </section>
+
+  <section id="faq" class="faq">
+    <h2>Perguntas frequentes</h2>
+
+    <details>
+      <summary>Como funciona?</summary>
+      <p>Você diz onde vota e responde três perguntas. A página mostra os cargos que existem no seu município e no seu estado e ordena pelo quanto cada um combina com o que você respondeu: onde quer ter efeito (cidade, estado ou país), se prefere fazer leis ou administrar e em qual eleição pensa em entrar. Se informar a idade, ela confere a idade mínima de cada cargo.</p>
+      <p>Depois você monta o seu caminho, um cargo por eleição, e copia um link para mostrar a alguém. O link guarda as respostas, então quem abrir vê o mesmo resultado.</p>
+    </details>
+
+    <details>
+      <summary>De onde vêm os números?</summary>
+      <p>Só de fontes oficiais:</p>
+      <ul>
+        <li><strong>Vagas, votos válidos, eleitores e votos de cada eleito</strong>: <a href="https://dadosabertos.tse.jus.br/">Portal de Dados Abertos do TSE</a>, arquivos <em>consulta_vagas</em>, <em>detalhe_votacao_munzona</em> e <em>votacao_candidato_munzona</em>. Municípios: eleição de 2024. Estados: a eleição geral mais recente publicada (<span data-ano-geral>2026</span>). Para conferir um candidato, use o <a href="https://divulgacandcontas.tse.jus.br/">DivulgaCandContas</a>.</li>
+        <li><strong>Nomes dos municípios e população</strong>: <a href="https://servicodados.ibge.gov.br/api/docs/localidades">IBGE, API de localidades</a> e <a href="https://sidra.ibge.gov.br/tabela/4709">Censo 2022, tabela 4709</a>.</li>
+        <li><strong>Idades, datas e prazos</strong>: <a href="https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm">Constituição Federal</a> (art. 14, § 3º, VI; arts. 28, 29, 46 e 77) e <a href="https://www.planalto.gov.br/ccivil_03/leis/l9504.htm">Lei 9.504/1997</a> (arts. 1º, 8º, 9º e 11).</li>
+        <li><strong>Quociente eleitoral</strong>: calculado como manda o <a href="https://www.planalto.gov.br/ccivil_03/leis/l4737compilado.htm">Código Eleitoral</a>, art. 106: votos válidos divididos pelas vagas, desprezando a fração até meio.</li>
+      </ul>
+      <p class="pequeno" id="faq-datas"></p>
+    </details>
+
+    <details>
+      <summary>O que é quociente eleitoral?</summary>
+      <p>Vereadores e deputados são eleitos pelo sistema proporcional. Primeiro se calcula quantos votos valem uma cadeira: os votos válidos divididos pelo número de vagas. Cada partido ou federação ganha uma cadeira para cada quociente que somar, e as cadeiras vão para os seus candidatos mais votados.</p>
+      <p>Para ficar com uma dessas cadeiras, o candidato precisa ter pelo menos 10% do quociente (Código Eleitoral, art. 108). Nas cadeiras que sobram, entram partidos com 80% do quociente e candidatos com 20% (art. 109, com a redação da Lei 14.211/2021). Por isso o eleito com menos votos pode ter bem menos votos que o quociente: ele foi puxado pelos votos do partido.</p>
+    </details>
+
+    <details>
+      <summary>Quais são os limites destes dados?</summary>
+      <ul>
+        <li>Os números são da <strong>última</strong> eleição. A próxima terá outro eleitorado, outros candidatos e outro quociente. Use como ordem de grandeza.</li>
+        <li>O quociente é calculado por nós a partir dos votos válidos do TSE. O número oficial pode mudar um pouco se votos forem anulados ou validados depois, em recursos na Justiça.</li>
+        <li>Em algumas cidades a disputa de 2024 ainda estava na Justiça quando os dados foram gerados, e o TSE não marca quem foi eleito. Nelas a página não mostra o eleito com menos votos.</li>
+        <li>Onde a eleição de 2024 foi anulada e refeita, valem os números da eleição nova.</li>
+        <li>O número de cadeiras pode mudar. A Câmara continua com 513 deputados (o aumento para 531 foi vetado em 2025), mas a divisão por estado depende da população (Lei Complementar 78/1993) e pode ser revista.</li>
+        <li>Datas de filiação, convenção e registro seguem a Lei 9.504. O TSE publica o calendário oficial de cada eleição, que é o que vale. Confira no <a href="https://www.tse.jus.br/eleicoes/calendario-eleitoral">calendário eleitoral do TSE</a>.</li>
+        <li>A idade é conferida na posse (na data do registro, para quem tem 18 anos). Sem o dia do seu aniversário, a página só consegue dar uma estimativa.</li>
+        <li>Ser elegível exige mais do que idade: nacionalidade brasileira, título em dia, alistamento eleitoral, filiação e não estar em nenhum caso de inelegibilidade (CF, art. 14, e Lei Complementar 64/1990). Nada aqui é orientação jurídica.</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>Minhas respostas vão para algum lugar?</summary>
+      <p>Não. Tudo acontece no seu navegador e nada é enviado para servidor nenhum. As respostas ficam só no endereço da página (depois do <code>#</code>). Se você copiar o link, quem receber vê as respostas, inclusive a idade e o nome, se você preencheu.</p>
+    </details>
+
+    <details>
+      <summary>Como conferir o código?</summary>
+      <p>O código é aberto. Qualquer pessoa pode ler, rodar e apontar erros:</p>
+      <ul>
+        <li><a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/scripts/caminho/gerar_dados.py">scripts/caminho/gerar_dados.py</a>: baixa os arquivos do TSE e do IBGE e gera os dados. Rode com <code>python3 scripts/caminho/gerar_dados.py</code> (só precisa de Python).</li>
+        <li><a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/.github/workflows/dados-caminho.yml">.github/workflows/dados-caminho.yml</a>: roda o script no GitHub, com o registro público de cada execução.</li>
+        <li><a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/tree/main/site/caminho/dados">site/caminho/dados/</a>: os dados gerados, um arquivo por estado.</li>
+        <li><a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/site/caminho/regras.js">site/caminho/regras.js</a>: idades, datas e perguntas, com o artigo de lei de cada regra.</li>
+        <li><a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/site/caminho/caminho.js">site/caminho/caminho.js</a>: como a página calcula o resultado.</li>
+      </ul>
+      <p>Achou um número errado? <a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/issues/new">Abra uma issue no GitHub</a> com a fonte.</p>
+    </details>
+
+    <details>
+      <summary>Por que o caminho do Gabriel aparece aqui?</summary>
+      <p>O Gabriel fez este questionário para decidir o próprio caminho e deixou o resultado como exemplo: vereador em Goiânia em 2028 como degrau, deputado federal por Goiás em 2030 como objetivo. É um plano em estudo e não é pedido de voto. A ferramenta é a mesma para qualquer pessoa, de qualquer cidade.</p>
+    </details>
+  </section>
 </main>
 <gr-rodape></gr-rodape>
-<script src="dados.js"></script>
-<script>
-(() => {
-  const D = window.CAMINHO;
-  const app = document.getElementById("app");
-  document.getElementById("nota").textContent =
-    "Números de referência de " + D.atualizado + ", tirados de eleições anteriores. Confira sempre no TSE e no TRE-GO antes de decidir. Nada aqui é orientação jurídica.";
-
-  let respostas = lerHash();
-  let atual = respostas.length >= D.perguntas.length ? D.perguntas.length : Math.max(0, respostas.findIndex(r => r == null));
-  if (atual < 0) atual = respostas.length;
-
-  function lerHash() {
-    const m = location.hash.match(/r=([0-9]+)/);
-    if (!m) return [];
-    return m[1].split("").map(Number).slice(0, D.perguntas.length)
-      .map((v, i) => v < D.perguntas[i].opcoes.length ? v : null);
-  }
-  function salvarHash() {
-    history.replaceState(null, "", "#r=" + respostas.map(r => r ?? "").join(""));
-  }
-
-  function el(tag, attrs = {}, ...filhos) {
-    const n = document.createElement(tag);
-    for (const [k, v] of Object.entries(attrs)) {
-      if (v == null) continue;
-      if (k === "class") n.className = v; else if (k.startsWith("on")) n.addEventListener(k.slice(2), v); else n.setAttribute(k, v);
-    }
-    for (const f of filhos.flat(Infinity)) if (f != null) n.append(f);
-    return n;
-  }
-
-  function render() {
-    app.replaceChildren();
-    if (atual >= D.perguntas.length) return renderResultado();
-    const p = D.perguntas[atual];
-    app.className = "cartao";
-    app.append(
-      el("div", { class: "progresso" }, el("div", { style: `width:${(atual / D.perguntas.length) * 100}%` })),
-      el("div", { class: "contador" }, `Pergunta ${atual + 1} de ${D.perguntas.length}`),
-      el("h2", {}, p.texto),
-      el("div", { class: "opcoes", role: "group" },
-        p.opcoes.map(([texto], i) => el("button", {
-          class: "opcao" + (respostas[atual] === i ? " marcada" : ""),
-          type: "button",
-          onclick: () => { respostas[atual] = i; salvarHash(); atual++; render(); },
-        }, texto))
-      ),
-      el("div", { class: "acoes" },
-        el("button", { class: "botao secundario", type: "button", disabled: atual === 0 ? "" : null,
-          onclick: () => { atual--; render(); } }, "Voltar")
-      )
-    );
-  }
-
-  function pontuar() {
-    const pts = Object.fromEntries(Object.keys(D.caminhos).map(k => [k, 0]));
-    const max = Object.fromEntries(Object.keys(D.caminhos).map(k => [k, 0]));
-    D.perguntas.forEach((p, i) => {
-      for (const k in pts) max[k] += Math.max(0, ...p.opcoes.map(o => o[1][k] || 0));
-      const r = respostas[i];
-      if (r != null) for (const [k, v] of Object.entries(p.opcoes[r][1])) pts[k] += v;
-    });
-    return Object.keys(pts)
-      .map(k => ({ k, pct: max[k] ? Math.round((pts[k] / max[k]) * 100) : 0 }))
-      .sort((a, b) => b.pct - a.pct);
-  }
-
-  function cartaoCaminho(k, vencedor) {
-    const c = D.caminhos[k];
-    return el("div", {},
-      el("span", { class: "quando" }, c.quando),
-      el("p", {}, c.resumo),
-      el("dl", {}, c.fatos.map(([a, b]) => [el("dt", {}, a), el("dd", {}, b)])),
-      el("strong", {}, vencedor ? "Seus próximos passos" : "Primeiros passos"),
-      el("ol", {}, c.passos.map(s => el("li", {}, s)))
-    );
-  }
-
-  function renderResultado() {
-    const rank = pontuar();
-    const top = rank[0];
-    app.className = "cartao resultado vencedor";
-    const copiado = el("span", { class: "copiado" });
-    app.append(
-      el("div", { class: "contador" }, "Seu caminho mais provável"),
-      el("h2", {}, D.caminhos[top.k].nome),
-      cartaoCaminho(top.k, true),
-      el("div", { class: "outros" },
-        el("strong", {}, "Como cada caminho combinou com você"),
-        rank.map((r, i) => el("div", { class: "barra" + (i === 0 ? " primeiro" : "") },
-          el("span", {}, D.caminhos[r.k].nome), el("span", {}, r.pct + "%"),
-          el("div", { class: "trilho" }, el("div", { style: `width:${r.pct}%` }))
-        ))
-      ),
-      ...rank.slice(1).map(r => el("details", {}, el("summary", {}, D.caminhos[r.k].nome), cartaoCaminho(r.k, false))),
-      el("div", { class: "acoes" },
-        el("button", { class: "botao secundario", type: "button",
-          onclick: () => { respostas = []; atual = 0; history.replaceState(null, "", location.pathname); render(); } }, "Refazer"),
-        el("button", { class: "botao", type: "button",
-          onclick: async () => {
-            try { await navigator.clipboard.writeText(location.href); copiado.textContent = "Link copiado"; }
-            catch { copiado.textContent = location.href; }
-          } }, "Copiar link do resultado"),
-        copiado
-      )
-    );
-  }
-
-  render();
-})();
-</script>
+<script src="regras.js"></script>
+<script src="caminho.js"></script>
 </body>
 </html>

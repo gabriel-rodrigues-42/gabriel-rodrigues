@@ -1,0 +1,57 @@
+name: Dados do questionário Caminho
+
+# Baixa os dados oficiais (TSE e IBGE), roda scripts/caminho/gerar_dados.py
+# e grava o resultado em site/caminho/dados/ no mesmo branch.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - scripts/caminho/**
+      - .github/workflows/dados-caminho.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dados-caminho-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gerar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache dos arquivos baixados
+        uses: actions/cache@v4
+        with:
+          path: .cache/caminho
+          key: caminho-${{ hashFiles('scripts/caminho/gerar_dados.py') }}
+          restore-keys: caminho-
+
+      - name: Gerar os dados
+        shell: bash
+        run: python3 scripts/caminho/gerar_dados.py 2>&1 | tee gerar.log
+
+      - name: Resumo
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          grep -vE '^\s+colunas de' gerar.log | tail -60 >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Gravar no branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/caminho/dados
+          if git diff --cached --quiet; then
+            echo "Dados sem mudança."
+          else
+            git commit -m "Atualiza os dados do questionário Caminho (TSE e IBGE)"
+            git push
+          fi

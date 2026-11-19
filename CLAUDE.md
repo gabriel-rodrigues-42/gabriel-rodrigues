@@ -9,7 +9,7 @@ Site gabriel-rodrigues.com, design system e vídeos do Gabriel Rodrigues, desenv
   - `design-system/moldura.js` + `moldura.css`: cabeçalho e rodapé com o Gabriel e a missão. Toda página nova carrega os dois no `<head>` e usa `<gr-cabecalho>` logo depois de `<body>` e `<gr-rodape>` no fim.
   - `privacidade/`: política de privacidade do formulário de apoio. Mudou o que o formulário guarda? Atualize a página e a versão em `functions/api/apoio.js`.
   - `ideias/`: portfólio de ideias lido em voz alta com legendas (Web Speech API). Conteúdo só em `ideias.js`; `leitor.js` monta a página e faz a leitura.
-  - `caminho/`: questionário "Qual caminho faz sentido pra mim?". Dados em `dados.js`.
+  - `caminho/`: questionário "Qual caminho faz sentido pra mim?" para qualquer município. Regras de lei, perguntas e o exemplo do Gabriel em `regras.js`; lógica em `caminho.js`; números por UF em `dados/`, gerados por `scripts/caminho/gerar_dados.py` (TSE e IBGE). Não edite `dados/` à mão: mude o script e o workflow `dados-caminho.yml` regenera no GitHub (o TSE não abre daqui da nuvem).
   - `projetos/`: páginas de projeto. Modelo em `projetos/_modelo/`.
 - `functions/api/apoio.js`: Pages Function do formulário "Acredita que eu devo tentar?" da home. Grava na tabela `apoios` (`db/apoios.sql`) do D1 `gabriel-rodrigues`, ligado como `DB`. O banco é do site todo: recurso novo ganha tabela e arquivo próprios em `db/`. Sem CPF: só email, nome, cidade e UF, com consentimento.
 - `videos/`: vídeos (não publicado). `blender/gabriel.py` tem o boneco do Gabriel, as cores e o cenário; `blender/cenas/` tem um script por plano; `roteiros/` guarda os roteiros. `out/` e `audio/` ficam fora do Git.
