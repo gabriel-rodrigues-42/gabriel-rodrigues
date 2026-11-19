@@ -15,6 +15,45 @@
 
 window.IDEIAS = [
   {
+    id: "reindustrializacao",
+    titulo: "Reindustrializar o Brasil com o dinheiro que já existe",
+    estado: "rascunho",
+    gancho: "O dinheiro para reindustrializar o Brasil já existe. Ele só está parado.",
+    problema: [
+      "O Brasil depende de fora para o que é estratégico. Chips, equipamentos médicos, baterias, plataformas digitais. Quando a gente compra pronto, o valor, as patentes e os bons empregos ficam lá fora.",
+      "Quem tem um patrimônio muito grande quase nunca vende as próprias ações. Usa as ações como garantia, pega crédito no banco e vive desse crédito. Assim quase não paga imposto.",
+      "Taxar grandes fortunas costuma esbarrar em duas paredes. O capital muda de país, e patrimônio em ações não vira imposto fácil sem ser vendido.",
+    ],
+    proposta: [
+      "Criar o Fundo Soberano de Reindustrialização e Inovação, o FSRI. O investidor continua tomando crédito com as ações como garantia. A diferença é que o dinheiro vai para indústrias e plataformas novas no Brasil.",
+      "Em troca, ele ganha isenção progressiva no imposto sobre ganho de capital e sobre dividendos. Só se o dinheiro ficar investido pelo prazo mínimo, em produção real no país.",
+      "Os projetos ficam em três faixas de risco. Plataformas digitais, indústria de base e tecnologia de ponta, como chips. O Estado garante parte do prejuízo: até 20%, 35% ou 50%, conforme a faixa.",
+      "Cada aporte precisa ter um projeto de retorno rápido e um de longo prazo. O rápido paga os juros do empréstimo. O longo constrói o futuro.",
+      "O dinheiro chega por um funil público. Hackathon nacional, quatro meses de aceleração, banca transmitida ao vivo e liberação só por metas auditadas.",
+    ],
+    criticas: [
+      {
+        critica: "Isso é isenção de imposto para rico.",
+        resposta: "Esse patrimônio já paga pouco hoje, porque não é vendido. A isenção do fundo só existe se o dinheiro virar fábrica, patente ou plataforma nova no Brasil.",
+      },
+      {
+        critica: "O Estado vai pagar a conta quando der errado.",
+        resposta: "O investidor arca com pelo menos metade do prejuízo, mesmo no pior caso. O seguro só paga em falência auditada, sem má-fé. E quando um projeto de alto risco dá certo, o Estado fica com 10% a 15%.",
+      },
+      {
+        critica: "Vai virar cabide para os mesmos grupos de sempre.",
+        resposta: "A seleção é pública e transmitida ao vivo. E o investidor não pode aplicar dinheiro incentivado em empresa ou setor onde já tem controle. O fundo existe para criar concorrentes.",
+      },
+      {
+        critica: "O Brasil não tem como competir em chip.",
+        resposta: "Por isso a faixa de chips tem o prazo mais longo, de 10 a 15 anos, e a maior proteção. E é obrigatória, senão ninguém escolheria a aposta difícil.",
+      },
+    ],
+    pergunta: "Se você pudesse escolher um produto que o Brasil passasse a fabricar aqui, qual seria?",
+    links: [{ texto: "Ler a história completa", url: "/projetos/reindustrializacao/" }],
+  },
+
+  {
     id: "galera-club",
     titulo: "galera.club",
     estado: "rascunho",

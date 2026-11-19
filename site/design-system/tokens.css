@@ -16,6 +16,7 @@
   --azul-medio: #2f5bb7;
   --azul-claro: #e6ecf7;
   --branco: #ffffff;
+  --branco-vidro: rgba(255, 255, 255, .08); /* cartão claro sobre fundo azul */
 
   /* Neutros */
   --creme: #fbf8ef;          /* fundo padrão: papel, não branco puro */
