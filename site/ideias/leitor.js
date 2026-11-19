@@ -7,7 +7,7 @@
   "use strict";
 
   const IDEIAS = window.IDEIAS || [];
-  const ESTADOS = { "rascunho": "", "em teste": "azul", "pronta para postar": "amarelo" };
+  const ESTADOS = { "rascunho": "", "em teste": "azul", "pronta para postar": "amarelo", "no ar": "" };
   const PALAVRAS_POR_MINUTO = 165; // ritmo das legendas quando não há voz
 
   const $ = (id) => document.getElementById(id);
