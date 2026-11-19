@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cartório digital · Gabriel Rodrigues</title>
+<meta name="description" content="Quanto custa passar um imóvel para o seu nome em Goiânia, para onde vai cada real e como outros países fazem a mesma coisa em um dia. Um projeto da Faixa 1 do FSRI.">
+<link rel="canonical" href="https://gabriel-rodrigues.com/projetos/cartorio-digital/">
+<meta name="author" content="Gabriel Rodrigues">
+<meta name="theme-color" content="#fbf8ef">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Gabriel Rodrigues">
+<meta property="og:url" content="https://gabriel-rodrigues.com/projetos/cartorio-digital/">
+<meta property="og:title" content="Cartório digital · Gabriel Rodrigues">
+<meta property="og:description" content="Quanto custa passar um imóvel para o seu nome em Goiânia, para onde vai cada real e como outros países fazem a mesma coisa em um dia.">
+<meta property="og:image" content="https://gabriel-rodrigues.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gabriel Rodrigues, engenharia de software a serviço do Brasil">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cartório digital · Gabriel Rodrigues">
+<meta name="twitter:description" content="Quanto custa passar um imóvel para o seu nome em Goiânia, para onde vai cada real e como outros países fazem a mesma coisa em um dia.">
+<meta name="twitter:image" content="https://gabriel-rodrigues.com/og.jpg">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "Cartório digital: passar um imóvel para o seu nome sem 14 etapas",
+ "description": "Quanto custa passar um imóvel para o seu nome em Goiânia, para onde vai cada real e como outros países fazem a mesma coisa em um dia.",
+ "inLanguage": "pt-BR",
+ "image": "https://gabriel-rodrigues.com/og.jpg",
+ "author": { "@type": "Person", "name": "Gabriel Rodrigues", "url": "https://gabriel-rodrigues.com/" },
+ "mainEntityOfPage": "https://gabriel-rodrigues.com/projetos/cartorio-digital/",
+ "datePublished": "2026-11-19"
+}
+</script>
+<link rel="stylesheet" href="/design-system/tokens.css">
+<link rel="stylesheet" href="/design-system/componentes.css">
+<link rel="stylesheet" href="/design-system/moldura.css">
+<script src="/design-system/moldura.js"></script>
+<style>
+  main { max-width: 760px; margin: 0 auto; padding: var(--espaco-7) var(--espaco-4); }
+  nav a { font-weight: var(--peso-forte); text-decoration: none; color: var(--azul); }
+  a { color: var(--azul); }
+  h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); }
+  h2 { font-size: var(--tamanho-5); line-height: 1.15; color: var(--azul); margin: 0 0 var(--espaco-3); }
+  h3 { font-size: var(--tamanho-4); color: var(--azul); margin: 0 0 var(--espaco-2); line-height: 1.25; }
+  p { margin: 0 0 var(--espaco-3); }
+  .lead { font-size: var(--tamanho-3); color: var(--texto-suave); }
+  .grande { font-size: var(--tamanho-4); font-weight: var(--peso-forte); line-height: 1.35; }
+  .pequeno { font-size: var(--tamanho-2); }
+  .suave { color: var(--texto-suave); }
+  .capitulo { margin-top: var(--espaco-7); }
+  .ato { display: inline-block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); letter-spacing: .08em; text-transform: uppercase; color: var(--verde-escuro); margin-bottom: var(--espaco-2); }
+  .pausa { text-align: center; padding: var(--espaco-6) var(--espaco-4); font-size: var(--tamanho-5); font-weight: var(--peso-forte); line-height: 1.2; color: var(--azul); }
+  .capa-acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-3); margin-top: var(--espaco-5); }
+  .ilustra { display: block; width: 100%; height: auto; margin: var(--espaco-5) 0 var(--espaco-2); }
+  .duas-legendas { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-4); font-size: var(--tamanho-1); font-weight: var(--peso-forte); color: var(--texto-suave); }
+  .duas-legendas span:last-child { color: var(--verde-escuro); text-align: right; }
+  .legenda-ilustra { font-size: var(--tamanho-1); color: var(--texto-suave); text-align: center; margin: 0; }
+
+  /* Calculadora */
+  .calc { margin-top: var(--espaco-5); padding: var(--espaco-5); }
+  .calc .opcoes { display: flex; flex-wrap: wrap; gap: var(--espaco-2); margin: var(--espaco-2) 0 var(--espaco-3); }
+  .calc .opcoes .opcao { width: auto; padding: 10px 14px; }
+  .calc label.marcar { display: flex; gap: var(--espaco-2); align-items: flex-start; font-size: var(--tamanho-2); margin-bottom: var(--espaco-4); cursor: pointer; }
+  .calc label.marcar input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--verde); flex: none; }
+  .total { font-size: var(--tamanho-5); font-weight: var(--peso-forte); color: var(--azul); line-height: 1.1; }
+  .barra { display: flex; height: 48px; border-radius: var(--forma-opcao); overflow: hidden; background: var(--creme); margin: var(--espaco-3) 0; }
+  .barra div { transition: flex-basis .5s ease; min-width: 0; }
+  .barra .b-pref, .linhas .b-pref::before { background: var(--amarelo); }
+  .barra .b-fundo, .linhas .b-fundo::before { background: var(--verde); }
+  .barra .b-cart, .linhas .b-cart::before { background: var(--azul); }
+  .linhas { list-style: none; padding: 0; margin: 0; font-size: var(--tamanho-2); }
+  .linhas li { display: grid; grid-template-columns: 1fr auto; gap: var(--espaco-3); padding: var(--espaco-2) 0; border-bottom: 1px dashed var(--azul-claro); }
+  .linhas li::before { content: none; }
+  .linhas li span:first-child::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: var(--forma-bolha-1); margin-right: 8px; vertical-align: -1px; background: inherit; }
+  .linhas li.b-pref span:first-child::before { background: var(--amarelo); }
+  .linhas li.b-fundo span:first-child::before { background: var(--verde); }
+  .linhas li.b-cart span:first-child::before { background: var(--azul); }
+  .linhas li b { color: var(--azul); white-space: nowrap; }
+  .frase-calc { margin-top: var(--espaco-4); font-weight: var(--peso-forte); color: var(--verde-escuro); }
+
+  /* Números */
+  .numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--espaco-4); margin-top: var(--espaco-4); }
+  .numeros .cartao { padding: var(--espaco-4); }
+  .numeros strong { display: block; font-size: var(--tamanho-5); color: var(--verde-escuro); line-height: 1.1; margin-bottom: var(--espaco-1); }
+  .fontes { font-size: var(--tamanho-2); color: var(--texto-suave); }
+  .numeros .fontes { display: block; margin-top: var(--espaco-2); font-size: var(--tamanho-1); }
+
+  /* Fluxo de hoje */
+  .fluxo { list-style: none; padding: 0; margin: var(--espaco-5) 0 0; position: relative; }
+  .fluxo::before { content: ""; position: absolute; left: 27px; top: 20px; bottom: 20px; width: 6px; background: var(--amarelo); border-radius: var(--forma-pilula); }
+  .fluxo li { position: relative; display: grid; grid-template-columns: 60px 1fr; gap: var(--espaco-4); align-items: start; padding-bottom: var(--espaco-5); }
+  .fluxo li:last-child { padding-bottom: 0; }
+  .fluxo .n { width: 60px; height: 60px; display: grid; place-items: center; background: var(--azul); color: var(--branco); font-weight: var(--peso-forte); font-size: var(--tamanho-4); border-radius: var(--forma-bolha-1); box-shadow: var(--sombra-clay); position: relative; }
+  .fluxo li:nth-child(even) .n { border-radius: var(--forma-bolha-2); }
+  .fluxo strong { display: block; color: var(--azul); font-size: var(--tamanho-3); margin-top: var(--espaco-2); }
+  .fluxo .trava { display: inline-block; margin-top: var(--espaco-2); background: var(--areia); color: var(--texto); font-size: var(--tamanho-1); font-weight: var(--peso-forte); padding: 4px 10px; border-radius: var(--forma-selo); }
+
+  /* Países */
+  .paises { display: grid; gap: var(--espaco-3); margin-top: var(--espaco-4); }
+  .pais { display: grid; grid-template-columns: 112px 1fr; gap: var(--espaco-3); align-items: center; font-size: var(--tamanho-2); }
+  .pais b { color: var(--azul); }
+  .pais .trilho { background: var(--creme); border-radius: var(--forma-pilula); height: 28px; position: relative; overflow: hidden; }
+  .pais .dias { height: 100%; background: var(--verde); border-radius: var(--forma-pilula); min-width: 10px; }
+  .pais.br .dias { background: var(--azul); }
+  .pais small { display: block; color: var(--texto-suave); font-size: var(--tamanho-1); margin-top: 2px; }
+  @media (max-width: 420px) { .pais { grid-template-columns: 1fr; gap: var(--espaco-1); } }
+  .duas { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-4); margin-top: var(--espaco-4); }
+  .duas .cartao { padding: var(--espaco-4); }
+  .duas .contra { background: var(--areia); box-shadow: none; }
+  .duas .pro { background: var(--verde-claro); box-shadow: none; }
+  .duas p { margin: var(--espaco-2) 0 0; font-size: var(--tamanho-2); }
+  @media (max-width: 560px) { .duas { grid-template-columns: 1fr; } }
+
+  /* Camadas da proposta */
+  .camadas { display: grid; gap: var(--espaco-4); margin-top: var(--espaco-4); }
+  .camada { padding: var(--espaco-4) var(--espaco-5); }
+  .camada .selo { margin-bottom: var(--espaco-3); }
+  .camada ul { margin: 0; padding-left: 1.1em; }
+  .camada li + li { margin-top: var(--espaco-2); }
+
+  /* Comprovante */
+  .comprovante { position: relative; max-width: 420px; margin: var(--espaco-5) auto 0; background: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); padding: var(--espaco-5); overflow: hidden; }
+  .comprovante::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 10px; background: linear-gradient(90deg, var(--verde) 0 33%, var(--amarelo) 33% 66%, var(--azul) 66%); }
+  .comprovante .topo { display: flex; justify-content: space-between; gap: var(--espaco-3); align-items: flex-start; margin-top: var(--espaco-2); }
+  .comprovante .topo small { display: block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); letter-spacing: .06em; text-transform: uppercase; color: var(--verde-escuro); }
+  .comprovante .topo b { display: block; color: var(--azul); font-size: var(--tamanho-3); line-height: 1.2; }
+  .comprovante .qr { width: 76px; height: 76px; flex: none; }
+  .comprovante dl { display: grid; grid-template-columns: auto 1fr; gap: 6px var(--espaco-3); margin: var(--espaco-4) 0 0; font-size: var(--tamanho-2); }
+  .comprovante dt { color: var(--texto-suave); }
+  .comprovante dd { margin: 0; font-weight: var(--peso-forte); color: var(--azul); text-align: right; }
+  .comprovante .rodape-c { margin-top: var(--espaco-4); font-size: var(--tamanho-1); color: var(--texto-suave); }
+
+  /* Críticas */
+  .critica { background: var(--branco); border-radius: var(--forma-opcao); box-shadow: var(--sombra-cartao); margin-top: var(--espaco-4); }
+  .critica summary { cursor: pointer; list-style: none; padding: var(--espaco-4) var(--espaco-5); font-weight: var(--peso-forte); color: var(--azul); display: flex; gap: var(--espaco-3); justify-content: space-between; align-items: center; }
+  .critica summary::-webkit-details-marker { display: none; }
+  .critica summary::after { content: "+"; flex: none; width: 32px; height: 32px; display: grid; place-items: center; background: var(--amarelo); color: var(--azul); border-radius: var(--forma-bolha-1); font-size: var(--tamanho-4); }
+  .critica[open] summary::after { content: "−"; }
+  .critica summary:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; border-radius: var(--forma-opcao); }
+  .critica .resposta { padding: 0 var(--espaco-5) var(--espaco-4); }
+  .critica .resposta p:last-child { margin-bottom: 0; }
+
+  .conversa { background: var(--amarelo-claro); border-radius: var(--forma-cartao); padding: var(--espaco-6) var(--espaco-5); text-align: center; }
+  .conversa p.grande { color: var(--azul); }
+  .conversa .capa-acoes { justify-content: center; }
+  .hashtags { display: flex; flex-wrap: wrap; gap: var(--espaco-2); justify-content: center; margin-top: var(--espaco-4); }
+  .hashtag { background: var(--branco); color: var(--verde-escuro); font-weight: var(--peso-forte); padding: 6px 12px; border-radius: var(--forma-selo); }
+  .fontes li + li { margin-top: var(--espaco-2); }
+
+  .revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .revelar.visivel { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .revelar { opacity: 1; transform: none; transition: none; }
+    .barra div { transition: none; }
+  }
+</style>
+</head>
+<body>
+<gr-cabecalho></gr-cabecalho>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
+
+<main>
+  <nav><a href="/projetos/">← Projetos</a></nav>
+
+  <header>
+    <span class="selo" style="margin-top: var(--espaco-5)">Em estudo · Faixa 1 do FSRI</span>
+    <h1>Passar um imóvel para o seu nome leva 14 etapas. <span class="destaque">Dá para ser uma.</span></h1>
+    <p class="lead">Em 2025 eu comprei um apartamento de R$ 250 mil em Goiânia e paguei uns R$ 10 mil entre imposto e cartório. Fui entender para onde foi cada real, e como outros países fazem a mesma coisa em um dia.</p>
+
+    <svg class="ilustra" viewBox="0 0 640 230" role="img" aria-labelledby="t-capa">
+      <title id="t-capa">Ilustração: à esquerda, um caminho cheio de paradas; à direita, uma casa e um resumo com código de verificação, saídos de um balcão só.</title>
+      <path d="M20 170 C 70 90, 110 200, 160 120 S 230 190, 270 110" fill="none" stroke="var(--areia)" stroke-width="16" stroke-linecap="round"/>
+      <g fill="var(--azul)">
+        <circle cx="30" cy="156" r="10"/><circle cx="62" cy="122" r="10"/><circle cx="96" cy="146" r="10"/><circle cx="126" cy="160" r="10"/>
+        <circle cx="152" cy="130" r="10"/><circle cx="182" cy="128" r="10"/><circle cx="214" cy="160" r="10"/><circle cx="246" cy="138" r="10"/>
+      </g>
+      <path d="M296 130 h 44" stroke="var(--verde)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M330 110 l 24 20 -24 20" fill="none" stroke="var(--verde)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M380 112 L 456 50 L 532 112 Z" fill="var(--azul)" stroke="var(--azul)" stroke-width="14" stroke-linejoin="round"/>
+      <rect x="392" y="104" width="128" height="96" rx="18" fill="var(--verde)"/>
+      <rect x="436" y="140" width="40" height="60" rx="12" fill="var(--amarelo)"/>
+      <circle cx="456" cy="86" r="12" fill="var(--amarelo-claro)"/>
+      <g transform="translate(538 96) rotate(6)">
+        <rect width="80" height="100" rx="16" fill="var(--branco)" stroke="var(--azul-claro)" stroke-width="4"/>
+        <rect width="80" height="10" rx="5" fill="var(--azul)"/>
+        <g fill="var(--azul)"><rect x="12" y="22" width="14" height="14" rx="3"/><rect x="54" y="22" width="14" height="14" rx="3"/><rect x="12" y="58" width="14" height="14" rx="3"/><rect x="34" y="42" width="10" height="10" rx="2"/><rect x="54" y="60" width="8" height="8" rx="2"/><rect x="34" y="60" width="8" height="12" rx="2"/></g>
+        <rect x="12" y="82" width="56" height="6" rx="3" fill="var(--azul-claro)"/>
+      </g>
+    </svg>
+    <div class="duas-legendas"><span>Hoje: certidões, escritura, imposto e registro, cada um num lugar</span><span>Proposta: um balcão, tudo conferido</span></div>
+    <p class="legenda-ilustra">Ilustração</p>
+
+    <div class="capa-acoes">
+      <a class="botao verde" href="#calculadora">Fazer a conta do seu imóvel</a>
+      <a class="botao secundario" href="#criticas">Ir direto às críticas</a>
+    </div>
+  </header>
+
+  <section class="capitulo revelar" id="calculadora">
+    <span class="ato">Capítulo 1 · Para onde vai o dinheiro</span>
+    <h2>Metade é imposto. Metade é cartório.</h2>
+    <p>Quando alguém fala em "taxa de cartório", mistura três coisas: o ITBI, que é imposto da prefeitura; os emolumentos, que são o preço do cartório; e os repasses para fundos do Estado que vêm embutidos nesse preço. Escolha o valor e veja a divisão em Goiânia, pela tabela oficial de 2026.</p>
+    <div class="cartao calc">
+      <strong>Valor do imóvel</strong>
+      <div class="opcoes" role="radiogroup" aria-label="Valor do imóvel">
+        <button class="opcao" type="button" role="radio" aria-checked="false" data-valor="150000">R$ 150 mil</button>
+        <button class="opcao marcada" type="button" role="radio" aria-checked="true" data-valor="250000">R$ 250 mil</button>
+        <button class="opcao" type="button" role="radio" aria-checked="false" data-valor="400000">R$ 400 mil</button>
+      </div>
+      <label class="marcar"><input type="checkbox" id="financiado"> Comprei financiado (o contrato do banco substitui a escritura, mas o banco cobra as tarifas dele)</label>
+      <div class="total" id="total" aria-live="polite">R$ 12.622</div>
+      <div class="pequeno suave" id="percentual">5,0% do valor do imóvel, sem contar certidões</div>
+      <div class="barra" aria-hidden="true"><div class="b-pref" id="b-pref"></div><div class="b-fundo" id="b-fundo"></div><div class="b-cart" id="b-cart"></div></div>
+      <ul class="linhas">
+        <li class="b-pref"><span>ITBI (2%), imposto da prefeitura</span><b id="v-itbi"></b></li>
+        <li class="b-fundo"><span>Fundos do Estado e ISS no registro*</span><b id="v-fundo"></b></li>
+        <li class="b-cart"><span>Escritura no tabelionato de notas</span><b id="v-esc"></b></li>
+        <li class="b-cart"><span>Registro de imóveis, prenotação e matrícula</span><b id="v-reg"></b></li>
+      </ul>
+      <p class="frase-calc" id="frase"></p>
+      <p class="pequeno suave" style="margin: 0">* Os fundos e o ISS do registro são estimados em 29,25% do emolumento, pela divisão publicada para o 1º Registro de Imóveis de Goiânia. A tabela oficial não mostra os fundos da escritura, então ela pode sair mais cara do que aparece aqui. Por lei, 40% dos emolumentos de Goiás vão para 11 fundos e órgãos públicos.</p>
+    </div>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 2 · Como funciona hoje</span>
+    <h2>Quatro balcões, muitas certidões</h2>
+    <p>No Brasil, a propriedade só passa para o seu nome quando o registro é feito (Código Civil, art. 1.245). Até lá, o caminho é este:</p>
+    <ol class="fluxo">
+      <li><span class="n">1</span><div><strong>Juntar certidões</strong>Do vendedor e do imóvel: ônus, ações, débitos, estado civil. Cada uma vem de um lugar diferente.<br><span class="trava">Trava: papel espalhado em vários cadastros</span></div></li>
+      <li><span class="n">2</span><div><strong>Fazer a escritura</strong>No tabelionato de notas, presencial ou por videoconferência desde 2020. Obrigatória para imóvel acima de 30 salários mínimos (Código Civil, art. 108).<br><span class="trava">Trava: só vale tabelião do estado do imóvel ou de quem compra</span></div></li>
+      <li><span class="n">3</span><div><strong>Pagar o ITBI</strong>Na prefeitura. Em Goiânia, 2% sobre o maior valor entre o preço e o valor venal.</div></li>
+      <li><span class="n">4</span><div><strong>Registrar</strong>No registro de imóveis da região. O registrador confere tudo de novo e só então abre a nova página da matrícula.<br><span class="trava">Trava: preço por faixa, com repasses embutidos</span></div></li>
+    </ol>
+    <p style="margin-top: var(--espaco-5)">A tecnologia já existe. O próprio setor diz que 42% dos atos notariais foram eletrônicos em 2024. Mas digitalizar sem baratear é só mudar o papel de lugar: o preço da escritura por vídeo segue a mesma tabela do balcão, e quase não há concorrência.</p>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 3 · Os números</span>
+    <h2>Lento, fragmentado e com imposto escondido</h2>
+    <div class="numeros">
+      <div class="cartao"><strong>R$ 31,4 bi</strong>arrecadados pelos cartórios do Brasil em 2024, um recorde. Em 2021 foram R$ 23,4 bi. <span class="fontes">CNJ, divulgado pela imprensa (2025)</span></div>
+      <div class="cartao"><strong>14 etapas</strong>e 31 dias para registrar um imóvel no Brasil. Na Geórgia, 1 etapa e 1 dia. <span class="fontes">Banco Mundial, Doing Business 2020</span></div>
+      <div class="cartao"><strong>40%</strong>dos emolumentos de Goiás vão para 11 fundos e órgãos, do Judiciário à Assembleia. <span class="fontes">Lei estadual 20.494/2019, art. 15</span></div>
+    </div>
+  </section>
+
+  <p class="pausa revelar">E se passar o imóvel<br>fosse tão simples quanto um <span class="destaque">Pix</span>, só que conferido?</p>
+
+  <section class="capitulo revelar" style="margin-top: 0">
+    <span class="ato">Capítulo 4 · Como outros países fazem</span>
+    <h2>O atalho é integrar, não inventar moda</h2>
+    <p>Dias para registrar um imóvel, segundo o Banco Mundial (Doing Business 2020, dados de 2019, caso de venda entre empresas). Serve para comparar, não como preço exato de uma família.</p>
+    <div class="paises">
+      <div class="pais"><b>Geórgia</b><div><div class="trilho"><div class="dias" style="width: 3.2%"></div></div><small>1 etapa · 1 dia · custo 0% do valor</small></div></div>
+      <div class="pais"><b>Nova Zelândia</b><div><div class="trilho"><div class="dias" style="width: 11.3%"></div></div><small>2 etapas · 3,5 dias · 0,1%</small></div></div>
+      <div class="pais"><b>Dinamarca</b><div><div class="trilho"><div class="dias" style="width: 12.9%"></div></div><small>3 etapas · 4 dias · 0,6%, registro 100% online</small></div></div>
+      <div class="pais"><b>Estônia</b><div><div class="trilho"><div class="dias" style="width: 56.5%"></div></div><small>3 etapas · 17,5 dias · 0,5%, com tabelião obrigatório</small></div></div>
+      <div class="pais br"><b>Brasil</b><div><div class="trilho"><div class="dias" style="width: 100%"></div></div><small>14 etapas · 31 dias · 3,6%</small></div></div>
+    </div>
+    <p style="margin-top: var(--espaco-4)">A Estônia mostra que dá para ter tabelião e ser barato. O que faz diferença é ter os dados integrados e o processo num lugar só.</p>
+    <div class="duas">
+      <div class="cartao pro"><strong>Portugal: o Estado concorre</strong><p>O balcão público Casa Pronta faz a compra e o registro num atendimento só, ao lado dos notários privados. Quando Portugal mudou o notariado em 2004, deu dois anos de transição e deixou cada notário escolher o caminho.</p></div>
+      <div class="cartao contra"><strong>Romênia: o susto de 2026</strong><p>Em julho de 2026, um invasor apagou a base do registro de imóveis e travou quase todas as vendas do país. O que salvou foram as cópias guardadas em lugares separados. Nenhum sistema é inviolável; a defesa é cópia, rastro e recuperação.</p></div>
+    </div>
+    <p style="margin-top: var(--espaco-4)">E o blockchain? Na Geórgia, ele só grava uma "impressão digital" de cada registro para provar que ninguém mexeu depois. Na Suécia ficou em protótipo, e em Honduras travou antes do piloto. No Brasil, o Banco Central desligou a plataforma blockchain do Drex em 2025. Por isso a proposta fala em <strong>histórico que não se apaga</strong>, com a tecnologia que for mais segura e auditável.</p>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 5 · O que proponho</span>
+    <h2>Um caminho simples para o caso simples</h2>
+    <p>A maior parte das vendas é parecida: imóvel quitado, sem dívida, sem briga. Para esse caso, a proposta é um caminho só, num balcão público, sem fechar nenhum cartório por decreto.</p>
+    <ol class="fluxo">
+      <li><span class="n">1</span><div><strong>Os dois vão ao Vapt Vupt</strong>Goiás tem 78 unidades e cerca de 620 mil atendimentos por mês (Governo de Goiás, 2026). Lá já se faz identidade e CNH, com foto e digitais.</div></li>
+      <li><span class="n">2</span><div><strong>O sistema confere sozinho</strong>Dívidas, penhoras, bloqueios, estado civil e ITBI aparecem na tela, cruzando as bases que já existem. Ninguém corre atrás de certidão.</div></li>
+      <li><span class="n">3</span><div><strong>Uma pessoa treinada conversa com o vendedor</strong>Se for idoso ou vulnerável, há um questionário para checar se a venda é livre. O comprador assina digitalmente todos os fatos relevantes.</div></li>
+      <li><span class="n">4</span><div><strong>O registro entra no histórico que não se apaga</strong>Cada mudança fica gravada com rastro e cópias em vários lugares, inclusive fora da rede. Os dois saem com um resumo de uma página.</div></li>
+    </ol>
+
+    <div class="comprovante" role="img" aria-label="Exemplo ilustrativo do resumo de uma página entregue a comprador e vendedor">
+      <div class="topo">
+        <div><small>Estado de Goiás · ilustração</small><b>Resumo da transferência</b></div>
+        <svg class="qr" viewBox="0 0 76 76" aria-hidden="true">
+          <rect width="76" height="76" rx="12" fill="var(--azul-claro)"/>
+          <g fill="var(--azul)"><rect x="8" y="8" width="20" height="20" rx="4"/><rect x="48" y="8" width="20" height="20" rx="4"/><rect x="8" y="48" width="20" height="20" rx="4"/><rect x="34" y="10" width="8" height="8" rx="2"/><rect x="34" y="30" width="10" height="10" rx="2"/><rect x="50" y="36" width="8" height="8" rx="2"/><rect x="36" y="50" width="8" height="14" rx="2"/><rect x="52" y="52" width="14" height="8" rx="2"/></g>
+          <g fill="var(--branco)"><rect x="13" y="13" width="10" height="10" rx="2"/><rect x="53" y="13" width="10" height="10" rx="2"/><rect x="13" y="53" width="10" height="10" rx="2"/></g>
+        </svg>
+      </div>
+      <dl>
+        <dt>Imóvel</dt><dd>Apartamento, matrícula 00.000</dd>
+        <dt>Valor declarado</dt><dd>R$ 250.000,00</dd>
+        <dt>Dívidas e penhoras</dt><dd>Nenhuma encontrada</dd>
+        <dt>ITBI</dt><dd>Pago</dd>
+        <dt>Conferência</dt><dd>Biometria e entrevista</dd>
+      </dl>
+      <p class="rodape-c">Aponte a câmera para o código e confira no sistema oficial. O papel não substitui o registro: ele resume, em linguagem clara, o que o registro diz.</p>
+    </div>
+    <p class="legenda-ilustra" style="margin-top: var(--espaco-3)">Ilustração do resumo de uma página, com dados fictícios</p>
+
+    <h3 style="margin-top: var(--espaco-6)">Quem faz o quê</h3>
+    <div class="camadas">
+      <div class="cartao camada"><span class="selo">Goiás pode fazer já</span><ul>
+        <li>Convênio para o Vapt Vupt ser posto de atendimento do sistema oficial que já existe.</li>
+        <li>Compra pública de inovação, pelo Marco Legal das Startups, para o software que confere o caso simples e integra o ITBI dos municípios. Hackathon aberto, banca pública, código do Estado e auditável.</li>
+        <li>Rever os 40% de repasses, que são lei estadual, e mostrar no recibo quanto vai para cada lugar.</li>
+      </ul></div>
+      <div class="cartao camada"><span class="selo azul">Precisa de lei federal</span><ul>
+        <li>Permitir que imóvel quitado e sem dívida seja transferido pelo caminho simples, sem escritura, como já acontece com o contrato do banco no financiamento.</li>
+        <li>Obrigar a publicar, cartório por cartório, quanto cada um arrecada.</li>
+        <li>Governança pública das plataformas digitais do registro.</li>
+      </ul></div>
+      <div class="cartao camada"><span class="selo amarelo">Só com emenda à Constituição</span><ul>
+        <li>Um registro de imóveis estatal, se um dia for o caminho. A transição seria aos poucos, quando os cartórios forem vagando, estado por estado, sem quebrar a regra de quem passou em concurso.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section class="capitulo revelar" id="criticas">
+    <span class="ato">Capítulo 6 · As críticas</span>
+    <h2>As perguntas mais difíceis</h2>
+    <p>Fiz uma entrevista simulada, como se estivesse ao vivo na TV. Estas são as perguntas mais duras e as respostas.</p>
+
+    <details class="critica">
+      <summary>Vocês querem acabar com os cartórios?</summary>
+      <div class="resposta"><p>Não. Ninguém fecha cartório por decreto. A proposta é um balcão público que concorre no caso simples, como Portugal fez com a Casa Pronta.</p><p>Se um dia o registro virar estatal, a transição é aos poucos, quando os cartórios vagarem, com requalificação paga pelo fundo para quem trabalha neles. São cerca de 96,7 mil empregados, segundo o próprio setor (Anoreg/BR, 2025).</p></div>
+    </details>
+    <details class="critica">
+      <summary>Um idoso pode ser coagido a vender. A biometria resolve?</summary>
+      <div class="resposta"><p>Biometria prova quem é, não prova que a vontade é livre. Por isso o caminho simples tem uma pessoa treinada que conversa com o vendedor, com questionário próprio para idosos e vulneráveis.</p><p>Dívidas, penhoras e a assinatura do cônjuge aparecem na tela, porque o sistema consulta as bases oficiais. Hoje o cidadão é que corre atrás disso.</p></div>
+    </details>
+    <details class="critica">
+      <summary>A biometria do gov.br já foi fraudada. Por que confiar?</summary>
+      <div class="resposta"><p>Em 2025 a Polícia Federal desarticulou um grupo que burlava a biometria facial do gov.br (Operação Face Off). Todo sistema pode ser atacado, inclusive o de hoje: um registro de imóveis de Caxias do Sul já teve todos os dados sequestrados.</p><p>A resposta é camada sobre camada: presença física no balcão, conferência pela base oficial, entrevista e histórico que não se apaga, com cópias em lugares separados.</p></div>
+    </details>
+    <details class="critica">
+      <summary>A escritura por vídeo já existe. Isso não é chover no molhado?</summary>
+      <div class="resposta"><p>Existe desde 2020, e é um avanço. Mas o preço é o mesmo do balcão, e você só pode escolher tabelião do seu estado ou do estado do imóvel.</p><p>Digitalizar sem baratear e sem concorrência é só mudar o papel de lugar.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Quase não há briga judicial por imóvel. Por que mexer?</summary>
+      <div class="resposta"><p>A segurança vem da conferência, não do carimbo. O caminho simples confere mais dados que uma pessoa sozinha, e em segundos.</p><p>O que muda é o número de etapas e o preço, não o cuidado.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Goiás não pode legislar sobre registro de imóveis.</summary>
+      <div class="resposta"><p>É verdade: registro público é competência da União (Constituição, art. 22). Por isso a proposta separa o que Goiás pode fazer já, como o balcão, o software e os 40% de repasses, do que precisa de lei federal.</p><p>No Congresso, o primeiro passo concreto é a lei do caminho simples para imóvel quitado e sem dívida, mais a publicação da arrecadação de cada cartório.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Quem paga a certidão de nascimento gratuita se o preço cair?</summary>
+      <div class="resposta"><p>Hoje ela é paga por um fundo que recebe 2,5% dos emolumentos em Goiás, o FUNCOMP. Esse dinheiro continua garantido, de forma visível.</p><p>E já existe registro de nascimento dentro de maternidades, ligado a cartórios. Dá para ampliar o que funciona e levar para o Vapt Vupt.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Para que imprimir papel numa proposta digital?</summary>
+      <div class="resposta"><p>Ninguém lê o A4 de hoje. O resumo de uma página é claro, bonito e tem código para conferir no sistema oficial.</p><p>Ele não substitui o registro. Ele explica o registro.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Os fundos de 40% pagam o Judiciário. O problema não é o próprio Estado?</summary>
+      <div class="resposta"><p>Em parte, sim. Esses repasses funcionam como um imposto escondido no preço do cartório.</p><p>Se o Judiciário, o Ministério Público ou a Assembleia precisam desse dinheiro, que ele esteja no orçamento, à vista de todos. E que o recibo diga quanto foi para cada lugar.</p></div>
+    </details>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 7 · Como medir</span>
+    <h2>Três números para acompanhar</h2>
+    <ul>
+      <li><strong>Custo total</strong> de passar um imóvel, em % do valor, separando imposto, cartório e fundos.</li>
+      <li><strong>Etapas e dias</strong> do contrato assinado até o registro pronto.</li>
+      <li><strong>Arrecadação pública</strong> de cada cartório, atualizada todo ano no painel Justiça Aberta do CNJ.</li>
+    </ul>
+  </section>
+
+  <section class="capitulo revelar conversa">
+    <p class="grande">Quanto você pagou para passar o seu imóvel para o seu nome? E sabia para onde foi cada parte?</p>
+    <div class="hashtags"><span class="hashtag">#CartórioDigital</span><span class="hashtag">#SistemasMelhores</span></div>
+    <div class="capa-acoes"><a class="botao" href="/projetos/reindustrializacao/">Ver o FSRI, o fundo por trás</a></div>
+  </section>
+
+  <section class="capitulo">
+    <h2>Fontes</h2>
+    <ul class="fontes">
+      <li><a href="https://www.tjgo.jus.br/files/2026/01%20-%20Janeiro/Provimento%20Conjunto%20179-2026.pdf">TJGO e CGJ-GO, Provimento Conjunto 179/2025, tabela de emolumentos de 2026 (Tabelas XIII e XIV)</a></li>
+      <li><a href="https://myside.com.br/guia-imoveis/registro-de-imovel-valor">MySide, divisão do registro em emolumento, ISS e fundo no 1º Registro de Imóveis de Goiânia (2026), fonte secundária</a></li>
+      <li><a href="https://myside.com.br/guia-goiania/isti-goiania-go">MySide, ITBI de Goiânia a 2% (LC municipal 344/2021), atualizado em janeiro de 2026, fonte secundária</a></li>
+      <li><a href="https://appasp.economia.go.gov.br/legislacao/arquivos/leis/L_20494.htm">Lei estadual de Goiás 20.494/2019, repasse de 40% dos emolumentos</a></li>
+      <li><a href="https://gazetadoparana.com.br/publico/arrecadacao-de-cartorios-no-brasil-registra-recorde-com-r-314-bilhoes-em-2024">Gazeta do Paraná, arrecadação de R$ 31,4 bi em 2024, segundo o CNJ (2025)</a></li>
+      <li><a href="https://www.contabeis.com.br/noticias/51181/cartorios-atingem-recorde-ao-arrecadar-r-23-4-bilhoes-em-2021/">Contábeis, arrecadação de R$ 23,4 bi em 2021</a></li>
+      <li><a href="https://anoregam.org.br/wp-content/uploads/2026/01/cartorio-em-numeros-7a.pdf">Anoreg/BR, Cartório em Números, 7ª edição (2025), fonte do setor</a></li>
+      <li><a href="https://archive.doingbusiness.org/en/data/exploretopics/registering-property">Banco Mundial, Doing Business 2020, Registering Property</a></li>
+      <li><a href="https://arabic.doingbusiness.org/content/dam/doingBusiness/media/Subnational/DB2021_SNDB_Brazil_Full-report_English.pdf">Banco Mundial, Doing Business Subnacional Brasil 2021</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm">Código Civil, arts. 108 e 1.245</a></li>
+      <li><a href="https://www.irib.org.br/e-notariado-cn-cnj-reafirma-aplicacao-de-competencia-territorial-para-atos-notariais-hibridos/">IRIB, CNJ reafirma competência territorial do e-Notariado (julho de 2026)</a></li>
+      <li><a href="https://www.hardware.com.br/noticias/hacker-apaga-base-registro-imoveis-romenia-paralisa-mercado/amp/">Hardware.com.br, ataque ao registro de imóveis da Romênia (julho de 2026)</a></li>
+      <li><a href="https://jornaldebrasilia.com.br/blogs-e-colunas/analice-nicolau/sistema-manoel-valente-como-um-ataque-cibernetico-iniciou-uma-revolucao-na-seguranca-digital-dos-cartorios">Jornal de Brasília, sequestro de dados em registro de imóveis de Caxias do Sul (2025)</a></li>
+      <li><a href="https://olhardigital.com.br/2025/05/13/seguranca/pf-deflagra-operacao-contra-fraude-biometrica-no-gov-br/">Olhar Digital, Operação Face Off da Polícia Federal (maio de 2025)</a></li>
+    </ul>
+  </section>
+</main>
+<gr-rodape></gr-rodape>
+<script>
+(() => {
+  // Tabela de emolumentos de Goiás 2026 (Provimento Conjunto 179/2025): escritura (XIII, item 63) e registro (XIV, item 76)
+  const faixas = {
+    150000: { escritura: 3408.91, registro: 1945.88 },
+    250000: { escritura: 4166.03, registro: 2620.98 },
+    400000: { escritura: 5680.28, registro: 4054.59 }
+  };
+  const PRENOTACAO_MATRICULA = 11.14 + 57.53;
+  const FUNDO_ISS_REGISTRO = 0.2925; // 24,25% de fundo + 5% de ISS, 1º RI de Goiânia
+  const real = (v) => "R$ " + Math.round(v).toLocaleString("pt-BR");
+  const pct = (v) => v.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + "%";
+  const opcoes = [...document.querySelectorAll(".calc .opcao")];
+  const financiado = document.getElementById("financiado");
+  const $ = (id) => document.getElementById(id);
+  let valor = 250000;
+
+  function calcular() {
+    const f = faixas[valor];
+    const itbi = valor * 0.02;
+    const esc = financiado.checked ? 0 : f.escritura;
+    const fundo = f.registro * FUNDO_ISS_REGISTRO;
+    const reg = f.registro + PRENOTACAO_MATRICULA;
+    const total = itbi + esc + fundo + reg;
+    const publico = itbi + fundo;
+    $("total").textContent = real(total);
+    $("percentual").textContent = pct(total / valor * 100) + " do valor do imóvel, sem contar certidões" + (financiado.checked ? " e tarifas do banco" : "");
+    $("v-itbi").textContent = real(itbi);
+    $("v-fundo").textContent = real(fundo);
+    $("v-esc").textContent = financiado.checked ? "no contrato do banco" : real(esc);
+    $("v-reg").textContent = real(reg);
+    $("b-pref").style.flexBasis = (itbi / total * 100) + "%";
+    $("b-fundo").style.flexBasis = (fundo / total * 100) + "%";
+    $("b-cart").style.flexBasis = ((esc + reg) / total * 100) + "%";
+    $("frase").textContent = "Prefeitura e Estado ficam com cerca de " + Math.round(publico / total * 100) + "%. Os cartórios ficam com cerca de " + Math.round((esc + reg) / total * 100) + "%, antes de salários e custos.";
+  }
+  opcoes.forEach((op) => op.addEventListener("click", () => {
+    valor = +op.dataset.valor;
+    opcoes.forEach((o) => { o.classList.toggle("marcada", o === op); o.setAttribute("aria-checked", String(o === op)); });
+    calcular();
+  }));
+  financiado.addEventListener("change", calcular);
+  calcular();
+
+  const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("visivel"); io.unobserve(e.target); } }), { threshold: .12 }) : null;
+  document.querySelectorAll(".revelar").forEach((el) => io ? io.observe(el) : el.classList.add("visivel"));
+})();
+</script>
+</body>
+</html>
