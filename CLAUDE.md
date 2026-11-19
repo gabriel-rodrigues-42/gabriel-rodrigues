@@ -26,7 +26,7 @@ Site gabriel-rodrigues.com, design system e vídeos do Gabriel Rodrigues, desenv
 
 ## Ideias
 
-Para criar ou melhorar uma ideia, edite `site/ideias/ideias.js` (o formato está explicado no topo do arquivo). Cada ideia tem gancho, problema, proposta, críticas com resposta e uma pergunta para puxar conversa. Frases curtas: cada frase vira uma legenda.
+Para criar ou melhorar uma ideia, edite `site/ideias/ideias.js` (o formato está explicado no topo do arquivo). Cada ideia tem gancho, problema, proposta, críticas com resposta, uma pergunta para puxar conversa e uma hashtag (mais a `HASHTAG_GERAL`, #SistemasMelhores). Frases curtas: cada frase vira uma legenda.
 
 ## Skills
 
