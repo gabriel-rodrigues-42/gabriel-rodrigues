@@ -147,13 +147,23 @@ def cod_eleicao(l: dict) -> int:
     return inteiro(l.get("CD_ELEICAO"))
 
 
-def mais_recente(por_eleicao: dict) -> dict:
-    """(ue, cargo, eleição) -> valor  vira  (ue, cargo) -> valor da eleição mais recente.
-    Onde a eleição de prefeito foi anulada e refeita (eleição suplementar), vale a nova."""
-    out = {}
-    for (ue, cargo, el) in sorted(por_eleicao, key=lambda k: k[2]):
-        out[(ue, cargo)] = por_eleicao[(ue, cargo, el)]
-    return out
+def por_ue(por_eleicao: dict) -> dict:
+    """(ue, cargo, eleição) -> valor  vira  (ue, cargo) -> {eleição: valor}."""
+    out = defaultdict(dict)
+    for (ue, cargo, el), v in por_eleicao.items():
+        out[(ue, cargo)][el] = v
+    return dict(out)
+
+
+def escolher_eleicao(n_vagas: int, detalhe: dict, cand: dict):
+    """Uma cidade pode ter mais de uma eleição no ano (a de prefeito anulada e refeita,
+    ou uma eleição suplementar parcial). Usa a mais recente que elegeu todas as vagas;
+    se nenhuma elegeu, a mais recente."""
+    codigos = sorted(set(detalhe) | set(cand), reverse=True)
+    if not codigos:
+        return {}, {}
+    completo = next((c for c in codigos if cand.get(c, {}).get("eleitos") == n_vagas), codigos[0])
+    return detalhe.get(completo, {}), cand.get(completo, {})
 
 
 def ler_vagas(zip_path: Path):
@@ -193,7 +203,7 @@ def ler_detalhe(zip_path: Path):
         s["aptos"] += inteiro(l.get("QT_APTOS"))
         s["validos"] += sum(inteiro(l.get(c)) for c in coluna)
         gerado = data_geracao(l, gerado)
-    return mais_recente(dict(soma)), gerado
+    return por_ue(dict(soma)), gerado
 
 
 def ler_candidatos(zip_path: Path):
@@ -227,7 +237,7 @@ def ler_candidatos(zip_path: Path):
         r["maior_eleito"] = v if r["maior_eleito"] is None else max(r["maior_eleito"], v)
         if turno == 2:
             r["segundo_turno"] = True
-    return mais_recente(dict(resultado)), gerado
+    return por_ue(dict(resultado)), gerado
 
 
 # ---------------------------------------------------------------- regras
@@ -244,8 +254,7 @@ def cargo(ue: str, nome: str, vagas, detalhe, cand, ano: int):
     n = vagas.get((ue, nome))
     if not n:
         return None
-    d = detalhe.get((ue, nome), {})
-    c = cand.get((ue, nome), {})
+    d, c = escolher_eleicao(n, detalhe.get((ue, nome), {}), cand.get((ue, nome), {}))
     # Com uma vaga, o número que importa é o do vencedor. Com várias, o do eleito com menos votos.
     eleito = c.get("maior_eleito") if n == 1 else c.get("menor_eleito")
     out = {"ano": ano, "vagas": n, "validos": d.get("validos"), "menor_eleito": eleito}
