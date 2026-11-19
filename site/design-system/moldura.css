@@ -14,8 +14,8 @@ h1, h2, h3, h4, p, li, dd, dt, a, strong, span, label { overflow-wrap: break-wor
 h1, h2, h3 { hyphens: auto; }
 
 /* ---------- Cabeçalho (mobile first) ----------
-   Celular: nome + botão Apoiar na primeira linha, menu embaixo, sem avatar.
-   A partir de 720px: avatar, nome, menu e Apoiar numa linha só, fixo no topo. */
+   Celular: logo + botão Apoiar na primeira linha, menu embaixo.
+   A partir de 720px: logo, menu e Apoiar numa linha só, fixo no topo. */
 .moldura-topo { background: var(--creme-vidro); border-bottom: 2px solid var(--azul-claro); }
 .moldura-topo-dentro {
   max-width: 960px; margin: 0 auto; padding: var(--espaco-3) var(--espaco-4) var(--espaco-2);
@@ -23,10 +23,8 @@ h1, h2, h3 { hyphens: auto; }
   align-items: center; column-gap: var(--espaco-3); row-gap: var(--espaco-2);
 }
 .moldura-marca { grid-area: marca; display: flex; align-items: center; gap: var(--espaco-3); text-decoration: none; color: var(--azul); min-width: 0; }
-.moldura-marca img { display: none; width: 40px; height: 40px; flex: none; object-fit: cover; border-radius: var(--forma-bolha-1); background: var(--azul-claro); }
-.moldura-marca > span { min-width: 0; }
-.moldura-marca strong { display: block; font-size: var(--tamanho-3); font-weight: 900; line-height: 1.1; }
-.moldura-marca span span { display: block; font-size: var(--tamanho-1); color: var(--texto-suave); line-height: 1.2; }
+.moldura-logo { display: block; width: 48px; height: 48px; flex: none; }
+.moldura-oculto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 .moldura-menu { grid-area: menu; display: flex; flex-wrap: wrap; gap: var(--espaco-1) var(--espaco-2); margin-left: -10px; }
 .moldura-menu a, .moldura-apoiar {
   font-size: var(--tamanho-2); font-weight: var(--peso-forte); color: var(--azul); text-decoration: none;
@@ -40,7 +38,7 @@ h1, h2, h3 { hyphens: auto; }
 @media (min-width: 720px) {
   .moldura-topo { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
   .moldura-topo-dentro { grid-template-columns: minmax(0, 1fr) auto auto; grid-template-areas: "marca menu apoiar"; padding: var(--espaco-2) var(--espaco-4); }
-  .moldura-marca img { display: block; }
+  .moldura-logo { width: 52px; height: 52px; }
   .moldura-menu { margin-left: 0; flex-wrap: nowrap; }
 }
 
