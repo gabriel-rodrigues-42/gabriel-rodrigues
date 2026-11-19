@@ -1,2 +1,3 @@
 .bpy/
 __pycache__/
+.cache/
