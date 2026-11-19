@@ -5,7 +5,7 @@
 (function () {
   "use strict";
 
-  const MISSAO = "Desenvolvedor de Inhumas (GO). Estudo política para levar o jeito de trabalhar da engenharia de software para o governo: medir, testar, corrigir e mostrar o código.";
+  const MISSAO = "Desenvolvedor de software em Goiânia (GO). Estudo política para levar o jeito de trabalhar da engenharia de software para o governo: medir, testar, corrigir e mostrar o código.";
 
   const MENU = [
     { href: "/#publicacoes", texto: "Projetos e ideias", ativo: (p) => p.startsWith("/projetos/") || p.startsWith("/ideias/") },
@@ -29,7 +29,8 @@
               <img src="/design-system/img/gabriel-avatar.jpg" alt="" width="40" height="40">
               <span><strong>Gabriel Rodrigues</strong><span>Engenharia de software no serviço público</span></span>
             </a>
-            <nav class="moldura-menu" aria-label="Menu principal">${links}<a class="moldura-apoiar" href="/#apoiar">Apoiar</a></nav>
+            <nav class="moldura-menu" aria-label="Menu principal">${links}</nav>
+            <a class="moldura-apoiar" href="/#apoiar">Apoiar</a>
           </div>
         </header>`;
     }

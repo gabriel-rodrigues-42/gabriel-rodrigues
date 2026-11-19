@@ -24,7 +24,8 @@
   .indice { list-style: none; padding: 0; margin: var(--espaco-5) 0 0; display: flex; flex-wrap: wrap; gap: var(--espaco-2); }
   .indice a { display: inline-block; text-decoration: none; color: var(--azul); background: var(--branco); font-weight: var(--peso-forte); font-size: var(--tamanho-1); padding: 6px 12px; border-radius: var(--forma-pilula); border: 2px solid var(--azul-claro); }
 
-  .ideias { display: grid; gap: var(--espaco-6); margin-top: var(--espaco-6); }
+  .ideias { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-6); margin-top: var(--espaco-6); }
+  .ideia-topo > :first-child { min-width: 0; }
   .ideia { scroll-margin-top: var(--espaco-5); transition: box-shadow .2s; }
   .ideia.tocando { box-shadow: 0 10px 0 -2px var(--amarelo), 0 2px 18px rgba(0, 39, 118, .12); }
   .ideia-topo { display: flex; gap: var(--espaco-3); align-items: flex-start; justify-content: space-between; }
