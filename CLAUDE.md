@@ -22,6 +22,7 @@ Site gabriel-rodrigues.com, design system e vídeos do Gabriel Rodrigues, desenv
 - Páginas precisam funcionar em 390px de largura sem rolagem lateral.
 - Números sempre com fonte oficial e ano.
 - Pré-campanha: nada de pedido de voto, número de urna ou ataque a pessoas e partidos. Critique sistemas.
+- SEO: toda página tem título único, descrição, canonical, Open Graph e Twitter (copie o bloco do `projetos/_modelo/`) e entra em `site/sitemap.xml`. Ícones e imagem de compartilhamento ficam na raiz de `site/` (`favicon.svg`, `og.jpg`).
 - Dados pessoais: colete o mínimo (LGPD). Nada de CPF, título de eleitor ou lista com cara de abaixo-assinado.
 
 ## Ideias
