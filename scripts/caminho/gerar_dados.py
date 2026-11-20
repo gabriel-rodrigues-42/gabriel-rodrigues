@@ -4,6 +4,9 @@
 Baixa arquivos oficiais e grava JSONs pequenos em site/caminho/dados/:
   - brasil.json            cargos estaduais e federais de cada UF + metadados e fontes
   - municipios-XX.json     um arquivo por UF com vereador e prefeito de cada município
+  - municipios.json        índice leve de todos os municípios ([ibge, nome, UF, população]),
+                           do maior para o menor, para o seletor de cidade do site
+                           (site/design-system/cidade.js)
 
 Fontes (todas públicas e oficiais):
   - TSE, Portal de Dados Abertos (https://dadosabertos.tse.jus.br/)
@@ -16,6 +19,7 @@ Fontes (todas públicas e oficiais):
 Uso:
   python3 scripts/caminho/gerar_dados.py                # baixa (com cache em .cache/) e gera
   python3 scripts/caminho/gerar_dados.py --cache /tmp/x # outra pasta de cache
+  python3 scripts/caminho/gerar_dados.py --so-indice    # só refaz municipios.json a partir dos arquivos por UF
 
 Só usa a biblioteca padrão do Python 3.10+. Roda no GitHub Actions
 (.github/workflows/dados-caminho.yml), que publica o resultado neste repositório.
@@ -328,10 +332,30 @@ def casar(ibge_por_uf, tse_nomes):
 
 # ---------------------------------------------------------------- principal
 
+def gerar_indice():
+    """Junta os municipios-XX.json num índice só, do mais populoso para o menos.
+
+    O seletor de cidade (site/design-system/cidade.js) busca em todos os municípios
+    do Brasil de uma vez; baixar os 27 arquivos completos seria pesado demais.
+    """
+    indice = []
+    for uf in UFS:
+        for m in json.loads((SAIDA / f"municipios-{uf}.json").read_text("utf-8")):
+            indice.append([m["ibge"], m["nome"], uf, m.get("pop") or 0])
+    indice.sort(key=lambda m: (-m[3], chave(m[1])))
+    texto = "[\n" + ",\n".join(json.dumps(m, ensure_ascii=False, separators=(",", ":")) for m in indice) + "\n]\n"
+    (SAIDA / "municipios.json").write_text(texto, "utf-8")
+    log(f"índice: {len(indice)} municípios em municipios.json")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--cache", type=Path, default=RAIZ / ".cache" / "caminho")
+    ap.add_argument("--so-indice", action="store_true", help="só refaz municipios.json a partir dos arquivos por UF")
     args = ap.parse_args()
+    if args.so_indice:
+        gerar_indice()
+        return
     cache = args.cache
 
     def zip_tse(pasta: str, ano: int):
@@ -426,6 +450,7 @@ def main():
         "estados": estados,
     }
     (SAIDA / "brasil.json").write_text(json.dumps(brasil, ensure_ascii=False, indent=1) + "\n", "utf-8")
+    gerar_indice()
 
     # Conferência rápida no log
     log(f"municípios: {resumo['municipios']}, com eleição municipal casada: {resumo['com_eleicao']}")

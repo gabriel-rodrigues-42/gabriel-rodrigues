@@ -24,8 +24,9 @@ label { display: block; font-weight: var(--peso-forte); margin: var(--espaco-4) 
 label small { font-weight: var(--peso-normal); color: var(--texto-suave); }
 input, select {
   font: inherit; width: 100%; max-width: 100%; padding: 12px 14px; color: var(--texto);
-  background: var(--creme); border: 2px solid var(--azul-claro); border-radius: var(--forma-opcao);
+  background-color: var(--creme); border: 2px solid var(--azul-claro); border-radius: var(--forma-opcao);
 }
+select { padding-right: 44px; }
 input:focus-visible, select:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
 .campo-info { font-size: var(--tamanho-2); color: var(--texto-suave); margin: var(--espaco-2) 0 0; }
 .campo-info.ok { color: var(--verde-escuro); font-weight: 700; }
@@ -62,7 +63,7 @@ dd small { font-weight: var(--peso-normal); color: var(--texto-suave); }
 .idade-nao { color: var(--texto); background: var(--amarelo-claro); padding: 0 4px; border-radius: 4px; }
 .fonte { font-size: var(--tamanho-1); color: var(--texto-suave); margin: var(--espaco-2) 0 0; }
 .adicionar { display: flex; gap: var(--espaco-2); flex-wrap: wrap; align-items: center; margin-top: var(--espaco-3); }
-.adicionar select { width: auto; padding: 10px 12px; }
+.adicionar select { width: auto; padding: 10px 44px 10px 12px; }
 .copiado { font-size: var(--tamanho-2); color: var(--verde-escuro); font-weight: 700; overflow-wrap: anywhere; }
 
 /* FAQ */
