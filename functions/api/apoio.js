@@ -1,6 +1,7 @@
 // POST /api/apoio — guarda o apoio de quem acredita que o Gabriel deve tentar.
 // Roda como Cloudflare Pages Function. Precisa do banco D1 gabriel-rodrigues ligado ao projeto
-// com o nome DB (Pages > Settings > Bindings) e da tabela de db/apoios.sql.
+// com o nome DB (Pages > Settings > Bindings). A tabela de db/apoios.sql é criada aqui mesmo
+// se ainda não existir, então não precisa rodar o SQL à mão. Mudou a tabela? Mude os dois.
 // Guarda só o necessário (LGPD, art. 6º, III): email, nome, cidade, UF e quando a pessoa consentiu.
 // Não guarda CPF, telefone nem IP.
 
@@ -20,6 +21,15 @@ function responder(request, status, corpo, idioma) {
     headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" },
   });
 }
+
+const CRIAR_TABELA = `CREATE TABLE IF NOT EXISTS apoios (
+  email TEXT PRIMARY KEY,
+  nome TEXT,
+  cidade TEXT,
+  uf TEXT,
+  consentido_em TEXT NOT NULL,
+  versao_privacidade TEXT NOT NULL
+)`;
 
 const limpar = (v, max) => String(v ?? "").replace(/\s+/g, " ").trim().slice(0, max);
 
@@ -52,13 +62,23 @@ export async function onRequestPost({ request, env }) {
 
   if (!env.DB) return responder(request, 503, { ok: false, erro: "O formulário ainda está sendo ligado." });
 
-  await env.DB.prepare(
-    `INSERT INTO apoios (email, nome, cidade, uf, consentido_em, versao_privacidade)
-     VALUES (?1, ?2, ?3, ?4, ?5, ?6)
-     ON CONFLICT(email) DO UPDATE SET
-       nome = excluded.nome, cidade = excluded.cidade, uf = excluded.uf,
-       consentido_em = excluded.consentido_em, versao_privacidade = excluded.versao_privacidade`
-  ).bind(email, nome || null, cidade || null, uf || null, new Date().toISOString(), VERSAO_PRIVACIDADE).run();
+  try {
+    // Cria a tabela antes de gravar (não faz nada se ela já existe) e grava, numa transação só.
+    await env.DB.batch([
+      env.DB.prepare(CRIAR_TABELA),
+      env.DB.prepare(
+        `INSERT INTO apoios (email, nome, cidade, uf, consentido_em, versao_privacidade)
+         VALUES (?1, ?2, ?3, ?4, ?5, ?6)
+         ON CONFLICT(email) DO UPDATE SET
+           nome = excluded.nome, cidade = excluded.cidade, uf = excluded.uf,
+           consentido_em = excluded.consentido_em, versao_privacidade = excluded.versao_privacidade`
+      ).bind(email, nome || null, cidade || null, uf || null, new Date().toISOString(), VERSAO_PRIVACIDADE),
+    ]);
+  } catch (erro) {
+    // Aparece em Workers & Pages > gabriel-rodrigues > Functions > Real-time logs (sem dados da pessoa).
+    console.error("apoio: falha ao gravar no D1:", erro?.message || erro);
+    return responder(request, 500, { ok: false, erro: "Não consegui guardar agora. Tente de novo em alguns minutos." });
+  }
 
   return responder(request, 200, { ok: true }, idioma);
 }
