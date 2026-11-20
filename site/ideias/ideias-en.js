@@ -51,7 +51,7 @@ window.IDEIAS = [
     hashtag: "#GaleraClub",
     titulo: "galera.club: a Brazilian platform that is already live",
     estado: "no ar",
-    gancho: "Digital sovereignty doesn't start with a speech. It starts with a Brazilian platform that already works, and I built one.",
+    gancho: "A link-in-bio page made in Brazil, with Pix payments on the page and no fee per sale. I built it, and it is already live.",
     problema: [
       "People who sell in Brazil sell through Instagram and WhatsApp. The link in bio, which is that person's storefront, almost always belongs to a foreign company.",
       "Foreign tools charge in dollars and sell through credit cards. On Linktree, every sale pays 2.9% plus 30 US cents to Stripe, on any plan, according to Linktree's own help center, updated in October 2026.",
@@ -61,7 +61,7 @@ window.IDEIAS = [
       "galera.club is a link-in-bio page made in Brazil. Each person gets an address with their own name, with links, products and prices.",
       "The Pix payment is generated on the page itself, following the Central Bank standard. The money goes straight from buyer to seller, with no middleman. The platform charges nothing per sale.",
       "The order arrives ready on WhatsApp or in the page's own chat, with answers the owner writes. And there's the Market, where people discover who sells in their own city.",
-      "This isn't a draft. Version 2.60 was published at galera.club on November 16, 2026. There have been 67 versions since August. Every release backs up the database first and rolls back on its own if something goes wrong.",
+      "Version 2.60 was published at galera.club on November 16, 2026. There have been 67 versions since August. Every release backs up the database first and rolls back on its own if something goes wrong.",
       "It's the kind of platform the Sovereign Fund for Reindustrialization was designed to multiply. The more Brazilians' money flows through Brazilian tools, the more income and data stay here.",
     ],
     criticas: [
@@ -74,7 +74,7 @@ window.IDEIAS = [
         resposta: "Today nobody pays. Everything that helps you sell is free and will stay free. The planned paid plan sells looks and space, like removing the brand from the page. Never the tool for making money.",
       },
       {
-        critica: "Digital sovereignty using WhatsApp, which is American?",
+        critica: "A Brazilian platform using WhatsApp, which is American?",
         resposta: "Fair point. WhatsApp is where customers already are, so it's an option. But the page has its own chat, and the owner chooses. The payment, which matters most, goes through Pix, which is Brazilian.",
       },
       {
@@ -115,7 +115,7 @@ window.IDEIAS = [
     criticas: [
       {
         critica: "Law isn't code. Society isn't a system.",
-        resposta: "I agree that people aren't machines. But every law has a goal, and a goal can be measured. Measuring isn't dehumanizing, it's taking seriously the people the law is supposed to help.",
+        resposta: "I agree that people aren't machines. But every law has a goal, and a goal can be measured. Measuring means taking seriously the people the law is supposed to help.",
       },
       {
         critica: "Every politician promises to modernize and nothing changes.",

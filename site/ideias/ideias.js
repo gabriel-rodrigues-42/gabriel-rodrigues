@@ -35,7 +35,7 @@ window.IDEIAS = [
       "Em troca, ele ganha isenção progressiva no imposto sobre ganho de capital e sobre dividendos. Só se o dinheiro ficar investido pelo prazo mínimo, em produção real no país.",
       "Os projetos ficam em três faixas de risco. Plataformas digitais, indústria de base e tecnologia de ponta, como chips. O Estado garante parte do prejuízo: até 20%, 35% ou 50%, conforme a faixa.",
       "Cada aporte precisa ter um projeto de retorno rápido e um de longo prazo. O rápido paga os juros do empréstimo. O longo constrói o futuro.",
-      "O dinheiro chega por um funil público. Hackathon nacional, quatro meses de aceleração, banca transmitida ao vivo e liberação só por metas auditadas.",
+      "O dinheiro chega por um funil público. Maratona nacional de inovação, quatro meses de aceleração, banca transmitida ao vivo e liberação só por metas auditadas.",
     ],
     criticas: [
       {
@@ -64,7 +64,7 @@ window.IDEIAS = [
     hashtag: "#GaleraClub",
     titulo: "galera.club: uma plataforma brasileira que já está no ar",
     estado: "no ar",
-    gancho: "Soberania digital não começa num discurso. Começa numa plataforma brasileira que já funciona, e eu construí uma.",
+    gancho: "Uma página de link na bio feita no Brasil, com Pix na página e sem taxa por venda. Eu construí, e ela já está no ar.",
     problema: [
       "Quem vende no Brasil vende pelo Instagram e pelo WhatsApp. O link na bio, que é a vitrine dessa pessoa, quase sempre é de uma empresa de fora.",
       "As ferramentas estrangeiras cobram em dólar e vendem pelo cartão. No Linktree, toda venda paga 2,9% mais 30 centavos de dólar ao Stripe, em qualquer plano, segundo a central de ajuda do próprio Linktree, atualizada em outubro de 2026.",
@@ -74,7 +74,7 @@ window.IDEIAS = [
       "O galera.club é uma página de link na bio feita no Brasil. Cada pessoa ganha um endereço com o próprio nome, com links, produtos e preços.",
       "O Pix é gerado na própria página, no padrão do Banco Central. O dinheiro vai direto do comprador para o vendedor, sem intermediário. A plataforma não cobra nada por venda.",
       "O pedido chega pronto no WhatsApp ou num chat próprio da página, com respostas que o dono escreve. E existe o Mercado, onde as pessoas descobrem quem vende na própria cidade.",
-      "Isso não é rascunho. A versão 2.60 foi publicada em galera.club em 16 de novembro de 2026. Foram 67 versões desde agosto. Cada publicação faz backup do banco antes e volta sozinha se algo der errado.",
+      "A versão 2.60 foi publicada em galera.club em 16 de novembro de 2026. Foram 67 versões desde agosto. Cada publicação faz backup do banco antes e volta sozinha se algo der errado.",
       "É o tipo de plataforma que o Fundo Soberano de Reindustrialização foi pensado para multiplicar. Quanto mais o dinheiro do brasileiro passa por ferramentas brasileiras, mais renda e mais dados ficam aqui.",
     ],
     criticas: [
@@ -87,7 +87,7 @@ window.IDEIAS = [
         resposta: "Hoje ninguém paga. Tudo que ajuda a vender é grátis e vai continuar grátis. O plano pago planejado vende aparência e espaço, como tirar a marca da página. Nunca a ferramenta de ganhar dinheiro.",
       },
       {
-        critica: "Soberania digital usando WhatsApp, que é americano?",
+        critica: "Plataforma brasileira usando WhatsApp, que é americano?",
         resposta: "É justo. O WhatsApp é onde o cliente já está, então ele é uma opção. Mas a página tem um chat próprio, e o dono escolhe. O pagamento, que é o que mais importa, passa pelo Pix, que é brasileiro.",
       },
       {
@@ -128,7 +128,7 @@ window.IDEIAS = [
     criticas: [
       {
         critica: "Lei não é código. Sociedade não é sistema.",
-        resposta: "Concordo que pessoas não são máquinas. Mas toda lei tem um objetivo, e um objetivo pode ser medido. Medir não é desumanizar, é levar a sério quem a lei deveria ajudar.",
+        resposta: "Concordo que pessoas não são máquinas. Mas toda lei tem um objetivo, e um objetivo pode ser medido. Medir é levar a sério quem a lei deveria ajudar.",
       },
       {
         critica: "Todo político promete modernizar e nada muda.",
