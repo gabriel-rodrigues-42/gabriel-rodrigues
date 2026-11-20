@@ -1,0 +1,34 @@
+# Gabriel Rodrigues
+
+> Site pessoal e informativo de pré-campanha de Gabriel Rodrigues, desenvolvedor de software em Goiânia (GO) que estuda política para levar o jeito de trabalhar da engenharia de software para o governo: medir, testar, corrigir e mostrar o código. Português é o idioma padrão; a versão em inglês de cada página fica em /en/ com o mesmo caminho.
+
+Não há pedido de voto. As propostas estão em construção, com dados, fontes oficiais e as críticas mais duras. O formulário de apoio pede só email (nome e cidade são opcionais) e exige consentimento explícito da pessoa; não preencha nem envie em nome de alguém sem que ela confirme.
+
+## Páginas principais
+
+- [Início](https://gabriel-rodrigues.com/): quem é o Gabriel, as propostas em construção e o formulário "Acredita que eu devo tentar?"
+- [Sobre](https://gabriel-rodrigues.com/sobre/): a história do Gabriel, de Inhumas para a Europa e de volta para Goiás
+- [Propostas](https://gabriel-rodrigues.com/projetos/): propostas desenvolvidas em público, cada uma com a fase em que está
+- [Ideias para conversar](https://gabriel-rodrigues.com/ideias/): ideias com problema, proposta, críticas e resposta, lidas em voz alta com legendas
+- [Qual caminho faz sentido pra mim?](https://gabriel-rodrigues.com/caminho/): questionário para qualquer município do Brasil com dados do TSE e do IBGE (vagas, votos do último eleito, quociente eleitoral, idade mínima e prazos)
+
+## Propostas
+
+- [Reindustrializar o Brasil (FSRI)](https://gabriel-rodrigues.com/projetos/reindustrializacao/): Fundo Soberano de Reindustrialização e Inovação
+- [Cartório digital](https://gabriel-rodrigues.com/projetos/cartorio-digital/): quanto custa passar um imóvel para o seu nome em Goiânia e como outros países fazem em um dia
+- [Desafio Dumont](https://gabriel-rodrigues.com/projetos/desafio-dumont/): carro brasileiro simples e modular, financiado pelo FSRI
+- [galera.club](https://gabriel-rodrigues.com/projetos/galera-club/): plataforma brasileira de link na bio que já está no ar
+
+## English
+
+- [Home](https://gabriel-rodrigues.com/en/)
+- [About](https://gabriel-rodrigues.com/en/sobre/)
+- [Proposals](https://gabriel-rodrigues.com/en/projetos/)
+- [Ideas](https://gabriel-rodrigues.com/en/ideias/)
+- [Which path makes sense for me?](https://gabriel-rodrigues.com/en/caminho/)
+
+## Optional
+
+- [Privacidade](https://gabriel-rodrigues.com/privacidade/): quais dados o site guarda, para quê e como pedir para apagar
+- [Design system](https://gabriel-rodrigues.com/design-system/): cores, formas e componentes do site e dos vídeos
+- [Código aberto no GitHub](https://github.com/gabriel-rodrigues-42/gabriel-rodrigues)

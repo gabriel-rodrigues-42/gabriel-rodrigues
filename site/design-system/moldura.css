@@ -32,7 +32,7 @@ h1, h2, h3 { hyphens: auto; }
 }
 .moldura-menu a:hover, .moldura-menu a[aria-current="page"] { background: var(--azul-claro); }
 .moldura-acoes { grid-area: apoiar; display: flex; align-items: center; gap: var(--espaco-2); }
-.moldura-apoiar { background: var(--verde); color: var(--branco); padding: 8px 16px; }
+.moldura-apoiar { background: var(--verde-fundo); color: var(--branco); padding: 8px 16px; }
 
 /* Troca de idioma PT/EN (no rodapé, sobre o azul): duas pílulas juntas, a do idioma atual preenchida. */
 .moldura-idioma { grid-column: 1 / -1; justify-self: start; display: flex; border: 2px solid var(--branco-vidro-forte); border-radius: var(--forma-pilula); padding: 2px; }

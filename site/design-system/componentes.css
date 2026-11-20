@@ -13,7 +13,7 @@ body {
 
 /* Selo */
 .selo {
-  display: inline-block; background: var(--verde); color: var(--branco);
+  display: inline-block; background: var(--verde-fundo); color: var(--branco);
   font-weight: var(--peso-forte); font-size: var(--tamanho-1); letter-spacing: .06em; text-transform: uppercase;
   padding: 6px 14px; border-radius: var(--forma-selo);
 }
@@ -33,7 +33,7 @@ a.cartao:hover { transform: translateY(-3px); }
   font: inherit; font-weight: var(--peso-forte); cursor: pointer; border: none; text-decoration: none; display: inline-block;
   padding: 12px 20px; border-radius: var(--forma-pilula); background: var(--azul); color: var(--branco);
 }
-.botao.verde { background: var(--verde); }
+.botao.verde { background: var(--verde-fundo); }
 .botao.secundario { background: transparent; color: var(--azul); border: 2px solid var(--azul-claro); }
 .botao:disabled { opacity: .4; cursor: default; }
 .botao:focus-visible, .opcao:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }

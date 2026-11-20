@@ -23,11 +23,14 @@ Site gabriel-rodrigues.com, design system e vídeos do Gabriel Rodrigues, desenv
 ## Regras
 
 - Cores, fontes e formas só por variáveis de `site/design-system/tokens.css`. Precisa de algo novo? Adicione lá primeiro.
+- Contraste AA (4,5:1) em todo texto. Texto branco sobre verde usa `--verde-fundo`, nunca `--verde`; texto verde sobre fundo claro usa `--verde-escuro`. Confira com o Lighthouse (Acessibilidade 100).
+- Padrões web: siga o [Modern Web Guidance do Chrome](https://developer.chrome.com/docs/modern-web-guidance). A meta de compatibilidade (Baseline target) deste projeto é Baseline Widely available: use HTML, CSS e JS nativos antes de bibliotecas.
 - Páginas precisam funcionar em 390px de largura sem rolagem lateral.
 - Números sempre com fonte oficial e ano.
 - Pré-campanha: nada de pedido de voto, número de urna ou ataque a pessoas e partidos. Critique sistemas.
 - Inglês: mudou o texto de uma página, de `ideias.js` ou de `regras.js`? Mude também a versão em inglês. Página nova ganha a versão em `/en/` no mesmo PR.
 - SEO: toda página tem título único, descrição, canonical, Open Graph e Twitter (copie o bloco do `projetos/_modelo/`) e entra em `site/sitemap.xml`. Páginas com versão em inglês levam o bloco `hreflang` (pt-BR, en e x-default) nas duas versões, e as duas URLs entram no sitemap com os `xhtml:link`. Ícones e imagem de compartilhamento ficam na raiz de `site/` (`favicon.svg`, `og.jpg`).
+- Agentes de IA: `site/llms.txt` resume o site e lista as páginas; página nova entra nele. Formulário novo ganha WebMCP declarativo (`toolname`, `tooldescription` no `<form>` e `toolparamdescription` nos campos), sem `toolautosubmit`: a pessoa sempre confirma o envio.
 - Dados pessoais: colete o mínimo (LGPD). Nada de CPF, título de eleitor ou lista com cara de abaixo-assinado.
 
 ## Ideias
