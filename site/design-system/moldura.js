@@ -1,5 +1,5 @@
 // Moldura do site: o cabeçalho e o rodapé que levam o contexto do Gabriel para todas as páginas.
-// Para mudar o menu, a frase de missão ou os links do rodapé, edite só este arquivo (nos dois idiomas, em T).
+// O seletor PT/EN fica no rodapé. Para mudar o menu, a frase de missão ou os links do rodapé, edite só este arquivo (nos dois idiomas, em T).
 // Carregue no <head> (sem defer) junto com moldura.css e use <gr-cabecalho> e <gr-rodape> no corpo.
 
 (function () {
@@ -95,10 +95,6 @@
             </a>
             <nav class="moldura-menu" aria-label="${T.menuRotulo}">${links}</nav>
             <div class="moldura-acoes">
-              <div class="moldura-idioma" role="group" aria-label="${T.idiomaRotulo}">
-                <a href="${EN ? outroIdioma() : location.pathname}" lang="pt-BR" hreflang="pt-BR" title="Ler em português"${EN ? "" : ' aria-current="true"'} data-idioma="pt">PT</a>
-                <a href="${EN ? location.pathname : outroIdioma()}" lang="en" hreflang="en" title="Read in English"${EN ? ' aria-current="true"' : ""} data-idioma="en">EN</a>
-              </div>
               <a class="moldura-apoiar" href="${RAIZ}#apoiar">${T.apoiar}</a>
             </div>
           </div>
@@ -123,6 +119,10 @@
               <li><a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues">${T.rodape[1]}</a></li>
               <li><a href="${RAIZ}privacidade/">${T.rodape[2]}</a> · <a href="#" data-cookies>${T.rodape[3]}</a> · <a href="/design-system/">${T.rodape[4]}</a></li>
             </ul>
+            <div class="moldura-idioma" role="group" aria-label="${T.idiomaRotulo}">
+              <a href="${EN ? outroIdioma() : location.pathname}" lang="pt-BR" hreflang="pt-BR" title="Ler em português"${EN ? "" : ' aria-current="true"'} data-idioma="pt">PT</a>
+              <a href="${EN ? location.pathname : outroIdioma()}" lang="en" hreflang="en" title="Read in English"${EN ? ' aria-current="true"' : ""} data-idioma="en">EN</a>
+            </div>
             <p class="moldura-aviso">${T.aviso}</p>
           </div>
         </footer>`;

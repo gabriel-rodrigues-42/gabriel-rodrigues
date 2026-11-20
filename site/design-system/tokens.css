@@ -17,6 +17,7 @@
   --azul-claro: #e6ecf7;
   --branco: #ffffff;
   --branco-vidro: rgba(255, 255, 255, .08); /* cartão claro sobre fundo azul */
+  --branco-vidro-forte: rgba(255, 255, 255, .35); /* borda clara sobre fundo azul */
 
   /* Cores livres: personalização e diversidade (ex.: painéis do Desafio Dumont).
      Só para ilustração e destaque, nunca para texto. */
