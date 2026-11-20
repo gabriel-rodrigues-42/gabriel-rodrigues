@@ -19,7 +19,6 @@
     PA: "Pará", PB: "Paraíba", PR: "Paraná", PE: "Pernambuco", PI: "Piauí", RJ: "Rio de Janeiro", RN: "Rio Grande do Norte",
     RS: "Rio Grande do Sul", RO: "Rondônia", RR: "Roraima", SC: "Santa Catarina", SP: "São Paulo", SE: "Sergipe", TO: "Tocantins",
   };
-  const chave = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z]/g, "");
 
   // ---------------------------------------------------------------- estado e link
   const vazio = () => ({ uf: "", ibge: null, efeito: [], poder: [], quando: [], idade: null, nome: "", caminho: [], exemplo: null });
@@ -119,47 +118,30 @@
     }
   }
 
+  // O seletor de cidade é o componente do site (design-system/cidade.js): busca em todos os
+  // municípios, por nome, CEP ou localização. Ele devolve a UF junto, então não há passo de estado.
   async function passoLocal() {
-    const info = el("p", { class: "campo-info" });
-    const selUF = el("select", { id: "uf", onchange: async () => { E.uf = selUF.value; E.ibge = null; E.caminho = []; salvar(); await render(); document.getElementById(E.uf === "DF" ? "uf" : "municipio")?.focus(); } },
-      el("option", { value: "" }, "Escolha o estado"),
-      Object.entries(UFS_NOMES).sort((a, b) => a[1].localeCompare(b[1])).map(([s, n]) => el("option", { value: s, selected: s === E.uf }, `${n} (${s})`)),
-    );
+    const notaDF = el("p", { class: "campo-info" }, "O Distrito Federal não tem municípios nem vereadores. No lugar de deputado estadual existe o deputado distrital.");
+    notaDF.hidden = E.uf !== "DF";
+    const seletor = el("gr-cidade", { "id-campo": "municipio", ibge: E.uf && E.ibge ? E.ibge : null, placeholder: "Digite o nome da cidade" });
+    seletor.addEventListener("gr-cidade", (e) => {
+      const m = e.detail;
+      const ibge = m && m.ibge ? m.ibge : null;
+      if (ibge !== E.ibge) E.caminho = [];
+      E.uf = ibge ? m.uf : "";
+      E.ibge = ibge;
+      salvar();
+      notaDF.hidden = E.uf !== "DF";
+      app.querySelector(".acoes .botao:not(.secundario)").disabled = !ibge;
+    });
     app.append(
       ...cabecalhoPasso("Onde você vota?"),
       el("p", { class: "campo-info" }, "Para se candidatar, o título de eleitor precisa estar no lugar da disputa pelo menos 6 meses antes da eleição (Lei 9.504, art. 9º)."),
-      el("label", { for: "uf" }, "Estado"), selUF,
+      el("label", { for: "municipio" }, "Município ", el("small", {}, "(todos os do Brasil)")),
+      seletor,
+      notaDF,
+      botoes(!!(E.uf && E.ibge)),
     );
-    let seguir = !!(E.uf && E.ibge);
-    if (E.uf) {
-      let lista;
-      try { lista = await municipios(E.uf); }
-      catch { app.append(el("p", { class: "campo-info" }, "Não consegui carregar os municípios. Tente de novo em instantes.")); app.append(botoes(false)); return; }
-      if (lista.length === 1) { E.ibge = lista[0].ibge; seguir = true; salvar(); }
-      const atual = lista.find((m) => m.ibge === E.ibge);
-      const entrada = el("input", {
-        id: "municipio", list: "lista-municipios", autocomplete: "off", placeholder: "Digite o nome da cidade",
-        value: atual ? atual.nome : "",
-        oninput: () => {
-          const k = chave(entrada.value);
-          const achou = lista.find((m) => chave(m.nome) === k);
-          E.ibge = achou ? achou.ibge : null;
-          salvar();
-          info.textContent = achou ? `${achou.nome} (${E.uf})` + (achou.pop ? `, ${num(achou.pop)} habitantes (IBGE, Censo 2022)` : "") : (k.length > 2 ? "Escolha um nome da lista." : "");
-          info.className = "campo-info" + (achou ? " ok" : "");
-          app.querySelector(".acoes .botao:not(.secundario)").disabled = !achou;
-        },
-      });
-      app.append(
-        el("label", { for: "municipio" }, "Município ", el("small", {}, `(${num(lista.length)} em ${UFS_NOMES[E.uf]})`)),
-        entrada,
-        el("datalist", { id: "lista-municipios" }, lista.map((m) => el("option", { value: m.nome }))),
-        info,
-      );
-      if (atual) { info.textContent = `${atual.nome} (${E.uf})` + (atual.pop ? `, ${num(atual.pop)} habitantes (IBGE, Censo 2022)` : ""); info.className = "campo-info ok"; }
-      if (E.uf === "DF") app.append(el("p", { class: "campo-info" }, "O Distrito Federal não tem municípios nem vereadores. No lugar de deputado estadual existe o deputado distrital."));
-    }
-    app.append(botoes(seguir));
   }
 
   function passoPergunta(q) {

@@ -1,0 +1,59 @@
+/* Seletor de cidade <gr-cidade>. Depende de tokens.css. Use junto com cidade.js.
+   O campo de texto herda o estilo de input da página; aqui só vêm o ícone, a lista e os atalhos.
+   Atalhos e mensagens usam a cor do texto em volta, então funcionam em fundo claro e no azul. */
+
+gr-cidade { display: block; min-width: 0; font-weight: var(--peso-normal); }
+.gr-cidade { position: relative; display: grid; gap: var(--espaco-2); min-width: 0; }
+
+.gr-cidade-busca { position: relative; min-width: 0; }
+.gr-cidade-busca > svg {
+  position: absolute; left: 14px; top: 50%; width: 20px; height: 20px; transform: translateY(-50%);
+  fill: none; stroke: var(--texto-suave); stroke-width: 2.2; stroke-linecap: round; pointer-events: none;
+}
+gr-cidade .gr-cidade-busca input { width: 100%; min-width: 0; padding-left: 44px; padding-right: 44px; }
+gr-cidade .gr-cidade-busca input.gr-cidade-escolhida { font-weight: var(--peso-forte); }
+.gr-cidade-limpar {
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  width: 36px; height: 36px; border: none; border-radius: var(--forma-pilula); cursor: pointer;
+  background: var(--azul-claro); color: var(--azul); font: inherit; font-size: var(--tamanho-4); line-height: 1;
+}
+.gr-cidade-limpar:focus-visible { outline: 3px solid var(--amarelo); outline-offset: 1px; }
+
+/* Lista de cidades: sempre clara, para ler bem também sobre o azul */
+.gr-cidade-lista {
+  position: absolute; z-index: 20; top: calc(100% + 4px); left: 0; right: 0;
+  margin: 0; padding: var(--espaco-1); list-style: none; max-height: 300px; overflow-y: auto; overscroll-behavior: contain;
+  background: var(--branco); color: var(--texto); border: 2px solid var(--azul-claro);
+  border-radius: var(--forma-opcao); box-shadow: var(--sombra-cartao);
+}
+.gr-cidade-lista[hidden] { display: none; }
+.gr-cidade-lista [role="option"] {
+  display: flex; justify-content: space-between; align-items: baseline; gap: var(--espaco-3);
+  padding: 10px 12px; border-radius: var(--forma-opcao); cursor: pointer; min-width: 0;
+}
+.gr-cidade-lista [role="option"] span { min-width: 0; overflow-wrap: anywhere; }
+.gr-cidade-lista [role="option"] small { flex: none; font-size: var(--tamanho-1); font-weight: var(--peso-forte); color: var(--texto-suave); }
+.gr-cidade-lista [role="option"]:hover { background: var(--creme); }
+.gr-cidade-lista [aria-selected="true"] { background: var(--verde-claro); color: var(--verde-escuro); font-weight: 700; }
+.gr-cidade-dica { padding: 6px 12px; font-size: var(--tamanho-1); color: var(--texto-suave); }
+
+/* Atalhos: localização, CEP e exterior */
+.gr-cidade-atalhos { display: flex; flex-wrap: wrap; gap: var(--espaco-1) var(--espaco-4); }
+.gr-cidade-atalhos[hidden], .gr-cidade-busca[hidden], .gr-cidade-cep[hidden] { display: none; }
+.gr-cidade-atalhos button, .gr-cidade-voltar {
+  display: inline-flex; align-items: center; gap: 6px; padding: 4px 0; border: none; background: none; cursor: pointer;
+  font: inherit; font-size: var(--tamanho-2); font-weight: var(--peso-forte); color: inherit;
+  text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;
+  text-decoration-color: var(--amarelo);
+}
+.gr-cidade-atalhos button:disabled { opacity: .5; cursor: progress; }
+.gr-cidade-atalhos svg { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.gr-cidade-atalhos button:focus-visible, .gr-cidade-voltar:focus-visible { outline: 3px solid var(--amarelo); outline-offset: 2px; border-radius: 4px; }
+
+gr-cidade .gr-cidade-cep label { display: block; margin: 0 0 var(--espaco-1); font-size: var(--tamanho-2); font-weight: var(--peso-forte); }
+.gr-cidade-cep-linha { display: flex; flex-wrap: wrap; gap: var(--espaco-2) var(--espaco-4); align-items: center; }
+gr-cidade .gr-cidade-cep-linha input { flex: 1 1 160px; width: auto; min-width: 0; }
+
+.gr-cidade-status { margin: 0; font-size: var(--tamanho-2); min-height: 0; }
+.gr-cidade-status:empty { display: none; }
+.gr-cidade-status.ok { font-weight: 700; }

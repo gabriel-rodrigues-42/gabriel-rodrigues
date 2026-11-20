@@ -32,6 +32,8 @@
 <link rel="stylesheet" href="componentes.css">
 <link rel="stylesheet" href="/design-system/moldura.css">
 <script src="/design-system/moldura.js"></script>
+<link rel="stylesheet" href="/design-system/cidade.css">
+<script src="/design-system/cidade.js" defer></script>
 <style>
   main { max-width: 960px; margin: 0 auto; padding: var(--espaco-7) var(--espaco-4) var(--espaco-7); }
   h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); }
@@ -51,6 +53,9 @@
   .tipo p { margin: 6px 0; }
   .video { position: relative; aspect-ratio: 16 / 9; border-radius: var(--forma-cartao); overflow: hidden; box-shadow: var(--sombra-cartao); background: #1b1b1b; }
   .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .campos-demo label { display: block; font-weight: var(--peso-forte); margin: var(--espaco-3) 0 var(--espaco-1); }
+  .campos-demo label:first-child { margin-top: 0; }
+  .campos-demo input, .campos-demo select { font: inherit; width: 100%; padding: 12px 14px; color: var(--texto); background-color: var(--creme); border: 2px solid var(--azul-claro); border-radius: var(--forma-opcao); }
   code.bloco { display: block; white-space: pre; overflow-x: auto; background: var(--azul); color: var(--branco); padding: var(--espaco-4); border-radius: var(--forma-opcao); font-size: var(--tamanho-2); }
   a { color: var(--azul); }
 </style>
@@ -107,6 +112,19 @@
       </div>
     </div>
   </div>
+
+  <h2>Campos</h2>
+  <div class="cartao campos-demo">
+    <label for="demo-cidade">Seletor de cidade <code>&lt;gr-cidade&gt;</code></label>
+    <gr-cidade id-campo="demo-cidade" exterior></gr-cidade>
+    <label for="demo-select">Caixa de seleção</label>
+    <select id="demo-select"><option>Goiás (GO)</option><option>Distrito Federal (DF)</option></select>
+  </div>
+  <p>O seletor de cidade busca sem acento entre os 5.571 municípios (IBGE), com atalhos de localização e CEP. Usado no formulário de apoio e no questionário Caminho. Os atributos estão no topo de <code>cidade.js</code>.</p>
+  <code class="bloco">&lt;link rel="stylesheet" href="/design-system/cidade.css"&gt;
+&lt;script src="/design-system/cidade.js" defer&gt;&lt;/script&gt;
+&lt;label for="cidade"&gt;Cidade&lt;/label&gt;
+&lt;gr-cidade id-campo="cidade" nome-cidade="cidade" nome-uf="uf"&gt;&lt;/gr-cidade&gt;</code>
 
   <h2>Animação em massinha</h2>
   <p>Os vídeos são stop motion de verdade, feitos no Blender: um cenário de mesa e o boneco do Gabriel em massinha, montados por scripts Python com as mesmas cores deste sistema. A animação roda a 12 quadros por segundo, "em dois", com o tremido leve das mãos do animador.</p>

@@ -101,9 +101,10 @@
   .legenda-controles { display: flex; flex-wrap: wrap; gap: var(--espaco-2); align-items: center; }
   .legenda-controles button, .legenda-controles select {
     font: inherit; font-size: var(--tamanho-1); font-weight: var(--peso-forte); cursor: pointer;
-    background: rgba(255, 255, 255, .12); color: var(--branco); border: none; border-radius: var(--forma-pilula);
+    background-color: rgba(255, 255, 255, .12); color: var(--branco); border: none; border-radius: var(--forma-pilula);
     padding: 8px 12px; display: inline-flex; align-items: center; gap: 6px;
   }
+  .legenda-controles select { --seta-cor: var(--branco); padding-right: 32px; background-position: calc(100% - 18px) 52%, calc(100% - 12px) 52%; }
   .legenda-controles select option { color: var(--texto); }
   .legenda-controles button:focus-visible, .legenda-controles select:focus-visible { outline: 3px solid var(--amarelo); outline-offset: 2px; }
   .legenda-controles .icone { width: 16px; height: 16px; }
