@@ -1,0 +1,9 @@
+# Só formulários: assim toda contribuição passa pelos compromissos (fontes, dados, impacto, sem apontar o dedo).
+blank_issues_enabled: false
+contact_links:
+  - name: Como contribuir (leia antes)
+    url: https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/CONTRIBUTING.md
+    about: O que é inegociável, como funciona a revisão e o que nunca escrever aqui.
+  - name: Ver as propostas no site
+    url: https://gabriel-rodrigues.com/projetos/
+    about: Leia as propostas em construção antes de sugerir, para não repetir.

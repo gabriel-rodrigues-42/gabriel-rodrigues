@@ -1,0 +1,121 @@
+name: Nova proposta
+description: Mande uma ideia para melhorar um sistema público do Brasil, com dados, fontes e impacto.
+title: "[Proposta] "
+labels: ["proposta nova", "para revisar"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por mandar sua ideia. Eu leio todas e respondo aqui mesmo.
+
+        **Antes de começar:** tudo o que você escrever aqui é público e fica no seu perfil do GitHub. Não escreva email, telefone, endereço, CPF, título de eleitor ou dados de outras pessoas. As regras completas estão no [CONTRIBUTING](https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/CONTRIBUTING.md).
+
+        Escreva simples, como quem explica para um vizinho. Frases curtas. Não precisa ser especialista: um bom dado com fonte vale mais que um texto longo.
+
+  - type: input
+    id: resumo
+    attributes:
+      label: A proposta em uma frase
+      description: O que muda e para quem.
+      placeholder: "Ex.: passar imóvel quitado para o seu nome num balcão público, em um dia, pelo preço do custo."
+    validations:
+      required: true
+
+  - type: textarea
+    id: problema
+    attributes:
+      label: Como funciona hoje e onde trava
+      description: Descreva o sistema como um fluxo. Quem faz o quê, em que ordem, onde emperra. Critique o sistema, não as pessoas que trabalham nele.
+      placeholder: "1. A pessoa faz X. 2. Depois precisa de Y. 3. Aqui trava porque..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: dados
+    attributes:
+      label: Os números, com fonte e ano
+      description: |
+        Um dado por linha, com o link da fonte e o ano. Prefira fontes oficiais (IBGE, TSE, Banco Central, Tesouro, ministérios, tribunais, leis no Planalto) ou estudos com autor e data. Sem fonte, o dado não entra.
+      placeholder: |
+        - 96,7 mil pessoas trabalham em cartórios. Anoreg/BR, Cartório em Números, 2025. https://...
+        - ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposta
+    attributes:
+      label: O que você propõe
+      description: A mudança em linguagem simples. Se já existe em outro lugar (outra cidade, estado ou país), conte onde e como foi.
+    validations:
+      required: true
+
+  - type: textarea
+    id: impacto
+    attributes:
+      label: Impacto estimado
+      description: Quem ganha, quanto (tempo, dinheiro, pessoas atendidas) e quem pode perder ou precisar de transição. Mostre a conta, mesmo que aproximada.
+      placeholder: "Ex.: 1,2 milhão de escrituras por ano (fonte, ano) × R$ 2.000 de economia = R$ 2,4 bi por ano."
+    validations:
+      required: true
+
+  - type: input
+    id: medir
+    attributes:
+      label: Como medir se deu certo
+      description: Um ou dois números públicos para acompanhar depois.
+      placeholder: "Ex.: dias para registrar um imóvel; preço médio da escritura."
+    validations:
+      required: true
+
+  - type: textarea
+    id: criticas
+    attributes:
+      label: A crítica mais dura e a sua resposta
+      description: Qual é o melhor argumento contra a sua ideia? Como você responde? Isso deixa a proposta à prova de crítica.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: quem
+    attributes:
+      label: Quem precisa agir
+      description: Se não souber, tudo bem. Eu ajudo a descobrir.
+      multiple: true
+      options:
+        - Município (prefeitura ou câmara)
+        - Estado (governo ou assembleia)
+        - União por lei (Congresso)
+        - União por emenda à Constituição
+        - Órgão ou agência, sem mudar lei
+        - Não sei
+    validations:
+      required: false
+
+  - type: input
+    id: relacionada
+    attributes:
+      label: Proposta do site relacionada (se houver)
+      description: Cole o link da página, se a sua ideia completa uma proposta que já existe.
+      placeholder: https://gabriel-rodrigues.com/projetos/...
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: compromissos
+    attributes:
+      label: Compromissos (inegociáveis)
+      description: Sem eles, a proposta não entra. Se faltar algo, eu peço ajuste antes de fechar.
+      options:
+        - label: Citei a fonte e o ano de cada número, de preferência oficial.
+          required: true
+        - label: Critiquei sistemas, não pessoas, partidos ou grupos. Busquei solução, não culpado.
+          required: true
+        - label: Usei dados e estimei o impacto, mostrando a conta.
+          required: true
+        - label: Não escrevi pedido de voto, número de urna, nem ataque a candidatos (lei eleitoral, pré-campanha).
+          required: true
+        - label: Não escrevi dados pessoais meus ou de outras pessoas (LGPD).
+          required: true
+        - label: Aceito que o texto seja adaptado e publicado no site gabriel-rodrigues.com, com crédito ao meu usuário do GitHub.
+          required: true

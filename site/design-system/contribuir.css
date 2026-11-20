@@ -1,0 +1,37 @@
+/* Convite para contribuir <gr-contribuir> (contribuir.js). Só variáveis de tokens.css. */
+gr-contribuir { display: block; }
+gr-contribuir .contribuir { max-width: 760px; margin: var(--espaco-7) auto var(--espaco-6); padding: 0 var(--espaco-4); box-sizing: border-box; }
+gr-contribuir .contribuir-cartao {
+  background: var(--branco);
+  border: 2px solid var(--verde-claro);
+  border-radius: var(--forma-cartao);
+  box-shadow: var(--sombra-cartao);
+  padding: var(--espaco-5);
+  color: var(--texto);
+  font-family: var(--fonte);
+}
+gr-contribuir .contribuir-titulo { font-size: var(--tamanho-5); line-height: 1.15; color: var(--azul); margin: var(--espaco-3) 0 var(--espaco-2); }
+gr-contribuir .contribuir-texto { font-size: var(--tamanho-3); color: var(--texto); margin: 0 0 var(--espaco-4); }
+gr-contribuir .contribuir-rotulo { font-size: var(--tamanho-2); font-weight: var(--peso-forte); color: var(--verde-escuro); margin: 0 0 var(--espaco-2); }
+gr-contribuir .contribuir-regras { list-style: none; padding: 0; margin: 0 0 var(--espaco-5); display: grid; gap: var(--espaco-2); }
+gr-contribuir .contribuir-regras li {
+  position: relative;
+  padding: var(--espaco-2) var(--espaco-3) var(--espaco-2) calc(var(--espaco-3) + 22px);
+  background: var(--creme);
+  border-radius: var(--forma-opcao);
+  font-size: var(--tamanho-2);
+  font-weight: var(--peso-forte);
+  color: var(--texto);
+}
+gr-contribuir .contribuir-regras li::before {
+  content: "✓";
+  position: absolute; left: var(--espaco-3); top: var(--espaco-2);
+  color: var(--verde-escuro); font-weight: var(--peso-forte);
+}
+gr-contribuir .contribuir-acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-3); }
+gr-contribuir .contribuir-acoes .botao { display: inline-flex; align-items: center; justify-content: center; text-align: center; text-decoration: none; }
+gr-contribuir .contribuir-nota { font-size: var(--tamanho-1); color: var(--texto-suave); margin: var(--espaco-4) 0 0; }
+gr-contribuir .contribuir-nota a { color: var(--azul); font-weight: var(--peso-forte); }
+@media (max-width: 480px) {
+  gr-contribuir .contribuir-acoes .botao { flex: 1 1 100%; }
+}
