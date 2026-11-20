@@ -1,17 +1,60 @@
 // Moldura do site: o cabeçalho e o rodapé que levam o contexto do Gabriel para todas as páginas.
-// Para mudar o menu, a frase de missão ou os links do rodapé, edite só este arquivo.
+// Para mudar o menu, a frase de missão ou os links do rodapé, edite só este arquivo (nos dois idiomas, em T).
 // Carregue no <head> (sem defer) junto com moldura.css e use <gr-cabecalho> e <gr-rodape> no corpo.
 
 (function () {
   "use strict";
 
-  const MISSAO = "Desenvolvedor de software em Goiânia (GO). Estudo política para levar o jeito de trabalhar da engenharia de software para o governo: medir, testar, corrigir e mostrar o código.";
+  // Idioma: português é o padrão. A versão em inglês de /x/ fica em /en/x/ e tem <html lang="en">.
+  const EN = /^en\b/i.test(document.documentElement.lang) || location.pathname === "/en" || location.pathname.startsWith("/en/");
+  const RAIZ = EN ? "/en/" : "/";
+  // Caminho sem o /en, para marcar o item do menu da página atual nos dois idiomas.
+  const semIdioma = location.pathname.replace(/^\/en(?=\/|$)/, "") || "/";
+
+  const T = EN ? {
+    missao: "Software developer in Goiânia, Brazil. I study politics to bring the way software engineering works into government: measure, test, fix and show the code.",
+    menu: ["Projects and ideas", "Path", "About"],
+    menuRotulo: "Main menu",
+    apoiar: "Support",
+    marca: "Gabriel Rodrigues, home page",
+    rodape: ["Do you think I should try?", "Open source on GitHub", "Privacy", "Cookies", "Design system"],
+    aviso: "Personal, informational pre-campaign website. No request for votes. Ideas under construction, open to criticism.",
+    cookiesRotulo: "Analytics cookies",
+    cookies: "May I count visits with Google Analytics to learn which ideas interest people most? No ads.",
+    saibaMais: "Learn more",
+    recusar: "Decline",
+    aceitar: "Accept",
+    idiomaRotulo: "Language",
+  } : {
+    missao: "Desenvolvedor de software em Goiânia (GO). Estudo política para levar o jeito de trabalhar da engenharia de software para o governo: medir, testar, corrigir e mostrar o código.",
+    menu: ["Projetos e ideias", "Caminho", "Sobre"],
+    menuRotulo: "Menu principal",
+    apoiar: "Apoiar",
+    marca: "Gabriel Rodrigues, página inicial",
+    rodape: ["Acredita que eu devo tentar?", "Código aberto no GitHub", "Privacidade", "Cookies", "Design system"],
+    aviso: "Site pessoal e informativo de pré-campanha. Não há pedido de voto. Ideias em construção, abertas a crítica.",
+    cookiesRotulo: "Cookies de medição",
+    cookies: "Posso contar as visitas com o Google Analytics para saber quais ideias interessam mais? Sem anúncios.",
+    saibaMais: "Saiba mais",
+    recusar: "Recusar",
+    aceitar: "Aceitar",
+    idiomaRotulo: "Idioma",
+  };
 
   const MENU = [
-    { href: "/#publicacoes", texto: "Projetos e ideias", ativo: (p) => p.startsWith("/projetos/") || p.startsWith("/ideias/") },
-    { href: "/caminho/", texto: "Caminho", ativo: (p) => p.startsWith("/caminho/") },
-    { href: "/sobre/", texto: "Sobre", ativo: (p) => p.startsWith("/sobre/") },
+    { href: RAIZ + "#publicacoes", texto: T.menu[0], ativo: (p) => p.startsWith("/projetos/") || p.startsWith("/ideias/") },
+    { href: RAIZ + "caminho/", texto: T.menu[1], ativo: (p) => p.startsWith("/caminho/") },
+    { href: RAIZ + "sobre/", texto: T.menu[2], ativo: (p) => p.startsWith("/sobre/") },
   ];
+
+  // Endereço da mesma página no outro idioma. Vem do <link rel="alternate" hreflang> do <head>
+  // (toda página traduzida tem); sem ele, vai para a página inicial do outro idioma.
+  function outroIdioma() {
+    const alvo = document.querySelector(`link[rel="alternate"][hreflang="${EN ? "pt-BR" : "en"}"]`);
+    let url = alvo ? new URL(alvo.href, location.href) : new URL(EN ? "/" : "/en/", location.href);
+    if (url.hostname === "gabriel-rodrigues.com" || url.hostname === "www.gabriel-rodrigues.com") url = new URL(url.pathname, location.origin);
+    return url.pathname + (url.pathname === location.pathname ? "" : location.hash);
+  }
 
   // Logo do Gabriel: um G com duas pessoas e estrelas. As cores vêm de tokens.css
   // (--logo-g, --logo-pessoas, --logo-estrelas). Cópia em arquivo: /design-system/img/logo.svg.
@@ -35,24 +78,29 @@
   </g>
 `;
 
-  const caminho = location.pathname;
 
   class Cabecalho extends HTMLElement {
     connectedCallback() {
       if (this.dataset.pronto) return;
       this.dataset.pronto = "1";
       const links = MENU.map((m) =>
-        `<a href="${m.href}"${m.ativo(caminho) ? ' aria-current="page"' : ""}>${m.texto}</a>`
+        `<a href="${m.href}"${m.ativo(semIdioma) ? ' aria-current="page"' : ""}>${m.texto}</a>`
       ).join("");
       this.innerHTML = `
         <header class="moldura-topo">
           <div class="moldura-topo-dentro">
-            <a class="moldura-marca" href="/" aria-label="Gabriel Rodrigues, página inicial">
+            <a class="moldura-marca" href="${RAIZ}" aria-label="${T.marca}">
               <svg class="moldura-logo" viewBox="4 5 56 55" aria-hidden="true" focusable="false">${LOGO}</svg>
               <span class="moldura-oculto">Gabriel Rodrigues</span>
             </a>
-            <nav class="moldura-menu" aria-label="Menu principal">${links}</nav>
-            <a class="moldura-apoiar" href="/#apoiar">Apoiar</a>
+            <nav class="moldura-menu" aria-label="${T.menuRotulo}">${links}</nav>
+            <div class="moldura-acoes">
+              <div class="moldura-idioma" role="group" aria-label="${T.idiomaRotulo}">
+                <a href="${EN ? outroIdioma() : location.pathname}" lang="pt-BR" hreflang="pt-BR" title="Ler em português"${EN ? "" : ' aria-current="true"'} data-idioma="pt">PT</a>
+                <a href="${EN ? location.pathname : outroIdioma()}" lang="en" hreflang="en" title="Read in English"${EN ? ' aria-current="true"' : ""} data-idioma="en">EN</a>
+              </div>
+              <a class="moldura-apoiar" href="${RAIZ}#apoiar">${T.apoiar}</a>
+            </div>
           </div>
         </header>`;
     }
@@ -67,15 +115,15 @@
           <div class="moldura-rodape-dentro">
             <div>
               <strong>Gabriel Rodrigues</strong>
-              <p>${MISSAO}</p>
+              <p>${T.missao}</p>
             </div>
             <ul>
-              <li><a href="/#apoiar">Acredita que eu devo tentar?</a></li>
+              <li><a href="${RAIZ}#apoiar">${T.rodape[0]}</a></li>
               <li><a href="https://galera.club/gabriel">galera.club/gabriel</a></li>
-              <li><a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues">Código aberto no GitHub</a></li>
-              <li><a href="/privacidade/">Privacidade</a> · <a href="#" data-cookies>Cookies</a> · <a href="/design-system/">Design system</a></li>
+              <li><a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues">${T.rodape[1]}</a></li>
+              <li><a href="${RAIZ}privacidade/">${T.rodape[2]}</a> · <a href="#" data-cookies>${T.rodape[3]}</a> · <a href="/design-system/">${T.rodape[4]}</a></li>
             </ul>
-            <p class="moldura-aviso">Site pessoal e informativo de pré-campanha. Não há pedido de voto. Ideias em construção, abertas a crítica.</p>
+            <p class="moldura-aviso">${T.aviso}</p>
           </div>
         </footer>`;
     }
@@ -112,12 +160,12 @@
     const aviso = document.createElement("div");
     aviso.className = "moldura-cookies";
     aviso.setAttribute("role", "dialog");
-    aviso.setAttribute("aria-label", "Cookies de medição");
+    aviso.setAttribute("aria-label", T.cookiesRotulo);
     aviso.innerHTML = `
-      <p>Posso contar as visitas com o Google Analytics para saber quais ideias interessam mais? Sem anúncios. <a href="/privacidade/#cookies">Saiba mais</a></p>
+      <p>${T.cookies} <a href="${RAIZ}privacidade/#cookies">${T.saibaMais}</a></p>
       <div class="moldura-cookies-botoes">
-        <button type="button" data-escolha="recusado">Recusar</button>
-        <button type="button" data-escolha="aceito">Aceitar</button>
+        <button type="button" data-escolha="recusado">${T.recusar}</button>
+        <button type="button" data-escolha="aceito">${T.aceitar}</button>
       </div>`;
     aviso.addEventListener("click", (e) => {
       const b = e.target.closest("[data-escolha]");
@@ -134,6 +182,9 @@
   if (escolha === "aceito") carregarGtm();
   document.addEventListener("DOMContentLoaded", () => { if (!lerEscolha()) mostrarAviso(); });
   document.addEventListener("click", (e) => {
+    // Troca de idioma: recalcula na hora, para levar junto o # atual (ex.: respostas do /caminho/).
+    const idioma = e.target.closest(".moldura-idioma a:not([aria-current])");
+    if (idioma) idioma.href = outroIdioma();
     if (!e.target.closest("[data-cookies]")) return;
     e.preventDefault();
     mostrarAviso();

@@ -30,11 +30,34 @@
   const DADOS = "/caminho/dados/municipios.json";
   const MAX_RESULTADOS = 8;
   const UFS = new Set("AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO".split(" "));
-  const EXTERIOR = { ibge: null, nome: "Fora do Brasil", uf: "EX", pop: 0 };
+  // Textos nos dois idiomas do site. Inglês quando a página tem <html lang="en">.
+  const EN = /^en\b/i.test(document.documentElement.lang);
+  const T = EN ? {
+    fora: "Outside Brazil", placeholder: "Type the name of your city", apagar: "Clear the city", encontradas: "Cities found",
+    cep: "CEP (Brazilian postal code)", porNome: "Search by name", local: "Use my location", porCep: "Search by CEP", exterior: "I live outside Brazil",
+    habitantes: "inhabitants (IBGE, 2022 Census)", erroLista: "Couldn't load the list of cities. Try again in a moment.",
+    nada: "No city with that name. Try the CEP.", varias: "There is more than one city with that name. Pick yours from the list.",
+    escolha: "Pick your city from the list.", semGeo: "This browser doesn't share location. Type the name or use the CEP.",
+    procurando: "Looking for your city…", naoBR: "I didn't recognize a Brazilian city there. Type the name or use the CEP.",
+    semCidade: "Couldn't find the city right now. Type the name or use the CEP.", negou: "No problem. Type the city name or use the CEP.",
+    semLocal: "Couldn't get this device's location. Type the name or use the CEP.", digiteCep: "Type the 8 digits of the CEP.",
+    buscandoCep: "Looking up the CEP…", cepNaoAchado: "Couldn't find that CEP. Check the numbers.", cepErro: "Couldn't look up the CEP right now. Type the city name.",
+  } : {
+    fora: "Fora do Brasil", placeholder: "Digite o nome da sua cidade", apagar: "Apagar a cidade", encontradas: "Cidades encontradas",
+    cep: "CEP", porNome: "Buscar pelo nome", local: "Usar minha localização", porCep: "Buscar pelo CEP", exterior: "Moro fora do Brasil",
+    habitantes: "habitantes (IBGE, Censo 2022)", erroLista: "Não consegui carregar a lista de cidades. Tente de novo em instantes.",
+    nada: "Nenhuma cidade com esse nome. Tente pelo CEP.", varias: "Tem mais de uma cidade com esse nome. Escolha a sua na lista.",
+    escolha: "Escolha sua cidade na lista.", semGeo: "Este navegador não informa a localização. Digite o nome ou use o CEP.",
+    procurando: "Procurando sua cidade…", naoBR: "Não reconheci uma cidade do Brasil aí. Digite o nome ou use o CEP.",
+    semCidade: "Não consegui descobrir a cidade agora. Digite o nome ou use o CEP.", negou: "Tudo bem. Digite o nome da cidade ou use o CEP.",
+    semLocal: "Não consegui pegar a localização deste aparelho. Digite o nome ou use o CEP.", digiteCep: "Digite os 8 números do CEP.",
+    buscandoCep: "Buscando o CEP…", cepNaoAchado: "Não achei esse CEP. Confira os números.", cepErro: "Não consegui buscar o CEP agora. Digite o nome da cidade.",
+  };
+  const EXTERIOR = { ibge: null, nome: T.fora, uf: "EX", pop: 0 };
 
   const chave = (s) => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase()
     .replace(/[^a-z0-9]+/g, " ").trim();
-  const num = (n) => Number(n).toLocaleString("pt-BR");
+  const num = (n) => Number(n).toLocaleString(EN ? "en-US" : "pt-BR");
 
   // Uma lista para todas as instâncias da página, baixada só quando alguém usa o campo.
   let promessa = null;
@@ -93,21 +116,21 @@
             ${ICONE_BUSCA}
             <input id="${id}" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false"
               aria-controls="${lista}" autocomplete="${this.hasAttribute("autocompletar") ? "address-level2" : "off"}" autocapitalize="words" spellcheck="false" enterkeyhint="done"
-              maxlength="80" placeholder="${this.getAttribute("placeholder") || "Digite o nome da sua cidade"}">
-            <button type="button" class="gr-cidade-limpar" aria-label="Apagar a cidade" hidden>×</button>
-            <ul class="gr-cidade-lista" id="${lista}" role="listbox" aria-label="Cidades encontradas" hidden></ul>
+              maxlength="80" placeholder="${this.getAttribute("placeholder") || T.placeholder}">
+            <button type="button" class="gr-cidade-limpar" aria-label="${T.apagar}" hidden>×</button>
+            <ul class="gr-cidade-lista" id="${lista}" role="listbox" aria-label="${T.encontradas}" hidden></ul>
           </div>
           <div class="gr-cidade-cep" hidden>
-            <label for="${id}-cep">CEP</label>
+            <label for="${id}-cep">${T.cep}</label>
             <div class="gr-cidade-cep-linha">
               <input id="${id}-cep" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="9" placeholder="00000-000">
-              <button type="button" class="gr-cidade-voltar">Buscar pelo nome</button>
+              <button type="button" class="gr-cidade-voltar">${T.porNome}</button>
             </div>
           </div>
           <div class="gr-cidade-atalhos">
-            <button type="button" data-acao="local">${ICONE_LOCAL}<span>Usar minha localização</span></button>
-            <button type="button" data-acao="cep">${ICONE_CEP}<span>Buscar pelo CEP</span></button>
-            ${this.hasAttribute("exterior") ? `<button type="button" data-acao="exterior">${ICONE_MUNDO}<span>Moro fora do Brasil</span></button>` : ""}
+            <button type="button" data-acao="local">${ICONE_LOCAL}<span>${T.local}</span></button>
+            <button type="button" data-acao="cep">${ICONE_CEP}<span>${T.porCep}</span></button>
+            ${this.hasAttribute("exterior") ? `<button type="button" data-acao="exterior">${ICONE_MUNDO}<span>${T.exterior}</span></button>` : ""}
           </div>
           <p class="gr-cidade-status" role="status" aria-live="polite"></p>
         </div>`;
@@ -178,8 +201,8 @@
         o.value = !m ? "" : o.dataset.chave === "nome" ? (m.uf === "EX" ? "" : m.nome) : m.uf;
       });
       this.fechar();
-      if (m) this.avisar(m.uf === "EX" ? "Fora do Brasil." :
-        `${m.nome} (${m.uf})` + (m.pop ? `, ${num(m.pop)} habitantes (IBGE, Censo 2022).` : "."), true);
+      if (m) this.avisar(m.uf === "EX" ? T.fora + "." :
+        `${m.nome} (${m.uf})` + (m.pop ? `, ${num(m.pop)} ${T.habitantes}.` : "."), true);
       else if (!manterTexto) this.avisar("");
       if (!silencioso) this.dispatchEvent(new CustomEvent("gr-cidade", { bubbles: true, detail: this.valor }));
     }
@@ -205,7 +228,7 @@
       if (!chave(this.campo.value)) { this.fechar(); return; }
       let lista;
       try { lista = await municipios(); }
-      catch { this.avisar("Não consegui carregar a lista de cidades. Tente de novo em instantes."); return; }
+      catch { this.avisar(T.erroLista); return; }
       if (document.activeElement !== this.campo || this.valor) return;
       this.resultados = buscar(lista, this.campo.value);
       this.foco = this.resultados.length ? 0 : -1;
@@ -232,7 +255,7 @@
         const nada = document.createElement("li");
         nada.className = "gr-cidade-dica";
         nada.setAttribute("role", "presentation");
-        nada.textContent = "Nenhuma cidade com esse nome. Tente pelo CEP.";
+        nada.textContent = T.nada;
         this.listaEl.append(nada);
       }
       const aberto = this.listaEl.children.length > 0;
@@ -291,29 +314,29 @@
       const exatas = achadas.filter((m) => m.k === k);
       const unica = exatas.length === 1 ? exatas[0] : achadas.length === 1 ? achadas[0] : null;
       if (unica) this.definir(unica);
-      else if (!silencioso) this.avisar(exatas.length > 1 ? "Tem mais de uma cidade com esse nome. Escolha a sua na lista." : "Escolha sua cidade na lista.");
+      else if (!silencioso) this.avisar(exatas.length > 1 ? T.varias : T.escolha);
     }
 
     // ------------------------------------------------------------ localização
     localizar(botao) {
-      if (!navigator.geolocation) { this.avisar("Este navegador não informa a localização. Digite o nome ou use o CEP."); return; }
+      if (!navigator.geolocation) { this.avisar(T.semGeo); return; }
       botao.disabled = true;
-      this.avisar("Procurando sua cidade…");
+      this.avisar(T.procurando);
       navigator.geolocation.getCurrentPosition(
         async ({ coords }) => {
           try {
             const m = await this.cidadeDasCoordenadas(coords.latitude, coords.longitude);
             if (m) this.definir(m);
-            else this.avisar("Não reconheci uma cidade do Brasil aí. Digite o nome ou use o CEP.");
+            else this.avisar(T.naoBR);
           } catch {
-            this.avisar("Não consegui descobrir a cidade agora. Digite o nome ou use o CEP.");
+            this.avisar(T.semCidade);
           } finally { botao.disabled = false; }
         },
         (erro) => {
           botao.disabled = false;
           this.avisar(erro && erro.code === 1
-            ? "Tudo bem. Digite o nome da cidade ou use o CEP."
-            : "Não consegui pegar a localização deste aparelho. Digite o nome ou use o CEP.");
+            ? T.negou
+            : T.semLocal);
         },
         // Precisão de cidade basta: sem GPS fino, aceita posição de até 10 minutos.
         { enableHighAccuracy: false, timeout: 15000, maximumAge: 600000 },
@@ -347,7 +370,7 @@
       this.campo.closest(".gr-cidade-busca").hidden = ligar;
       this.atalhos.hidden = ligar;
       this.fechar();
-      this.avisar(ligar ? "Digite os 8 números do CEP." : "");
+      this.avisar(ligar ? T.digiteCep : "");
       (ligar ? this.cep : this.campo).focus();
       if (!ligar) this.cep.value = "";
     }
@@ -356,13 +379,13 @@
       let d = this.cep.value.replace(/\D/g, "").slice(0, 8);
       this.cep.value = d.length > 5 ? `${d.slice(0, 5)}-${d.slice(5)}` : d;
       if (d.length !== 8) return;
-      this.avisar("Buscando o CEP…");
+      this.avisar(T.buscandoCep);
       try {
         const m = await this.cidadeDoCep(d);
         if (m) { this.modoCep(false); this.definir(m); }
-        else this.avisar("Não achei esse CEP. Confira os números.");
+        else this.avisar(T.cepNaoAchado);
       } catch {
-        this.avisar("Não consegui buscar o CEP agora. Digite o nome da cidade.");
+        this.avisar(T.cepErro);
       }
     }
 

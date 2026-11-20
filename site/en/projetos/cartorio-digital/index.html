@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital notary office · Gabriel Rodrigues</title>
+<meta name="description" content="How much it costs to put a property in your name in Goiânia, Brazil, where each real goes and how other countries do the same thing in a day. A project for Tier 1 of the FSRI.">
+<link rel="canonical" href="https://gabriel-rodrigues.com/en/projetos/cartorio-digital/">
+<link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/projetos/cartorio-digital/">
+<link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/cartorio-digital/">
+<link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/projetos/cartorio-digital/">
+<meta name="author" content="Gabriel Rodrigues">
+<meta name="theme-color" content="#fbf8ef">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:site_name" content="Gabriel Rodrigues">
+<meta property="og:url" content="https://gabriel-rodrigues.com/en/projetos/cartorio-digital/">
+<meta property="og:title" content="Digital notary office · Gabriel Rodrigues">
+<meta property="og:description" content="How much it costs to put a property in your name in Goiânia, Brazil, where each real goes and how other countries do the same thing in a day.">
+<meta property="og:image" content="https://gabriel-rodrigues.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gabriel Rodrigues, software engineering at the service of Brazil">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Digital notary office · Gabriel Rodrigues">
+<meta name="twitter:description" content="How much it costs to put a property in your name in Goiânia, Brazil, where each real goes and how other countries do the same thing in a day.">
+<meta name="twitter:image" content="https://gabriel-rodrigues.com/og.jpg">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "Digital notary office: putting a property in your name without 14 steps",
+ "description": "How much it costs to put a property in your name in Goiânia, Brazil, where each real goes and how other countries do the same thing in a day.",
+ "inLanguage": "en",
+ "image": "https://gabriel-rodrigues.com/og.jpg",
+ "author": { "@type": "Person", "name": "Gabriel Rodrigues", "url": "https://gabriel-rodrigues.com/" },
+ "mainEntityOfPage": "https://gabriel-rodrigues.com/en/projetos/cartorio-digital/",
+ "datePublished": "2026-11-19"
+}
+</script>
+<link rel="stylesheet" href="/design-system/tokens.css">
+<link rel="stylesheet" href="/design-system/componentes.css">
+<link rel="stylesheet" href="/design-system/moldura.css">
+<script src="/design-system/moldura.js"></script>
+<style>
+  main { max-width: 760px; margin: 0 auto; padding: var(--espaco-7) var(--espaco-4); }
+  nav a { font-weight: var(--peso-forte); text-decoration: none; color: var(--azul); }
+  a { color: var(--azul); }
+  h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); }
+  h2 { font-size: var(--tamanho-5); line-height: 1.15; color: var(--azul); margin: 0 0 var(--espaco-3); }
+  h3 { font-size: var(--tamanho-4); color: var(--azul); margin: 0 0 var(--espaco-2); line-height: 1.25; }
+  p { margin: 0 0 var(--espaco-3); }
+  .lead { font-size: var(--tamanho-3); color: var(--texto-suave); }
+  .grande { font-size: var(--tamanho-4); font-weight: var(--peso-forte); line-height: 1.35; }
+  .pequeno { font-size: var(--tamanho-2); }
+  .suave { color: var(--texto-suave); }
+  .capitulo { margin-top: var(--espaco-7); }
+  .ato { display: inline-block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); letter-spacing: .08em; text-transform: uppercase; color: var(--verde-escuro); margin-bottom: var(--espaco-2); }
+  .pausa { text-align: center; padding: var(--espaco-6) var(--espaco-4); font-size: var(--tamanho-5); font-weight: var(--peso-forte); line-height: 1.2; color: var(--azul); }
+  .capa-acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-3); margin-top: var(--espaco-5); }
+  .ilustra { display: block; width: 100%; height: auto; margin: var(--espaco-5) 0 var(--espaco-2); }
+  .duas-legendas { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-4); font-size: var(--tamanho-1); font-weight: var(--peso-forte); color: var(--texto-suave); }
+  .duas-legendas span:last-child { color: var(--verde-escuro); text-align: right; }
+  .legenda-ilustra { font-size: var(--tamanho-1); color: var(--texto-suave); text-align: center; margin: 0; }
+
+  /* Calculadora */
+  .calc { margin-top: var(--espaco-5); padding: var(--espaco-5); }
+  .calc .opcoes { display: flex; flex-wrap: wrap; gap: var(--espaco-2); margin: var(--espaco-2) 0 var(--espaco-3); }
+  .calc .opcoes .opcao { width: auto; padding: 10px 14px; }
+  .calc label.marcar { display: flex; gap: var(--espaco-2); align-items: flex-start; font-size: var(--tamanho-2); margin-bottom: var(--espaco-4); cursor: pointer; }
+  .calc label.marcar input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--verde); flex: none; }
+  .total { font-size: var(--tamanho-5); font-weight: var(--peso-forte); color: var(--azul); line-height: 1.1; }
+  .barra { display: flex; height: 48px; border-radius: var(--forma-opcao); overflow: hidden; background: var(--creme); margin: var(--espaco-3) 0; }
+  .barra div { transition: flex-basis .5s ease; min-width: 0; }
+  .barra .b-pref, .linhas .b-pref::before { background: var(--amarelo); }
+  .barra .b-fundo, .linhas .b-fundo::before { background: var(--verde); }
+  .barra .b-cart, .linhas .b-cart::before { background: var(--azul); }
+  .linhas { list-style: none; padding: 0; margin: 0; font-size: var(--tamanho-2); }
+  .linhas li { display: grid; grid-template-columns: 1fr auto; gap: var(--espaco-3); padding: var(--espaco-2) 0; border-bottom: 1px dashed var(--azul-claro); }
+  .linhas li::before { content: none; }
+  .linhas li span:first-child::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: var(--forma-bolha-1); margin-right: 8px; vertical-align: -1px; background: inherit; }
+  .linhas li.b-pref span:first-child::before { background: var(--amarelo); }
+  .linhas li.b-fundo span:first-child::before { background: var(--verde); }
+  .linhas li.b-cart span:first-child::before { background: var(--azul); }
+  .linhas li b { color: var(--azul); white-space: nowrap; }
+  .frase-calc { margin-top: var(--espaco-4); font-weight: var(--peso-forte); color: var(--verde-escuro); }
+
+  /* Números */
+  .numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--espaco-4); margin-top: var(--espaco-4); }
+  .numeros .cartao { padding: var(--espaco-4); }
+  .numeros strong { display: block; font-size: var(--tamanho-5); color: var(--verde-escuro); line-height: 1.1; margin-bottom: var(--espaco-1); }
+  .fontes { font-size: var(--tamanho-2); color: var(--texto-suave); }
+  .numeros .fontes { display: block; margin-top: var(--espaco-2); font-size: var(--tamanho-1); }
+
+  /* Fluxo de hoje */
+  .fluxo { list-style: none; padding: 0; margin: var(--espaco-5) 0 0; position: relative; }
+  .fluxo::before { content: ""; position: absolute; left: 27px; top: 20px; bottom: 20px; width: 6px; background: var(--amarelo); border-radius: var(--forma-pilula); }
+  .fluxo li { position: relative; display: grid; grid-template-columns: 60px 1fr; gap: var(--espaco-4); align-items: start; padding-bottom: var(--espaco-5); }
+  .fluxo li:last-child { padding-bottom: 0; }
+  .fluxo .n { width: 60px; height: 60px; display: grid; place-items: center; background: var(--azul); color: var(--branco); font-weight: var(--peso-forte); font-size: var(--tamanho-4); border-radius: var(--forma-bolha-1); box-shadow: var(--sombra-clay); position: relative; }
+  .fluxo li:nth-child(even) .n { border-radius: var(--forma-bolha-2); }
+  .fluxo strong { display: block; color: var(--azul); font-size: var(--tamanho-3); margin-top: var(--espaco-2); }
+  .fluxo .trava { display: inline-block; margin-top: var(--espaco-2); background: var(--areia); color: var(--texto); font-size: var(--tamanho-1); font-weight: var(--peso-forte); padding: 4px 10px; border-radius: var(--forma-selo); }
+
+  /* Países */
+  .paises { display: grid; gap: var(--espaco-3); margin-top: var(--espaco-4); }
+  .pais { display: grid; grid-template-columns: 112px 1fr; gap: var(--espaco-3); align-items: center; font-size: var(--tamanho-2); }
+  .pais b { color: var(--azul); }
+  .pais .trilho { background: var(--creme); border-radius: var(--forma-pilula); height: 28px; position: relative; overflow: hidden; }
+  .pais .dias { height: 100%; background: var(--verde); border-radius: var(--forma-pilula); min-width: 10px; }
+  .pais.br .dias { background: var(--azul); }
+  .pais small { display: block; color: var(--texto-suave); font-size: var(--tamanho-1); margin-top: 2px; }
+  @media (max-width: 420px) { .pais { grid-template-columns: 1fr; gap: var(--espaco-1); } }
+  .duas { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-4); margin-top: var(--espaco-4); }
+  .duas .cartao { padding: var(--espaco-4); }
+  .duas .contra { background: var(--areia); box-shadow: none; }
+  .duas .pro { background: var(--verde-claro); box-shadow: none; }
+  .duas p { margin: var(--espaco-2) 0 0; font-size: var(--tamanho-2); }
+  @media (max-width: 560px) { .duas { grid-template-columns: 1fr; } }
+
+  /* Camadas da proposta */
+  .camadas { display: grid; gap: var(--espaco-4); margin-top: var(--espaco-4); }
+  .camada { padding: var(--espaco-4) var(--espaco-5); }
+  .camada .selo { margin-bottom: var(--espaco-3); }
+  .camada ul { margin: 0; padding-left: 1.1em; }
+  .camada li + li { margin-top: var(--espaco-2); }
+
+  /* Comprovante */
+  .comprovante { position: relative; max-width: 420px; margin: var(--espaco-5) auto 0; background: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); padding: var(--espaco-5); overflow: hidden; }
+  .comprovante::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 10px; background: linear-gradient(90deg, var(--verde) 0 33%, var(--amarelo) 33% 66%, var(--azul) 66%); }
+  .comprovante .topo { display: flex; justify-content: space-between; gap: var(--espaco-3); align-items: flex-start; margin-top: var(--espaco-2); }
+  .comprovante .topo small { display: block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); letter-spacing: .06em; text-transform: uppercase; color: var(--verde-escuro); }
+  .comprovante .topo b { display: block; color: var(--azul); font-size: var(--tamanho-3); line-height: 1.2; }
+  .comprovante .qr { width: 76px; height: 76px; flex: none; }
+  .comprovante dl { display: grid; grid-template-columns: auto 1fr; gap: 6px var(--espaco-3); margin: var(--espaco-4) 0 0; font-size: var(--tamanho-2); }
+  .comprovante dt { color: var(--texto-suave); }
+  .comprovante dd { margin: 0; font-weight: var(--peso-forte); color: var(--azul); text-align: right; }
+  .comprovante .rodape-c { margin-top: var(--espaco-4); font-size: var(--tamanho-1); color: var(--texto-suave); }
+
+  /* Críticas */
+  .critica { background: var(--branco); border-radius: var(--forma-opcao); box-shadow: var(--sombra-cartao); margin-top: var(--espaco-4); }
+  .critica summary { cursor: pointer; list-style: none; padding: var(--espaco-4) var(--espaco-5); font-weight: var(--peso-forte); color: var(--azul); display: flex; gap: var(--espaco-3); justify-content: space-between; align-items: center; }
+  .critica summary::-webkit-details-marker { display: none; }
+  .critica summary::after { content: "+"; flex: none; width: 32px; height: 32px; display: grid; place-items: center; background: var(--amarelo); color: var(--azul); border-radius: var(--forma-bolha-1); font-size: var(--tamanho-4); }
+  .critica[open] summary::after { content: "−"; }
+  .critica summary:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; border-radius: var(--forma-opcao); }
+  .critica .resposta { padding: 0 var(--espaco-5) var(--espaco-4); }
+  .critica .resposta p:last-child { margin-bottom: 0; }
+
+  .conversa { background: var(--amarelo-claro); border-radius: var(--forma-cartao); padding: var(--espaco-6) var(--espaco-5); text-align: center; }
+  .conversa p.grande { color: var(--azul); }
+  .conversa .capa-acoes { justify-content: center; }
+  .hashtags { display: flex; flex-wrap: wrap; gap: var(--espaco-2); justify-content: center; margin-top: var(--espaco-4); }
+  .hashtag { background: var(--branco); color: var(--verde-escuro); font-weight: var(--peso-forte); padding: 6px 12px; border-radius: var(--forma-selo); }
+  .fontes li + li { margin-top: var(--espaco-2); }
+
+  .revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .revelar.visivel { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .revelar { opacity: 1; transform: none; transition: none; }
+    .barra div { transition: none; }
+  }
+</style>
+</head>
+<body>
+<gr-cabecalho></gr-cabecalho>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
+
+<main>
+  <nav><a href="/en/projetos/">← Projects</a></nav>
+
+  <header>
+    <span class="selo" style="margin-top: var(--espaco-5)">Under study · FSRI Tier 1</span>
+    <h1>Putting a property in your name in Brazil takes 14 steps. <span class="destaque">It could take one.</span></h1>
+    <p class="lead">In 2025 I bought a R$ 250,000 apartment in Goiânia and paid about R$ 10,000 in taxes and notary fees. I set out to understand where each real went, and how other countries do the same thing in a day.</p>
+
+    <svg class="ilustra" viewBox="0 0 640 230" role="img" aria-labelledby="t-capa">
+      <title id="t-capa">Illustration: on the left, a path full of stops; on the right, a house and a summary with a verification code, coming out of a single counter.</title>
+      <path d="M20 170 C 70 90, 110 200, 160 120 S 230 190, 270 110" fill="none" stroke="var(--areia)" stroke-width="16" stroke-linecap="round"/>
+      <g fill="var(--azul)">
+        <circle cx="30" cy="156" r="10"/><circle cx="62" cy="122" r="10"/><circle cx="96" cy="146" r="10"/><circle cx="126" cy="160" r="10"/>
+        <circle cx="152" cy="130" r="10"/><circle cx="182" cy="128" r="10"/><circle cx="214" cy="160" r="10"/><circle cx="246" cy="138" r="10"/>
+      </g>
+      <path d="M296 130 h 44" stroke="var(--verde)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M330 110 l 24 20 -24 20" fill="none" stroke="var(--verde)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M380 112 L 456 50 L 532 112 Z" fill="var(--azul)" stroke="var(--azul)" stroke-width="14" stroke-linejoin="round"/>
+      <rect x="392" y="104" width="128" height="96" rx="18" fill="var(--verde)"/>
+      <rect x="436" y="140" width="40" height="60" rx="12" fill="var(--amarelo)"/>
+      <circle cx="456" cy="86" r="12" fill="var(--amarelo-claro)"/>
+      <g transform="translate(538 96) rotate(6)">
+        <rect width="80" height="100" rx="16" fill="var(--branco)" stroke="var(--azul-claro)" stroke-width="4"/>
+        <rect width="80" height="10" rx="5" fill="var(--azul)"/>
+        <g fill="var(--azul)"><rect x="12" y="22" width="14" height="14" rx="3"/><rect x="54" y="22" width="14" height="14" rx="3"/><rect x="12" y="58" width="14" height="14" rx="3"/><rect x="34" y="42" width="10" height="10" rx="2"/><rect x="54" y="60" width="8" height="8" rx="2"/><rect x="34" y="60" width="8" height="12" rx="2"/></g>
+        <rect x="12" y="82" width="56" height="6" rx="3" fill="var(--azul-claro)"/>
+      </g>
+    </svg>
+    <div class="duas-legendas"><span>Today: certificates, deed, tax and registration, each in a different place</span><span>Proposal: one counter, everything checked</span></div>
+    <p class="legenda-ilustra">Illustration</p>
+
+    <div class="capa-acoes">
+      <a class="botao verde" href="#calculadora">Do the math for your property</a>
+      <a class="botao secundario" href="#criticas">Skip to the criticism</a>
+    </div>
+  </header>
+
+  <section class="capitulo revelar" id="calculadora">
+    <span class="ato">Chapter 1 · Where the money goes</span>
+    <h2>Half is tax. Half is the notary office.</h2>
+    <p>In Brazil, property transfers go through cartórios, private notary and registry offices run under public concession. When people talk about "notary fees", they mix three things: the ITBI, a city tax on property transfers; the emolumentos, which are the notary's price; and the transfers to state funds that come built into that price. Pick a value and see the split in Goiânia, using the official 2026 fee table.</p>
+    <div class="cartao calc">
+      <strong>Property value</strong>
+      <div class="opcoes" role="radiogroup" aria-label="Property value">
+        <button class="opcao" type="button" role="radio" aria-checked="false" data-valor="150000">R$ 150k</button>
+        <button class="opcao marcada" type="button" role="radio" aria-checked="true" data-valor="250000">R$ 250k</button>
+        <button class="opcao" type="button" role="radio" aria-checked="false" data-valor="400000">R$ 400k</button>
+      </div>
+      <label class="marcar"><input type="checkbox" id="financiado"> I bought with a mortgage (the bank contract replaces the deed, but the bank charges its own fees)</label>
+      <div class="total" id="total" aria-live="polite">R$ 12,622</div>
+      <div class="pequeno suave" id="percentual">5.0% of the property value, not counting certificates</div>
+      <div class="barra" aria-hidden="true"><div class="b-pref" id="b-pref"></div><div class="b-fundo" id="b-fundo"></div><div class="b-cart" id="b-cart"></div></div>
+      <ul class="linhas">
+        <li class="b-pref"><span>ITBI (2%), city tax</span><b id="v-itbi"></b></li>
+        <li class="b-fundo"><span>State funds and ISS service tax on registration*</span><b id="v-fundo"></b></li>
+        <li class="b-cart"><span>Deed at the notary office</span><b id="v-esc"></b></li>
+        <li class="b-cart"><span>Property registry, filing and title record</span><b id="v-reg"></b></li>
+      </ul>
+      <p class="frase-calc" id="frase"></p>
+      <p class="pequeno suave" style="margin: 0">* The funds and ISS on registration are estimated at 29.25% of the fee, based on the split published for Goiânia's 1st Property Registry. The official table doesn't show the funds on the deed, so it may cost more than shown here. By law, 40% of notary fees in Goiás go to 11 public funds and bodies.</p>
+    </div>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Chapter 2 · How it works today</span>
+    <h2>Four counters, lots of certificates</h2>
+    <p>In Brazil, ownership only passes to you once the registration is done (Civil Code, art. 1,245). Until then, this is the path:</p>
+    <ol class="fluxo">
+      <li><span class="n">1</span><div><strong>Gather certificates</strong>On the seller and the property: liens, lawsuits, debts, marital status. Each one comes from a different place.<br><span class="trava">Bottleneck: paperwork scattered across many registries</span></div></li>
+      <li><span class="n">2</span><div><strong>Sign the deed</strong>At the notary office, in person or by video call since 2020. Mandatory for property worth more than 30 minimum wages (Civil Code, art. 108).<br><span class="trava">Bottleneck: only a notary from the property's or the buyer's state counts</span></div></li>
+      <li><span class="n">3</span><div><strong>Pay the ITBI</strong>At city hall. In Goiânia, 2% of the higher of the price and the assessed value.</div></li>
+      <li><span class="n">4</span><div><strong>Register</strong>At the area's property registry. The registrar checks everything again and only then opens the new page of the title record.<br><span class="trava">Bottleneck: price by bracket, with built-in transfers</span></div></li>
+    </ol>
+    <p style="margin-top: var(--espaco-5)">The technology already exists. The sector itself says 42% of notarial acts were electronic in 2024. But going digital without getting cheaper just moves the paper around: a deed by video follows the same fee table as the counter, and there is almost no competition.</p>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Chapter 3 · The numbers</span>
+    <h2>Slow, fragmented and with a hidden tax</h2>
+    <div class="numeros">
+      <div class="cartao"><strong>R$ 31.4 bn</strong>collected by Brazil's notary and registry offices in 2024, a record. In 2021 it was R$ 23.4 bn. <span class="fontes">CNJ (National Council of Justice), reported by the press (2025)</span></div>
+      <div class="cartao"><strong>14 steps</strong>and 31 days to register a property in Brazil. In Georgia, 1 step and 1 day. <span class="fontes">World Bank, Doing Business 2020</span></div>
+      <div class="cartao"><strong>40%</strong>of notary fees in Goiás go to 11 funds and bodies, from the Judiciary to the State Assembly. <span class="fontes">Goiás state law 20.494/2019, art. 15</span></div>
+    </div>
+  </section>
+
+  <p class="pausa revelar">What if transferring a property<br>were as simple as a <span class="destaque">Pix</span> payment, only verified?</p>
+
+  <section class="capitulo revelar" style="margin-top: 0">
+    <span class="ato">Chapter 4 · How other countries do it</span>
+    <h2>The shortcut is integration, not reinvention</h2>
+    <p>Days to register a property, according to the World Bank (Doing Business 2020, 2019 data, sale between companies). Useful for comparison, not as an exact price for a family.</p>
+    <div class="paises">
+      <div class="pais"><b>Georgia</b><div><div class="trilho"><div class="dias" style="width: 3.2%"></div></div><small>1 step · 1 day · cost 0% of the value</small></div></div>
+      <div class="pais"><b>New Zealand</b><div><div class="trilho"><div class="dias" style="width: 11.3%"></div></div><small>2 steps · 3.5 days · 0.1%</small></div></div>
+      <div class="pais"><b>Denmark</b><div><div class="trilho"><div class="dias" style="width: 12.9%"></div></div><small>3 steps · 4 days · 0.6%, registration 100% online</small></div></div>
+      <div class="pais"><b>Estonia</b><div><div class="trilho"><div class="dias" style="width: 56.5%"></div></div><small>3 steps · 17.5 days · 0.5%, with a mandatory notary</small></div></div>
+      <div class="pais br"><b>Brazil</b><div><div class="trilho"><div class="dias" style="width: 100%"></div></div><small>14 steps · 31 days · 3.6%</small></div></div>
+    </div>
+    <p style="margin-top: var(--espaco-4)">Estonia shows you can have notaries and still be cheap. What makes the difference is integrated data and the process in a single place.</p>
+    <div class="duas">
+      <div class="cartao pro"><strong>Portugal: the State competes</strong><p>The public Casa Pronta counter handles the purchase and the registration in a single visit, alongside private notaries. When Portugal reformed its notary system in 2004, it gave a two-year transition and let each notary choose their path.</p></div>
+      <div class="cartao contra"><strong>Romania: the 2026 scare</strong><p>In July 2026, an attacker wiped the property registry database and froze almost every sale in the country. What saved it were copies kept in separate places. No system is unbreakable; the defense is backups, audit trails and recovery.</p></div>
+    </div>
+    <p style="margin-top: var(--espaco-4)">What about blockchain? In Georgia, it only stores a "fingerprint" of each record to prove nobody tampered with it later. In Sweden it stayed a prototype, and in Honduras it stalled before the pilot. In Brazil, the Central Bank switched off the Drex blockchain platform in 2025. That's why the proposal talks about <strong>a history that can't be erased</strong>, with whatever technology is safest and most auditable.</p>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Chapter 5 · What I propose</span>
+    <h2>A simple path for the simple case</h2>
+    <p>Most sales look alike: the property is paid off, with no debt and no dispute. For that case, the proposal is a single path, at a public counter, without closing any notary office by decree.</p>
+    <ol class="fluxo">
+      <li><span class="n">1</span><div><strong>Both go to Vapt Vupt</strong>Goiás's one-stop public service centers: 78 units and about 620,000 visits a month (Goiás Government, 2026). They already issue ID cards and driver's licenses there, with photo and fingerprints.</div></li>
+      <li><span class="n">2</span><div><strong>The system checks on its own</strong>Debts, liens, freezes, marital status and ITBI show up on screen, cross-checking databases that already exist. Nobody chases certificates.</div></li>
+      <li><span class="n">3</span><div><strong>A trained person talks to the seller</strong>If the seller is elderly or vulnerable, there is a questionnaire to check that the sale is freely made. The buyer digitally signs off on all relevant facts.</div></li>
+      <li><span class="n">4</span><div><strong>The record goes into a history that can't be erased</strong>Every change is stored with an audit trail and copies in several places, including offline. Both leave with a one-page summary.</div></li>
+    </ol>
+
+    <div class="comprovante" role="img" aria-label="Illustrative example of the one-page summary given to buyer and seller">
+      <div class="topo">
+        <div><small>State of Goiás · illustration</small><b>Transfer summary</b></div>
+        <svg class="qr" viewBox="0 0 76 76" aria-hidden="true">
+          <rect width="76" height="76" rx="12" fill="var(--azul-claro)"/>
+          <g fill="var(--azul)"><rect x="8" y="8" width="20" height="20" rx="4"/><rect x="48" y="8" width="20" height="20" rx="4"/><rect x="8" y="48" width="20" height="20" rx="4"/><rect x="34" y="10" width="8" height="8" rx="2"/><rect x="34" y="30" width="10" height="10" rx="2"/><rect x="50" y="36" width="8" height="8" rx="2"/><rect x="36" y="50" width="8" height="14" rx="2"/><rect x="52" y="52" width="14" height="8" rx="2"/></g>
+          <g fill="var(--branco)"><rect x="13" y="13" width="10" height="10" rx="2"/><rect x="53" y="13" width="10" height="10" rx="2"/><rect x="13" y="53" width="10" height="10" rx="2"/></g>
+        </svg>
+      </div>
+      <dl>
+        <dt>Property</dt><dd>Apartment, title record 00.000</dd>
+        <dt>Declared value</dt><dd>R$ 250,000.00</dd>
+        <dt>Debts and liens</dt><dd>None found</dd>
+        <dt>ITBI</dt><dd>Paid</dd>
+        <dt>Verification</dt><dd>Biometrics and interview</dd>
+      </dl>
+      <p class="rodape-c">Point your camera at the code and check it in the official system. The paper doesn't replace the registration: it summarizes, in plain language, what the registration says.</p>
+    </div>
+    <p class="legenda-ilustra" style="margin-top: var(--espaco-3)">Illustration of the one-page summary, with fictional data</p>
+
+    <h3 style="margin-top: var(--espaco-6)">Who does what</h3>
+    <div class="camadas">
+      <div class="cartao camada"><span class="selo">Goiás can do it now</span><ul>
+        <li>An agreement so Vapt Vupt becomes a service point of the official system that already exists.</li>
+        <li>Public procurement of innovation, under Brazil's Startup Legal Framework, for the software that checks the simple case and integrates the cities' ITBI. Open hackathon, public judging panel, State-owned and auditable code.</li>
+        <li>Review the 40% in transfers, which are state law, and show on the receipt how much goes where.</li>
+      </ul></div>
+      <div class="cartao camada"><span class="selo azul">Needs federal law</span><ul>
+        <li>Allow a paid-off, debt-free property to be transferred through the simple path, without a deed, as already happens with the bank contract in a mortgage.</li>
+        <li>Require publishing, office by office, how much each notary office collects.</li>
+        <li>Public governance of the registry's digital platforms.</li>
+      </ul></div>
+      <div class="cartao camada"><span class="selo amarelo">Only with a constitutional amendment</span><ul>
+        <li>A state-run property registry, if that is ever the way. The transition would be gradual, as offices become vacant, state by state, without breaking the rights of those who passed the public exam.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section class="capitulo revelar" id="criticas">
+    <span class="ato">Chapter 6 · The criticism</span>
+    <h2>The hardest questions</h2>
+    <p>I did a mock interview, as if I were live on TV. These are the toughest questions and the answers.</p>
+
+    <details class="critica">
+      <summary>Do you want to get rid of notary offices?</summary>
+      <div class="resposta"><p>No. Nobody closes a notary office by decree. The proposal is a public counter that competes in the simple case, as Portugal did with Casa Pronta.</p><p>If the registry ever becomes state-run, the transition is gradual, as offices become vacant, with retraining paid by the fund for the people who work there. That's about 96,700 employees, according to the sector itself (Anoreg/BR, 2025).</p></div>
+    </details>
+    <details class="critica">
+      <summary>An elderly person can be coerced into selling. Do biometrics solve that?</summary>
+      <div class="resposta"><p>Biometrics prove who someone is, not that their will is free. That's why the simple path has a trained person who talks to the seller, with a specific questionnaire for elderly and vulnerable people.</p><p>Debts, liens and the spouse's signature show up on screen, because the system queries the official databases. Today it's the citizen who has to chase all that.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Gov.br biometrics have already been defrauded. Why trust them?</summary>
+      <div class="resposta"><p>In 2025 the Federal Police broke up a group that bypassed gov.br's facial biometrics (Operation Face Off). Any system can be attacked, including today's: a property registry in Caxias do Sul already had all its data held for ransom.</p><p>The answer is layer upon layer: physical presence at the counter, checks against the official database, an interview and a history that can't be erased, with copies in separate places.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Deeds by video already exist. Isn't this reinventing the wheel?</summary>
+      <div class="resposta"><p>They have existed since 2020, and that's progress. But the price is the same as at the counter, and you can only choose a notary from your state or the property's state.</p><p>Going digital without getting cheaper and without competition just moves the paper around.</p></div>
+    </details>
+    <details class="critica">
+      <summary>There are hardly any property lawsuits. Why change it?</summary>
+      <div class="resposta"><p>Security comes from the checking, not from the stamp. The simple path checks more data than a single person can, and in seconds.</p><p>What changes is the number of steps and the price, not the care.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Goiás can't legislate on property registration.</summary>
+      <div class="resposta"><p>True: public registries are a federal matter (Constitution, art. 22). That's why the proposal separates what Goiás can do now, like the counter, the software and the 40% in transfers, from what needs federal law.</p><p>In Congress, the first concrete step is the law for the simple path for paid-off, debt-free property, plus publishing what each notary office collects.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Who pays for free birth certificates if prices fall?</summary>
+      <div class="resposta"><p>Today they are paid for by a fund that receives 2.5% of notary fees in Goiás, FUNCOMP. That money remains guaranteed, in plain sight.</p><p>And birth registration already happens inside maternity hospitals, linked to registry offices. We can expand what works and bring it to Vapt Vupt.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Why print paper in a digital proposal?</summary>
+      <div class="resposta"><p>Nobody reads today's A4 pages. The one-page summary is clear, good-looking and has a code to check in the official system.</p><p>It doesn't replace the registration. It explains it.</p></div>
+    </details>
+    <details class="critica">
+      <summary>The 40% funds pay for the Judiciary. Isn't the problem the State itself?</summary>
+      <div class="resposta"><p>Partly, yes. These transfers work like a tax hidden in the notary's price.</p><p>If the Judiciary, the Public Prosecutor's Office or the State Assembly need that money, let it be in the budget, in plain sight. And let the receipt say how much went where.</p></div>
+    </details>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Chapter 7 · How to measure</span>
+    <h2>Three numbers to track</h2>
+    <ul>
+      <li><strong>Total cost</strong> of transferring a property, as a % of its value, separating tax, notary and funds.</li>
+      <li><strong>Steps and days</strong> from signed contract to finished registration.</li>
+      <li><strong>Public revenue figures</strong> for each notary office, updated every year on the CNJ's Justiça Aberta dashboard.</li>
+    </ul>
+  </section>
+
+  <section class="capitulo revelar conversa">
+    <p class="grande">How much did you pay to put your property in your name? And did you know where each part went?</p>
+    <div class="hashtags"><span class="hashtag">#CartórioDigital</span><span class="hashtag">#SistemasMelhores</span></div>
+    <div class="capa-acoes"><a class="botao" href="/en/projetos/reindustrializacao/">See the FSRI, the fund behind it</a></div>
+  </section>
+
+  <section class="capitulo">
+    <h2>Sources <small>(in Portuguese unless noted)</small></h2>
+    <ul class="fontes">
+      <li><a href="https://www.tjgo.jus.br/files/2026/01%20-%20Janeiro/Provimento%20Conjunto%20179-2026.pdf">TJGO and CGJ-GO, Joint Provision 179/2025, 2026 notary fee table (Tables XIII and XIV)</a></li>
+      <li><a href="https://myside.com.br/guia-imoveis/registro-de-imovel-valor">MySide, split of the registration into fee, ISS and fund at Goiânia's 1st Property Registry (2026), secondary source</a></li>
+      <li><a href="https://myside.com.br/guia-goiania/isti-goiania-go">MySide, Goiânia's ITBI at 2% (municipal Complementary Law 344/2021), updated January 2026, secondary source</a></li>
+      <li><a href="https://appasp.economia.go.gov.br/legislacao/arquivos/leis/L_20494.htm">Goiás state law 20.494/2019, transfer of 40% of notary fees</a></li>
+      <li><a href="https://gazetadoparana.com.br/publico/arrecadacao-de-cartorios-no-brasil-registra-recorde-com-r-314-bilhoes-em-2024">Gazeta do Paraná, R$ 31.4 bn collected in 2024, according to the CNJ (2025)</a></li>
+      <li><a href="https://www.contabeis.com.br/noticias/51181/cartorios-atingem-recorde-ao-arrecadar-r-23-4-bilhoes-em-2021/">Contábeis, R$ 23.4 bn collected in 2021</a></li>
+      <li><a href="https://anoregam.org.br/wp-content/uploads/2026/01/cartorio-em-numeros-7a.pdf">Anoreg/BR, Cartório em Números, 7th edition (2025), industry source</a></li>
+      <li><a href="https://archive.doingbusiness.org/en/data/exploretopics/registering-property">World Bank, Doing Business 2020, Registering Property (in English)</a></li>
+      <li><a href="https://arabic.doingbusiness.org/content/dam/doingBusiness/media/Subnational/DB2021_SNDB_Brazil_Full-report_English.pdf">World Bank, Subnational Doing Business in Brazil 2021 (in English)</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/leis/2002/l10406compilada.htm">Civil Code, arts. 108 and 1,245</a></li>
+      <li><a href="https://www.irib.org.br/e-notariado-cn-cnj-reafirma-aplicacao-de-competencia-territorial-para-atos-notariais-hibridos/">IRIB, CNJ reaffirms territorial jurisdiction for e-Notariado (July 2026)</a></li>
+      <li><a href="https://www.hardware.com.br/noticias/hacker-apaga-base-registro-imoveis-romenia-paralisa-mercado/amp/">Hardware.com.br, attack on Romania's property registry (July 2026)</a></li>
+      <li><a href="https://jornaldebrasilia.com.br/blogs-e-colunas/analice-nicolau/sistema-manoel-valente-como-um-ataque-cibernetico-iniciou-uma-revolucao-na-seguranca-digital-dos-cartorios">Jornal de Brasília, ransomware at a property registry in Caxias do Sul (2025)</a></li>
+      <li><a href="https://olhardigital.com.br/2025/05/13/seguranca/pf-deflagra-operacao-contra-fraude-biometrica-no-gov-br/">Olhar Digital, Federal Police Operation Face Off (May 2025)</a></li>
+    </ul>
+  </section>
+</main>
+<gr-rodape></gr-rodape>
+<script>
+(() => {
+  // Tabela de emolumentos de Goiás 2026 (Provimento Conjunto 179/2025): escritura (XIII, item 63) e registro (XIV, item 76)
+  const faixas = {
+    150000: { escritura: 3408.91, registro: 1945.88 },
+    250000: { escritura: 4166.03, registro: 2620.98 },
+    400000: { escritura: 5680.28, registro: 4054.59 }
+  };
+  const PRENOTACAO_MATRICULA = 11.14 + 57.53;
+  const FUNDO_ISS_REGISTRO = 0.2925; // 24,25% de fundo + 5% de ISS, 1º RI de Goiânia
+  const real = (v) => "R$ " + Math.round(v).toLocaleString("en-US");
+  const pct = (v) => v.toLocaleString("en-US", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + "%";
+  const opcoes = [...document.querySelectorAll(".calc .opcao")];
+  const financiado = document.getElementById("financiado");
+  const $ = (id) => document.getElementById(id);
+  let valor = 250000;
+
+  function calcular() {
+    const f = faixas[valor];
+    const itbi = valor * 0.02;
+    const esc = financiado.checked ? 0 : f.escritura;
+    const fundo = f.registro * FUNDO_ISS_REGISTRO;
+    const reg = f.registro + PRENOTACAO_MATRICULA;
+    const total = itbi + esc + fundo + reg;
+    const publico = itbi + fundo;
+    $("total").textContent = real(total);
+    $("percentual").textContent = pct(total / valor * 100) + " of the property value, not counting certificates" + (financiado.checked ? " or bank fees" : "");
+    $("v-itbi").textContent = real(itbi);
+    $("v-fundo").textContent = real(fundo);
+    $("v-esc").textContent = financiado.checked ? "in the bank contract" : real(esc);
+    $("v-reg").textContent = real(reg);
+    $("b-pref").style.flexBasis = (itbi / total * 100) + "%";
+    $("b-fundo").style.flexBasis = (fundo / total * 100) + "%";
+    $("b-cart").style.flexBasis = ((esc + reg) / total * 100) + "%";
+    $("frase").textContent = "City hall and the State keep about " + Math.round(publico / total * 100) + "%. Notary offices keep about " + Math.round((esc + reg) / total * 100) + "%, before salaries and costs.";
+  }
+  opcoes.forEach((op) => op.addEventListener("click", () => {
+    valor = +op.dataset.valor;
+    opcoes.forEach((o) => { o.classList.toggle("marcada", o === op); o.setAttribute("aria-checked", String(o === op)); });
+    calcular();
+  }));
+  financiado.addEventListener("change", calcular);
+  calcular();
+
+  const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("visivel"); io.unobserve(e.target); } }), { threshold: .12 }) : null;
+  document.querySelectorAll(".revelar").forEach((el) => io ? io.observe(el) : el.classList.add("visivel"));
+})();
+</script>
+</body>
+</html>

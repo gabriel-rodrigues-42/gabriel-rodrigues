@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gabriel Rodrigues · Software engineering in public service</title>
+<meta name="description" content="Gabriel Rodrigues: a software developer in Goiânia, Brazil, who studies politics to bring software engineering into government.">
+<link rel="canonical" href="https://gabriel-rodrigues.com/en/">
+<link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/">
+<link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/">
+<link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/">
+<meta name="author" content="Gabriel Rodrigues">
+<meta name="theme-color" content="#fbf8ef">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:site_name" content="Gabriel Rodrigues">
+<meta property="og:url" content="https://gabriel-rodrigues.com/en/">
+<meta property="og:title" content="Gabriel Rodrigues · Software engineering in public service">
+<meta property="og:description" content="Gabriel Rodrigues: a software developer in Goiânia, Brazil, who studies politics to bring software engineering into government.">
+<meta property="og:image" content="https://gabriel-rodrigues.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gabriel Rodrigues, software engineering at the service of Brazil">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gabriel Rodrigues · Software engineering in public service">
+<meta name="twitter:description" content="Gabriel Rodrigues: a software developer in Goiânia, Brazil, who studies politics to bring software engineering into government.">
+<meta name="twitter:image" content="https://gabriel-rodrigues.com/og.jpg">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Person",
+   "@id": "https://gabriel-rodrigues.com/#gabriel",
+   "name": "Gabriel Rodrigues",
+   "url": "https://gabriel-rodrigues.com/",
+   "image": "https://gabriel-rodrigues.com/design-system/img/gabriel-foto.jpg",
+   "jobTitle": "Software developer",
+   "description": "Software developer in Goiânia, Brazil, who studies politics to bring software engineering into government.",
+   "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Goiânia",
+    "addressRegion": "GO",
+    "addressCountry": "BR"
+   },
+   "sameAs": [
+    "https://galera.club/gabriel",
+    "https://github.com/gabriel-rodrigues-42"
+   ]
+  },
+  {
+   "@type": "WebSite",
+   "@id": "https://gabriel-rodrigues.com/#site",
+   "url": "https://gabriel-rodrigues.com/",
+   "name": "Gabriel Rodrigues",
+   "inLanguage": ["pt-BR", "en"],
+   "publisher": {
+    "@id": "https://gabriel-rodrigues.com/#gabriel"
+   }
+  }
+ ]
+}
+</script>
+<link rel="stylesheet" href="/design-system/tokens.css">
+<link rel="stylesheet" href="/design-system/componentes.css">
+<link rel="stylesheet" href="/design-system/moldura.css">
+<script src="/design-system/moldura.js"></script>
+<link rel="stylesheet" href="/design-system/cidade.css">
+<script src="/design-system/cidade.js" defer></script>
+<style>
+  main { max-width: 760px; margin: 0 auto; padding: var(--espaco-6) var(--espaco-4) 0; }
+  section { scroll-margin-top: 80px; }
+  h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); }
+  h2 { font-size: var(--tamanho-5); line-height: 1.15; color: var(--azul); margin: 0 0 var(--espaco-2); }
+  .lead { font-size: var(--tamanho-3); color: var(--texto-suave); margin: 0 0 var(--espaco-3); }
+  a { color: var(--azul); }
+
+  /* Sobre */
+  /* Mobile first: foto em cima, texto embaixo. A partir de 720px, foto à direita. */
+  .sobre { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-4); }
+  .sobre-foto { width: 140px; height: 140px; object-fit: cover; border-radius: var(--forma-bolha-3); box-shadow: var(--sombra-cartao); background: var(--azul-claro); }
+  .objetivo { margin: 0 0 var(--espaco-4); padding: var(--espaco-3) var(--espaco-4); background: var(--branco); border-radius: var(--forma-opcao); box-shadow: var(--sombra-cartao); color: var(--azul); font-weight: var(--peso-forte); }
+  .objetivo span { display: block; font-weight: var(--peso-normal); color: var(--texto-suave); font-size: var(--tamanho-2); margin-top: var(--espaco-1); }
+  .objetivo a { color: var(--verde-escuro); font-weight: var(--peso-forte); white-space: nowrap; }
+  .jeito { list-style: none; padding: 0; margin: var(--espaco-5) 0 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-3); }
+  .jeito li { background: var(--branco); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); box-shadow: var(--sombra-cartao); font-size: var(--tamanho-2); color: var(--texto-suave); }
+  .jeito strong { display: block; color: var(--verde-escuro); font-size: var(--tamanho-3); }
+  @media (min-width: 720px) {
+    .sobre { grid-template-columns: minmax(0, 1fr) 200px; gap: var(--espaco-6); align-items: center; }
+    .sobre-foto { width: 200px; height: 200px; grid-column: 2; grid-row: 1; }
+    .jeito { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
+  /* Publicações */
+  #publicacoes { margin-top: var(--espaco-7); }
+  .filtros { display: flex; flex-wrap: wrap; gap: var(--espaco-2); margin: var(--espaco-4) 0; }
+  .filtros button { font: inherit; font-size: var(--tamanho-2); font-weight: var(--peso-forte); cursor: pointer; color: var(--azul); background: transparent; border: 2px solid var(--azul-claro); padding: 6px 14px; border-radius: var(--forma-pilula); }
+  .filtros button[aria-pressed="true"] { background: var(--azul); border-color: var(--azul); color: var(--branco); }
+  .filtros button:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+  .posts { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--espaco-4); }
+  .posts a.cartao { padding: var(--espaco-4) var(--espaco-5); }
+  .posts .tipo { display: inline-block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); letter-spacing: .06em; text-transform: uppercase; padding: 2px 10px; border-radius: var(--forma-selo); background: var(--verde-claro); color: var(--verde-escuro); }
+  .posts .tipo.ideia { background: var(--amarelo-claro); color: var(--azul); }
+  .posts .tipo.ferramenta { background: var(--azul-claro); color: var(--azul); }
+  .posts strong { display: block; font-size: var(--tamanho-4); line-height: 1.25; color: var(--azul); margin: var(--espaco-2) 0 var(--espaco-1); }
+  .posts p { margin: 0; color: var(--texto-suave); }
+  .posts .ir { display: inline-block; margin-top: var(--espaco-2); font-weight: var(--peso-forte); color: var(--verde-escuro); }
+
+  /* galera.club */
+  .galera { margin-top: var(--espaco-7); display: flex; align-items: center; justify-content: space-between; gap: var(--espaco-4); flex-wrap: wrap; background: var(--amarelo-claro); }
+  .galera p { margin: 0; color: var(--texto-suave); }
+  .galera strong { display: block; color: var(--azul); font-size: var(--tamanho-4); }
+
+  /* Apoio */
+  #apoiar { margin-top: var(--espaco-7); }
+  .apoio { background: var(--azul); color: var(--branco); border-radius: var(--forma-cartao); padding: var(--espaco-6) var(--espaco-5); box-shadow: var(--sombra-clay); }
+  .apoio h2 { color: var(--branco); }
+  .apoio .lead { color: var(--branco); opacity: .9; }
+  .apoio .destaque { background: none; color: var(--amarelo); }
+  .campos { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-3); margin-top: var(--espaco-4); }
+  .campos .largo { grid-column: 1 / -1; }
+  .campos label { display: grid; gap: var(--espaco-1); font-size: var(--tamanho-2); font-weight: 700; }
+  .campos input, .campos select { font: inherit; color: var(--texto); background-color: var(--branco); border: 2px solid transparent; padding: 10px 14px; border-radius: var(--forma-opcao); width: 100%; min-width: 0; }
+  .campos input:focus, .campos select:focus { outline: none; border-color: var(--amarelo); }
+  .campo-cidade { display: grid; gap: var(--espaco-1); min-width: 0; }
+  .consentimento { display: flex; gap: var(--espaco-3); align-items: flex-start; margin-top: var(--espaco-4); font-size: var(--tamanho-2); background: var(--branco-vidro); padding: var(--espaco-3) var(--espaco-4); border-radius: var(--forma-opcao); }
+  .consentimento input { width: 22px; height: 22px; flex: none; margin: 2px 0 0; accent-color: var(--amarelo); }
+  .apoio a { color: var(--amarelo); }
+  .apoio .botao { margin-top: var(--espaco-4); background: var(--amarelo); color: var(--azul); }
+  .apoio .botao:focus-visible { outline-color: var(--amarelo); }
+  .opcional { font-weight: var(--peso-normal); opacity: .8; }
+  .nota { font-size: var(--tamanho-1); opacity: .8; margin: var(--espaco-3) 0 0; }
+  .resposta { font-weight: 700; margin: var(--espaco-3) 0 0; min-height: 1.5em; }
+  .resposta.ok { color: var(--amarelo); }
+  .armadilha { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .apoio { padding: var(--espaco-5) var(--espaco-4); }
+  @media (min-width: 720px) { .campos { grid-template-columns: repeat(2, minmax(0, 1fr)); } .apoio { padding: var(--espaco-6) var(--espaco-5); } }
+</style>
+</head>
+<body>
+<gr-cabecalho></gr-cabecalho>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
+<main>
+
+  <section id="sobre" class="sobre" aria-labelledby="titulo-sobre">
+    <img class="sobre-foto" src="/design-system/img/gabriel-foto.jpg" alt="Photo of Gabriel Rodrigues smiling, wearing a blue suit and a burgundy tie" width="200" height="200">
+    <div>
+      <span class="selo">Goiânia · Goiás · Brazil</span>
+      <h1 id="titulo-sobre">Hi, I'm <span class="destaque">Gabriel</span>.</h1>
+      <p class="objetivo">I want to run for federal representative for Goiás in 2030.<span>2028 depends on you: if enough people support me, I'll run for Goiânia's City Council as early as 2028. <a href="#apoiar">Tell me if you believe in it →</a></span></p>
+      <p class="lead">I'm a software developer. I spent years building platforms in Europe and came back to Goiânia, Brazil.</p>
+      <p class="lead">Today I study politics to bring into government the way people who build software work. <a href="/en/sobre/">Read my story →</a></p>
+    </div>
+  </section>
+
+  <ul class="jeito" aria-label="How I work">
+    <li><strong>Measure</strong>Know the problem in numbers before changing anything.</li>
+    <li><strong>Test</strong>Start small, see if it works, fix it.</li>
+    <li><strong>Open up</strong>Everything in public, with sources and open to criticism.</li>
+  </ul>
+
+  <section id="publicacoes" aria-labelledby="titulo-publicacoes">
+    <h2 id="titulo-publicacoes">Projects and <span class="destaque">ideas</span></h2>
+    <p class="lead">What I'm studying and proposing. Each idea comes with the toughest criticism and my answer.</p>
+    <div class="filtros" role="group" aria-label="Filter posts">
+      <button type="button" data-filtro="" aria-pressed="true">All</button>
+      <button type="button" data-filtro="projeto" aria-pressed="false">Projects</button>
+      <button type="button" data-filtro="ideia" aria-pressed="false">Ideas</button>
+    </div>
+    <!-- Mesma lista da página em português (/index.html), em inglês. As ideias vêm de /ideias/ideias-en.js. -->
+    <ul class="posts" id="posts">
+      <li data-tipo="projeto" data-ideia="galera-club"><a class="cartao" href="/en/projetos/galera-club/">
+        <span class="tipo">Project · Live</span>
+        <strong>galera.club: digital sovereignty that is already live</strong>
+        <p>A Brazilian link-in-bio platform, with Pix payments on the page and orders via WhatsApp, with no fee per sale.</p>
+        <span class="ir">Read the project →</span>
+      </a></li>
+      <li data-tipo="projeto" data-ideia="reindustrializacao"><a class="cartao" href="/en/projetos/reindustrializacao/">
+        <span class="tipo">Project</span>
+        <strong>Reindustrializing Brazil with money that already exists</strong>
+        <p>How to turn the credit that large fortunes already use into Brazilian factories, patents and platforms.</p>
+        <span class="ir">Read the story →</span>
+      </a></li>
+      <li data-tipo="projeto" data-ideia="qual-caminho"><a class="cartao" href="/en/caminho/">
+        <span class="tipo ferramenta">Tool</span>
+        <strong>Which path makes sense for me?</strong>
+        <p>A few questions for anyone who wants to improve Brazil and doesn't know where to start.</p>
+        <span class="ir">Answer →</span>
+      </a></li>
+      <li data-tipo="ideia" id="todas-ideias"><a class="cartao" href="/en/ideias/">
+        <span class="tipo ideia">Ideas</span>
+        <strong>Ideas to talk about</strong>
+        <p>All the ideas, to read or listen to with captions.</p>
+        <span class="ir">See all →</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <a class="cartao galera" href="https://galera.club/gabriel">
+    <div>
+      <strong>galera.club/gabriel</strong>
+      <p>All my links and social media in one place.</p>
+    </div>
+    <span class="botao">Open →</span>
+  </a>
+
+  <section id="apoiar" aria-labelledby="titulo-apoio">
+    <div class="apoio">
+      <h2 id="titulo-apoio">Do you think I should <span class="destaque">try</span>?</h2>
+      <p class="lead">If you think Brazil needs people who build systems inside government, leave your email. I'll share how the preparation is going and ask your opinion on the ideas.</p>
+      <form id="form-apoio" action="/api/apoio" method="post" novalidate>
+        <input type="hidden" name="idioma" value="en">
+        <div class="campos">
+          <label><span>Name <span class="opcional">(optional)</span></span>
+            <input name="nome" autocomplete="name" maxlength="80">
+          </label>
+          <label>Email
+            <input name="email" type="email" autocomplete="email" maxlength="254" required>
+          </label>
+          <div class="campo-cidade largo">
+            <label for="apoio-cidade"><span>City <span class="opcional">(optional)</span></span></label>
+            <gr-cidade id-campo="apoio-cidade" nome-cidade="cidade" nome-uf="uf" exterior autocompletar></gr-cidade>
+          </div>
+        </div>
+        <label class="armadilha" aria-hidden="true">Do not fill in<input name="site" tabindex="-1" autocomplete="off"></label>
+        <label class="consentimento">
+          <input type="checkbox" name="consentimento" value="sim" required>
+          <span>I authorize Gabriel to keep my name, email and city to send news about the preparation and the ideas on this site. I understand this shows I support his attempt and that I can ask to be removed at any time. I have read the <a href="/en/privacidade/">privacy policy</a>.</span>
+        </label>
+        <button class="botao" type="submit">I want you to try</button>
+        <p class="resposta" id="resposta" role="status" aria-live="polite"></p>
+        <p class="nota">I don't ask for CPF (Brazilian tax ID), voter ID or phone number. This is not a request for votes or a petition. Your data is not sold or shared.</p>
+      </form>
+    </div>
+  </section>
+</main>
+<gr-rodape></gr-rodape>
+
+<script src="/ideias/ideias-en.js"></script>
+<script>
+(() => {
+  "use strict";
+
+  // Ideias: uma entrada por ideia de ideias-en.js, antes do cartão "See all".
+  const lista = document.getElementById("posts");
+  const todas = document.getElementById("todas-ideias");
+  const comPagina = new Set([...lista.querySelectorAll("[data-ideia]")].map((li) => li.dataset.ideia));
+  const ESTADO = { "rascunho": "draft", "em teste": "testing", "pronta para postar": "ready to post", "no ar": "live" };
+  (window.IDEIAS || []).filter((ideia) => !comPagina.has(ideia.id)).forEach((ideia) => {
+    const li = document.createElement("li");
+    li.dataset.tipo = "ideia";
+    const a = document.createElement("a");
+    a.className = "cartao";
+    a.href = "/en/ideias/#" + encodeURIComponent(ideia.id);
+    const tipo = document.createElement("span");
+    tipo.className = "tipo ideia";
+    tipo.textContent = "Idea" + (ideia.estado ? " · " + (ESTADO[ideia.estado] || ideia.estado) : "");
+    const titulo = document.createElement("strong");
+    titulo.textContent = ideia.titulo;
+    const gancho = document.createElement("p");
+    gancho.textContent = ideia.gancho;
+    const ir = document.createElement("span");
+    ir.className = "ir";
+    ir.textContent = "Read or listen →";
+    a.append(tipo, titulo, gancho, ir);
+    li.append(a);
+    lista.insertBefore(li, todas);
+  });
+
+  // Filtros
+  const botoes = document.querySelectorAll(".filtros button");
+  botoes.forEach((b) => b.addEventListener("click", () => {
+    const filtro = b.dataset.filtro;
+    botoes.forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+    lista.querySelectorAll("li").forEach((li) => { li.hidden = !!filtro && li.dataset.tipo !== filtro; });
+  }));
+
+  // Formulário de apoio (mesma API da página em português; as mensagens do servidor vêm em português,
+  // então aqui a página mostra as suas próprias, em inglês).
+  const form = document.getElementById("form-apoio");
+  const resposta = document.getElementById("resposta");
+  const botao = form.querySelector("button[type=submit]");
+  const avisar = (texto, ok) => { resposta.textContent = texto; resposta.classList.toggle("ok", !!ok); };
+
+  if (new URLSearchParams(location.search).get("apoio") === "ok") avisar("Thank you! I got your support.", true);
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const dados = Object.fromEntries(new FormData(form));
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dados.email || "")) return avisar("Please check the email.");
+    if (dados.consentimento !== "sim") return avisar("Please tick the authorization so I can keep your email.");
+    botao.disabled = true;
+    avisar("Sending…");
+    try {
+      const r = await fetch(form.action, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(dados) });
+      if (r.ok) { form.reset(); avisar("Thank you! I got your support. I'll send news soon.", true); }
+      else if (r.status === 503) avisar("The form is still being set up. Please come back in a few days.");
+      else if (r.status === 400) avisar("Please check the email, the city and the authorization.");
+      else avisar("Couldn't send it. Please try again.");
+    } catch {
+      avisar("No connection. Please try again.");
+    } finally {
+      botao.disabled = false;
+    }
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Which path makes sense for me? · Gabriel Rodrigues</title>
+<meta name="description" content="Tell us where you vote and find out which elected offices in Brazil suit you: seats, votes of the last winner, electoral quotient, minimum age and deadlines, with TSE and IBGE data for every Brazilian municipality.">
+<link rel="canonical" href="https://gabriel-rodrigues.com/en/caminho/">
+<link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/caminho/">
+<link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/caminho/">
+<link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/caminho/">
+<meta name="author" content="Gabriel Rodrigues">
+<meta name="theme-color" content="#fbf8ef">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:site_name" content="Gabriel Rodrigues">
+<meta property="og:url" content="https://gabriel-rodrigues.com/en/caminho/">
+<meta property="og:title" content="Which path makes sense for me? · Gabriel Rodrigues">
+<meta property="og:description" content="Tell us where you vote and find out which elected offices in Brazil suit you: seats, votes of the last winner, electoral quotient, minimum age and deadlines, with TSE and IBGE data for every Brazilian municipality.">
+<meta property="og:image" content="https://gabriel-rodrigues.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gabriel Rodrigues, software engineering at the service of Brazil">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Which path makes sense for me? · Gabriel Rodrigues">
+<meta name="twitter:description" content="Tell us where you vote and find out which elected offices in Brazil suit you: seats, votes of the last winner, electoral quotient, minimum age and deadlines, with TSE and IBGE data for every Brazilian municipality.">
+<meta name="twitter:image" content="https://gabriel-rodrigues.com/og.jpg">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "Which path makes sense for me?",
+ "description": "Tell us where you vote and find out which elected offices in Brazil suit you: seats, votes of the last winner, electoral quotient, minimum age and deadlines, with TSE and IBGE data for every Brazilian municipality.",
+ "url": "https://gabriel-rodrigues.com/en/caminho/",
+ "inLanguage": "en",
+ "applicationCategory": "EducationalApplication",
+ "isAccessibleForFree": true,
+ "author": { "@type": "Person", "name": "Gabriel Rodrigues", "url": "https://gabriel-rodrigues.com/" }
+}
+</script>
+<link rel="stylesheet" href="/design-system/tokens.css">
+<link rel="stylesheet" href="/design-system/componentes.css">
+<link rel="stylesheet" href="/design-system/moldura.css">
+<script src="/design-system/moldura.js"></script>
+<link rel="stylesheet" href="/design-system/cidade.css">
+<script src="/design-system/cidade.js"></script>
+<link rel="stylesheet" href="/caminho/caminho.css">
+</head>
+<body>
+<gr-cabecalho></gr-cabecalho>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
+<main>
+  <header>
+    <span class="selo">Open questionnaire</span>
+    <h1>Which path makes <em class="destaque">sense</em> for me?</h1>
+    <p class="intro">Tell us where you vote and what you want to change. You get the elected offices that suit you, with the real numbers for your city and state: seats, votes of the last winner, electoral quotient, minimum age and deadlines. It works for every municipality in Brazil.</p>
+    <a class="exemplo cartao" href="#exemplo=gabriel">
+      <img src="/design-system/img/gabriel-foto.jpg" alt="" width="56" height="56">
+      <span><strong>See an example: Gabriel's path</strong>
+      City councilor in Goiânia in 2028, federal representative for Goiás in 2030.</span>
+    </a>
+  </header>
+
+  <section id="app" class="cartao" aria-live="polite">
+    <p>Loading the questionnaire…</p>
+    <noscript>This questionnaire needs JavaScript turned on.</noscript>
+  </section>
+
+  <section id="faq" class="faq">
+    <h2>Frequently asked questions</h2>
+
+    <details>
+      <summary>Who is this for?</summary>
+      <p>Anyone who is registered to vote in Brazil and is curious about running for office. Brazil's elections, offices and rules are national, so the tool only covers Brazilian municipalities and states. Official sources and data are in Portuguese.</p>
+    </details>
+
+    <details>
+      <summary>How does it work?</summary>
+      <p>You say where you vote and answer three questions. The page shows the offices that exist in your municipality and your state, ranked by how well each one fits your answers: where you want to have an effect (city, state or country), whether you prefer to write laws or to administer, and which election you're thinking of running in. If you give your age, it checks each office's minimum age.</p>
+      <p>Then you build your path, one office per election, and copy a link to show someone. The link keeps your answers, so whoever opens it sees the same result.</p>
+    </details>
+
+    <details>
+      <summary>Where do the numbers come from?</summary>
+      <p>Only from official sources:</p>
+      <ul>
+        <li><strong>Seats, valid votes, voters and each winner's votes</strong>: <a href="https://dadosabertos.tse.jus.br/">Open Data Portal of the TSE</a> (Brazil's Superior Electoral Court), files <em>consulta_vagas</em>, <em>detalhe_votacao_munzona</em> and <em>votacao_candidato_munzona</em>. Municipalities: 2024 election. States: the most recent general election published (<span data-ano-geral>2026</span>). To check a candidate, use <a href="https://divulgacandcontas.tse.jus.br/">DivulgaCandContas</a>.</li>
+        <li><strong>Municipality names and population</strong>: <a href="https://servicodados.ibge.gov.br/api/docs/localidades">IBGE, localities API</a> and <a href="https://sidra.ibge.gov.br/tabela/4709">2022 Census, table 4709</a>.</li>
+        <li><strong>Ages, dates and deadlines</strong>: <a href="https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm">Federal Constitution</a> (art. 14, § 3, VI; arts. 28, 29, 46 and 77) and <a href="https://www.planalto.gov.br/ccivil_03/leis/l9504.htm">Law 9.504/1997</a> (arts. 1, 8, 9 and 11).</li>
+        <li><strong>Electoral quotient</strong>: calculated as the <a href="https://www.planalto.gov.br/ccivil_03/leis/l4737compilado.htm">Electoral Code</a> requires, art. 106: valid votes divided by seats, discarding fractions up to one half.</li>
+      </ul>
+      <p class="pequeno" id="faq-datas"></p>
+    </details>
+
+    <details>
+      <summary>What is the electoral quotient?</summary>
+      <p>City councilors and representatives are elected by proportional representation. First you calculate how many votes are worth one seat: the valid votes divided by the number of seats. Each party or federation gets one seat for every quotient it adds up, and the seats go to its most-voted candidates.</p>
+      <p>To take one of those seats, a candidate needs at least 10% of the quotient (Electoral Code, art. 108). For the leftover seats, parties with 80% of the quotient and candidates with 20% compete (art. 109, as worded by Law 14.211/2021). That's why the winner with the fewest votes may have far fewer votes than the quotient: they were pulled in by the party's votes.</p>
+    </details>
+
+    <details>
+      <summary>What are the limits of this data?</summary>
+      <ul>
+        <li>The numbers are from the <strong>last</strong> election. The next one will have a different electorate, different candidates and a different quotient. Use them as an order of magnitude.</li>
+        <li>We calculate the quotient from the TSE's valid votes. The official number may change a little if votes are annulled or validated later, in court appeals.</li>
+        <li>In some cities the 2024 race was still in court when the data was generated, and the TSE doesn't mark who was elected. In those, the page doesn't show the winner with the fewest votes.</li>
+        <li>Where the 2024 election was annulled and held again, the numbers from the new election apply.</li>
+        <li>The number of seats can change. The Chamber of Deputies remains at 513 members (the increase to 531 was vetoed in 2025), but the split by state depends on population (Complementary Law 78/1993) and may be revised.</li>
+        <li>Party membership, convention and registration dates follow Law 9.504. The TSE publishes the official calendar for each election, and that is what counts. Check the <a href="https://www.tse.jus.br/eleicoes/calendario-eleitoral">TSE electoral calendar</a>.</li>
+        <li>Age is checked when taking office (on the registration date, for those who are 18). Without your birthday, the page can only give an estimate.</li>
+        <li>Being eligible takes more than age: Brazilian nationality, voting rights in good standing, voter registration, party membership and not falling into any case of ineligibility (Constitution, art. 14, and Complementary Law 64/1990). Nothing here is legal advice.</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary>Do my answers go anywhere?</summary>
+      <p>No. Everything happens in your browser and nothing is sent to any server. The answers only live in the page address (after the <code>#</code>). If you copy the link, whoever receives it sees the answers, including your age and name, if you filled them in.</p>
+    </details>
+
+    <details>
+      <summary>How can I check the code?</summary>
+      <p>The code is open source. Anyone can read it, run it and point out errors:</p>
+      <ul>
+        <li><a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/scripts/caminho/gerar_dados.py">scripts/caminho/gerar_dados.py</a>: downloads the TSE and IBGE files and generates the data. Run it with <code>python3 scripts/caminho/gerar_dados.py</code> (it only needs Python).</li>
+        <li><a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/.github/workflows/dados-caminho.yml">.github/workflows/dados-caminho.yml</a>: runs the script on GitHub, with a public log of every run.</li>
+        <li><a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/tree/main/site/caminho/dados">site/caminho/dados/</a>: the generated data, one file per state.</li>
+        <li><a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/site/caminho/regras.js">site/caminho/regras.js</a>: ages, dates and questions, with the legal article behind each rule (English text in <a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/site/caminho/regras-en.js">regras-en.js</a>).</li>
+        <li><a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/site/caminho/caminho.js">site/caminho/caminho.js</a>: how the page calculates the result.</li>
+      </ul>
+      <p>Found a wrong number? <a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/issues/new">Open an issue on GitHub</a> with the source.</p>
+    </details>
+
+    <details>
+      <summary>Why is Gabriel's path shown here?</summary>
+      <p>Gabriel built this questionnaire to decide his own path and left the result as an example: city councilor in Goiânia in 2028 as a stepping stone, federal representative for Goiás in 2030 as the goal. It's a plan under study and not a request for votes. The tool is the same for anyone, from any city.</p>
+    </details>
+  </section>
+</main>
+<gr-rodape></gr-rodape>
+<script src="/caminho/regras.js"></script>
+<script src="/caminho/regras-en.js"></script>
+<script src="/caminho/caminho.js"></script>
+</body>
+</html>

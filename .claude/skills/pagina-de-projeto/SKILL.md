@@ -21,5 +21,6 @@ Cada página é uma referência pública: alguém deve conseguir entender o prob
    ```html
    <a class="cartao" href="/projetos/<slug>/"><strong>Título</strong>Uma frase sobre o problema.</a>
    ```
-6. Confira no celular: `python3 -m http.server 8000 -d site` e abra com largura de 390px. Nada pode rolar para o lado.
-7. Abra um PR; a prévia aparece no Cloudflare Pages.
+6. Versão em inglês: crie `site/en/projetos/<slug>/index.html` com o mesmo HTML traduzido (`<html lang="en">`, canonical e `og:url` em `/en/`, `og:locale` `en_US` com `og:locale:alternate` `pt_BR`, links internos para `/en/...`). As duas páginas levam o bloco `hreflang` do modelo, e as duas URLs entram no `site/sitemap.xml` com os `xhtml:link`. Adicione também o cartão em `site/en/projetos/index.html` e, se for o caso, em `site/en/index.html`.
+7. Confira no celular: `python3 -m http.server 8000 -d site` e abra com largura de 390px. Nada pode rolar para o lado.
+8. Abra um PR; a prévia aparece no Cloudflare Pages.

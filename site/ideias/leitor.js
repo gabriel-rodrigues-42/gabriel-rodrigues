@@ -7,7 +7,28 @@
   "use strict";
 
   const IDEIAS = window.IDEIAS || [];
+  // Idioma: inglês na versão /en/ideias/ (<html lang="en">), que carrega ideias-en.js no lugar de ideias.js.
+  const EN = /^en\b/i.test(document.documentElement.lang);
   const ESTADOS = { "rascunho": "", "em teste": "azul", "pronta para postar": "amarelo", "no ar": "" };
+  // Nome do estado como aparece no selo (em ideias-en.js o estado continua em português).
+  const NOME_ESTADO = EN ? { "rascunho": "draft", "em teste": "testing", "pronta para postar": "ready to post", "no ar": "live" } : {};
+  const T = EN ? {
+    ouvir: "Listen to the idea ", problema: "The problem", proposta: "The proposal", criticas: "Criticism and answers",
+    critica: "Criticism", resposta: "Answer", emConstrucao: "Answer under construction.", conversar: "Let's talk",
+    copiar: "Copy to post", copiado: "Copied!", copie: "Copy the text:", hashtag: "To talk about it online, use the hashtag ",
+    semVoz: "Your browser can't read aloud. The captions move on their own at reading pace.",
+    semVozIdioma: "I couldn't find an English voice on this device. I'll try reading anyway.",
+    fim: "The end. Thanks for listening!", ideia: (a, b) => `Idea ${a} of ${b} · `, frase: (a, b) => `sentence ${a} of ${b}`,
+    pausar: "Pause", continuar: "Resume", todas: "Listen to all", deNovo: "Again", outroPais: "",
+  } : {
+    ouvir: "Ouvir a ideia ", problema: "O problema", proposta: "A proposta", criticas: "Críticas e respostas",
+    critica: "Crítica", resposta: "Resposta", emConstrucao: "Resposta em construção.", conversar: "Pra conversar",
+    copiar: "Copiar para postar", copiado: "Copiado!", copie: "Copie o texto:", hashtag: "Pra conversar nas redes, use a hashtag ",
+    semVoz: "Seu navegador não lê em voz alta. As legendas passam sozinhas no ritmo de leitura.",
+    semVozIdioma: "Não achei uma voz em português neste aparelho. Vou tentar ler mesmo assim.",
+    fim: "Fim. Obrigado por ouvir!", ideia: (a, b) => `Ideia ${a} de ${b} · `, frase: (a, b) => `frase ${a} de ${b}`,
+    pausar: "Pausar", continuar: "Continuar", todas: "Ouvir todas", deNovo: "De novo", outroPais: " · Portugal",
+  };
   const PALAVRAS_POR_MINUTO = 165; // ritmo das legendas quando não há voz
 
   const $ = (id) => document.getElementById(id);
@@ -61,14 +82,14 @@
       const topo = criar("div", "ideia-topo", art);
       const cab = criar("div", "", topo);
       const selo = criar("span", "selo " + (ESTADOS[ideia.estado] || ""), cab);
-      selo.textContent = ideia.estado || "rascunho";
+      selo.textContent = NOME_ESTADO[ideia.estado || "rascunho"] || ideia.estado || "rascunho";
       const h2 = criar("h2", "frase", cab);
       h2.textContent = ideia.titulo;
       registrar(h2, ideia.titulo + ".", n);
 
       const btn = criar("button", "tocar", topo);
       btn.type = "button";
-      btn.setAttribute("aria-label", "Ouvir a ideia " + ideia.titulo);
+      btn.setAttribute("aria-label", T.ouvir + ideia.titulo);
       btn.setAttribute("aria-pressed", "false");
       btn.innerHTML = '<svg class="icone"><use href="#i-play"/></svg>';
       btn.addEventListener("click", () => alternar(porIdeia[n], n));
@@ -76,23 +97,23 @@
 
       if (ideia.gancho) escrever(criar("p", "gancho", art), ideia.gancho, n);
 
-      secao(art, "O problema", n);
+      secao(art, T.problema, n);
       (ideia.problema || []).forEach((p) => escrever(criar("p", "", art), p, n));
 
-      secao(art, "A proposta", n);
+      secao(art, T.proposta, n);
       (ideia.proposta || []).forEach((p) => escrever(criar("p", "", art), p, n));
 
       if (ideia.criticas && ideia.criticas.length) {
-        secao(art, "Críticas e respostas", n);
+        secao(art, T.criticas, n);
         ideia.criticas.forEach((c) => {
           const box = criar("div", "critica", art);
-          criar("span", "rotulo", box).textContent = "Crítica";
-          escrever(criar("p", "pergunta-critica", box), c.critica, n, "Crítica:");
-          criar("span", "rotulo", box).textContent = "Resposta";
+          criar("span", "rotulo", box).textContent = T.critica;
+          escrever(criar("p", "pergunta-critica", box), c.critica, n, T.critica + ":");
+          criar("span", "rotulo", box).textContent = T.resposta;
           if (c.resposta) {
-            escrever(criar("p", "", box), c.resposta, n, "Resposta:");
+            escrever(criar("p", "", box), c.resposta, n, T.resposta + ":");
           } else {
-            escrever(criar("p", "pendente", box), "Resposta em construção.", n);
+            escrever(criar("p", "pendente", box), T.emConstrucao, n);
           }
         });
       }
@@ -100,9 +121,9 @@
       if (ideia.pergunta) {
         const conversa = criar("div", "conversa", art);
         const h3 = criar("h3", "frase", conversa);
-        h3.textContent = "Pra conversar";
+        h3.textContent = T.conversar;
         h3.style.marginTop = "0";
-        registrar(h3, "Pra conversar.", n);
+        registrar(h3, T.conversar + ".", n);
         escrever(criar("p", "", conversa), ideia.pergunta, n);
         if (ideia.hashtag) {
           const tags = criar("div", "hashtags", conversa);
@@ -111,9 +132,9 @@
           });
           const copiar = criar("button", "botao secundario copiar", tags);
           copiar.type = "button";
-          copiar.textContent = "Copiar para postar";
+          copiar.textContent = T.copiar;
           copiar.addEventListener("click", () => copiarPost(ideia, copiar));
-          registrarSo(tags, "Pra conversar nas redes, use a hashtag " + falarHashtag(ideia.hashtag) + ".", n);
+          registrarSo(tags, T.hashtag + falarHashtag(ideia.hashtag) + ".", n);
         }
       }
 
@@ -140,7 +161,7 @@
   }
 
   function textoDoPost(ideia) {
-    const url = location.origin + "/ideias/#" + ideia.id;
+    const url = location.origin + (EN ? "/en" : "") + "/ideias/#" + ideia.id;
     const tags = [ideia.hashtag, window.HASHTAG_GERAL].filter(Boolean).join(" ");
     return ideia.titulo + "\n\n" + ideia.pergunta + "\n\n" + url + "\n\n" + tags;
   }
@@ -148,8 +169,8 @@
   function copiarPost(ideia, botao) {
     const texto = textoDoPost(ideia);
     const pronto = () => {
-      botao.textContent = "Copiado!";
-      setTimeout(() => (botao.textContent = "Copiar para postar"), 1800);
+      botao.textContent = T.copiado;
+      setTimeout(() => (botao.textContent = T.copiar), 1800);
     };
     if (navigator.clipboard && window.isSecureContext) {
       navigator.clipboard.writeText(texto).then(pronto, () => copiarAntigo(texto, pronto));
@@ -164,7 +185,7 @@
     area.style.position = "fixed";
     area.style.opacity = "0";
     area.select();
-    try { document.execCommand("copy"); pronto(); } catch (e) { window.prompt("Copie o texto:", texto); }
+    try { document.execCommand("copy"); pronto(); } catch (e) { window.prompt(T.copie, texto); }
     area.remove();
   }
 
@@ -182,19 +203,21 @@
 
   // Vozes "de brincadeira" do macOS (e algumas antigas): ficam fora da lista, ninguém entende.
   const NOVIDADE = /^(Albert|Bad News|Bahh|Bells|Boing|Bubbles|Cellos|Eddy|Flo|Fred|Good News|Grandma|Grandpa|Jester|Junior|Kathy|Organ|Ralph|Reed|Rocko|Sandy|Shelley|Superstar|Trinoids|Whisper|Wobble|Zarvox)\b/i;
-  const CHAVE_VOZ = "ideias-voz";
+  const CHAVE_VOZ = EN ? "ideias-voz-en" : "ideias-voz";
+  // Idioma principal de cada versão: pt-BR (Portugal no fim da lista) ou inglês (EUA e Reino Unido primeiro).
+  const PRINCIPAL = EN ? /^en[-_](US|GB)$/i : /^pt[-_]BR$/i;
 
   // Quanto maior, melhor. As vozes neurais (Edge, Chrome, macOS Premium) vêm primeiro;
   // as de Portugal ficam no fim, mas continuam na lista.
   function pontuar(v) {
     const nome = v.name;
-    const br = /^pt[-_]BR$/i.test(v.lang);
+    const br = PRINCIPAL.test(v.lang);
     let p = br ? 50 : 10;
     if (/online|natural|neural/i.test(nome)) p += 50;          // Edge: Francisca, Antonio, Thalita
     else if (/^Google/i.test(nome)) p += 40;                    // Chrome: "Google português do Brasil"
     else if (/premium/i.test(nome)) p += 38;                    // macOS: Luciana (Premium)
     else if (/enhanced|melhorad|aprimorad/i.test(nome)) p += 30; // macOS: Luciana/Felipe (Enhanced)
-    if (/luciana|francisca|thalita/i.test(nome)) p += 2;
+    if (/luciana|francisca|thalita|aria|jenny|samantha/i.test(nome)) p += 2;
     if (v.localService === false) p += 1;
     return p;
   }
@@ -202,12 +225,12 @@
   function rotulo(v) {
     let nome = v.name
       .replace(/^(Microsoft|Google)\s+/i, "")
-      .replace(/\s*[-–]\s*Portugu[eê]s?e?.*$/i, "")
-      .replace(/\s*\((Portugu[eê]s?e?|Português)[^)]*\)+\s*$/i, "")
+      .replace(/\s*[-–]\s*(Portugu[eê]s?e?|English).*$/i, "")
+      .replace(/\s*\((Portugu[eê]s?e?|Português|English)[^)]*\)+\s*$/i, "")
       .replace(/\s*Online\s*\(Natural\)/i, " (natural)")
       .trim();
-    if (/^português do brasil$/i.test(nome)) nome = "Google (natural)";
-    if (!/^pt[-_]BR$/i.test(v.lang)) nome += " · Portugal";
+    if (/^(português do brasil|US English|UK English (Female|Male))$/i.test(nome)) nome = "Google " + (EN ? nome.replace(/ English/i, "") : "(natural)");
+    if (!PRINCIPAL.test(v.lang)) nome += EN ? " · " + v.lang.replace("_", "-") : T.outroPais;
     return nome.slice(0, 36);
   }
 
@@ -221,7 +244,7 @@
   function carregarVozes() {
     if (!synth) return;
     vozes = synth.getVoices()
-      .filter((v) => /^pt/i.test(v.lang) && !NOVIDADE.test(v.name))
+      .filter((v) => (EN ? /^en/i : /^pt/i).test(v.lang) && !NOVIDADE.test(v.name))
       .sort((a, b) => pontuar(b) - pontuar(a));
     const sel = $("c-voz");
     const atual = (voz && voz.name) || lerPreferida();
@@ -241,8 +264,8 @@
     const aviso = $("aviso");
     // Só vozes simples (sem neural/Premium)? Mostra a dica de como instalar uma melhor.
     $("dica-voz").hidden = !!synth && vozes.some((v) => pontuar(v) >= 80);
-    if (!synth) aviso.textContent = "Seu navegador não lê em voz alta. As legendas passam sozinhas no ritmo de leitura.";
-    else if (synth.getVoices().length && !vozes.length) aviso.textContent = "Não achei uma voz em português neste aparelho. Vou tentar ler mesmo assim.";
+    if (!synth) aviso.textContent = T.semVoz;
+    else if (synth.getVoices().length && !vozes.length) aviso.textContent = T.semVozIdioma;
     else aviso.textContent = "";
   }
 
@@ -305,7 +328,7 @@
       estado.tocando = false;
       estado.pos = estado.fila.length;
       marcar(null);
-      $("legenda-texto").textContent = "Fim. Obrigado por ouvir!";
+      $("legenda-texto").textContent = T.fim;
       $("legenda-barra").style.width = "100%";
       atualizarBotoes();
       return;
@@ -323,7 +346,7 @@
 
     if (synth) {
       const u = new SpeechSynthesisUtterance(item.fala);
-      u.lang = "pt-BR";
+      u.lang = EN ? "en-US" : "pt-BR";
       if (voz) u.voice = voz;
       u.rate = rate;
       let teveFronteira = false;
@@ -386,8 +409,8 @@
     $("legenda-barra").style.width = (n ? (estado.pos / n) * 100 : 0) + "%";
     const ideias = [...new Set(estado.fila.map((i) => falas[i].ideia))];
     $("legenda-progresso").textContent =
-      (ideias.length > 1 ? "Ideia " + (ideias.indexOf(item.ideia) + 1) + " de " + ideias.length + " · " : "") +
-      "frase " + (estado.pos + 1) + " de " + n;
+      (ideias.length > 1 ? T.ideia(ideias.indexOf(item.ideia) + 1, ideias.length) : "") +
+      T.frase(estado.pos + 1, n);
     marcar(item);
     return palavras;
   }
@@ -423,10 +446,10 @@
     const todas = $("ouvir-todas");
     const tocandoTodas = estado.tocando && estado.ideiaBotao === "todas";
     todas.innerHTML = '<svg class="icone"><use href="#i-' + (tocandoTodas ? "pause" : "play") + '"/></svg>' +
-      (tocandoTodas ? "Pausar" : estado.ideiaBotao === "todas" && estado.pos < estado.fila.length ? "Continuar" : "Ouvir todas");
+      (tocandoTodas ? T.pausar : estado.ideiaBotao === "todas" && estado.pos < estado.fila.length ? T.continuar : T.todas);
     const pausa = $("c-pausa");
     pausa.innerHTML = '<svg class="icone"><use href="#i-' + (estado.tocando ? "pause" : "play") + '"/></svg><span>' +
-      (estado.tocando ? "Pausar" : estado.pos >= estado.fila.length ? "De novo" : "Continuar") + "</span>";
+      (estado.tocando ? T.pausar : estado.pos >= estado.fila.length ? T.deNovo : T.continuar) + "</span>";
   }
 
   // ---------- Início ----------
