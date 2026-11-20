@@ -11,6 +11,8 @@
 //   nome-uf       nome do <input hidden> com a UF ("EX" para quem mora fora, se tiver `exterior`)
 //   ibge          código IBGE já escolhido (ex.: vindo do endereço da página)
 //   exterior      mostra a opção "Moro fora do Brasil"
+//   autocompletar deixa o navegador preencher a cidade salva (autocomplete="address-level2");
+//                 o nome preenchido é casado com a lista e a UF vem junto
 //   placeholder   texto de exemplo do campo
 //
 // Avisa a página com o evento "gr-cidade" (detail = { ibge, nome, uf, pop } ou null).
@@ -90,7 +92,7 @@
           <div class="gr-cidade-busca">
             ${ICONE_BUSCA}
             <input id="${id}" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false"
-              aria-controls="${lista}" autocomplete="off" autocapitalize="words" spellcheck="false" enterkeyhint="done"
+              aria-controls="${lista}" autocomplete="${this.hasAttribute("autocompletar") ? "address-level2" : "off"}" autocapitalize="words" spellcheck="false" enterkeyhint="done"
               maxlength="80" placeholder="${this.getAttribute("placeholder") || "Digite o nome da sua cidade"}">
             <button type="button" class="gr-cidade-limpar" aria-label="Apagar a cidade" hidden>×</button>
             <ul class="gr-cidade-lista" id="${lista}" role="listbox" aria-label="Cidades encontradas" hidden></ul>
@@ -130,9 +132,14 @@
       }
 
       this.campo.addEventListener("focus", () => this.abrir());
-      this.campo.addEventListener("input", () => {
+      this.campo.addEventListener("input", (e) => {
         if (this.valor) this.definir(null, { manterTexto: true });
-        this.abrir();
+        // Preenchimento automático do navegador não é digitação: chega sem inputType (Chrome)
+        // ou como insertReplacementText (Safari), às vezes sem foco no campo.
+        const autofill = !e.inputType || e.inputType === "insertReplacementText";
+        if (autofill && document.activeElement !== this.campo) this.resolver();
+        else if (autofill) this.abrir().then(() => this.resolver({ silencioso: true }));
+        else this.abrir();
       });
       this.campo.addEventListener("keydown", (e) => this.teclado(e));
       this.campo.addEventListener("blur", () => setTimeout(() => this.sair(), 150));
@@ -268,9 +275,14 @@
     }
 
     // Saiu do campo sem escolher: se o texto aponta para uma cidade só, escolhe ela.
-    async sair() {
-      if (this.contains(document.activeElement) && document.activeElement === this.campo) return;
+    sair() {
+      if (document.activeElement === this.campo) return;
       this.fechar();
+      this.resolver();
+    }
+
+    // Casa o texto do campo (digitado ou preenchido pelo navegador) com uma cidade da lista.
+    async resolver({ silencioso = false } = {}) {
       if (this.valor || !this.cepCaixa.hidden || !chave(this.campo.value)) return;
       let lista;
       try { lista = await municipios(); } catch { return; }
@@ -279,7 +291,7 @@
       const exatas = achadas.filter((m) => m.k === k);
       const unica = exatas.length === 1 ? exatas[0] : achadas.length === 1 ? achadas[0] : null;
       if (unica) this.definir(unica);
-      else this.avisar(exatas.length > 1 ? "Tem mais de uma cidade com esse nome. Escolha a sua na lista." : "Escolha sua cidade na lista.");
+      else if (!silencioso) this.avisar(exatas.length > 1 ? "Tem mais de uma cidade com esse nome. Escolha a sua na lista." : "Escolha sua cidade na lista.");
     }
 
     // ------------------------------------------------------------ localização
