@@ -22,7 +22,7 @@ gr-propostas { display: block; }
 .slot:nth-child(even) > a:hover { transform: translateY(-4px) rotate(.6deg); }
 .slot > a:focus-visible { outline: 3px solid var(--azul); outline-offset: 3px; }
 
-/* Palco: fundo colorido com uma bolha orgânica e a miniatura de massinha por cima. */
+/* Palco: fundo colorido com uma bolha orgânica e a ilustração plana por cima. */
 .slot-palco { --palco: var(--azul-claro); position: relative; aspect-ratio: 5 / 4; background: var(--palco); overflow: hidden; isolation: isolate; }
 .slot[data-cor="verde"] .slot-palco { --palco: var(--verde-claro); }
 .slot[data-cor="amarelo"] .slot-palco { --palco: var(--amarelo-claro); }
@@ -35,7 +35,7 @@ gr-propostas { display: block; }
 }
 .slot-palco img {
   position: absolute; inset: 10% 8% 4%; width: 84%; height: 86%; object-fit: contain;
-  transition: transform .25s ease; filter: drop-shadow(0 6px 0 rgba(0, 39, 118, .10));
+  transition: transform .25s ease;
 }
 .slot > a:hover .slot-palco img { transform: translateY(-6px) scale(1.06); }
 

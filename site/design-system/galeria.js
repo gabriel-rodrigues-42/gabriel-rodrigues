@@ -30,7 +30,7 @@
     todas: { titulo: "Ouça todas as ideias", gancho: "Todas as ideias, para ler ou ouvir com legendas. Cada uma com as críticas mais duras e a minha resposta.", acao: "Ler ou ouvir" },
   };
 
-  const IMG_PADRAO = "/projetos/img/ideia.webp";
+  const IMG_PADRAO = "/projetos/img/ideia.svg";
   const local = (href) => (EN && href.startsWith("/") ? "/en" + href : href);
 
   function el(tag, classe, texto) {
