@@ -1,0 +1,227 @@
+"""Desenha as miniaturas da galeria de propostas e a capa de /projetos/ em SVG.
+
+Estilo: ilustração editorial plana. Formas geométricas simples, sem brilho, sem 3D, sem texto,
+cores lidas direto de site/design-system/tokens.css (mudou o token, rode de novo).
+Fundo transparente: o palco do cartão (galeria.css) dá a cor de fundo.
+
+Uso:
+    python3 scripts/miniaturas/desenhar.py            # todas
+    python3 scripts/miniaturas/desenhar.py ideia      # só uma
+
+Saída: site/projetos/img/<id>.svg (700x560). Proposta nova: escreva uma função aqui,
+registre em DESENHOS e aponte o campo img de site/projetos/propostas.js para o SVG.
+"""
+import math, os, re, sys
+
+RAIZ = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+TOKENS = open(os.path.join(RAIZ, "site", "design-system", "tokens.css"), encoding="utf-8").read()
+C = {n: v for n, v in re.findall(r"--([a-z-]+):\s*(#[0-9a-fA-F]{6})", TOKENS)}
+W, H = 700, 560
+
+
+def svg(titulo, corpo):
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" '
+            f'role="img"><title>{titulo}</title>{corpo}</svg>\n')
+
+
+def ret(x, y, w, h, cor, r=0, extra=""):
+    return f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{r}" fill="{C[cor]}"{extra}/>'
+
+
+def circ(cx, cy, r, cor, extra=""):
+    return f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{C[cor]}"{extra}/>'
+
+
+def cam(d, cor, extra=""):
+    return f'<path d="{d}" fill="{C[cor]}"{extra}/>'
+
+
+def traco(d, cor, w, extra="", ponta="round"):
+    return f'<path d="{d}" fill="none" stroke="{C[cor]}" stroke-width="{w}" stroke-linecap="{ponta}" stroke-linejoin="round"{extra}/>'
+
+
+def linhas(x, y, larguras, cor, passo=18, alt=8):
+    """Linhas de texto falsas, como num documento."""
+    return "".join(ret(x, y + i * passo, w, alt, cor, alt / 2) for i, w in enumerate(larguras))
+
+
+def engrenagem(cx, cy, r, dentes, cor, furo):
+    pts = []
+    for i in range(dentes * 2):
+        a0 = math.pi * 2 * i / (dentes * 2)
+        a1 = math.pi * 2 * (i + 1) / (dentes * 2)
+        raio = r if i % 2 == 0 else r * .8
+        for a in (a0 + .06, a1 - .06):
+            pts.append(f"{cx + raio * math.cos(a):.1f},{cy + raio * math.sin(a):.1f}")
+    return f'<polygon points="{" ".join(pts)}" fill="{C[cor]}"/>' + circ(cx, cy, r * .36, furo)
+
+
+def estrela(cx, cy, r, cor):
+    pts = []
+    for i in range(10):
+        a = -math.pi / 2 + math.pi * i / 5
+        rr = r if i % 2 == 0 else r * .45
+        pts.append(f"{cx + rr * math.cos(a):.1f},{cy + rr * math.sin(a):.1f}")
+    return f'<polygon points="{" ".join(pts)}" fill="{C[cor]}"/>'
+
+
+def chao(x, y, w, cor="azul"):
+    return ret(x, y, w, 12, cor, 6)
+
+
+def congresso(x, y, esc=1.0, cor="azul-medio", claro="branco"):
+    """Silhueta do Congresso Nacional: duas torres, a cúpula do Senado e a cuba da Câmara. x, y = pé do centro."""
+    s = esc
+    return (f'<g transform="translate({x} {y}) scale({s})">'
+            + ret(-150, -14, 300, 14, cor, 4)
+            + ret(-22, -150, 18, 136, cor) + ret(4, -150, 18, 136, cor) + ret(-22, -100, 44, 8, cor)
+            + cam("M-130,-14 Q-95,-62 -60,-14 Z", claro) + traco("M-130,-14 Q-95,-62 -60,-14", cor, 6)
+            + cam("M55,-44 L145,-44 Q132,-14 100,-14 Q68,-14 55,-44 Z", cor)
+            + "</g>")
+
+
+def casa(x, y, w, corpo="azul-medio", telhado="verde", janela="amarelo"):
+    h = w * .7
+    return (cam(f"M{x - 8},{y - h} L{x + w / 2},{y - h - w * .45} L{x + w + 8},{y - h} Z", telhado)
+            + ret(x, y - h, w, h, corpo) + ret(x + w * .38, y - h * .55, w * .24, h * .55, telhado)
+            + ret(x + w * .12, y - h * .8, w * .18, w * .18, janela, 2) + ret(x + w * .7, y - h * .8, w * .18, w * .18, janela, 2))
+
+
+def fabrica(x, y, w, h):
+    dente = w / 3
+    telhado = f"M{x},{y - h} " + " ".join(f"L{x + dente * i},{y - h - 50} L{x + dente * (i + 1)},{y - h}" for i in range(3)) + " Z"
+    janelas = "".join(ret(x + 22 + i * (w - 44) / 3, y - h + 30, (w - 44) / 3 - 18, 36, "amarelo", 4) for i in range(3))
+    return (ret(x + w - 70, y - h - 120, 36, 120, "azul") + ret(x + w - 70, y - h - 120, 36, 16, "verde")
+            + cam(telhado, "azul") + ret(x, y - h, w, h, "azul-medio") + janelas
+            + ret(x + w / 2 - 26, y - 64, 52, 64, "verde", 4))
+
+
+def arvore(x, y, r, cor="verde-escuro"):
+    return ret(x - 4, y - r * 1.4, 8, r * 1.4, "azul") + circ(x, y - r * 1.6, r, cor)
+
+
+# ---------- Miniaturas ----------
+
+def galera_club():
+    tel = (ret(240, 50, 210, 420, "azul", 34) + ret(254, 72, 182, 376, "branco", 22)
+           + circ(345, 140, 34, "verde-claro") + circ(345, 132, 12, "verde") + cam("M323,162 Q345,136 367,162 Z", "verde")
+           + ret(295, 188, 100, 12, "azul", 6) + ret(312, 208, 66, 8, "areia", 4)
+           + ret(274, 236, 142, 38, "amarelo", 19) + ret(300, 251, 90, 8, "azul", 4)
+           + ret(274, 284, 142, 38, "azul-claro", 19) + ret(300, 299, 90, 8, "azul-medio", 4)
+           + ret(274, 332, 142, 38, "azul-claro", 19) + ret(300, 347, 70, 8, "azul-medio", 4)
+           + ret(274, 392, 142, 40, "verde", 20) + traco("M330,412 L341,423 L362,402", "branco", 6))
+    balao = (cam("M462,120 h120 a24,24 0 0 1 24,24 v56 a24,24 0 0 1 -24,24 h-80 l-28,26 v-26 h-12 a24,24 0 0 1 -24,-24 v-56 a24,24 0 0 1 24,-24 Z", "verde")
+             + circ(492, 172, 8, "branco") + circ(522, 172, 8, "branco") + circ(552, 172, 8, "branco"))
+    moeda = circ(170, 330, 54, "amarelo-escuro") + circ(170, 324, 54, "amarelo") + circ(170, 324, 36, "amarelo-escuro") + circ(170, 324, 28, "amarelo")
+    return svg("Celular com perfil, links, pagamento e conversa", moeda + tel + balao
+               + estrela(560, 330, 14, "amarelo-escuro") + estrela(130, 180, 10, "azul-medio"))
+
+
+def reindustrializacao():
+    barras = (ret(505, 330, 34, 110, "verde", 6) + ret(551, 270, 34, 170, "verde", 6) + ret(597, 200, 34, 240, "amarelo-escuro", 6))
+    seta = traco("M470,300 L540,240 L580,262 L640,170", "azul", 12) + cam("M650,152 L652,200 L612,176 Z", "azul")
+    return svg("Fábrica com gráfico de crescimento", engrenagem(150, 170, 52, 10, "amarelo-escuro", "amarelo-claro")
+               + engrenagem(220, 120, 32, 8, "verde", "verde-claro")
+               + fabrica(110, 440, 360, 170) + barras + seta + chao(80, 440, 570))
+
+
+def desafio_dumont():
+    silhueta = "M140,330 L140,284 Q140,262 162,258 L252,248 L302,198 Q312,188 326,188 L432,188 Q446,188 456,198 L502,246 L560,256 Q578,260 578,280 L578,330 Z"
+    fatias = [(140, 288, "verde", 0), (288, 470, "amarelo", -18), (470, 578, "azul-medio", 0)]
+    defs, corpo = "", ""
+    for i, (x0, x1, cor, dy) in enumerate(fatias):
+        defs += f'<clipPath id="f{i}"><rect x="{x0 + (5 if i else 0)}" y="0" width="{x1 - x0 - (5 if i else 0) - (5 if i < 2 else 0)}" height="{H}"/></clipPath>'
+        janelas = (cam("M300,246 L330,208 L376,208 L376,246 Z", "azul-claro") + cam("M388,208 L430,208 Q440,208 447,216 L474,246 L388,246 Z", "azul-claro")) if i == 1 else ""
+        corpo += f'<g clip-path="url(#f{i})"><g transform="translate(0 {dy})">' + cam(silhueta, cor) + janelas + "</g></g>"
+    setas = traco("M380,150 L380,118", "azul-medio", 6) + traco("M368,130 L380,118 L392,130", "azul-medio", 6)
+    chassi = ret(130, 330, 458, 30, "azul", 15)
+    rodas = "".join(circ(x, 368, 46, "texto") + circ(x, 368, 18, "areia") for x in (226, 492))
+    chave = (f'<g transform="rotate(-35 600 140)">' + ret(586, 140, 28, 110, "azul", 14)
+             + f'<circle cx="600" cy="128" r="30" fill="none" stroke="{C["azul"]}" stroke-width="22" stroke-dasharray="150 40" transform="rotate(-70 600 128)"/></g>')
+    return svg("Carro modular com painéis de cores diferentes", f"<defs>{defs}</defs>" + chassi + corpo + rodas + setas + chave + chao(100, 414, 500))
+
+
+def cartorio_digital():
+    pilha = ""
+    for i, ang in enumerate((-12, -6, 0, 6)):
+        pilha += (f'<g transform="rotate({ang} 190 270)">' + ret(110, 150, 170, 220, "areia" if i < 3 else "branco", 12)
+                  + (linhas(132, 182, [110, 126, 96, 120, 80, 110, 70], "azul-claro") + circ(240, 330, 20, "livre-coral") if i == 3 else "") + "</g>")
+    seta = traco("M310,270 L380,270", "azul-medio", 14) + cam("M400,270 L372,248 L372,292 Z", "azul-medio")
+    doc = (ret(420, 100, 210, 290, "branco", 16) + ret(420, 100, 210, 42, "azul", 16) + ret(420, 126, 210, 16, "azul")
+           + casa(480, 250, 90) + linhas(450, 278, [150, 130, 150, 90], "azul-claro"))
+    selo = circ(612, 380, 44, "verde") + traco("M592,380 L606,394 L634,366", "branco", 9)
+    return svg("Pilha de papéis que vira um documento só, com a casa e um selo de aprovado", pilha + seta + doc + selo)
+
+
+def qual_caminho():
+    def estrada(d):
+        return traco(d, "azul-medio", 36) + traco(d, "amarelo", 5, ' stroke-dasharray="14 14"')
+    caminhos = ["M350,560 C350,470 350,420 350,370", "M350,370 C350,300 200,300 190,190",
+                "M350,370 C350,300 350,240 350,160", "M350,370 C350,300 500,300 510,190"]
+
+    def pino(x, y, cor):
+        return cam(f"M{x},{y + 46} C{x - 34},{y + 6} {x - 32},{y - 34} {x},{y - 34} C{x + 32},{y - 34} {x + 34},{y + 6} {x},{y + 46} Z", cor) + circ(x, y - 4, 13, "branco")
+    return svg("Estrada que se divide em três caminhos, cada um com um destino",
+               "".join(estrada(d) for d in caminhos) + pino(190, 130, "verde") + pino(350, 100, "amarelo-escuro") + pino(510, 130, "azul")
+               + arvore(110, 420, 26) + arvore(600, 400, 30) + arvore(560, 470, 20, "verde"))
+
+
+def leis_software():
+    doc = (ret(110, 90, 230, 320, "branco", 16) + ret(110, 90, 230, 46, "verde", 16) + ret(110, 120, 230, 16, "verde")
+           + linhas(140, 166, [170, 150, 170, 110], "azul-claro")
+           + traco("M180,290 L148,322 L180,354", "livre-roxo", 12) + traco("M270,290 L302,322 L270,354", "livre-roxo", 12)
+           + traco("M238,282 L212,362", "livre-roxo", 12))
+    cx, cy, r = 510, 330, 120
+
+    def arco(a0, a1, cor):
+        p = lambda a: (cx + r * math.cos(math.radians(a)), cy - r * math.sin(math.radians(a)))
+        (x0, y0), (x1, y1) = p(a0), p(a1)
+        return traco(f"M{x0:.1f},{y0:.1f} A{r},{r} 0 0 1 {x1:.1f},{y1:.1f}", cor, 34, ponta="butt")
+    medidor = (arco(180, 122, "livre-coral") + arco(118, 62, "amarelo") + arco(58, 0, "verde")
+               + traco(f"M{cx},{cy} L{cx + 80 * math.cos(math.radians(40)):.1f},{cy - 80 * math.sin(math.radians(40)):.1f}", "azul", 12)
+               + circ(cx, cy, 18, "azul"))
+    return svg("Documento de lei com sinais de código e um medidor de resultado", doc + medidor + chao(360, 352, 300))
+
+
+def canal_do_youtube():
+    tela = ret(110, 80, 480, 310, "azul", 26) + ret(130, 100, 440, 270, "azul-claro", 14)
+    cena = f'<clipPath id="t"><rect x="130" y="100" width="440" height="270" rx="14"/></clipPath><g clip-path="url(#t)">' + circ(400, 210, 60, "amarelo") + ret(130, 330, 440, 40, "verde-claro") + congresso(350, 332, .95) + "</g>"
+    pe = cam("M320,390 L380,390 L396,446 L304,446 Z", "azul-medio") + ret(250, 446, 200, 16, "azul", 8)
+    play = circ(560, 380, 54, "amarelo-escuro") + circ(560, 374, 54, "amarelo") + cam("M543,346 L543,402 L590,374 Z", "azul")
+    return svg("Tela com o Congresso Nacional e um botão de play", tela + cena + pe + play)
+
+
+def ideia():
+    raios = "".join(traco(f"M{350 + 150 * math.cos(math.radians(a)):.1f},{220 + 150 * math.sin(math.radians(a)):.1f} "
+                          f"L{350 + 185 * math.cos(math.radians(a)):.1f},{220 + 185 * math.sin(math.radians(a)):.1f}", "amarelo-escuro", 14)
+                    for a in (-180, -145, -110, -70, -35, 0))
+    lampada = (circ(350, 220, 118, "amarelo") + cam("M290,300 L410,300 L396,350 L304,350 Z", "amarelo")
+               + traco("M318,250 L334,200 L350,240 L366,200 L382,250", "amarelo-escuro", 8)
+               + traco("M334,300 L334,252 M366,300 L366,252", "amarelo-escuro", 8)
+               + ret(300, 352, 100, 22, "azul-medio", 11) + ret(306, 380, 88, 22, "azul-medio", 11) + ret(326, 408, 48, 20, "azul", 10))
+    return svg("Lâmpada acesa", raios + lampada + estrela(160, 380, 16, "verde") + estrela(540, 400, 12, "azul-medio"))
+
+
+def capa():
+    fundo = cam("M90,250 C80,140 190,70 320,80 C450,90 520,60 600,130 C680,200 650,320 640,400 C630,480 560,500 350,500 C160,500 100,470 90,400 C84,350 96,300 90,250 Z", "verde-claro")
+    return svg("O Congresso Nacional, uma fábrica, uma árvore e um carro sob o sol",
+               fundo
+               + circ(490, 190, 72, "amarelo")
+               + fabrica(92, 410, 140, 130) + congresso(430, 410, 1.15) + arvore(258, 410, 20)
+               + ret(76, 410, 568, 14, "azul", 7) + ret(110, 436, 500, 10, "areia", 5)
+               + ret(330, 422, 92, 26, "livre-coral", 13) + ret(348, 412, 50, 18, "livre-coral", 9) + circ(350, 450, 9, "texto") + circ(402, 450, 9, "texto")
+               + estrela(180, 140, 12, "amarelo-escuro") + estrela(590, 120, 10, "azul-medio"))
+
+
+DESENHOS = {
+    "galera-club": galera_club, "reindustrializacao": reindustrializacao, "desafio-dumont": desafio_dumont,
+    "cartorio-digital": cartorio_digital, "qual-caminho": qual_caminho, "leis-com-mentalidade-de-software": leis_software,
+    "canal-do-youtube": canal_do_youtube, "ideia": ideia, "capa": capa,
+}
+
+if __name__ == "__main__":
+    for pid in sys.argv[1:] or DESENHOS:
+        saida = os.path.join(RAIZ, "site", "projetos", "img", f"{pid}.svg")
+        with open(saida, "w", encoding="utf-8") as f:
+            f.write(DESENHOS[pid]())
+        print(saida)

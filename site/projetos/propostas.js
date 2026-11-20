@@ -5,9 +5,9 @@
 // Campos:
 // - id: o mesmo id de ideias.js, quando existir (a galeria não repete a ideia que já está aqui).
 // - href: endereço em português. Em inglês, a galeria põe /en na frente.
-// - img: miniatura em /projetos/img/ (WebP com fundo transparente, ~700x560, gerada no Recraft,
-//   estilo "digital_illustration / plastic": brinquedo de massinha sobre uma base azul redonda,
-//   cores da bandeira). Sem imagem, usa /projetos/img/ideia.webp.
+// - img: miniatura em /projetos/img/ (SVG 700x560, fundo transparente, ilustração editorial plana
+//   desenhada por scripts/miniaturas/desenhar.py com as cores de tokens.css). Sem imagem, usa
+//   /projetos/img/ideia.svg.
 // - cor: fundo do palco da miniatura. Uma de: verde, amarelo, azul, coral, turquesa, roxo.
 // - tipo: projeto, ferramenta ou ideia (vira o selo do cartão).
 // - fase: em que ponto está. 1 Ideia, 2 Estudo, 3 Proposta, 4 No ar.
@@ -20,7 +20,7 @@ window.PROPOSTAS = [
   {
     id: "galera-club",
     href: "/projetos/galera-club/",
-    img: "/projetos/img/galera-club.webp",
+    img: "/projetos/img/galera-club.svg",
     cor: "verde",
     tipo: "projeto",
     fase: 4,
@@ -33,7 +33,7 @@ window.PROPOSTAS = [
   {
     id: "reindustrializacao",
     href: "/projetos/reindustrializacao/",
-    img: "/projetos/img/reindustrializacao.webp",
+    img: "/projetos/img/reindustrializacao.svg",
     cor: "amarelo",
     tipo: "projeto",
     fase: 3,
@@ -46,7 +46,7 @@ window.PROPOSTAS = [
   {
     id: "desafio-dumont",
     href: "/projetos/desafio-dumont/",
-    img: "/projetos/img/desafio-dumont.webp",
+    img: "/projetos/img/desafio-dumont.svg",
     cor: "coral",
     tipo: "projeto",
     fase: 3,
@@ -59,7 +59,7 @@ window.PROPOSTAS = [
   {
     id: "cartorio-digital",
     href: "/projetos/cartorio-digital/",
-    img: "/projetos/img/cartorio-digital.webp",
+    img: "/projetos/img/cartorio-digital.svg",
     cor: "azul",
     tipo: "projeto",
     fase: 3,
@@ -72,7 +72,7 @@ window.PROPOSTAS = [
   {
     id: "qual-caminho",
     href: "/caminho/",
-    img: "/projetos/img/qual-caminho.webp",
+    img: "/projetos/img/qual-caminho.svg",
     cor: "turquesa",
     tipo: "ferramenta",
     fase: 4,
@@ -85,7 +85,7 @@ window.PROPOSTAS = [
   {
     id: "leis-com-mentalidade-de-software",
     href: "/ideias/#leis-com-mentalidade-de-software",
-    img: "/projetos/img/leis-com-mentalidade-de-software.webp",
+    img: "/projetos/img/leis-com-mentalidade-de-software.svg",
     cor: "roxo",
     tipo: "ideia",
     fase: 1,
@@ -98,7 +98,7 @@ window.PROPOSTAS = [
   {
     id: "canal-do-youtube",
     href: "/ideias/#canal-do-youtube",
-    img: "/projetos/img/canal-do-youtube.webp",
+    img: "/projetos/img/canal-do-youtube.svg",
     cor: "amarelo",
     tipo: "ideia",
     fase: 2,
