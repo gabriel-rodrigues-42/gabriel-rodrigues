@@ -27,6 +27,7 @@ Site gabriel-rodrigues.com, design system e vídeos do Gabriel Rodrigues, desenv
 - Padrões web: siga o [Modern Web Guidance do Chrome](https://developer.chrome.com/docs/modern-web-guidance). A meta de compatibilidade (Baseline target) deste projeto é Baseline Widely available: use HTML, CSS e JS nativos antes de bibliotecas.
 - Páginas precisam funcionar em 390px de largura sem rolagem lateral.
 - Números sempre com fonte oficial e ano.
+- Texto: linguagem simples, frases curtas, fato concreto antes de conclusão. Revise com a skill `escrita-pt-br` antes de publicar.
 - Pré-campanha: nada de pedido de voto, número de urna ou ataque a pessoas e partidos. Critique sistemas.
 - Inglês: mudou o texto de uma página, de `ideias.js` ou de `regras.js`? Mude também a versão em inglês. Página nova ganha a versão em `/en/` no mesmo PR.
 - SEO: toda página tem título único, descrição, canonical, Open Graph e Twitter (copie o bloco do `projetos/_modelo/`) e entra em `site/sitemap.xml`. Páginas com versão em inglês levam o bloco `hreflang` (pt-BR, en e x-default) nas duas versões, e as duas URLs entram no sitemap com os `xhtml:link`. Ícones e imagem de compartilhamento ficam na raiz de `site/` (`favicon.svg`, `og.jpg`).
@@ -39,6 +40,7 @@ Para criar ou melhorar uma ideia, edite `site/ideias/ideias.js` (o formato está
 
 ## Skills
 
+- `escrita-pt-br`: como escrever e revisar qualquer texto do site, dos vídeos e das redes (público de Goiás, linguagem simples, sem cara de texto de IA).
 - `novo-video`: do tema ao MP4, usando `blender-claymation`.
 - `pagina-de-projeto`: página de referência em `site/projetos/`.
 

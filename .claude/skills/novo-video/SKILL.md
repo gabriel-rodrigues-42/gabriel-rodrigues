@@ -14,7 +14,7 @@ As cenas são feitas no **Blender**, com a skill `blender-claymation` (em `.clau
 1. Combine com o Gabriel o tema e a **pergunta central** (uma só).
 2. Copie `videos/roteiros/_modelo.md` para `videos/roteiros/<slug>.md` e preencha.
    - 60 a 120 segundos. Gancho nos primeiros 5 segundos.
-   - Frases curtas, que uma pessoa de 14 anos entende. Explique o sistema como fluxo: entrada, etapas, saída, onde trava.
+   - Frases curtas, que uma pessoa de 14 anos entende. Revise com a skill `escrita-pt-br`. Explique o sistema como fluxo: entrada, etapas, saída, onde trava.
    - Todo número precisa de fonte oficial (gov.br, Câmara, Senado, IBGE, TSE, TCU). Sem fonte, não entra.
 3. **Regras de pré-campanha** (Lei 9.504/97, art. 36-A): pode falar de ideias e projetos; **não pode** pedir voto, dizer que é candidato nem usar número de urna. Critique sistemas, nunca pessoas ou partidos. Se tiver dúvida, marque no roteiro e pergunte ao Gabriel.
 4. Mostre o roteiro ao Gabriel e espere aprovação antes de animar.
