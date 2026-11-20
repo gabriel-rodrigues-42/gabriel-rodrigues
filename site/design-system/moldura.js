@@ -10,7 +10,7 @@
   const MENU = [
     { href: "/#publicacoes", texto: "Projetos e ideias", ativo: (p) => p.startsWith("/projetos/") || p.startsWith("/ideias/") },
     { href: "/caminho/", texto: "Caminho", ativo: (p) => p.startsWith("/caminho/") },
-    { href: "/#sobre", texto: "Sobre", ativo: () => false },
+    { href: "/sobre/", texto: "Sobre", ativo: (p) => p.startsWith("/sobre/") },
   ];
 
   // Logo do Gabriel: um G com duas pessoas e estrelas. As cores vêm de tokens.css
