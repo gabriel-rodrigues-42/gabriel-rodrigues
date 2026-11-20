@@ -13,7 +13,7 @@
 
   const T = EN ? {
     missao: "Software developer in Goiânia, Brazil. I study politics to bring the way software engineering works into government: measure, test, fix and show the code.",
-    menu: ["Projects and ideas", "Path", "About"],
+    menu: ["Proposals", "Path", "About"],
     menuRotulo: "Main menu",
     apoiar: "Support",
     marca: "Gabriel Rodrigues, home page",
@@ -27,7 +27,7 @@
     idiomaRotulo: "Language",
   } : {
     missao: "Desenvolvedor de software em Goiânia (GO). Estudo política para levar o jeito de trabalhar da engenharia de software para o governo: medir, testar, corrigir e mostrar o código.",
-    menu: ["Projetos e ideias", "Caminho", "Sobre"],
+    menu: ["Propostas", "Caminho", "Sobre"],
     menuRotulo: "Menu principal",
     apoiar: "Apoiar",
     marca: "Gabriel Rodrigues, página inicial",
@@ -42,7 +42,7 @@
   };
 
   const MENU = [
-    { href: RAIZ + "#publicacoes", texto: T.menu[0], ativo: (p) => p.startsWith("/projetos/") || p.startsWith("/ideias/") },
+    { href: RAIZ + "projetos/", texto: T.menu[0], ativo: (p) => p.startsWith("/projetos/") || p.startsWith("/ideias/") },
     { href: RAIZ + "caminho/", texto: T.menu[1], ativo: (p) => p.startsWith("/caminho/") },
     { href: RAIZ + "sobre/", texto: T.menu[2], ativo: (p) => p.startsWith("/sobre/") },
   ];

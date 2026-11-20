@@ -14,7 +14,7 @@ h1, h2, h3, h4, p, li, dd, dt, a, strong, span, label { overflow-wrap: break-wor
 h1, h2, h3 { hyphens: auto; }
 
 /* ---------- Cabeçalho (mobile first) ----------
-   Celular: logo + botão Apoiar na primeira linha, menu embaixo.
+   Celular: logo + botão Apoiar na primeira linha, menu centralizado embaixo.
    A partir de 720px: logo, menu e Apoiar numa linha só, fixo no topo. */
 .moldura-topo { background: var(--creme-vidro); border-bottom: 2px solid var(--azul-claro); }
 .moldura-topo-dentro {
@@ -25,7 +25,7 @@ h1, h2, h3 { hyphens: auto; }
 .moldura-marca { grid-area: marca; display: flex; align-items: center; gap: var(--espaco-3); text-decoration: none; color: var(--azul); min-width: 0; }
 .moldura-logo { display: block; width: 48px; height: 48px; flex: none; }
 .moldura-oculto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
-.moldura-menu { grid-area: menu; display: flex; flex-wrap: wrap; gap: var(--espaco-1) var(--espaco-2); margin-left: -10px; }
+.moldura-menu { grid-area: menu; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--espaco-1) var(--espaco-2); }
 .moldura-menu a, .moldura-apoiar {
   font-size: var(--tamanho-2); font-weight: var(--peso-forte); color: var(--azul); text-decoration: none;
   padding: 6px 10px; border-radius: var(--forma-pilula); white-space: nowrap;
@@ -50,7 +50,7 @@ h1, h2, h3 { hyphens: auto; }
   .moldura-topo { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
   .moldura-topo-dentro { grid-template-columns: minmax(0, 1fr) auto auto; grid-template-areas: "marca menu apoiar"; padding: var(--espaco-2) var(--espaco-4); }
   .moldura-logo { width: 52px; height: 52px; }
-  .moldura-menu { margin-left: 0; flex-wrap: nowrap; }
+  .moldura-menu { flex-wrap: nowrap; }
 }
 
 /* ---------- Rodapé ---------- */

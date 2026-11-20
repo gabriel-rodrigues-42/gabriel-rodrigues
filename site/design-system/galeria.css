@@ -1,0 +1,114 @@
+/* Galeria de propostas (<gr-propostas>, ver galeria.js): cartões estilo "seleção de fase".
+   Mobile first: uma coluna até ~330px de conteúdo, duas no celular comum, três no computador.
+   O primeiro cartão é o destaque: ocupa a linha toda e, a partir de 600px, fica deitado. */
+
+gr-propostas { display: block; }
+
+.galeria {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: var(--espaco-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr));
+}
+.slot { min-width: 0; }
+.slot-destaque { grid-column: 1 / -1; }
+
+.slot > a {
+  position: relative; display: flex; flex-direction: column; height: 100%;
+  background: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao);
+  color: var(--texto); text-decoration: none; overflow: hidden;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.slot > a:hover { transform: translateY(-4px) rotate(-.6deg); box-shadow: 0 14px 0 -2px var(--azul-claro), 0 8px 26px rgba(0, 39, 118, .14); }
+.slot:nth-child(even) > a:hover { transform: translateY(-4px) rotate(.6deg); }
+.slot > a:focus-visible { outline: 3px solid var(--azul); outline-offset: 3px; }
+
+/* Palco: fundo colorido com uma bolha orgânica e a miniatura de massinha por cima. */
+.slot-palco { --palco: var(--azul-claro); position: relative; aspect-ratio: 5 / 4; background: var(--palco); overflow: hidden; isolation: isolate; }
+.slot[data-cor="verde"] .slot-palco { --palco: var(--verde-claro); }
+.slot[data-cor="amarelo"] .slot-palco { --palco: var(--amarelo-claro); }
+.slot[data-cor="coral"] .slot-palco { --palco: var(--livre-coral-claro); }
+.slot[data-cor="turquesa"] .slot-palco { --palco: var(--livre-turquesa-claro); }
+.slot[data-cor="roxo"] .slot-palco { --palco: var(--livre-roxo-claro); }
+.slot-palco::before {
+  content: ""; position: absolute; inset: 14% 10% 6%; z-index: -1;
+  background: var(--branco); opacity: .55; border-radius: var(--forma-bolha-2);
+}
+.slot-palco img {
+  position: absolute; inset: 10% 8% 4%; width: 84%; height: 86%; object-fit: contain;
+  transition: transform .25s ease; filter: drop-shadow(0 6px 0 rgba(0, 39, 118, .10));
+}
+.slot > a:hover .slot-palco img { transform: translateY(-6px) scale(1.06); }
+
+.slot-tipo, .slot-status {
+  position: absolute; top: var(--espaco-2); z-index: 1;
+  font-size: 11px; font-weight: var(--peso-forte); letter-spacing: .06em; text-transform: uppercase; line-height: 1.2;
+  padding: 3px 9px; border-radius: var(--forma-selo); white-space: nowrap;
+}
+.slot-tipo { left: var(--espaco-2); background: var(--azul); color: var(--branco); }
+.slot-status { right: var(--espaco-2); background: var(--branco); color: var(--azul); display: flex; align-items: center; gap: 5px; }
+.slot-status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--amarelo-escuro); }
+.slot-status.no-ar { color: var(--verde-escuro); }
+.slot-status.no-ar::before { background: var(--verde); box-shadow: 0 0 0 0 var(--verde); animation: slot-pulso 1.8s ease-out infinite; }
+@keyframes slot-pulso { 0% { box-shadow: 0 0 0 0 rgba(0, 156, 59, .55); } 100% { box-shadow: 0 0 0 7px rgba(0, 156, 59, 0); } }
+/* Nos cartões pequenos, o status desce para o pé do palco, para não brigar com o selo de tipo. */
+.slot:not(.slot-destaque) .slot-status { top: auto; bottom: var(--espaco-2); left: var(--espaco-2); right: auto; }
+
+.slot-corpo { display: flex; flex-direction: column; gap: var(--espaco-2); padding: var(--espaco-3) var(--espaco-3) var(--espaco-4); flex: 1; }
+.slot-titulo { color: var(--azul); font-size: var(--tamanho-2); line-height: 1.25; font-weight: 900; }
+.slot-gancho {
+  margin: 0; color: var(--texto-suave); font-size: var(--tamanho-1); line-height: 1.45;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden;
+}
+
+/* Medidor de fase: quatro barrinhas, como a vida de um personagem. */
+.slot-fase { margin-top: auto; display: flex; align-items: center; gap: var(--espaco-2); font-size: 12px; font-weight: var(--peso-forte); color: var(--azul); }
+.slot-barras { display: flex; gap: 3px; }
+.slot-barras i { width: 14px; height: 8px; border-radius: 4px 6px 5px 3px; background: var(--azul-claro); }
+.slot-barras i.cheia { background: var(--amarelo-escuro); }
+.slot-barras i.cheia:nth-child(4) { background: var(--verde); }
+.slot-fase, .slot-acao { padding-right: 36px; min-height: 30px; }
+.slot-acao { margin-top: auto; display: flex; align-items: center; font-size: 12px; font-weight: var(--peso-forte); color: var(--verde-escuro); }
+
+/* Botão de "play" no canto: aparece maior no destaque. */
+.slot-ir {
+  position: absolute; right: var(--espaco-3); bottom: var(--espaco-3);
+  width: 30px; height: 30px; border-radius: 50%; background: var(--verde); box-shadow: var(--sombra-clay);
+  transition: transform .18s ease;
+}
+.slot-ir::after { content: ""; position: absolute; left: 11px; top: 9px; border-left: 10px solid var(--branco); border-top: 6px solid transparent; border-bottom: 6px solid transparent; }
+.slot > a:hover .slot-ir { transform: scale(1.12); }
+
+/* Destaque */
+.slot-destaque .slot-titulo { font-size: var(--tamanho-4); }
+.slot-destaque .slot-gancho { font-size: var(--tamanho-2); -webkit-line-clamp: 4; line-clamp: 4; }
+.slot-destaque .slot-corpo { padding: var(--espaco-4) var(--espaco-5) var(--espaco-5); }
+.slot-destaque .slot-fase, .slot-destaque .slot-acao { padding-right: 52px; min-height: 44px; }
+.slot-destaque .slot-palco { aspect-ratio: 16 / 10; }
+.slot-destaque .slot-tipo, .slot-destaque .slot-status { font-size: var(--tamanho-1); top: var(--espaco-3); }
+.slot-destaque .slot-tipo { left: var(--espaco-3); }
+.slot-destaque .slot-status { right: var(--espaco-3); }
+.slot-destaque .slot-ir { width: 44px; height: 44px; right: var(--espaco-4); bottom: var(--espaco-4); }
+.slot-destaque .slot-ir::after { left: 17px; top: 13px; border-left-width: 14px; border-top-width: 9px; border-bottom-width: 9px; }
+.slot-destaque .slot-fase { font-size: var(--tamanho-1); }
+.slot-destaque .slot-barras i { width: 22px; height: 10px; }
+
+/* Celular: nos cartões pequenos o cartão todo já é o botão; o "play" some para o medidor caber. */
+@media (max-width: 599px) {
+  .slot:not(.slot-destaque) .slot-ir { display: none; }
+  .slot:not(.slot-destaque) .slot-fase, .slot:not(.slot-destaque) .slot-acao { padding-right: 0; min-height: 0; }
+}
+
+@media (min-width: 600px) {
+  .galeria { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .slot-destaque > a { flex-direction: row; }
+  .slot-destaque .slot-palco { flex: 0 0 48%; aspect-ratio: auto; min-height: 240px; }
+  .slot-destaque .slot-corpo { justify-content: center; }
+  .slot-titulo { font-size: var(--tamanho-3); }
+  .slot-gancho { font-size: var(--tamanho-2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slot > a, .slot-palco img, .slot-ir { transition: none; }
+  .slot > a:hover, .slot:nth-child(even) > a:hover, .slot > a:hover .slot-palco img { transform: none; }
+  .slot-status.no-ar::before { animation: none; }
+}

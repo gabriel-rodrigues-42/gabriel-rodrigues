@@ -25,6 +25,10 @@
   --livre-roxo: #7b4fd6;
   --livre-turquesa: #1fb5ad;
   --livre-terra: #b5651d;
+  /* Versões claras das cores livres: fundo de palco das miniaturas da galeria de propostas. */
+  --livre-coral-claro: #ffe3d6;
+  --livre-turquesa-claro: #d3f2ef;
+  --livre-roxo-claro: #e8dff8;
 
   /* Logo: G verde, pessoas azuis, estrelas amarelas */
   --logo-g: var(--verde);
