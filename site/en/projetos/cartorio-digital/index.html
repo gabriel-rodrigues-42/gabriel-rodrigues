@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Digital notary office · Gabriel Rodrigues</title>
-<meta name="description" content="How much it costs to put a property in your name in Goiânia, Brazil, where each real goes and how other countries do the same thing in a day. A project for Tier 1 of the FSRI.">
+<meta name="description" content="How much it costs to put a property in your name in Goiânia, Brazil, where each real goes, how to check a property before you pay and how other countries do the same thing in a day. A project for Tier 1 of the FSRI.">
 <link rel="canonical" href="https://gabriel-rodrigues.com/en/projetos/cartorio-digital/">
 <link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/projetos/cartorio-digital/">
 <link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/cartorio-digital/">
@@ -21,26 +21,27 @@
 <meta property="og:site_name" content="Gabriel Rodrigues">
 <meta property="og:url" content="https://gabriel-rodrigues.com/en/projetos/cartorio-digital/">
 <meta property="og:title" content="Digital notary office · Gabriel Rodrigues">
-<meta property="og:description" content="How much it costs to put a property in your name in Goiânia, Brazil, where each real goes and how other countries do the same thing in a day.">
+<meta property="og:description" content="How much it costs to put a property in your name in Goiânia, Brazil, where each real goes, how to check a property before you pay and how other countries do the same thing in a day.">
 <meta property="og:image" content="https://gabriel-rodrigues.com/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Gabriel Rodrigues, software engineering at the service of Brazil">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Digital notary office · Gabriel Rodrigues">
-<meta name="twitter:description" content="How much it costs to put a property in your name in Goiânia, Brazil, where each real goes and how other countries do the same thing in a day.">
+<meta name="twitter:description" content="How much it costs to put a property in your name in Goiânia, Brazil, where each real goes, how to check a property before you pay and how other countries do the same thing in a day.">
 <meta name="twitter:image" content="https://gabriel-rodrigues.com/og.jpg">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
  "@type": "Article",
  "headline": "Digital notary office: putting a property in your name without 14 steps",
- "description": "How much it costs to put a property in your name in Goiânia, Brazil, where each real goes and how other countries do the same thing in a day.",
+ "description": "How much it costs to put a property in your name in Goiânia, Brazil, where each real goes, how to check a property before you pay and how other countries do the same thing in a day.",
  "inLanguage": "en",
  "image": "https://gabriel-rodrigues.com/og.jpg",
  "author": { "@type": "Person", "name": "Gabriel Rodrigues", "url": "https://gabriel-rodrigues.com/" },
  "mainEntityOfPage": "https://gabriel-rodrigues.com/en/projetos/cartorio-digital/",
- "datePublished": "2026-11-19"
+ "datePublished": "2026-11-19",
+ "dateModified": "2026-11-20"
 }
 </script>
 <link rel="stylesheet" href="/design-system/tokens.css">
@@ -327,8 +328,38 @@
     </div>
   </section>
 
+  <section class="capitulo revelar" id="caso-real">
+    <span class="ato">Chapter 6 · A real case</span>
+    <h2>The scam the notary office catches too late</h2>
+    <p>In 2026, Jornal da Record, a Brazilian TV news show, reported a case from Goiás. An elderly man believed he had bought a farm. When he went to register it, the document was fake, and he was the one arrested for using a forged document. The Civil Police then investigated, and the scammers were arrested in Goiânia.</p>
+    <p>It is not an isolated case. The Goiás Civil Police itself has published others:</p>
+    <div class="numeros">
+      <div class="cartao"><strong>R$ 4 mn</strong>was the value of the farm in Nova Crixás that a man tried to transfer with a forged power of attorney, in July 2025. <span class="fontes">Goiás Civil Police (2025)</span></div>
+      <div class="cartao"><strong>R$ 1 mn</strong>was the value of the property in Aparecida de Goiânia that a couple tried to register with a forged power of attorney from another state, in March 2025. The QR code did not match the seal. <span class="fontes">Goiás Civil Police (2025)</span></div>
+      <div class="cartao"><strong>2.26 mn</strong>fraud reports in Brazil in 2025, of all kinds, not only property. That is 429.8% more than in 2018. <span class="fontes">Brazilian Public Security Yearbook 2026, via BP Money</span></div>
+    </div>
+    <p style="margin-top: var(--espaco-4)">In these cases the check worked: the notary office got suspicious and called the police. But it came at the end, when the buyer had already trusted the paper. <strong>The notary office caught the problem, and the citizen was harmed anyway.</strong></p>
+
+    <h3 style="margin-top: var(--espaco-6)">The tools already exist. They are hidden.</h3>
+    <ol class="fluxo">
+      <li><span class="n">1</span><div><strong>QR code on the seal</strong>Since 2017, every notary act in Goiás can carry a code you check on your phone, for free.<br><span class="trava">Catch: it is optional, and almost nobody knows it exists</span></div></li>
+      <li><span class="n">2</span><div><strong>Central registry of powers of attorney</strong>Since July 2025, anyone can check whether a deed or power of attorney was really issued.<br><span class="trava">Catch: it costs money and requires a digital certificate</span></div></li>
+      <li><span class="n">3</span><div><strong>Online property record</strong>The registrars' platform shows a property's record right away.<br><span class="trava">Catch: it costs money, has no legal value and asks for the record number, which the seller is the one who provides</span></div></li>
+    </ol>
+    <p style="margin-top: var(--espaco-4)">For an elderly person who has never heard of a digital certificate, these tools do not exist.</p>
+
+    <h3 style="margin-top: var(--espaco-6)">What I propose: check before you pay</h3>
+    <ol class="fluxo">
+      <li><span class="n">1</span><div><strong>One check, on gov.br</strong>The buyer enters the seller's CPF (Brazil's tax ID) and the document code: property record, deed or power of attorney. The answer is simple and free: does this person own this property? Does this power of attorney exist and is it still valid? The check confirms, it does not list: nobody can find out which properties someone owns from their CPF alone.</div></li>
+      <li><span class="n">2</span><div><strong>The seller answers for what they declare</strong>If the data does not match, the deal is flagged as suspicious and the real owner gets an alert on gov.br.</div></li>
+      <li><span class="n">3</span><div><strong>Protection at payment</strong>A transfer above R$ 100 thousand made by an elderly person asks for the reason. If the reason is buying a property, the bank checks it through Open Finance against the same record. If it is proven that the seller is not the owner, the money does not leave.</div></li>
+      <li><span class="n">4</span><div><strong>Tell everyone</strong>Explain in plain language, on radio, TV, social media and at Vapt Vupt service centers, how to check a property before paying.</div></li>
+    </ol>
+    <p style="margin-top: var(--espaco-4)">This is not a new, expensive system. It is a check on top of databases that already exist, using the same infrastructure as gov.br and Open Finance. Goiás can run the campaign and bring the check to Vapt Vupt. Making the registry, gov.br and the banks talk to each other takes a federal law and the Central Bank.</p>
+  </section>
+
   <section class="capitulo revelar" id="criticas">
-    <span class="ato">Chapter 6 · The criticism</span>
+    <span class="ato">Chapter 7 · The criticism</span>
     <h2>The hardest questions</h2>
     <p>I did a mock interview, as if I were live on TV. These are the toughest questions and the answers.</p>
 
@@ -367,16 +398,40 @@
     <details class="critica">
       <summary>The 40% funds pay for the Judiciary. Isn't the problem the State itself?</summary>
       <div class="resposta"><p>Partly, yes. These transfers work like a tax hidden in the notary's price.</p><p>If the Judiciary, the Public Prosecutor's Office or the State Assembly need that money, let it be in the budget, in plain sight. And let the receipt say how much went where.</p></div>
+    <details class="critica">
+      <summary>The notary office caught the scam. The system worked. Why change it?</summary>
+      <div class="resposta"><p>The notary office caught the problem, but the citizen had already been harmed. In the case shown by Record, the first person arrested was the victim.</p><p>Government has a duty to show people the right ways to check and to make them simple. Checking at the end protects the registry. Checking before protects the person.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Elderly people don't use the gov.br app. Scams exploit trust, not a missing website.</summary>
+      <div class="resposta"><p>That is why the protection does not depend only on them opening an app. A large transfer by an elderly person asks for the reason, and the bank checks that the recipient really owns the property before the money leaves.</p><p>Information comes with it: explaining in plain language, where people are, how to check before paying.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Looking up property owners by CPF helps scammers pick victims.</summary>
+      <div class="resposta"><p>That concern deserves serious study. The proposed check confirms, it does not list: you already need the seller's CPF and the document number, and the answer is just yes or no.</p><p>Every deal has two sides. Whoever checks logs in through gov.br, and the seller answers for what they declare: wrong data becomes a suspicion alert.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Another expensive system. Who pays?</summary>
+      <div class="resposta"><p>The databases already exist: the electronic registry, the powers of attorney registry, gov.br and Open Finance. The check is a link between them, and can share infrastructure with other government services.</p><p>Building software got much cheaper with artificial intelligence. What is expensive today is the scam.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Holding an elderly person's money takes away their freedom.</summary>
+      <div class="resposta"><p>The safeguard does not decide for anyone. It only asks for the reason of a large transfer. Payment is blocked only when it is proven that the seller does not own the property.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Isn't someone who buys a farm without checking anything to blame?</summary>
+      <div class="resposta"><p>Every case gets its own investigation. A good information system separates good intentions from bad ones: it protects whoever was deceived and punishes whoever deceived.</p><p>If checking were simple and free, the victim would have found the scam before paying.</p></div>
     </details>
   </section>
 
   <section class="capitulo revelar">
-    <span class="ato">Chapter 7 · How to measure</span>
-    <h2>Three numbers to track</h2>
+    <span class="ato">Chapter 8 · How to measure</span>
+    <h2>Four numbers to track</h2>
     <ul>
       <li><strong>Total cost</strong> of transferring a property, as a % of its value, separating tax, notary and funds.</li>
       <li><strong>Steps and days</strong> from signed contract to finished registration.</li>
       <li><strong>Public revenue figures</strong> for each notary office, updated every year on the CNJ's Justiça Aberta dashboard.</li>
+      <li><strong>Scams caught before payment</strong>, not only at registration, involving forged property documents.</li>
     </ul>
   </section>
 
@@ -403,6 +458,13 @@
       <li><a href="https://www.hardware.com.br/noticias/hacker-apaga-base-registro-imoveis-romenia-paralisa-mercado/amp/">Hardware.com.br, attack on Romania's property registry (July 2026)</a></li>
       <li><a href="https://jornaldebrasilia.com.br/blogs-e-colunas/analice-nicolau/sistema-manoel-valente-como-um-ataque-cibernetico-iniciou-uma-revolucao-na-seguranca-digital-dos-cartorios">Jornal de Brasília, ransomware at a property registry in Caxias do Sul (2025)</a></li>
       <li><a href="https://olhardigital.com.br/2025/05/13/seguranca/pf-deflagra-operacao-contra-fraude-biometrica-no-gov-br/">Olhar Digital, Federal Police Operation Face Off (May 2025)</a></li>
+      <li><a href="https://www.facebook.com/share/v/1GRNcP2x1H/">Jornal da Record, video report on the fake sale of a farm in Goiás (2026)</a></li>
+      <li><a href="https://goias.gov.br/policiacivil/pcgo-prende-homem-por-tentar-transferir-fazenda-de-r-4-milhoes-com-procuracao-falsa-em-nova-crixas/">Goiás Civil Police, forged power of attorney to transfer a farm in Nova Crixás (August 2025)</a></li>
+      <li><a href="https://goias.gov.br/policiacivil/pcgo-prende-casal-por-tentar-fraudar-registro-de-imovel-avaliado-em-r-1-milhao/">Goiás Civil Police, couple arrested trying to register a property with a forged power of attorney in Aparecida de Goiânia (March 2025)</a></li>
+      <li><a href="https://bpmoney.com.br/economia/cartorios-mutirao-nacional-golpes-compra-imoveis/">BP Money, fraud in 2025 according to the Brazilian Public Security Yearbook 2026 (FBSP), secondary source</a></li>
+      <li><a href="https://www.rotajuridica.com.br/qr-code-passa-a-ser-usado-em-goias-exame-da-autenticidade-dos-servicos-extrajudiciais/">Rota Jurídica, QR code to check notary acts in Goiás (September 2017)</a></li>
+      <li><a href="https://www.notariado.org.br/cep-sera-aberta-para-consulta-publica-a-partir-de-14-de-julho/">Colégio Notarial do Brasil, deeds and powers of attorney registry opened to the public (July 2025)</a></li>
+      <li><a href="https://www.registrodeimoveis.org.br/servicos/matricula">Registro de Imóveis do Brasil, online property record service (accessed November 2026)</a></li>
     </ul>
   </section>
 </main>
