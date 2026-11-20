@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Projetos · Gabriel Rodrigues</title>
-<meta name="description" content="Projetos para melhorar os sistemas do Brasil, explicados de forma simples, com dados e fontes.">
+<title>Propostas · Gabriel Rodrigues</title>
+<meta name="description" content="Propostas que o Gabriel Rodrigues está desenvolvendo em público para melhorar os sistemas do Brasil, cada uma com a fase em que está, dados e fontes.">
 <link rel="canonical" href="https://gabriel-rodrigues.com/projetos/">
 <link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/projetos/">
 <link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/">
@@ -20,43 +20,64 @@
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:site_name" content="Gabriel Rodrigues">
 <meta property="og:url" content="https://gabriel-rodrigues.com/projetos/">
-<meta property="og:title" content="Projetos · Gabriel Rodrigues">
-<meta property="og:description" content="Projetos para melhorar os sistemas do Brasil, explicados de forma simples, com dados e fontes.">
+<meta property="og:title" content="Propostas · Gabriel Rodrigues">
+<meta property="og:description" content="Propostas que o Gabriel Rodrigues está desenvolvendo em público para melhorar os sistemas do Brasil, cada uma com a fase em que está, dados e fontes.">
 <meta property="og:image" content="https://gabriel-rodrigues.com/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Gabriel Rodrigues, engenharia de software a serviço do Brasil">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Projetos · Gabriel Rodrigues">
-<meta name="twitter:description" content="Projetos para melhorar os sistemas do Brasil, explicados de forma simples, com dados e fontes.">
+<meta name="twitter:title" content="Propostas · Gabriel Rodrigues">
+<meta name="twitter:description" content="Propostas que o Gabriel Rodrigues está desenvolvendo em público para melhorar os sistemas do Brasil, cada uma com a fase em que está, dados e fontes.">
 <meta name="twitter:image" content="https://gabriel-rodrigues.com/og.jpg">
 <link rel="stylesheet" href="/design-system/tokens.css">
 <link rel="stylesheet" href="/design-system/componentes.css">
 <link rel="stylesheet" href="/design-system/moldura.css">
 <script src="/design-system/moldura.js"></script>
+<link rel="stylesheet" href="/design-system/galeria.css">
+<script src="/projetos/propostas.js"></script>
+<script src="/design-system/galeria.js"></script>
 <style>
-  main { max-width: 760px; margin: 0 auto; padding: var(--espaco-7) var(--espaco-4); }
-  h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); }
-  .lead { font-size: var(--tamanho-3); color: var(--texto-suave); }
-  .lista { display: grid; gap: var(--espaco-4); margin-top: var(--espaco-5); }
-  .lista strong { display: block; font-size: var(--tamanho-4); color: var(--azul); }
-  nav a { font-weight: 800; text-decoration: none; color: var(--azul); }
+  main { max-width: 960px; margin: 0 auto; padding: var(--espaco-5) var(--espaco-4) var(--espaco-7); }
+  .capa { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-3); align-items: center; margin-bottom: var(--espaco-5); }
+  .capa img { width: min(100%, 300px); height: auto; justify-self: center; }
+  h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: 0 0 var(--espaco-3); hyphens: manual; }
+  .lead { font-size: var(--tamanho-3); color: var(--texto-suave); margin: 0; }
+  .fases { list-style: none; padding: 0; margin: var(--espaco-4) 0 0; display: flex; flex-wrap: wrap; gap: var(--espaco-2); counter-reset: fase; }
+  .fases li { counter-increment: fase; font-size: var(--tamanho-1); font-weight: var(--peso-forte); color: var(--azul); background: var(--branco); padding: 4px 12px 4px 4px; border-radius: var(--forma-pilula); box-shadow: var(--sombra-cartao); display: flex; align-items: center; gap: 6px; }
+  .fases li::before { content: counter(fase); width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: var(--amarelo-escuro); color: var(--branco); }
+  .fases li:last-child::before { background: var(--verde); }
+  .sem-js { display: grid; gap: var(--espaco-3); padding: 0; list-style: none; }
+  @media (min-width: 720px) {
+    .capa { grid-template-columns: minmax(0, 1fr) 280px; gap: var(--espaco-6); }
+    .capa img { grid-column: 2; grid-row: 1; width: 100%; }
+  }
 </style>
 </head>
 <body>
 <gr-cabecalho></gr-cabecalho>
 <div class="bolha amarela"></div><div class="bolha verde"></div>
 <main>
-  <h1 style="margin-top: var(--espaco-5)">Projetos para o <span class="destaque">Brasil</span></h1>
-  <p class="lead">Cada projeto explica um sistema que todo mundo usa, mostra onde ele trava e propõe uma melhoria, com dados e fontes. Pode usar como referência.</p>
-  <!-- Novos projetos entram no topo desta lista (a skill pagina-de-projeto faz isso). -->
-  <div class="lista">
-    <a class="cartao" href="/projetos/desafio-dumont/"><strong>Desafio Dumont</strong>Um desafio aberto para criar um carro brasileiro simples, modular e fácil de personalizar, com uma rede de oficinas pelo país.</a>
-    <a class="cartao" href="/projetos/cartorio-digital/"><strong>Cartório digital</strong>Passar um imóvel para o seu nome leva 14 etapas e uns 5% do valor. Para onde vai cada real, e como fazer em um balcão só.</a>
-    <a class="cartao" href="/projetos/galera-club/"><strong>galera.club: soberania digital no ar</strong>Uma plataforma brasileira de link na bio que já funciona: Pix na página, pedido no WhatsApp e nenhuma taxa por venda.</a>
-    <a class="cartao" href="/projetos/reindustrializacao/"><strong>Reindustrializar o Brasil</strong>Como transformar o crédito que os grandes patrimônios já usam em fábricas, patentes e plataformas brasileiras.</a>
+  <div class="capa">
+    <img src="/projetos/img/capa.webp" alt="Uma pequena cidade de massinha em obras, com guindaste, fábrica, casa e carro, sobre uma base azul" width="683" height="560" fetchpriority="high">
+    <div>
+      <h1>Propostas em <span class="destaque">construção</span></h1>
+      <p class="lead">Cada proposta explica um sistema que todo mundo usa, mostra onde ele trava e propõe uma melhoria, com dados e fontes. Estou desenvolvendo todas em público: o medidor mostra em que fase cada uma está.</p>
+      <ol class="fases" aria-label="As quatro fases de uma proposta"><li>Ideia</li><li>Estudo</li><li>Proposta</li><li>No ar</li></ol>
+    </div>
   </div>
+  <!-- A galeria vem de /projetos/propostas.js (novas propostas entram lá; a skill pagina-de-projeto faz isso).
+       A lista abaixo é só para quem está sem JavaScript e para buscadores; a galeria a substitui. -->
+  <gr-propostas>
+    <ul class="sem-js">
+      <li><a href="/projetos/desafio-dumont/">Desafio Dumont</a></li>
+      <li><a href="/projetos/cartorio-digital/">Cartório digital</a></li>
+      <li><a href="/projetos/galera-club/">galera.club: soberania digital no ar</a></li>
+      <li><a href="/projetos/reindustrializacao/">Reindustrializar o Brasil</a></li>
+    </ul>
+  </gr-propostas>
 </main>
 <gr-rodape></gr-rodape>
+<script src="/ideias/ideias.js"></script>
 </body>
 </html>

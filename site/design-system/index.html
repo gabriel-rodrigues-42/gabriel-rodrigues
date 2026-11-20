@@ -33,6 +33,7 @@
 <link rel="stylesheet" href="/design-system/moldura.css">
 <script src="/design-system/moldura.js"></script>
 <link rel="stylesheet" href="/design-system/cidade.css">
+<link rel="stylesheet" href="/design-system/galeria.css">
 <script src="/design-system/cidade.js" defer></script>
 <style>
   main { max-width: 960px; margin: 0 auto; padding: var(--espaco-7) var(--espaco-4) var(--espaco-7); }
@@ -125,6 +126,18 @@
 &lt;script src="/design-system/cidade.js" defer&gt;&lt;/script&gt;
 &lt;label for="cidade"&gt;Cidade&lt;/label&gt;
 &lt;gr-cidade id-campo="cidade" nome-cidade="cidade" nome-uf="uf"&gt;&lt;/gr-cidade&gt;</code>
+
+  <h2>Galeria de propostas</h2>
+  <p>Cartões no estilo "seleção de fase" de videogame, para chamar o clique: miniatura de massinha num palco colorido, selo de tipo, status (no ar ou em construção) e um medidor de quatro fases (Ideia, Estudo, Proposta, No ar). O primeiro cartão é o destaque. Usada na página inicial e em <a href="/projetos/">/projetos/</a>; os dados ficam em <code>/projetos/propostas.js</code>.</p>
+  <ul class="galeria" style="grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr))">
+    <li class="slot" data-cor="verde"><a href="/projetos/galera-club/"><div class="slot-palco"><img src="/projetos/img/galera-club.webp" alt="" width="700" height="560" loading="lazy"><span class="slot-tipo">Projeto</span><span class="slot-status no-ar">No ar</span></div><div class="slot-corpo"><strong class="slot-titulo">Cartão no ar</strong><p class="slot-gancho">Fase 4: o medidor fica completo e o ponto verde pulsa.</p><div class="slot-fase"><span class="slot-barras" role="img" aria-label="Fase 4 de 4: No ar"><i class="cheia"></i><i class="cheia"></i><i class="cheia"></i><i class="cheia"></i></span><span class="slot-fase-nome">No ar</span></div></div><span class="slot-ir" aria-hidden="true"></span></a></li>
+    <li class="slot" data-cor="roxo"><a href="/ideias/"><div class="slot-palco"><img src="/projetos/img/ideia.webp" alt="" width="700" height="560" loading="lazy"><span class="slot-tipo">Ideia</span><span class="slot-status">Em construção</span></div><div class="slot-corpo"><strong class="slot-titulo">Cartão em construção</strong><p class="slot-gancho">Fase 1 a 3: barras amarelas mostram até onde a proposta chegou.</p><div class="slot-fase"><span class="slot-barras" role="img" aria-label="Fase 1 de 4: Ideia"><i class="cheia"></i><i></i><i></i><i></i></span><span class="slot-fase-nome">Ideia</span></div></div><span class="slot-ir" aria-hidden="true"></span></a></li>
+  </ul>
+  <p>Miniaturas novas: gere no Recraft com estilo <code>digital_illustration</code>, subestilo <code>plastic</code>, as cores da bandeira e "brinquedo pequeno sobre uma base azul redonda, sem texto". Depois tire o fundo branco e salve em WebP (~700x560) em <code>/projetos/img/</code>.</p>
+  <code class="bloco">&lt;link rel="stylesheet" href="/design-system/galeria.css"&gt;
+&lt;script src="/projetos/propostas.js"&gt;&lt;/script&gt;
+&lt;script src="/design-system/galeria.js"&gt;&lt;/script&gt;
+&lt;gr-propostas&gt;&lt;/gr-propostas&gt;</code>
 
   <h2>Animação em massinha</h2>
   <p>Os vídeos são stop motion de verdade, feitos no Blender: um cenário de mesa e o boneco do Gabriel em massinha, montados por scripts Python com as mesmas cores deste sistema. A animação roda a 12 quadros por segundo, "em dois", com o tremido leve das mãos do animador.</p>

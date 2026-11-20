@@ -70,6 +70,9 @@
 <link rel="stylesheet" href="/design-system/componentes.css">
 <link rel="stylesheet" href="/design-system/moldura.css">
 <script src="/design-system/moldura.js"></script>
+<link rel="stylesheet" href="/design-system/galeria.css">
+<script src="/projetos/propostas.js"></script>
+<script src="/design-system/galeria.js"></script>
 <link rel="stylesheet" href="/design-system/cidade.css">
 <script src="/design-system/cidade.js" defer></script>
 <style>
@@ -96,20 +99,9 @@
     .jeito { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
 
-  /* Publicações */
+  /* Propostas */
   #publicacoes { margin-top: var(--espaco-7); }
-  .filtros { display: flex; flex-wrap: wrap; gap: var(--espaco-2); margin: var(--espaco-4) 0; }
-  .filtros button { font: inherit; font-size: var(--tamanho-2); font-weight: var(--peso-forte); cursor: pointer; color: var(--azul); background: transparent; border: 2px solid var(--azul-claro); padding: 6px 14px; border-radius: var(--forma-pilula); }
-  .filtros button[aria-pressed="true"] { background: var(--azul); border-color: var(--azul); color: var(--branco); }
-  .filtros button:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
-  .posts { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--espaco-4); }
-  .posts a.cartao { padding: var(--espaco-4) var(--espaco-5); }
-  .posts .tipo { display: inline-block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); letter-spacing: .06em; text-transform: uppercase; padding: 2px 10px; border-radius: var(--forma-selo); background: var(--verde-claro); color: var(--verde-escuro); }
-  .posts .tipo.ideia { background: var(--amarelo-claro); color: var(--azul); }
-  .posts .tipo.ferramenta { background: var(--azul-claro); color: var(--azul); }
-  .posts strong { display: block; font-size: var(--tamanho-4); line-height: 1.25; color: var(--azul); margin: var(--espaco-2) 0 var(--espaco-1); }
-  .posts p { margin: 0; color: var(--texto-suave); }
-  .posts .ir { display: inline-block; margin-top: var(--espaco-2); font-weight: var(--peso-forte); color: var(--verde-escuro); }
+  #publicacoes .lead { margin-bottom: var(--espaco-5); }
 
   /* galera.club */
   .galera { margin-top: var(--espaco-7); display: flex; align-items: center; justify-content: space-between; gap: var(--espaco-4); flex-wrap: wrap; background: var(--amarelo-claro); }
@@ -165,41 +157,10 @@
   </ul>
 
   <section id="publicacoes" aria-labelledby="titulo-publicacoes">
-    <h2 id="titulo-publicacoes">Projetos e <span class="destaque">ideias</span></h2>
-    <p class="lead">O que estou estudando e propondo. Cada ideia traz as críticas mais duras e a minha resposta.</p>
-    <div class="filtros" role="group" aria-label="Filtrar publicações">
-      <button type="button" data-filtro="" aria-pressed="true">Tudo</button>
-      <button type="button" data-filtro="projeto" aria-pressed="false">Projetos</button>
-      <button type="button" data-filtro="ideia" aria-pressed="false">Ideias</button>
-    </div>
-    <!-- Projetos e ferramentas entram aqui à mão (novos no topo). As ideias vêm de /ideias/ideias.js.
-         data-ideia esconde a ideia de mesmo id, para não repetir o que já tem página própria. -->
-    <ul class="posts" id="posts">
-      <li data-tipo="projeto" data-ideia="galera-club"><a class="cartao" href="/projetos/galera-club/">
-        <span class="tipo">Projeto · No ar</span>
-        <strong>galera.club: soberania digital que já está no ar</strong>
-        <p>Uma plataforma brasileira de link na bio, com Pix na página e pedido no WhatsApp, sem taxa por venda.</p>
-        <span class="ir">Ler o projeto →</span>
-      </a></li>
-      <li data-tipo="projeto" data-ideia="reindustrializacao"><a class="cartao" href="/projetos/reindustrializacao/">
-        <span class="tipo">Projeto</span>
-        <strong>Reindustrializar o Brasil com o dinheiro que já existe</strong>
-        <p>Como fazer o crédito que os grandes patrimônios já usam virar fábrica, patente e plataforma brasileira.</p>
-        <span class="ir">Ler a história →</span>
-      </a></li>
-      <li data-tipo="projeto" data-ideia="qual-caminho"><a class="cartao" href="/caminho/">
-        <span class="tipo ferramenta">Ferramenta</span>
-        <strong>Qual caminho faz sentido pra mim?</strong>
-        <p>Sete perguntas para quem quer melhorar o Brasil e não sabe por onde começar.</p>
-        <span class="ir">Responder →</span>
-      </a></li>
-      <li data-tipo="ideia" id="todas-ideias"><a class="cartao" href="/ideias/">
-        <span class="tipo ideia">Ideias</span>
-        <strong>Ideias para conversar</strong>
-        <p>Todas as ideias, para ler ou ouvir com legendas.</p>
-        <span class="ir">Ver todas →</span>
-      </a></li>
-    </ul>
+    <h2 id="titulo-publicacoes">Propostas em <span class="destaque">construção</span></h2>
+    <p class="lead">O que estou desenvolvendo em público. Cada proposta mostra em que fase está e traz dados, as críticas mais duras e a minha resposta.</p>
+    <!-- A lista vem de /projetos/propostas.js; as ideias novas de ideias.js entram sozinhas no fim. -->
+    <gr-propostas></gr-propostas>
   </section>
 
   <a class="cartao galera" href="https://galera.club/gabriel">
@@ -245,39 +206,6 @@
 <script>
 (() => {
   "use strict";
-
-  // Ideias: uma entrada por ideia de ideias.js, antes do cartão "Ver todas".
-  const lista = document.getElementById("posts");
-  const todas = document.getElementById("todas-ideias");
-  const comPagina = new Set([...lista.querySelectorAll("[data-ideia]")].map((li) => li.dataset.ideia));
-  (window.IDEIAS || []).filter((ideia) => !comPagina.has(ideia.id)).forEach((ideia) => {
-    const li = document.createElement("li");
-    li.dataset.tipo = "ideia";
-    const a = document.createElement("a");
-    a.className = "cartao";
-    a.href = "/ideias/#" + encodeURIComponent(ideia.id);
-    const tipo = document.createElement("span");
-    tipo.className = "tipo ideia";
-    tipo.textContent = "Ideia" + (ideia.estado ? " · " + ideia.estado : "");
-    const titulo = document.createElement("strong");
-    titulo.textContent = ideia.titulo;
-    const gancho = document.createElement("p");
-    gancho.textContent = ideia.gancho;
-    const ir = document.createElement("span");
-    ir.className = "ir";
-    ir.textContent = "Ler ou ouvir →";
-    a.append(tipo, titulo, gancho, ir);
-    li.append(a);
-    lista.insertBefore(li, todas);
-  });
-
-  // Filtros
-  const botoes = document.querySelectorAll(".filtros button");
-  botoes.forEach((b) => b.addEventListener("click", () => {
-    const filtro = b.dataset.filtro;
-    botoes.forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
-    lista.querySelectorAll("li").forEach((li) => { li.hidden = !!filtro && li.dataset.tipo !== filtro; });
-  }));
 
   // Formulário de apoio
   const form = document.getElementById("form-apoio");
