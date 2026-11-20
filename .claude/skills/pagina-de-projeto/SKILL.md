@@ -9,7 +9,7 @@ Cada página é uma referência pública: alguém deve conseguir entender o prob
 
 1. Copie `site/projetos/_modelo/` para `site/projetos/<slug>/` (o mesmo slug do vídeo, se houver).
 2. Troque tudo que está entre `[colchetes]` e **apague** a linha `<meta name="robots" content="noindex">` e o comentário de MODELO.
-3. Conteúdo:
+3. Conteúdo (escreva e revise com a skill `escrita-pt-br`):
    - **Como funciona hoje**: o sistema como fluxo (quem, o quê, em que ordem, onde trava).
    - **Os números**: no máximo 3, cada um com fonte oficial e ano.
    - **O que proponho**: a mudança em linguagem simples e quem é afetado.
@@ -17,7 +17,7 @@ Cada página é uma referência pública: alguém deve conseguir entender o prob
    - **Fontes**: links oficiais completos.
    - Vídeo: troque `VIDEO_ID` pelo ID do YouTube; se ainda não houver vídeo, apague o bloco.
 4. Mesmas regras de pré-campanha da skill `novo-video`: sem pedido de voto, sem ataques a pessoas ou partidos.
-5. Ponha a proposta na galeria: adicione uma entrada em `site/projetos/propostas.js` (formato no topo do arquivo; títulos e gancho em `pt` e `en`, e a `fase` de 1 a 4). Gere a miniatura com `scripts/miniaturas/gerar.py <slug> "cena em inglês"` (precisa da chave do Recraft em `RECRAFT_API_KEY`; sem ela, deixe `img` de fora e a galeria usa a imagem padrão). Acrescente também o link na lista sem JavaScript dentro de `<gr-propostas>` em `site/projetos/index.html` e `site/en/projetos/index.html`.
+5. Ponha a proposta na galeria: adicione uma entrada em `site/projetos/propostas.js` (formato no topo do arquivo; títulos e gancho em `pt` e `en`, e a `fase` de 1 a 4). Desenhe a miniatura em `scripts/miniaturas/desenhar.py` (ilustração editorial plana, sem massinha nem 3D: escreva uma função, registre em `DESENHOS` e rode `python3 scripts/miniaturas/desenhar.py <slug>`). Acrescente também o link na lista sem JavaScript dentro de `<gr-propostas>` em `site/projetos/index.html` e `site/en/projetos/index.html`.
 6. Versão em inglês: crie `site/en/projetos/<slug>/index.html` com o mesmo HTML traduzido (`<html lang="en">`, canonical e `og:url` em `/en/`, `og:locale` `en_US` com `og:locale:alternate` `pt_BR`, links internos para `/en/...`). As duas páginas levam o bloco `hreflang` do modelo, e as duas URLs entram no `site/sitemap.xml` com os `xhtml:link`. A página em português também ganha uma linha na seção "Propostas" de `site/llms.txt`.
 7. Confira no celular: `python3 -m http.server 8000 -d site` e abra com largura de 390px. Nada pode rolar para o lado.
 8. Abra um PR; a prévia aparece no Cloudflare Pages.
