@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dumont Challenge · Gabriel Rodrigues</title>
+<meta name="description" content="An open challenge to create a simple, modular, easy-to-customize Brazilian car, funded by the FSRI and built by a network of repair shops across the country.">
+<link rel="canonical" href="https://gabriel-rodrigues.com/en/projetos/desafio-dumont/">
+<link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/projetos/desafio-dumont/">
+<link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/desafio-dumont/">
+<link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/projetos/desafio-dumont/">
+<meta name="author" content="Gabriel Rodrigues">
+<meta name="theme-color" content="#fbf8ef">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:site_name" content="Gabriel Rodrigues">
+<meta property="og:url" content="https://gabriel-rodrigues.com/en/projetos/desafio-dumont/">
+<meta property="og:title" content="Dumont Challenge · Gabriel Rodrigues">
+<meta property="og:description" content="An open challenge to create a simple, modular, easy-to-customize Brazilian car, with money from those who pay little tax today.">
+<meta property="og:image" content="https://gabriel-rodrigues.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gabriel Rodrigues, software engineering at the service of Brazil">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dumont Challenge · Gabriel Rodrigues">
+<meta name="twitter:description" content="An open challenge to create a simple, modular, easy-to-customize Brazilian car, with money from those who pay little tax today.">
+<meta name="twitter:image" content="https://gabriel-rodrigues.com/og.jpg">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "Dumont Challenge: a Brazilian car to customize",
+ "description": "An open challenge to create a simple, modular, easy-to-customize Brazilian car, funded by the FSRI and built by a network of repair shops across the country.",
+ "inLanguage": "en",
+ "image": "https://gabriel-rodrigues.com/og.jpg",
+ "author": { "@type": "Person", "name": "Gabriel Rodrigues", "url": "https://gabriel-rodrigues.com/" },
+ "mainEntityOfPage": "https://gabriel-rodrigues.com/en/projetos/desafio-dumont/",
+ "datePublished": "2026-11-20"
+}
+</script>
+<link rel="stylesheet" href="/design-system/tokens.css">
+<link rel="stylesheet" href="/design-system/componentes.css">
+<link rel="stylesheet" href="/design-system/moldura.css">
+<script src="/design-system/moldura.js"></script>
+<style>
+  main { max-width: 760px; margin: 0 auto; padding: var(--espaco-7) var(--espaco-4); }
+  nav a { font-weight: var(--peso-forte); text-decoration: none; color: var(--azul); }
+  a { color: var(--azul); }
+  h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); }
+  h2 { font-size: var(--tamanho-5); line-height: 1.15; color: var(--azul); margin: 0 0 var(--espaco-3); }
+  h3 { font-size: var(--tamanho-4); color: var(--azul); margin: 0 0 var(--espaco-2); line-height: 1.25; }
+  p { margin: 0 0 var(--espaco-3); }
+  .lead { font-size: var(--tamanho-3); color: var(--texto-suave); }
+  .grande { font-size: var(--tamanho-4); font-weight: var(--peso-forte); line-height: 1.35; }
+  .pequeno { font-size: var(--tamanho-2); }
+  .suave { color: var(--texto-suave); }
+  .capitulo { margin-top: var(--espaco-7); }
+  .ato { display: inline-block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); letter-spacing: .08em; text-transform: uppercase; color: var(--verde-escuro); margin-bottom: var(--espaco-2); }
+  .pausa { text-align: center; padding: var(--espaco-6) var(--espaco-4); font-size: var(--tamanho-5); font-weight: var(--peso-forte); line-height: 1.2; color: var(--azul); }
+  .capa-acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-3); margin-top: var(--espaco-5); }
+  .ilustra { display: block; width: 100%; height: auto; margin: var(--espaco-5) 0 var(--espaco-2); }
+  .legenda-ilustra { font-size: var(--tamanho-1); color: var(--texto-suave); text-align: center; margin: 0; }
+
+  /* Ilustração: troca de cor dos painéis */
+  .painel { transition: fill .6s ease; }
+  .cores { display: flex; flex-wrap: wrap; gap: var(--espaco-2); justify-content: center; margin-top: var(--espaco-3); }
+  .cor { width: 36px; height: 36px; border: 3px solid var(--branco); border-radius: var(--forma-bolha-1); box-shadow: var(--sombra-cartao); cursor: pointer; padding: 0; }
+  .cor:nth-child(even) { border-radius: var(--forma-bolha-2); }
+  .cor[aria-pressed="true"] { outline: 3px solid var(--azul); outline-offset: 2px; }
+  .cor:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+
+  /* Números */
+  .numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--espaco-4); margin-top: var(--espaco-4); }
+  .numeros .cartao { padding: var(--espaco-4); }
+  .numeros strong { display: block; font-size: var(--tamanho-5); color: var(--verde-escuro); line-height: 1.1; margin-bottom: var(--espaco-1); }
+  .fontes { font-size: var(--tamanho-2); color: var(--texto-suave); }
+  .numeros .fontes { display: block; margin-top: var(--espaco-2); font-size: var(--tamanho-1); }
+  .fontes li + li { margin-top: var(--espaco-2); }
+
+  /* Comparação de barras */
+  .barras { display: grid; gap: var(--espaco-3); margin-top: var(--espaco-4); }
+  .linha-barra { display: grid; grid-template-columns: 120px 1fr; gap: var(--espaco-3); align-items: center; font-size: var(--tamanho-2); }
+  .linha-barra b { color: var(--azul); }
+  .linha-barra .trilho { background: var(--creme); border-radius: var(--forma-pilula); height: 28px; overflow: hidden; }
+  .linha-barra .valor { height: 100%; background: var(--verde); border-radius: var(--forma-pilula); min-width: 10px; }
+  .linha-barra.br .valor { background: var(--azul); }
+  .linha-barra small { display: block; color: var(--texto-suave); font-size: var(--tamanho-1); margin-top: 2px; }
+  @media (max-width: 420px) { .linha-barra { grid-template-columns: 1fr; gap: var(--espaco-1); } }
+
+  /* Fluxos */
+  .fluxo { list-style: none; padding: 0; margin: var(--espaco-5) 0 0; position: relative; }
+  .fluxo::before { content: ""; position: absolute; left: 27px; top: 20px; bottom: 20px; width: 6px; background: var(--amarelo); border-radius: var(--forma-pilula); }
+  .fluxo li { position: relative; display: grid; grid-template-columns: 60px 1fr; gap: var(--espaco-4); align-items: start; padding-bottom: var(--espaco-5); }
+  .fluxo li:last-child { padding-bottom: 0; }
+  .fluxo .n { width: 60px; height: 60px; display: grid; place-items: center; background: var(--azul); color: var(--branco); font-weight: var(--peso-forte); font-size: var(--tamanho-4); border-radius: var(--forma-bolha-1); box-shadow: var(--sombra-clay); position: relative; }
+  .fluxo li:nth-child(even) .n { border-radius: var(--forma-bolha-2); background: var(--verde); }
+  .fluxo strong { display: block; color: var(--azul); font-size: var(--tamanho-3); margin-top: var(--espaco-2); }
+  .fluxo .trava { display: inline-block; margin-top: var(--espaco-2); background: var(--areia); color: var(--texto); font-size: var(--tamanho-1); font-weight: var(--peso-forte); padding: 4px 10px; border-radius: var(--forma-selo); }
+
+  .duas { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-4); margin-top: var(--espaco-4); }
+  .duas .cartao { padding: var(--espaco-4); }
+  .duas .contra { background: var(--areia); box-shadow: none; }
+  .duas .pro { background: var(--verde-claro); box-shadow: none; }
+  .duas p { margin: var(--espaco-2) 0 0; font-size: var(--tamanho-2); }
+  @media (max-width: 560px) { .duas { grid-template-columns: 1fr; } }
+
+  /* Calculadora */
+  .calc { margin-top: var(--espaco-5); padding: var(--espaco-5); }
+  .calc .opcoes { display: flex; flex-wrap: wrap; gap: var(--espaco-2); margin: var(--espaco-2) 0 var(--espaco-4); }
+  .calc .opcoes .opcao { width: auto; padding: 10px 14px; }
+  .total { font-size: var(--tamanho-5); font-weight: var(--peso-forte); color: var(--azul); line-height: 1.1; }
+  .barra { display: flex; height: 48px; border-radius: var(--forma-opcao); overflow: hidden; background: var(--creme); margin: var(--espaco-3) 0; }
+  .barra div { transition: flex-basis .5s ease; min-width: 0; }
+  .b-fundo { background: var(--verde); }
+  .b-estado { background: var(--amarelo); }
+  .linhas { list-style: none; padding: 0; margin: 0; font-size: var(--tamanho-2); }
+  .linhas li { display: grid; grid-template-columns: 1fr auto; gap: var(--espaco-3); padding: var(--espaco-2) 0; border-bottom: 1px dashed var(--azul-claro); }
+  .linhas li span:first-child::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: var(--forma-bolha-1); margin-right: 8px; vertical-align: -1px; background: var(--azul-claro); }
+  .linhas li.l-fundo span:first-child::before { background: var(--verde); }
+  .linhas li.l-estado span:first-child::before { background: var(--amarelo); }
+  .linhas li b { color: var(--azul); white-space: nowrap; }
+  .frase-calc { margin-top: var(--espaco-4); font-weight: var(--peso-forte); color: var(--verde-escuro); }
+
+  /* Camadas da lei */
+  .camadas { display: grid; gap: var(--espaco-4); margin-top: var(--espaco-4); }
+  .camada { padding: var(--espaco-4) var(--espaco-5); }
+  .camada .selo { margin-bottom: var(--espaco-3); }
+  .camada ul { margin: 0; padding-left: 1.1em; }
+  .camada li + li { margin-top: var(--espaco-2); }
+
+  /* Críticas */
+  .critica { background: var(--branco); border-radius: var(--forma-opcao); box-shadow: var(--sombra-cartao); margin-top: var(--espaco-4); }
+  .critica summary { cursor: pointer; list-style: none; padding: var(--espaco-4) var(--espaco-5); font-weight: var(--peso-forte); color: var(--azul); display: flex; gap: var(--espaco-3); justify-content: space-between; align-items: center; }
+  .critica summary::-webkit-details-marker { display: none; }
+  .critica summary::after { content: "+"; flex: none; width: 32px; height: 32px; display: grid; place-items: center; background: var(--amarelo); color: var(--azul); border-radius: var(--forma-bolha-1); font-size: var(--tamanho-4); }
+  .critica[open] summary::after { content: "−"; }
+  .critica summary:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; border-radius: var(--forma-opcao); }
+  .critica .resposta { padding: 0 var(--espaco-5) var(--espaco-4); }
+  .critica .resposta p:last-child { margin-bottom: 0; }
+
+  .conversa { background: var(--amarelo-claro); border-radius: var(--forma-cartao); padding: var(--espaco-6) var(--espaco-5); text-align: center; }
+  .conversa p.grande { color: var(--azul); }
+  .conversa .capa-acoes { justify-content: center; }
+  .hashtags { display: flex; flex-wrap: wrap; gap: var(--espaco-2); justify-content: center; margin-top: var(--espaco-4); }
+  .hashtag { background: var(--branco); color: var(--verde-escuro); font-weight: var(--peso-forte); padding: 6px 12px; border-radius: var(--forma-selo); }
+
+  .revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .revelar.visivel { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .revelar { opacity: 1; transform: none; transition: none; }
+    .barra div, .painel { transition: none; }
+  }
+</style>
+</head>
+<body>
+<gr-cabecalho></gr-cabecalho>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
+
+<main>
+  <nav><a href="/en/projetos/">← Projects</a></nav>
+
+  <header>
+    <span class="selo" style="margin-top: var(--espaco-5)">Under study · FSRI Tier 3</span>
+    <h1>A Brazilian car that everyone <span class="destaque">paints their own way</span></h1>
+    <p class="lead">The Dumont Challenge (Desafio Dumont) is a bill proposal. It opens a national competition for teams to create a simple, modular, easy-to-customize car. The starting money comes from those who pay little tax today. The winner is the repair shop in your neighborhood.</p>
+
+    <svg class="ilustra" viewBox="0 0 640 260" role="img" aria-labelledby="t-capa">
+      <title id="t-capa">Illustration: a compact pickup truck with panels in different colors on a common base, with big wheels and an open bed.</title>
+      <ellipse cx="320" cy="232" rx="270" ry="14" fill="var(--areia)"/>
+      <rect x="92" y="176" width="456" height="30" rx="15" fill="var(--azul)"/>
+      <path class="painel" id="p-capo" d="M96 178 C 96 140, 120 128, 176 126 L 236 124 L 236 178 Z" fill="var(--verde)"/>
+      <path class="painel" id="p-cabine" d="M236 178 L 236 120 C 240 76, 262 62, 300 62 L 352 62 C 372 62, 380 76, 382 98 L 386 178 Z" fill="var(--amarelo)"/>
+      <path d="M262 110 C 266 86, 278 78, 300 78 L 344 78 C 358 78, 364 88, 366 104 L 366 112 L 262 112 Z" fill="var(--azul-claro)"/>
+      <path class="painel" id="p-cacamba" d="M386 178 L 386 124 L 544 124 C 550 124, 552 130, 552 136 L 552 178 Z" fill="var(--livre-coral)"/>
+      <rect x="402" y="134" width="132" height="10" rx="5" fill="var(--branco)" opacity=".55"/>
+      <rect class="painel" id="p-porta" x="250" y="122" width="120" height="50" rx="12" fill="var(--livre-turquesa)"/>
+      <rect x="338" y="140" width="22" height="8" rx="4" fill="var(--azul)"/>
+      <rect x="104" y="146" width="22" height="14" rx="6" fill="var(--amarelo-claro)"/>
+      <g fill="var(--texto)"><circle cx="176" cy="204" r="34"/><circle cx="468" cy="204" r="34"/></g>
+      <g fill="var(--azul-claro)"><circle cx="176" cy="204" r="14"/><circle cx="468" cy="204" r="14"/></g>
+      <g stroke="var(--azul)" stroke-width="4" stroke-dasharray="6 7" fill="none" opacity=".6">
+        <path d="M236 120 L 236 178"/><path d="M386 124 L 386 178"/>
+      </g>
+      <g font-family="Nunito, sans-serif" font-weight="800" font-size="15" fill="var(--azul)">
+        <text x="24" y="254">one chassis</text>
+        <text x="460" y="40">kits that fit</text>
+      </g>
+      <path d="M60 238 C 70 224, 86 212, 100 200" stroke="var(--azul)" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M520 48 C 510 80, 486 100, 470 118" stroke="var(--azul)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div class="cores" role="group" aria-label="Change the colors of the illustration's panels">
+      <button class="cor" type="button" aria-pressed="true" aria-label="Brazil's colors" data-cores="verde,amarelo,livre-coral,livre-turquesa" style="background: linear-gradient(135deg, var(--verde) 50%, var(--amarelo) 50%)"></button>
+      <button class="cor" type="button" aria-pressed="false" aria-label="Cerrado savanna" data-cores="livre-terra,amarelo,verde,livre-terra" style="background: linear-gradient(135deg, var(--livre-terra) 50%, var(--amarelo) 50%)"></button>
+      <button class="cor" type="button" aria-pressed="false" aria-label="Carnival" data-cores="livre-rosa,livre-roxo,amarelo,livre-turquesa" style="background: linear-gradient(135deg, var(--livre-rosa) 50%, var(--livre-roxo) 50%)"></button>
+      <button class="cor" type="button" aria-pressed="false" aria-label="Coast" data-cores="livre-turquesa,azul-claro,livre-coral,azul-medio" style="background: linear-gradient(135deg, var(--livre-turquesa) 50%, var(--azul-medio) 50%)"></button>
+      <button class="cor" type="button" aria-pressed="false" aria-label="Company fleet" data-cores="azul,azul,branco,azul" style="background: linear-gradient(135deg, var(--azul) 50%, var(--branco) 50%)"></button>
+    </div>
+    <p class="legenda-ilustra" style="margin-top: var(--espaco-2)">Illustration. Tap a color to change the panels. The real car is designed by the teams.</p>
+
+    <div class="capa-acoes">
+      <a class="botao verde" href="#calculadora">See where the money comes from</a>
+      <a class="botao secundario" href="#criticas">Skip to the criticism</a>
+    </div>
+  </header>
+
+  <section class="capitulo revelar">
+    <span class="ato">Chapter 1 · The gap</span>
+    <h2>Brazil sells 14,000 Fiat Stradas a month and almost no electric pickups</h2>
+    <p>In October 2026, almost 1 in 4 cars sold in Brazil was already electric or hybrid. But for work vehicles, the small pickup and the van, the picture changes: only 3% were electrified. No Brazilian automaker competes in that space.</p>
+    <p>And there's something almost nobody notices: more than 80% of new cars leave the factory white, black or gray. A country as colorful as ours drives colorless cars.</p>
+    <div class="numeros">
+      <div class="cartao"><strong>152</strong>electric light commercial vehicles registered in October 2026, against about 14,000 Fiat Stradas in the same month. <span class="fontes">Fenabrave, Oct 2026</span></div>
+      <div class="cartao"><strong>4.8 million</strong>vehicles a year is the capacity of the country's factories. Forecast production for 2026 is 2.8 million. <span class="fontes">Anfavea, via AutoData and Agência Brasil (2026)</span></div>
+      <div class="cartao"><strong>80%+</strong>of new cars sold in Brazil are white, black or gray. <span class="fontes">Mecânica Online, Jul 2026</span></div>
+    </div>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Chapter 2 · How it works today</span>
+    <h2>The foreign one arrives. The Brazilian one is never born.</h2>
+    <p>The rules apply to everyone. A foreign automaker arriving in Brazil almost always follows the same script, and uses the same incentives a Brazilian one could use.</p>
+    <ol class="fluxo">
+      <li><span class="n">1</span><div><strong>Import and test the market</strong>Chery imported from 2009 onwards. BYD started selling cars here in 2022.</div></li>
+      <li><span class="n">2</span><div><strong>Assemble in a factory that already exists</strong>BYD took over the old Ford plant in Camaçari (Bahia). GWM, the old Mercedes plant in Iracemápolis (São Paulo).<br><span class="trava">Bottleneck for a Brazilian company: no parent company to fund this phase</span></div></li>
+      <li><span class="n">3</span><div><strong>Use the incentives</strong>MOVER research credit (the federal auto industry program), the Lei do Bem R&amp;D tax break and state ICMS tax credits. Goiás returns 92.5% to 93.3% of ICMS to automakers until 2032.<br><span class="trava">Bottleneck: the MOVER credit is calculated on revenue, and the Lei do Bem only applies under the actual-profit tax regime. Whoever isn't selling yet is left out.</span></div></li>
+      <li><span class="n">4</span><div><strong>Localize little by little</strong>More parts from here, more engineering from here. Chery opened a factory in 2014. BYD has been assembling in Bahia since July 2025.</div></li>
+    </ol>
+    <p style="margin-top: var(--espaco-5)">And for those who want to customize their car, the rules get in the way too. Changing the structure of a registered car requires prior authorization (Traffic Code, art. 98). Wrapping more than half the car counts as a color change on the registration document (Contran Resolution 916/2022).</p>
+  </section>
+
+  <p class="pausa revelar">What if Brazil's next automaker<br>were born from an <span class="destaque">open challenge</span>?</p>
+
+  <section class="capitulo revelar" style="margin-top: 0">
+    <span class="ato">Chapter 3 · Where the idea comes from</span>
+    <h2>Copy what works. Improve what doesn't.</h2>
+    <div class="duas">
+      <div class="cartao pro"><strong>Slate, in the United States</strong><p>An electric pickup with no paint and no dashboard screen. Color comes from a wrap, and a kit turns the pickup into a five-seat SUV. It raised about US$ 1.4 billion and passed 100,000 reservations in three weeks (2025). The price went from "under US$ 20,000" to US$ 24,950 (2026).</p></div>
+      <div class="cartao contra"><strong>Gurgel, in Brazil</strong><p>It made more than 40,000 vehicles and exported to dozens of countries. It went under when its people's car depended on a lower tax, and that lower tax was given to all 1.0-liter cars in 1990. Lesson: you can't depend on a single benefit.</p></div>
+    </div>
+    <p style="margin-top: var(--espaco-4)">The name comes from Santos Dumont, the Brazilian aviation pioneer. In 1910 he published the drawings of the Demoiselle, his light airplane, for free. Anyone could build one. The challenge follows the same idea: the kits' fitting dimensions are public, so any repair shop or small factory can create accessories.</p>
+    <p>To remember what went wrong: between 2012 and 2017, the Inovar-Auto program raised the IPI excise tax by 30 points for those who didn't use Brazilian parts. The WTO condemned the program at the request of Japan and the European Union. The Dumont Challenge does the opposite: <strong>it doesn't punish imports, it rewards those who invent here</strong>.</p>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Chapter 4 · What I propose</span>
+    <h2>Think like a startup, execute like a giant</h2>
+    <p>The Dumont Challenge uses the same funnel as the <a href="/en/projetos/reindustrializacao/">FSRI</a>. Nobody picks the winner out of friendship. And I'm not part of any team.</p>
+    <ol class="fluxo">
+      <li><span class="n">1</span><div><strong>National challenge</strong>The call asks for a simple, modular, safe and easy-to-repair car. The technical panel sets the safety, cost and performance targets. Teams from all over the country sign up with a prototype, technology and business model.</div></li>
+      <li><span class="n">2</span><div><strong>Acceleration and public panel</strong>The best ones receive R$ 200,000 to R$ 500,000 and mentoring at universities. Then they pitch live to engineers, experts and investors. The public also votes, for a separate prize.</div></li>
+      <li><span class="n">3</span><div><strong>Private investment, released by milestones</strong>The big money comes, through the FSRI, from people with large fortunes who pay little tax today. If that's not enough, it opens to ordinary investors. Each part is only released when a technical milestone is met.</div></li>
+      <li><span class="n">4</span><div><strong>Manufacture and localize at the same time</strong>Start where possible: an idle line in another factory or a new factory in a hub with a skilled workforce, such as Anápolis and Catalão, in Goiás. Invest where we don't have capacity yet, like batteries, which becomes another challenge.</div></li>
+      <li><span class="n">5</span><div><strong>A network of repair shops across Brazil</strong>The automaker certifies repair shops to install kits and apply wraps. The shop guarantees its work. The color is up to each owner.</div></li>
+    </ol>
+
+    <h3 style="margin-top: var(--espaco-6)">What the law changes</h3>
+    <div class="camadas">
+      <div class="cartao camada"><span class="selo">Brazilian Modular Vehicle Law</span><ul>
+        <li><strong>Creates the Dumont Challenge</strong> within Tier 3 of the FSRI, with a cap in reais on public insurance per project.</li>
+        <li><strong>Factory-approved kit, installed in the neighborhood.</strong> Amends art. 98 of the Traffic Code: a kit certified together with the car can be installed by an accredited shop, which issues the certificate and updates the registration. The model already exists for natural gas (CNG) conversions, with installers registered at Inmetro and accredited inspection.</li>
+        <li><strong>Custom color on the registration document</strong>, for wraps and colored panels, without an inspection at every change.</li>
+        <li><strong>Research credit for those without revenue yet.</strong> A new company receives the MOVER and Lei do Bem credit before it sells, as a credit it can use later or sell.</li>
+        <li><strong>Open standard.</strong> Whoever receives money from the fund publishes the kits' fitting dimensions.</li>
+        <li><strong>Conflict rule.</strong> Politicians and their relatives can't be on a team or invest.</li>
+      </ul></div>
+      <div class="cartao camada"><span class="selo azul">Already exists, just use it</span><ul>
+        <li>The Consumer Protection Code already holds the automaker liable for defects (art. 12) and the shop for its service (art. 14). When an installed part causes harm, both are jointly liable (art. 25).</li>
+        <li>Public procurement of innovation, under Brazil's Startup Legal Framework, lets city governments and state-owned companies buy the first cars for their fleets.</li>
+      </ul></div>
+      <div class="cartao camada"><span class="selo amarelo">Press the government</span><ul>
+        <li>The zero IPI tax of the Sustainable Car program requires painting done in Brazil. A car with color-molded or wrapped panels needs to fit that rule. That's a decree, not a law.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section class="capitulo revelar" id="calculadora">
+    <span class="ato">Chapter 5 · Where the money comes from</span>
+    <h2>Tax that turns into a factory</h2>
+    <p>A new car takes billions. Caoa Chery announced R$ 3 billion for Anápolis. BYD, R$ 5.5 billion for Camaçari. At the same time, Brazil's 255 billionaires hold R$ 1.86 trillion, equivalent to 14.6% of GDP (Forbes, 2026).</p>
+    <div class="numeros">
+      <div class="cartao"><strong>4.6%</strong>was the effective income tax rate of Brazil's richest 0.01% in 2023. <span class="fontes">Ministry of Finance, SPE (2025)</span></div>
+      <div class="cartao"><strong>20.6%</strong>of income is what the 0.01% pay adding up all taxes. The average Brazilian pays 42.5%. <span class="fontes">EU Tax Observatory (2025)</span></div>
+      <div class="cartao"><strong>0% to 0.5%</strong>of their wealth is what billionaires pay per year worldwide. The proposal taken to the G20 is a 2% floor. <span class="fontes">EU Tax Observatory (2023) and Zucman report to the G20 (2024)</span></div>
+    </div>
+    <h3 style="margin-top: var(--espaco-6)">Inheritance: Brazil charges little to those who leave a lot</h3>
+    <p>Top inheritance tax rate. In Brazil, the ITCMD inheritance tax has been capped at 8% since 1992 (Senate Resolution 9/1992).</p>
+    <div class="barras">
+      <div class="linha-barra"><b>Japan</b><div><div class="trilho"><div class="valor" style="width: 100%"></div></div><small>55%</small></div></div>
+      <div class="linha-barra"><b>France</b><div><div class="trilho"><div class="valor" style="width: 81.8%"></div></div><small>45%</small></div></div>
+      <div class="linha-barra"><b>US and UK</b><div><div class="trilho"><div class="valor" style="width: 72.7%"></div></div><small>40%</small></div></div>
+      <div class="linha-barra"><b>Germany</b><div><div class="trilho"><div class="valor" style="width: 54.5%"></div></div><small>30%</small></div></div>
+      <div class="linha-barra"><b>Chile</b><div><div class="trilho"><div class="valor" style="width: 45.5%"></div></div><small>25%</small></div></div>
+      <div class="linha-barra br"><b>Brazil</b><div><div class="trilho"><div class="valor" style="width: 14.5%"></div></div><small>8%</small></div></div>
+    </div>
+    <p class="pequeno suave" style="margin-top: var(--espaco-3)">Tax Foundation, top inheritance tax rates (updated 2024). From 2027 the ITCMD becomes progressive in every state (Constitutional Amendment 132/2023 and Complementary Law 227/2026), but the cap remains 8%.</p>
+    <p style="margin-top: var(--espaco-4)">The idea isn't just to tax. It's to offer a choice: instead of paying part of the tax, the person invests that amount in the fund, in industry in Brazil. See how much that would be.</p>
+    <div class="cartao calc">
+      <strong>Wealth</strong>
+      <div class="opcoes" role="radiogroup" aria-label="Wealth" id="op-patrimonio">
+        <button class="opcao" type="button" role="radio" aria-checked="false" data-valor="1e9">R$ 1 billion</button>
+        <button class="opcao marcada" type="button" role="radio" aria-checked="true" data-valor="10e9">R$ 10 billion</button>
+        <button class="opcao" type="button" role="radio" aria-checked="false" data-valor="50e9">R$ 50 billion</button>
+        <button class="opcao" type="button" role="radio" aria-checked="false" data-valor="1.86e12">All 255 billionaires</button>
+      </div>
+      <strong>How much of that tax goes to the fund</strong>
+      <div class="opcoes" role="radiogroup" aria-label="Share for the fund" id="op-parte">
+        <button class="opcao" type="button" role="radio" aria-checked="false" data-valor="0.25">25%</button>
+        <button class="opcao marcada" type="button" role="radio" aria-checked="true" data-valor="0.5">50%</button>
+        <button class="opcao" type="button" role="radio" aria-checked="false" data-valor="0.75">75%</button>
+      </div>
+      <div class="pequeno suave">Reference minimum tax per year</div>
+      <div class="total" id="total" aria-live="polite"></div>
+      <div class="barra" aria-hidden="true"><div class="b-fundo" id="b-fundo"></div><div class="b-estado" id="b-estado"></div></div>
+      <ul class="linhas">
+        <li class="l-fundo"><span>Goes to the fund and comes back with profit</span><b id="v-fundo"></b></li>
+        <li class="l-estado"><span>Stays with the State, as tax</span><b id="v-estado"></b></li>
+        <li><span>Challenge teams that could be accelerated (R$ 500k each)</span><b id="v-equipes"></b></li>
+        <li><span>Factories like BYD's (R$ 5.5 bn each)</span><b id="v-fabrica"></b></li>
+      </ul>
+      <p class="frase-calc" id="frase"></p>
+      <p class="pequeno suave" style="margin: 0" id="nota-calc"></p>
+    </div>
+      </section>
+
+  <section class="capitulo revelar" id="criticas">
+    <span class="ato">Chapter 6 · The criticism</span>
+    <h2>The hardest questions</h2>
+    <p>I did a mock interview, as if I were live on TV. These are the toughest questions and the answers.</p>
+
+    <details class="critica">
+      <summary>Are you going to start a car company?</summary>
+      <div class="resposta"><p>No. I propose a law that opens a challenge. The car and the company are created by the winning teams.</p><p>I don't join any team, I don't invest and I recuse myself from any decision of the fund.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Can R$ 500,000 make a car? That costs billions.</summary>
+      <div class="resposta"><p>R$ 500,000 makes a prototype and a business plan, not a factory. The challenge has phases.</p><p>The big money only comes after the public panel, from private investment and by milestones. Slate, in the United States, needed about US$ 1.4 billion. That's the scale we're talking about, and it doesn't come out of the government's coffers.</p></div>
+    </details>
+    <details class="critica">
+      <summary>If it fails, do taxpayers pay?</summary>
+      <div class="resposta"><p>In Tier 3 of the FSRI, public insurance covers at most half of the loss, and only in an audited bankruptcy. The investor always loses the bigger part.</p><p>The law sets a cap in reais per project. And since the money is released by milestones, the risk at any moment is only what has already been released.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Isn't this Inovar-Auto, which the WTO condemned?</summary>
+      <div class="resposta"><p>No. Inovar-Auto raised taxes on those who didn't use Brazilian parts. The WTO accepts incentives, but not lower taxes conditioned on using local parts.</p><p>The Dumont Challenge doesn't raise anyone's taxes. It funds research, prototypes and patents in Brazil.</p></div>
+    </details>
+    <details class="critica">
+      <summary>The battery comes from China. Is that sovereignty?</summary>
+      <div class="resposta"><p>It's starting where we can. Even BYD assembles batteries in Bahia with cells from China.</p><p>A car with most of its parts from here is better than none. A Brazilian battery cell becomes another challenge of the fund, because it takes more time and more money.</p></div>
+    </details>
+    <details class="critica">
+      <summary>BYD sells an electric car for R$ 119,000. How do you compete?</summary>
+      <div class="resposta"><p>Not on price alone. On the work vehicle that barely exists in electric form today, on modularity and on the network of shops that customize.</p><p>And on the security of not depending only on others. Exchange rates, tariffs and the 2021 chip shortage have already stopped factories all over the world.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Who guarantees the shop won't make an unsafe car?</summary>
+      <div class="resposta"><p>The shop only installs kits already approved together with the car, and must be certified by the automaker. It's the CNG conversion model, which has worked for years with registered installers and inspection.</p><p>If something goes wrong, the consumer can already sue the shop and the automaker together, under the Consumer Protection Code.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Why would idle factories rent a line to a competitor?</summary>
+      <div class="resposta"><p>Because an idle line loses money. Factories all over the world assemble other brands' cars under contract. If nobody rents, the other option is a dedicated factory in a hub with a ready workforce.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Doesn't giving credit to companies with no revenue open the door to shell companies?</summary>
+      <div class="resposta"><p>It would, if the money came out all at once. That's why the credit is only released against an audited milestone: prototype ready, crash test done, certification approved.</p><p>A company that sold reservations without a car was suspended from MOVER in 2026. The rule has to catch that earlier.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Isn't assembling first and localizing later what the Chinese do?</summary>
+      <div class="resposta"><p>Yes, and it works. That's why we copy it. The difference is that here the engineering, the patent and the company are Brazilian from day one. We manufacture and localize at the same time.</p></div>
+    </details>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Chapter 7 · How to measure</span>
+    <h2>Four numbers to track</h2>
+    <ul>
+      <li><strong>Electric light commercial vehicles</strong> sold per month, per Fenabrave.</li>
+      <li><strong>Brazilian parts</strong> in the winning car, as a % of cost, year by year.</li>
+      <li><strong>Certified repair shops</strong> per state and jobs created in them.</li>
+      <li><strong>Public money at risk</strong>, in reais, published every month by the fund.</li>
+    </ul>
+  </section>
+
+  <section class="capitulo revelar conversa">
+    <p class="grande">If you could build your own car, what color would it be? And which kit would you add first?</p>
+    <div class="hashtags"><span class="hashtag">#DesafioDumont</span><span class="hashtag">#SistemasMelhores</span></div>
+    <div class="capa-acoes"><a class="botao" href="/en/projetos/reindustrializacao/">See the FSRI, the fund behind it</a></div>
+  </section>
+
+  <section class="capitulo">
+    <h2>Sources <small>(mostly in Portuguese)</small></h2>
+    <ul class="fontes" id="lista-fontes">
+      <li><a href="https://canalve.com.br/eletrificados-618-mil-emplacamentos-outubro/">Canal VE, October 2026 registrations according to Fenabrave</a></li>
+      <li><a href="https://www.autodata.com.br/revistas/flipbook/BrazilAutomotiveGuide_2026/15/">AutoData, Brazil Automotive Guide 2026, factory capacity according to Anfavea</a></li>
+      <li><a href="https://agenciabrasil.ebc.com.br/economia/noticia/2026-07/producao-de-veiculos-sobe-88-no-primeiro-semestre-diz-anfavea">Agência Brasil, vehicle production and Anfavea's 2026 forecast (July 2026)</a></li>
+      <li><a href="https://mecanicaonline.com.br/2026/07/carros-neutros-dominam-o-mercado-mais-de-80-dos-veiculos-novos-sao-brancos-pretos-ou-cinza/">Mecânica Online, more than 80% of new cars are white, black or gray (July 2026)</a></li>
+      <li><a href="https://www.webmotors.com.br/wm1/noticias/veja-investimentos-anunciados-no-brasil">Webmotors, investments announced by BYD, GWM and Caoa Chery (2025)</a></li>
+      <li><a href="https://timesbrasil.com.br/empresas-e-negocios/transporte/gwm-byd-e-mais-montadoras-e-marcas-chinesas-ampliam-presenca-na-industria-automotiva-brasileira/">Times Brasil, how Chinese automakers came to Brazil (2025)</a></li>
+      <li><a href="https://startups.com.br/pesquisas/incentivos-fiscais-para-inovacao-ainda-nao-alcancam-startups-iniciantes/">Startups.com.br, Lei do Bem doesn't reach early-stage startups (2025)</a></li>
+      <li><a href="https://exame.com/economia/politica-industrial-brasileira-e-condenada-na-omc">Exame, WTO condemns Inovar-Auto (2016)</a></li>
+      <li><a href="https://mecanicaonline.com.br/2017/10/o-fim-dos-30-pontos-de-ipi/">Mecânica Online, the end of the 30 IPI points (2017)</a></li>
+      <li><a href="https://agenciagov.ebc.com.br/noticias/202506/inmetro-reforca-regras-de-seguranca-para-uso-de-gnv-e-alerta-sobre-riscos-de-instalacoes-e-manutencoes-irregulares">Agência Gov, Inmetro rules for CNG conversion (2025)</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm">Brazilian Traffic Code, art. 98</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm">Consumer Protection Code, arts. 12, 14 and 25</a></li>
+      <li><a href="https://www.gov.br/pt-br/servicos/solicitar-autorizacao-de-credito-financeiro-no-programa-mover">Gov.br, MOVER Program financial credit (Law 14.902/2024)</a></li>
+      <li><a href="https://revistapesquisa.fapesp.br/en/the-history-of-a-brand/">Revista Pesquisa FAPESP, the history of Gurgel (2004, in English)</a></li>
+      <li><a href="https://revistapesquisa.fapesp.br/omc-considera-ilegais-sete-programas-do-brasil/">Revista Pesquisa FAPESP, WTO rules seven Brazilian programs illegal (2017)</a></li>
+      <li><a href="https://www.vrum.com.br/aceleradas/2026/06/7435239-falta-de-relatorios-leva-a-suspensao-da-lecar-no-programa-mover.html">Vrum, suspension of a new automaker from MOVER (June 2026)</a></li>
+      <li><a href="https://techcrunch.com/2026/06/24/slate-autos-radically-simple-electric-truck-starts-at-24950/">TechCrunch, price of Slate's pickup (June 2026, in English)</a></li>
+      <li><a href="https://forbes.com.br/forbes-money/2026/08/fortuna-bilionarios-brasileiros-r-186-trilhao-pib/">Forbes Brasil, 255 billionaires hold R$ 1.86 trillion (August 2026)</a></li>
+      <li><a href="https://diariodocomercio.com.br/?p=540931">Diário do Comércio, SPE/Ministry of Finance study on the effective income tax of the 0.01% (2025)</a></li>
+      <li><a href="https://www.taxobservatory.eu//www-site/uploads/2025/08/Progressividade-Tributaria-e-Desigualdade-no-Brasil-Evidencias-a-partir-de-Dados-Administrativos-Integrados.pdf">EU Tax Observatory, Tax progressivity and inequality in Brazil (2025)</a></li>
+      <li><a href="https://taxobservatory.eu/?p=247">EU Tax Observatory, Global Tax Evasion Report 2024 (in English)</a></li>
+      <li><a href="https://gabriel-zucman.eu/files/report-g20.pdf">Gabriel Zucman, report to the G20 on minimum taxation of billionaires (2024, in English)</a></li>
+      <li><a href="https://taxfoundation.org/research/all/federal/estate-and-inheritance-taxes-around-world/">Tax Foundation, estate and inheritance taxes around the world (in English)</a></li>
+      <li><a href="https://www.machadomeyer.com.br/pt/inteligencia-juridica/publicacoes-ij/planejamento-sucessorio/itcmd-principais-mudancas-trazidas-pela-lc-227-26">Machado Meyer, changes to the ITCMD under Complementary Law 227/2026</a></li>
+      <li><a href="https://planalto.gov.br/ccivil_03/_Ato2023-2026/2025/Lei/L15270.htm">Law 15.270/2025, minimum tax on high incomes</a></li>
+      <li><a href="https://www.gov.br/fazenda/pt-br/acesso-a-informacao/FAQAmpliaodaIsenodoImpostodeRendaetributaomnimadasaltasrendas.docx.pdf">Ministry of Finance, Q&amp;A on the exemption and the minimum tax (2025)</a></li>
+    </ul>
+  </section>
+</main>
+<gr-rodape></gr-rodape>
+<script>
+(() => {
+  // Ilustração: troca as cores dos painéis
+  const paineis = ["p-capo", "p-cabine", "p-cacamba", "p-porta"].map((id) => document.getElementById(id));
+  const botoesCor = [...document.querySelectorAll(".cor")];
+  botoesCor.forEach((b) => b.addEventListener("click", () => {
+    b.dataset.cores.split(",").forEach((c, i) => paineis[i].setAttribute("fill", "var(--" + c + ")"));
+    botoesCor.forEach((o) => o.setAttribute("aria-pressed", String(o === b)));
+  }));
+
+  // Calculadora: imposto mínimo de referência sobre o patrimônio
+  const TAXA_REFERENCIA = 0.02; // 2% ao ano, proposta levada ao G20 em 2024
+  const EQUIPE = 500000;
+  const FABRICA = 5.5e9;
+  const real = (v) => {
+    if (v >= 1e9) return "R$ " + (v / 1e9).toLocaleString("en-US", { maximumFractionDigits: 1 }) + " bn";
+    if (v >= 1e6) return "R$ " + (v / 1e6).toLocaleString("en-US", { maximumFractionDigits: 0 }) + " million";
+    return "R$ " + Math.round(v).toLocaleString("en-US");
+  };
+  const $ = (id) => document.getElementById(id);
+  let patrimonio = 10e9, parte = 0.5;
+
+  function calcular() {
+    const imposto = patrimonio * TAXA_REFERENCIA;
+    const fundo = imposto * parte;
+    const estado = imposto - fundo;
+    $("total").textContent = real(imposto) + " per year";
+    $("v-fundo").textContent = real(fundo);
+    $("v-estado").textContent = real(estado);
+    $("v-equipes").textContent = Math.floor(fundo / EQUIPE).toLocaleString("en-US");
+    const fab = fundo / FABRICA;
+    $("v-fabrica").textContent = fab >= 1 ? fab.toLocaleString("en-US", { maximumFractionDigits: 1 }) + " factories" : Math.round(fab * 100) + "%";
+    $("b-fundo").style.flexBasis = (parte * 100) + "%";
+    $("b-estado").style.flexBasis = ((1 - parte) * 100) + "%";
+    $("frase").textContent = "Instead of paying " + real(fundo) + " in tax, that amount is invested in the fund. If the project succeeds, the person gets it back with profit, and the State keeps a share of the company.";
+  }
+  function grupo(id, aoMudar) {
+    const ops = [...document.querySelectorAll("#" + id + " .opcao")];
+    ops.forEach((op) => op.addEventListener("click", () => {
+      ops.forEach((o) => { o.classList.toggle("marcada", o === op); o.setAttribute("aria-checked", String(o === op)); });
+      aoMudar(+op.dataset.valor); calcular();
+    }));
+  }
+  grupo("op-patrimonio", (v) => { patrimonio = v; });
+  grupo("op-parte", (v) => { parte = v; });
+  $("nota-calc").textContent = "Illustrative estimate. The 2% annual floor on wealth is the benchmark proposed to the G20 in 2024 and includes tax the person already pays, so the new amount would be smaller. For comparison, the minimum tax of Law 15.270/2025 should raise R$ 25.2 billion in 2026, according to the Ministry of Finance estimate.";
+  calcular();
+
+  const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("visivel"); io.unobserve(e.target); } }), { threshold: .12 }) : null;
+  document.querySelectorAll(".revelar").forEach((el) => io ? io.observe(el) : el.classList.add("visivel"));
+})();
+</script>
+</body>
+</html>

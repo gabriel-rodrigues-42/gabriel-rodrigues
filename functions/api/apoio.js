@@ -9,11 +9,12 @@ const VERSAO_PRIVACIDADE = "2026-11-20";
 const UFS = new Set("AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO EX".split(" "));
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function responder(request, status, corpo) {
+function responder(request, status, corpo, idioma) {
   const tipo = request.headers.get("Content-Type") || "";
-  // Sem JavaScript o formulário chega como form-urlencoded: volta para a página.
+  // Sem JavaScript o formulário chega como form-urlencoded: volta para a página, no idioma de origem.
   if (!tipo.includes("application/json") && status === 200) {
-    return Response.redirect(new URL("/?apoio=ok#apoiar", request.url).toString(), 303);
+    const pagina = idioma === "en" ? "/en/" : "/";
+    return Response.redirect(new URL(pagina + "?apoio=ok#apoiar", request.url).toString(), 303);
   }
   return new Response(JSON.stringify(corpo), {
     status,
@@ -44,7 +45,9 @@ export async function onRequestPost({ request, env }) {
   }
 
   // Armadilha para robôs: campo escondido que pessoas não preenchem.
-  if (limpar(dados.site, 200)) return responder(request, 200, { ok: true });
+  // A versão em inglês do formulário (/en/) manda idioma=en. Só serve para o redirecionamento; não é guardado.
+  const idioma = dados.idioma === "en" ? "en" : "pt";
+  if (limpar(dados.site, 200)) return responder(request, 200, { ok: true }, idioma);
 
   const email = limpar(dados.email, 254).toLowerCase();
   const nome = limpar(dados.nome, 80);
@@ -77,7 +80,7 @@ export async function onRequestPost({ request, env }) {
     return responder(request, 500, { ok: false, erro: "Não consegui guardar agora. Tente de novo em alguns minutos." });
   }
 
-  return responder(request, 200, { ok: true });
+  return responder(request, 200, { ok: true }, idioma);
 }
 
 export function onRequest() {

@@ -31,7 +31,18 @@ h1, h2, h3 { hyphens: auto; }
   padding: 6px 10px; border-radius: var(--forma-pilula); white-space: nowrap;
 }
 .moldura-menu a:hover, .moldura-menu a[aria-current="page"] { background: var(--azul-claro); }
-.moldura-apoiar { grid-area: apoiar; background: var(--verde); color: var(--branco); padding: 8px 16px; }
+.moldura-acoes { grid-area: apoiar; display: flex; align-items: center; gap: var(--espaco-2); }
+.moldura-apoiar { background: var(--verde); color: var(--branco); padding: 8px 16px; }
+
+/* Troca de idioma PT/EN: duas pílulas juntas, a do idioma atual preenchida. */
+.moldura-idioma { display: flex; border: 2px solid var(--azul-claro); border-radius: var(--forma-pilula); padding: 2px; }
+.moldura-idioma a {
+  font-size: var(--tamanho-1); font-weight: var(--peso-forte); color: var(--azul); text-decoration: none;
+  padding: 4px 8px; border-radius: var(--forma-pilula); line-height: 1.2; letter-spacing: .04em;
+}
+.moldura-idioma a:hover { background: var(--azul-claro); }
+.moldura-idioma a[aria-current] { background: var(--azul); color: var(--branco); }
+.moldura-idioma a:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
 .moldura-apoiar:hover { background: var(--verde-escuro); }
 .moldura-menu a:focus-visible, .moldura-apoiar:focus-visible, .moldura-marca:focus-visible, .moldura-rodape a:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
 

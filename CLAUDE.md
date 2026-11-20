@@ -13,6 +13,7 @@ Site gabriel-rodrigues.com, design system e vídeos do Gabriel Rodrigues, desenv
   - `ideias/`: portfólio de ideias lido em voz alta com legendas (Web Speech API). Conteúdo só em `ideias.js`; `leitor.js` monta a página e faz a leitura.
   - `caminho/`: questionário "Qual caminho faz sentido pra mim?" para qualquer município. Regras de lei, perguntas e o exemplo do Gabriel em `regras.js`; lógica em `caminho.js`; números por UF em `dados/` (mais o índice `municipios.json` do seletor de cidade), gerados por `scripts/caminho/gerar_dados.py` (TSE e IBGE). Não edite `dados/` à mão: mude o script e o workflow `dados-caminho.yml` regenera no GitHub (o TSE não abre daqui da nuvem).
   - `projetos/`: páginas de projeto. Modelo em `projetos/_modelo/`.
+  - `en/`: versão em inglês. A tradução de `/x/` fica em `/en/x/` (mesmo slug), com `<html lang="en">`. O português é o padrão. O seletor PT/EN do cabeçalho (`moldura.js`) acha a outra versão pelo `<link rel="alternate" hreflang>` do `<head>`. Os scripts compartilhados (`moldura.js`, `cidade.js`, `caminho.js`, `leitor.js`) escolhem os textos pelo `lang` da página. Textos em inglês das ideias em `ideias/ideias-en.js` e das regras do questionário em `caminho/regras-en.js`. O design system não tem versão em inglês.
 - `functions/api/apoio.js`: Pages Function do formulário "Acredita que eu devo tentar?" da home. Grava na tabela `apoios` (`db/apoios.sql`) do D1 `gabriel-rodrigues`, ligado como `DB`. O banco é do site todo: recurso novo ganha tabela e arquivo próprios em `db/`. Sem CPF: só email, nome, cidade e UF, com consentimento.
 - `videos/`: vídeos (não publicado). `blender/gabriel.py` tem o boneco do Gabriel, as cores e o cenário; `blender/cenas/` tem um script por plano; `roteiros/` guarda os roteiros. `out/` e `audio/` ficam fora do Git.
 - `.claude/skills/blender-claymation/`: skill de stop motion no Blender (MIT, de angrypenguinpng/blender-claymation-skill).
@@ -24,7 +25,8 @@ Site gabriel-rodrigues.com, design system e vídeos do Gabriel Rodrigues, desenv
 - Páginas precisam funcionar em 390px de largura sem rolagem lateral.
 - Números sempre com fonte oficial e ano.
 - Pré-campanha: nada de pedido de voto, número de urna ou ataque a pessoas e partidos. Critique sistemas.
-- SEO: toda página tem título único, descrição, canonical, Open Graph e Twitter (copie o bloco do `projetos/_modelo/`) e entra em `site/sitemap.xml`. Ícones e imagem de compartilhamento ficam na raiz de `site/` (`favicon.svg`, `og.jpg`).
+- Inglês: mudou o texto de uma página, de `ideias.js` ou de `regras.js`? Mude também a versão em inglês. Página nova ganha a versão em `/en/` no mesmo PR.
+- SEO: toda página tem título único, descrição, canonical, Open Graph e Twitter (copie o bloco do `projetos/_modelo/`) e entra em `site/sitemap.xml`. Páginas com versão em inglês levam o bloco `hreflang` (pt-BR, en e x-default) nas duas versões, e as duas URLs entram no sitemap com os `xhtml:link`. Ícones e imagem de compartilhamento ficam na raiz de `site/` (`favicon.svg`, `og.jpg`).
 - Dados pessoais: colete o mínimo (LGPD). Nada de CPF, título de eleitor ou lista com cara de abaixo-assinado.
 
 ## Ideias

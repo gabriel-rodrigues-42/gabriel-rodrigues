@@ -1,14 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://gabriel-rodrigues.com/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://gabriel-rodrigues.com/sobre/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://gabriel-rodrigues.com/ideias/</loc><lastmod>2026-11-19</lastmod></url>
-  <url><loc>https://gabriel-rodrigues.com/projetos/</loc><lastmod>2026-11-19</lastmod></url>
-  <url><loc>https://gabriel-rodrigues.com/projetos/desafio-dumont/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://gabriel-rodrigues.com/projetos/cartorio-digital/</loc><lastmod>2026-11-19</lastmod></url>
-  <url><loc>https://gabriel-rodrigues.com/projetos/galera-club/</loc><lastmod>2026-11-19</lastmod></url>
-  <url><loc>https://gabriel-rodrigues.com/projetos/reindustrializacao/</loc><lastmod>2026-11-19</lastmod></url>
-  <url><loc>https://gabriel-rodrigues.com/caminho/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://gabriel-rodrigues.com/privacidade/</loc><lastmod>2026-11-20</lastmod></url>
+<!-- Cada página com versão em inglês entra duas vezes (PT e /en/), as duas com os mesmos xhtml:link de idioma. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://gabriel-rodrigues.com/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/"/>
+  </url>
+  <url><loc>https://gabriel-rodrigues.com/en/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/"/>
+  </url>
+  <url><loc>https://gabriel-rodrigues.com/sobre/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/sobre/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/sobre/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/sobre/"/>
+  </url>
+  <url><loc>https://gabriel-rodrigues.com/en/sobre/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/sobre/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/sobre/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/sobre/"/>
+  </url>
+  <url><loc>https://gabriel-rodrigues.com/ideias/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/ideias/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/ideias/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/ideias/"/>
+  </url>
+  <url><loc>https://gabriel-rodrigues.com/en/ideias/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/ideias/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/ideias/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/ideias/"/>
+  </url>
+  <url><loc>https://gabriel-rodrigues.com/projetos/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/projetos/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/projetos/"/>
+  </url>
+  <url><loc>https://gabriel-rodrigues.com/en/projetos/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/projetos/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/projetos/"/>
+  </url>
+  <url><loc>https://gabriel-rodrigues.com/projetos/desafio-dumont/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/projetos/desafio-dumont/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/desafio-dumont/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/projetos/desafio-dumont/"/>
+  </url>
+  <url><loc>https://gabriel-rodrigues.com/en/projetos/desafio-dumont/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/projetos/desafio-dumont/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/desafio-dumont/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/projetos/desafio-dumont/"/>
+  </url>
+  <url><loc>https://gabriel-rodrigues.com/projetos/cartorio-digital/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/projetos/cartorio-digital/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/cartorio-digital/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/projetos/cartorio-digital/"/>
+  </url>
+  <url><loc>https://gabriel-rodrigues.com/en/projetos/cartorio-digital/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/projetos/cartorio-digital/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/cartorio-digital/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/projetos/cartorio-digital/"/>
+  </url>
+  <url><loc>https://gabriel-rodrigues.com/projetos/galera-club/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/projetos/galera-club/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/galera-club/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/projetos/galera-club/"/>
+  </url>
+  <url><loc>https://gabriel-rodrigues.com/en/projetos/galera-club/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/projetos/galera-club/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/galera-club/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/projetos/galera-club/"/>
+  </url>
+  <url><loc>https://gabriel-rodrigues.com/projetos/reindustrializacao/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/projetos/reindustrializacao/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/reindustrializacao/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/projetos/reindustrializacao/"/>
+  </url>
+  <url><loc>https://gabriel-rodrigues.com/en/projetos/reindustrializacao/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/projetos/reindustrializacao/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/reindustrializacao/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/projetos/reindustrializacao/"/>
+  </url>
+  <url><loc>https://gabriel-rodrigues.com/caminho/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/caminho/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/caminho/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/caminho/"/>
+  </url>
+  <url><loc>https://gabriel-rodrigues.com/en/caminho/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/caminho/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/caminho/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/caminho/"/>
+  </url>
+  <url><loc>https://gabriel-rodrigues.com/privacidade/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/privacidade/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/privacidade/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/privacidade/"/>
+  </url>
+  <url><loc>https://gabriel-rodrigues.com/en/privacidade/</loc><lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/privacidade/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/privacidade/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/privacidade/"/>
+  </url>
   <url><loc>https://gabriel-rodrigues.com/design-system/</loc><lastmod>2026-11-19</lastmod></url>
 </urlset>
