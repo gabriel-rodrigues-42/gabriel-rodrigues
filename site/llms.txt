@@ -32,3 +32,4 @@ Não há pedido de voto. As propostas estão em construção, com dados, fontes 
 - [Privacidade](https://gabriel-rodrigues.com/privacidade/): quais dados o site guarda, para quê e como pedir para apagar
 - [Design system](https://gabriel-rodrigues.com/design-system/): cores, formas e componentes do site e dos vídeos
 - [Código aberto no GitHub](https://github.com/gabriel-rodrigues-42/gabriel-rodrigues)
+- [Como contribuir](https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/CONTRIBUTING.md): como mandar uma proposta nova ou melhorar uma existente pelos formulários de issue do GitHub, com fonte e ano, dados, impacto e sem apontar o dedo

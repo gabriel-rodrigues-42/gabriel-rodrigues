@@ -1,0 +1,26 @@
+name: Erro no site
+description: Algo quebrado, difícil de ler ou que não funciona no celular.
+title: "[Site] "
+labels: ["site"]
+body:
+  - type: input
+    id: pagina
+    attributes:
+      label: Página
+      placeholder: https://gabriel-rodrigues.com/...
+    validations:
+      required: true
+  - type: textarea
+    id: problema
+    attributes:
+      label: O que aconteceu
+      description: O que você fez, o que esperava e o que viu. Um print ajuda (sem dados pessoais na imagem).
+    validations:
+      required: true
+  - type: input
+    id: aparelho
+    attributes:
+      label: Aparelho e navegador
+      placeholder: "Ex.: celular Android, Chrome"
+    validations:
+      required: false

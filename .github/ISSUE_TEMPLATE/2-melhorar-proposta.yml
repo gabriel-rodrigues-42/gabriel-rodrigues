@@ -1,0 +1,74 @@
+name: Melhorar uma proposta
+description: Traga um dado novo, uma correção, uma crítica ou uma ideia para uma proposta que já está no site.
+title: "[Melhoria] "
+labels: ["melhoria", "para revisar"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por ajudar a melhorar. Toda proposta do site está em construção e aberta a crítica.
+
+        **Lembre:** tudo aqui é público. Não escreva email, telefone, endereço, CPF, título de eleitor ou dados de outras pessoas. As regras estão no [CONTRIBUTING](https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/CONTRIBUTING.md).
+
+  - type: input
+    id: proposta
+    attributes:
+      label: Qual proposta
+      description: O link da página no site.
+      placeholder: https://gabriel-rodrigues.com/projetos/...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: O que você traz
+      multiple: true
+      options:
+        - Um dado novo ou mais recente
+        - Uma correção (número, lei, fonte errada)
+        - Uma crítica que a página não responde
+        - Uma ideia para melhorar a proposta
+        - Um exemplo que já funciona em outro lugar
+    validations:
+      required: true
+
+  - type: textarea
+    id: sugestao
+    attributes:
+      label: Sua contribuição
+      description: O que está na página hoje (se for correção) e o que você sugere. Seja direto.
+    validations:
+      required: true
+
+  - type: textarea
+    id: fontes
+    attributes:
+      label: Fontes, com ano
+      description: O link de cada fonte e o ano. Prefira fontes oficiais. Para uma crítica sem número, explique de onde vem o argumento.
+    validations:
+      required: true
+
+  - type: textarea
+    id: impacto
+    attributes:
+      label: O que isso muda no impacto
+      description: A sua contribuição aumenta, diminui ou muda quem é afetado? Se der, mostre a conta.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: compromissos
+    attributes:
+      label: Compromissos (inegociáveis)
+      options:
+        - label: Citei a fonte e o ano de cada número, de preferência oficial.
+          required: true
+        - label: Critiquei sistemas, não pessoas, partidos ou grupos. Busquei solução, não culpado.
+          required: true
+        - label: Não escrevi pedido de voto, número de urna, nem ataque a candidatos (lei eleitoral, pré-campanha).
+          required: true
+        - label: Não escrevi dados pessoais meus ou de outras pessoas (LGPD).
+          required: true
+        - label: Aceito que o texto seja adaptado e publicado no site gabriel-rodrigues.com, com crédito ao meu usuário do GitHub.
+          required: true
