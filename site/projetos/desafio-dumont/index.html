@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Desafio Dumont · Gabriel Rodrigues</title>
+<meta name="description" content="Um desafio aberto para criar um carro brasileiro simples, modular e fácil de personalizar, financiado pelo FSRI e montado por uma rede de oficinas pelo país.">
+<link rel="canonical" href="https://gabriel-rodrigues.com/projetos/desafio-dumont/">
+<meta name="author" content="Gabriel Rodrigues">
+<meta name="theme-color" content="#fbf8ef">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Gabriel Rodrigues">
+<meta property="og:url" content="https://gabriel-rodrigues.com/projetos/desafio-dumont/">
+<meta property="og:title" content="Desafio Dumont · Gabriel Rodrigues">
+<meta property="og:description" content="Um desafio aberto para criar um carro brasileiro simples, modular e fácil de personalizar, com dinheiro de quem hoje paga pouco imposto.">
+<meta property="og:image" content="https://gabriel-rodrigues.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gabriel Rodrigues, engenharia de software a serviço do Brasil">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Desafio Dumont · Gabriel Rodrigues">
+<meta name="twitter:description" content="Um desafio aberto para criar um carro brasileiro simples, modular e fácil de personalizar, com dinheiro de quem hoje paga pouco imposto.">
+<meta name="twitter:image" content="https://gabriel-rodrigues.com/og.jpg">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "Desafio Dumont: um carro brasileiro para personalizar",
+ "description": "Um desafio aberto para criar um carro brasileiro simples, modular e fácil de personalizar, financiado pelo FSRI e montado por uma rede de oficinas pelo país.",
+ "inLanguage": "pt-BR",
+ "image": "https://gabriel-rodrigues.com/og.jpg",
+ "author": { "@type": "Person", "name": "Gabriel Rodrigues", "url": "https://gabriel-rodrigues.com/" },
+ "mainEntityOfPage": "https://gabriel-rodrigues.com/projetos/desafio-dumont/",
+ "datePublished": "2026-11-20"
+}
+</script>
+<link rel="stylesheet" href="/design-system/tokens.css">
+<link rel="stylesheet" href="/design-system/componentes.css">
+<link rel="stylesheet" href="/design-system/moldura.css">
+<script src="/design-system/moldura.js"></script>
+<style>
+  main { max-width: 760px; margin: 0 auto; padding: var(--espaco-7) var(--espaco-4); }
+  nav a { font-weight: var(--peso-forte); text-decoration: none; color: var(--azul); }
+  a { color: var(--azul); }
+  h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); }
+  h2 { font-size: var(--tamanho-5); line-height: 1.15; color: var(--azul); margin: 0 0 var(--espaco-3); }
+  h3 { font-size: var(--tamanho-4); color: var(--azul); margin: 0 0 var(--espaco-2); line-height: 1.25; }
+  p { margin: 0 0 var(--espaco-3); }
+  .lead { font-size: var(--tamanho-3); color: var(--texto-suave); }
+  .grande { font-size: var(--tamanho-4); font-weight: var(--peso-forte); line-height: 1.35; }
+  .pequeno { font-size: var(--tamanho-2); }
+  .suave { color: var(--texto-suave); }
+  .capitulo { margin-top: var(--espaco-7); }
+  .ato { display: inline-block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); letter-spacing: .08em; text-transform: uppercase; color: var(--verde-escuro); margin-bottom: var(--espaco-2); }
+  .pausa { text-align: center; padding: var(--espaco-6) var(--espaco-4); font-size: var(--tamanho-5); font-weight: var(--peso-forte); line-height: 1.2; color: var(--azul); }
+  .capa-acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-3); margin-top: var(--espaco-5); }
+  .ilustra { display: block; width: 100%; height: auto; margin: var(--espaco-5) 0 var(--espaco-2); }
+  .legenda-ilustra { font-size: var(--tamanho-1); color: var(--texto-suave); text-align: center; margin: 0; }
+
+  /* Ilustração: troca de cor dos painéis */
+  .painel { transition: fill .6s ease; }
+  .cores { display: flex; flex-wrap: wrap; gap: var(--espaco-2); justify-content: center; margin-top: var(--espaco-3); }
+  .cor { width: 36px; height: 36px; border: 3px solid var(--branco); border-radius: var(--forma-bolha-1); box-shadow: var(--sombra-cartao); cursor: pointer; padding: 0; }
+  .cor:nth-child(even) { border-radius: var(--forma-bolha-2); }
+  .cor[aria-pressed="true"] { outline: 3px solid var(--azul); outline-offset: 2px; }
+  .cor:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+
+  /* Números */
+  .numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--espaco-4); margin-top: var(--espaco-4); }
+  .numeros .cartao { padding: var(--espaco-4); }
+  .numeros strong { display: block; font-size: var(--tamanho-5); color: var(--verde-escuro); line-height: 1.1; margin-bottom: var(--espaco-1); }
+  .fontes { font-size: var(--tamanho-2); color: var(--texto-suave); }
+  .numeros .fontes { display: block; margin-top: var(--espaco-2); font-size: var(--tamanho-1); }
+  .fontes li + li { margin-top: var(--espaco-2); }
+
+  /* Comparação de barras */
+  .barras { display: grid; gap: var(--espaco-3); margin-top: var(--espaco-4); }
+  .linha-barra { display: grid; grid-template-columns: 120px 1fr; gap: var(--espaco-3); align-items: center; font-size: var(--tamanho-2); }
+  .linha-barra b { color: var(--azul); }
+  .linha-barra .trilho { background: var(--creme); border-radius: var(--forma-pilula); height: 28px; overflow: hidden; }
+  .linha-barra .valor { height: 100%; background: var(--verde); border-radius: var(--forma-pilula); min-width: 10px; }
+  .linha-barra.br .valor { background: var(--azul); }
+  .linha-barra small { display: block; color: var(--texto-suave); font-size: var(--tamanho-1); margin-top: 2px; }
+  @media (max-width: 420px) { .linha-barra { grid-template-columns: 1fr; gap: var(--espaco-1); } }
+
+  /* Fluxos */
+  .fluxo { list-style: none; padding: 0; margin: var(--espaco-5) 0 0; position: relative; }
+  .fluxo::before { content: ""; position: absolute; left: 27px; top: 20px; bottom: 20px; width: 6px; background: var(--amarelo); border-radius: var(--forma-pilula); }
+  .fluxo li { position: relative; display: grid; grid-template-columns: 60px 1fr; gap: var(--espaco-4); align-items: start; padding-bottom: var(--espaco-5); }
+  .fluxo li:last-child { padding-bottom: 0; }
+  .fluxo .n { width: 60px; height: 60px; display: grid; place-items: center; background: var(--azul); color: var(--branco); font-weight: var(--peso-forte); font-size: var(--tamanho-4); border-radius: var(--forma-bolha-1); box-shadow: var(--sombra-clay); position: relative; }
+  .fluxo li:nth-child(even) .n { border-radius: var(--forma-bolha-2); background: var(--verde); }
+  .fluxo strong { display: block; color: var(--azul); font-size: var(--tamanho-3); margin-top: var(--espaco-2); }
+  .fluxo .trava { display: inline-block; margin-top: var(--espaco-2); background: var(--areia); color: var(--texto); font-size: var(--tamanho-1); font-weight: var(--peso-forte); padding: 4px 10px; border-radius: var(--forma-selo); }
+
+  .duas { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-4); margin-top: var(--espaco-4); }
+  .duas .cartao { padding: var(--espaco-4); }
+  .duas .contra { background: var(--areia); box-shadow: none; }
+  .duas .pro { background: var(--verde-claro); box-shadow: none; }
+  .duas p { margin: var(--espaco-2) 0 0; font-size: var(--tamanho-2); }
+  @media (max-width: 560px) { .duas { grid-template-columns: 1fr; } }
+
+  /* Calculadora */
+  .calc { margin-top: var(--espaco-5); padding: var(--espaco-5); }
+  .calc .opcoes { display: flex; flex-wrap: wrap; gap: var(--espaco-2); margin: var(--espaco-2) 0 var(--espaco-4); }
+  .calc .opcoes .opcao { width: auto; padding: 10px 14px; }
+  .total { font-size: var(--tamanho-5); font-weight: var(--peso-forte); color: var(--azul); line-height: 1.1; }
+  .barra { display: flex; height: 48px; border-radius: var(--forma-opcao); overflow: hidden; background: var(--creme); margin: var(--espaco-3) 0; }
+  .barra div { transition: flex-basis .5s ease; min-width: 0; }
+  .b-fundo { background: var(--verde); }
+  .b-estado { background: var(--amarelo); }
+  .linhas { list-style: none; padding: 0; margin: 0; font-size: var(--tamanho-2); }
+  .linhas li { display: grid; grid-template-columns: 1fr auto; gap: var(--espaco-3); padding: var(--espaco-2) 0; border-bottom: 1px dashed var(--azul-claro); }
+  .linhas li span:first-child::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: var(--forma-bolha-1); margin-right: 8px; vertical-align: -1px; background: var(--azul-claro); }
+  .linhas li.l-fundo span:first-child::before { background: var(--verde); }
+  .linhas li.l-estado span:first-child::before { background: var(--amarelo); }
+  .linhas li b { color: var(--azul); white-space: nowrap; }
+  .frase-calc { margin-top: var(--espaco-4); font-weight: var(--peso-forte); color: var(--verde-escuro); }
+
+  /* Camadas da lei */
+  .camadas { display: grid; gap: var(--espaco-4); margin-top: var(--espaco-4); }
+  .camada { padding: var(--espaco-4) var(--espaco-5); }
+  .camada .selo { margin-bottom: var(--espaco-3); }
+  .camada ul { margin: 0; padding-left: 1.1em; }
+  .camada li + li { margin-top: var(--espaco-2); }
+
+  /* Críticas */
+  .critica { background: var(--branco); border-radius: var(--forma-opcao); box-shadow: var(--sombra-cartao); margin-top: var(--espaco-4); }
+  .critica summary { cursor: pointer; list-style: none; padding: var(--espaco-4) var(--espaco-5); font-weight: var(--peso-forte); color: var(--azul); display: flex; gap: var(--espaco-3); justify-content: space-between; align-items: center; }
+  .critica summary::-webkit-details-marker { display: none; }
+  .critica summary::after { content: "+"; flex: none; width: 32px; height: 32px; display: grid; place-items: center; background: var(--amarelo); color: var(--azul); border-radius: var(--forma-bolha-1); font-size: var(--tamanho-4); }
+  .critica[open] summary::after { content: "−"; }
+  .critica summary:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; border-radius: var(--forma-opcao); }
+  .critica .resposta { padding: 0 var(--espaco-5) var(--espaco-4); }
+  .critica .resposta p:last-child { margin-bottom: 0; }
+
+  .conversa { background: var(--amarelo-claro); border-radius: var(--forma-cartao); padding: var(--espaco-6) var(--espaco-5); text-align: center; }
+  .conversa p.grande { color: var(--azul); }
+  .conversa .capa-acoes { justify-content: center; }
+  .hashtags { display: flex; flex-wrap: wrap; gap: var(--espaco-2); justify-content: center; margin-top: var(--espaco-4); }
+  .hashtag { background: var(--branco); color: var(--verde-escuro); font-weight: var(--peso-forte); padding: 6px 12px; border-radius: var(--forma-selo); }
+
+  .revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .revelar.visivel { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .revelar { opacity: 1; transform: none; transition: none; }
+    .barra div, .painel { transition: none; }
+  }
+</style>
+</head>
+<body>
+<gr-cabecalho></gr-cabecalho>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
+
+<main>
+  <nav><a href="/projetos/">← Projetos</a></nav>
+
+  <header>
+    <span class="selo" style="margin-top: var(--espaco-5)">Em estudo · Faixa 3 do FSRI</span>
+    <h1>Um carro brasileiro que cada um <span class="destaque">pinta do seu jeito</span></h1>
+    <p class="lead">O Desafio Dumont é uma proposta de lei. Ela abre uma competição nacional para equipes criarem um carro simples, modular e fácil de personalizar. Quem paga a largada é quem hoje paga pouco imposto. Quem ganha é a oficina do seu bairro.</p>
+
+    <svg class="ilustra" viewBox="0 0 640 260" role="img" aria-labelledby="t-capa">
+      <title id="t-capa">Ilustração: uma picape compacta com painéis de cores diferentes sobre uma base comum, com rodas grandes e uma caçamba aberta.</title>
+      <ellipse cx="320" cy="232" rx="270" ry="14" fill="var(--areia)"/>
+      <rect x="92" y="176" width="456" height="30" rx="15" fill="var(--azul)"/>
+      <path class="painel" id="p-capo" d="M96 178 C 96 140, 120 128, 176 126 L 236 124 L 236 178 Z" fill="var(--verde)"/>
+      <path class="painel" id="p-cabine" d="M236 178 L 236 120 C 240 76, 262 62, 300 62 L 352 62 C 372 62, 380 76, 382 98 L 386 178 Z" fill="var(--amarelo)"/>
+      <path d="M262 110 C 266 86, 278 78, 300 78 L 344 78 C 358 78, 364 88, 366 104 L 366 112 L 262 112 Z" fill="var(--azul-claro)"/>
+      <path class="painel" id="p-cacamba" d="M386 178 L 386 124 L 544 124 C 550 124, 552 130, 552 136 L 552 178 Z" fill="var(--livre-coral)"/>
+      <rect x="402" y="134" width="132" height="10" rx="5" fill="var(--branco)" opacity=".55"/>
+      <rect class="painel" id="p-porta" x="250" y="122" width="120" height="50" rx="12" fill="var(--livre-turquesa)"/>
+      <rect x="338" y="140" width="22" height="8" rx="4" fill="var(--azul)"/>
+      <rect x="104" y="146" width="22" height="14" rx="6" fill="var(--amarelo-claro)"/>
+      <g fill="var(--texto)"><circle cx="176" cy="204" r="34"/><circle cx="468" cy="204" r="34"/></g>
+      <g fill="var(--azul-claro)"><circle cx="176" cy="204" r="14"/><circle cx="468" cy="204" r="14"/></g>
+      <g stroke="var(--azul)" stroke-width="4" stroke-dasharray="6 7" fill="none" opacity=".6">
+        <path d="M236 120 L 236 178"/><path d="M386 124 L 386 178"/>
+      </g>
+      <g font-family="Nunito, sans-serif" font-weight="800" font-size="15" fill="var(--azul)">
+        <text x="24" y="254">um chassi só</text>
+        <text x="460" y="40">kits que se encaixam</text>
+      </g>
+      <path d="M60 238 C 70 224, 86 212, 100 200" stroke="var(--azul)" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M520 48 C 510 80, 486 100, 470 118" stroke="var(--azul)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div class="cores" role="group" aria-label="Trocar as cores dos painéis da ilustração">
+      <button class="cor" type="button" aria-pressed="true" aria-label="Cores do Brasil" data-cores="verde,amarelo,livre-coral,livre-turquesa" style="background: linear-gradient(135deg, var(--verde) 50%, var(--amarelo) 50%)"></button>
+      <button class="cor" type="button" aria-pressed="false" aria-label="Cerrado" data-cores="livre-terra,amarelo,verde,livre-terra" style="background: linear-gradient(135deg, var(--livre-terra) 50%, var(--amarelo) 50%)"></button>
+      <button class="cor" type="button" aria-pressed="false" aria-label="Carnaval" data-cores="livre-rosa,livre-roxo,amarelo,livre-turquesa" style="background: linear-gradient(135deg, var(--livre-rosa) 50%, var(--livre-roxo) 50%)"></button>
+      <button class="cor" type="button" aria-pressed="false" aria-label="Litoral" data-cores="livre-turquesa,azul-claro,livre-coral,azul-medio" style="background: linear-gradient(135deg, var(--livre-turquesa) 50%, var(--azul-medio) 50%)"></button>
+      <button class="cor" type="button" aria-pressed="false" aria-label="Frota de empresa" data-cores="azul,azul,branco,azul" style="background: linear-gradient(135deg, var(--azul) 50%, var(--branco) 50%)"></button>
+    </div>
+    <p class="legenda-ilustra" style="margin-top: var(--espaco-2)">Ilustração. Toque numa cor para trocar os painéis. Quem desenha o carro de verdade são as equipes.</p>
+
+    <div class="capa-acoes">
+      <a class="botao verde" href="#calculadora">Ver de onde vem o dinheiro</a>
+      <a class="botao secundario" href="#criticas">Ir direto às críticas</a>
+    </div>
+  </header>
+
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 1 · O buraco</span>
+    <h2>O Brasil vende 14 mil Stradas por mês e quase nenhuma picape elétrica</h2>
+    <p>Em outubro de 2026, quase 1 em cada 4 carros vendidos no Brasil já era elétrico ou híbrido. Mas no carro de trabalho, a picape pequena e a van, a conta muda: só 3% eram eletrificados. Nenhuma montadora brasileira disputa esse espaço.</p>
+    <p>E tem outra coisa que quase ninguém repara: mais de 80% dos carros novos saem brancos, pretos ou cinza. Um país com a nossa cor anda de carro sem cor.</p>
+    <div class="numeros">
+      <div class="cartao"><strong>152</strong>comerciais leves elétricos emplacados em outubro de 2026, contra cerca de 14 mil Fiat Strada no mesmo mês. <span class="fontes">Fenabrave, out/2026</span></div>
+      <div class="cartao"><strong>4,8 mi</strong>de veículos por ano é a capacidade das fábricas do país. A previsão de produção para 2026 é de 2,8 milhões. <span class="fontes">Anfavea, via AutoData e Agência Brasil (2026)</span></div>
+      <div class="cartao"><strong>+80%</strong>dos carros novos vendidos no Brasil são brancos, pretos ou cinza. <span class="fontes">Mecânica Online, jul/2026</span></div>
+    </div>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 2 · Como funciona hoje</span>
+    <h2>A estrangeira chega. A brasileira nem nasce.</h2>
+    <p>As regras valem para todo mundo. Uma montadora estrangeira que chega ao Brasil segue quase sempre o mesmo roteiro, e usa os mesmos incentivos que uma brasileira poderia usar.</p>
+    <ol class="fluxo">
+      <li><span class="n">1</span><div><strong>Importa e testa o mercado</strong>A Chery importou a partir de 2009. A BYD começou a vender carros aqui em 2022.</div></li>
+      <li><span class="n">2</span><div><strong>Monta numa fábrica que já existe</strong>A BYD ocupou a antiga fábrica da Ford em Camaçari (BA). A GWM, a antiga Mercedes em Iracemápolis (SP).<br><span class="trava">Trava para a brasileira: não tem matriz que banque essa fase</span></div></li>
+      <li><span class="n">3</span><div><strong>Usa os incentivos</strong>Crédito do MOVER para pesquisa, Lei do Bem e crédito de ICMS do estado. Goiás devolve de 92,5% a 93,3% do ICMS a montadoras até 2032.<br><span class="trava">Trava: o crédito do MOVER é calculado sobre a receita, e a Lei do Bem só vale no lucro real. Quem ainda não vende fica de fora.</span></div></li>
+      <li><span class="n">4</span><div><strong>Nacionaliza aos poucos</strong>Mais peças daqui, mais engenharia daqui. A Chery abriu fábrica em 2014. A BYD monta na Bahia desde julho de 2025.</div></li>
+    </ol>
+    <p style="margin-top: var(--espaco-5)">E para quem quer personalizar o carro, a regra também trava. Mudar a estrutura de um carro registrado exige autorização prévia (Código de Trânsito, art. 98). Envelopar mais da metade do carro conta como troca de cor no documento (Resolução Contran 916/2022).</p>
+  </section>
+
+  <p class="pausa revelar">E se a próxima montadora do Brasil<br>nascesse de um <span class="destaque">desafio aberto</span>?</p>
+
+  <section class="capitulo revelar" style="margin-top: 0">
+    <span class="ato">Capítulo 3 · De onde vem a ideia</span>
+    <h2>Copiar o que funciona. Melhorar o que não funciona.</h2>
+    <div class="duas">
+      <div class="cartao pro"><strong>Slate, nos Estados Unidos</strong><p>Uma picape elétrica sem pintura e sem tela no painel. A cor vem de adesivo, e um kit transforma a picape em SUV de cinco lugares. Captou cerca de US$ 1,4 bilhão e passou de 100 mil reservas em três semanas (2025). O preço subiu de "menos de US$ 20 mil" para US$ 24.950 (2026).</p></div>
+      <div class="cartao contra"><strong>Gurgel, no Brasil</strong><p>Fez mais de 40 mil veículos e exportou para dezenas de países. Quebrou quando o carro popular dependia de um imposto menor, e esse imposto menor foi dado a todos os carros 1.0 em 1990. Lição: não dá para depender de um benefício só.</p></div>
+    </div>
+    <p style="margin-top: var(--espaco-4)">O nome vem de Santos Dumont. Ele publicou de graça os desenhos do Demoiselle, seu avião leve, em 1910. Qualquer um podia construir. O desafio segue a mesma ideia: as medidas de encaixe dos kits são públicas, para qualquer oficina ou fábrica pequena criar acessórios.</p>
+    <p>Para lembrar o que deu errado: entre 2012 e 2017, o Inovar-Auto aumentou em 30 pontos o IPI de quem não usava peça nacional. A OMC condenou o programa a pedido do Japão e da União Europeia. O Desafio Dumont faz o contrário: <strong>não pune o importado, premia quem inventa aqui</strong>.</p>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 4 · O que proponho</span>
+    <h2>Pensar como startup, executar como gigante</h2>
+    <p>O Desafio Dumont usa o mesmo funil do <a href="/projetos/reindustrializacao/">FSRI</a>. Ninguém escolhe o vencedor por amizade. E eu não participo de equipe nenhuma.</p>
+    <ol class="fluxo">
+      <li><span class="n">1</span><div><strong>Desafio nacional</strong>O edital pede um carro simples, modular, seguro e fácil de consertar. A banca técnica define as metas de segurança, custo e desempenho. Equipes de todo o país se inscrevem com protótipo, tecnologia e modelo de negócio.</div></li>
+      <li><span class="n">2</span><div><strong>Aceleração e banca pública</strong>As melhores recebem de R$ 200 mil a R$ 500 mil e mentoria em universidades. Depois, apresentam ao vivo para engenheiros, especialistas e investidores. O público também vota, num prêmio à parte.</div></li>
+      <li><span class="n">3</span><div><strong>Investimento privado, liberado por metas</strong>O dinheiro grande vem de quem tem patrimônio alto e hoje paga pouco imposto, pelo FSRI. Se não bastar, abre para investidores comuns. Cada parte só sai quando uma meta técnica é cumprida.</div></li>
+      <li><span class="n">4</span><div><strong>Fabricar e nacionalizar ao mesmo tempo</strong>Começar onde dá: uma linha parada de outra fábrica ou uma fábrica nova num polo com mão de obra, como Anápolis e Catalão. Investir onde ainda não temos capacidade, como bateria, que vira outro desafio.</div></li>
+      <li><span class="n">5</span><div><strong>Rede de oficinas pelo Brasil</strong>A montadora certifica oficinas para instalar kits e envelopar. A oficina dá garantia do serviço. A cor fica a critério de cada um.</div></li>
+    </ol>
+
+    <h3 style="margin-top: var(--espaco-6)">O que a lei muda</h3>
+    <div class="camadas">
+      <div class="cartao camada"><span class="selo">Lei do Veículo Modular Brasileiro</span><ul>
+        <li><strong>Cria o Desafio Dumont</strong> dentro da Faixa 3 do FSRI, com teto em reais para o seguro público por projeto.</li>
+        <li><strong>Kit aprovado de fábrica, instalado no bairro.</strong> Muda o art. 98 do Código de Trânsito: um kit homologado junto com o carro pode ser instalado por oficina credenciada, que emite o certificado e atualiza o documento. O modelo já existe no GNV, com instalador registrado no Inmetro e inspeção acreditada.</li>
+        <li><strong>Cor personalizada no documento</strong>, para envelopamento e painel colorido, sem vistoria a cada troca.</li>
+        <li><strong>Crédito de pesquisa para quem ainda não fatura.</strong> A empresa nova recebe o crédito do MOVER e da Lei do Bem antes de vender, como crédito que pode usar depois ou vender.</li>
+        <li><strong>Padrão aberto.</strong> Quem recebe dinheiro do fundo publica as medidas de encaixe dos kits.</li>
+        <li><strong>Impedimento.</strong> Político e parentes não podem integrar equipe nem investir.</li>
+      </ul></div>
+      <div class="cartao camada"><span class="selo azul">Já existe, só usar</span><ul>
+        <li>O Código de Defesa do Consumidor já responsabiliza a montadora pelo defeito (art. 12) e a oficina pelo serviço (art. 14). Quando a peça instalada causa dano, as duas respondem juntas (art. 25).</li>
+        <li>A compra pública de inovação, pelo Marco Legal das Startups, permite que prefeituras e estatais comprem os primeiros carros para frota.</li>
+      </ul></div>
+      <div class="cartao camada"><span class="selo amarelo">Cobrar do governo</span><ul>
+        <li>O IPI zero do Carro Sustentável exige pintura feita no Brasil. Um carro de painel colorido na massa ou envelopado precisa caber nessa regra. Isso é decreto, não lei.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section class="capitulo revelar" id="calculadora">
+    <span class="ato">Capítulo 5 · De onde vem o dinheiro</span>
+    <h2>Imposto que vira fábrica</h2>
+    <p>Um carro novo exige bilhões. A Caoa Chery anunciou R$ 3 bilhões para Anápolis. A BYD, R$ 5,5 bilhões para Camaçari. Ao mesmo tempo, os 255 bilionários brasileiros somam R$ 1,86 trilhão, o equivalente a 14,6% do PIB (Forbes, 2026).</p>
+    <div class="numeros">
+      <div class="cartao"><strong>4,6%</strong>foi o Imposto de Renda efetivo do 0,01% mais rico do Brasil em 2023. <span class="fontes">Ministério da Fazenda, SPE (2025)</span></div>
+      <div class="cartao"><strong>20,6%</strong>da renda é o que o 0,01% paga somando todos os tributos. O brasileiro médio paga 42,5%. <span class="fontes">EU Tax Observatory (2025)</span></div>
+      <div class="cartao"><strong>0% a 0,5%</strong>do patrimônio é o que bilionários pagam por ano no mundo. A proposta levada ao G20 é um piso de 2%. <span class="fontes">EU Tax Observatory (2023) e relatório Zucman ao G20 (2024)</span></div>
+    </div>
+    <h3 style="margin-top: var(--espaco-6)">Herança: o Brasil cobra pouco de quem deixa muito</h3>
+    <p>Alíquota máxima do imposto sobre herança. No Brasil, o ITCMD tem teto de 8% desde 1992 (Resolução do Senado 9/1992).</p>
+    <div class="barras">
+      <div class="linha-barra"><b>Japão</b><div><div class="trilho"><div class="valor" style="width: 100%"></div></div><small>55%</small></div></div>
+      <div class="linha-barra"><b>França</b><div><div class="trilho"><div class="valor" style="width: 81.8%"></div></div><small>45%</small></div></div>
+      <div class="linha-barra"><b>EUA e Reino Unido</b><div><div class="trilho"><div class="valor" style="width: 72.7%"></div></div><small>40%</small></div></div>
+      <div class="linha-barra"><b>Alemanha</b><div><div class="trilho"><div class="valor" style="width: 54.5%"></div></div><small>30%</small></div></div>
+      <div class="linha-barra"><b>Chile</b><div><div class="trilho"><div class="valor" style="width: 45.5%"></div></div><small>25%</small></div></div>
+      <div class="linha-barra br"><b>Brasil</b><div><div class="trilho"><div class="valor" style="width: 14.5%"></div></div><small>8%</small></div></div>
+    </div>
+    <p class="pequeno suave" style="margin-top: var(--espaco-3)">Tax Foundation, alíquotas máximas de herança (atualizado em 2024). A partir de 2027 o ITCMD passa a ser progressivo em todos os estados (EC 132/2023 e LC 227/2026), mas o teto continua 8%.</p>
+    <p style="margin-top: var(--espaco-4)">A ideia não é só taxar. É dar uma escolha: em vez de pagar uma parte do imposto, a pessoa investe esse valor no fundo, em indústria no Brasil. Veja quanto isso daria.</p>
+    <div class="cartao calc">
+      <strong>Patrimônio</strong>
+      <div class="opcoes" role="radiogroup" aria-label="Patrimônio" id="op-patrimonio">
+        <button class="opcao" type="button" role="radio" aria-checked="false" data-valor="1e9">R$ 1 bilhão</button>
+        <button class="opcao marcada" type="button" role="radio" aria-checked="true" data-valor="10e9">R$ 10 bilhões</button>
+        <button class="opcao" type="button" role="radio" aria-checked="false" data-valor="50e9">R$ 50 bilhões</button>
+        <button class="opcao" type="button" role="radio" aria-checked="false" data-valor="1.86e12">Todos os 255 bilionários</button>
+      </div>
+      <strong>Quanto desse imposto vai para o fundo</strong>
+      <div class="opcoes" role="radiogroup" aria-label="Parte para o fundo" id="op-parte">
+        <button class="opcao" type="button" role="radio" aria-checked="false" data-valor="0.25">25%</button>
+        <button class="opcao marcada" type="button" role="radio" aria-checked="true" data-valor="0.5">50%</button>
+        <button class="opcao" type="button" role="radio" aria-checked="false" data-valor="0.75">75%</button>
+      </div>
+      <div class="pequeno suave">Imposto mínimo de referência por ano</div>
+      <div class="total" id="total" aria-live="polite"></div>
+      <div class="barra" aria-hidden="true"><div class="b-fundo" id="b-fundo"></div><div class="b-estado" id="b-estado"></div></div>
+      <ul class="linhas">
+        <li class="l-fundo"><span>Vai para o fundo e volta com lucro</span><b id="v-fundo"></b></li>
+        <li class="l-estado"><span>Fica com o Estado, como imposto</span><b id="v-estado"></b></li>
+        <li><span>Equipes do desafio que dá para acelerar (R$ 500 mil cada)</span><b id="v-equipes"></b></li>
+        <li><span>Fábricas como a da BYD (R$ 5,5 bi cada)</span><b id="v-fabrica"></b></li>
+      </ul>
+      <p class="frase-calc" id="frase"></p>
+      <p class="pequeno suave" style="margin: 0" id="nota-calc"></p>
+    </div>
+      </section>
+
+  <section class="capitulo revelar" id="criticas">
+    <span class="ato">Capítulo 6 · As críticas</span>
+    <h2>As perguntas mais difíceis</h2>
+    <p>Fiz uma entrevista simulada, como se estivesse ao vivo na TV. Estas são as perguntas mais duras e as respostas.</p>
+
+    <details class="critica">
+      <summary>O senhor vai abrir uma montadora?</summary>
+      <div class="resposta"><p>Não. Eu proponho uma lei que abre um desafio. Quem cria o carro e a empresa são as equipes que vencerem.</p><p>Eu não entro em equipe, não invisto e me declaro impedido em qualquer decisão do fundo.</p></div>
+    </details>
+    <details class="critica">
+      <summary>R$ 500 mil fazem um carro? Isso custa bilhões.</summary>
+      <div class="resposta"><p>R$ 500 mil fazem um protótipo e um plano de negócio, não uma fábrica. O desafio tem fases.</p><p>O dinheiro grande só vem depois da banca pública, do investimento privado e por metas. A Slate, nos Estados Unidos, precisou de cerca de US$ 1,4 bilhão. É dessa escala que estamos falando, e ela não sai do caixa do governo.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Se quebrar, o contribuinte paga?</summary>
+      <div class="resposta"><p>Na Faixa 3 do FSRI, o seguro público cobre no máximo metade do prejuízo, e só em falência auditada. O investidor sempre perde a maior parte.</p><p>A lei põe um teto em reais por projeto. E como o dinheiro sai por metas, o risco em cada momento é só o que já foi liberado.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Isso não é o Inovar-Auto, que a OMC condenou?</summary>
+      <div class="resposta"><p>Não. O Inovar-Auto subia o imposto de quem não usava peça nacional. A OMC aceita incentivo, mas não aceita imposto menor condicionado a usar peça daqui.</p><p>O Desafio Dumont não sobe imposto de ninguém. Ele financia pesquisa, protótipo e patente no Brasil.</p></div>
+    </details>
+    <details class="critica">
+      <summary>A bateria vem da China. Isso é soberania?</summary>
+      <div class="resposta"><p>É começar por onde dá. Até a BYD monta baterias na Bahia com células da China.</p><p>Um carro com a maior parte das peças daqui é melhor que nenhum. A célula de bateria brasileira vira outro desafio do fundo, porque leva mais tempo e mais dinheiro.</p></div>
+    </details>
+    <details class="critica">
+      <summary>A BYD vende carro elétrico por R$ 119 mil. Como competir?</summary>
+      <div class="resposta"><p>Não pelo preço sozinho. Pelo carro de trabalho que hoje quase não existe em elétrico, pela modularidade e pela rede de oficinas que personalizam.</p><p>E pela segurança de não depender só de fora. Câmbio, tarifa e a falta de chips de 2021 já pararam fábricas no mundo todo.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Quem garante que a oficina não faz um carro inseguro?</summary>
+      <div class="resposta"><p>A oficina só instala kit já aprovado junto com o carro, e precisa ser certificada pela montadora. É o modelo do GNV, que funciona há anos com instalador registrado e inspeção.</p><p>Se der errado, o consumidor já pode processar a oficina e a montadora juntas, pelo Código de Defesa do Consumidor.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Por que as fábricas paradas alugariam linha para um concorrente?</summary>
+      <div class="resposta"><p>Porque linha parada dá prejuízo. Fábricas no mundo todo montam carros de outras marcas por contrato. Se ninguém alugar, a outra opção é fábrica própria num polo com mão de obra pronta.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Mudar o crédito para empresa sem receita não abre a porta para fachada?</summary>
+      <div class="resposta"><p>Abriria, se o dinheiro saísse de uma vez. Por isso o crédito só sai contra meta auditada: protótipo pronto, teste de colisão feito, homologação aprovada.</p><p>Uma empresa que vendeu reservas sem carro foi suspensa do MOVER em 2026. A regra tem que pegar isso antes.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Montar primeiro e nacionalizar depois não é o que os chineses fazem?</summary>
+      <div class="resposta"><p>É, e funciona. Por isso a gente copia. A diferença é que aqui a engenharia, a patente e a empresa são brasileiras desde o primeiro dia. Fabricamos e nacionalizamos ao mesmo tempo.</p></div>
+    </details>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 7 · Como medir</span>
+    <h2>Quatro números para acompanhar</h2>
+    <ul>
+      <li><strong>Comerciais leves elétricos</strong> vendidos por mês, pela Fenabrave.</li>
+      <li><strong>Peças nacionais</strong> no carro vencedor, em % do custo, ano a ano.</li>
+      <li><strong>Oficinas certificadas</strong> por estado e empregos criados nelas.</li>
+      <li><strong>Dinheiro público em risco</strong>, em reais, publicado todo mês pelo fundo.</li>
+    </ul>
+  </section>
+
+  <section class="capitulo revelar conversa">
+    <p class="grande">Se você pudesse montar o seu carro, que cor ele teria? E que kit você colocaria primeiro?</p>
+    <div class="hashtags"><span class="hashtag">#DesafioDumont</span><span class="hashtag">#SistemasMelhores</span></div>
+    <div class="capa-acoes"><a class="botao" href="/projetos/reindustrializacao/">Ver o FSRI, o fundo por trás</a></div>
+  </section>
+
+  <section class="capitulo">
+    <h2>Fontes</h2>
+    <ul class="fontes" id="lista-fontes">
+      <li><a href="https://canalve.com.br/eletrificados-618-mil-emplacamentos-outubro/">Canal VE, emplacamentos de outubro de 2026 segundo a Fenabrave</a></li>
+      <li><a href="https://www.autodata.com.br/revistas/flipbook/BrazilAutomotiveGuide_2026/15/">AutoData, Brazil Automotive Guide 2026, capacidade das fábricas segundo a Anfavea</a></li>
+      <li><a href="https://agenciabrasil.ebc.com.br/economia/noticia/2026-07/producao-de-veiculos-sobe-88-no-primeiro-semestre-diz-anfavea">Agência Brasil, produção de veículos e previsão de 2026 da Anfavea (julho de 2026)</a></li>
+      <li><a href="https://mecanicaonline.com.br/2026/07/carros-neutros-dominam-o-mercado-mais-de-80-dos-veiculos-novos-sao-brancos-pretos-ou-cinza/">Mecânica Online, mais de 80% dos carros novos são brancos, pretos ou cinza (julho de 2026)</a></li>
+      <li><a href="https://www.webmotors.com.br/wm1/noticias/veja-investimentos-anunciados-no-brasil">Webmotors, investimentos anunciados por BYD, GWM e Caoa Chery (2025)</a></li>
+      <li><a href="https://timesbrasil.com.br/empresas-e-negocios/transporte/gwm-byd-e-mais-montadoras-e-marcas-chinesas-ampliam-presenca-na-industria-automotiva-brasileira/">Times Brasil, como as montadoras chinesas chegaram ao Brasil (2025)</a></li>
+      <li><a href="https://startups.com.br/pesquisas/incentivos-fiscais-para-inovacao-ainda-nao-alcancam-startups-iniciantes/">Startups.com.br, Lei do Bem não alcança startups iniciantes (2025)</a></li>
+      <li><a href="https://exame.com/economia/politica-industrial-brasileira-e-condenada-na-omc">Exame, OMC condena o Inovar-Auto (2016)</a></li>
+      <li><a href="https://mecanicaonline.com.br/2017/10/o-fim-dos-30-pontos-de-ipi/">Mecânica Online, o fim dos 30 pontos de IPI (2017)</a></li>
+      <li><a href="https://agenciagov.ebc.com.br/noticias/202506/inmetro-reforca-regras-de-seguranca-para-uso-de-gnv-e-alerta-sobre-riscos-de-instalacoes-e-manutencoes-irregulares">Agência Gov, regras do Inmetro para conversão a GNV (2025)</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm">Código de Trânsito Brasileiro, art. 98</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm">Código de Defesa do Consumidor, arts. 12, 14 e 25</a></li>
+      <li><a href="https://www.gov.br/pt-br/servicos/solicitar-autorizacao-de-credito-financeiro-no-programa-mover">Gov.br, crédito financeiro do Programa MOVER (Lei 14.902/2024)</a></li>
+      <li><a href="https://revistapesquisa.fapesp.br/en/the-history-of-a-brand/">Revista Pesquisa FAPESP, a história da Gurgel (2004)</a></li>
+      <li><a href="https://revistapesquisa.fapesp.br/omc-considera-ilegais-sete-programas-do-brasil/">Revista Pesquisa FAPESP, OMC considera ilegais sete programas do Brasil (2017)</a></li>
+      <li><a href="https://www.vrum.com.br/aceleradas/2026/06/7435239-falta-de-relatorios-leva-a-suspensao-da-lecar-no-programa-mover.html">Vrum, suspensão de uma montadora nova no MOVER (junho de 2026)</a></li>
+      <li><a href="https://techcrunch.com/2026/06/24/slate-autos-radically-simple-electric-truck-starts-at-24950/">TechCrunch, preço da picape da Slate (junho de 2026)</a></li>
+      <li><a href="https://forbes.com.br/forbes-money/2026/08/fortuna-bilionarios-brasileiros-r-186-trilhao-pib/">Forbes Brasil, 255 bilionários somam R$ 1,86 trilhão (agosto de 2026)</a></li>
+      <li><a href="https://diariodocomercio.com.br/?p=540931">Diário do Comércio, estudo da SPE/Fazenda sobre o IR efetivo do 0,01% (2025)</a></li>
+      <li><a href="https://www.taxobservatory.eu//www-site/uploads/2025/08/Progressividade-Tributaria-e-Desigualdade-no-Brasil-Evidencias-a-partir-de-Dados-Administrativos-Integrados.pdf">EU Tax Observatory, Progressividade tributária e desigualdade no Brasil (2025)</a></li>
+      <li><a href="https://taxobservatory.eu/?p=247">EU Tax Observatory, Global Tax Evasion Report 2024</a></li>
+      <li><a href="https://gabriel-zucman.eu/files/report-g20.pdf">Gabriel Zucman, relatório ao G20 sobre tributação mínima de bilionários (2024)</a></li>
+      <li><a href="https://taxfoundation.org/research/all/federal/estate-and-inheritance-taxes-around-world/">Tax Foundation, impostos sobre herança no mundo</a></li>
+      <li><a href="https://www.machadomeyer.com.br/pt/inteligencia-juridica/publicacoes-ij/planejamento-sucessorio/itcmd-principais-mudancas-trazidas-pela-lc-227-26">Machado Meyer, mudanças no ITCMD pela LC 227/2026</a></li>
+      <li><a href="https://planalto.gov.br/ccivil_03/_Ato2023-2026/2025/Lei/L15270.htm">Lei 15.270/2025, imposto mínimo sobre altas rendas</a></li>
+      <li><a href="https://www.gov.br/fazenda/pt-br/acesso-a-informacao/FAQAmpliaodaIsenodoImpostodeRendaetributaomnimadasaltasrendas.docx.pdf">Ministério da Fazenda, perguntas e respostas sobre a isenção e o imposto mínimo (2025)</a></li>
+    </ul>
+  </section>
+</main>
+<gr-rodape></gr-rodape>
+<script>
+(() => {
+  // Ilustração: troca as cores dos painéis
+  const paineis = ["p-capo", "p-cabine", "p-cacamba", "p-porta"].map((id) => document.getElementById(id));
+  const botoesCor = [...document.querySelectorAll(".cor")];
+  botoesCor.forEach((b) => b.addEventListener("click", () => {
+    b.dataset.cores.split(",").forEach((c, i) => paineis[i].setAttribute("fill", "var(--" + c + ")"));
+    botoesCor.forEach((o) => o.setAttribute("aria-pressed", String(o === b)));
+  }));
+
+  // Calculadora: imposto mínimo de referência sobre o patrimônio
+  const TAXA_REFERENCIA = 0.02; // 2% ao ano, proposta levada ao G20 em 2024
+  const EQUIPE = 500000;
+  const FABRICA = 5.5e9;
+  const real = (v) => {
+    if (v >= 1e9) return "R$ " + (v / 1e9).toLocaleString("pt-BR", { maximumFractionDigits: 1 }) + " bi";
+    if (v >= 1e6) return "R$ " + (v / 1e6).toLocaleString("pt-BR", { maximumFractionDigits: 0 }) + " mi";
+    return "R$ " + Math.round(v).toLocaleString("pt-BR");
+  };
+  const $ = (id) => document.getElementById(id);
+  let patrimonio = 10e9, parte = 0.5;
+
+  function calcular() {
+    const imposto = patrimonio * TAXA_REFERENCIA;
+    const fundo = imposto * parte;
+    const estado = imposto - fundo;
+    $("total").textContent = real(imposto) + " por ano";
+    $("v-fundo").textContent = real(fundo);
+    $("v-estado").textContent = real(estado);
+    $("v-equipes").textContent = Math.floor(fundo / EQUIPE).toLocaleString("pt-BR");
+    const fab = fundo / FABRICA;
+    $("v-fabrica").textContent = fab >= 1 ? fab.toLocaleString("pt-BR", { maximumFractionDigits: 1 }) + " fábricas" : Math.round(fab * 100) + "%";
+    $("b-fundo").style.flexBasis = (parte * 100) + "%";
+    $("b-estado").style.flexBasis = ((1 - parte) * 100) + "%";
+    $("frase").textContent = "Em vez de pagar " + real(fundo) + " em imposto, esse valor é investido no fundo. Se o projeto der certo, ela recebe de volta com lucro, e o Estado fica com uma parte da empresa.";
+  }
+  function grupo(id, aoMudar) {
+    const ops = [...document.querySelectorAll("#" + id + " .opcao")];
+    ops.forEach((op) => op.addEventListener("click", () => {
+      ops.forEach((o) => { o.classList.toggle("marcada", o === op); o.setAttribute("aria-checked", String(o === op)); });
+      aoMudar(+op.dataset.valor); calcular();
+    }));
+  }
+  grupo("op-patrimonio", (v) => { patrimonio = v; });
+  grupo("op-parte", (v) => { parte = v; });
+  $("nota-calc").textContent = "Estimativa didática. O piso de 2% ao ano sobre o patrimônio é a referência proposta ao G20 em 2024 e inclui o imposto que a pessoa já paga, então o valor novo seria menor. Para comparar, o imposto mínimo da Lei 15.270/2025 deve render R$ 25,2 bilhões em 2026, pela estimativa da Fazenda.";
+  calcular();
+
+  const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("visivel"); io.unobserve(e.target); } }), { threshold: .12 }) : null;
+  document.querySelectorAll(".revelar").forEach((el) => io ? io.observe(el) : el.classList.add("visivel"));
+})();
+</script>
+</body>
+</html>

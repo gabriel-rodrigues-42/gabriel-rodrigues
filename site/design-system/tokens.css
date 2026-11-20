@@ -18,6 +18,14 @@
   --branco: #ffffff;
   --branco-vidro: rgba(255, 255, 255, .08); /* cartão claro sobre fundo azul */
 
+  /* Cores livres: personalização e diversidade (ex.: painéis do Desafio Dumont).
+     Só para ilustração e destaque, nunca para texto. */
+  --livre-coral: #ff7a45;
+  --livre-rosa: #ff5fa2;
+  --livre-roxo: #7b4fd6;
+  --livre-turquesa: #1fb5ad;
+  --livre-terra: #b5651d;
+
   /* Logo: G verde, pessoas azuis, estrelas amarelas */
   --logo-g: var(--verde);
   --logo-pessoas: var(--azul);
