@@ -39,7 +39,7 @@ input:focus-visible, select:focus-visible { outline: 3px solid var(--azul); outl
 .linha-tempo { list-style: none; padding: 0; margin: 0 0 var(--espaco-4); display: grid; gap: var(--espaco-3); }
 .passo { position: relative; background: var(--creme); border-radius: var(--forma-opcao); padding: var(--espaco-4); padding-left: 64px; }
 .passo .ano { position: absolute; left: var(--espaco-3); top: var(--espaco-4); width: 42px; height: 42px; display: grid; place-items: center;
-  background: var(--verde); color: var(--branco); font-weight: var(--peso-forte); font-size: var(--tamanho-1); border-radius: var(--forma-bolha-2); }
+  background: var(--verde-fundo); color: var(--branco); font-weight: var(--peso-forte); font-size: var(--tamanho-1); border-radius: var(--forma-bolha-2); }
 .passo h3 { margin-bottom: var(--espaco-2); }
 .passo ul { margin: 0; padding-left: 18px; font-size: var(--tamanho-2); }
 .passo .remover { margin-top: var(--espaco-2); padding: 6px 12px; font-size: var(--tamanho-2); }
@@ -53,7 +53,7 @@ input:focus-visible, select:focus-visible { outline: 3px solid var(--azul); outl
 .cargo-topo { display: flex; justify-content: space-between; gap: var(--espaco-2); align-items: flex-start; flex-wrap: wrap; }
 .cargo .onde { font-size: var(--tamanho-2); color: var(--texto-suave); margin: 2px 0 0; }
 .selo-fit { font-size: var(--tamanho-1); font-weight: var(--peso-forte); padding: 4px 10px; border-radius: var(--forma-selo); background: var(--azul-claro); color: var(--azul); white-space: nowrap; }
-.selo-fit.alto { background: var(--verde); color: var(--branco); }
+.selo-fit.alto { background: var(--verde-fundo); color: var(--branco); }
 .selo-fit.medio { background: var(--amarelo); color: var(--azul); }
 .cargo p { margin: var(--espaco-3) 0; }
 dl { display: grid; grid-template-columns: minmax(0, 46%) minmax(0, 1fr); gap: 6px 12px; margin: var(--espaco-3) 0; font-size: var(--tamanho-2); }

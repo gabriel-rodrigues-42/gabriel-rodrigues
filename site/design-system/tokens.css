@@ -8,6 +8,7 @@
   /* Cores da bandeira */
   --verde: #009c3b;
   --verde-escuro: #00602a;   /* texto verde sobre fundo claro (contraste AA) */
+  --verde-fundo: #00843a;    /* fundo verde com texto branco (contraste 4,8:1, AA) */
   --verde-claro: #d6f2df;
   --amarelo: #ffdf00;
   --amarelo-escuro: #c9a800;

@@ -79,7 +79,7 @@
   .passos { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--espaco-3); margin: var(--espaco-4) 0; }
   .passo { text-align: center; padding: var(--espaco-4) var(--espaco-3); }
   .passo .bola { width: 64px; height: 64px; margin: 0 auto var(--espaco-3); display: grid; place-items: center; font-size: var(--tamanho-4); font-weight: var(--peso-forte); box-shadow: var(--sombra-clay); }
-  .passo:nth-child(1) .bola { background: var(--verde); color: var(--branco); border-radius: var(--forma-bolha-1); }
+  .passo:nth-child(1) .bola { background: var(--verde-fundo); color: var(--branco); border-radius: var(--forma-bolha-1); }
   .passo:nth-child(2) .bola { background: var(--amarelo); color: var(--azul); border-radius: var(--forma-bolha-2); }
   .passo:nth-child(3) .bola { background: var(--azul); color: var(--branco); border-radius: var(--forma-bolha-3); }
   .passo strong { display: block; color: var(--azul); }
@@ -99,7 +99,7 @@
   .fluxo::before { content: ""; position: absolute; left: 27px; top: 20px; bottom: 20px; width: 6px; background: var(--amarelo); border-radius: var(--forma-pilula); }
   .fluxo li { position: relative; display: grid; grid-template-columns: 60px 1fr; gap: var(--espaco-4); align-items: start; padding-bottom: var(--espaco-5); }
   .fluxo li:last-child { padding-bottom: 0; }
-  .fluxo .n { width: 60px; height: 60px; display: grid; place-items: center; background: var(--verde); color: var(--branco); font-weight: var(--peso-forte); font-size: var(--tamanho-4); border-radius: var(--forma-bolha-1); box-shadow: var(--sombra-clay); position: relative; }
+  .fluxo .n { width: 60px; height: 60px; display: grid; place-items: center; background: var(--verde-fundo); color: var(--branco); font-weight: var(--peso-forte); font-size: var(--tamanho-4); border-radius: var(--forma-bolha-1); box-shadow: var(--sombra-clay); position: relative; }
   .fluxo li:nth-child(even) .n { background: var(--azul); border-radius: var(--forma-bolha-2); }
   .fluxo li:last-child .n { background: var(--amarelo); color: var(--azul); border-radius: var(--forma-bolha-3); }
   .fluxo strong { display: block; color: var(--azul); font-size: var(--tamanho-3); margin-top: var(--espaco-2); }
@@ -134,7 +134,7 @@
   /* Haltere (barbell) */
   .haltere { display: grid; grid-template-columns: 1fr 2fr 1fr; align-items: center; margin: var(--espaco-5) 0 var(--espaco-3); }
   .peso { aspect-ratio: 1; display: grid; place-items: center; text-align: center; padding: var(--espaco-2); font-weight: var(--peso-forte); font-size: var(--tamanho-2); line-height: 1.2; box-shadow: var(--sombra-clay); }
-  .peso.rapido { background: var(--verde); color: var(--branco); border-radius: var(--forma-bolha-1); }
+  .peso.rapido { background: var(--verde-fundo); color: var(--branco); border-radius: var(--forma-bolha-1); }
   .peso.longo { background: var(--azul); color: var(--branco); border-radius: var(--forma-bolha-3); }
   .barra-haltere { height: 14px; background: var(--amarelo); border-radius: var(--forma-pilula); box-shadow: var(--sombra-clay); }
   .haltere-texto { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-4); font-size: var(--tamanho-2); }

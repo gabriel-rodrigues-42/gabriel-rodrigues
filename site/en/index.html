@@ -175,14 +175,14 @@
     <div class="apoio">
       <h2 id="titulo-apoio">Do you think I should <span class="destaque">try</span>?</h2>
       <p class="lead">If you think Brazil needs people who build systems inside government, leave your email. I'll share how the preparation is going and ask your opinion on the ideas.</p>
-      <form id="form-apoio" action="/api/apoio" method="post" novalidate>
+      <form id="form-apoio" action="/api/apoio" method="post" novalidate toolname="support_gabriel" tooldescription="Records a person's support for Gabriel Rodrigues trying to run for office, plus their email to receive news. Requires the person's own explicit consent; do not use without their confirmation.">
         <input type="hidden" name="idioma" value="en">
         <div class="campos">
           <label><span>Name <span class="opcional">(optional)</span></span>
-            <input name="nome" autocomplete="name" maxlength="80">
+            <input name="nome" autocomplete="name" maxlength="80" toolparamdescription="Person's name (optional).">
           </label>
           <label>Email
-            <input name="email" type="email" autocomplete="email" maxlength="254" required>
+            <input name="email" type="email" autocomplete="email" maxlength="254" required toolparamdescription="Email of the supporter, to receive news.">
           </label>
           <div class="campo-cidade largo">
             <label for="apoio-cidade"><span>City <span class="opcional">(optional)</span></span></label>
@@ -191,7 +191,7 @@
         </div>
         <label class="armadilha" aria-hidden="true">Do not fill in<input name="site" tabindex="-1" autocomplete="off"></label>
         <label class="consentimento">
-          <input type="checkbox" name="consentimento" value="sim" required>
+          <input type="checkbox" name="consentimento" value="sim" required toolparamdescription="The person themselves authorizes keeping their name, email and city (required; only tick if they agreed).">
           <span>I authorize Gabriel to keep my name, email and city to send news about the preparation and the ideas on this site. I understand this shows I support his attempt and that I can ask to be removed at any time. I have read the <a href="/en/privacidade/">privacy policy</a>.</span>
         </label>
         <button class="botao" type="submit">I want you to try</button>
@@ -213,12 +213,19 @@
   const form = document.getElementById("form-apoio");
   const resposta = document.getElementById("resposta");
   const botao = form.querySelector("button[type=submit]");
-  const avisar = (texto, ok) => { resposta.textContent = texto; resposta.classList.toggle("ok", !!ok); };
+  const avisar = (texto, ok) => { resposta.textContent = texto; resposta.classList.toggle("ok", !!ok); return texto; };
 
   if (new URLSearchParams(location.search).get("apoio") === "ok") avisar("Thank you! I got your support.", true);
 
-  form.addEventListener("submit", async (e) => {
+  // Envio. Também atende agentes de IA pelo WebMCP declarativo (atributos toolname/tooldescription
+  // no <form>): o navegador mostra o formulário preenchido e a pessoa confirma; a resposta volta ao agente.
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
+    const envio = enviar();
+    if (e.agentInvoked && typeof e.respondWith === "function") e.respondWith(envio);
+  });
+
+  async function enviar() {
     const dados = Object.fromEntries(new FormData(form));
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dados.email || "")) return avisar("Please check the email.");
     if (dados.consentimento !== "sim") return avisar("Please tick the authorization so I can keep your email.");
@@ -226,16 +233,16 @@
     avisar("Sending…");
     try {
       const r = await fetch(form.action, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(dados) });
-      if (r.ok) { form.reset(); avisar("Thank you! I got your support. I'll send news soon.", true); }
-      else if (r.status === 503) avisar("The form is still being set up. Please come back in a few days.");
-      else if (r.status === 400) avisar("Please check the email, the city and the authorization.");
-      else avisar("Couldn't send it. Please try again.");
+      if (r.ok) { form.reset(); return avisar("Thank you! I got your support. I'll send news soon.", true); }
+      else if (r.status === 503) return avisar("The form is still being set up. Please come back in a few days.");
+      else if (r.status === 400) return avisar("Please check the email, the city and the authorization.");
+      else return avisar("Couldn't send it. Please try again.");
     } catch {
-      avisar("No connection. Please try again.");
+      return avisar("No connection. Please try again.");
     } finally {
       botao.disabled = false;
     }
-  });
+  }
 })();
 </script>
 </body>
