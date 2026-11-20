@@ -75,7 +75,6 @@
   .capa-acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-3); margin-top: var(--espaco-5); }
   .botao { display: inline-flex; align-items: center; gap: var(--espaco-2); }
   .icone { width: 18px; height: 18px; fill: currentColor; flex: none; }
-  .rolar { margin-top: var(--espaco-6); font-size: var(--tamanho-1); font-weight: var(--peso-forte); color: var(--texto-suave); text-transform: uppercase; letter-spacing: .08em; }
 
   /* Três passos do Buy, Borrow, Die */
   .passos { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--espaco-3); margin: var(--espaco-4) 0; }
@@ -231,12 +230,11 @@
   <header>
     <span class="selo" style="margin-top: var(--espaco-5)">Proposta em estudo</span>
     <h1>O dinheiro para reindustrializar o Brasil <span class="destaque">já existe</span>. Ele só está parado.</h1>
-    <p class="lead">Esta é a história de uma proposta: o Fundo Soberano de Reindustrialização e Inovação, o FSRI. A ideia é pegar o crédito que os grandes patrimônios já usam todo dia e fazer esse dinheiro virar fábrica, patente e plataforma brasileira.</p>
+    <p class="lead">Quem tem muito patrimônio já pega crédito no banco dando as próprias ações como garantia. A proposta do Fundo Soberano de Reindustrialização e Inovação, o FSRI, é fazer esse dinheiro virar fábrica, patente e plataforma brasileira.</p>
     <div class="capa-acoes">
       <a class="botao verde" href="/ideias/#reindustrializacao"><svg class="icone"><use href="#i-play"/></svg>Ouvir o resumo com legendas</a>
       <a class="botao secundario" href="#criticas">Ir direto às críticas</a>
     </div>
-    <p class="rolar">Role para ler a história ↓</p>
   </header>
 
   <!-- ATO 1 -->
@@ -252,7 +250,7 @@
   <section class="capitulo revelar">
     <span class="ato">Capítulo 2 · O segredo de quem tem muito</span>
     <h2>Compra, pega emprestado, nunca vende</h2>
-    <p>Quem tem um patrimônio muito grande quase nunca vende as próprias ações. Vender gera imposto sobre ganho de capital. Então a estratégia é outra, conhecida lá fora como <em>Buy, Borrow, Die</em>.</p>
+    <p>Quem tem um patrimônio muito grande quase nunca vende as próprias ações. Vender gera imposto sobre ganho de capital. Então a estratégia é outra. Nos Estados Unidos ela tem até nome: <em>Buy, Borrow, Die</em>, ou compra, pega emprestado e nunca vende.</p>
     <div class="passos">
       <div class="cartao passo"><div class="bola">1</div><div><strong>Compra</strong><em>Buy</em>Junta ações e participações em empresas.</div></div>
       <div class="cartao passo"><div class="bola">2</div><div><strong>Pega emprestado</strong><em>Borrow</em>Usa essas ações como garantia para tomar crédito no banco.</div></div>
@@ -287,8 +285,8 @@
     <ol class="fluxo">
       <li><span class="n">1</span><div><strong>O crédito sai do banco</strong>O investidor de alta renda toma uma linha de crédito privada, com as próprias ações ou participações como garantia.</div></li>
       <li><span class="n">2</span><div><strong>Vai para projetos habilitados</strong>Em vez de ficar parado, o dinheiro é aportado em projetos aprovados pelo FSRI.</div></li>
-      <li><span class="n">3</span><div><strong>O imposto vira prêmio por produtividade</strong>Se o capital ficar investido pelo prazo mínimo, o investidor ganha isenção ou desconto progressivo no imposto sobre ganho de capital futuro e sobre dividendos e juros sobre capital próprio. Sem investimento produtivo real no país, não tem benefício.</div></li>
-      <li><span class="n">4</span><div><strong>A empresa cresce e abre capital na B3</strong>Quando amadurece, a empresa vai para a bolsa brasileira. O investidor vende a parte dele com isenção, quita o empréstimo original e realiza o lucro.</div></li>
+      <li><span class="n">3</span><div><strong>O imposto vira prêmio por produtividade</strong>Se o capital ficar investido pelo prazo mínimo, o investidor ganha isenção ou desconto progressivo no imposto sobre o lucro quando vender as ações e sobre os lucros que a empresa distribuir. Sem investimento produtivo real no país, não tem benefício.</div></li>
+      <li><span class="n">4</span><div><strong>A empresa cresce e abre capital na B3</strong>Quando amadurece, a empresa vai para a bolsa brasileira. O investidor vende a parte dele com isenção, quita o empréstimo original e fica com o lucro.</div></li>
     </ol>
   </section>
 
@@ -296,7 +294,7 @@
   <section class="capitulo revelar">
     <span class="ato">Capítulo 4 · Risco do tamanho certo</span>
     <h2>Três faixas, do aplicativo ao chip</h2>
-    <p>Ninguém sério coloca dinheiro num chip brasileiro que leva 15 anos para dar retorno. A não ser que o risco seja dividido. Por isso o Estado, via BNDES e FINEP e com recursos do próprio fundo, entra como garantidor parcial, e a proteção cresce junto com o risco.</p>
+    <p>Ninguém sério coloca dinheiro num chip brasileiro que leva 15 anos para dar retorno. A não ser que o risco seja dividido. Por isso o Estado entra como garantidor de parte do prejuízo, pelo BNDES e pela Finep (o banco de desenvolvimento e a agência de inovação do governo federal) e com dinheiro do próprio fundo. Quanto maior o risco, maior a proteção.</p>
 
     <div class="abas" role="tablist" aria-label="Faixas de risco">
       <button class="aba" role="tab" id="aba-1" aria-controls="faixa-1" aria-selected="true" type="button">Faixa 1</button>
@@ -307,39 +305,39 @@
     <div class="cartao faixa-painel" role="tabpanel" id="faixa-1" aria-labelledby="aba-1">
       <span class="selo">Baixo risco · retorno rápido</span>
       <h3>Plataformas digitais e infraestrutura</h3>
-      <ul class="setores"><li>Mobilidade urbana</li><li>Bilheteria de eventos</li><li>Nuvem nacional</li><li>Cartórios digitais com histórico que não se apaga</li><li>Software B2B</li><li>Fintechs de infraestrutura</li></ul>
+      <ul class="setores"><li>Mobilidade urbana</li><li>Bilheteria de eventos</li><li>Nuvem nacional</li><li>Cartórios digitais com histórico que não se apaga</li><li>Software para empresas</li><li>Empresas de pagamento e crédito digital</li></ul>
       <div class="fatos">
-        <div class="fato"><small>Maturação</small><b>2 a 4 anos</b></div>
+        <div class="fato"><small>Tempo até o retorno</small><b>2 a 4 anos</b></div>
         <div class="fato"><small>Seguro estatal</small><b>até 20%</b></div>
-        <div class="fato"><small>Na carteira</small><b>no mínimo 40%</b></div>
+        <div class="fato"><small>Parte do aporte</small><b>no mínimo 40%</b></div>
       </div>
-      <p class="pequeno suave">É o motor de caixa: gera dividendos rápidos para o investidor pagar os juros e amortizar o crédito original.</p>
+      <p class="pequeno suave">É a faixa que paga as contas: dá lucro rápido para o investidor pagar os juros e abater o empréstimo.</p>
     </div>
     <div class="cartao faixa-painel" role="tabpanel" id="faixa-2" aria-labelledby="aba-2" hidden>
       <span class="selo azul">Médio risco · indústria de base</span>
       <h3>O que o país precisa fabricar</h3>
       <ul class="setores"><li>Equipamentos médicos e hospitalares</li><li>Baterias e armazenamento de energia</li><li>Drones e automação agrícola</li><li>Refino de minerais estratégicos</li></ul>
       <div class="fatos">
-        <div class="fato"><small>Maturação</small><b>5 a 8 anos</b></div>
+        <div class="fato"><small>Tempo até o retorno</small><b>5 a 8 anos</b></div>
         <div class="fato"><small>Seguro estatal</small><b>até 35%</b></div>
         <div class="fato"><small>Contrapartida</small><b>patente no Brasil</b></div>
       </div>
       <p class="pequeno suave">O dinheiro é liberado conforme patentes e propriedade intelectual são registradas aqui. O conhecimento fica no país.</p>
     </div>
     <div class="cartao faixa-painel" role="tabpanel" id="faixa-3" aria-labelledby="aba-3" hidden>
-      <span class="selo amarelo">Alto risco · deep tech</span>
+      <span class="selo amarelo">Alto risco · tecnologia de ponta</span>
       <h3>As apostas que mudam um país</h3>
       <ul class="setores"><li>Semicondutores</li><li>Biotecnologia avançada</li><li>Mobilidade elétrica nacional</li><li>Computação quântica</li><li>Aeroespacial</li></ul>
       <div class="fatos">
-        <div class="fato"><small>Maturação</small><b>10 a 15 anos</b></div>
+        <div class="fato"><small>Tempo até o retorno</small><b>10 a 15 anos</b></div>
         <div class="fato"><small>Seguro estatal</small><b>até 50%</b></div>
         <div class="fato"><small>Regra</small><b>obrigatória</b></div>
       </div>
       <p class="pequeno suave">Ter pelo menos um projeto nesta faixa é obrigatório para destravar as isenções das Faixas 1 e 2.</p>
     </div>
 
-    <h3 style="margin-top: var(--espaco-6)">O haltere: um peso leve, um peso pesado</h3>
-    <p>Cada aporte incentivado precisa ter pelo menos dois projetos de perfis opostos. Um que dá retorno rápido e um que leva anos. É a estratégia <em>barbell</em>, ou haltere.</p>
+    <h3 style="margin-top: var(--espaco-6)">Um projeto rápido e um demorado, juntos</h3>
+    <p>Cada aporte incentivado precisa ter pelo menos dois projetos de perfis opostos. Um que dá retorno rápido e um que leva anos.</p>
     <div class="haltere" aria-hidden="true">
       <div class="peso rapido">Faixa 1<br>rápido</div>
       <div class="barra-haltere"></div>
@@ -347,7 +345,7 @@
     </div>
     <div class="haltere-texto">
       <p><strong>Paga as contas.</strong> O retorno rápido cobre os juros do empréstimo do investidor.</p>
-      <p><strong>Constrói o futuro.</strong> O capital paciente financia a indústria pesada e a tecnologia de ponta.</p>
+      <p><strong>Constrói o futuro.</strong> O dinheiro que pode esperar financia a indústria pesada e a tecnologia de ponta.</p>
     </div>
   </section>
 
@@ -371,9 +369,9 @@
     </div>
 
     <div class="travas">
-      <div class="cartao trava"><div class="cadeado"><svg><use href="#i-cadeado"/></svg></div><strong>Pele em jogo</strong><p>Mesmo na faixa mais arriscada, o investidor arca com pelo menos metade do prejuízo. Quem arrisca o próprio dinheiro escolhe e fiscaliza melhor.</p></div>
+      <div class="cartao trava"><div class="cadeado"><svg><use href="#i-cadeado"/></svg></div><strong>O investidor perde primeiro</strong><p>Mesmo na faixa mais arriscada, o investidor arca com pelo menos metade do prejuízo. Quem arrisca o próprio dinheiro escolhe e fiscaliza melhor.</p></div>
       <div class="cartao trava"><div class="cadeado"><svg><use href="#i-cadeado"/></svg></div><strong>Só falência auditada</strong><p>O seguro não cobre lucro que não veio. Só paga em liquidação comprovada por auditoria independente, sem sinal de má-fé ou desvio.</p></div>
-      <div class="cartao trava"><div class="cadeado"><svg><use href="#i-cadeado"/></svg></div><strong>Se der certo, o Estado ganha junto</strong><p>Nos projetos da Faixa 3 que fizerem sucesso, o Estado fica com 10% a 15%, por golden shares ou royalties, e esse dinheiro volta para o fundo de seguros.</p></div>
+      <div class="cartao trava"><div class="cadeado"><svg><use href="#i-cadeado"/></svg></div><strong>Se der certo, o Estado ganha junto</strong><p>Nos projetos da Faixa 3 que fizerem sucesso, o Estado fica com 10% a 15%, em ações com direitos especiais ou numa parte das vendas, e esse dinheiro volta para o fundo de seguros.</p></div>
       <div class="cartao trava"><div class="cadeado"><svg><use href="#i-cadeado"/></svg></div><strong>Nada de investir em si mesmo</strong><p>É proibido aplicar dinheiro incentivado em empresas ou setores onde o investidor já tem participação relevante ou controle. O fundo cria concorrentes, não monopólios.</p></div>
     </div>
   </section>
@@ -381,13 +379,13 @@
   <!-- ATO 6: história ilustrativa -->
   <section class="capitulo revelar">
     <div class="historia">
-      <span class="ato">Capítulo 6 · A jornada de uma ideia</span>
+      <span class="ato">Capítulo 6 · Como uma ideia recebe dinheiro</span>
       <h2>De um problema real até a bolsa</h2>
       <p>O dinheiro não vai para quem conhece alguém. Ele passa por um funil público, em quatro etapas. Para ver como seria, acompanhe uma equipe imaginária.</p>
       <p class="aviso-ficcao">História ilustrativa. A equipe é inventada; as etapas e as regras são as da proposta.</p>
       <ol class="cenas">
         <li class="cena">
-          <span class="quando">Etapa 1 · Hackathon nacional</span>
+          <span class="quando">Etapa 1 · Maratona nacional de inovação</span>
           <h3>O desafio é publicado</h3>
           <p>O Estado e os conselhos setoriais publicam um problema concreto: desenvolver sensores hospitalares nacionais.</p>
           <p>Uma equipe de três pessoas, uma engenheira, um técnico de enfermagem e um programador, se inscreve. Pela primeira vez, uma equipe assim tem um caminho aberto até o investidor.</p>
@@ -400,7 +398,7 @@
         </li>
         <li class="cena">
           <span class="quando">Etapa 3 · Banca pública</span>
-          <h3>O Shark Tank técnico, ao vivo</h3>
+          <h3>Uma banca técnica, ao vivo</h3>
           <p>A equipe apresenta o projeto numa sessão transmitida para todo mundo ver. Na banca, engenheiros sêniores, especialistas do setor e os investidores habilitados no fundo.</p>
           <p>Qualquer pessoa pode assistir e entender por que um projeto foi aprovado e outro não.</p>
         </li>
@@ -424,25 +422,25 @@
     <h2>Quando o gigante vende abaixo do custo</h2>
     <p>Uma plataforma brasileira nova costuma quebrar não por ser pior, mas por enfrentar um jogo conhecido: o vencedor leva tudo.</p>
     <div class="linha-tempo">
-      <div class="quadro"><b>Primeiro</b><p>Uma gigante estrangeira subsidia tarifas artificialmente baixas por anos.</p></div>
-      <div class="quadro"><b>Depois</b><p>As concorrentes locais não aguentam queimar caixa e fecham.</p></div>
+      <div class="quadro"><b>Primeiro</b><p>Uma gigante estrangeira cobra abaixo do custo por anos e banca o prejuízo.</p></div>
+      <div class="quadro"><b>Depois</b><p>As concorrentes locais não aguentam perder dinheiro tanto tempo e fecham.</p></div>
       <div class="quadro"><b>No fim</b><p>Sem concorrência, vêm o monopólio e as taxas altas para quem trabalha e para quem consome.</p></div>
     </div>
     <div class="seta-baixo" aria-hidden="true">↓</div>
     <h3>O antídoto: uma defesa automática</h3>
     <div class="linha-tempo">
-      <div class="quadro bom"><b>O CADE enxerga</b><p>Cruzando nota fiscal eletrônica e dados do Pix, monitora margens e preços médios de cada setor, em cada praça.</p></div>
-      <div class="quadro bom"><b>A taxa dispara sozinha</b><p>Se a empresa opera sistematicamente abaixo do custo para eliminar concorrentes, incide a CIDE-Concorrencial sobre as transações dela naquela cidade.</p></div>
+      <div class="quadro bom"><b>O CADE enxerga</b><p>O órgão que fiscaliza a concorrência cruza nota fiscal eletrônica e dados do Pix e acompanha margens e preços médios de cada setor, em cada cidade.</p></div>
+      <div class="quadro bom"><b>A taxa dispara sozinha</b><p>Se a empresa opera sistematicamente abaixo do custo para eliminar concorrentes, passa a pagar a CIDE-Concorrencial, uma contribuição nova, sobre as vendas naquela cidade.</p></div>
       <div class="quadro bom"><b>O dinheiro equilibra o jogo</b><p>O que é arrecadado reduz tributos e a taxa da plataforma nacional atacada, enquanto durar o ataque.</p></div>
     </div>
-    <p style="margin-top: var(--espaco-4)">A lógica é simples. A queima de caixa de quem ataca passa a financiar a defesa de quem é atacado.</p>
+    <p style="margin-top: var(--espaco-4)">Quanto mais a gigante vende abaixo do custo, mais dinheiro vai para a concorrente brasileira.</p>
   </section>
 
   <!-- ATO 8 -->
   <section class="capitulo revelar">
     <span class="ato">Capítulo 8 · Quem ganha</span>
     <h2>Mais renda fica com quem trabalha</h2>
-    <p>As plataformas da Faixa 1 nascem integradas ao Gov.br e ao Pix. Isso derruba o custo de conquistar cada cliente e permite cobrar microtaxas. A proposta fala em algo como 2% a 5%, contra os 25% a 30% que estima para os oligopólios estrangeiros.</p>
+    <p>As plataformas da Faixa 1 nascem integradas ao Gov.br e ao Pix. Isso derruba o custo de conquistar cada cliente e permite cobrar microtaxas. A proposta fala em algo como 2% a 5%, contra os 25% a 30% que estima para as grandes plataformas estrangeiras.</p>
     <p>Um exemplo que já existe: o <a href="/projetos/galera-club/">galera.club</a>, uma página de link na bio brasileira, com Pix na página e nenhuma taxa por venda.</p>
     <div class="ganhadores">
       <div class="cartao ganhador"><strong>O motorista</strong><p>Fica com uma parte maior de cada corrida.</p></div>
@@ -462,16 +460,16 @@
     <div class="goias">
       <div class="cartao"><span class="onde">Norte e Nordeste goiano</span><h3>Terras raras com valor agregado</h3><p>Goiás tem reservas relevantes de minerais críticos e terras raras, como em Minaçu e região. Aportes das Faixas 2 e 3 podem financiar refino local, em vez de exportar só minério bruto.</p></div>
       <div class="cartao"><span class="onde">Anápolis · DAIA</span><h3>Remédio e equipamento feito aqui</h3><p>Aproveitar o polo farmoquímico do Distrito Agroindustrial de Anápolis para fabricar insumos farmacêuticos ativos e equipamentos médico-hospitalares.</p></div>
-      <div class="cartao"><span class="onde">Sudoeste goiano</span><h3>Do agro à agtech</h3><p>Hackathons de agricultura de precisão, drones, sensores de solo e bioinsumos, com UFG, IF Goiano e centros de pesquisa. O capital do agro financia tecnologia nova, sem conflito de interesses.</p></div>
-      <div class="cartao"><span class="onde">Todo o estado</span><h3>Soberania digital em teste</h3><p>Programas piloto, com compras públicas de inovação do Marco Legal das Startups, para testar <a href="/projetos/cartorio-digital/">cartórios digitais</a>, mobilidade e gestão pública nascidos nos hackathons locais.</p></div>
+      <div class="cartao"><span class="onde">Sudoeste goiano</span><h3>Do agro à tecnologia no campo</h3><p>Maratonas de inovação em agricultura de precisão, drones, sensores de solo e bioinsumos, com UFG, IF Goiano e centros de pesquisa. O capital do agro financia tecnologia nova, sem conflito de interesses.</p></div>
+      <div class="cartao"><span class="onde">Todo o estado</span><h3>Tecnologia brasileira em teste</h3><p>Programas piloto, com compras públicas de inovação do Marco Legal das Startups, para testar <a href="/projetos/cartorio-digital/">cartórios digitais</a>, mobilidade e gestão pública criados nas maratonas de inovação locais.</p></div>
     </div>
   </section>
 
   <!-- CRÍTICAS -->
   <section class="capitulo revelar" id="criticas">
-    <span class="ato">Capítulo 10 · Pode criticar</span>
+    <span class="ato">Capítulo 10 · As críticas</span>
     <h2>As críticas mais duras, e as respostas</h2>
-    <p>Uma ideia boa precisa aguentar pancada. Estas são as objeções que eu esperaria ouvir, respondidas com as regras da própria proposta.</p>
+    <p>Estas são as objeções que eu esperaria ouvir, respondidas com as regras da própria proposta.</p>
 
     <details class="critica">
       <summary>Isso é isenção de imposto para rico.</summary>
@@ -492,7 +490,7 @@
     <details class="critica">
       <summary>Vai virar cabide para os mesmos grupos de sempre.</summary>
       <div class="resposta">
-        <p>A seleção é pública: hackathon aberto, banca transmitida ao vivo e dinheiro liberado só por metas auditadas.</p>
+        <p>A seleção é pública: maratona de inovação aberta, banca transmitida ao vivo e dinheiro liberado só por metas auditadas.</p>
         <p>E o investidor não pode colocar dinheiro incentivado em empresa ou setor onde já manda. O fundo existe para criar concorrentes.</p>
       </div>
     </details>
@@ -509,7 +507,7 @@
       <summary>Chip brasileiro? O Brasil não tem como competir nisso.</summary>
       <div class="resposta">
         <p>Por isso a Faixa 3 tem o horizonte mais longo, de 10 a 15 anos, e a maior proteção. E por isso é obrigatória: sem ela, ninguém escolheria a aposta difícil.</p>
-        <p>O haltere garante que o investidor tenha retorno rápido na Faixa 1 enquanto espera a Faixa 3 amadurecer.</p>
+        <p>A regra de juntar um projeto rápido e um demorado garante que o investidor tenha retorno rápido na Faixa 1 enquanto espera a Faixa 3 amadurecer.</p>
       </div>
     </details>
   </section>

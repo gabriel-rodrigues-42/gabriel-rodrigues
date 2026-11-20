@@ -24,7 +24,7 @@ window.PROPOSTAS = [
     cor: "verde",
     tipo: "projeto",
     fase: 4,
-    titulo: { pt: "galera.club: soberania digital que já está no ar", en: "galera.club: digital sovereignty that is already live" },
+    titulo: { pt: "galera.club: uma plataforma brasileira que já está no ar", en: "galera.club: a Brazilian platform that is already live" },
     gancho: {
       pt: "Uma plataforma brasileira de link na bio, com Pix na página e pedido no WhatsApp, sem taxa por venda.",
       en: "A Brazilian link-in-bio platform, with Pix payments on the page and orders via WhatsApp, with no fee per sale.",
