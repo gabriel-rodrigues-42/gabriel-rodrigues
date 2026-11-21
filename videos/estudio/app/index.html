@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Estúdio · Gabriel Rodrigues</title>
+<link rel="icon" href="/design-system/img/logo.svg">
+<link rel="stylesheet" href="/design-system/tokens.css">
+<link rel="stylesheet" href="/design-system/componentes.css">
+<link rel="stylesheet" href="/app/estudio.css">
+<script src="/app/estudio.js" type="module"></script>
+</head>
+<body>
+<header class="topo">
+  <img src="/design-system/img/logo.svg" alt="" width="36" height="36">
+  <strong>Estúdio</strong>
+  <nav aria-label="Abas">
+    <a href="#blocos">Blocos</a>
+    <a href="#gravar">Gravar</a>
+    <a href="#etiquetar">Etiquetar</a>
+    <a href="#montar">Montar</a>
+  </nav>
+</header>
+
+<main>
+  <!-- BLOCOS -->
+  <section id="blocos" class="aba" aria-labelledby="t-blocos">
+    <h1 id="t-blocos">Blocos</h1>
+    <p class="suave">Cada bloco é um pedaço que entra em vários vídeos. Os textos ficam em <code>videos/estudio/blocos.json</code>.</p>
+    <div class="filtros">
+      <label>Tipo
+        <select id="f-tipo"><option value="">Todos</option><option value="fala">Falas</option><option value="animacao">Animações</option></select>
+      </label>
+      <label>Etiqueta
+        <select id="f-tag"><option value="">Todas</option></select>
+      </label>
+      <label>Situação
+        <select id="f-situacao"><option value="">Todas</option><option value="falta">Falta gravar</option><option value="ok">Já gravado</option></select>
+      </label>
+    </div>
+    <div id="lista-blocos" class="grade"></div>
+  </section>
+
+  <!-- GRAVAR -->
+  <section id="gravar" class="aba" aria-labelledby="t-gravar" hidden>
+    <h1 id="t-gravar">Gravar</h1>
+    <div class="gravar">
+      <div class="prompter-area">
+        <div id="prompter" class="prompter" aria-live="polite"><p id="prompter-texto">Escolha um bloco ao lado.</p></div>
+        <div class="camera-area">
+          <video id="previa" autoplay muted playsinline></video>
+          <div id="contagem" class="contagem" hidden></div>
+          <span id="gravando" class="gravando" hidden>● Gravando</span>
+        </div>
+      </div>
+      <form id="form-gravar" class="painel" onsubmit="return false">
+        <label>Roteiro
+          <select id="g-roteiro"><option value="">Todos os blocos</option></select>
+        </label>
+        <label>Bloco
+          <select id="g-bloco"></select>
+        </label>
+        <label>Lugar
+          <select id="g-lugar"></select>
+        </label>
+        <p id="g-dica" class="suave pequeno"></p>
+        <details>
+          <summary>Câmera e microfone</summary>
+          <label>Câmera <select id="g-camera"></select></label>
+          <label>Microfone <select id="g-mic"></select></label>
+          <label>Qualidade
+            <select id="g-qualidade"><option value="1080">1080p (1920x1080)</option><option value="2160">4K (3840x2160)</option></select>
+          </label>
+          <label class="marcar"><input type="checkbox" id="g-so-texto"> Só teleprompter (gravo no iPhone)</label>
+        </details>
+        <details>
+          <summary>Teleprompter</summary>
+          <label>Tamanho do texto <input type="range" id="g-tamanho" min="24" max="96" value="48" title="Muda o tamanho do texto"></label>
+          <label>Velocidade <input type="range" id="g-velocidade" min="0" max="120" value="30"></label>
+          <label class="marcar"><input type="checkbox" id="g-espelhar"> Espelhar texto (vidro de teleprompter)</label>
+          <label class="marcar"><input type="checkbox" id="g-contagem" checked> Contagem de 3 segundos</label>
+        </details>
+        <div class="botoes">
+          <button type="button" class="botao" id="b-gravar">Gravar (espaço)</button>
+          <button type="button" class="botao secundario" id="b-proximo">Próximo bloco (→)</button>
+        </div>
+        <p id="g-status" class="suave pequeno" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ETIQUETAR -->
+  <section id="etiquetar" class="aba" aria-labelledby="t-etiquetar" hidden>
+    <h1 id="t-etiquetar">Etiquetar</h1>
+    <p class="suave">Ponha os vídeos do iPhone e da webcam em <code>videos/estudio/midia/brutos/</code>. Um vídeo pode ter vários trechos, cada um gravando um bloco.</p>
+    <div class="etiquetar">
+      <ul id="lista-brutos" class="lista-brutos"></ul>
+      <div id="editor" class="editor" hidden>
+        <div class="video-area">
+          <video id="bruto" controls playsinline preload="metadata"></video>
+          <div id="moldura-v" class="moldura-v" hidden></div>
+        </div>
+        <p class="suave pequeno" id="bruto-info"></p>
+        <form id="form-etiqueta" class="painel" onsubmit="return false">
+          <div class="linha">
+            <label>Lugar <select id="e-lugar"></select></label>
+            <label>Câmera
+              <select id="e-camera"><option value="iphone">iPhone</option><option value="webcam">Webcam</option><option value="outra">Outra</option></select>
+            </label>
+          </div>
+          <div id="trechos"></div>
+          <div class="botoes">
+            <button type="button" class="botao secundario" id="b-trecho">+ Trecho</button>
+            <button type="button" class="botao" id="b-salvar">Salvar etiqueta</button>
+          </div>
+          <p id="e-status" class="suave pequeno" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- MONTAR -->
+  <section id="montar" class="aba" aria-labelledby="t-montar" hidden>
+    <h1 id="t-montar">Montar</h1>
+    <div class="montar">
+      <div class="painel">
+        <label>Roteiro <select id="m-roteiro"></select></label>
+        <ol id="m-blocos" class="m-blocos"></ol>
+        <div id="m-falta"></div>
+      </div>
+      <div class="painel">
+        <label class="marcar"><input type="checkbox" id="m-rascunho" checked> Rascunho: aviso na tela no lugar do que falta</label>
+        <label class="marcar"><input type="checkbox" id="m-legenda"> Legenda gravada no vídeo (o .srt sai sempre)</label>
+        <div class="botoes">
+          <button type="button" class="botao secundario" data-acao="tratar">1. Tratar tomadas</button>
+          <button type="button" class="botao secundario" data-acao="animar">2. Gerar animações</button>
+          <button type="button" class="botao" data-acao="montar">3. Montar vídeo</button>
+        </div>
+        <pre id="m-log" class="log" aria-live="polite"></pre>
+        <h2>Vídeos prontos</h2>
+        <ul id="m-finais" class="finais"></ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<dialog id="dialogo-animacao">
+  <div class="previa-animacao"><iframe id="iframe-animacao" title="Prévia da animação"></iframe></div>
+  <form method="dialog" class="botoes">
+    <button class="botao secundario" value="h" id="b-anim-h">Horizontal</button>
+    <button class="botao secundario" value="v" id="b-anim-v">Vertical</button>
+    <button class="botao" value="fechar">Fechar</button>
+  </form>
+</dialog>
+</body>
+</html>

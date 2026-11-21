@@ -1,0 +1,261 @@
+{
+  "_leia": "Biblioteca de blocos do estúdio. Cada bloco é um pedaço de vídeo que pode entrar em vários vídeos. tipo 'fala' é você falando para a câmera; tipo 'animacao' é gerado por animar.py a partir de um modelo em animacoes/. Texto curto: cada frase vira uma legenda. Número só com fonte oficial e ano.",
+  "lugares": [
+    { "id": "escritorio", "nome": "Escritório", "dica": "Mesa com o computador e a webcam OBSBOT. Luz da janela de frente ou de lado, nunca atrás." },
+    { "id": "feira", "nome": "Feira de Inhumas", "dica": "Domingo de manhã, com o movimento ao fundo. iPhone na vertical ou horizontal, mic DJI na roupa." },
+    { "id": "rua", "nome": "Rua", "dica": "Calçada de Goiânia ou Inhumas, de preferência na sombra. Mic DJI na roupa para cortar o barulho." },
+    { "id": "carro", "nome": "Carro parado", "dica": "Carro desligado, iPhone no suporte do painel. Bom para fala curta e direta." },
+    { "id": "balcao", "nome": "Na frente do problema", "dica": "Perto do lugar de que o vídeo fala: cartório, prefeitura, fábrica, posto. Só na calçada e sem filmar quem é atendido." },
+    { "id": "casa", "nome": "Casa", "dica": "Sala ou cozinha, com fundo simples. Bom para conversa mais calma." }
+  ],
+  "blocos": [
+    {
+      "id": "abertura-canal",
+      "tipo": "fala",
+      "titulo": "Apresentação do canal",
+      "texto": "Oi, eu sou o Gabriel Rodrigues, de Inhumas. Trabalho com software há mais de dez anos. Aqui eu explico, de um jeito simples, os sistemas que decidem a vida da gente.",
+      "lugares": ["escritorio", "feira", "rua"],
+      "tags": ["fixo"],
+      "origem": "/sobre/"
+    },
+    {
+      "id": "abertura-curta",
+      "tipo": "fala",
+      "titulo": "Apresentação curta (Shorts)",
+      "texto": "Eu sou o Gabriel, de Inhumas, e trabalho com software.",
+      "lugares": ["rua", "carro", "feira"],
+      "tags": ["fixo", "shorts"],
+      "origem": "/sobre/"
+    },
+    {
+      "id": "encerramento",
+      "tipo": "fala",
+      "titulo": "Encerramento com as fontes",
+      "texto": "Todas as fontes estão na descrição e no meu site, gabriel-rodrigues.com. Se você vive esse problema, me conta nos comentários como é na sua cidade.",
+      "lugares": ["escritorio", "casa"],
+      "tags": ["fixo"]
+    },
+    {
+      "id": "convite-contribuir",
+      "tipo": "fala",
+      "titulo": "Convite para corrigir a proposta",
+      "texto": "Cada proposta no site tem um botão para mandar correção ou ideia. Se eu errei uma conta, me mostra onde.",
+      "lugares": ["escritorio", "casa"],
+      "tags": ["fixo"],
+      "origem": "/projetos/"
+    },
+    {
+      "id": "pergunta-cidade",
+      "tipo": "fala",
+      "titulo": "Pergunta para os comentários",
+      "texto": "E na sua cidade, como funciona? Me conta aqui embaixo.",
+      "lugares": ["rua", "feira", "carro"],
+      "tags": ["fixo", "shorts"]
+    },
+    {
+      "id": "oito-anos-fora",
+      "tipo": "fala",
+      "titulo": "Quem eu sou: oito anos fazendo sistema",
+      "texto": "Passei oito anos na Europa fazendo sistemas. Meu trabalho era achar onde o sistema trava e consertar com cuidado.",
+      "lugares": ["escritorio", "casa"],
+      "tags": ["historia"],
+      "origem": "/sobre/"
+    },
+    {
+      "id": "feira-mae",
+      "tipo": "fala",
+      "titulo": "De onde eu venho",
+      "texto": "Minha mãe ainda vende salgado aqui na feira de domingo de Inhumas. Eu comecei a trabalhar com 12 anos, dando troco de cabeça.",
+      "lugares": ["feira"],
+      "tags": ["historia"],
+      "origem": "/sobre/"
+    },
+    {
+      "id": "outro-lado-da-tela",
+      "tipo": "fala",
+      "titulo": "Quem está do outro lado",
+      "texto": "Antes de fazer qualquer sistema, eu penso em quem está do outro lado da tela.",
+      "lugares": ["escritorio", "rua"],
+      "tags": ["bordao", "historia"],
+      "origem": "/sobre/"
+    },
+    {
+      "id": "codigo-e-regra",
+      "tipo": "fala",
+      "titulo": "Código bom não vence regra ruim",
+      "texto": "Código bom não vence regra ruim. E regra se muda na política.",
+      "lugares": ["escritorio", "rua", "carro"],
+      "tags": ["bordao"],
+      "origem": "/sobre/"
+    },
+    {
+      "id": "medir-antes",
+      "tipo": "fala",
+      "titulo": "Medir se a lei funcionou",
+      "texto": "No software, ninguém põe uma mudança no ar sem saber medir se ela funcionou. Com lei deveria ser igual.",
+      "lugares": ["escritorio", "rua"],
+      "tags": ["bordao"],
+      "origem": "/ideias/#leis-com-mentalidade-de-software"
+    },
+    {
+      "id": "olhar-como-sistema",
+      "tipo": "fala",
+      "titulo": "Transição: vamos olhar como sistema",
+      "texto": "Vamos olhar isso como um sistema: o que entra, por onde passa e onde trava.",
+      "lugares": ["escritorio", "balcao"],
+      "tags": ["transicao"]
+    },
+    {
+      "id": "numero-oficial",
+      "tipo": "fala",
+      "titulo": "Transição: esse número é oficial",
+      "texto": "Esse número é oficial. A fonte está na tela e na descrição.",
+      "lugares": ["escritorio", "carro"],
+      "tags": ["transicao"]
+    },
+    {
+      "id": "promessa-investir",
+      "tipo": "fala",
+      "titulo": "Frase de campanha: vamos investir",
+      "texto": "Toda eleição tem alguém prometendo investir em saúde e educação. A pergunta que eu faço é outra: como a gente vai medir se deu certo?",
+      "lugares": ["rua", "carro"],
+      "tags": ["frase-de-politico"]
+    },
+    {
+      "id": "promessa-burocracia",
+      "tipo": "fala",
+      "titulo": "Frase de campanha: acabar com a burocracia",
+      "texto": "Todo mundo já ouviu que vai acabar com a burocracia. Eu prefiro mostrar em qual etapa ela trava, e quanto custa para você.",
+      "lugares": ["rua", "balcao"],
+      "tags": ["frase-de-politico"]
+    },
+    {
+      "id": "promessa-dinheiro",
+      "tipo": "fala",
+      "titulo": "Frase de campanha: não tem dinheiro",
+      "texto": "Sempre que a ideia é boa, alguém diz que não tem dinheiro. Às vezes o dinheiro existe e está parado no lugar errado.",
+      "lugares": ["rua", "escritorio"],
+      "tags": ["frase-de-politico"],
+      "origem": "/projetos/reindustrializacao/"
+    },
+    {
+      "id": "cartorio-gancho",
+      "tipo": "fala",
+      "titulo": "Cartório: o gancho",
+      "texto": "Passar um imóvel para o seu nome leva 14 etapas. Em 2025 eu comprei um apartamento em Goiânia e paguei uns R$ 10 mil entre imposto e cartório.",
+      "lugares": ["balcao", "rua"],
+      "tags": ["cartorio-digital"],
+      "origem": "/projetos/cartorio-digital/"
+    },
+    {
+      "id": "cartorio-quatro-balcoes",
+      "tipo": "fala",
+      "titulo": "Cartório: quatro balcões",
+      "texto": "Hoje são quatro balcões. Certidões, escritura, imposto na prefeitura e registro. Cada um confere tudo de novo.",
+      "lugares": ["escritorio", "balcao"],
+      "tags": ["cartorio-digital"],
+      "origem": "/projetos/cartorio-digital/"
+    },
+    {
+      "id": "cartorio-proposta",
+      "tipo": "fala",
+      "titulo": "Cartório: o que eu proponho",
+      "texto": "Para o caso simples, imóvel quitado e sem dívida, a proposta é um caminho só, num balcão público como o Vapt Vupt. Sem fechar nenhum cartório por decreto.",
+      "lugares": ["escritorio", "balcao"],
+      "tags": ["cartorio-digital"],
+      "origem": "/projetos/cartorio-digital/"
+    },
+    {
+      "id": "reindustrializacao-gancho",
+      "tipo": "fala",
+      "titulo": "Reindustrialização: o gancho",
+      "texto": "O dinheiro para reindustrializar o Brasil já existe. Ele só está parado.",
+      "lugares": ["rua", "escritorio"],
+      "tags": ["reindustrializacao"],
+      "origem": "/projetos/reindustrializacao/"
+    },
+    {
+      "id": "dumont-gancho",
+      "tipo": "fala",
+      "titulo": "Desafio Dumont: o gancho",
+      "texto": "E se o Brasil tivesse um carro simples, fácil de consertar, feito com oficinas pelo país?",
+      "lugares": ["rua", "balcao"],
+      "tags": ["desafio-dumont"],
+      "origem": "/projetos/desafio-dumont/"
+    },
+    {
+      "id": "brasil-responde-gancho",
+      "tipo": "fala",
+      "titulo": "Brasil Responde: o gancho",
+      "texto": "Antes de votar uma lei, quem vive o problema deveria ser ouvido. Pelo gov.br, com amostra sorteada, sem expor ninguém.",
+      "lugares": ["escritorio", "rua"],
+      "tags": ["brasil-responde"],
+      "origem": "/projetos/brasil-responde/"
+    },
+    {
+      "id": "apostas-gancho",
+      "tipo": "fala",
+      "titulo": "Apostas: por que eu entrei na política",
+      "texto": "Eu trabalhei anos protegendo jogador de aposta online na Europa. Aqui, o Brasil legalizou as apostas sem ferramentas sérias contra o abuso.",
+      "lugares": ["escritorio", "casa"],
+      "tags": ["historia", "apostas"],
+      "origem": "/sobre/"
+    },
+    {
+      "id": "vinheta",
+      "tipo": "animacao",
+      "titulo": "Vinheta de abertura",
+      "duracao": 3.5,
+      "animacao": { "modelo": "titulo", "titulo": "O Brasil explicado de um jeito simples", "subtitulo": "Gabriel Rodrigues" },
+      "tags": ["fixo"]
+    },
+    {
+      "id": "fim-site",
+      "tipo": "animacao",
+      "titulo": "Tela final com o site",
+      "duracao": 5,
+      "animacao": { "modelo": "fim", "titulo": "gabriel-rodrigues.com", "subtitulo": "Fontes e propostas no site" },
+      "tags": ["fixo"]
+    },
+    {
+      "id": "frase-codigo-e-regra",
+      "tipo": "animacao",
+      "titulo": "Frase na tela: código e regra",
+      "duracao": 4,
+      "animacao": { "modelo": "frase", "frase": "Código bom não vence regra ruim." },
+      "tags": ["bordao"]
+    },
+    {
+      "id": "numero-apostas-bolsa-familia",
+      "tipo": "animacao",
+      "titulo": "Número: Pix do Bolsa Família para apostas",
+      "duracao": 6,
+      "animacao": { "modelo": "numero", "valor": "R$ 3 bilhões", "texto": "mandados via Pix para sites de aposta por 5 milhões de beneficiários do Bolsa Família, só em agosto de 2024", "fonte": "Banco Central, 2024" },
+      "tags": ["apostas"]
+    },
+    {
+      "id": "cartorio-fluxo",
+      "tipo": "animacao",
+      "titulo": "Cartório: o caminho de hoje",
+      "duracao": 8,
+      "animacao": { "modelo": "fluxo", "titulo": "Passar um imóvel para o seu nome", "etapas": ["Juntar certidões", "Fazer a escritura", "Pagar o ITBI", "Registrar"], "trava": 4, "texto_trava": "Confere tudo de novo", "fonte": "Código Civil, arts. 108 e 1.245" },
+      "tags": ["cartorio-digital"]
+    },
+    {
+      "id": "cartorio-etapas-paises",
+      "tipo": "animacao",
+      "titulo": "Cartório: Brasil e Geórgia",
+      "duracao": 6,
+      "animacao": { "modelo": "comparar", "titulo": "Etapas para registrar um imóvel", "itens": [{ "nome": "Brasil", "valor": 14, "rotulo": "14 etapas, 31 dias" }, { "nome": "Geórgia", "valor": 1, "rotulo": "1 etapa, 1 dia" }], "fonte": "Banco Mundial, Doing Business 2020" },
+      "tags": ["cartorio-digital"]
+    },
+    {
+      "id": "cartorio-fundos",
+      "tipo": "animacao",
+      "titulo": "Cartório: 40% para fundos",
+      "duracao": 6,
+      "animacao": { "modelo": "numero", "valor": "40%", "texto": "do que você paga ao cartório em Goiás vai para 11 fundos e órgãos públicos", "fonte": "Lei estadual 20.494/2019, art. 15" },
+      "tags": ["cartorio-digital"]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "slug": "cartorio-digital-short",
+  "titulo": "14 etapas para um imóvel ficar no seu nome",
+  "pagina": "/projetos/cartorio-digital/",
+  "formatos": ["v"],
+  "blocos": [
+    "cartorio-gancho",
+    "cartorio-etapas-paises",
+    "cartorio-proposta",
+    "pergunta-cidade",
+    "fim-site"
+  ]
+}

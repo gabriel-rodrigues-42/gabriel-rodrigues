@@ -1,0 +1,23 @@
+{
+  "_leia": "Roteiro = lista de blocos de blocos.json, na ordem. formatos: h (horizontal 1920x1080, YouTube) e v (vertical 1080x1920, Shorts). Um bloco pode aparecer em vários roteiros.",
+  "slug": "cartorio-digital",
+  "titulo": "Por que passar um imóvel para o seu nome leva 14 etapas",
+  "pagina": "/projetos/cartorio-digital/",
+  "formatos": ["h"],
+  "blocos": [
+    "cartorio-gancho",
+    "vinheta",
+    "abertura-canal",
+    "olhar-como-sistema",
+    "cartorio-fluxo",
+    "cartorio-quatro-balcoes",
+    "cartorio-etapas-paises",
+    "cartorio-fundos",
+    "numero-oficial",
+    "cartorio-proposta",
+    "medir-antes",
+    "pergunta-cidade",
+    "encerramento",
+    "fim-site"
+  ]
+}
