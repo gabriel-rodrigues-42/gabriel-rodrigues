@@ -213,10 +213,26 @@ def capa():
                + estrela(180, 140, 12, "amarelo-escuro") + estrela(590, 120, 10, "azul-medio"))
 
 
+def brasil_responde():
+    celular = ret(90, 70, 220, 400, "azul", 34) + ret(106, 104, 188, 330, "branco", 18) + ret(170, 84, 60, 8, "azul-medio", 4)
+    perguntas = ""
+    for i, marcada in enumerate((True, False, True)):
+        y = 140 + i * 92
+        perguntas += ret(126, y, 34, 34, "verde" if marcada else "areia", 8) + linhas(176, y + 4, [92, 64], "azul-claro", passo=18)
+        if marcada:
+            perguntas += traco(f"M134,{y + 17} L141,{y + 25} L153,{y + 10}", "branco", 6)
+    balao = (cam("M240,330 h110 a22,22 0 0 1 22,22 v46 a22,22 0 0 1 -22,22 h-66 l-26,24 v-24 h-18 a22,22 0 0 1 -22,-22 v-46 a22,22 0 0 1 22,-22 Z", "livre-roxo")
+             + cam("M290,354 L290,394 L322,374 Z", "branco"))
+    seta = traco("M400,250 C440,250 450,250 470,250", "azul-medio", 14) + cam("M492,250 L464,228 L464,272 Z", "azul-medio")
+    barras = ret(520, 160, 26, 70, "amarelo", 6) + ret(556, 120, 26, 110, "verde", 6) + ret(592, 180, 26, 50, "livre-roxo", 6)
+    return svg("Celular com um questionário e um balão de vídeo, uma seta e o Congresso Nacional com um gráfico",
+               celular + perguntas + balao + seta + barras + chao(470, 412, 200) + congresso(570, 412, .62))
+
+
 DESENHOS = {
     "galera-club": galera_club, "reindustrializacao": reindustrializacao, "desafio-dumont": desafio_dumont,
     "cartorio-digital": cartorio_digital, "qual-caminho": qual_caminho, "leis-com-mentalidade-de-software": leis_software,
-    "canal-do-youtube": canal_do_youtube, "ideia": ideia, "capa": capa,
+    "canal-do-youtube": canal_do_youtube, "brasil-responde": brasil_responde, "ideia": ideia, "capa": capa,
 }
 
 if __name__ == "__main__":
