@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Animação do estúdio</title>
+<!-- Modelos de animação do estúdio. Fora do site: o animar.py abre esta página no Chromium,
+     para cada quadro e tira um print. Os dados vêm no endereço, depois do #, em JSON:
+     index.html#{"modelo":"numero","valor":"40%","texto":"...","fonte":"...","formato":"h"}
+     Modelos: titulo, fim, frase, numero, fluxo, comparar, falta.
+     Cores, fontes e formas só por variáveis do tokens.css do design system. -->
+<link rel="stylesheet" href="/design-system/tokens.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background-color: var(--creme);
+    color: var(--texto);
+    font-family: var(--fonte);
+    overflow: hidden;
+    /* u = 1% do lado menor: o mesmo desenho serve para 1920x1080 e 1080x1920 */
+    --u: 1vmin;
+  }
+  .palco { position: relative; width: 100vw; height: 100vh; display: grid; place-items: center; padding: calc(var(--u) * 8); }
+  .conteudo { position: relative; z-index: 1; width: 100%; max-width: calc(var(--u) * 150); display: grid; gap: calc(var(--u) * 4); justify-items: center; text-align: center; }
+  .v .conteudo { max-width: none; }
+
+  /* Bolhas de fundo, nas cores da bandeira */
+  .bolha { position: absolute; z-index: 0; animation: boiar 6s ease-in-out infinite alternate, entrar .7s cubic-bezier(.2, 1.4, .4, 1) both; }
+  .b1 { width: calc(var(--u) * 46); height: calc(var(--u) * 40); background: var(--verde-claro); border-radius: var(--forma-bolha-1); top: -8%; left: -6%; }
+  .b2 { width: calc(var(--u) * 36); height: calc(var(--u) * 38); background: var(--amarelo-claro); border-radius: var(--forma-bolha-2); bottom: -10%; right: -4%; animation-delay: -2s, .15s; }
+  .b3 { width: calc(var(--u) * 18); height: calc(var(--u) * 16); background: var(--azul-claro); border-radius: var(--forma-bolha-3); top: 12%; right: 10%; animation-delay: -4s, .3s; }
+  @keyframes boiar { to { transform: translate(calc(var(--u) * 2), calc(var(--u) * -2)) rotate(6deg); } }
+  @keyframes entrar { from { scale: 0; } to { scale: 1; } }
+
+  /* Entradas */
+  .surge { animation: surgir .6s cubic-bezier(.2, 1.3, .4, 1) both; }
+  .desliza { animation: deslizar .6s ease-out both; }
+  @keyframes surgir { from { opacity: 0; transform: scale(.6) rotate(-3deg); } to { opacity: 1; transform: none; } }
+  @keyframes deslizar { from { opacity: 0; transform: translateY(calc(var(--u) * 5)); } to { opacity: 1; transform: none; } }
+
+  h1, p { margin: 0; }
+  .titulo { font-size: calc(var(--u) * 9); line-height: 1.05; font-weight: 900; color: var(--azul); text-wrap: balance; }
+  .subtitulo { font-size: calc(var(--u) * 4.4); font-weight: var(--peso-forte); color: var(--verde-escuro); }
+  .site { white-space: nowrap; font-size: min(calc(var(--u) * 9), 7.4vw); }
+  .logo { width: calc(var(--u) * 22); height: auto; }
+  .fonte { font-size: calc(var(--u) * 3); color: var(--texto-suave); background: var(--branco); padding: calc(var(--u) * 1.2) calc(var(--u) * 3); border-radius: var(--forma-selo); box-shadow: var(--sombra-cartao); }
+  .fonte::before { content: "Fonte: "; font-weight: var(--peso-forte); }
+
+  /* frase */
+  .frase { font-size: calc(var(--u) * 10); line-height: 1.1; font-weight: 900; color: var(--azul); text-wrap: balance; }
+  .frase mark { background: none; color: inherit; position: relative; white-space: nowrap; }
+  .frase mark::after { content: ""; position: absolute; left: -2%; right: -2%; bottom: .04em; height: .32em; background: var(--amarelo); border-radius: var(--forma-bolha-2); z-index: -1; transform-origin: left; animation: riscar .5s ease-out .7s both; }
+  @keyframes riscar { from { transform: scaleX(0); } }
+
+  /* numero */
+  .valor { font-size: calc(var(--u) * 22); line-height: 1; font-weight: 900; color: var(--verde-escuro); }
+  .v .valor { font-size: calc(var(--u) * 26); }
+  .texto { font-size: calc(var(--u) * 5); line-height: 1.25; font-weight: var(--peso-forte); color: var(--azul); text-wrap: balance; max-width: calc(var(--u) * 140); }
+
+  /* fluxo */
+  .etapas { list-style: none; padding: 0; margin: 0; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: calc(var(--u) * 3); width: 100%; position: relative; }
+  .v .etapas { grid-auto-flow: row; justify-items: start; gap: calc(var(--u) * 4); }
+  .etapas::before { content: ""; position: absolute; background: var(--amarelo); border-radius: var(--forma-pilula); left: 10%; right: 10%; top: calc(var(--u) * 7); height: calc(var(--u) * 1.6); transform-origin: left; animation: riscar 1.2s ease-out .3s both; }
+  .v .etapas::before { left: calc(var(--u) * 7); right: auto; top: 5%; bottom: 5%; width: calc(var(--u) * 1.6); height: auto; transform-origin: top; animation-name: descer; }
+  @keyframes descer { from { transform: scaleY(0); } }
+  .etapa { position: relative; display: grid; align-content: start; justify-items: center; gap: calc(var(--u) * 2); }
+  .v .etapa { grid-template-columns: auto 1fr; align-items: center; justify-items: start; gap: calc(var(--u) * 4); }
+  .etapa .n { width: calc(var(--u) * 14); height: calc(var(--u) * 14); display: grid; place-items: center; background: var(--azul); color: var(--branco); font-weight: 900; font-size: calc(var(--u) * 6); border-radius: var(--forma-bolha-1); box-shadow: var(--sombra-clay); }
+  .etapa:nth-child(even) .n { border-radius: var(--forma-bolha-2); }
+  .etapa strong { font-size: calc(var(--u) * 4); line-height: 1.15; color: var(--azul); text-align: center; }
+  .v .etapa > div, .v .etapa strong { text-align: left; }
+  .v .etapa strong { font-size: calc(var(--u) * 5); }
+  .trava .n { background: var(--livre-coral); color: var(--texto); }
+  .selo-trava { display: inline-block; background: var(--areia); color: var(--texto); font-weight: var(--peso-forte); font-size: calc(var(--u) * 3); padding: calc(var(--u) * .8) calc(var(--u) * 2.4); border-radius: var(--forma-selo); }
+  .trava .n { animation: surgir .6s cubic-bezier(.2, 1.3, .4, 1) both, tremer .5s ease-in-out both; }
+  @keyframes tremer { 0%, 100% { rotate: 0deg; } 25% { rotate: -8deg; } 75% { rotate: 8deg; } }
+
+  /* comparar */
+  .barras { display: grid; gap: calc(var(--u) * 4); width: 100%; }
+  .barra { display: grid; grid-template-columns: calc(var(--u) * 30) 1fr; gap: calc(var(--u) * 3); align-items: center; text-align: left; }
+  .v .barra { grid-template-columns: 1fr; gap: calc(var(--u) * 1.5); }
+  .barra b { font-size: calc(var(--u) * 5); color: var(--azul); }
+  .trilho { background: var(--branco); border-radius: var(--forma-pilula); height: calc(var(--u) * 10); box-shadow: var(--sombra-cartao); }
+  .encher { height: 100%; border-radius: var(--forma-pilula); background: var(--verde); min-width: calc(var(--u) * 10); transform-origin: left; animation: riscar 1s cubic-bezier(.3, 1.2, .5, 1) both; display: flex; align-items: center; }
+  .barra:first-child .encher { background: var(--azul); }
+  .rotulo { font-size: calc(var(--u) * 3.6); font-weight: var(--peso-forte); color: var(--texto-suave); grid-column: 2; }
+  .v .rotulo { grid-column: 1; }
+
+  /* falta: aviso no rascunho, no lugar de uma fala que ainda não foi gravada */
+  .falta { background-color: var(--areia); }
+  .falta .titulo { color: var(--texto); }
+</style>
+</head>
+<body>
+<div class="palco" id="palco"></div>
+<script>
+  const dados = JSON.parse(decodeURIComponent(location.hash.slice(1) || "{}"));
+  const formato = dados.formato || (innerHeight > innerWidth ? "v" : "h");
+  document.body.classList.add(formato);
+  const palco = document.getElementById("palco");
+
+  function el(tag, classe, texto, atraso) {
+    const e = document.createElement(tag);
+    if (classe) e.className = classe;
+    if (texto != null) e.textContent = texto;
+    if (atraso != null) e.style.animationDelay = atraso + "s";
+    return e;
+  }
+  function bolhas() {
+    for (const b of ["b1", "b2", "b3"]) palco.append(el("div", "bolha " + b));
+  }
+  function logo(atraso) {
+    const img = el("img", "logo surge", null, atraso);
+    img.src = "/design-system/img/logo.svg";
+    img.alt = "";
+    return img;
+  }
+  function fonte(texto, atraso) {
+    return texto ? el("p", "fonte desliza", texto, atraso) : null;
+  }
+
+  const modelos = {
+    titulo(d) {
+      bolhas();
+      return [logo(0.1), el("h1", "titulo surge", d.titulo, 0.4), el("p", "subtitulo desliza", d.subtitulo, 0.9)];
+    },
+    fim(d) {
+      bolhas();
+      return [logo(0.1), el("h1", "titulo site surge", d.titulo, 0.3), el("p", "subtitulo desliza", d.subtitulo, 0.8)];
+    },
+    frase(d) {
+      bolhas();
+      const p = el("p", "frase surge", null, 0.1);
+      // A última palavra ganha o grifo amarelo, a não ser que a frase marque *outra*.
+      const texto = d.frase || "";
+      const m = texto.match(/\*(.+?)\*/);
+      const [antes, grifo, depois] = m
+        ? [texto.slice(0, m.index), m[1], texto.slice(m.index + m[0].length)]
+        : (() => { const i = texto.trimEnd().lastIndexOf(" "); return [texto.slice(0, i + 1), texto.slice(i + 1), ""]; })();
+      p.append(antes, Object.assign(document.createElement("mark"), { textContent: grifo }), depois);
+      return [p];
+    },
+    numero(d) {
+      bolhas();
+      return [el("p", "valor surge", d.valor, 0.1), el("p", "texto desliza", d.texto, 0.7), fonte(d.fonte, 1.3)];
+    },
+    fluxo(d) {
+      const ol = el("ol", "etapas");
+      (d.etapas || []).forEach((nome, i) => {
+        const trava = d.trava === i + 1;
+        const li = el("li", "etapa" + (trava ? " trava" : ""));
+        const n = el("span", "n surge", String(i + 1));
+        n.style.animationDelay = trava ? `${0.4 + i * 0.6}s, ${1.2 + i * 0.6}s` : `${0.4 + i * 0.6}s`;
+        const txt = el("div");
+        txt.append(el("strong", "desliza", nome, 0.6 + i * 0.6));
+        if (trava && d.texto_trava) {
+          txt.append(document.createElement("br"), el("span", "selo-trava surge", d.texto_trava, 1.4 + i * 0.6));
+        }
+        li.append(n, txt);
+        ol.append(li);
+      });
+      return [el("h1", "titulo desliza", d.titulo, 0), ol, fonte(d.fonte, 0.8 + (d.etapas || []).length * 0.6)];
+    },
+    comparar(d) {
+      const itens = d.itens || [];
+      const max = Math.max(...itens.map((i) => i.valor), 1);
+      const lista = el("div", "barras");
+      itens.forEach((item, i) => {
+        const linha = el("div", "barra desliza", null, 0.3 + i * 0.5);
+        const trilho = el("div", "trilho");
+        const encher = el("div", "encher", null, 0.5 + i * 0.5);
+        encher.style.width = (100 * item.valor / max) + "%";
+        trilho.append(encher);
+        linha.append(el("b", null, item.nome), trilho, el("span", "rotulo", item.rotulo));
+        lista.append(linha);
+      });
+      return [el("h1", "titulo desliza", d.titulo, 0), lista, fonte(d.fonte, 0.8 + itens.length * 0.5)];
+    },
+    falta(d) {
+      document.body.classList.add("falta");
+      return [el("p", "subtitulo", "Falta gravar: " + (d.bloco || "")), el("h1", "titulo", d.texto || "")];
+    },
+  };
+
+  const conteudo = el("div", "conteudo");
+  const partes = (modelos[dados.modelo] || modelos.falta)(dados);
+  conteudo.append(...partes.filter(Boolean));
+  palco.append(conteudo);
+
+  // O animar.py chama pronto() e depois quadro(t) para cada quadro.
+  window.pronto = async () => {
+    await document.fonts.ready;
+    await Promise.all([...document.images].map((i) => i.decode().catch(() => {})));
+    return true;
+  };
+  window.quadro = (segundos) => {
+    for (const a of document.getAnimations()) {
+      a.pause();
+      a.currentTime = segundos * 1000;
+    }
+  };
+</script>
+</body>
+</html>
