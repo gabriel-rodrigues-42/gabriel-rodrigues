@@ -8,6 +8,7 @@ Não há pedido de voto. As propostas estão em construção, com dados, fontes 
 
 - [Início](https://gabriel-rodrigues.com/): quem é o Gabriel, as propostas em construção e o formulário "Acredita que eu devo tentar?"
 - [Sobre](https://gabriel-rodrigues.com/sobre/): a história do Gabriel, de Inhumas para a Europa e de volta para Goiás
+- [No que eu acredito](https://gabriel-rodrigues.com/sobre/no-que-acredito/): o que o Gabriel pensa sobre Deus, religião, memória dos desastres e buscar conhecimento juntos, com religião ou sem
 - [Propostas](https://gabriel-rodrigues.com/projetos/): propostas desenvolvidas em público, cada uma com a fase em que está
 - [Ideias para conversar](https://gabriel-rodrigues.com/ideias/): ideias com problema, proposta, críticas e resposta, lidas em voz alta com legendas
 - [Qual caminho faz sentido pra mim?](https://gabriel-rodrigues.com/caminho/): questionário para qualquer município do Brasil com dados do TSE e do IBGE (vagas, votos do último eleito, quociente eleitoral, idade mínima e prazos)
@@ -24,6 +25,7 @@ Não há pedido de voto. As propostas estão em construção, com dados, fontes 
 
 - [Home](https://gabriel-rodrigues.com/en/)
 - [About](https://gabriel-rodrigues.com/en/sobre/)
+- [What I believe](https://gabriel-rodrigues.com/en/sobre/no-que-acredito/)
 - [Proposals](https://gabriel-rodrigues.com/en/projetos/)
 - [Ideas](https://gabriel-rodrigues.com/en/ideias/)
 - [Which path makes sense for me?](https://gabriel-rodrigues.com/en/caminho/)
