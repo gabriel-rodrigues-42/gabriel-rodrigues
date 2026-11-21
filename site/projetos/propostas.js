@@ -70,6 +70,19 @@ window.PROPOSTAS = [
     },
   },
   {
+    id: "brasil-responde",
+    href: "/projetos/brasil-responde/",
+    img: "/projetos/img/brasil-responde.svg",
+    cor: "roxo",
+    tipo: "projeto",
+    fase: 1,
+    titulo: { pt: "Brasil Responde: ouvir quem vive o problema antes de votar a lei", en: "Brazil Answers: hearing from the people who live the problem before voting on the law" },
+    gancho: {
+      pt: "Questionários pelo gov.br para quem é afetado por uma lei, anônimos ou com depoimento, com amostra sorteada.",
+      en: "Questionnaires through gov.br for the people a law affects, anonymous or with a testimony, with a random sample.",
+    },
+  },
+  {
     id: "qual-caminho",
     href: "/caminho/",
     img: "/projetos/img/qual-caminho.svg",
