@@ -183,7 +183,7 @@ window.IDEIAS = [
     ],
     proposta: [
       "Um canal que explica um sistema do Brasil por vez, de forma simples, como um professor explicaria. Sempre com fonte, e sem atacar pessoas ou partidos.",
-      "O formato começa leve. Primeiro o texto lido em voz alta com legendas, como nesta página. A animação em massinha vem depois, quando as ideias estiverem afiadas.",
+      "O formato começa leve. Primeiro o texto lido em voz alta com legendas, como nesta página. Os vídeos gravados, com animações simples, vêm depois, quando as ideias estiverem afiadas.",
       "Cada vídeo ganha uma página de referência no site, para quem quiser consultar e compartilhar.",
     ],
     criticas: [

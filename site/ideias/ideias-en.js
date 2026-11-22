@@ -170,7 +170,7 @@ window.IDEIAS = [
     ],
     proposta: [
       "A channel that explains one Brazilian system at a time, simply, the way a teacher would. Always with sources, and without attacking people or parties.",
-      "The format starts light. First the text read aloud with captions, like on this page. Clay animation comes later, once the ideas are sharp.",
+      "The format starts light. First the text read aloud with captions, like on this page. Recorded videos with simple animations come later, once the ideas are sharp.",
       "Each video gets a reference page on the site, for anyone who wants to look it up and share it.",
     ],
     criticas: [
