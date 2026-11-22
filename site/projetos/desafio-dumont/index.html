@@ -68,13 +68,30 @@
   .ilustra { display: block; width: 100%; height: auto; margin: var(--espaco-5) 0 var(--espaco-2); }
   .legenda-ilustra { font-size: var(--tamanho-1); color: var(--texto-suave); text-align: center; margin: 0; }
 
-  /* Ilustração: troca de cor dos painéis */
-  .painel { transition: fill .6s ease; }
-  .cores { display: flex; flex-wrap: wrap; gap: var(--espaco-2); justify-content: center; margin-top: var(--espaco-3); }
-  .cor { width: 36px; height: 36px; border: 3px solid var(--branco); border-radius: var(--forma-bolha-1); box-shadow: var(--sombra-cartao); cursor: pointer; padding: 0; }
-  .cor:nth-child(even) { border-radius: var(--forma-bolha-2); }
+  /* Ilustração: o mesmo carro com kits e cores trocáveis */
+  .carro { --corpo: var(--carro-verde-mata); --teto: var(--carro-branco); --faixa: var(--carro-amarelo-ipe); }
+  .carro .corpo { fill: var(--corpo); }
+  .carro .teto { fill: var(--teto); }
+  .carro .faixa { fill: var(--faixa); }
+  .carro .pintura { transition: fill .5s ease; }
+  .carro .kit { transition: opacity .35s ease; opacity: 0; visibility: hidden; }
+  .carro[data-kit="picape"] .kit[data-kit="picape"], .carro[data-kit="suv"] .kit[data-kit="suv"], .carro[data-kit="furgao"] .kit[data-kit="furgao"] { opacity: 1; visibility: visible; }
+  .monte { display: grid; gap: var(--espaco-3); justify-items: center; margin-top: var(--espaco-3); }
+  .kits, .cores { display: flex; flex-wrap: wrap; gap: var(--espaco-2); justify-content: center; align-items: center; }
+  .rotulo-monte { flex-basis: 100%; text-align: center; font-size: var(--tamanho-1); font-weight: var(--peso-forte); letter-spacing: .08em; text-transform: uppercase; color: var(--texto-suave); }
+  .kit-botao { font: inherit; font-size: var(--tamanho-2); font-weight: var(--peso-forte); color: var(--azul); background: var(--branco); border: 2px solid var(--azul-claro); border-radius: var(--forma-pilula); padding: var(--espaco-2) var(--espaco-3); min-height: 44px; cursor: pointer; }
+  .kit-botao span { font-weight: var(--peso-normal); color: var(--texto-suave); }
+  .kit-botao[aria-pressed="true"] { background: var(--azul); border-color: var(--azul); color: var(--branco); }
+  .kit-botao[aria-pressed="true"] span { color: var(--branco); }
+  @media (max-width: 430px) { .kit-botao { line-height: 1.2; } .kit-botao span { display: block; font-size: var(--tamanho-1); } }
+  .kit-botao:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+  .cor { width: 40px; height: 40px; border: 3px solid var(--branco); border-radius: 50%; box-shadow: var(--sombra-cartao); cursor: pointer; padding: 0; }
   .cor[aria-pressed="true"] { outline: 3px solid var(--azul); outline-offset: 2px; }
   .cor:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+  .carro .adesivo, .carro .adesivo-grande { transition: opacity .35s ease; opacity: 0; visibility: hidden; }
+  .carro[data-adesivo] .adesivo { opacity: 1; visibility: visible; }
+  .carro[data-adesivo][data-kit="furgao"] .adesivo-grande { opacity: 1; visibility: visible; }
+  .escolha { font-size: var(--tamanho-2); color: var(--texto-suave); text-align: center; margin: 0; min-height: 3em; }
 
   /* Números */
   .numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--espaco-4); margin-top: var(--espaco-4); }
@@ -171,38 +188,99 @@
     <h1>Um carro brasileiro que cada um <span class="destaque">pinta do seu jeito</span></h1>
     <p class="lead">O Desafio Dumont é uma proposta de lei. Ela abre uma competição nacional para equipes criarem um carro simples, modular e fácil de personalizar. O dinheiro da largada vem de quem tem patrimônio alto e escolhe investir no desafio em vez de pagar parte do imposto. A oficina do seu bairro ganha trabalho.</p>
 
-    <svg class="ilustra" viewBox="0 0 640 260" role="img" aria-labelledby="t-capa">
-      <title id="t-capa">Ilustração: uma picape compacta com painéis de cores diferentes sobre uma base comum, com rodas grandes e uma caçamba aberta.</title>
-      <ellipse cx="320" cy="232" rx="270" ry="14" fill="var(--areia)"/>
-      <rect x="92" y="176" width="456" height="30" rx="15" fill="var(--azul)"/>
-      <path class="painel" id="p-capo" d="M96 178 C 96 140, 120 128, 176 126 L 236 124 L 236 178 Z" fill="var(--verde)"/>
-      <path class="painel" id="p-cabine" d="M236 178 L 236 120 C 240 76, 262 62, 300 62 L 352 62 C 372 62, 380 76, 382 98 L 386 178 Z" fill="var(--amarelo)"/>
-      <path d="M262 110 C 266 86, 278 78, 300 78 L 344 78 C 358 78, 364 88, 366 104 L 366 112 L 262 112 Z" fill="var(--azul-claro)"/>
-      <path class="painel" id="p-cacamba" d="M386 178 L 386 124 L 544 124 C 550 124, 552 130, 552 136 L 552 178 Z" fill="var(--livre-coral)"/>
-      <rect x="402" y="134" width="132" height="10" rx="5" fill="var(--branco)" opacity=".55"/>
-      <rect class="painel" id="p-porta" x="250" y="122" width="120" height="50" rx="12" fill="var(--livre-turquesa)"/>
-      <rect x="338" y="140" width="22" height="8" rx="4" fill="var(--azul)"/>
-      <rect x="104" y="146" width="22" height="14" rx="6" fill="var(--amarelo-claro)"/>
-      <g fill="var(--texto)"><circle cx="176" cy="204" r="34"/><circle cx="468" cy="204" r="34"/></g>
-      <g fill="var(--azul-claro)"><circle cx="176" cy="204" r="14"/><circle cx="468" cy="204" r="14"/></g>
-      <g stroke="var(--azul)" stroke-width="4" stroke-dasharray="6 7" fill="none" opacity=".6">
-        <path d="M236 120 L 236 178"/><path d="M386 124 L 386 178"/>
+    <svg class="ilustra carro" viewBox="0 0 640 260" role="img" aria-labelledby="t-capa" data-kit="picape">
+      <title id="t-capa">Ilustração: um carro compacto sobre um chassi comum. A parte de trás é um kit que se troca, e o mesmo carro vira picape, SUV ou furgão.</title>
+      <ellipse cx="324" cy="230" rx="268" ry="10" fill="var(--areia)"/>
+      <rect x="100" y="184" width="460" height="14" rx="7" fill="var(--carro-grafite)"/>
+      <!-- Kits de trás -->
+      <g class="kit" data-kit="picape">
+        <path class="pintura corpo" d="M396 188 L 396 124 L 560 124 C 565 124, 568 127, 568 132 L 568 188 Z"/>
+        <rect x="396" y="119" width="172" height="7" rx="3" fill="var(--carro-grafite)"/>
+        <rect x="562" y="130" width="6" height="22" rx="3" fill="var(--carro-lanterna)"/>
       </g>
+      <g class="kit" data-kit="suv">
+        <path class="pintura corpo" d="M396 188 L 396 66 L 522 66 C 540 66, 552 72, 558 84 L 568 112 L 568 188 Z"/>
+        <path class="pintura teto" d="M396 63 L 524 63 C 536 63, 544 66, 550 72 L 396 72 Z"/>
+        <path d="M404 78 L 470 78 L 470 120 L 404 120 Z" fill="var(--carro-vidro)"/>
+        <path d="M478 78 L 520 78 C 532 78, 540 83, 545 92 L 552 120 L 478 120 Z" fill="var(--carro-vidro)"/>
+        <rect x="410" y="130" width="16" height="4" rx="2" fill="var(--carro-grafite)" opacity=".5"/>
+        <rect x="562" y="116" width="6" height="26" rx="3" fill="var(--carro-lanterna)"/>
+      </g>
+      <g class="kit" data-kit="furgao">
+        <path class="pintura corpo" d="M396 188 L 396 66 L 554 66 C 562 66, 568 72, 568 80 L 568 188 Z"/>
+        <path class="pintura teto" d="M396 63 L 554 63 C 560 63, 564 65, 566 70 L 396 70 Z"/>
+        <rect x="408" y="80" width="74" height="98" rx="6" fill="none" stroke="var(--carro-grafite)" stroke-width="2" opacity=".3"/>
+        <rect x="414" y="128" width="16" height="4" rx="2" fill="var(--carro-grafite)" opacity=".5"/>
+        <rect x="562" y="96" width="6" height="40" rx="3" fill="var(--carro-lanterna)"/>
+      </g>
+      <!-- Frente e cabine: iguais em todos os kits -->
+      <path class="pintura corpo" d="M82 188 L 82 150 C 82 136, 90 129, 104 128 L 228 122 L 276 72 C 280 68, 284 66, 290 66 L 388 66 C 394 66, 398 70, 398 76 L 398 188 Z"/>
+      <path class="pintura teto" d="M279 70 C 282 66, 286 63, 292 63 L 398 63 L 398 72 L 277 72 Z"/>
+      <rect class="pintura faixa" x="84" y="152" width="484" height="5"/>
+      <path d="M236 120 L 280 77 L 334 77 L 334 120 Z" fill="var(--carro-vidro)"/>
+      <path d="M342 77 L 388 77 L 388 120 L 342 120 Z" fill="var(--carro-vidro)"/>
+      <path d="M258 120 L 301 77 L 313 77 L 270 120 Z" fill="var(--carro-branco)" opacity=".14"/>
+      <path d="M236 108 L 252 104 L 254 117 L 240 119 Z" fill="var(--carro-grafite)"/>
+      <g stroke="var(--carro-grafite)" stroke-width="2" opacity=".28" fill="none">
+        <path d="M232 124 L 232 180"/><path d="M338 122 L 338 180"/>
+      </g>
+      <rect x="316" y="130" width="16" height="4" rx="2" fill="var(--carro-grafite)" opacity=".5"/>
+      <rect x="84" y="136" width="40" height="6" rx="3" fill="var(--carro-farol)"/>
+      <!-- Compósito sem pintura: para-choques, caixas de roda e soleira -->
+      <path d="M74 166 L 112 166 L 112 192 L 84 192 C 78 192, 74 188, 74 182 Z" fill="var(--carro-grafite)"/>
+      <rect x="556" y="164" width="18" height="28" rx="5" fill="var(--carro-grafite)"/>
+      <rect x="214" y="178" width="212" height="12" rx="4" fill="var(--carro-grafite)"/>
+      <g fill="var(--carro-pneu)"><circle cx="170" cy="194" r="40"/><circle cx="470" cy="194" r="40"/></g>
+      <g stroke="var(--carro-grafite)" stroke-width="9" fill="none">
+        <path d="M122 194 A 48 48 0 0 1 218 194"/><path d="M422 194 A 48 48 0 0 1 518 194"/>
+      </g>
+      <g fill="var(--carro-pneu)" stroke="var(--carro-grafite)" stroke-width="3"><circle cx="170" cy="194" r="33"/><circle cx="470" cy="194" r="33"/></g>
+      <g fill="var(--carro-aro)"><circle cx="170" cy="194" r="21"/><circle cx="470" cy="194" r="21"/></g>
+      <g fill="var(--carro-aro-claro)"><circle cx="170" cy="194" r="15"/><circle cx="470" cy="194" r="15"/></g>
+      <g fill="var(--carro-aro)"><circle cx="170" cy="194" r="5"/><circle cx="470" cy="194" r="5"/></g>
+      <!-- Adesivo de marca fictícia: painel que vira espaço de propaganda -->
+      <g class="adesivo" font-family="Nunito, sans-serif" font-weight="900">
+        <rect x="241" y="127" width="92" height="22" rx="11" fill="var(--carro-branco)" stroke="var(--carro-grafite)" stroke-opacity=".25"/>
+        <circle cx="253" cy="138" r="7" fill="var(--verde)"/><path d="M249 139 L 253 133 L 257 139 Z" fill="var(--amarelo)"/>
+        <text x="264" y="143" font-size="12" fill="var(--azul)">sua marca</text>
+        <g class="adesivo-grande">
+          <rect x="420" y="84" width="128" height="44" rx="14" fill="var(--carro-branco)" stroke="var(--carro-grafite)" stroke-opacity=".25"/>
+          <circle cx="440" cy="106" r="12" fill="var(--verde)"/><path d="M433 108 L 440 97 L 447 108 Z" fill="var(--amarelo)"/>
+          <text x="458" y="112" font-size="17" fill="var(--azul)">sua marca</text>
+        </g>
+      </g>
+      <path d="M396 64 L 396 188" stroke="var(--azul)" stroke-width="3" stroke-dasharray="6 7" fill="none" opacity=".55"/>
       <g font-family="Nunito, sans-serif" font-weight="800" font-size="15" fill="var(--azul)">
-        <text x="24" y="254">um chassi só</text>
-        <text x="460" y="40">kits que se encaixam</text>
+        <text x="20" y="254">um chassi só</text>
+        <text x="430" y="30">kits que se encaixam</text>
       </g>
-      <path d="M60 238 C 70 224, 86 212, 100 200" stroke="var(--azul)" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <path d="M520 48 C 510 80, 486 100, 470 118" stroke="var(--azul)" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M62 238 C 74 226, 92 212, 106 200" stroke="var(--azul)" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M488 38 C 482 46, 474 52, 462 56" stroke="var(--azul)" stroke-width="3" fill="none" stroke-linecap="round"/>
     </svg>
-    <div class="cores" role="group" aria-label="Trocar as cores dos painéis da ilustração">
-      <button class="cor" type="button" aria-pressed="true" aria-label="Cores do Brasil" data-cores="verde,amarelo,livre-coral,livre-turquesa" style="background: linear-gradient(135deg, var(--verde) 50%, var(--amarelo) 50%)"></button>
-      <button class="cor" type="button" aria-pressed="false" aria-label="Cerrado" data-cores="livre-terra,amarelo,verde,livre-terra" style="background: linear-gradient(135deg, var(--livre-terra) 50%, var(--amarelo) 50%)"></button>
-      <button class="cor" type="button" aria-pressed="false" aria-label="Carnaval" data-cores="livre-rosa,livre-roxo,amarelo,livre-turquesa" style="background: linear-gradient(135deg, var(--livre-rosa) 50%, var(--livre-roxo) 50%)"></button>
-      <button class="cor" type="button" aria-pressed="false" aria-label="Litoral" data-cores="livre-turquesa,azul-claro,livre-coral,azul-medio" style="background: linear-gradient(135deg, var(--livre-turquesa) 50%, var(--azul-medio) 50%)"></button>
-      <button class="cor" type="button" aria-pressed="false" aria-label="Frota de empresa" data-cores="azul,azul,branco,azul" style="background: linear-gradient(135deg, var(--azul) 50%, var(--branco) 50%)"></button>
+    <div class="monte">
+      <div class="kits" role="group" aria-label="Escolher o kit da ilustração">
+        <span class="rotulo-monte">Kit</span>
+        <button class="kit-botao" type="button" aria-pressed="true" data-kit="picape" data-frase="Picape de 2 lugares, com caçamba aberta.">Picape <span>2 lugares</span></button>
+        <button class="kit-botao" type="button" aria-pressed="false" data-kit="suv" data-frase="SUV de 5 lugares, com teto e vidros atrás.">SUV <span>5 lugares</span></button>
+        <button class="kit-botao" type="button" aria-pressed="false" data-kit="furgao" data-frase="Furgão de carga, fechado e com porta de correr.">Furgão <span>carga</span></button>
+      </div>
+      <div class="cores" role="group" aria-label="Escolher a cor da ilustração">
+        <span class="rotulo-monte">Cor</span>
+        <button class="cor" type="button" aria-pressed="true" aria-label="Verde mata, teto branco e filete amarelo" data-corpo="verde-mata" data-teto="branco" data-faixa="amarelo-ipe" style="background: linear-gradient(180deg, var(--carro-branco) 34%, var(--carro-verde-mata) 34% 62%, var(--carro-amarelo-ipe) 62% 70%, var(--carro-verde-mata) 70%)"></button>
+        <button class="cor" type="button" aria-pressed="false" aria-label="Azul noite, teto branco" data-corpo="azul-noite" data-teto="branco" data-faixa="azul-noite" style="background: linear-gradient(180deg, var(--carro-branco) 34%, var(--carro-azul-noite) 34%)"></button>
+        <button class="cor" type="button" aria-pressed="false" aria-label="Terracota, teto branco" data-corpo="terracota" data-teto="branco" data-faixa="terracota" style="background: linear-gradient(180deg, var(--carro-branco) 34%, var(--carro-terracota) 34%)"></button>
+        <button class="cor" type="button" aria-pressed="false" aria-label="Areia, teto grafite" data-corpo="areia" data-teto="grafite" data-faixa="areia" style="background: linear-gradient(180deg, var(--carro-grafite) 34%, var(--carro-areia) 34%)"></button>
+        <button class="cor" type="button" aria-pressed="false" aria-label="Amarelo ipê, teto grafite" data-corpo="amarelo-ipe" data-teto="grafite" data-faixa="amarelo-ipe" style="background: linear-gradient(180deg, var(--carro-grafite) 34%, var(--carro-amarelo-ipe) 34%)"></button>
+        <button class="cor" type="button" aria-pressed="false" aria-label="Prata, teto grafite" data-corpo="prata" data-teto="grafite" data-faixa="prata" style="background: linear-gradient(180deg, var(--carro-grafite) 34%, var(--carro-prata) 34%)"></button>
+        <button class="cor" type="button" aria-pressed="false" aria-label="Branco, teto grafite" data-corpo="branco" data-teto="grafite" data-faixa="branco" style="background: linear-gradient(180deg, var(--carro-grafite) 34%, var(--carro-branco) 34%)"></button>
+      </div>
+      <div class="kits">
+        <span class="rotulo-monte">Extra</span>
+        <button class="kit-botao adesivo-botao" type="button" aria-pressed="false" data-frase="Com adesivo de marca.">Adesivo de marca</button>
+      </div>
+      <p class="escolha" aria-live="polite">Picape de 2 lugares, com caçamba aberta. Verde mata, teto branco e filete amarelo.</p>
     </div>
-    <p class="legenda-ilustra" style="margin-top: var(--espaco-2)">Ilustração. Toque numa cor para trocar os painéis. Quem desenha o carro de verdade são as equipes.</p>
+    <p class="legenda-ilustra" style="margin-top: var(--espaco-2)">Ilustração. Troque o kit, a cor e o adesivo. Quem desenha o carro de verdade são as equipes.</p>
 
     <div class="capa-acoes">
       <a class="botao verde" href="#calculadora">Ver de onde vem o dinheiro</a>
@@ -429,12 +507,27 @@
 <gr-rodape></gr-rodape>
 <script>
 (() => {
-  // Ilustração: troca as cores dos painéis
-  const paineis = ["p-capo", "p-cabine", "p-cacamba", "p-porta"].map((id) => document.getElementById(id));
+  // Ilustração: troca o kit e a cor do carro
+  const carro = document.querySelector(".carro");
+  const botoesKit = [...document.querySelectorAll(".kit-botao[data-kit]")];
+  const botaoAdesivo = document.querySelector(".adesivo-botao");
   const botoesCor = [...document.querySelectorAll(".cor")];
+  const escolha = document.querySelector(".escolha");
+  const marcado = (lista) => lista.find((b) => b.getAttribute("aria-pressed") === "true");
+  const mostrar = () => { escolha.textContent = marcado(botoesKit).dataset.frase + " " + marcado(botoesCor).getAttribute("aria-label") + "." + (carro.dataset.adesivo ? " " + botaoAdesivo.dataset.frase : ""); };
+  botaoAdesivo.addEventListener("click", () => {
+    const ligado = !carro.dataset.adesivo;
+    if (ligado) carro.dataset.adesivo = "sim"; else delete carro.dataset.adesivo;
+    botaoAdesivo.setAttribute("aria-pressed", String(ligado)); mostrar();
+  });
+  const marcar = (lista, b) => lista.forEach((o) => o.setAttribute("aria-pressed", String(o === b)));
+  botoesKit.forEach((b) => b.addEventListener("click", () => {
+    carro.dataset.kit = b.dataset.kit;
+    marcar(botoesKit, b); mostrar();
+  }));
   botoesCor.forEach((b) => b.addEventListener("click", () => {
-    b.dataset.cores.split(",").forEach((c, i) => paineis[i].setAttribute("fill", "var(--" + c + ")"));
-    botoesCor.forEach((o) => o.setAttribute("aria-pressed", String(o === b)));
+    for (const parte of ["corpo", "teto", "faixa"]) carro.style.setProperty("--" + parte, "var(--carro-" + b.dataset[parte] + ")");
+    marcar(botoesCor, b); mostrar();
   }));
 
   // Calculadora: imposto mínimo de referência sobre o patrimônio
