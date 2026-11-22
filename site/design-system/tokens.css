@@ -20,7 +20,24 @@
   --branco-vidro: rgba(255, 255, 255, .08); /* cartão claro sobre fundo azul */
   --branco-vidro-forte: rgba(255, 255, 255, .35); /* borda clara sobre fundo azul */
 
-  /* Cores livres: personalização e diversidade (ex.: painéis do Desafio Dumont).
+  /* Carro do Desafio Dumont: cores de carro de verdade, com tom sóbrio.
+     Só para ilustração, nunca para texto. */
+  --carro-verde-mata: #2f5d46;
+  --carro-azul-noite: #1f3550;
+  --carro-areia: #c9b99a;
+  --carro-terracota: #a3583b;
+  --carro-prata: #a7adb3;
+  --carro-branco: #eeede8;
+  --carro-amarelo-ipe: #d6a52c;
+  --carro-grafite: #2b2f33;   /* compósito sem pintura: para-choque, caixa de roda, teto */
+  --carro-pneu: #1a1d20;
+  --carro-aro: #8e959d;
+  --carro-aro-claro: #d2d6db;
+  --carro-vidro: #2e3c4c;
+  --carro-farol: #f6f3e8;
+  --carro-lanterna: #b3261e;
+
+  /* Cores livres: personalização e diversidade (ex.: miniaturas da galeria).
      Só para ilustração e destaque, nunca para texto. */
   --livre-coral: #ff7a45;
   --livre-rosa: #ff5fa2;
