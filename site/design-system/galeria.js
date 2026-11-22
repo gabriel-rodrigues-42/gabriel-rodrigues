@@ -2,7 +2,7 @@
 // status (no ar ou em construção) e um medidor de fase. Usada na página inicial e em /projetos/.
 //
 // Uso, no <head> (sem defer), depois de tokens.css e componentes.css:
-//   <link rel="stylesheet" href="/design-system/galeria.css">
+//   <link rel="stylesheet" href="/design-system/galeria.css?v=2026-11-22">
 //   <script src="/projetos/propostas.js"></script>
 //   <script src="/design-system/galeria.js"></script>
 // e no corpo: <gr-propostas></gr-propostas>

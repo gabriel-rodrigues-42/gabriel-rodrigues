@@ -30,10 +30,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap">
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="componentes.css">
-<link rel="stylesheet" href="/design-system/moldura.css">
+<link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-22">
 <script src="/design-system/moldura.js"></script>
 <link rel="stylesheet" href="/design-system/cidade.css">
-<link rel="stylesheet" href="/design-system/galeria.css">
+<link rel="stylesheet" href="/design-system/galeria.css?v=2026-11-22">
 <script src="/design-system/cidade.js" defer></script>
 <style>
   main { max-width: 960px; margin: 0 auto; padding: var(--espaco-7) var(--espaco-4) var(--espaco-7); }
@@ -135,7 +135,7 @@
     <li class="slot" data-cor="roxo"><a href="/ideias/"><div class="slot-palco"><img src="/projetos/img/ideia.svg" alt="" width="700" height="560" loading="lazy"><span class="slot-tipo">Ideia</span><span class="slot-status">Em construção</span></div><div class="slot-corpo"><strong class="slot-titulo">Cartão em construção</strong><p class="slot-gancho">Fase 1 a 3: barras amarelas mostram até onde a proposta chegou.</p><div class="slot-fase"><span class="slot-barras" role="img" aria-label="Fase 1 de 4: Ideia"><i class="cheia"></i><i></i><i></i><i></i></span><span class="slot-fase-nome">Ideia</span></div></div><span class="slot-ir" aria-hidden="true"></span></a></li>
   </ul>
   <p>Miniaturas: ilustração editorial plana, em SVG (700x560, fundo transparente). Formas geométricas simples, sem brilho, sem volume 3D e sem texto, só com as cores de <code>tokens.css</code>. Para uma proposta nova, escreva o desenho em <code>scripts/miniaturas/desenhar.py</code> e rode o script: ele salva em <code>/projetos/img/</code>.</p>
-  <code class="bloco">&lt;link rel="stylesheet" href="/design-system/galeria.css"&gt;
+  <code class="bloco">&lt;link rel="stylesheet" href="/design-system/galeria.css?v=2026-11-22"&gt;
 &lt;script src="/projetos/propostas.js"&gt;&lt;/script&gt;
 &lt;script src="/design-system/galeria.js"&gt;&lt;/script&gt;
 &lt;gr-propostas&gt;&lt;/gr-propostas&gt;</code>
@@ -146,7 +146,7 @@
   <p>Os scripts ficam em <a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/tree/main/videos/blender"><code>videos/blender/</code></a>.</p>
 
   <h2>Como usar</h2>
-  <code class="bloco">&lt;link rel="stylesheet" href="/design-system/tokens.css"&gt;
+  <code class="bloco">&lt;link rel="stylesheet" href="/design-system/tokens.css?v=2026-11-22"&gt;
 &lt;link rel="stylesheet" href="/design-system/componentes.css"&gt;</code>
   <p>Regra única: use sempre as variáveis de <code>tokens.css</code>. Se precisar de uma cor ou forma nova, adicione lá primeiro.</p>
 </main>
