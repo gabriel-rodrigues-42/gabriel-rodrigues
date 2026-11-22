@@ -54,7 +54,7 @@ gr-propostas { display: block; }
 .slot:not(.slot-destaque) .slot-status { top: auto; bottom: var(--espaco-2); left: var(--espaco-2); right: auto; }
 
 .slot-corpo { display: flex; flex-direction: column; gap: var(--espaco-2); padding: var(--espaco-3) var(--espaco-3) var(--espaco-4); flex: 1; }
-.slot-titulo { color: var(--azul); font-size: var(--tamanho-2); line-height: 1.25; font-weight: 900; }
+.slot-titulo { color: var(--azul); font-size: var(--tamanho-2); line-height: 1.25; font-weight: 900; text-wrap: balance; }
 .slot-gancho {
   margin: 0; color: var(--texto-suave); font-size: var(--tamanho-1); line-height: 1.45;
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden;

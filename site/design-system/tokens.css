@@ -54,6 +54,9 @@
   --tamanho-4: 22px;
   --tamanho-5: clamp(28px, 6vw, 40px);
   --tamanho-6: clamp(32px, 7vw, 48px);
+  /* Título dentro de cartão estreito (ex.: ideia com botão ao lado). Menor no
+     celular para "Reindustrializar" caber inteiro numa linha de 360px. */
+  --tamanho-titulo-cartao: clamp(24px, 6vw, 40px);
 
   /* Espaços (escala de 4) */
   --espaco-1: 4px;
