@@ -229,10 +229,25 @@ def brasil_responde():
                celular + perguntas + balao + seta + barras + chao(470, 412, 200) + congresso(570, 412, .62))
 
 
+def pena_do_tamanho_do_dano():
+    """Balança: moedas de um lado, casas de famílias do outro; ao fundo, degraus que sobem."""
+    degraus = "".join(ret(430 + i * 46, 412 - (i + 1) * 46, 46, (i + 1) * 46, "azul-claro", 6) for i in range(5))
+    poste = ret(343, 150, 14, 262, "azul") + ret(290, 400, 120, 16, "azul", 8) + circ(350, 150, 16, "amarelo-escuro")
+    braco = traco("M170,190 L530,140", "azul", 12)
+    fio_e = traco("M170,190 L130,290 M170,190 L210,290", "azul-medio", 5)
+    fio_d = traco("M530,140 L490,240 M530,140 L570,240", "azul-medio", 5)
+    prato_e = cam("M110,290 h120 a60,26 0 0 1 -120,0 Z", "azul-medio")
+    prato_d = cam("M470,240 h120 a60,26 0 0 1 -120,0 Z", "azul-medio")
+    moedas = "".join(ret(132 + (i % 3) * 26, 276 - (i // 3) * 16, 24, 14, "amarelo" if i % 2 else "amarelo-escuro", 7) for i in range(9))
+    casas = casa(482, 238, 36, corpo="verde", telhado="azul", janela="amarelo") + casa(530, 238, 36, corpo="livre-turquesa", telhado="azul", janela="amarelo")
+    return svg("Balança com moedas de um lado e casas de famílias do outro, diante de degraus que sobem",
+               degraus + chao(80, 412, 540) + poste + braco + fio_e + fio_d + moedas + prato_e + casas + prato_d)
+
+
 DESENHOS = {
     "galera-club": galera_club, "reindustrializacao": reindustrializacao, "desafio-dumont": desafio_dumont,
     "cartorio-digital": cartorio_digital, "qual-caminho": qual_caminho, "leis-com-mentalidade-de-software": leis_software,
-    "canal-do-youtube": canal_do_youtube, "brasil-responde": brasil_responde, "ideia": ideia, "capa": capa,
+    "canal-do-youtube": canal_do_youtube, "brasil-responde": brasil_responde, "pena-do-tamanho-do-dano": pena_do_tamanho_do_dano, "ideia": ideia, "capa": capa,
 }
 
 if __name__ == "__main__":
