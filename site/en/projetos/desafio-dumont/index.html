@@ -89,7 +89,7 @@
   .cor[aria-pressed="true"] { outline: 3px solid var(--azul); outline-offset: 2px; }
   .cor:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
   .carro .adesivo, .carro .adesivo-grande { transition: opacity .35s ease; opacity: 0; visibility: hidden; }
-  .carro[data-adesivo="logo"] .adesivo[data-adesivo="logo"], .carro[data-adesivo="completo"] .adesivo[data-adesivo="completo"] { opacity: 1; visibility: visible; }
+  .carro[data-adesivo="completo"] .adesivo[data-adesivo="completo"] { opacity: 1; visibility: visible; }
   .carro[data-adesivo="completo"][data-kit="furgao"] .adesivo-grande { opacity: 1; visibility: visible; }
   .escolha { font-size: var(--tamanho-2); color: var(--texto-suave); text-align: center; margin: 0; min-height: 3em; }
 
@@ -237,10 +237,6 @@
       <g fill="var(--carro-aro-claro)"><circle cx="170" cy="194" r="15"/><circle cx="470" cy="194" r="15"/></g>
       <g fill="var(--carro-aro)"><circle cx="170" cy="194" r="5"/><circle cx="470" cy="194" r="5"/></g>
       <!-- Adesivos de marca fictícia: o painel vira espaço de propaganda, em área lisa -->
-      <g class="adesivo" data-adesivo="logo">
-        <circle cx="285" cy="166" r="10" fill="var(--carro-branco)"/>
-        <circle cx="285" cy="166" r="7.5" fill="var(--verde)"/><path d="M281 168 L 285 161.5 L 289 168 Z" fill="var(--amarelo)"/>
-      </g>
       <g class="adesivo" data-adesivo="completo" font-family="Nunito, sans-serif" font-weight="900" fill="var(--azul)">
         <rect x="237" y="139" width="98" height="36" rx="8" fill="var(--carro-branco)" stroke="var(--carro-grafite)" stroke-opacity=".25"/>
         <circle cx="252" cy="157" r="9" fill="var(--verde)"/><path d="M247 160 L 252 152 L 257 160 Z" fill="var(--amarelo)"/>
@@ -278,11 +274,10 @@
         <button class="cor" type="button" aria-pressed="false" aria-label="Silver, graphite roof" data-corpo="prata" data-teto="grafite" data-faixa="prata" style="background: linear-gradient(180deg, var(--carro-grafite) 34%, var(--carro-prata) 34%)"></button>
         <button class="cor" type="button" aria-pressed="false" aria-label="White, graphite roof" data-corpo="branco" data-teto="grafite" data-faixa="branco" style="background: linear-gradient(180deg, var(--carro-grafite) 34%, var(--carro-branco) 34%)"></button>
       </div>
-      <div class="kits" role="group" aria-label="Brand sticker">
-        <span class="rotulo-monte">Brand sticker</span>
+      <div class="kits" role="group" aria-label="Your brand">
+        <span class="rotulo-monte">Your brand</span>
         <button class="kit-botao adesivo-botao" type="button" aria-pressed="true" data-adesivo="" data-frase="">No sticker</button>
-        <button class="kit-botao adesivo-botao" type="button" aria-pressed="false" data-adesivo="logo" data-frase="With a small logo sticker.">Small logo</button>
-        <button class="kit-botao adesivo-botao" type="button" aria-pressed="false" data-adesivo="completo" data-frase="With a full sticker, with text.">Logo and text</button>
+        <button class="kit-botao adesivo-botao" type="button" aria-pressed="false" data-adesivo="completo" data-frase="With a brand sticker.">With sticker</button>
       </div>
       <p class="escolha" aria-live="polite">Two-seat pickup with an open bed. Forest green, white roof and yellow pinstripe.</p>
     </div>
