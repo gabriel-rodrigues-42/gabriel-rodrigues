@@ -32,7 +32,7 @@ Os detalhes e como eu reviso estão em **[CONTRIBUTING.md](CONTRIBUTING.md)**.
   - **site/en/**: a versão em inglês.
 - **functions/** e **db/**: o formulário de apoio do site (Cloudflare Pages Functions e D1).
 - **scripts/**: geração dos dados do questionário e das miniaturas das propostas.
-- **videos/**: roteiros e cenas em stop motion de massinha, feitas no Blender por scripts Python.
+- **videos/estudio/**: estúdio para gravar os vídeos em blocos, com teleprompter, etiquetas e montagem com ffmpeg.
 
 ## Ver o site localmente
 
@@ -45,13 +45,10 @@ Abra http://localhost:8000. As regras de código, texto e acessibilidade estão 
 ## Fazer um vídeo
 
 ```bash
-uv venv -p 3.13 .bpy && VIRTUAL_ENV=.bpy uv pip install bpy==5.2.4   # Blender como módulo Python, uma vez
-.bpy/bin/python videos/blender/cenas/como_nasce_uma_lei.py -- --still 60 --res 960 540 --samples 24   # um quadro
-.bpy/bin/python videos/blender/cenas/como_nasce_uma_lei.py -- --res 1920 1080 --samples 80 --out videos/out/renders/lei
-.claude/skills/blender-claymation/scripts/encode.sh videos/out/renders/lei videos/out/lei.mp4
+python3 videos/estudio/estudio.py      # abre http://localhost:8010
 ```
 
-O passo a passo completo está em `.claude/skills/novo-video/SKILL.md`. As cenas usam a skill [blender-claymation](https://github.com/angrypenguinpng/blender-claymation-skill) (MIT).
+O passo a passo completo está em [videos/estudio/README.md](videos/estudio/README.md).
 
 ## Em inglês
 
