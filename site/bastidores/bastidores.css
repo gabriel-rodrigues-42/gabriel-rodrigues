@@ -1,0 +1,56 @@
+/* Bastidores: aviso, "senha" e a leitura dos blocos e roteiros do estúdio. Usado em /bastidores/ e /en/bastidores/. */
+main { max-width: 760px; margin: 0 auto; padding: var(--espaco-7) var(--espaco-4); }
+main h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); text-wrap: balance; }
+main h2 { font-size: var(--tamanho-5); line-height: 1.15; color: var(--azul); margin: var(--espaco-6) 0 var(--espaco-2); text-wrap: balance; }
+main h1:focus, main h2:focus { outline: none; }
+.lead { font-size: var(--tamanho-3); color: var(--texto-suave); }
+main a { color: var(--azul); }
+.acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-3); margin-top: var(--espaco-5); }
+.meta { font-size: var(--tamanho-1); color: var(--texto-suave); }
+
+/* Recado bem-humorado para quem mexe na URL, no console ou no DevTools */
+.piada { background: var(--amarelo-claro); color: var(--texto); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); font-weight: var(--peso-forte); margin: 0 0 var(--espaco-4); }
+
+/* "Senha" */
+.senha label { display: block; font-weight: var(--peso-forte); margin: var(--espaco-4) 0 var(--espaco-2); }
+.senha .linha { display: flex; flex-wrap: wrap; gap: var(--espaco-3); }
+.senha input { font: inherit; color: var(--texto); background-color: var(--branco); border: 2px solid var(--azul-claro); padding: 10px 14px; border-radius: var(--forma-opcao); flex: 1 1 160px; min-width: 0; }
+.senha input:focus { outline: none; border-color: var(--azul); }
+.senha .resposta { min-height: 1.5em; font-weight: var(--peso-forte); color: var(--azul); }
+.link-botao { font: inherit; background: none; border: none; padding: 0; color: var(--azul); text-decoration: underline; cursor: pointer; }
+.link-botao:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+
+/* Roteiros */
+.roteiro { padding: var(--espaco-4); margin-top: var(--espaco-3); }
+.roteiro summary { cursor: pointer; display: grid; gap: var(--espaco-1); }
+.roteiro summary strong { font-size: var(--tamanho-3); color: var(--azul); line-height: 1.25; }
+.roteiro summary:focus-visible { outline: 3px solid var(--azul); outline-offset: 4px; border-radius: 4px; }
+.passos { padding-left: var(--espaco-5); margin: var(--espaco-4) 0 0; display: grid; gap: var(--espaco-4); }
+.passos li::marker { font-weight: var(--peso-forte); color: var(--azul); }
+.passo-topo { display: flex; flex-wrap: wrap; align-items: center; gap: var(--espaco-2); }
+.passo-topo .selo { padding: 3px 10px; }
+.passo-titulo { font-weight: var(--peso-forte); }
+.fala { margin: var(--espaco-2) 0 0; padding-left: var(--espaco-3); border-left: 4px solid var(--verde); font-size: var(--tamanho-3); }
+.descricao { margin: var(--espaco-2) 0 0; padding-left: var(--espaco-3); border-left: 4px solid var(--amarelo); color: var(--texto-suave); }
+
+/* Blocos */
+.filtros { display: flex; flex-wrap: wrap; gap: var(--espaco-2); margin: var(--espaco-4) 0; }
+.filtro { font: inherit; font-size: var(--tamanho-2); cursor: pointer; background: var(--branco); color: var(--azul); border: 2px solid var(--azul-claro); border-radius: var(--forma-pilula); padding: 6px 12px; }
+.filtro[aria-pressed="true"] { background: var(--azul); border-color: var(--azul); color: var(--branco); }
+.filtro:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+.lista-blocos { display: grid; gap: var(--espaco-3); }
+.bloco { padding: var(--espaco-4); }
+.bloco h3 { font-size: var(--tamanho-3); color: var(--azul); margin: var(--espaco-2) 0 0; line-height: 1.25; }
+.detalhes { display: grid; grid-template-columns: max-content 1fr; gap: var(--espaco-1) var(--espaco-3); font-size: var(--tamanho-2); margin: var(--espaco-3) 0 0; }
+.detalhes dt { font-weight: var(--peso-forte); }
+.detalhes dd { margin: 0; color: var(--texto-suave); min-width: 0; }
+.tags { display: flex; flex-wrap: wrap; gap: var(--espaco-2); margin: var(--espaco-3) 0 0; }
+.tag { font-size: var(--tamanho-1); color: var(--verde-escuro); font-weight: var(--peso-forte); }
+
+@media (max-width: 420px) {
+  .detalhes { grid-template-columns: 1fr; }
+  .detalhes dd { margin-bottom: var(--espaco-2); }
+}
+
+/* Texto longo (URL, id) nunca empurra a página para o lado */
+main, .cartao, .fala, .descricao, .detalhes dd { overflow-wrap: anywhere; }

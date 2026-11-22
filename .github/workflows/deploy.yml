@@ -38,6 +38,9 @@ jobs:
             npx --yes wrangler@3 pages project create "$PROJECT" --production-branch=main
           fi
 
+      - name: Juntar blocos e roteiros do estúdio para /bastidores/
+        run: python3 scripts/bastidores/juntar.py
+
       - name: Publicar a pasta site/
         id: deploy
         env:

@@ -34,6 +34,7 @@ Não há pedido de voto. As propostas estão em construção, com dados, fontes 
 ## Optional
 
 - [Privacidade](https://gabriel-rodrigues.com/privacidade/): quais dados o site guarda, para quê e como pedir para apagar
+- [Bastidores](https://gabriel-rodrigues.com/bastidores/): as falas e os roteiros que o Gabriel usa para gravar os vídeos, só para leitura. Não é conteúdo principal; a "senha" do aviso é pública (42)
 - [Design system](https://gabriel-rodrigues.com/design-system/): cores, formas e componentes do site e dos vídeos
 - [Código aberto no GitHub](https://github.com/gabriel-rodrigues-42/gabriel-rodrigues)
 - [Como contribuir](https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/CONTRIBUTING.md): como mandar uma proposta nova ou melhorar uma existente pelos formulários de issue do GitHub, com fonte e ano, dados, impacto e sem apontar o dedo

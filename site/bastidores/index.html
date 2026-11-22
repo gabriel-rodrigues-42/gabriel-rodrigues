@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bastidores: não é segredo, só não é a parte principal do site. Fica fora do menu, do sitemap e da busca. -->
+<meta name="robots" content="noindex">
+<title>Bastidores · Gabriel Rodrigues</title>
+<meta name="description" content="As falas e os roteiros que o Gabriel usa para gravar os vídeos, só para leitura. Não é a parte principal do site.">
+<link rel="canonical" href="https://gabriel-rodrigues.com/bastidores/">
+<link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/bastidores/">
+<link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/bastidores/">
+<link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/bastidores/">
+<meta name="author" content="Gabriel Rodrigues">
+<meta name="theme-color" content="#fbf8ef">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:site_name" content="Gabriel Rodrigues">
+<meta property="og:url" content="https://gabriel-rodrigues.com/bastidores/">
+<meta property="og:title" content="Bastidores · Gabriel Rodrigues">
+<meta property="og:description" content="As falas e os roteiros que o Gabriel usa para gravar os vídeos, só para leitura.">
+<meta property="og:image" content="https://gabriel-rodrigues.com/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bastidores · Gabriel Rodrigues">
+<meta name="twitter:description" content="As falas e os roteiros que o Gabriel usa para gravar os vídeos, só para leitura.">
+<link rel="stylesheet" href="/design-system/tokens.css?v=2026-11-22">
+<link rel="stylesheet" href="/design-system/componentes.css">
+<link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-22">
+<script src="/design-system/moldura.js"></script>
+<link rel="stylesheet" href="/bastidores/bastidores.css">
+<script src="/bastidores/bastidores.js" defer></script>
+</head>
+<body>
+<gr-cabecalho></gr-cabecalho>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
+<main>
+  <p id="piada" class="piada" role="status" hidden></p>
+
+  <section id="aviso" aria-labelledby="titulo-aviso">
+    <span class="selo azul">Bastidores</span>
+    <h1 id="titulo-aviso" tabindex="-1">Você achou os <span class="destaque">bastidores</span></h1>
+    <p class="lead">Aqui ficam umas coisinhas que me ajudam a gravar os vídeos: as falas que eu repito e a ordem de cada vídeo.</p>
+    <p>Não é a parte principal do site. Se você veio atrás das propostas, elas estão em <a href="/projetos/">Propostas</a>.</p>
+    <p id="sem-js">Para ver os bastidores, ative o JavaScript do navegador.</p>
+    <div class="acoes">
+      <button id="botao-certeza" class="botao" type="button">Tenho certeza, quero ver</button>
+      <a class="botao secundario" href="/projetos/">Me leva para as propostas</a>
+    </div>
+  </section>
+
+  <section id="senha" class="senha" aria-labelledby="titulo-senha" hidden>
+    <span class="selo azul">Bastidores</span>
+    <h1 id="titulo-senha" tabindex="-1">Só mais uma coisa: qual é a senha?</h1>
+    <p class="lead">Não é segredo. A dica está no nome do meu GitHub.</p>
+    <form id="form-senha" toolname="entrar_bastidores" tooldescription="Entra na página de bastidores do Gabriel, que mostra só para leitura as falas e os roteiros dos vídeos. A senha é pública e está no código: 42.">
+      <label for="campo-senha">Senha</label>
+      <div class="linha">
+        <input id="campo-senha" name="senha" autocomplete="off" autocapitalize="off" spellcheck="false" toolparamdescription="A senha de brincadeira, que é 42.">
+        <button class="botao" type="submit">Entrar</button>
+      </div>
+      <p id="resposta-senha" class="resposta" aria-live="polite"></p>
+      <button id="botao-revelar" class="link-botao" type="button">Não sei a senha</button>
+    </form>
+  </section>
+
+  <section id="conteudo" aria-labelledby="titulo-conteudo" hidden>
+    <span class="selo azul">Bastidores</span>
+    <h1 id="titulo-conteudo" tabindex="-1">Como eu monto os vídeos</h1>
+    <p class="lead">Cada vídeo é feito de blocos: falas que eu gravo para a câmera e animações feitas a partir dos números. Tudo aqui é só para ler.</p>
+    <p>Os números das animações seguem a regra do site: fonte oficial e ano. O código fica no <a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/tree/main/videos/estudio">GitHub, na pasta do estúdio</a>.</p>
+    <p id="status" class="meta" role="status"></p>
+
+    <h2>Roteiros (<span id="contagem-roteiros">0</span>)</h2>
+    <p>Cada vídeo é uma lista de blocos, na ordem. Um bloco pode entrar em vários vídeos.</p>
+    <div id="lista-roteiros"></div>
+
+    <h2>Blocos (<span id="contagem-blocos">0</span>)</h2>
+    <p>Toque numa etiqueta para ver só os blocos dela.</p>
+    <div id="filtros" class="filtros" role="group" aria-label="Filtrar blocos por etiqueta"></div>
+    <div id="lista-blocos" class="lista-blocos"></div>
+  </section>
+</main>
+<gr-rodape></gr-rodape>
+</body>
+</html>
