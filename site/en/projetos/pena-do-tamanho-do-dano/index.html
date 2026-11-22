@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A sentence the size of the harm · Gabriel Rodrigues</title>
+<meta name="description" content="Measuring stolen public money in Bolsa Família payments and making the prison sentence for corruption grow in steps with the harm. With a calculator, a comparison with other countries and the criticism.">
+<link rel="canonical" href="https://gabriel-rodrigues.com/en/projetos/pena-do-tamanho-do-dano/">
+<link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/projetos/pena-do-tamanho-do-dano/">
+<link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/pena-do-tamanho-do-dano/">
+<link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/projetos/pena-do-tamanho-do-dano/">
+<meta name="author" content="Gabriel Rodrigues">
+<meta name="theme-color" content="#fbf8ef">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:site_name" content="Gabriel Rodrigues">
+<meta property="og:url" content="https://gabriel-rodrigues.com/en/projetos/pena-do-tamanho-do-dano/">
+<meta property="og:title" content="A sentence the size of the harm · Gabriel Rodrigues">
+<meta property="og:description" content="Every R$ 690 stolen is one family's Bolsa Família for a month. The idea: measure the harm that way and make the sentence grow with it.">
+<meta property="og:image" content="https://gabriel-rodrigues.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gabriel Rodrigues, software engineering in the service of Brazil">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="A sentence the size of the harm · Gabriel Rodrigues">
+<meta name="twitter:description" content="Every R$ 690 stolen is one family's Bolsa Família for a month. The idea: measure the harm that way and make the sentence grow with it.">
+<meta name="twitter:image" content="https://gabriel-rodrigues.com/og.jpg">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "A sentence the size of the harm: corruption measured in Bolsa Família payments",
+ "description": "Measuring stolen public money in Bolsa Família payments and making the prison sentence for corruption grow in steps with the harm.",
+ "inLanguage": "en",
+ "image": "https://gabriel-rodrigues.com/og.jpg",
+ "author": { "@type": "Person", "name": "Gabriel Rodrigues", "url": "https://gabriel-rodrigues.com/en/" },
+ "mainEntityOfPage": "https://gabriel-rodrigues.com/en/projetos/pena-do-tamanho-do-dano/",
+ "datePublished": "2026-11-22"
+}
+</script>
+<link rel="stylesheet" href="/design-system/tokens.css">
+<link rel="stylesheet" href="/design-system/componentes.css">
+<link rel="stylesheet" href="/design-system/moldura.css">
+<script src="/design-system/moldura.js"></script>
+<link rel="stylesheet" href="/design-system/contribuir.css">
+<script src="/design-system/contribuir.js"></script>
+<link rel="stylesheet" href="/projetos/pena-do-tamanho-do-dano/pagina.css">
+<script src="/projetos/pena-do-tamanho-do-dano/calculadora.js" defer></script>
+</head>
+<body>
+<gr-cabecalho></gr-cabecalho>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
+<main>
+  <nav><a href="/en/projetos/">← Proposals</a></nav>
+  <header>
+    <span class="selo" style="margin-top: var(--espaco-5)">Idea</span>
+    <h1>Every R$ 690 stolen is the Bolsa Família of <span class="destaque">one family for a month.</span></h1>
+    <p class="lead">That was the average payment in February 2026, to 18.84 million families (Ministry of Development and Social Assistance). Bolsa Família is Brazil's cash transfer program for low-income families. Measuring corruption this way helps everyone grasp the size of the harm.</p>
+    <p>The idea started simple: every Bolsa Família payment stolen means one more month in prison. I did the math and it breaks down early. This page shows where it breaks, how other countries do it, and a version that keeps the spirit of the idea.</p>
+    <div class="capa-acoes">
+      <a class="botao verde" href="#calculadora">Do the math</a>
+      <a class="botao secundario" href="#criticas">Skip to the criticism</a>
+    </div>
+  </header>
+
+  <section class="capitulo revelar" id="calculadora">
+    <span class="ato">Chapter 1 · Do the math</span>
+    <h2>Move the values and compare three rules</h2>
+    <p>Choose how much was stolen and what happened in the case. The calculator shows the sentence under today's law, under the straight math (one month per Bolsa Família payment) and under the step proposal.</p>
+    <div class="cartao calc">
+      <label class="controle" for="valor">
+        <span>Public money stolen</span>
+        <output id="valor-saida" for="valor">R$ 250 thousand</output>
+      </label>
+      <input type="range" id="valor" min="0" max="140" step="1" value="48" aria-describedby="equivale">
+      <p class="equivale" id="equivale" aria-live="polite"></p>
+
+      <details class="ajustes">
+        <summary>Adjust the rules</summary>
+        <label class="controle" for="meses">
+          <span>Straight math: months in prison per payment</span>
+          <output id="meses-saida" for="meses">1 month</output>
+        </label>
+        <input type="range" id="meses" min="1" max="20" step="1" value="10">
+        <label class="controle" for="passo">
+          <span>Steps: extra years for every 10 times more money</span>
+          <output id="passo-saida" for="passo">2 years</output>
+        </label>
+        <input type="range" id="passo" min="1" max="4" step="1" value="2">
+      </details>
+
+      <fieldset class="fatores">
+        <legend>What happened in the case</legend>
+        <label class="marcar"><input type="checkbox" id="f-cargo"> The person held a management or appointed position <small>+1/3, already law (Penal Code, art. 327, § 2)</small></label>
+        <label class="marcar"><input type="checkbox" id="f-calamidade"> It happened during a public disaster, like a flood or an epidemic <small>+1/6, already an aggravating factor (art. 61); the law does not say how much, and 1/6 is the share courts use most</small></label>
+        <label class="marcar"><input type="checkbox" id="f-social"> The money was for health, education or social assistance <small>+1/3, new proposal, only in the two new rules</small></label>
+        <label class="marcar"><input type="checkbox" id="f-devolveu"> Paid it all back before being charged <small>−1/3, already law (art. 16, which allows a cut of 1/3 to 2/3)</small></label>
+      </fieldset>
+
+      <div class="resultados" aria-live="polite">
+        <div class="regra" id="r-hoje"><div class="cabeca"><b>Today's law</b><span class="anos"></span></div><div class="trilho"><div class="faixa"></div></div><small>Embezzlement and bribery: 2 to 12 years. The judge chooses within the range, and the amount is only one of the things weighed.</small></div>
+        <div class="regra" id="r-direta"><div class="cabeca"><b>Straight math</b><span class="anos"></span></div><div class="trilho"><div class="faixa"></div></div><small class="nota"></small></div>
+        <div class="regra destaque-regra" id="r-degraus"><div class="cabeca"><b>Step proposal</b><span class="anos"></span></div><div class="trilho"><div class="faixa"></div></div><small class="nota"></small></div>
+        <div class="escala" aria-hidden="true"><span>0</span><span>10</span><span>20</span><span>30</span><span>40 years</span></div>
+      </div>
+      <p class="pequeno suave" style="margin: var(--espaco-4) 0 0">Reference payment: R$ 690.01 (Ministry of Development and Social Assistance, February 2026). 40-year cap: Penal Code, art. 75. Under any rule, people who do not pay the money back stay in closed prison (art. 33, § 4). The calculator is a simulation for debate, not a sentence.</p>
+    </div>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Chapter 2 · How it works today</span>
+    <h2>The law already punishes, but the amount counts for little and loosely</h2>
+    <ol class="fluxo">
+      <li><span class="n">1</span><div><strong>The crime carries 2 to 12 years</strong>It applies to whoever steals public money (embezzlement), to the public official who takes a bribe and to whoever offers it. Stealing R$ 5 thousand or R$ 500 million makes no difference: the range is the same.<br><span class="trava">Bottleneck: the range does not grow with the harm</span></div></li>
+      <li><span class="n">2</span><div><strong>The judge works out the sentence</strong>They look at eight points, such as guilt, motives and the "consequences of the crime" (Penal Code, art. 59). The harm comes in there, but each judge decides how much it weighs.<br><span class="trava">Bottleneck: similar cases can get very different sentences</span></div></li>
+      <li><span class="n">3</span><div><strong>No repayment, no way out of closed prison</strong>In crimes against public administration, the prisoner only moves to a semi-open regime after paying back what was stolen (art. 33, § 4). The judge can also seize assets the person cannot explain (art. 91-A).</div></li>
+      <li><span class="n">4</span><div><strong>Outside criminal court</strong>The Administrative Misconduct Act recovers the money, removes the official from office and suspends political rights, but does not lead to prison. The Anti-Corruption Act fines companies up to 20% of revenue.<br><span class="trava">Bottleneck: long cases and the risk of the statute of limitations running out</span></div></li>
+    </ol>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Chapter 3 · The numbers</span>
+    <h2>Three numbers to understand the math</h2>
+    <div class="numeros">
+      <div class="cartao"><strong>R$ 690.01</strong>was the average Bolsa Família payment per family. The month's total was R$ 13 billion. <span class="fontes">Ministry of Development and Social Assistance, February 2026</span></div>
+      <div class="cartao"><strong>2 to 12 years</strong>in prison for embezzlement and bribery, whatever the amount. <span class="fontes">Penal Code, arts. 312, 317 and 333 (Law 10,763/2003)</span></div>
+      <div class="cartao"><strong>40 years</strong>is the most anyone can serve in prison in Brazil. It used to be 30. <span class="fontes">Penal Code, art. 75 (Law 13,964/2019)</span></div>
+    </div>
+    <p style="margin-top: var(--espaco-4)">How much does Brazil lose to corruption each year? There is no official number. The most quoted estimates come from private groups, such as the São Paulo industry federation (Fiesp), and use perception indexes, not traced money. That is why they are not presented here as fact.</p>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Chapter 4 · Where the straight math breaks</span>
+    <h2>At one month per payment, everyone hits the cap</h2>
+    <p>There are 480 months in 40 years. At R$ 690.01 a month, the math reaches the cap at R$ 331 thousand stolen. From there on, stealing R$ 400 thousand and stealing R$ 1 billion get the same sentence.</p>
+    <div class="barras-capa">
+      <div role="img" aria-label="Chart: under the straight math, R$ 10 thousand gives 1 year and 2 months; R$ 100 thousand gives 12 years; R$ 331 thousand already gives 40 years, the cap; R$ 1 million and R$ 1 billion also give 40 years.">
+        <div class="linha-barra"><span>R$ 10 thousand</span><div class="trilho"><div class="cheio" style="width: 3%"></div></div><b>1 year</b></div>
+        <div class="linha-barra"><span>R$ 100 thousand</span><div class="trilho"><div class="cheio" style="width: 30%"></div></div><b>12 years</b></div>
+        <div class="linha-barra"><span>R$ 331 thousand</span><div class="trilho"><div class="cheio teto" style="width: 100%"></div></div><b>40 years</b></div>
+        <div class="linha-barra"><span>R$ 1 million</span><div class="trilho"><div class="cheio teto" style="width: 100%"></div></div><b>40 years</b></div>
+        <div class="linha-barra"><span>R$ 1 billion</span><div class="trilho"><div class="cheio teto" style="width: 100%"></div></div><b>40 years</b></div>
+      </div>
+      <p class="legenda-ilustra">Years in prison under the straight math, with the R$ 690.01 payment (Ministry of Development and Social Assistance, February 2026) and the 40-year cap (Penal Code, art. 75). My own calculation.</p>
+    </div>
+    <p>There is another problem. Long sentences deter less than they seem to. The US National Institute of Justice sums up the research this way: the chance of being caught deters far more than the size of the punishment (NIJ, 2016). In Brazil, what is most missing is fast trials and keeping cases from expiring.</p>
+  </section>
+
+  <section class="capitulo revelar" id="paises">
+    <span class="ato">Chapter 5 · How other countries do it</span>
+    <h2>Countries that look at the amount use steps, not a straight line</h2>
+    <div class="paises">
+      <article class="cartao pais-cartao">
+        <span class="selo azul">United States</span>
+        <h3>A table with 16 steps</h3>
+        <p>In federal fraud, theft and bribery cases, the judge adds points according to the loss. Each step needs two to three times more money than the one before. The table was updated on November 1, 2026.</p>
+        <ol class="degraus" aria-label="Some steps of the US table">
+          <li><span>more than US$ 9 thousand</span><b>+2 points</b></li>
+          <li><span>more than US$ 150 thousand</span><b>+8</b></li>
+          <li><span>more than US$ 2 million</span><b>+16</b></li>
+          <li><span>more than US$ 35 million</span><b>+22</b></li>
+          <li><span>more than US$ 750 million</span><b>+30</b></li>
+        </ol>
+        <p class="fontes">U.S. Sentencing Commission, amendment 838 to § 2B1.1 (2026)</p>
+      </article>
+      <article class="cartao pais-cartao">
+        <span class="selo">Germany</span>
+        <h3>A large benefit, a longer sentence</h3>
+        <p>An official who takes a bribe gets 6 months to 5 years. If the benefit is "of great magnitude", the case becomes especially serious and the sentence goes from 1 to 10 years. The law does not set the amount: the courts decide.</p>
+        <p class="fontes">German Criminal Code, §§ 332 and 335</p>
+      </article>
+      <article class="cartao pais-cartao contra">
+        <span class="selo amarelo">China and Vietnam</span>
+        <h3>Ranges by amount that reach the death penalty</h3>
+        <p>In China, since 2016, anyone who embezzles or takes 3 million yuan or more can be sentenced to death. Vietnam also has ranges by amount and sentenced a businesswoman to death in 2024. In Brazil, the Constitution forbids the death penalty and life imprisonment (art. 5, XLVII). That path does not work here.</p>
+        <p class="fontes">Time, 2016; Fortune, 2024</p>
+      </article>
+    </div>
+    <p style="margin-top: var(--espaco-4)">The US model is the closest to the idea. It works because it grows slowly: the money has to multiply for the sentence to go up one step. That keeps the cap for the enormous cases.</p>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Chapter 6 · What I propose</span>
+    <h2>Measure in Bolsa Família payments and raise the sentence in steps</h2>
+    <ol class="fluxo">
+      <li><span class="n">1</span><div><strong>The ruling shows the harm in Bolsa Família payments</strong>Every conviction for stealing public money states how many payments that amount would cover, using last year's average. The number goes on the Transparency Portal. It does not change the sentence, but everyone understands the size of the case.</div></li>
+      <li><span class="n">2</span><div><strong>The sentence goes up one step for every 10 times more money</strong>Up to about R$ 69 thousand (100 payments), 2 to 4 years. Every 10 times more, 2 more years. Above R$ 690 million, a new range of 12 to 14 years, and 14 to 16 above R$ 6.9 billion. The judge still chooses within each step.</div></li>
+      <li><span class="n">3</span><div><strong>One third more if the money was for health, education or social assistance</strong>These are the services low-income families depend on most. Today the law does not care where the money came from.</div></li>
+      <li><span class="n">4</span><div><strong>Paying back still pays off</strong>Whoever pays it all back before being charged gets a shorter sentence, as today. Whoever does not pay back stays in closed prison. What is recovered goes to social assistance.</div></li>
+      <li><span class="n">5</span><div><strong>Deadlines for trials</strong>Cases of stolen public money move up the line, with a deadline for each phase. A longer sentence is useless if the case expires before the ruling.</div></li>
+    </ol>
+    <p style="margin-top: var(--espaco-5)">The path is a bill that changes the Penal Code (arts. 312, 317, 327 and 333) and the Code of Criminal Procedure. The steps in reais would be updated every year by the average Bolsa Família payment.</p>
+  </section>
+
+  <section class="capitulo revelar" id="criticas">
+    <span class="ato">Chapter 7 · The criticism</span>
+    <h2>The hardest questions</h2>
+    <p>These are the toughest questions I would expect to hear, and my answers.</p>
+    <details class="critica">
+      <summary>Longer sentences do not solve anything. Brazil's problem is impunity.</summary>
+      <div class="resposta"><p>I agree that certainty of punishment matters more. That is why the proposal has trial deadlines and keeps repayment as the condition to leave closed prison.</p><p>The steps are not about filling prisons. They are so that stealing R$ 500 million does not fit the same range as stealing R$ 5 thousand.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Why measure in Bolsa Família? That mixes two subjects.</summary>
+      <div class="resposta"><p>It is the best-known measure of how much money keeps a family going for a month. The stolen money and the payment come from the same place: the public budget.</p><p>It could be the minimum wage. What matters is swapping "millions" for something people can picture.</p></div>
+    </details>
+    <details class="critica">
+      <summary>This takes away the judge's freedom and could be struck down by the Supreme Court.</summary>
+      <div class="resposta"><p>Automatic math would be struck down. The Constitution requires individual sentencing (art. 5, XLVI), and the Supreme Court has already struck down a sentence out of proportion with the crime (RE 979,962, 2021).</p><p>That is why the proposal uses steps with ranges. The judge still decides within each one, as today.</p></div>
+    </details>
+    <details class="critica">
+      <summary>With bribes, which amount counts? The bribe can be small and the loss huge.</summary>
+      <div class="resposta"><p>The larger of the two counts: the bribe or the loss the contract caused to public money. The loss has to be proven in court, with an expert report or an audit by the audit court.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Keeping someone in prison is expensive for the state.</summary>
+      <div class="resposta"><p>It is. That is why the focus is still on getting the money back and seizing assets. Long sentences are for cases with enormous amounts, which are few.</p></div>
+    </details>
+    <details class="critica">
+      <summary>This will only catch the small fish.</summary>
+      <div class="resposta"><p>The steps do the opposite. Up to R$ 69 thousand, the sentence starts at 2 years, as today. The increase shows up in the large amounts.</p></div>
+    </details>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Chapter 8 · How to measure it</span>
+    <h2>Four numbers to track</h2>
+    <ul>
+      <li><strong>Time to ruling</strong>: how many months a case of stolen public money takes, from charges to trial.</li>
+      <li><strong>Money returned</strong>: what share of the stolen amount goes back to public coffers, case by case.</li>
+      <li><strong>Expired cases</strong>: how many cases die without a trial.</li>
+      <li><strong>Sentences by step</strong>: whether cases with similar amounts get similar sentences.</li>
+    </ul>
+  </section>
+
+  <section class="capitulo revelar conversa">
+    <p class="grande">When you hear that R$ 10 million was stolen, can you picture the size? What if they said 14 thousand Bolsa Família payments?</p>
+    <div class="hashtags"><span class="hashtag">#PenaDoTamanhoDoDano</span><span class="hashtag">#SistemasMelhores</span></div>
+  </section>
+
+  <section class="capitulo">
+    <h2>Sources</h2>
+    <ul class="fontes">
+      <li><a href="https://agenciagov.ebc.com.br/noticias/202602/mais-de-18-84-milhoes-de-familias-recebem-o-bolsa-familia-a-partir-desta-quinta-feira-12-02">Agência Gov, Bolsa Família in February 2026: 18.84 million families, average payment of R$ 690.01 and R$ 13 billion in the month (02/12/2026, in Portuguese)</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm">Brazilian Penal Code: arts. 16, 33, 59, 61, 75, 91-A, 312, 317, 327 and 333 (in Portuguese)</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/leis/2003/l10.763.htm">Law 10,763/2003: 2 to 12 years for bribery and repayment as a condition to change regime (in Portuguese)</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2019/lei/l13964.htm">Law 13,964/2019: 40-year cap and seizure of unexplained assets (in Portuguese)</a></li>
+      <li><a href="https://planalto.gov.br/ccivil_03/leis/l8429compilada.htm">Law 8,429/1992, Administrative Misconduct Act, with the changes from Law 14,230/2021 (in Portuguese)</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/lei/l12846.htm">Law 12,846/2013, Anti-Corruption Act: fines of 0.1% to 20% of revenue (in Portuguese)</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm">Federal Constitution, art. 5, XLVI and XLVII (in Portuguese)</a></li>
+      <li><a href="https://informativos.trilhante.com.br/julgados/stf-re-979962-rs">Supreme Court, RE 979,962, Theme 1003: disproportionate sentence ruled unconstitutional (03/24/2021, in Portuguese)</a></li>
+      <li><a href="https://nij.ojp.gov/topics/articles/five-things-about-deterrence">National Institute of Justice (US), "Five Things About Deterrence" (2016)</a></li>
+      <li><a href="https://www.ussc.gov/guidelines/amendment/838">U.S. Sentencing Commission, amendment 838: new loss table in § 2B1.1 (in force since 11/01/2026)</a></li>
+      <li><a href="https://www.gesetze-im-internet.de/stgb/__332.html">German Criminal Code, § 332: taking bribes</a> and <a href="https://www.gesetze-im-internet.de/stgb/__335.html">§ 335: especially serious cases (in German)</a></li>
+      <li><a href="https://time.com/4298731/this-is-how-much-money-you-can-take-in-bribes-before-the-chinese-authorities-execute-you">Time, China sets 3 million yuan as the amount for the death penalty for corruption (2016)</a></li>
+      <li><a href="https://fortune.com/2024/04/12/vietnam-real-estate-billionaire-death-sentence-my-lan/">Fortune, Vietnam sentences a businesswoman to death for billion-dollar fraud (2024)</a></li>
+      <li><a href="https://agenciabrasil.ebc.com.br/radioagencia-nacional/politica/audio/2017-12/fiesp-avalia-perda-anual-de-r-130-bi-em-corrupcao-valor">Agência Brasil, Fiesp estimate of losses to corruption (2017), cited as an example of a number without official measurement (in Portuguese)</a></li>
+    </ul>
+  </section>
+</main>
+<gr-contribuir></gr-contribuir>
+<gr-rodape></gr-rodape>
+<script>
+(() => {
+  const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("visivel"); io.unobserve(e.target); } }), { threshold: .12 }) : null;
+  document.querySelectorAll(".revelar").forEach((el) => io ? io.observe(el) : el.classList.add("visivel"));
+})();
+</script>
+</body>
+</html>

@@ -83,6 +83,19 @@ window.PROPOSTAS = [
     },
   },
   {
+    id: "pena-do-tamanho-do-dano",
+    href: "/projetos/pena-do-tamanho-do-dano/",
+    img: "/projetos/img/pena-do-tamanho-do-dano.svg",
+    cor: "turquesa",
+    tipo: "projeto",
+    fase: 1,
+    titulo: { pt: "Pena do tamanho do dano: corrupção medida em Bolsas Família", en: "A sentence the size of the harm: corruption measured in Bolsa Família payments" },
+    gancho: {
+      pt: "Cada R$ 690 desviados é o Bolsa Família de uma família por um mês. Uma calculadora e uma pena que sobe em degraus.",
+      en: "Every R$ 690 stolen is one family's Bolsa Família for a month. A calculator and a sentence that rises in steps.",
+    },
+  },
+  {
     id: "qual-caminho",
     href: "/caminho/",
     img: "/projetos/img/qual-caminho.svg",

@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pena do tamanho do dano · Gabriel Rodrigues</title>
+<meta name="description" content="Medir o dinheiro público desviado em Bolsas Família e fazer a pena por corrupção crescer em degraus com o dano. Com calculadora, comparação com outros países e as críticas.">
+<link rel="canonical" href="https://gabriel-rodrigues.com/projetos/pena-do-tamanho-do-dano/">
+<link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/projetos/pena-do-tamanho-do-dano/">
+<link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/pena-do-tamanho-do-dano/">
+<link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/projetos/pena-do-tamanho-do-dano/">
+<meta name="author" content="Gabriel Rodrigues">
+<meta name="theme-color" content="#fbf8ef">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:site_name" content="Gabriel Rodrigues">
+<meta property="og:url" content="https://gabriel-rodrigues.com/projetos/pena-do-tamanho-do-dano/">
+<meta property="og:title" content="Pena do tamanho do dano · Gabriel Rodrigues">
+<meta property="og:description" content="Cada R$ 690 desviados é o Bolsa Família de uma família por um mês. A ideia: medir o dano nessa conta e fazer a pena crescer com ele.">
+<meta property="og:image" content="https://gabriel-rodrigues.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gabriel Rodrigues, engenharia de software a serviço do Brasil">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Pena do tamanho do dano · Gabriel Rodrigues">
+<meta name="twitter:description" content="Cada R$ 690 desviados é o Bolsa Família de uma família por um mês. A ideia: medir o dano nessa conta e fazer a pena crescer com ele.">
+<meta name="twitter:image" content="https://gabriel-rodrigues.com/og.jpg">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "Pena do tamanho do dano: corrupção medida em Bolsas Família",
+ "description": "Medir o dinheiro público desviado em Bolsas Família e fazer a pena por corrupção crescer em degraus com o dano.",
+ "inLanguage": "pt-BR",
+ "image": "https://gabriel-rodrigues.com/og.jpg",
+ "author": { "@type": "Person", "name": "Gabriel Rodrigues", "url": "https://gabriel-rodrigues.com/" },
+ "mainEntityOfPage": "https://gabriel-rodrigues.com/projetos/pena-do-tamanho-do-dano/",
+ "datePublished": "2026-11-22"
+}
+</script>
+<link rel="stylesheet" href="/design-system/tokens.css">
+<link rel="stylesheet" href="/design-system/componentes.css">
+<link rel="stylesheet" href="/design-system/moldura.css">
+<script src="/design-system/moldura.js"></script>
+<link rel="stylesheet" href="/design-system/contribuir.css">
+<script src="/design-system/contribuir.js"></script>
+<link rel="stylesheet" href="/projetos/pena-do-tamanho-do-dano/pagina.css">
+<script src="/projetos/pena-do-tamanho-do-dano/calculadora.js" defer></script>
+</head>
+<body>
+<gr-cabecalho></gr-cabecalho>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
+<main>
+  <nav><a href="/projetos/">← Propostas</a></nav>
+  <header>
+    <span class="selo" style="margin-top: var(--espaco-5)">Ideia</span>
+    <h1>Cada R$ 690 desviados é o Bolsa Família de <span class="destaque">uma família por um mês.</span></h1>
+    <p class="lead">Esse foi o benefício médio pago em fevereiro de 2026, para 18,84 milhões de famílias (Ministério do Desenvolvimento e Assistência Social). Medir a corrupção nessa conta ajuda todo mundo a entender o tamanho do dano.</p>
+    <p>A ideia começou simples: cada Bolsa Família desviado vale um mês a mais de prisão. Fiz as contas e ela trava cedo. Esta página mostra onde trava, como outros países fazem e uma versão que mantém o espírito da ideia.</p>
+    <div class="capa-acoes">
+      <a class="botao verde" href="#calculadora">Fazer a conta</a>
+      <a class="botao secundario" href="#criticas">Ir direto às críticas</a>
+    </div>
+  </header>
+
+  <section class="capitulo revelar" id="calculadora">
+    <span class="ato">Capítulo 1 · Faça a conta</span>
+    <h2>Mexa nos valores e compare três regras</h2>
+    <p>Escolha quanto foi desviado e o que aconteceu no caso. A calculadora mostra a pena pela lei de hoje, pela conta direta (um mês por Bolsa Família) e pela proposta em degraus.</p>
+    <div class="cartao calc">
+      <label class="controle" for="valor">
+        <span>Dinheiro público desviado</span>
+        <output id="valor-saida" for="valor">R$ 250 mil</output>
+      </label>
+      <input type="range" id="valor" min="0" max="140" step="1" value="48" aria-describedby="equivale">
+      <p class="equivale" id="equivale" aria-live="polite"></p>
+
+      <details class="ajustes">
+        <summary>Ajustar as regras</summary>
+        <label class="controle" for="meses">
+          <span>Conta direta: meses de prisão por Bolsa Família</span>
+          <output id="meses-saida" for="meses">1 mês</output>
+        </label>
+        <input type="range" id="meses" min="1" max="20" step="1" value="10">
+        <label class="controle" for="passo">
+          <span>Degraus: anos a mais a cada 10 vezes mais dinheiro</span>
+          <output id="passo-saida" for="passo">2 anos</output>
+        </label>
+        <input type="range" id="passo" min="1" max="4" step="1" value="2">
+      </details>
+
+      <fieldset class="fatores">
+        <legend>O que aconteceu no caso</legend>
+        <label class="marcar"><input type="checkbox" id="f-cargo"> Quem desviou tinha cargo de chefia ou de confiança <small>+1/3, já é lei (Código Penal, art. 327, § 2º)</small></label>
+        <label class="marcar"><input type="checkbox" id="f-calamidade"> Foi durante uma calamidade pública, como enchente ou epidemia <small>+1/6, já é agravante (art. 61); a lei não diz quanto e 1/6 é a fração mais usada pelos tribunais</small></label>
+        <label class="marcar"><input type="checkbox" id="f-social"> O dinheiro era da saúde, da educação ou da assistência social <small>+1/3, proposta nova, só nas duas regras novas</small></label>
+        <label class="marcar"><input type="checkbox" id="f-devolveu"> Devolveu tudo antes da denúncia <small>−1/3, já é lei (art. 16, que permite reduzir de 1/3 a 2/3)</small></label>
+      </fieldset>
+
+      <div class="resultados" aria-live="polite">
+        <div class="regra" id="r-hoje"><div class="cabeca"><b>Lei de hoje</b><span class="anos"></span></div><div class="trilho"><div class="faixa"></div></div><small>Peculato e corrupção: 2 a 12 anos. O juiz escolhe dentro da faixa, e o valor é só uma das coisas que ele pesa.</small></div>
+        <div class="regra" id="r-direta"><div class="cabeca"><b>Conta direta</b><span class="anos"></span></div><div class="trilho"><div class="faixa"></div></div><small class="nota"></small></div>
+        <div class="regra destaque-regra" id="r-degraus"><div class="cabeca"><b>Proposta em degraus</b><span class="anos"></span></div><div class="trilho"><div class="faixa"></div></div><small class="nota"></small></div>
+        <div class="escala" aria-hidden="true"><span>0</span><span>10</span><span>20</span><span>30</span><span>40 anos</span></div>
+      </div>
+      <p class="pequeno suave" style="margin: var(--espaco-4) 0 0">Benefício de referência: R$ 690,01 (MDS, fevereiro de 2026). Teto de 40 anos: Código Penal, art. 75. Em qualquer regra, quem não devolve o dinheiro não sai do regime fechado (art. 33, § 4º). A calculadora é uma simulação para debate, não uma sentença.</p>
+    </div>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 2 · Como funciona hoje</span>
+    <h2>A lei já pune, mas o valor pesa pouco e de forma solta</h2>
+    <ol class="fluxo">
+      <li><span class="n">1</span><div><strong>O crime tem pena de 2 a 12 anos</strong>Vale para quem desvia dinheiro público (peculato), para o agente público que recebe propina e para quem oferece. Dá no mesmo desviar R$ 5 mil ou R$ 500 milhões: a faixa é a mesma.<br><span class="trava">Trava: a faixa não cresce com o dano</span></div></li>
+      <li><span class="n">2</span><div><strong>O juiz calcula a pena</strong>Ele olha oito pontos, como a culpa, os motivos e as "consequências do crime" (Código Penal, art. 59). O dano entra aí, mas cada juiz decide quanto ele vale.<br><span class="trava">Trava: casos parecidos podem ter penas bem diferentes</span></div></li>
+      <li><span class="n">3</span><div><strong>Sem devolver, não sai do fechado</strong>Em crime contra a administração pública, o preso só passa para o semiaberto se devolver o que desviou (art. 33, § 4º). O juiz também pode tomar bens que a pessoa não explica como comprou (art. 91-A).</div></li>
+      <li><span class="n">4</span><div><strong>Fora do processo penal</strong>A Lei de Improbidade cobra o ressarcimento, tira o cargo e suspende os direitos políticos, mas não prende. A Lei Anticorrupção multa a empresa em até 20% do faturamento.<br><span class="trava">Trava: processos longos e risco de prescrição</span></div></li>
+    </ol>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 3 · Os números</span>
+    <h2>Três números para entender a conta</h2>
+    <div class="numeros">
+      <div class="cartao"><strong>R$ 690,01</strong>foi o benefício médio do Bolsa Família por família. O total do mês foi de R$ 13 bilhões. <span class="fontes">MDS, fevereiro de 2026</span></div>
+      <div class="cartao"><strong>2 a 12 anos</strong>de prisão para peculato e corrupção, qualquer que seja o valor. <span class="fontes">Código Penal, arts. 312, 317 e 333 (Lei 10.763/2003)</span></div>
+      <div class="cartao"><strong>40 anos</strong>é o máximo que alguém pode cumprir de prisão no Brasil. Antes eram 30. <span class="fontes">Código Penal, art. 75 (Lei 13.964/2019)</span></div>
+    </div>
+    <p style="margin-top: var(--espaco-4)">Quanto o país perde por ano com corrupção? Não existe um número oficial. As estimativas mais citadas são de entidades privadas, como a Fiesp, e usam índices de percepção, não dinheiro rastreado. Por isso elas não entram aqui como fato.</p>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 4 · Onde a conta direta trava</span>
+    <h2>Com um mês por benefício, todo mundo bate no teto</h2>
+    <p>São 480 meses em 40 anos. Com R$ 690,01 por mês, a conta chega ao teto com R$ 331 mil desviados. A partir daí, quem desvia R$ 400 mil e quem desvia R$ 1 bilhão recebem a mesma pena.</p>
+    <div class="barras-capa">
+      <div role="img" aria-label="Gráfico: pela conta direta, R$ 10 mil dão 1 ano e 2 meses; R$ 100 mil dão 12 anos; R$ 331 mil já dão 40 anos, o teto; R$ 1 milhão e R$ 1 bilhão também dão 40 anos.">
+        <div class="linha-barra"><span>R$ 10 mil</span><div class="trilho"><div class="cheio" style="width: 3%"></div></div><b>1 ano</b></div>
+        <div class="linha-barra"><span>R$ 100 mil</span><div class="trilho"><div class="cheio" style="width: 30%"></div></div><b>12 anos</b></div>
+        <div class="linha-barra"><span>R$ 331 mil</span><div class="trilho"><div class="cheio teto" style="width: 100%"></div></div><b>40 anos</b></div>
+        <div class="linha-barra"><span>R$ 1 milhão</span><div class="trilho"><div class="cheio teto" style="width: 100%"></div></div><b>40 anos</b></div>
+        <div class="linha-barra"><span>R$ 1 bilhão</span><div class="trilho"><div class="cheio teto" style="width: 100%"></div></div><b>40 anos</b></div>
+      </div>
+      <p class="legenda-ilustra">Anos de prisão pela conta direta, com o benefício de R$ 690,01 (MDS, fevereiro de 2026) e o teto de 40 anos (Código Penal, art. 75). Cálculo próprio.</p>
+    </div>
+    <p>Tem outro problema. Pena longa assusta menos do que parece. O Instituto Nacional de Justiça dos Estados Unidos resume as pesquisas assim: a chance de ser pego assusta muito mais do que o tamanho da pena (NIJ, 2016). No Brasil, o que mais falta é julgar rápido e não deixar o caso prescrever.</p>
+  </section>
+
+  <section class="capitulo revelar" id="paises">
+    <span class="ato">Capítulo 5 · Como outros países fazem</span>
+    <h2>Quem olha o valor usa degraus, não uma conta reta</h2>
+    <div class="paises">
+      <article class="cartao pais-cartao">
+        <span class="selo azul">Estados Unidos</span>
+        <h3>Uma tabela de 16 degraus</h3>
+        <p>Nos crimes federais de fraude, desvio e propina, o juiz soma pontos conforme o prejuízo. Cada degrau pede de duas a três vezes mais dinheiro que o anterior. A tabela foi atualizada em 1º de novembro de 2026.</p>
+        <ol class="degraus" aria-label="Alguns degraus da tabela americana">
+          <li><span>mais de US$ 9 mil</span><b>+2 pontos</b></li>
+          <li><span>mais de US$ 150 mil</span><b>+8</b></li>
+          <li><span>mais de US$ 2 milhões</span><b>+16</b></li>
+          <li><span>mais de US$ 35 milhões</span><b>+22</b></li>
+          <li><span>mais de US$ 750 milhões</span><b>+30</b></li>
+        </ol>
+        <p class="fontes">U.S. Sentencing Commission, emenda 838 ao § 2B1.1 (2026)</p>
+      </article>
+      <article class="cartao pais-cartao">
+        <span class="selo">Alemanha</span>
+        <h3>Vantagem grande, pena maior</h3>
+        <p>O servidor que aceita propina pega de 6 meses a 5 anos. Se a vantagem for "de grande dimensão", o caso vira especialmente grave e a pena vai de 1 a 10 anos. A lei não fixa o valor: os tribunais decidem.</p>
+        <p class="fontes">Código Penal alemão, §§ 332 e 335</p>
+      </article>
+      <article class="cartao pais-cartao contra">
+        <span class="selo amarelo">China e Vietnã</span>
+        <h3>Faixas por valor que chegam à pena de morte</h3>
+        <p>Na China, desde 2016, quem desvia ou recebe 3 milhões de yuans ou mais pode ser condenado à morte. O Vietnã também tem faixas por valor e condenou uma empresária à morte em 2024. No Brasil, a Constituição proíbe pena de morte e pena perpétua (art. 5º, XLVII). Esse caminho não serve.</p>
+        <p class="fontes">Time, 2016; Fortune, 2024</p>
+      </article>
+    </div>
+    <p style="margin-top: var(--espaco-4)">O modelo americano é o mais parecido com a ideia. Ele funciona porque cresce devagar: o dinheiro precisa multiplicar para a pena subir um degrau. Assim o teto fica reservado para os casos enormes.</p>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 6 · O que proponho</span>
+    <h2>Medir em Bolsas Família e subir a pena em degraus</h2>
+    <ol class="fluxo">
+      <li><span class="n">1</span><div><strong>A sentença mostra o dano em Bolsas Família</strong>Toda condenação por desvio de dinheiro público diz quantos benefícios aquele valor pagaria, com o valor médio do último ano. O número vai para o Portal da Transparência. Não muda a pena, mas todo mundo entende o tamanho do caso.</div></li>
+      <li><span class="n">2</span><div><strong>A pena sobe um degrau a cada 10 vezes mais dinheiro</strong>Até uns R$ 69 mil (100 benefícios), 2 a 4 anos. A cada 10 vezes mais, 2 anos a mais. Acima de R$ 690 milhões, uma faixa nova de 12 a 14 anos, e de 14 a 16 acima de R$ 6,9 bilhões. O juiz continua escolhendo dentro de cada degrau.</div></li>
+      <li><span class="n">3</span><div><strong>Um terço a mais se o dinheiro era da saúde, da educação ou da assistência social</strong>São os serviços de que mais dependem as famílias de baixa renda. Hoje a lei não diferencia de onde veio o dinheiro.</div></li>
+      <li><span class="n">4</span><div><strong>Devolver continua valendo a pena</strong>Quem devolve tudo antes da denúncia tem a pena reduzida, como já é hoje. Quem não devolve não sai do regime fechado. O que for recuperado vai para a assistência social.</div></li>
+      <li><span class="n">5</span><div><strong>Prazo para julgar</strong>Processo de desvio de dinheiro público ganha prioridade na fila, com prazo para cada fase. Pena maior não adianta se o caso prescreve antes da sentença.</div></li>
+    </ol>
+    <p style="margin-top: var(--espaco-5)">O caminho é um projeto de lei que muda o Código Penal (arts. 312, 317, 327 e 333) e o Código de Processo Penal. Os degraus em reais seriam atualizados todo ano pelo valor médio do Bolsa Família.</p>
+  </section>
+
+  <section class="capitulo revelar" id="criticas">
+    <span class="ato">Capítulo 7 · As críticas</span>
+    <h2>As perguntas mais difíceis</h2>
+    <p>Estas são as perguntas mais duras que eu esperaria ouvir, e as minhas respostas.</p>
+    <details class="critica">
+      <summary>Pena maior não resolve. O problema do Brasil é a impunidade.</summary>
+      <div class="resposta"><p>Concordo que a certeza da punição pesa mais. Por isso a proposta tem prazo para julgar e mantém a devolução como condição para sair do fechado.</p><p>Os degraus não são para encher presídio. São para que um desvio de R$ 500 milhões não caiba na mesma faixa de um de R$ 5 mil.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Por que medir em Bolsa Família? Isso mistura assunto.</summary>
+      <div class="resposta"><p>É a medida mais conhecida de quanto dinheiro sustenta uma família por um mês. O dinheiro desviado e o benefício saem do mesmo lugar: o orçamento público.</p><p>Poderia ser o salário mínimo. O importante é trocar "milhões" por algo que a pessoa consiga imaginar.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Isso tira a liberdade do juiz e pode cair no STF.</summary>
+      <div class="resposta"><p>Uma conta automática cairia. A Constituição manda individualizar a pena (art. 5º, XLVI), e o STF já derrubou pena desproporcional ao crime (RE 979.962, 2021).</p><p>Por isso a proposta usa degraus com faixa. O juiz continua decidindo dentro de cada um, como hoje.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Na propina, qual valor conta? O suborno pode ser pequeno e o prejuízo, enorme.</summary>
+      <div class="resposta"><p>Conta o maior dos dois: o valor da propina ou o prejuízo que o contrato deu ao dinheiro público. O prejuízo precisa estar provado no processo, com perícia ou auditoria do tribunal de contas.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Manter alguém preso custa caro para o Estado.</summary>
+      <div class="resposta"><p>Custa. Por isso o foco continua sendo devolver o dinheiro e tomar os bens. A pena alta fica para os casos de valor enorme, que são poucos.</p></div>
+    </details>
+    <details class="critica">
+      <summary>Isso vai pegar só o peixe pequeno.</summary>
+      <div class="resposta"><p>Os degraus fazem o contrário. Até R$ 69 mil, a pena começa em 2 anos, como hoje. O aumento aparece nos valores grandes.</p></div>
+    </details>
+  </section>
+
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 8 · Como medir</span>
+    <h2>Quatro números para acompanhar</h2>
+    <ul>
+      <li><strong>Tempo até a sentença</strong>: quantos meses leva, da denúncia ao julgamento, um caso de desvio de dinheiro público.</li>
+      <li><strong>Dinheiro devolvido</strong>: que parte do valor desviado volta aos cofres, caso a caso.</li>
+      <li><strong>Casos prescritos</strong>: quantos processos morrem sem julgamento.</li>
+      <li><strong>Penas por degrau</strong>: se casos de valor parecido estão recebendo penas parecidas.</li>
+    </ul>
+  </section>
+
+  <section class="capitulo revelar conversa">
+    <p class="grande">Quando você ouve que desviaram R$ 10 milhões, consegue imaginar o tamanho? E se dissessem 14 mil Bolsas Família?</p>
+    <div class="hashtags"><span class="hashtag">#PenaDoTamanhoDoDano</span><span class="hashtag">#SistemasMelhores</span></div>
+  </section>
+
+  <section class="capitulo">
+    <h2>Fontes</h2>
+    <ul class="fontes">
+      <li><a href="https://agenciagov.ebc.com.br/noticias/202602/mais-de-18-84-milhoes-de-familias-recebem-o-bolsa-familia-a-partir-desta-quinta-feira-12-02">Agência Gov, Bolsa Família de fevereiro de 2026: 18,84 milhões de famílias, benefício médio de R$ 690,01 e R$ 13 bilhões no mês (12/02/2026)</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm">Código Penal: arts. 16, 33, 59, 61, 75, 91-A, 312, 317, 327 e 333</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/leis/2003/l10.763.htm">Lei 10.763/2003: pena de 2 a 12 anos para corrupção e devolução como condição para progredir de regime</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2019/lei/l13964.htm">Lei 13.964/2019: teto de 40 anos e perda de bens sem origem explicada</a></li>
+      <li><a href="https://planalto.gov.br/ccivil_03/leis/l8429compilada.htm">Lei 8.429/1992, Lei de Improbidade, com as mudanças da Lei 14.230/2021</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/lei/l12846.htm">Lei 12.846/2013, Lei Anticorrupção: multa de 0,1% a 20% do faturamento</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm">Constituição Federal, art. 5º, XLVI e XLVII</a></li>
+      <li><a href="https://informativos.trilhante.com.br/julgados/stf-re-979962-rs">STF, RE 979.962, Tema 1003: pena desproporcional declarada inconstitucional (24/03/2021)</a></li>
+      <li><a href="https://nij.ojp.gov/topics/articles/five-things-about-deterrence">National Institute of Justice (EUA), "Five Things About Deterrence" (2016)</a></li>
+      <li><a href="https://www.ussc.gov/guidelines/amendment/838">U.S. Sentencing Commission, emenda 838: nova tabela de prejuízo do § 2B1.1 (em vigor desde 01/11/2026)</a></li>
+      <li><a href="https://www.gesetze-im-internet.de/stgb/__332.html">Código Penal alemão, § 332: corrupção passiva</a> e <a href="https://www.gesetze-im-internet.de/stgb/__335.html">§ 335: casos especialmente graves</a></li>
+      <li><a href="https://time.com/4298731/this-is-how-much-money-you-can-take-in-bribes-before-the-chinese-authorities-execute-you">Time, China fixa em 3 milhões de yuans o valor para pena de morte por corrupção (2016)</a></li>
+      <li><a href="https://fortune.com/2024/04/12/vietnam-real-estate-billionaire-death-sentence-my-lan/">Fortune, Vietnã condena empresária à morte por desvio bilionário (2024)</a></li>
+      <li><a href="https://agenciabrasil.ebc.com.br/radioagencia-nacional/politica/audio/2017-12/fiesp-avalia-perda-anual-de-r-130-bi-em-corrupcao-valor">Agência Brasil, estimativa da Fiesp sobre perdas com corrupção (2017), citada como exemplo de número sem medição oficial</a></li>
+    </ul>
+  </section>
+</main>
+<gr-contribuir></gr-contribuir>
+<gr-rodape></gr-rodape>
+<script>
+(() => {
+  const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("visivel"); io.unobserve(e.target); } }), { threshold: .12 }) : null;
+  document.querySelectorAll(".revelar").forEach((el) => io ? io.observe(el) : el.classList.add("visivel"));
+})();
+</script>
+</body>
+</html>
