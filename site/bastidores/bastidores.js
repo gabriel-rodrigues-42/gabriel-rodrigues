@@ -1,4 +1,5 @@
 // Bastidores: mostra, só para leitura, os blocos de fala e os roteiros do estúdio de vídeo (videos/estudio/).
+// PÚBLICO: nada aqui é protegido. Não traga para esta página nada confidencial ou que precise de login de verdade.
 // Não é segredo. A "senha" é 42 e está aqui no código de propósito: o aviso existe só para
 // quem chegou por engano não achar que esta é a parte principal do site.
 // Os dados vêm de estudio.json, gerado por scripts/bastidores/juntar.py no deploy.

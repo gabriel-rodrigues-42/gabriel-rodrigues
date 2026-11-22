@@ -36,6 +36,7 @@ Site gabriel-rodrigues.com, design system e vídeos do Gabriel Rodrigues, desenv
 - Inglês: mudou o texto de uma página, de `ideias.js` ou de `regras.js`? Mude também a versão em inglês. Página nova ganha a versão em `/en/` no mesmo PR.
 - SEO: toda página tem título único, descrição, canonical, Open Graph e Twitter (copie o bloco do `projetos/_modelo/`) e entra em `site/sitemap.xml`. Páginas com versão em inglês levam o bloco `hreflang` (pt-BR, en e x-default) nas duas versões, e as duas URLs entram no sitemap com os `xhtml:link`. Ícones e imagem de compartilhamento ficam na raiz de `site/` (`favicon.svg`, `og.jpg`).
 - Agentes de IA: `site/llms.txt` resume o site e lista as páginas; página nova entra nele. Formulário novo ganha WebMCP declarativo (`toolname`, `tooldescription` no `<form>` e `toolparamdescription` nos campos), sem `toolautosubmit`: a pessoa sempre confirma o envio.
+- Bastidores são públicos: `/bastidores/` não tem autenticação de verdade (a "senha" 42 está no código). Nada confidencial ou que precise de login entra lá, nem em `videos/estudio/blocos.json` e `roteiros/`, que vão para o site: dado pessoal, contato, endereço, rotina, estratégia, rascunho que não pode vazar, chave ou senha. Se pedirem algo assim, recuse e avise o Gabriel. Para proteger de verdade, primeiro ponha autenticação real (Cloudflare Access ou Pages Function com segredo e D1).
 - Dados pessoais: colete o mínimo (LGPD). Nada de CPF, título de eleitor ou lista com cara de abaixo-assinado.
 
 ## Ideias

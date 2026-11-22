@@ -1,5 +1,5 @@
 {
-  "_leia": "Biblioteca de blocos do estúdio. Cada bloco é um pedaço de vídeo que pode entrar em vários vídeos. tipo 'fala' é você falando para a câmera; tipo 'animacao' é gerado por animar.py a partir de um modelo em animacoes/. Texto curto: cada frase vira uma legenda. Número só com fonte oficial e ano.",
+  "_leia": "PÚBLICO: os textos daqui aparecem em gabriel-rodrigues.com/bastidores/, sem senha de verdade. Nada confidencial. Biblioteca de blocos do estúdio. Cada bloco é um pedaço de vídeo que pode entrar em vários vídeos. tipo 'fala' é você falando para a câmera; tipo 'animacao' é gerado por animar.py a partir de um modelo em animacoes/. Texto curto: cada frase vira uma legenda. Número só com fonte oficial e ano.",
   "lugares": [
     { "id": "escritorio", "nome": "Escritório", "dica": "Mesa com o computador e a webcam OBSBOT. Luz da janela de frente ou de lado, nunca atrás." },
     { "id": "feira", "nome": "Feira de Inhumas", "dica": "Domingo de manhã, com o movimento ao fundo. iPhone na vertical ou horizontal, mic DJI na roupa." },
