@@ -2,6 +2,8 @@
 
 Ferramenta local para gravar os vídeos do canal em blocos. Fica fora do site: só `site/` é publicado, e os vídeos em `midia/` não vão para o Git.
 
+Os textos de `blocos.json` e dos roteiros aparecem, só para leitura, em [gabriel-rodrigues.com/bastidores/](https://gabriel-rodrigues.com/bastidores/). Por isso, não escreva nada confidencial nesses arquivos. A dica de cada lugar não vai para o site.
+
 A ideia: um vídeo é uma lista de blocos. Alguns blocos são falas que voltam em vários vídeos (a apresentação, o encerramento, "código bom não vence regra ruim"). Outros são animações geradas com as cores do site. Você grava cada fala uma vez, em lugares diferentes, e a montagem junta tudo.
 
 ## O fluxo

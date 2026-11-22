@@ -1,0 +1,8 @@
+# Quem digita /admin cai nos bastidores, com um recado bem-humorado (ver site/bastidores/bastidores.js).
+/admin /bastidores/?de=admin 302
+/admin/* /bastidores/?de=admin 302
+/en/admin /en/bastidores/?de=admin 302
+/en/admin/* /en/bastidores/?de=admin 302
+/wp-admin /bastidores/?de=wp-admin 302
+/wp-admin/* /bastidores/?de=wp-admin 302
+/wp-login.php /bastidores/?de=wp-admin 302

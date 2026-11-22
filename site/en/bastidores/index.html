@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Backstage: not a secret, just not the main part of the site. Kept out of the menu, the sitemap and search. -->
+<meta name="robots" content="noindex">
+<title>Backstage · Gabriel Rodrigues</title>
+<meta name="description" content="The lines and video scripts Gabriel uses to record his videos, read only. Not the main part of the site.">
+<link rel="canonical" href="https://gabriel-rodrigues.com/en/bastidores/">
+<link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/bastidores/">
+<link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/bastidores/">
+<link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/bastidores/">
+<meta name="author" content="Gabriel Rodrigues">
+<meta name="theme-color" content="#fbf8ef">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:site_name" content="Gabriel Rodrigues">
+<meta property="og:url" content="https://gabriel-rodrigues.com/en/bastidores/">
+<meta property="og:title" content="Backstage · Gabriel Rodrigues">
+<meta property="og:description" content="The lines and video scripts Gabriel uses to record his videos, read only.">
+<meta property="og:image" content="https://gabriel-rodrigues.com/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Backstage · Gabriel Rodrigues">
+<meta name="twitter:description" content="The lines and video scripts Gabriel uses to record his videos, read only.">
+<link rel="stylesheet" href="/design-system/tokens.css?v=2026-11-22">
+<link rel="stylesheet" href="/design-system/componentes.css">
+<link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-22">
+<script src="/design-system/moldura.js"></script>
+<link rel="stylesheet" href="/bastidores/bastidores.css">
+<script src="/bastidores/bastidores.js" defer></script>
+</head>
+<body>
+<gr-cabecalho></gr-cabecalho>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
+<main>
+  <p id="piada" class="piada" role="status" hidden></p>
+
+  <section id="aviso" aria-labelledby="titulo-aviso">
+    <span class="selo azul">Backstage</span>
+    <h1 id="titulo-aviso" tabindex="-1">You found the <span class="destaque">backstage</span></h1>
+    <p class="lead">This is where I keep a few small things that help me record videos: the lines I repeat and the order of each video.</p>
+    <p>It is not the main part of the site. If you came for the proposals, they are in <a href="/en/projetos/">Proposals</a>.</p>
+    <p id="sem-js">To see the backstage, turn on JavaScript in your browser.</p>
+    <div class="acoes">
+      <button id="botao-certeza" class="botao" type="button">I'm sure, show me</button>
+      <a class="botao secundario" href="/en/projetos/">Take me to the proposals</a>
+    </div>
+  </section>
+
+  <section id="senha" class="senha" aria-labelledby="titulo-senha" hidden>
+    <span class="selo azul">Backstage</span>
+    <h1 id="titulo-senha" tabindex="-1">One more thing: what's the password?</h1>
+    <p class="lead">It's not a secret. The hint is in my GitHub username.</p>
+    <form id="form-senha" toolname="entrar_bastidores" tooldescription="Opens Gabriel's backstage page, which shows the lines and scripts of his videos, read only. The password is public and is in the code: 42.">
+      <label for="campo-senha">Password</label>
+      <div class="linha">
+        <input id="campo-senha" name="senha" autocomplete="off" autocapitalize="off" spellcheck="false" toolparamdescription="The joke password, which is 42.">
+        <button class="botao" type="submit">Enter</button>
+      </div>
+      <p id="resposta-senha" class="resposta" aria-live="polite"></p>
+      <button id="botao-revelar" class="link-botao" type="button">I don't know the password</button>
+    </form>
+  </section>
+
+  <section id="conteudo" aria-labelledby="titulo-conteudo" hidden>
+    <span class="selo azul">Backstage</span>
+    <h1 id="titulo-conteudo" tabindex="-1">How I put my videos together</h1>
+    <p class="lead">Each video is made of blocks: lines I record to the camera and animations made from the numbers. Everything here is read only.</p>
+    <p>The lines and scripts stay in Portuguese, the language I record in. The numbers in the animations follow the site rule: official source and year. The code is on <a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/tree/main/videos/estudio">GitHub, in the studio folder</a>.</p>
+    <p id="status" class="meta" role="status"></p>
+
+    <h2>Video scripts (<span id="contagem-roteiros">0</span>)</h2>
+    <p>Each video is a list of blocks, in order. One block can go into several videos.</p>
+    <div id="lista-roteiros"></div>
+
+    <h2>Blocks (<span id="contagem-blocos">0</span>)</h2>
+    <p>Tap a tag to see only its blocks.</p>
+    <div id="filtros" class="filtros" role="group" aria-label="Filter blocks by tag"></div>
+    <div id="lista-blocos" class="lista-blocos"></div>
+  </section>
+</main>
+<gr-rodape></gr-rodape>
+</body>
+</html>
