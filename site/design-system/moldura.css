@@ -1,6 +1,6 @@
 /* Moldura do site: cabeçalho e rodapé iguais em todas as páginas.
    Depende de tokens.css. Use junto com moldura.js:
-     <link rel="stylesheet" href="/design-system/moldura.css">
+     <link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-22">
      <script src="/design-system/moldura.js"></script>
      <gr-cabecalho></gr-cabecalho> logo depois de <body>
      <gr-rodape></gr-rodape> logo antes de </body> */
