@@ -58,6 +58,8 @@
   nav a { font-weight: var(--peso-forte); text-decoration: none; color: var(--azul); }
   a { color: var(--azul); }
   h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); }
+  /* Segunda frase do título sempre na linha de baixo, como manchete. */
+  h1 .linha { display: block; }
   h2 { font-size: var(--tamanho-5); line-height: 1.15; color: var(--azul); margin: 0 0 var(--espaco-3); }
   h3 { font-size: var(--tamanho-4); color: var(--azul); margin: 0 0 var(--espaco-2); line-height: 1.25; }
   p { margin: 0 0 var(--espaco-3); }
@@ -229,7 +231,7 @@
   <!-- CAPA -->
   <header>
     <span class="selo" style="margin-top: var(--espaco-5)">Proposal under study</span>
-    <h1>The money to reindustrialize Brazil <span class="destaque">already exists</span>. It's just sitting still.</h1>
+    <h1>The money to reindustrialize Brazil <span class="destaque">already exists</span>. <span class="linha">It's just sitting still.</span></h1>
     <p class="lead">People with large fortunes already borrow from banks using their own shares as collateral. The proposal for the Sovereign Fund for Reindustrialization and Innovation, the FSRI (from its Portuguese name), is to turn that money into Brazilian factories, patents and platforms.</p>
     <div class="capa-acoes">
       <a class="botao verde" href="/en/ideias/#reindustrializacao"><svg class="icone"><use href="#i-play"/></svg>Listen to the summary with captions</a>
