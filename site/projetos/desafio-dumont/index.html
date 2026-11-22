@@ -89,8 +89,8 @@
   .cor[aria-pressed="true"] { outline: 3px solid var(--azul); outline-offset: 2px; }
   .cor:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
   .carro .adesivo, .carro .adesivo-grande { transition: opacity .35s ease; opacity: 0; visibility: hidden; }
-  .carro[data-adesivo] .adesivo { opacity: 1; visibility: visible; }
-  .carro[data-adesivo][data-kit="furgao"] .adesivo-grande { opacity: 1; visibility: visible; }
+  .carro[data-adesivo="logo"] .adesivo[data-adesivo="logo"], .carro[data-adesivo="completo"] .adesivo[data-adesivo="completo"] { opacity: 1; visibility: visible; }
+  .carro[data-adesivo="completo"][data-kit="furgao"] .adesivo-grande { opacity: 1; visibility: visible; }
   .escolha { font-size: var(--tamanho-2); color: var(--texto-suave); text-align: center; margin: 0; min-height: 3em; }
 
   /* Números */
@@ -236,15 +236,21 @@
       <g fill="var(--carro-aro)"><circle cx="170" cy="194" r="21"/><circle cx="470" cy="194" r="21"/></g>
       <g fill="var(--carro-aro-claro)"><circle cx="170" cy="194" r="15"/><circle cx="470" cy="194" r="15"/></g>
       <g fill="var(--carro-aro)"><circle cx="170" cy="194" r="5"/><circle cx="470" cy="194" r="5"/></g>
-      <!-- Adesivo de marca fictícia: painel que vira espaço de propaganda -->
-      <g class="adesivo" font-family="Nunito, sans-serif" font-weight="900">
-        <rect x="240" y="159" width="88" height="18" rx="9" fill="var(--carro-branco)" stroke="var(--carro-grafite)" stroke-opacity=".25"/>
-        <circle cx="251" cy="168" r="6" fill="var(--verde)"/><path d="M247.5 169.5 L 251 164 L 254.5 169.5 Z" fill="var(--amarelo)"/>
-        <text x="261" y="172" font-size="11" fill="var(--azul)">sua marca</text>
+      <!-- Adesivos de marca fictícia: o painel vira espaço de propaganda, em área lisa -->
+      <g class="adesivo" data-adesivo="logo">
+        <circle cx="285" cy="166" r="10" fill="var(--carro-branco)"/>
+        <circle cx="285" cy="166" r="7.5" fill="var(--verde)"/><path d="M281 168 L 285 161.5 L 289 168 Z" fill="var(--amarelo)"/>
+      </g>
+      <g class="adesivo" data-adesivo="completo" font-family="Nunito, sans-serif" font-weight="900" fill="var(--azul)">
+        <rect x="237" y="139" width="98" height="36" rx="8" fill="var(--carro-branco)" stroke="var(--carro-grafite)" stroke-opacity=".25"/>
+        <circle cx="252" cy="157" r="9" fill="var(--verde)"/><path d="M247 160 L 252 152 L 257 160 Z" fill="var(--amarelo)"/>
+        <text x="266" y="155" font-size="12">sua marca</text>
+        <text x="266" y="167" font-size="8" font-weight="700">seu slogan aqui</text>
         <g class="adesivo-grande">
-          <rect x="420" y="84" width="128" height="44" rx="14" fill="var(--carro-branco)" stroke="var(--carro-grafite)" stroke-opacity=".25"/>
-          <circle cx="440" cy="106" r="12" fill="var(--verde)"/><path d="M433 108 L 440 97 L 447 108 Z" fill="var(--amarelo)"/>
-          <text x="458" y="112" font-size="17" fill="var(--azul)">sua marca</text>
+          <rect x="410" y="84" width="140" height="52" rx="12" fill="var(--carro-branco)" stroke="var(--carro-grafite)" stroke-opacity=".25"/>
+          <circle cx="430" cy="110" r="13" fill="var(--verde)"/><path d="M423 114 L 430 102 L 437 114 Z" fill="var(--amarelo)"/>
+          <text x="449" y="107" font-size="17">sua marca</text>
+          <text x="449" y="123" font-size="11" font-weight="700">seu slogan aqui</text>
         </g>
       </g>
       <path d="M396 64 L 396 188" stroke="var(--azul)" stroke-width="3" stroke-dasharray="6 7" fill="none" opacity=".55"/>
@@ -272,9 +278,11 @@
         <button class="cor" type="button" aria-pressed="false" aria-label="Prata, teto grafite" data-corpo="prata" data-teto="grafite" data-faixa="prata" style="background: linear-gradient(180deg, var(--carro-grafite) 34%, var(--carro-prata) 34%)"></button>
         <button class="cor" type="button" aria-pressed="false" aria-label="Branco, teto grafite" data-corpo="branco" data-teto="grafite" data-faixa="branco" style="background: linear-gradient(180deg, var(--carro-grafite) 34%, var(--carro-branco) 34%)"></button>
       </div>
-      <div class="kits">
-        <span class="rotulo-monte">Extra</span>
-        <button class="kit-botao adesivo-botao" type="button" aria-pressed="false" data-frase="Com adesivo de marca.">Adesivo de marca</button>
+      <div class="kits" role="group" aria-label="Adesivo de marca">
+        <span class="rotulo-monte">Adesivo de marca</span>
+        <button class="kit-botao adesivo-botao" type="button" aria-pressed="true" data-adesivo="" data-frase="">Sem adesivo</button>
+        <button class="kit-botao adesivo-botao" type="button" aria-pressed="false" data-adesivo="logo" data-frase="Com adesivo de logo pequeno.">Logo pequeno</button>
+        <button class="kit-botao adesivo-botao" type="button" aria-pressed="false" data-adesivo="completo" data-frase="Com adesivo completo, com texto.">Logo com texto</button>
       </div>
       <p class="escolha" aria-live="polite">Picape de 2 lugares, com caçamba aberta. Verde mata, teto branco e filete amarelo.</p>
     </div>
@@ -508,16 +516,15 @@
   // Ilustração: troca o kit e a cor do carro
   const carro = document.querySelector(".carro");
   const botoesKit = [...document.querySelectorAll(".kit-botao[data-kit]")];
-  const botaoAdesivo = document.querySelector(".adesivo-botao");
+  const botoesAdesivo = [...document.querySelectorAll(".adesivo-botao")];
   const botoesCor = [...document.querySelectorAll(".cor")];
   const escolha = document.querySelector(".escolha");
   const marcado = (lista) => lista.find((b) => b.getAttribute("aria-pressed") === "true");
-  const mostrar = () => { escolha.textContent = marcado(botoesKit).dataset.frase + " " + marcado(botoesCor).getAttribute("aria-label") + "." + (carro.dataset.adesivo ? " " + botaoAdesivo.dataset.frase : ""); };
-  botaoAdesivo.addEventListener("click", () => {
-    const ligado = !carro.dataset.adesivo;
-    if (ligado) carro.dataset.adesivo = "sim"; else delete carro.dataset.adesivo;
-    botaoAdesivo.setAttribute("aria-pressed", String(ligado)); mostrar();
-  });
+  const mostrar = () => { escolha.textContent = marcado(botoesKit).dataset.frase + " " + marcado(botoesCor).getAttribute("aria-label") + "." + (marcado(botoesAdesivo).dataset.frase ? " " + marcado(botoesAdesivo).dataset.frase : ""); };
+  botoesAdesivo.forEach((b) => b.addEventListener("click", () => {
+    if (b.dataset.adesivo) carro.dataset.adesivo = b.dataset.adesivo; else delete carro.dataset.adesivo;
+    marcar(botoesAdesivo, b); mostrar();
+  }));
   const marcar = (lista, b) => lista.forEach((o) => o.setAttribute("aria-pressed", String(o === b)));
   botoesKit.forEach((b) => b.addEventListener("click", () => {
     carro.dataset.kit = b.dataset.kit;
