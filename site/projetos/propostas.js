@@ -96,6 +96,19 @@ window.PROPOSTAS = [
     },
   },
   {
+    id: "regulacao-da-cannabis",
+    href: "/projetos/regulacao-da-cannabis/",
+    img: "/projetos/img/regulacao-da-cannabis.svg",
+    cor: "verde",
+    tipo: "projeto",
+    fase: 1,
+    titulo: { pt: "A maconha já tem regra: a do tráfico", en: "Cannabis already has rules: the dealers'" },
+    gancho: {
+      pt: "Cânhamo para a indústria e clubes para adultos a partir de 21 anos, com produto rastreado e imposto pago.",
+      en: "Hemp for industry and clubs for adults aged 21 and over, with tracked products and taxes paid.",
+    },
+  },
+  {
     id: "qual-caminho",
     href: "/caminho/",
     img: "/projetos/img/qual-caminho.svg",
