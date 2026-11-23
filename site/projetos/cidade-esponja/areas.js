@@ -310,7 +310,7 @@ window.CIDADE_ESPONJA = (() => {
       nome: M("Conjunto Caiçara", "Conjunto Caiçara"),
       bairro: M("Região Oeste", "West region"),
       grau: "muito-alto", tipo: ["inundacao"],
-      resumo: M("Risco muito alto de inundação na lista da Defesa Civil (2025). Também tem setor no plano de risco do Serviço Geológico (2026).", "Very high flood risk in the Civil Defense list (2025). It also has a sector in the Geological Survey's risk plan (2026)."),
+      resumo: M("Risco muito alto de inundação na lista da Defesa Civil (2025). Também tem setor no plano de risco do Serviço Geológico (2026). A posição no mapa é aproximada.", "Very high flood risk in the Civil Defense list (2025). It also has a sector in the Geological Survey's risk plan (2026). The map position is approximate."),
       eventos: [],
       opcoes: ["varzea", "alerta", "bacia"],
       fontes: ["risco2025", "sgb"],
@@ -385,7 +385,7 @@ window.CIDADE_ESPONJA = (() => {
 
   const marcos = [
     {
-      id: "marco-jamel", pos: [-49.2455, -16.7005],
+      id: "marco-jamel", pos: [-49.2438, -16.7016],
       nome: M("Marco proposto: Jamel Cecílio", "Proposed marker: Jamel Cecílio"),
       texto: M(
         "O ponto aparece nos três temporais confirmados (jan/2025, dez/2025 e nov/2026). Ninguém registrou até onde a água subiu.",
