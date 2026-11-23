@@ -1,0 +1,52 @@
+name: Dados do mapa da cidade esponja
+
+# Baixa do OpenStreetMap (Overpass e Nominatim) as camadas de apoio do mapa de
+# /projetos/cidade-esponja/ e grava em site/projetos/cidade-esponja/dados/ no mesmo branch.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - scripts/cidade-esponja/**
+      - site/projetos/cidade-esponja/areas.js
+      - .github/workflows/dados-cidade-esponja.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dados-cidade-esponja-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gerar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Baixar os dados
+        shell: bash
+        run: python3 scripts/cidade-esponja/baixar_osm.py 2>&1 | tee baixar.log
+
+      - name: Resumo
+        run: |
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          tail -60 baixar.log >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Gravar no branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/projetos/cidade-esponja/dados
+          if git diff --cached --quiet; then
+            echo "Dados sem mudança."
+          else
+            git commit -m "Atualiza as camadas do mapa da cidade esponja (OpenStreetMap)"
+            git pull --rebase
+            git push
+          fi
