@@ -21,6 +21,7 @@ Não há pedido de voto. As propostas estão em construção, com dados, fontes 
 - [Brasil Responde](https://gabriel-rodrigues.com/projetos/brasil-responde/): ideia de questionários pelo gov.br para ouvir quem é afetado por uma lei antes da votação, anônimos ou com depoimento, com amostra sorteada
 - [Pena do tamanho do dano](https://gabriel-rodrigues.com/projetos/pena-do-tamanho-do-dano/): ideia de medir o dinheiro público desviado em Bolsas Família e fazer a pena por corrupção subir em degraus com o dano, com calculadora e comparação com Estados Unidos, Alemanha, China e Vietnã
 - [A maconha já tem regra: a do tráfico](https://gabriel-rodrigues.com/projetos/regulacao-da-cannabis/): ideia de lei em duas partes, cânhamo para a indústria por cooperativas e clubes sem fins lucrativos para adultos a partir de 21 anos, com produto rastreado, imposto num fundo com conta aberta e comparação com Uruguai, Canadá, Malta, Espanha, Alemanha e Tailândia
+- [Goiânia pode beber a própria chuva](https://gabriel-rodrigues.com/projetos/cidade-esponja/): mapa interativo dos pontos de alagamento e áreas de risco de Goiânia (Defesa Civil e imprensa, 2025–2026); cada ponto abre uma ficha com opções de cidade esponja, custo para o governo e para o morador e casos de outras cidades; cenários da Marginal Botafogo e candidatos aos Marcos da Memória
 - [galera.club](https://gabriel-rodrigues.com/projetos/galera-club/): plataforma brasileira de link na bio que já está no ar
 
 ## English

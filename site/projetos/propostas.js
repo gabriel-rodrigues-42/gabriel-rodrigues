@@ -109,6 +109,19 @@ window.PROPOSTAS = [
     },
   },
   {
+    id: "cidade-esponja",
+    href: "/projetos/cidade-esponja/",
+    img: "/projetos/img/cidade-esponja.svg",
+    cor: "turquesa",
+    tipo: "ferramenta",
+    fase: 2,
+    titulo: { pt: "Goiânia pode beber a própria chuva", en: "Goiânia can drink its own rain" },
+    gancho: {
+      pt: "Um mapa dos pontos que alagam em Goiânia. Toque num ponto e veja o que dá para fazer e quanto custa.",
+      en: "A map of the places that flood in Goiânia. Tap a point to see what can be done and what it costs.",
+    },
+  },
+  {
     id: "qual-caminho",
     href: "/caminho/",
     img: "/projetos/img/qual-caminho.svg",

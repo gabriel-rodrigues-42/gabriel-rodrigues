@@ -341,7 +341,7 @@
   const CEN = {
     hoje: {
       chao: "M0 110 H150 V170 H210 V110 H360 V200 H0 Z",
-      nivel: (mm) => (mm <= 30 ? 170 - (mm / 30) * 60 : 110 - (mm - 30) * 0.3),
+      nivel: (mm) => (mm <= 30 ? 170 - (mm / 30) * 60 : 110 - (mm - 30) * 0.6),
       pistas: [[30, 104, 115], [215, 104, 115]],
       estado: (mm) => (mm < 25 ? (EN ? "Road open" : "Pista aberta") : mm <= 35 ? (EN ? "Danger zone: the road usually closes between 25 and 35 mm" : "Zona de perigo: a via costuma fechar entre 25 e 35 mm") : (EN ? "Road closed, water over the lanes" : "Pista fechada, água por cima das faixas")),
     },
@@ -381,7 +381,8 @@
       <path d="${c.chao}" fill="var(--areia)"/>
       ${cenario === "hoje" ? '<path d="M150 110 V170 H210 V110" fill="none" stroke="var(--carro-prata)" stroke-width="4"/>' : '<path d="M150 130 V170 H210" fill="none" stroke="var(--verde-escuro)" stroke-width="3" opacity=".5"/>'}
       ${(c.parque || []).length ? (c.parque.reduce((s, v, i, a) => (i % 2 ? s : s + `<rect x="${v - 10}" y="${a[i + 1] - 10}" width="${cenario === "piloto" ? 160 : 140}" height="4" fill="var(--verde)"/>`), "")) : ""}
-      ${arvores}${viaduto}${pistas}`;
+      ${arvores}${pistas}
+      <rect x="0" y="${y}" width="360" height="${200 - y}" fill="var(--azul-medio)" opacity=".45"/>${viaduto}`;
     rotulo.textContent = T.chuva(mm);
     situacao.textContent = c.estado(mm);
   }
