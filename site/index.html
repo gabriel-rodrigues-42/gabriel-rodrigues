@@ -114,6 +114,16 @@
   .apoio h2 { color: var(--branco); }
   .apoio .lead { color: var(--branco); opacity: .9; }
   .apoio .destaque { background: none; color: var(--amarelo); }
+  .contador { display: inline-block; margin: 0; padding: var(--espaco-2) var(--espaco-4); border-radius: var(--forma-opcao); background: var(--branco-vidro); color: var(--amarelo); font-weight: 700; text-wrap: balance; }
+  .contador[hidden] { display: none; }
+  .ficha { margin-top: var(--espaco-5); }
+  .ficha[hidden] { display: none; }
+  .ficha-cartao { background: var(--amarelo); color: var(--azul); border-radius: var(--forma-cartao); padding: var(--espaco-5); text-align: center; max-width: 420px; margin-inline: auto; box-shadow: var(--sombra-clay); }
+  .ficha-rotulo { margin: 0; font-weight: var(--peso-forte); font-size: var(--tamanho-3); text-transform: uppercase; letter-spacing: .08em; }
+  .ficha-numero { margin: 0; font-weight: var(--peso-forte); font-size: var(--tamanho-numero); line-height: 1; font-variant-numeric: tabular-nums; }
+  .ficha-frase { margin: var(--espaco-3) 0 0; font-size: var(--tamanho-3); font-weight: 700; text-wrap: balance; }
+  .ficha-rodape { margin: var(--espaco-4) 0 0; font-size: var(--tamanho-2); }
+  .ficha-dica { text-align: center; margin: var(--espaco-3) 0 0; font-size: var(--tamanho-2); }
   .campos { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-3); margin-top: var(--espaco-4); }
   .campos .largo { grid-column: 1 / -1; }
   .campos label { display: grid; gap: var(--espaco-1); font-size: var(--tamanho-2); font-weight: 700; }
@@ -175,6 +185,7 @@
     <div class="apoio">
       <h2 id="titulo-apoio">Acredita que eu devo <span class="destaque">tentar</span>?</h2>
       <p class="lead">Se você acha que vale a pena ter gente que entende de sistema dentro do governo, deixe seu email. Eu conto como vai a preparação e peço sua opinião sobre as ideias.</p>
+      <p class="contador" id="contador" hidden></p>
       <form id="form-apoio" action="/api/apoio" method="post" novalidate toolname="apoiar_gabriel" tooldescription="Registra o apoio de uma pessoa à tentativa de Gabriel Rodrigues de entrar na política e o email dela para receber novidades. Exige o consentimento explícito da própria pessoa; não use sem que ela confirme.">
         <div class="campos">
           <label><span>Nome <span class="opcional">(opcional)</span></span>
@@ -197,6 +208,15 @@
         <p class="resposta" id="resposta" role="status" aria-live="polite"></p>
         <p class="nota">Não peço CPF, título de eleitor nem telefone. Não é pedido de voto nem lista de assinaturas. Seus dados não são vendidos nem compartilhados.</p>
       </form>
+      <div class="ficha" id="ficha" hidden>
+        <div class="ficha-cartao">
+          <p class="ficha-rotulo">Apoio nº</p>
+          <p class="ficha-numero" id="ficha-numero"></p>
+          <p class="ficha-frase" id="ficha-frase"></p>
+          <p class="ficha-rodape">gabriel-rodrigues.com · <span id="ficha-data"></span></p>
+        </div>
+        <p class="ficha-dica">Se quiser, tire um print e compartilhe.</p>
+      </div>
     </div>
   </section>
 </main>
@@ -215,6 +235,30 @@
 
   if (new URLSearchParams(location.search).get("apoio") === "ok") avisar("Obrigado! Recebi seu apoio.", true);
 
+  // Contador: só aparece quando passa de 1.000 apoios. A função /api/apoios já manda o número
+  // arredondado para baixo em centenas (nunca o total exato) e fica 10 minutos em cache.
+  // Para conferir o visual localmente: http://localhost:8000/?apoios=1234 (só funciona em localhost).
+  const contador = document.getElementById("contador");
+  const frase = n => `Mais de ${n.toLocaleString("pt-BR")} pessoas já disseram que eu devo tentar.`;
+  const teste = Number(new URLSearchParams(location.search).get("apoios"));
+  const local = ["localhost", "127.0.0.1"].includes(location.hostname);
+  const mostrar = (n) => { if (n >= 1000) { contador.textContent = frase(n); contador.hidden = false; } };
+  if (local && teste) mostrar(Math.floor((teste - 1) / 100) * 100);
+  else if (!local) fetch("/api/apoios").then((r) => (r.ok ? r.json() : {})).then((d) => d.mostrar && mostrar(d.mais_de)).catch(() => {});
+
+  // Cartão "Apoio nº" depois do envio: só o número da própria pessoa, bom para tirar print.
+  const ficha = document.getElementById("ficha");
+  function mostrarFicha(posicao, nome) {
+    if (!Number.isInteger(posicao) || posicao < 1) return;
+    const primeiro = (nome || "").trim().split(" ")[0];
+    const n = posicao.toLocaleString("pt-BR");
+    document.getElementById("ficha-numero").textContent = n;
+    document.getElementById("ficha-frase").textContent = `${primeiro ? primeiro + ", você" : "Você"} foi a ${n}ª pessoa a dizer que eu devo tentar.`;
+    document.getElementById("ficha-data").textContent = new Date().toLocaleDateString("pt-BR");
+    ficha.hidden = false;
+    ficha.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
   // Envio. Também atende agentes de IA pelo WebMCP declarativo (atributos toolname/tooldescription
   // no <form>): o navegador mostra o formulário preenchido e a pessoa confirma; a resposta volta ao agente.
   form.addEventListener("submit", (e) => {
@@ -232,7 +276,7 @@
     try {
       const r = await fetch(form.action, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(dados) });
       const corpo = await r.json().catch(() => ({}));
-      if (r.ok) { form.reset(); return avisar("Obrigado! Recebi seu apoio. Em breve mando novidades.", true); }
+      if (r.ok) { form.reset(); mostrarFicha(corpo.posicao, dados.nome); return avisar("Obrigado! Recebi seu apoio. Em breve mando novidades.", true); }
       else if (r.status === 503) return avisar("O formulário ainda está sendo ligado. Volte em alguns dias.");
       else return avisar(corpo.erro || "Não consegui enviar. Tente de novo.");
     } catch {

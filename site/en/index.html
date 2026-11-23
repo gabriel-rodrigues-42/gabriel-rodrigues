@@ -114,6 +114,16 @@
   .apoio h2 { color: var(--branco); }
   .apoio .lead { color: var(--branco); opacity: .9; }
   .apoio .destaque { background: none; color: var(--amarelo); }
+  .contador { display: inline-block; margin: 0; padding: var(--espaco-2) var(--espaco-4); border-radius: var(--forma-opcao); background: var(--branco-vidro); color: var(--amarelo); font-weight: 700; text-wrap: balance; }
+  .contador[hidden] { display: none; }
+  .ficha { margin-top: var(--espaco-5); }
+  .ficha[hidden] { display: none; }
+  .ficha-cartao { background: var(--amarelo); color: var(--azul); border-radius: var(--forma-cartao); padding: var(--espaco-5); text-align: center; max-width: 420px; margin-inline: auto; box-shadow: var(--sombra-clay); }
+  .ficha-rotulo { margin: 0; font-weight: var(--peso-forte); font-size: var(--tamanho-3); text-transform: uppercase; letter-spacing: .08em; }
+  .ficha-numero { margin: 0; font-weight: var(--peso-forte); font-size: var(--tamanho-numero); line-height: 1; font-variant-numeric: tabular-nums; }
+  .ficha-frase { margin: var(--espaco-3) 0 0; font-size: var(--tamanho-3); font-weight: 700; text-wrap: balance; }
+  .ficha-rodape { margin: var(--espaco-4) 0 0; font-size: var(--tamanho-2); }
+  .ficha-dica { text-align: center; margin: var(--espaco-3) 0 0; font-size: var(--tamanho-2); }
   .campos { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-3); margin-top: var(--espaco-4); }
   .campos .largo { grid-column: 1 / -1; }
   .campos label { display: grid; gap: var(--espaco-1); font-size: var(--tamanho-2); font-weight: 700; }
@@ -175,6 +185,7 @@
     <div class="apoio">
       <h2 id="titulo-apoio">Do you think I should <span class="destaque">try</span>?</h2>
       <p class="lead">If you think it's worth having people who understand systems inside government, leave your email. I'll share how the preparation is going and ask your opinion on the ideas.</p>
+      <p class="contador" id="contador" hidden></p>
       <form id="form-apoio" action="/api/apoio" method="post" novalidate toolname="support_gabriel" tooldescription="Records a person's support for Gabriel Rodrigues trying to run for office, plus their email to receive news. Requires the person's own explicit consent; do not use without their confirmation.">
         <input type="hidden" name="idioma" value="en">
         <div class="campos">
@@ -198,6 +209,15 @@
         <p class="resposta" id="resposta" role="status" aria-live="polite"></p>
         <p class="nota">I don't ask for CPF (Brazilian tax ID), voter ID or phone number. This is not a request for votes or a petition. Your data is not sold or shared.</p>
       </form>
+      <div class="ficha" id="ficha" hidden>
+        <div class="ficha-cartao">
+          <p class="ficha-rotulo">Supporter no.</p>
+          <p class="ficha-numero" id="ficha-numero"></p>
+          <p class="ficha-frase" id="ficha-frase"></p>
+          <p class="ficha-rodape">gabriel-rodrigues.com · <span id="ficha-data"></span></p>
+        </div>
+        <p class="ficha-dica">Take a screenshot and share it if you like.</p>
+      </div>
     </div>
   </section>
 </main>
@@ -217,6 +237,30 @@
 
   if (new URLSearchParams(location.search).get("apoio") === "ok") avisar("Thank you! I got your support.", true);
 
+  // Contador: só aparece quando passa de 1.000 apoios. A função /api/apoios já manda o número
+  // arredondado para baixo em centenas (nunca o total exato) e fica 10 minutos em cache.
+  // Para conferir o visual localmente: http://localhost:8000/?apoios=1234 (só funciona em localhost).
+  const contador = document.getElementById("contador");
+  const frase = n => `More than ${n.toLocaleString("en-US")} people have already said I should try.`;
+  const teste = Number(new URLSearchParams(location.search).get("apoios"));
+  const local = ["localhost", "127.0.0.1"].includes(location.hostname);
+  const mostrar = (n) => { if (n >= 1000) { contador.textContent = frase(n); contador.hidden = false; } };
+  if (local && teste) mostrar(Math.floor((teste - 1) / 100) * 100);
+  else if (!local) fetch("/api/apoios").then((r) => (r.ok ? r.json() : {})).then((d) => d.mostrar && mostrar(d.mais_de)).catch(() => {});
+
+  // "Supporter no." card after sending: only this person's own number, good for a screenshot.
+  const ficha = document.getElementById("ficha");
+  const ordinal = (n) => { const r = n % 100; const f = r >= 11 && r <= 13 ? "th" : ({ 1: "st", 2: "nd", 3: "rd" })[n % 10] || "th"; return n.toLocaleString("en-US") + f; };
+  function mostrarFicha(posicao, nome) {
+    if (!Number.isInteger(posicao) || posicao < 1) return;
+    const primeiro = (nome || "").trim().split(" ")[0];
+    document.getElementById("ficha-numero").textContent = posicao.toLocaleString("en-US");
+    document.getElementById("ficha-frase").textContent = `${primeiro ? primeiro + ", you" : "You"} were the ${ordinal(posicao)} person to say I should try.`;
+    document.getElementById("ficha-data").textContent = new Date().toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" });
+    ficha.hidden = false;
+    ficha.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
   // Envio. Também atende agentes de IA pelo WebMCP declarativo (atributos toolname/tooldescription
   // no <form>): o navegador mostra o formulário preenchido e a pessoa confirma; a resposta volta ao agente.
   form.addEventListener("submit", (e) => {
@@ -233,7 +277,8 @@
     avisar("Sending…");
     try {
       const r = await fetch(form.action, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(dados) });
-      if (r.ok) { form.reset(); return avisar("Thank you! I got your support. I'll send news soon.", true); }
+      const corpo = await r.json().catch(() => ({}));
+      if (r.ok) { form.reset(); mostrarFicha(corpo.posicao, dados.nome); return avisar("Thank you! I got your support. I'll send news soon.", true); }
       else if (r.status === 503) return avisar("The form is still being set up. Please come back in a few days.");
       else if (r.status === 400) return avisar("Please check the email, the city and the authorization.");
       else return avisar("Couldn't send it. Please try again.");
