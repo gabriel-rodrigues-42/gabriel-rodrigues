@@ -244,10 +244,36 @@ def pena_do_tamanho_do_dano():
                degraus + chao(80, 412, 540) + poste + braco + fio_e + fio_d + moedas + prato_e + casas + prato_d)
 
 
+def folha_canhamo(cx, cy, r, cor):
+    """Folha de cânhamo estilizada: cinco folíolos em leque."""
+    partes = ""
+    for ang, esc in ((-70, .62), (-35, .85), (0, 1), (35, .85), (70, .62)):
+        partes += (f'<ellipse cx="{cx}" cy="{cy - r * esc / 2:.1f}" rx="{r * .14:.1f}" ry="{r * esc / 2:.1f}" '
+                   f'fill="{C[cor]}" transform="rotate({ang} {cx} {cy})"/>')
+    return partes
+
+
+def regulacao_da_cannabis():
+    """Hastes de cânhamo no campo, uma seta para a fábrica de tecido e um pacote lacrado com selo."""
+    hastes = ""
+    for x, alt in ((120, 250), (175, 300), (230, 230)):
+        hastes += traco(f"M{x},412 L{x},{412 - alt}", "verde-escuro", 8)
+        for i, y in enumerate(range(412 - alt + 20, 400, 70)):
+            hastes += folha_canhamo(x, y, 58 - i * 6, "verde" if i % 2 else "verde-escuro")
+    seta = traco("M285,300 C320,300 330,300 350,300", "azul-medio", 14) + cam("M372,300 L344,278 L344,322 Z", "azul-medio")
+    rolo = (ret(400, 300, 120, 112, "amarelo", 14) + circ(400, 356, 56, "amarelo-escuro") + circ(400, 356, 20, "amarelo-claro")
+            + traco("M430,318 L510,318 M430,346 L510,346 M430,374 L510,374", "amarelo-escuro", 5))
+    pacote = (ret(540, 250, 110, 162, "azul", 16) + ret(540, 250, 110, 26, "azul-medio", 12)
+              + circ(595, 330, 32, "branco") + circ(595, 330, 32, "livre-coral", ' fill-opacity="0" stroke="#ff7a45" stroke-width="7"')
+              + traco("M580,330 L591,341 L611,320", "verde-escuro", 7))
+    return svg("Hastes de cânhamo, uma seta para um rolo de tecido e um pacote lacrado com selo",
+               chao(70, 412, 600) + hastes + seta + rolo + pacote + estrela(470, 210, 14, "amarelo-escuro"))
+
+
 DESENHOS = {
     "galera-club": galera_club, "reindustrializacao": reindustrializacao, "desafio-dumont": desafio_dumont,
     "cartorio-digital": cartorio_digital, "qual-caminho": qual_caminho, "leis-com-mentalidade-de-software": leis_software,
-    "canal-do-youtube": canal_do_youtube, "brasil-responde": brasil_responde, "pena-do-tamanho-do-dano": pena_do_tamanho_do_dano, "ideia": ideia, "capa": capa,
+    "canal-do-youtube": canal_do_youtube, "brasil-responde": brasil_responde, "pena-do-tamanho-do-dano": pena_do_tamanho_do_dano, "regulacao-da-cannabis": regulacao_da_cannabis, "ideia": ideia, "capa": capa,
 }
 
 if __name__ == "__main__":

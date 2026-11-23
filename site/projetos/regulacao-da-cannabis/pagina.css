@@ -1,0 +1,102 @@
+/* Estilos da página A maconha já tem regra (PT e EN usam o mesmo arquivo). Baseados em pena-do-tamanho-do-dano. */
+main { max-width: 760px; margin: 0 auto; padding: var(--espaco-7) var(--espaco-4); }
+nav a { font-weight: var(--peso-forte); text-decoration: none; color: var(--azul); }
+a { color: var(--azul); }
+h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); }
+h2 { font-size: var(--tamanho-5); line-height: 1.15; color: var(--azul); margin: 0 0 var(--espaco-3); }
+h3 { font-size: var(--tamanho-4); color: var(--azul); margin: 0 0 var(--espaco-2); line-height: 1.25; }
+p { margin: 0 0 var(--espaco-3); }
+.lead { font-size: var(--tamanho-3); color: var(--texto-suave); }
+.grande { font-size: var(--tamanho-4); font-weight: var(--peso-forte); line-height: 1.35; }
+.capitulo { margin-top: var(--espaco-7); }
+.ato { display: inline-block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); letter-spacing: .08em; text-transform: uppercase; color: var(--verde-escuro); margin-bottom: var(--espaco-2); }
+.capa-acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-3); margin-top: var(--espaco-5); }
+.legenda-ilustra { font-size: var(--tamanho-1); color: var(--texto-suave); text-align: center; margin: 0; }
+/* Números */
+.numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--espaco-4); margin-top: var(--espaco-4); }
+.numeros .cartao { padding: var(--espaco-4); }
+.numeros strong { display: block; font-size: var(--tamanho-5); color: var(--verde-escuro); line-height: 1.1; margin-bottom: var(--espaco-1); }
+.fontes { font-size: var(--tamanho-2); color: var(--texto-suave); }
+.numeros .fontes { display: block; margin-top: var(--espaco-2); font-size: var(--tamanho-1); }
+/* Fluxo de hoje */
+.fluxo { list-style: none; padding: 0; margin: var(--espaco-5) 0 0; position: relative; }
+.fluxo::before { content: ""; position: absolute; left: 27px; top: 20px; bottom: 20px; width: 6px; background: var(--amarelo); border-radius: var(--forma-pilula); }
+.fluxo li { position: relative; display: grid; grid-template-columns: 60px 1fr; gap: var(--espaco-4); align-items: start; padding-bottom: var(--espaco-5); }
+.fluxo li:last-child { padding-bottom: 0; }
+.fluxo .n { width: 60px; height: 60px; display: grid; place-items: center; background: var(--azul); color: var(--branco); font-weight: var(--peso-forte); font-size: var(--tamanho-4); border-radius: var(--forma-bolha-1); box-shadow: var(--sombra-clay); position: relative; }
+.fluxo li:nth-child(even) .n { border-radius: var(--forma-bolha-2); }
+.fluxo strong { display: block; color: var(--azul); font-size: var(--tamanho-3); margin-top: var(--espaco-2); }
+.fluxo .trava { display: inline-block; margin-top: var(--espaco-2); background: var(--areia); color: var(--texto); font-size: var(--tamanho-1); font-weight: var(--peso-forte); padding: 4px 10px; border-radius: var(--forma-selo); }
+.duas { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-4); margin-top: var(--espaco-4); }
+.duas .cartao { padding: var(--espaco-4); }
+.duas .contra { background: var(--areia); box-shadow: none; }
+.duas .pro { background: var(--verde-claro); box-shadow: none; }
+.duas p { margin: var(--espaco-2) 0 0; font-size: var(--tamanho-2); }
+@media (max-width: 560px) { .duas { grid-template-columns: 1fr; } }
+/* Camadas da proposta */
+.camadas { display: grid; gap: var(--espaco-4); margin-top: var(--espaco-4); }
+.camada { padding: var(--espaco-4) var(--espaco-5); }
+.camada .selo { margin-bottom: var(--espaco-3); }
+.camada ul { margin: 0; padding-left: 1.1em; }
+.camada li + li { margin-top: var(--espaco-2); }
+/* Críticas */
+.critica { background: var(--branco); border-radius: var(--forma-opcao); box-shadow: var(--sombra-cartao); margin-top: var(--espaco-4); }
+.critica summary { cursor: pointer; list-style: none; padding: var(--espaco-4) var(--espaco-5); font-weight: var(--peso-forte); color: var(--azul); display: flex; gap: var(--espaco-3); justify-content: space-between; align-items: center; }
+.critica summary::-webkit-details-marker { display: none; }
+.critica summary::after { content: "+"; flex: none; width: 32px; height: 32px; display: grid; place-items: center; background: var(--amarelo); color: var(--azul); border-radius: var(--forma-bolha-1); font-size: var(--tamanho-4); }
+.critica[open] summary::after { content: "−"; }
+.critica summary:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; border-radius: var(--forma-opcao); }
+.critica .resposta { padding: 0 var(--espaco-5) var(--espaco-4); }
+.critica .resposta p:last-child { margin-bottom: 0; }
+
+.conversa { background: var(--amarelo-claro); border-radius: var(--forma-cartao); padding: var(--espaco-6) var(--espaco-5); text-align: center; }
+.conversa p.grande { color: var(--azul); }
+.conversa .capa-acoes { justify-content: center; }
+.hashtags { display: flex; flex-wrap: wrap; gap: var(--espaco-2); justify-content: center; margin-top: var(--espaco-4); }
+.hashtag { background: var(--branco); color: var(--verde-escuro); font-weight: var(--peso-forte); padding: 6px 12px; border-radius: var(--forma-selo); }
+.fontes li + li { margin-top: var(--espaco-2); }
+
+/* Barras da capa */
+.barras-capa { margin: var(--espaco-5) 0; padding: var(--espaco-4) var(--espaco-5); background: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); }
+.linha-barra { display: grid; grid-template-columns: 1fr auto; gap: var(--espaco-1) var(--espaco-3); align-items: center; margin-bottom: var(--espaco-4); }
+.linha-barra span { grid-column: 1 / -1; font-size: var(--tamanho-2); font-weight: var(--peso-forte); color: var(--azul); }
+.linha-barra .trilho { background: var(--creme); border-radius: var(--forma-pilula); height: 28px; overflow: hidden; }
+.linha-barra .cheio { height: 100%; background: var(--verde); border-radius: var(--forma-pilula); min-width: 12px; }
+.linha-barra .cheio.pouco { background: var(--azul-medio); }
+.linha-barra b { font-size: var(--tamanho-4); color: var(--verde-escuro); min-width: 3ch; text-align: right; }
+
+.revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+.revelar.visivel { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .revelar { opacity: 1; transform: none; transition: none; }
+}
+
+
+
+/* Países */
+.paises { display: grid; gap: var(--espaco-4); margin-top: var(--espaco-4); }
+.pais-cartao { padding: var(--espaco-4) var(--espaco-5); }
+.pais-cartao .selo { margin-bottom: var(--espaco-3); }
+.pais-cartao h3 { margin-top: 0; }
+.pais-cartao.contra { background: var(--areia); box-shadow: none; }
+.pais-cartao .fontes { font-size: var(--tamanho-1); margin: 0; }
+
+.paises { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.pequeno { font-size: var(--tamanho-1); }
+.suave { color: var(--texto-suave); }
+/* Embalagem */
+.figura { margin: var(--espaco-4) 0 0; }
+.figura img { width: 100%; height: auto; display: block; border-radius: var(--forma-cartao); }
+.figura figcaption { font-size: var(--tamanho-1); color: var(--texto-suave); margin-top: var(--espaco-2); text-align: center; }
+/* Chamada para a reindustrialização */
+.ponte { background: var(--azul); color: var(--branco); border-radius: var(--forma-cartao); padding: var(--espaco-5); margin-top: var(--espaco-5); }
+.ponte h3 { color: var(--amarelo); }
+.ponte p { color: var(--branco); }
+.ponte .botao { background: var(--amarelo); color: var(--azul); }
+/* Cartões para compartilhar */
+.cartoes { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--espaco-4); margin-top: var(--espaco-4); }
+.cartao-compartilhar { padding: var(--espaco-3); display: grid; gap: var(--espaco-3); }
+.cartao-compartilhar img { width: 100%; height: auto; display: block; border-radius: var(--forma-opcao); }
+.cartao-compartilhar .acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-2); }
+.cartao-compartilhar .botao { flex: 1 1 auto; text-align: center; padding-inline: var(--espaco-3); }
+.aviso-copiado { font-size: var(--tamanho-1); color: var(--verde-escuro); min-height: 1.2em; margin: 0; }
