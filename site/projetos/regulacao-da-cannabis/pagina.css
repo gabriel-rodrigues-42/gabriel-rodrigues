@@ -96,7 +96,15 @@ p { margin: 0 0 var(--espaco-3); }
 /* Cartões para compartilhar */
 .cartoes { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--espaco-4); margin-top: var(--espaco-4); }
 .cartao-compartilhar { padding: var(--espaco-3); display: grid; gap: var(--espaco-3); }
-.cartao-compartilhar img { width: 100%; height: auto; display: block; border-radius: var(--forma-opcao); }
+.frase { margin: 0; padding: var(--espaco-5) var(--espaco-4); border-radius: var(--forma-opcao); display: grid; gap: var(--espaco-4); }
+.frase p { margin: 0; font-weight: 700; font-size: var(--tamanho-4); line-height: 1.3; text-wrap: pretty; }
+.frase strong { display: block; font-weight: 900; margin-bottom: var(--espaco-2); }
+.frase footer { font-size: var(--tamanho-1); opacity: .9; }
+.frase footer span { white-space: nowrap; }
+.frase.azul { background: var(--azul); color: var(--branco); }
+.frase.azul strong { color: var(--amarelo); }
+.frase.verde { background: var(--verde-fundo); color: var(--branco); }
+.frase.amarelo { background: var(--amarelo); color: var(--azul); }
 .cartao-compartilhar .acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-2); }
 .cartao-compartilhar .botao { flex: 1 1 auto; text-align: center; padding-inline: var(--espaco-3); }
 .aviso-copiado { font-size: var(--tamanho-1); color: var(--verde-escuro); min-height: 1.2em; margin: 0; }
