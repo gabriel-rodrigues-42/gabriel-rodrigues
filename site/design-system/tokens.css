@@ -73,6 +73,9 @@
   --tamanho-4: 22px;
   --tamanho-5: clamp(28px, 6vw, 40px);
   --tamanho-6: clamp(32px, 7vw, 48px);
+  /* Campos de formulário: no iPhone, campo com letra menor que 16px dá zoom
+     na página quando a pessoa toca nele. */
+  --tamanho-campo: 16px;
   /* Título dentro de cartão estreito (ex.: ideia com botão ao lado). Menor no
      celular para "Reindustrializar" caber inteiro numa linha de 360px. */
   --tamanho-titulo-cartao: clamp(24px, 6vw, 40px);
