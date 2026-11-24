@@ -45,6 +45,7 @@
     li.dataset.cor = p.cor || "azul";
     const a = el("a");
     a.href = local(p.href);
+    if (p.tipo === "audio") a.dataset.modoLeitura = ""; // abre já com o modo leitura ligado (moldura.js)
 
     const palco = el("div", "slot-palco");
     const img = el("img");
