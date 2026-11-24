@@ -238,8 +238,6 @@
       aplicarLeitura(ligada);
       return;
     }
-    // Links que prometem "ouvir com legendas" ligam o modo leitura antes de abrir a página.
-    if (e.target.closest("a[data-modo-leitura]")) salvarLeitura(true);
     // Troca de idioma: recalcula na hora, para levar junto o # atual (ex.: respostas do /caminho/).
     const idioma = e.target.closest(".moldura-idioma a:not([aria-current])");
     if (idioma) idioma.href = outroIdioma();
