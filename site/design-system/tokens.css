@@ -16,8 +16,10 @@
   --azul: #002776;
   --azul-medio: #2f5bb7;
   --azul-claro: #e6ecf7;
+  --vermelho-fundo: #c62828; /* fundo vermelho com texto branco (contraste 5,6:1, AA): só para ações que fecham ou param */
   --branco: #ffffff;
   --branco-vidro: rgba(255, 255, 255, .08); /* cartão claro sobre fundo azul */
+  --branco-vidro-medio: rgba(255, 255, 255, .16); /* botão claro sobre fundo azul */
   --branco-vidro-forte: rgba(255, 255, 255, .35); /* borda clara sobre fundo azul */
 
   /* Carro do Desafio Dumont: cores de carro de verdade, com tom sóbrio.

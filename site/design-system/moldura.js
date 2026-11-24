@@ -8,6 +8,8 @@
   // Idioma: português é o padrão. A versão em inglês de /x/ fica em /en/x/ e tem <html lang="en">.
   const EN = /^en\b/i.test(document.documentElement.lang) || location.pathname === "/en" || location.pathname.startsWith("/en/");
   const RAIZ = EN ? "/en/" : "/";
+  // Pasta deste arquivo: o leitor (modo leitura) mora ao lado.
+  const PASTA = document.currentScript ? new URL(".", document.currentScript.src).pathname : "/design-system/";
   // Caminho sem o /en, para marcar o item do menu da página atual nos dois idiomas.
   const semIdioma = location.pathname.replace(/^\/en(?=\/|$)/, "") || "/";
 
@@ -25,6 +27,8 @@
     recusar: "Decline",
     aceitar: "Accept",
     idiomaRotulo: "Language",
+    leitura: "Reading mode",
+    leituraTitulo: "Adds a play button to every page and section, to listen with captions",
   } : {
     missao: "Desenvolvedor de software em Goiânia (GO). Estudo política para levar o jeito de trabalhar da engenharia de software para o governo: medir, testar, corrigir e mostrar o código.",
     menu: ["Propostas", "Caminho", "Sobre"],
@@ -39,6 +43,8 @@
     recusar: "Recusar",
     aceitar: "Aceitar",
     idiomaRotulo: "Idioma",
+    leitura: "Modo leitura",
+    leituraTitulo: "Coloca um botão de play em cada página e seção, para ouvir com legendas",
   };
 
   const MENU = [
@@ -119,15 +125,58 @@
               <li><a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues">${T.rodape[1]}</a></li>
               <li><a href="${RAIZ}privacidade/">${T.rodape[2]}</a> · <a href="#" data-cookies>${T.rodape[3]}</a> · <a href="/design-system/">${T.rodape[4]}</a></li>
             </ul>
-            <div class="moldura-idioma" role="group" aria-label="${T.idiomaRotulo}">
-              <a href="${EN ? outroIdioma() : location.pathname}" lang="pt-BR" hreflang="pt-BR" title="Ler em português"${EN ? "" : ' aria-current="true"'} data-idioma="pt">PT</a>
-              <a href="${EN ? location.pathname : outroIdioma()}" lang="en" hreflang="en" title="Read in English"${EN ? ' aria-current="true"' : ""} data-idioma="en">EN</a>
+            <div class="moldura-ajustes">
+              <div class="moldura-idioma" role="group" aria-label="${T.idiomaRotulo}">
+                <a href="${EN ? outroIdioma() : location.pathname}" lang="pt-BR" hreflang="pt-BR" title="Ler em português"${EN ? "" : ' aria-current="true"'} data-idioma="pt">PT</a>
+                <a href="${EN ? location.pathname : outroIdioma()}" lang="en" hreflang="en" title="Read in English"${EN ? ' aria-current="true"' : ""} data-idioma="en">EN</a>
+              </div>
+              <button type="button" class="moldura-leitura" aria-pressed="${leituraLigada()}" title="${T.leituraTitulo}" data-modo-leitura-botao>
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9.5h3.2L12 5.6v12.8l-4.8-3.9H4z"/><path d="M15.5 8.8a4.5 4.5 0 0 1 0 6.4M18.2 6.2a8.2 8.2 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <span>${T.leitura}</span>
+                <span class="moldura-chave" aria-hidden="true"></span>
+              </button>
             </div>
             <p class="moldura-aviso">${T.aviso}</p>
           </div>
         </footer>`;
     }
   }
+
+  // ---------- Modo leitura ----------
+  // Ligado no rodapé, carrega leitor.js + leitor.css, que põem um ▶ em cada página e seção
+  // e mostram as legendas. A escolha fica no navegador (localStorage).
+  const CHAVE_LEITURA = "gr-modo-leitura"; // "ligado" | ausente
+  const VERSAO_LEITOR = "2026-11-24";
+  function leituraLigada() { try { return localStorage.getItem(CHAVE_LEITURA) === "ligado"; } catch { return false; } }
+  function salvarLeitura(ligada) {
+    try { ligada ? localStorage.setItem(CHAVE_LEITURA, "ligado") : localStorage.removeItem(CHAVE_LEITURA); } catch { /* sem armazenamento: vale só nesta página */ }
+  }
+
+  let leitorCarregando = null;
+  function carregarLeitor() {
+    if (window.GRLeitor) return Promise.resolve();
+    if (leitorCarregando) return leitorCarregando;
+    const css = document.createElement("link");
+    css.rel = "stylesheet";
+    css.href = PASTA + "leitor.css?v=" + VERSAO_LEITOR;
+    document.head.appendChild(css);
+    leitorCarregando = new Promise((ok, erro) => {
+      const s = document.createElement("script");
+      s.src = PASTA + "leitor.js?v=" + VERSAO_LEITOR;
+      s.onload = ok;
+      s.onerror = erro;
+      document.head.appendChild(s);
+    });
+    return leitorCarregando;
+  }
+
+  function aplicarLeitura(ligada) {
+    document.querySelectorAll("[data-modo-leitura-botao]").forEach((b) => b.setAttribute("aria-pressed", String(ligada)));
+    if (ligada) carregarLeitor().then(() => window.GRLeitor.ligar(), () => {});
+    else if (window.GRLeitor) window.GRLeitor.desligar();
+  }
+
+  if (leituraLigada()) aplicarLeitura(true);
 
   // ---------- Medição (Google Tag Manager) só com consentimento ----------
   // LGPD: nada de Google até a pessoa aceitar. Com o aceite, o GTM carrega e o Consent Mode
@@ -182,6 +231,15 @@
   if (escolha === "aceito") carregarGtm();
   document.addEventListener("DOMContentLoaded", () => { if (!lerEscolha()) mostrarAviso(); });
   document.addEventListener("click", (e) => {
+    const botaoLeitura = e.target.closest("[data-modo-leitura-botao]");
+    if (botaoLeitura) {
+      const ligada = botaoLeitura.getAttribute("aria-pressed") !== "true";
+      salvarLeitura(ligada);
+      aplicarLeitura(ligada);
+      return;
+    }
+    // Links que prometem "ouvir com legendas" ligam o modo leitura antes de abrir a página.
+    if (e.target.closest("a[data-modo-leitura]")) salvarLeitura(true);
     // Troca de idioma: recalcula na hora, para levar junto o # atual (ex.: respostas do /caminho/).
     const idioma = e.target.closest(".moldura-idioma a:not([aria-current])");
     if (idioma) idioma.href = outroIdioma();

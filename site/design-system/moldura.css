@@ -1,6 +1,6 @@
 /* Moldura do site: cabeçalho e rodapé iguais em todas as páginas.
    Depende de tokens.css. Use junto com moldura.js:
-     <link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-22">
+     <link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-24">
      <script src="/design-system/moldura.js"></script>
      <gr-cabecalho></gr-cabecalho> logo depois de <body>
      <gr-rodape></gr-rodape> logo antes de </body> */
@@ -37,7 +37,9 @@ h1, h2, h3 { hyphens: manual; text-wrap: balance; }
 .moldura-apoiar { background: var(--verde-fundo); color: var(--branco); padding: 8px 16px; }
 
 /* Troca de idioma PT/EN (no rodapé, sobre o azul): duas pílulas juntas, a do idioma atual preenchida. */
-.moldura-idioma { grid-column: 1 / -1; justify-self: start; display: flex; border: 2px solid var(--branco-vidro-forte); border-radius: var(--forma-pilula); padding: 2px; }
+/* Ajustes do rodapé: idioma e modo leitura lado a lado, na mesma altura. */
+.moldura-ajustes { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: var(--espaco-3); }
+.moldura-idioma { display: flex; border: 2px solid var(--branco-vidro-forte); border-radius: var(--forma-pilula); padding: 2px; }
 .moldura-idioma a {
   font-size: var(--tamanho-2); font-weight: var(--peso-forte); color: var(--branco); text-decoration: none;
   padding: 6px 14px; border-radius: var(--forma-pilula); line-height: 1.2; letter-spacing: .04em;
@@ -46,6 +48,19 @@ h1, h2, h3 { hyphens: manual; text-wrap: balance; }
 .moldura-idioma a:hover { background: var(--branco-vidro); }
 .moldura-rodape .moldura-idioma a[aria-current] { background: var(--amarelo); color: var(--azul); }
 .moldura-idioma a:focus-visible { outline: 3px solid var(--amarelo); outline-offset: 2px; }
+/* Modo leitura: pílula com chave liga/desliga. Ligado, a chave fica amarela. */
+.moldura-leitura {
+  font: inherit; font-size: var(--tamanho-2); font-weight: var(--peso-forte); color: var(--branco); line-height: 1.2; cursor: pointer;
+  display: inline-flex; align-items: center; gap: var(--espaco-2); background: none;
+  border: 2px solid var(--branco-vidro-forte); border-radius: var(--forma-pilula); padding: 8px 10px 8px 12px;
+}
+.moldura-leitura svg { width: 18px; height: 18px; fill: currentColor; flex: none; }
+.moldura-leitura:hover { background: var(--branco-vidro); }
+.moldura-leitura:focus-visible { outline: 3px solid var(--amarelo); outline-offset: 2px; }
+.moldura-chave { position: relative; width: 30px; height: 18px; border-radius: var(--forma-pilula); background: var(--branco-vidro-forte); flex: none; transition: background .2s; }
+.moldura-chave::after { content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: var(--branco); transition: transform .2s; }
+.moldura-leitura[aria-pressed="true"] .moldura-chave { background: var(--amarelo); }
+.moldura-leitura[aria-pressed="true"] .moldura-chave::after { transform: translateX(12px); background: var(--azul); }
 .moldura-apoiar:hover { background: var(--verde-escuro); }
 .moldura-menu a:focus-visible, .moldura-apoiar:focus-visible, .moldura-marca:focus-visible, .moldura-rodape a:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
 
