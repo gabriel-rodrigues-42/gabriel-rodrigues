@@ -1,6 +1,6 @@
 /* Moldura do site: cabeçalho e rodapé iguais em todas as páginas.
    Depende de tokens.css. Use junto com moldura.js:
-     <link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-24">
+     <link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-24b">
      <script src="/design-system/moldura.js"></script>
      <gr-cabecalho></gr-cabecalho> logo depois de <body>
      <gr-rodape></gr-rodape> logo antes de </body> */
@@ -9,6 +9,9 @@ gr-cabecalho, gr-rodape { display: block; font-family: var(--fonte); }
 
 /* ---------- Proteção contra rolagem lateral (vale para todas as páginas) ---------- */
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: clip; }
+/* Toque duplo não dá zoom (no logo, nos botões, em lugar nenhum). O zoom de
+   pinça continua funcionando, para quem precisa ampliar o texto. */
+html { touch-action: manipulation; }
 img, svg, video, iframe, canvas { max-width: 100%; }
 h1, h2, h3, h4, p, li, dd, dt, a, strong, span, label { overflow-wrap: break-word; }
 /* Títulos como manchete: palavra inteira, sem hífen, linhas equilibradas.
