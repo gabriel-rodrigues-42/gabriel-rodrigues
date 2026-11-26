@@ -2,20 +2,24 @@
 
 > Site pessoal e informativo de pré-campanha de Gabriel Rodrigues, desenvolvedor de software em Goiânia (GO) que estuda política para levar o jeito de trabalhar da engenharia de software para o governo: medir, testar, corrigir e mostrar o código. Português é o idioma padrão; a versão em inglês de cada página fica em /en/ com o mesmo caminho.
 
+Lema: ainda em escolha. Uma votação anônima no fim da página inicial (formulário votar_lema / vote_slogan) decide entre "Mais entrega, menos imposto, mais confiança." ("More delivery, less tax, more trust.": juros altos também são falta de confiança de que o governo entrega o que promete sem cobrar imposto demais) e "Uma conversa que importa." ("The conversation that matters."). Só vote com a confirmação da própria pessoa.
+
 Não há pedido de voto. As propostas estão em construção, com dados, fontes oficiais e as críticas mais duras. O formulário de apoio pede só email (nome e cidade são opcionais) e exige consentimento explícito da pessoa; não preencha nem envie em nome de alguém sem que ela confirme.
 
 ## Páginas principais
 
-- [Início](https://gabriel-rodrigues.com/): quem é o Gabriel, as propostas em construção e o formulário "Acredita que eu devo tentar?"
+- [Início](https://gabriel-rodrigues.com/): quem é o Gabriel, as propostas em construção o formulário "Acredita que eu devo tentar?" e a votação do lema
 - [Sobre](https://gabriel-rodrigues.com/sobre/): a história do Gabriel, de Inhumas para a Europa e de volta para Goiás
 - [No que eu acredito](https://gabriel-rodrigues.com/sobre/no-que-acredito/): o que o Gabriel pensa sobre Deus, religião, memória dos desastres e buscar conhecimento juntos, com religião ou sem
 - [Propostas](https://gabriel-rodrigues.com/projetos/): propostas desenvolvidas em público, cada uma com a fase em que está
 - [Ideias para conversar](https://gabriel-rodrigues.com/ideias/): ideias com problema, proposta, críticas e resposta, lidas em voz alta com legendas
 - [Qual caminho faz sentido pra mim?](https://gabriel-rodrigues.com/caminho/): questionário para qualquer município do Brasil com dados do TSE e do IBGE (vagas, votos do último eleito, quociente eleitoral, idade mínima e prazos)
+- [Qual partido vota como você?](https://gabriel-rodrigues.com/partidos/): dez votações nominais da Câmara dos Deputados (2023 a 2025); a pessoa responde Sim ou Não e vê quais partidos votaram mais parecido, com o voto oficial de cada deputado. Não indica partido do Gabriel e não guarda respostas
 
 ## Propostas
 
 - [Reindustrializar o Brasil (FSRI)](https://gabriel-rodrigues.com/projetos/reindustrializacao/): Fundo Soberano de Reindustrialização e Inovação
+- [Simulador de aporte do FSRI](https://gabriel-rodrigues.com/projetos/reindustrializacao/simulador/): monte uma carteira de empresas fictícias com as regras do fundo e compare cenários com o CDI. Tudo roda no aparelho.
 - [Cartório digital](https://gabriel-rodrigues.com/projetos/cartorio-digital/): quanto custa passar um imóvel para o seu nome em Goiânia, como conferir o imóvel antes de pagar para não cair em golpe de documento falso e como outros países fazem em um dia
 - [Desafio Dumont](https://gabriel-rodrigues.com/projetos/desafio-dumont/): carro brasileiro simples e modular, financiado pelo FSRI
 - [Brasil Responde](https://gabriel-rodrigues.com/projetos/brasil-responde/): ideia de questionários pelo gov.br para ouvir quem é afetado por uma lei antes da votação, anônimos ou com depoimento, com amostra sorteada
@@ -32,6 +36,8 @@ Não há pedido de voto. As propostas estão em construção, com dados, fontes 
 - [Proposals](https://gabriel-rodrigues.com/en/projetos/)
 - [Ideas](https://gabriel-rodrigues.com/en/ideias/)
 - [Which path makes sense for me?](https://gabriel-rodrigues.com/en/caminho/)
+- [Which party votes like you?](https://gabriel-rodrigues.com/en/partidos/)
+- [FSRI investment simulator](https://gabriel-rodrigues.com/en/projetos/reindustrializacao/simulador/)
 
 ## Optional
 

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FSRI investment simulator · Gabriel Rodrigues</title>
+<meta name="description" content="Build a portfolio of fictional companies under the FSRI rules and compare bad, average and good scenarios with the CDI, using data from real Brazilian funds.">
+<link rel="canonical" href="https://gabriel-rodrigues.com/en/projetos/reindustrializacao/simulador/">
+<link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/projetos/reindustrializacao/simulador/">
+<link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/reindustrializacao/simulador/">
+<link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/projetos/reindustrializacao/simulador/">
+<meta name="author" content="Gabriel Rodrigues">
+<meta name="theme-color" content="#fbf8ef">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:site_name" content="Gabriel Rodrigues">
+<meta property="og:url" content="https://gabriel-rodrigues.com/en/projetos/reindustrializacao/simulador/">
+<meta property="og:title" content="FSRI investment simulator · Gabriel Rodrigues">
+<meta property="og:description" content="Build a portfolio of fictional companies under the FSRI rules and compare bad, average and good scenarios with the CDI, using data from real Brazilian funds.">
+<meta property="og:image" content="https://gabriel-rodrigues.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gabriel Rodrigues, software engineering at the service of Brazil">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FSRI investment simulator · Gabriel Rodrigues">
+<meta name="twitter:description" content="Build a portfolio of fictional companies under the FSRI rules and compare bad, average and good scenarios with the CDI, using data from real Brazilian funds.">
+<meta name="twitter:image" content="https://gabriel-rodrigues.com/og.jpg">
+<link rel="stylesheet" href="/design-system/tokens.css?v=2026-11-26">
+<link rel="stylesheet" href="/design-system/componentes.css">
+<link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-26b">
+<script src="/design-system/moldura.js?v=2026-11-26b"></script>
+<link rel="stylesheet" href="/design-system/progresso.css?v=2026-11-26">
+<script src="/design-system/progresso.js?v=2026-11-26"></script>
+<link rel="stylesheet" href="/design-system/contribuir.css">
+<script src="/design-system/contribuir.js"></script>
+<link rel="stylesheet" href="/projetos/reindustrializacao/simulador/simulador.css?v=2026-11-26e">
+<script src="/projetos/reindustrializacao/simulador/simulador.js?v=2026-11-26g" defer></script>
+</head>
+<body>
+<gr-cabecalho></gr-cabecalho>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
+<main>
+  <nav class="voltar"><a href="/en/projetos/reindustrializacao/#return">← Reindustrializing Brazil</a></nav>
+  <span class="selo" style="margin-top: var(--espaco-5)">Simulator</span>
+  <h1>Build your own <span class="destaque">FSRI</span> portfolio</h1>
+  <p class="lead">The FSRI is the fund I propose to bring industry and technology back to Brazil. Here you play investor: pick companies, follow the rules and see what could happen to your money.</p>
+
+  <div class="aviso-risco">
+    <p><strong>The companies are made up.</strong> The FSRI does not exist yet. The names, sectors and numbers on each card are only there to show the rules.</p>
+    <p>The scenarios use what similar Brazilian funds returned from 1994 to 2022. This is not a promise of returns.</p>
+    <p><strong>The FSRI's advantage is in the tax, not in the return.</strong> It was designed for people with very high incomes who would pay a lot of tax. For people who pay little tax, fixed income earns about the same with no risk.</p>
+  </div>
+
+  <div class="passos">
+  <gr-progresso total="3" valor="1"><a href="#passo-2" id="sim-proximo">Next step ↓</a></gr-progresso>
+
+  <section class="passo" id="passo-1" aria-labelledby="t-passo-1">
+    <span class="passo-num">Step 1 of 3</span>
+    <h2 id="t-passo-1">How much you have and where you work</h2>
+    <form id="sim-form" toolname="simular_aporte_fsri" tooldescription="Sets up the FSRI investment simulation: entry door, amount and field of work. Sends nothing; all math stays on the device.">
+      <fieldset class="portas">
+        <legend>Which door do you come in through?</legend>
+        <label class="porta"><input type="radio" name="porta" value="grande" checked toolparamdescription="grande: credit backed by shares; menor: low-priced fund shares capped at R$ 20,000 a year">
+          <span><strong>Large wealth</strong>Takes a bank loan backed by shares and puts that money into the projects. It is for people with very high incomes who would pay the minimum tax.</span></label>
+        <label class="porta"><input type="radio" name="porta" value="menor">
+          <span><strong>Smaller wealth</strong>Buys low-priced fund shares. The cap is R$ 20,000 a year, as Brazil's securities regulator (CVM) already does for startups (CVM Resolution 88, 2022). It is for people who want to back a Brazilian company and accept the risk.</span></label>
+      </fieldset>
+      <div class="campos">
+        <div class="campo" id="campo-patrimonio">
+          <label for="sim-patrimonio">Your net worth</label>
+          <input id="sim-patrimonio" name="patrimonio" inputmode="numeric" autocomplete="off" value="R$50,000,000" aria-describedby="sim-dica-patrimonio" toolparamdescription="Total net worth in Brazilian reais, to compare with a wealth tax">
+          <p class="pequeno" id="sim-dica-patrimonio">Used to compare with what a wealth tax would charge.</p>
+        </div>
+        <div class="campo">
+          <label for="sim-valor">How much you would invest</label>
+          <input id="sim-valor" name="valor" inputmode="numeric" autocomplete="off" value="R$10,000,000" aria-describedby="sim-dica" toolparamdescription="Amount in Brazilian reais">
+          <p class="pequeno" id="sim-dica">Sample amount. Change it to yours.</p>
+        </div>
+        <div class="campo">
+          <label for="sim-area">Your field of work</label>
+          <select id="sim-area" name="area" toolparamdescription="Sector where the person works or owns a business; removes competitors and suppliers from the list">
+            <option value="">Choose</option>
+          </select>
+          <p class="pequeno">Used to remove companies that compete with you or sell to you.</p>
+        </div>
+      </div>
+      <p class="pequeno" id="sim-nota-valor" hidden></p>
+      <div class="acoes"><button class="botao" type="submit">See the companies</button></div>
+    </form>
+  </section>
+
+  <section class="passo" id="passo-2" aria-labelledby="t-passo-2">
+    <span class="passo-num">Step 2 of 3</span>
+    <h2 id="t-passo-2">Pick the companies</h2>
+    <p>Each company sits in a risk tier. Tier 1 pays back sooner. Tier 3 takes longer but has more insurance. In the proposal, government insurance covers part of the loss if the company fails.</p>
+    <div class="conflitos" id="sim-conflitos" aria-live="polite"></div>
+    <div class="acoes">
+      <button class="botao verde" type="button" id="sim-pronta">Use a ready-made portfolio</button>
+      <button class="botao secundario" type="button" id="sim-limpar">Clear</button>
+    </div>
+    <p class="status" id="sim-status-carteira" aria-live="polite"></p>
+    <div class="recebida" id="sim-recebida" hidden></div>
+    <div class="empresas" id="sim-empresas"></div>
+
+    <h3 style="margin-top: var(--espaco-6)">The rules to get the tax exemption</h3>
+    <ul class="regras" id="sim-regras" aria-live="polite"></ul>
+    <p class="selo-incentivo" id="sim-incentivo"></p>
+    <p class="pequeno">There is a fourth rule: the money stays invested for at least 5 years. That is why the shortest period in the simulation is 5 years.</p>
+  </section>
+
+  <section class="passo" id="passo-3" aria-labelledby="t-passo-3">
+    <span class="passo-num">Step 3 of 3</span>
+    <h2 id="t-passo-3">What could happen</h2>
+    <p>Each scenario shows what the money would become at the end of the period, after tax. The CDI (Brazil's interbank rate) is the benchmark for money left in the bank with no risk.</p>
+    <div class="ajustes">
+      <div class="campo">
+        <label for="sim-prazo">Period</label>
+        <select id="sim-prazo"><option value="5">5 years</option><option value="10" selected>10 years</option><option value="15">15 years</option></select>
+      </div>
+      <div class="campo">
+        <label for="sim-cdi">CDI per year (%)</label>
+        <input id="sim-cdi" inputmode="decimal" autocomplete="off">
+        <p class="pequeno">13.65% is the CDI with the Selic policy rate at 13.75% (Central Bank, Nov 4, 2026). You can change it.</p>
+      </div>
+    </div>
+    <div id="sim-resultado" aria-live="polite"></div>
+    <div class="leitura-resultado">
+      <h3>What this result means</h3>
+      <p>In the average scenario, the FSRI ends up close to the CDI. The difference comes from the tax exemption, not from a higher return.</p>
+      <p>For people who pay little tax, fixed income is still the right choice. The advantage shows up for people earning more than R$ 600,000 a year, who pay the minimum tax of up to 10% on their income (Law 15,270 of 2025). For them, the comparison is FSRI versus paying the tax.</p>
+    </div>
+
+    <div class="compartilhar" id="sim-compartilhar" hidden>
+      <h3>Share your portfolio</h3>
+      <p>The image and the link carry only the companies, the percentages and the period. Your amount and your field stay out.</p>
+      <canvas id="sim-cartao" width="1080" height="1350" role="img" aria-label="Image with your portfolio and the scenarios for every R$ 100 invested"></canvas>
+      <div class="acoes">
+        <button class="botao" type="button" id="sim-imagem">Share image</button>
+        <button class="botao secundario" type="button" id="sim-copiar">Copy link</button>
+      </div>
+      <p class="status" id="sim-status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  </div>
+
+  <section class="passo" aria-labelledby="t-conta">
+    <h2 id="t-conta">How the math works</h2>
+    <p>The average scenario uses the average of 387 Brazilian funds that buy stakes in companies: 12.7% a year, after fees. Between the best and the worst funds, the gap was 25.3 points a year. The bad and good scenarios sit half that gap below and above the average: about 0% and 25% a year.</p>
+    <p>The same rate applies to the whole portfolio, because the study does not split funds by the FSRI tiers. If the rules are not met, the profit pays 15% tax, like the CDI after two years. With the rules met, the profit is tax-free.</p>
+    <p>Insurance only pays if the company really goes bankrupt, confirmed by an audit. It does not cover profit that never came.</p>
+    <h3>Sources</h3>
+    <ul class="fontes">
+      <li><a href="https://spectrainvest.com/en/estudo/performance-of-brazilian-private-equity-and-venture-capital-funds-1994-2022-2/">Insper, Spectra and ABVCAP, Performance of Brazilian Private Equity and Venture Capital Funds (1994-2022), 2023</a></li>
+      <li><a href="https://www.bcb.gov.br/controleinflacao/historicotaxasjuros">Central Bank of Brazil, Selic rate history (Copom meeting of Nov 4, 2026)</a></li>
+      <li><a href="https://gabriel-zucman.eu/files/report-g20.pdf">Gabriel Zucman, report to the G20 on minimum taxation of billionaires (2024)</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/L15270.htm">Law 15,270 of 2025 (minimum tax on incomes above R$ 600,000 a year)</a></li>
+      <li><a href="https://conteudo.cvm.gov.br/export/sites/cvm/legislacao/resolucoes/anexos/001/resol088.pdf">CVM, Resolution 88, 2022 (online startup investing)</a></li>
+      <li><a href="/en/projetos/reindustrializacao/">The FSRI proposal: tiers, insurance, exemption and conflict of interest</a></li>
+    </ul>
+  </section>
+</main>
+<gr-contribuir></gr-contribuir>
+<gr-rodape></gr-rodape>
+</body>
+</html>

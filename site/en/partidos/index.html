@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Which party votes like you? · Gabriel Rodrigues</title>
+<meta name="description" content="Answer ten questions about real votes in Brazil's Chamber of Deputies and see which parties voted most like you, using each deputy's official vote.">
+<link rel="canonical" href="https://gabriel-rodrigues.com/en/partidos/">
+<link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/partidos/">
+<link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/partidos/">
+<link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/partidos/">
+<meta name="author" content="Gabriel Rodrigues">
+<meta name="theme-color" content="#fbf8ef">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:site_name" content="Gabriel Rodrigues">
+<meta property="og:url" content="https://gabriel-rodrigues.com/en/partidos/">
+<meta property="og:title" content="Which party votes like you? · Gabriel Rodrigues">
+<meta property="og:description" content="Answer ten questions about real votes in Brazil's Chamber of Deputies and see which parties voted most like you, using each deputy's official vote.">
+<meta property="og:image" content="https://gabriel-rodrigues.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gabriel Rodrigues, engenharia de software a serviço do Brasil">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Which party votes like you? · Gabriel Rodrigues">
+<meta name="twitter:description" content="Answer ten questions about real votes in Brazil's Chamber of Deputies and see which parties voted most like you, using each deputy's official vote.">
+<meta name="twitter:image" content="https://gabriel-rodrigues.com/og.jpg">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "Which party votes like you?",
+ "description": "Answer ten questions about real votes in Brazil's Chamber of Deputies and see which parties voted most like you, using each deputy's official vote.",
+ "url": "https://gabriel-rodrigues.com/en/partidos/",
+ "inLanguage": "en",
+ "applicationCategory": "EducationalApplication",
+ "isAccessibleForFree": true,
+ "author": { "@type": "Person", "name": "Gabriel Rodrigues", "url": "https://gabriel-rodrigues.com/" }
+}
+</script>
+<link rel="stylesheet" href="/design-system/tokens.css?v=2026-11-26">
+<link rel="stylesheet" href="/design-system/componentes.css">
+<link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-26b">
+<script src="/design-system/moldura.js?v=2026-11-26b"></script>
+<link rel="stylesheet" href="/design-system/progresso.css?v=2026-11-26">
+<script src="/design-system/progresso.js?v=2026-11-26"></script>
+<link rel="stylesheet" href="/partidos/partidos.css?v=2026-11-26c">
+</head>
+<body>
+<gr-cabecalho></gr-cabecalho>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
+<main>
+  <header>
+    <span class="selo">Official Chamber data</span>
+    <h1>Which party <em class="destaque">votes</em> like you?</h1>
+    <p class="intro">A party platform is a promise. A floor vote is a record. Here are ten roll-call votes in Brazil's Chamber of Deputies, from 2023 to 2025. Say how you would vote and see which parties voted most like you, deputy by deputy.</p>
+  </header>
+
+  <section id="app" class="cartao" aria-live="polite">
+    <p>Loading the votes…</p>
+    <noscript>This page needs JavaScript.</noscript>
+  </section>
+
+  <section id="resultado" class="cartao" aria-live="polite"></section>
+
+  <section id="faq" class="faq">
+    <h2>Questions</h2>
+    <details>
+      <summary>How is it calculated?</summary>
+      <p>For each vote, the page counts how many deputies of each party voted Yes and how many voted No. If 80 of 100 voted Yes and you answered Yes, the agreement on that vote is 80%. If you answered No, it is 20%. A party's score is the average over the votes you answered.</p>
+      <p>Abstentions, obstruction and absences are not counted. A party with fewer than 3 deputies voting is left out of that vote.</p>
+    </details>
+    <details>
+      <summary>Where do the votes come from?</summary>
+      <p>From the <a href="https://dadosabertos.camara.leg.br/swagger/api.html">Chamber of Deputies Open Data API</a>, which records each deputy's vote in each roll-call vote, with their party on that day. Each question links to the bill on the Chamber's website.</p>
+      <p class="pequeno" id="fonte-datas"></p>
+    </details>
+    <details>
+      <summary>Why these ten votes?</summary>
+      <p>They are floor roll-call votes on issues that affect many people: taxes, public spending, public safety, the environment, social networks and rules for members of Congress themselves. We picked votes where parties split, because that is where differences show. The income tax vote was nearly unanimous and stays to show there is also consensus.</p>
+      <p>Some important issues have not had a floor roll-call vote yet, such as cannabis regulation and digital notary offices. Want to suggest another vote? <a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/issues/new">Open an issue on GitHub</a> with its link.</p>
+    </details>
+    <details>
+      <summary>What are the limits?</summary>
+      <ul>
+        <li>It shows how deputies voted, not what each party promises, nor how they would vote today.</li>
+        <li>Parties change. Deputies switch parties, and parties merge (PTB and Patriota became PRD; PSC joined Podemos). The count uses each deputy's party on the day of the vote, under its current name.</li>
+        <li>A fast-track vote is not approval. Two questions were only about voting a bill in a hurry.</li>
+        <li>The result applies to the 2023–2027 Chamber of Deputies. City councils and state assemblies vote on other things.</li>
+      </ul>
+    </details>
+    <details>
+      <summary>Do my answers go anywhere?</summary>
+      <p>No. Everything runs in your browser. Your answers stay only in the page address (after the <code>#</code>). Nobody counts how many people picked each party.</p>
+    </details>
+    <details>
+      <summary>How can I check the code?</summary>
+      <ul>
+        <li><a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/scripts/partidos/gerar_votacoes.py">scripts/partidos/gerar_votacoes.py</a>: fetches the votes from the Chamber's API and counts them.</li>
+        <li><a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/.github/workflows/dados-partidos.yml">.github/workflows/dados-partidos.yml</a>: runs the script on GitHub, with a public log.</li>
+        <li><a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/site/partidos/dados/votacoes.json">site/partidos/dados/votacoes.json</a>: the counted votes, party by party.</li>
+        <li><a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/site/partidos/temas.js">site/partidos/temas.js</a>: the text of each question.</li>
+      </ul>
+    </details>
+    <details>
+      <summary>Why does this page exist?</summary>
+      <p>To choose who to vote for, or which party to join, it helps to know how each party really votes. Gabriel is not a member of any party and does not use this page to point to one. The tool is for anyone.</p>
+    </details>
+  </section>
+</main>
+<gr-rodape></gr-rodape>
+<script src="/partidos/temas.js"></script>
+<script src="/partidos/partidos.js?v=2026-11-26c"></script>
+</body>
+</html>

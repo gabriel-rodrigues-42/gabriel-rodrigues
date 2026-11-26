@@ -47,10 +47,10 @@
  "datePublished": "2026-11-19"
 }
 </script>
-<link rel="stylesheet" href="/design-system/tokens.css?v=2026-11-22">
+<link rel="stylesheet" href="/design-system/tokens.css?v=2026-11-26">
 <link rel="stylesheet" href="/design-system/componentes.css">
-<link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-22">
-<script src="/design-system/moldura.js"></script>
+<link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-26b">
+<script src="/design-system/moldura.js?v=2026-11-26b"></script>
 <link rel="stylesheet" href="/design-system/contribuir.css">
 <script src="/design-system/contribuir.js"></script>
 <style>
@@ -118,6 +118,10 @@
   .fato { background: var(--creme); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); }
   .fato small { display: block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); text-transform: uppercase; letter-spacing: .05em; color: var(--texto-suave); }
   .fato b { display: block; font-size: var(--tamanho-4); color: var(--verde-escuro); line-height: 1.2; }
+  .fatos.elevados { grid-template-columns: 1fr; gap: var(--espaco-4); margin-bottom: var(--espaco-5); }
+  .fatos.elevados .fato { background: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); padding: var(--espaco-4) var(--espaco-5); }
+  .fatos.elevados .fato b { font-size: var(--tamanho-5); white-space: nowrap; }
+  @media (min-width: 600px) { .fatos.elevados { grid-template-columns: repeat(3, 1fr); } .fatos.elevados .fato b { font-size: var(--tamanho-4); } }
   .setores { display: flex; flex-wrap: wrap; gap: var(--espaco-2); padding: 0; list-style: none; margin: 0 0 var(--espaco-3); }
   .setores li { background: var(--azul-claro); color: var(--azul); font-weight: var(--peso-forte); font-size: var(--tamanho-1); padding: 6px 12px; border-radius: var(--forma-pilula); }
 
@@ -207,6 +211,20 @@
   .hashtag { background: var(--branco); color: var(--verde-escuro); font-weight: var(--peso-forte); padding: 6px 12px; border-radius: var(--forma-selo); }
   .fontes { font-size: var(--tamanho-2); color: var(--texto-suave); }
 
+  /* A conta do investidor */
+  .saidas { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--espaco-3); margin-top: var(--espaco-4); }
+  .saida { padding: var(--espaco-4); }
+  .saida strong { display: block; color: var(--azul); font-size: var(--tamanho-3); }
+  .saida p { margin: var(--espaco-1) 0 0; font-size: var(--tamanho-2); }
+  .saidas + p { margin-top: var(--espaco-4); }
+  .subtitulo { margin-top: var(--espaco-6); }
+  .pior-caso { background: var(--areia); border-radius: var(--forma-cartao); padding: var(--espaco-5); margin-top: var(--espaco-5); }
+  .pior-caso h3 { margin-top: 0; }
+  .pior-caso p:last-child { margin-bottom: 0; }
+  .simulador-bloco { background: var(--verde-claro); }
+  .simulador-bloco ol { padding-left: var(--espaco-5); margin: var(--espaco-3) 0 var(--espaco-5); }
+  .simulador-bloco li + li { margin-top: var(--espaco-2); }
+
   /* Revelar ao rolar */
   .revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
   .revelar.visivel { opacity: 1; transform: none; }
@@ -221,7 +239,6 @@
 <div class="bolha amarela"></div><div class="bolha verde"></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5c0-1.1 1.2-1.8 2.2-1.2l9 6.5c.8.6.8 1.8 0 2.4l-9 6.5c-1 .6-2.2-.1-2.2-1.2z"/></symbol>
   <symbol id="i-cadeado" viewBox="0 0 24 24"><path d="M7 10V8a5 5 0 0 1 10 0v2h.5c1.4 0 2.5 1.1 2.5 2.5v6c0 1.4-1.1 2.5-2.5 2.5h-11C5.1 21 4 19.9 4 18.5v-6C4 11.1 5.1 10 6.5 10zm2 0h6V8a3 3 0 0 0-6 0z"/></symbol>
 </svg>
 
@@ -233,10 +250,6 @@
     <span class="selo" style="margin-top: var(--espaco-5)">Proposal under study</span>
     <h1>The money to reindustrialize Brazil <span class="destaque">already exists</span>. <span class="linha">It's just sitting still.</span></h1>
     <p class="lead">People with large fortunes already borrow from banks using their own shares as collateral. The proposal for the Sovereign Fund for Reindustrialization and Innovation, the FSRI (from its Portuguese name), is to turn that money into Brazilian factories, patents and platforms.</p>
-    <div class="capa-acoes">
-      <a class="botao verde" href="/en/ideias/#reindustrializacao"><svg class="icone"><use href="#i-play"/></svg>Listen to the summary with captions</a>
-      <a class="botao secundario" href="#criticas">Skip to the criticism</a>
-    </div>
   </header>
 
   <!-- ATO 1 -->
@@ -287,7 +300,7 @@
     <ol class="fluxo">
       <li><span class="n">1</span><div><strong>The credit leaves the bank</strong>The high-income investor takes a private credit line, with their own shares or stakes as collateral.</div></li>
       <li><span class="n">2</span><div><strong>It goes to qualified projects</strong>Instead of sitting still, the money is invested in projects approved by the FSRI.</div></li>
-      <li><span class="n">3</span><div><strong>Tax becomes a reward for productivity</strong>If the capital stays invested for the minimum period, the investor gets a progressive exemption or discount on the tax due when the shares are sold and on the profits the company pays out. Without real productive investment in the country, there is no benefit.</div></li>
+      <li><span class="n">3</span><div><strong>Tax becomes a reward for productivity</strong>If the capital stays invested for at least 5 years, the investor gets a progressive exemption or discount on the tax due when the shares are sold and on the profits the company pays out. Without real productive investment in the country, there is no benefit.</div></li>
       <li><span class="n">4</span><div><strong>The company grows and goes public on B3</strong>Once it matures, the company lists on the Brazilian stock exchange. The investor sells their stake tax-free, pays off the original loan and takes the profit.</div></li>
     </ol>
   </section>
@@ -378,10 +391,60 @@
     </div>
   </section>
 
+  <section class="capitulo revelar" id="return">
+    <span class="ato">Chapter 6 · The investor's math</span>
+    <h2>How much does the investor make?</h2>
+    <p>Nobody knows yet. The FSRI doesn't exist, so there is no measured return. Any number I put here would be a guess.</p>
+    <p>What I can show is how the money comes back, how much similar funds have earned in Brazil, and what happens if everything goes wrong.</p>
+
+    <h3 class="subtitulo">Who gets in</h3>
+    <p>Instead of only taxing large fortunes, the FSRI gives them a reason to invest here. But the fund doesn't depend on them. If large fortunes don't want to come in, the money of many people put together does the same job.</p>
+    <div class="saidas">
+      <div class="cartao saida"><strong>Large wealth</strong><p>People who already borrow from banks using their shares as collateral. They don't touch their savings: they change where a loan they would take anyway goes. If the project fails, the bank loan is still there.</p></div>
+      <div class="cartao saida"><strong>Smaller wealth</strong><p>Buys low-priced shares in the fund. To protect people who can't afford to lose, there's a yearly cap and a clear risk warning before getting in.</p></div>
+    </div>
+    <p>The cap can follow what Brazil's securities regulator (CVM) already uses for online startup investing: up to R$ 20,000 a year for most people (CVM Resolution 88, 2022). In startups, losing everything is common.</p>
+
+    <h3 class="subtitulo">Who picks the companies</h3>
+    <p>Investors build their own portfolio from the projects approved by the public panel. First, a system removes from their list anything with a conflict of interest: competitors and suppliers of the companies they already own a stake in. That way nobody uses the fund to buy out a competitor and become a monopoly.</p>
+    <p>Those who don't want to choose buy shares in a ready-made portfolio, put together by a professional manager and supervised by the CVM. Either way, the investor doesn't run the company. The fund publishes open reports: where the money is, which goal each company met, and what each stake is worth.</p>
+
+    <h3 class="subtitulo">How the money comes back</h3>
+    <div class="saidas">
+      <div class="cartao saida"><strong>Shared profit</strong><p>Tier 1 companies, which turn a profit sooner, pay part of it to their shareholders. That pays the interest on the loan.</p></div>
+      <div class="cartao saida"><strong>Sale on the stock exchange</strong><p>The company goes public on the B3 and the investor sells their stake.</p></div>
+      <div class="cartao saida"><strong>Sale to another company</strong><p>A larger company buys the whole startup, and each shareholder gets their part.</p></div>
+      <div class="cartao saida"><strong>Sale of the fund share</strong><p>The investor sells their share in the fund to another investor. Leaving before 5 years means losing the tax exemption.</p></div>
+    </div>
+
+    <h3 class="subtitulo">How much similar funds have earned</h3>
+    <p>Insper, Spectra and the industry association (ABVCAP) measured 387 Brazilian funds that buy stakes in companies, from 1994 to 2022.</p>
+    <div class="fatos elevados">
+      <div class="fato"><small>Average per year</small><b>12.7%</b><span class="pequeno">in reais, after fees</span></div>
+      <div class="fato"><small>Compared to CDI</small><b>1.1 times</b><span class="pequeno">beat the CDI by a little</span></div>
+      <div class="fato"><small>Best versus worst</small><b>25 points</b><span class="pequeno">of difference per year</span></div>
+    </div>
+    <p>On average, this kind of investment beat the CDI, Brazil's benchmark interest rate, by a small margin. The gap between good and bad funds was huge. Choosing who manages the money matters more than the sector.</p>
+    <p>That's why the FSRI changes the math with rules: the insurance cuts part of the loss, the exemption increases what's left of the profit, and pairing a fast project with a slow one pays the interest while the slow one matures.</p>
+
+    <h3 class="subtitulo">Who this makes sense for</h3>
+    <p>Looking only at returns, the FSRI does not beat fixed income. Similar funds earned 1.1 times the CDI, with much more risk.</p>
+    <p>Through the large-wealth door, the math is even tighter. The money comes from a loan, and the bank charges interest that tracks the CDI, because that is what money costs the bank, plus a margin. That interest eats almost all of the difference.</p>
+    <p>The advantage is in the tax. Since 2026, anyone earning more than R$ 600,000 a year pays a minimum tax on their total income, reaching 10% from R$ 1.2 million. Dividends above R$ 50,000 a month from the same company have 10% withheld at the source (Law 15,270 of 2025).</p>
+    <p>For that person, the comparison is not FSRI versus fixed income. It is FSRI versus paying the tax. In the FSRI, the money becomes a factory here and, after 5 years, the profit is tax-free.</p>
+    <p>For people who pay little tax, fixed income is still the right choice: it earns about the same with no risk of loss. The smaller-wealth door exists for people who want to back a Brazilian company and accept that risk.</p>
+
+    <div class="pior-caso">
+      <h3>What if everything goes wrong?</h3>
+      <p>If every project in an investment fails, the insurance returns a part and the investor loses the rest. In Tier 3, they lose at least half. In Tier 1, at least 80%.</p>
+      <p>In the CDI, the same money would have earned without that risk. That's why the FSRI is not for anyone who needs the money back on a set date.</p>
+    </div>
+  </section>
+
   <!-- ATO 6: história ilustrativa -->
   <section class="capitulo revelar">
     <div class="historia">
-      <span class="ato">Chapter 6 · How an idea gets funded</span>
+      <span class="ato">Chapter 7 · How an idea gets funded</span>
       <h2>From a real problem to the stock exchange</h2>
       <p>The money doesn't go to whoever knows somebody. It goes through a public funnel, in four stages. To see how it would work, follow an imaginary team.</p>
       <p class="aviso-ficcao">Illustrative story. The team is made up; the stages and rules are those of the proposal.</p>
@@ -420,7 +483,7 @@
 
   <!-- ATO 7 -->
   <section class="capitulo revelar">
-    <span class="ato">Chapter 7 · An unfair fight</span>
+    <span class="ato">Chapter 8 · An unfair fight</span>
     <h2>When the giant sells below cost</h2>
     <p>A new Brazilian platform usually fails not because it's worse, but because it faces a well-known game: winner takes all.</p>
     <div class="linha-tempo">
@@ -440,7 +503,7 @@
 
   <!-- ATO 8 -->
   <section class="capitulo revelar">
-    <span class="ato">Chapter 8 · Who wins</span>
+    <span class="ato">Chapter 9 · Who wins</span>
     <h2>More income stays with those who work</h2>
     <p>Tier 1 platforms are born integrated with Gov.br, the federal government's digital ID, and Pix. That slashes the cost of winning each customer and allows micro-fees. The proposal mentions something like 2% to 5%, against the 25% to 30% it estimates for large foreign platforms.</p>
     <p>An example that already exists: <a href="/en/projetos/galera-club/">galera.club</a>, a Brazilian link-in-bio page, with Pix on the page and no fee per sale.</p>
@@ -456,7 +519,7 @@
 
   <!-- ATO 9 -->
   <section class="capitulo revelar">
-    <span class="ato">Chapter 9 · Starting with Goiás</span>
+    <span class="ato">Chapter 10 · Starting with Goiás</span>
     <h2>Goiás as a laboratory</h2>
     <p>The model can get a regional arm, building on what Goiás is already good at.</p>
     <div class="goias">
@@ -467,16 +530,40 @@
     </div>
   </section>
 
+  <!-- SIMULADOR -->
+  <section class="capitulo revelar" id="simulator">
+    <div class="cartao simulador-bloco">
+      <span class="ato">Simulator</span>
+      <h2>Build your own FSRI portfolio</h2>
+      <p>Now that you've read the rules, you can try them. The simulator uses made-up companies and numbers from real Brazilian funds.</p>
+      <ol>
+        <li>Pick a door, large or smaller wealth, and how much you would invest.</li>
+        <li>Tell it your field of work. The system removes companies that compete with you or sell to you.</li>
+        <li>Build the portfolio following the rules, or use the ready-made one.</li>
+        <li>See the bad, average and good scenarios next to the CDI, and share the result.</li>
+      </ol>
+      <a class="botao verde" href="/en/projetos/reindustrializacao/simulador/">Open the simulator</a>
+    </div>
+  </section>
+
   <!-- CRÍTICAS -->
   <section class="capitulo revelar" id="criticas">
-    <span class="ato">Chapter 10 · The criticism</span>
+    <span class="ato">Chapter 11 · The criticism</span>
     <h2>The toughest criticism, and the answers</h2>
     <p>These are the objections I'd expect to hear, answered with the proposal's own rules.</p>
 
     <details class="critica">
+      <summary>Why would I risk my wealth on companies I don't know and don't control?</summary>
+      <div class="resposta">
+        <p>If you need that money, you shouldn't. Brazilian funds of this kind earned, on average, only a little more than the CDI, and the gap between the best and the worst was huge (Insper, Spectra and ABVCAP, 2022).</p>
+        <p>The FSRI doesn't promise a return. It changes the math: the insurance cuts part of the loss, the exemption raises the profit, and a portfolio of several projects spreads the risk. People with smaller wealth get in with a yearly cap. The rules are in <a href="#return">chapter 6</a>.</p>
+      </div>
+    </details>
+
+    <details class="critica">
       <summary>This is a tax break for the rich.</summary>
       <div class="resposta">
-        <p>Today that wealth already pays little tax, because it isn't sold. The FSRI exemption only exists if the money turns into real productive investment in the country, stays invested for the minimum period and includes at least one high-tech-risk project.</p>
+        <p>Today that wealth already pays little tax, because it isn't sold. The FSRI exemption only exists if the money turns into real productive investment in the country, stays invested for at least 5 years and includes at least one high-tech-risk project.</p>
         <p>No new factory, patent or platform, no benefit.</p>
       </div>
     </details>
@@ -516,7 +603,7 @@
 
   <!-- LEI -->
   <section class="capitulo revelar">
-    <span class="ato">Chapter 11 · How it leaves the paper</span>
+    <span class="ato">Chapter 12 · How it leaves the paper</span>
     <h2>The roadmap to becoming law</h2>
     <div class="esferas">
       <div class="cartao">
@@ -548,7 +635,6 @@
       <p class="suave">Posted about it? Use the hashtags so the conversation can find itself:</p>
       <div class="hashtags"><span class="hashtag">#ReindustrializaBrasil</span><span class="hashtag">#SistemasMelhores</span></div>
       <div class="capa-acoes">
-        <a class="botao verde" href="/en/ideias/#reindustrializacao"><svg class="icone"><use href="#i-play"/></svg>Listen with captions</a>
         <a class="botao secundario" href="/en/ideias/">See other ideas</a>
       </div>
     </div>
@@ -557,9 +643,12 @@
   <section class="capitulo">
     <h3>Sources and references <small>(in Portuguese)</small></h3>
     <ul class="fontes">
-      <li>Public Policy Proposal: Sovereign Fund for Reindustrialization and Innovation (FSRI), working paper, 2026. All percentages, terms and amounts on this page come from it and are proposed parameters, not measured data.</li>
+      <li>Public Policy Proposal: Sovereign Fund for Reindustrialization and Innovation (FSRI), working paper, 2026. The proposal's percentages, terms and amounts come from it and are proposed parameters, not measured data. The exception is the figures on existing funds, in chapter 6.</li>
       <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12529.htm">Law 12.529 of November 30, 2011</a>, which structures the Brazilian Competition Defense System (Planalto).</li>
       <li><a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp182.htm">Complementary Law 182 of June 1, 2021</a>, Brazil's Startup Legal Framework (Planalto).</li>
+      <li><a href="https://spectrainvest.com/en/estudo/performance-of-brazilian-private-equity-and-venture-capital-funds-1994-2022-2/">Performance of Brazilian Private Equity and Venture Capital Funds (1994-2022)</a>, Insper, Spectra Investments and ABVCAP, data through December 2022. Source of the numbers in chapter 6.</li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/L15270.htm">Law 15,270 of November 26, 2025</a>, which creates the minimum tax on incomes above R$ 600,000 a year, at up to 10%, and 10% withholding on dividends above R$ 50,000 a month (Office of the President of Brazil).</li>
+      <li><a href="https://conteudo.cvm.gov.br/export/sites/cvm/legislacao/resolucoes/anexos/001/resol088.pdf">CVM Resolution 88 of April 27, 2022</a>, which regulates investing in startups through online platforms and caps most people at R$ 20,000 a year (CVM).</li>
     </ul>
   </section>
 </main>

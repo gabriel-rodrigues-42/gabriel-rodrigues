@@ -191,8 +191,7 @@
   const link = (fonte) => el("a", { href: R.fontes[fonte].url, rel: "noopener" }, R.fontes[fonte].nome);
   function cabecalhoPasso(titulo, multipla) {
     return [
-      el("div", { class: "progresso" }, el("div", { style: `width:${(passo / PASSOS) * 100}%` })),
-      el("div", { class: "contador" }, T.passo(passo + 1, PASSOS)),
+      el("gr-progresso", { valor: passo, total: PASSOS, rotulo: T.passo(passo + 1, PASSOS) }),
       el("h2", { id: "pergunta" }, titulo),
       multipla ? el("p", { class: "dica" }, T.varias) : null,
     ].filter(Boolean);

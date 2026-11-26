@@ -66,10 +66,10 @@
  ]
 }
 </script>
-<link rel="stylesheet" href="/design-system/tokens.css?v=2026-11-22">
+<link rel="stylesheet" href="/design-system/tokens.css?v=2026-11-26">
 <link rel="stylesheet" href="/design-system/componentes.css">
-<link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-22">
-<script src="/design-system/moldura.js"></script>
+<link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-26b">
+<script src="/design-system/moldura.js?v=2026-11-26b"></script>
 <link rel="stylesheet" href="/design-system/galeria.css?v=2026-11-22">
 <script src="/projetos/propostas.js"></script>
 <script src="/design-system/galeria.js"></script>
@@ -81,6 +81,7 @@
   h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); }
   h2 { font-size: var(--tamanho-5); line-height: 1.15; color: var(--azul); margin: 0 0 var(--espaco-2); }
   .lead { font-size: var(--tamanho-3); color: var(--texto-suave); margin: 0 0 var(--espaco-3); }
+  .sem-quebra { white-space: nowrap; } /* link curto inteiro numa linha */
   a { color: var(--azul); }
 
   /* Sobre */
@@ -99,6 +100,7 @@
     .jeito { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
 
+
   /* Propostas */
   #publicacoes { margin-top: var(--espaco-7); }
   #publicacoes .lead { margin-bottom: var(--espaco-5); }
@@ -114,10 +116,20 @@
   .apoio h2 { color: var(--branco); }
   .apoio .lead { color: var(--branco); opacity: .9; }
   .apoio .destaque { background: none; color: var(--amarelo); }
+  .contador { display: inline-block; margin: 0; padding: var(--espaco-2) var(--espaco-4); border-radius: var(--forma-opcao); background: var(--branco-vidro); color: var(--amarelo); font-weight: 700; text-wrap: balance; }
+  .contador[hidden] { display: none; }
+  .ficha { margin-top: var(--espaco-5); }
+  .ficha[hidden] { display: none; }
+  .ficha-cartao { background: var(--amarelo); color: var(--azul); border-radius: var(--forma-cartao); padding: var(--espaco-5); text-align: center; max-width: 420px; margin-inline: auto; box-shadow: var(--sombra-clay); }
+  .ficha-rotulo { margin: 0; font-weight: var(--peso-forte); font-size: var(--tamanho-3); text-transform: uppercase; letter-spacing: .08em; }
+  .ficha-numero { margin: 0; font-weight: var(--peso-forte); font-size: var(--tamanho-numero); line-height: 1; font-variant-numeric: tabular-nums; }
+  .ficha-frase { margin: var(--espaco-3) 0 0; font-size: var(--tamanho-3); font-weight: 700; text-wrap: balance; }
+  .ficha-rodape { margin: var(--espaco-4) 0 0; font-size: var(--tamanho-2); }
+  .ficha-dica { text-align: center; margin: var(--espaco-3) 0 0; font-size: var(--tamanho-2); }
   .campos { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-3); margin-top: var(--espaco-4); }
   .campos .largo { grid-column: 1 / -1; }
   .campos label { display: grid; gap: var(--espaco-1); font-size: var(--tamanho-2); font-weight: 700; }
-  .campos input, .campos select { font: inherit; color: var(--texto); background-color: var(--branco); border: 2px solid transparent; padding: 10px 14px; border-radius: var(--forma-opcao); width: 100%; min-width: 0; }
+  .campos input, .campos select { font: inherit; font-size: var(--tamanho-campo); color: var(--texto); background-color: var(--branco); border: 2px solid transparent; padding: 10px 14px; border-radius: var(--forma-opcao); width: 100%; min-width: 0; }
   .campos input:focus, .campos select:focus { outline: none; border-color: var(--amarelo); }
   .campo-cidade { display: grid; gap: var(--espaco-1); min-width: 0; }
   .consentimento { display: flex; gap: var(--espaco-3); align-items: flex-start; margin-top: var(--espaco-4); font-size: var(--tamanho-2); background: var(--branco-vidro); padding: var(--espaco-3) var(--espaco-4); border-radius: var(--forma-opcao); }
@@ -132,6 +144,28 @@
   .armadilha { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   .apoio { padding: var(--espaco-5) var(--espaco-4); }
   @media (min-width: 720px) { .campos { grid-template-columns: repeat(2, minmax(0, 1fr)); } .apoio { padding: var(--espaco-6) var(--espaco-5); } }
+  /* Votação do lema: dois cartões empilhados no celular, lado a lado quando há espaço.
+     Os botões ficam ligados ao formulário pelo atributo form, assim o modo leitura lê os cartões. */
+  #lema { margin-top: var(--espaco-7); }
+  .votacao-opcoes { container-type: inline-size; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-4); margin-top: var(--espaco-4); }
+  @media (min-width: 640px) { .votacao-opcoes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .voto { position: relative; display: flex; flex-direction: column; gap: var(--espaco-3); background: var(--branco); border-radius: var(--forma-cartao); padding: var(--espaco-5); box-shadow: var(--sombra-cartao); }
+  .voto::before { content: ""; width: 48px; height: 8px; border-radius: var(--forma-pilula); background: var(--verde-fundo); }
+  .voto + .voto::before { background: var(--azul-medio); }
+  .voto-frase { margin: 0; font-size: var(--tamanho-4); font-weight: 900; line-height: 1.15; color: var(--azul); text-wrap: balance; hyphens: manual; }
+  .voto-porque { margin: 0; font-size: var(--tamanho-2); color: var(--texto-suave); flex: 1; }
+  .voto .botao { align-self: flex-start; }
+  .voto-resultado { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--espaco-3); }
+  .voto-resultado[hidden], .voto-seu[hidden], .voto .botao[hidden] { display: none; }
+  .voto-barra { height: 14px; background: var(--azul-claro); border-radius: var(--forma-pilula); overflow: hidden; }
+  .voto-barra span { display: block; height: 100%; width: calc(var(--pct, 0) * 1%); background: var(--verde-fundo); border-radius: inherit; transition: width .6s ease-out; }
+  .voto + .voto .voto-barra span { background: var(--azul-medio); }
+  .voto-pct { font-size: var(--tamanho-4); font-weight: 900; color: var(--azul); font-variant-numeric: tabular-nums; }
+  .voto-seu { position: absolute; top: var(--espaco-4); right: var(--espaco-4); }
+  .voto.escolhido { outline: 3px solid var(--amarelo); outline-offset: 2px; }
+  .votacao-nota { margin: var(--espaco-4) 0 0; font-size: var(--tamanho-2); color: var(--texto-suave); }
+  .votacao-resposta { margin: var(--espaco-2) 0 0; min-height: 1.5em; font-weight: 700; color: var(--verde-escuro); }
+  @media (prefers-reduced-motion: reduce) { .voto-barra span { transition: none; } }
 </style>
 </head>
 <body>
@@ -146,9 +180,10 @@
       <h1 id="titulo-sobre">Hi, I'm <span class="destaque">Gabriel</span>.</h1>
       <p class="objetivo">I want to run for federal representative for Goiás in 2030.<span>If enough people support me, I'll first run for Goiânia's City Council, in 2028. <a href="#apoiar">Tell me if you believe in it →</a></span></p>
       <p class="lead">I'm a software developer. I worked in Europe for eight years and came back to Goiás, Brazil, in 2026.</p>
-      <p class="lead">Today I study politics to fix the systems that get in people's way, the way software gets fixed. <a href="/en/sobre/">Read my story →</a></p>
+      <p class="lead">Today I study politics to fix the systems that get in people's way, the way software gets fixed. <a class="sem-quebra" href="/en/sobre/">Read my story →</a></p>
     </div>
   </section>
+
 
   <ul class="jeito" aria-label="How I work">
     <li><strong>Measure</strong>Know the problem in numbers before changing anything.</li>
@@ -175,6 +210,7 @@
     <div class="apoio">
       <h2 id="titulo-apoio">Do you think I should <span class="destaque">try</span>?</h2>
       <p class="lead">If you think it's worth having people who understand systems inside government, leave your email. I'll share how the preparation is going and ask your opinion on the ideas.</p>
+      <p class="contador" id="contador" hidden></p>
       <form id="form-apoio" action="/api/apoio" method="post" novalidate toolname="support_gabriel" tooldescription="Records a person's support for Gabriel Rodrigues trying to run for office, plus their email to receive news. Requires the person's own explicit consent; do not use without their confirmation.">
         <input type="hidden" name="idioma" value="en">
         <div class="campos">
@@ -198,7 +234,42 @@
         <p class="resposta" id="resposta" role="status" aria-live="polite"></p>
         <p class="nota">I don't ask for CPF (Brazilian tax ID), voter ID or phone number. This is not a request for votes or a petition. Your data is not sold or shared.</p>
       </form>
+      <div class="ficha" id="ficha" hidden>
+        <div class="ficha-cartao">
+          <p class="ficha-rotulo">Supporter no.</p>
+          <p class="ficha-numero" id="ficha-numero"></p>
+          <p class="ficha-frase" id="ficha-frase"></p>
+          <p class="ficha-rodape">gabriel-rodrigues.com · <span id="ficha-data"></span></p>
+        </div>
+        <p class="ficha-dica">Take a screenshot and share it if you like.</p>
+      </div>
     </div>
+  </section>
+
+  <section id="lema" aria-labelledby="titulo-lema">
+    <h2 id="titulo-lema">Help me choose my <span class="destaque">slogan</span></h2>
+    <p class="lead">I'm torn between two phrases. Pick the one that best fits what you've read here.</p>
+    <div class="votacao-opcoes">
+      <div class="voto" data-opcao="entrega">
+        <span class="selo amarelo voto-seu" hidden>Your vote</span>
+        <p class="voto-frase" id="lema-entrega">More delivery, less tax, more trust.</p>
+        <p class="voto-porque">High interest rates also come from low trust. A government that delivers without heavy taxes earns that trust.</p>
+        <button class="botao verde" type="submit" form="form-lema" name="opcao" value="entrega" aria-describedby="lema-entrega">I prefer this one</button>
+        <div class="voto-resultado" hidden><span class="voto-barra"><span></span></span><strong class="voto-pct"></strong></div>
+      </div>
+      <div class="voto" data-opcao="conversa">
+        <span class="selo amarelo voto-seu" hidden>Your vote</span>
+        <p class="voto-frase" id="lema-conversa">The conversation that matters.</p>
+        <p class="voto-porque">Politics explained simply, with official data, listening to the people who live the problem.</p>
+        <button class="botao" type="submit" form="form-lema" name="opcao" value="conversa" aria-describedby="lema-conversa">I prefer this one</button>
+        <div class="voto-resultado" hidden><span class="voto-barra"><span></span></span><strong class="voto-pct"></strong></div>
+      </div>
+    </div>
+    <form id="form-lema" action="/api/lema" method="post" toolname="vote_slogan" tooldescription="Records an anonymous vote for the phrase the person prefers as Gabriel Rodrigues's slogan: opcao=entrega for &quot;More delivery, less tax, more trust.&quot; or opcao=conversa for &quot;The conversation that matters.&quot; Only vote with the person's own confirmation.">
+      <input type="hidden" name="idioma" value="en">
+    </form>
+    <p class="votacao-nota">Your vote is anonymous, one per device. I only keep how many votes each phrase has. <a href="/en/privacidade/#lema">How it works</a>.</p>
+    <p class="votacao-resposta" id="lema-resposta" role="status" aria-live="polite"></p>
   </section>
 </main>
 <gr-rodape></gr-rodape>
@@ -217,6 +288,30 @@
 
   if (new URLSearchParams(location.search).get("apoio") === "ok") avisar("Thank you! I got your support.", true);
 
+  // Contador: só aparece quando passa de 1.000 apoios. A função /api/apoios já manda o número
+  // arredondado para baixo em centenas (nunca o total exato) e fica 10 minutos em cache.
+  // Para conferir o visual localmente: http://localhost:8000/?apoios=1234 (só funciona em localhost).
+  const contador = document.getElementById("contador");
+  const frase = n => `More than ${n.toLocaleString("en-US")} people have already said I should try.`;
+  const teste = Number(new URLSearchParams(location.search).get("apoios"));
+  const local = ["localhost", "127.0.0.1"].includes(location.hostname);
+  const mostrar = (n) => { if (n >= 1000) { contador.textContent = frase(n); contador.hidden = false; } };
+  if (local && teste) mostrar(Math.floor((teste - 1) / 100) * 100);
+  else if (!local) fetch("/api/apoios").then((r) => (r.ok ? r.json() : {})).then((d) => d.mostrar && mostrar(d.mais_de)).catch(() => {});
+
+  // "Supporter no." card after sending: only this person's own number, good for a screenshot.
+  const ficha = document.getElementById("ficha");
+  const ordinal = (n) => { const r = n % 100; const f = r >= 11 && r <= 13 ? "th" : ({ 1: "st", 2: "nd", 3: "rd" })[n % 10] || "th"; return n.toLocaleString("en-US") + f; };
+  function mostrarFicha(posicao, nome) {
+    if (!Number.isInteger(posicao) || posicao < 1) return;
+    const primeiro = (nome || "").trim().split(" ")[0];
+    document.getElementById("ficha-numero").textContent = posicao.toLocaleString("en-US");
+    document.getElementById("ficha-frase").textContent = `${primeiro ? primeiro + ", you" : "You"} were the ${ordinal(posicao)} person to say I should try.`;
+    document.getElementById("ficha-data").textContent = new Date().toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" });
+    ficha.hidden = false;
+    ficha.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
   // Envio. Também atende agentes de IA pelo WebMCP declarativo (atributos toolname/tooldescription
   // no <form>): o navegador mostra o formulário preenchido e a pessoa confirma; a resposta volta ao agente.
   form.addEventListener("submit", (e) => {
@@ -233,7 +328,8 @@
     avisar("Sending…");
     try {
       const r = await fetch(form.action, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(dados) });
-      if (r.ok) { form.reset(); return avisar("Thank you! I got your support. I'll send news soon.", true); }
+      const corpo = await r.json().catch(() => ({}));
+      if (r.ok) { form.reset(); mostrarFicha(corpo.posicao, dados.nome); return avisar("Thank you! I got your support. I'll send news soon.", true); }
       else if (r.status === 503) return avisar("The form is still being set up. Please come back in a few days.");
       else if (r.status === 400) return avisar("Please check the email, the city and the authorization.");
       else return avisar("Couldn't send it. Please try again.");
@@ -241,6 +337,58 @@
       return avisar("No connection. Please try again.");
     } finally {
       botao.disabled = false;
+    }
+  }
+  // Votação do lema. Um voto por aparelho: a escolha fica no localStorage (só neste navegador).
+  // O servidor guarda só a contagem de cada frase (functions/api/lema.js) e devolve as porcentagens.
+  // O resultado só aparece depois do voto, para não puxar a escolha de ninguém.
+  const formLema = document.getElementById("form-lema");
+  const respostaLema = document.getElementById("lema-resposta");
+  const cartoes = [...document.querySelectorAll(".voto")];
+  const CHAVE = "gr-lema-voto";
+  const guardado = () => { try { return localStorage.getItem(CHAVE); } catch { return null; } };
+  const guardar = (o) => { try { localStorage.setItem(CHAVE, o); } catch {} };
+
+  function mostrarResultado(pct, escolha) {
+    for (const c of cartoes) {
+      const o = c.dataset.opcao;
+      const n = Number(pct?.[o]) || 0;
+      c.querySelector(".botao").hidden = true;
+      c.querySelector(".voto-pct").textContent = n.toLocaleString("en") + "%";
+      c.querySelector(".voto-resultado").hidden = false;
+      c.classList.toggle("escolhido", o === escolha);
+      c.querySelector(".voto-seu").hidden = o !== escolha;
+      requestAnimationFrame(() => c.querySelector(".voto-barra span").style.setProperty("--pct", n));
+    }
+  }
+
+  // Voltou de um envio sem JavaScript (?lema=entrega) ou já votou neste aparelho: mostra o resultado.
+  const vindo = new URLSearchParams(location.search).get("lema");
+  if (["entrega", "conversa"].includes(vindo)) guardar(vindo);
+  const jaVotou = guardado();
+  if (jaVotou) fetch(formLema.action).then((r) => (r.ok ? r.json() : null)).then((d) => d?.ok && mostrarResultado(d.pct, jaVotou)).catch(() => {});
+
+  formLema.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const opcao = e.submitter?.value || new FormData(formLema).get("opcao");
+    const envio = votar(opcao);
+    if (e.agentInvoked && typeof e.respondWith === "function") e.respondWith(envio);
+  });
+
+  async function votar(opcao) {
+    if (!["entrega", "conversa"].includes(opcao) || guardado()) return "";
+    const botoes = cartoes.map((c) => c.querySelector(".botao"));
+    botoes.forEach((b) => (b.disabled = true));
+    respostaLema.textContent = "Sending…";
+    try {
+      const r = await fetch(formLema.action, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ opcao }) });
+      const corpo = await r.json().catch(() => ({}));
+      if (r.ok && corpo.ok) { guardar(opcao); mostrarResultado(corpo.pct, opcao); return (respostaLema.textContent = "Thank you! Your vote was counted."); }
+      return (respostaLema.textContent = r.status === 503 ? "Voting is still being set up. Come back in a few days." : corpo.erro || "I couldn't save your vote. Please try again.");
+    } catch {
+      return (respostaLema.textContent = "No connection. Please try again.");
+    } finally {
+      botoes.forEach((b) => (b.disabled = false));
     }
   }
 })();

@@ -30,8 +30,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap">
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="componentes.css">
-<link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-22">
-<script src="/design-system/moldura.js"></script>
+<link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-26b">
+<script src="/design-system/moldura.js?v=2026-11-26b"></script>
+<link rel="stylesheet" href="/design-system/progresso.css?v=2026-11-26">
+<script src="/design-system/progresso.js?v=2026-11-26"></script>
 <link rel="stylesheet" href="/design-system/cidade.css">
 <link rel="stylesheet" href="/design-system/galeria.css?v=2026-11-22">
 <script src="/design-system/cidade.js" defer></script>
@@ -49,6 +51,8 @@
   .cor code { color: var(--texto-suave); font-size: var(--tamanho-1); }
   .formas { display: flex; flex-wrap: wrap; gap: var(--espaco-5); align-items: center; }
   .forma { width: 140px; height: 120px; display: grid; place-items: center; font-size: var(--tamanho-1); font-weight: 800; color: var(--azul); }
+  .demo-progresso .opcao { min-height: 120px; }
+  .demo-progresso .opcao[aria-pressed="true"] { background: var(--verde-claro); border-color: var(--verde); }
   .vitrine { display: grid; gap: var(--espaco-4); }
   .linha { display: flex; flex-wrap: wrap; gap: var(--espaco-3); align-items: center; }
   .tipo p { margin: 6px 0; }
@@ -140,12 +144,35 @@
 &lt;script src="/design-system/galeria.js"&gt;&lt;/script&gt;
 &lt;gr-propostas&gt;&lt;/gr-propostas&gt;</code>
 
+  <h2>Questionário com progresso</h2>
+  <p>Todo questionário, wizard ou formulário em passos usa <code>&lt;gr-progresso&gt;</code>. A barra gruda no topo da tela enquanto a pessoa rola para responder, e solta no fim do cartão. Role esta vitrine e veja.</p>
+  <div class="cartao demo-progresso">
+    <gr-progresso valor="1" total="4" rotulo="1 de 4 respondidas"><a href="#demo-fim">Ver resultado ↓</a></gr-progresso>
+    <div style="display: grid; gap: 10px">
+      <button class="opcao" type="button" aria-pressed="true" data-demo>Pergunta 1</button>
+      <button class="opcao" type="button" aria-pressed="false" data-demo>Pergunta 2</button>
+      <button class="opcao" type="button" aria-pressed="false" data-demo>Pergunta 3</button>
+      <button class="opcao" type="button" aria-pressed="false" data-demo id="demo-fim">Pergunta 4</button>
+    </div>
+  </div>
+  <code class="bloco" style="margin-top: var(--espaco-4)">&lt;link rel="stylesheet" href="/design-system/progresso.css"&gt;
+&lt;script src="/design-system/progresso.js"&gt;&lt;/script&gt;
+&lt;gr-progresso valor="3" total="10" rotulo="3 de 10 respondidas"&gt;&lt;/gr-progresso&gt;</code>
+
   <h2>Como usar</h2>
-  <code class="bloco">&lt;link rel="stylesheet" href="/design-system/tokens.css?v=2026-11-22"&gt;
+  <code class="bloco">&lt;link rel="stylesheet" href="/design-system/tokens.css?v=2026-11-26"&gt;
 &lt;link rel="stylesheet" href="/design-system/componentes.css"&gt;</code>
   <p>Regra única: use sempre as variáveis de <code>tokens.css</code>. Se precisar de uma cor ou forma nova, adicione lá primeiro.</p>
 </main>
 <gr-rodape></gr-rodape>
+<script>
+  document.querySelectorAll("[data-demo]").forEach(b => b.addEventListener("click", () => {
+    b.setAttribute("aria-pressed", String(b.getAttribute("aria-pressed") !== "true"));
+    const n = document.querySelectorAll('[data-demo][aria-pressed="true"]').length;
+    const barra = document.querySelector(".demo-progresso gr-progresso");
+    barra.setAttribute("valor", n); barra.setAttribute("rotulo", `${n} de 4 respondidas`);
+  }));
+</script>
 <script>
   const cores = [
     ["--verde", "Ação principal, progresso"], ["--verde-escuro", "Texto verde sobre fundo claro"], ["--verde-fundo", "Fundo verde com texto branco (selo, botão verde)"], ["--verde-claro", "Fundos e bolhas"],

@@ -1,0 +1,117 @@
+/* Simulador de aporte do FSRI. Cores e formas só de tokens.css. */
+main { max-width: 860px; margin: 0 auto; padding: var(--espaco-6) var(--espaco-4) var(--espaco-7); }
+main a { color: var(--azul); }
+nav.voltar a { font-weight: var(--peso-forte); text-decoration: none; }
+h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); text-wrap: balance; hyphens: manual; }
+h2 { font-size: var(--tamanho-5); line-height: 1.15; color: var(--azul); margin: 0 0 var(--espaco-3); text-wrap: balance; }
+h3 { color: var(--azul); margin: 0 0 var(--espaco-2); }
+.lead { font-size: var(--tamanho-3); color: var(--texto-suave); }
+.pequeno { font-size: var(--tamanho-2); color: var(--texto-suave); }
+
+.aviso-risco { background: var(--amarelo-claro); border-radius: var(--forma-cartao); padding: var(--espaco-4) var(--espaco-5); margin: var(--espaco-5) 0; }
+.aviso-risco p { margin: 0; }
+.aviso-risco p + p { margin-top: var(--espaco-2); }
+
+.passo { margin-top: var(--espaco-7); scroll-margin-top: var(--espaco-5); }
+/* Barra fixa de passos: ocupa a largura do main, de borda a borda. */
+.passos { margin-top: var(--espaco-6); }
+.passos > gr-progresso { --progresso-recuo: var(--espaco-4); background: var(--creme); }
+.passos > .passo:first-of-type { margin-top: var(--espaco-4); }
+.passo-num { display: inline-block; font-weight: var(--peso-forte); color: var(--verde-escuro); text-transform: uppercase; letter-spacing: .06em; font-size: var(--tamanho-1); margin-bottom: var(--espaco-2); }
+
+/* Passo 1 */
+.portas { display: grid; gap: var(--espaco-3); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); border: 0; padding: 0; margin: 0 0 var(--espaco-5); }
+.portas legend { font-weight: var(--peso-forte); margin-bottom: var(--espaco-2); padding: 0; }
+.porta { display: flex; gap: var(--espaco-3); align-items: flex-start; background: var(--branco); border: 2px solid var(--azul-claro); border-radius: var(--forma-opcao); padding: var(--espaco-4); cursor: pointer; }
+.porta:has(input:checked) { border-color: var(--verde); background: var(--verde-claro); }
+.porta input { margin-top: 5px; accent-color: var(--verde-escuro); width: 20px; height: 20px; flex: none; }
+.porta strong { display: block; color: var(--azul); }
+.campos { display: grid; gap: var(--espaco-4); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.campo label { display: block; font-weight: var(--peso-forte); margin-bottom: var(--espaco-1); }
+.campo input, .campo select { width: 100%; font: inherit; font-size: var(--tamanho-campo); color: var(--texto); background-color: var(--branco); border: 2px solid var(--azul-claro); border-radius: var(--forma-opcao); padding: 12px 14px; }
+.campo input:focus-visible, .campo select:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+.campo .pequeno { margin: var(--espaco-1) 0 0; }
+.nota-teto { color: var(--verde-escuro); font-weight: var(--peso-forte); }
+.acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-3); margin-top: var(--espaco-5); }
+
+/* Passo 2: cartões */
+.conflitos { background: var(--azul-claro); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); margin: var(--espaco-4) 0; }
+.conflitos p { margin: 0; }
+.empresas { display: grid; gap: var(--espaco-4); grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); margin-top: var(--espaco-4); }
+.empresa { position: relative; background: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); padding: var(--espaco-4) var(--espaco-4) var(--espaco-5); display: flex; flex-direction: column; gap: var(--espaco-2); border: 3px solid transparent; min-width: 0; }
+.empresa.escolhida { border-color: var(--verde); }
+.empresa.conflito { background: var(--creme); box-shadow: none; border: 2px dashed var(--azul-claro); }
+.empresa.conflito h3 { text-decoration: line-through; color: var(--texto-suave); }
+.empresa-topo { display: flex; flex-wrap: wrap; gap: var(--espaco-2); align-items: center; }
+.ficticia { font-size: var(--tamanho-1); font-weight: var(--peso-forte); color: var(--texto); background: var(--amarelo-claro); border: 1px dashed var(--amarelo-escuro); border-radius: var(--forma-pilula); padding: 2px 10px; }
+.faixa { font-size: var(--tamanho-1); font-weight: var(--peso-forte); border-radius: var(--forma-selo); padding: 3px 10px; color: var(--branco); }
+.faixa.f1 { background: var(--verde-fundo); }
+.faixa.f2 { background: var(--azul); }
+.faixa.f3 { background: var(--amarelo); color: var(--azul); }
+.empresa h3 { font-size: var(--tamanho-4); margin: var(--espaco-1) 0 0; overflow-wrap: anywhere; }
+.empresa .setor { font-weight: var(--peso-forte); color: var(--verde-escuro); font-size: var(--tamanho-2); margin: 0; }
+.empresa p { margin: 0; }
+.empresa dl { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-2); margin: var(--espaco-2) 0 0; font-size: var(--tamanho-2); }
+.empresa dt { color: var(--texto-suave); }
+.empresa dd { margin: 0; font-weight: var(--peso-forte); }
+.motivo { font-size: var(--tamanho-2); font-weight: var(--peso-forte); color: var(--vermelho-fundo); margin: 0; }
+.empresa .botao { margin-top: auto; align-self: flex-start; }
+.empresa .botao[aria-pressed="true"] { background: var(--verde-fundo); }
+.peso { margin-top: var(--espaco-2); }
+.peso label { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--espaco-2); font-size: var(--tamanho-2); font-weight: var(--peso-forte); }
+.peso input { width: 100%; accent-color: var(--verde-escuro); }
+
+/* Regras */
+.regras { list-style: none; padding: 0; margin: var(--espaco-5) 0 0; display: grid; gap: var(--espaco-2); }
+.regras li { display: flex; gap: var(--espaco-3); align-items: flex-start; background: var(--branco); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); }
+.regras .marca { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-weight: var(--peso-forte); background: var(--azul-claro); color: var(--azul); }
+.regras li.ok .marca { background: var(--verde-fundo); color: var(--branco); }
+.selo-incentivo { margin-top: var(--espaco-4); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); font-weight: var(--peso-forte); }
+.selo-incentivo.sim { background: var(--verde-claro); color: var(--verde-escuro); }
+.selo-incentivo.nao { background: var(--amarelo-claro); color: var(--texto); }
+
+/* Passo 3: resultado */
+.vazio { background: var(--branco); border-radius: var(--forma-cartao); padding: var(--espaco-5); }
+.cenarios { display: grid; gap: var(--espaco-3); margin-top: var(--espaco-4); }
+.cenario { background: var(--branco); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); }
+.cenario-topo { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--espaco-1) var(--espaco-3); align-items: baseline; }
+.cenario-topo strong { color: var(--azul); }
+.cenario-topo b { font-size: var(--tamanho-4); color: var(--texto); }
+.cenario .barra { height: 14px; background: var(--azul-claro); border-radius: var(--forma-pilula); overflow: hidden; margin: var(--espaco-2) 0 var(--espaco-1); }
+.cenario .barra > div { height: 100%; border-radius: var(--forma-pilula); background: var(--verde); }
+.cenario.ruim .barra > div { background: var(--amarelo-escuro); }
+.cenario.bom .barra > div { background: var(--verde-fundo); }
+.cenario.cdi .barra > div { background: var(--azul-medio); }
+.cenario.cdi { border: 2px solid var(--azul-claro); }
+.cenario .pequeno { margin: 0; }
+.quebra { margin-top: var(--espaco-5); background: var(--azul); color: var(--branco); border-radius: var(--forma-cartao); padding: var(--espaco-5); }
+.quebra h3 { color: var(--amarelo); }
+.quebra p { margin: 0; }
+.quebra p + p { margin-top: var(--espaco-2); }
+.quebra b { color: var(--amarelo); }
+.ajustes { display: grid; gap: var(--espaco-4); grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-top: var(--espaco-4); }
+.fontes { font-size: var(--tamanho-2); color: var(--texto-suave); }
+.fontes li + li { margin-top: var(--espaco-1); }
+
+/* Compartilhar */
+.compartilhar { margin-top: var(--espaco-6); background: var(--verde-claro); border-radius: var(--forma-cartao); padding: var(--espaco-5); }
+.compartilhar canvas { display: block; width: 100%; max-width: 320px; height: auto; border-radius: var(--forma-opcao); margin: var(--espaco-4) 0; box-shadow: var(--sombra-cartao); }
+.status { font-weight: var(--peso-forte); color: var(--verde-escuro); min-height: 1.5em; margin: var(--espaco-2) 0 0; }
+.recebida { background: var(--azul-claro); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); margin-top: var(--espaco-4); }
+.recebida p { margin: 0; }
+.visualmente-oculto { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.peso label span { white-space: nowrap; }
+#sim-nota-valor { background: var(--amarelo-claro); color: var(--texto); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); margin-top: var(--espaco-4); }
+.leitura-resultado { margin-top: var(--espaco-5); background: var(--verde-claro); border-radius: var(--forma-cartao); padding: var(--espaco-5); }
+.leitura-resultado p { margin: 0; }
+.leitura-resultado p + p { margin-top: var(--espaco-2); }
+.comparativo { margin-top: var(--espaco-5); background: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); padding: var(--espaco-5); }
+.comparativo > p { margin: 0 0 var(--espaco-3); }
+.comp-linhas { display: grid; gap: var(--espaco-3); margin-bottom: var(--espaco-3); }
+.comp { background: var(--creme); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); display: grid; gap: var(--espaco-1); }
+.comp strong { color: var(--azul); }
+.comp b { font-size: var(--tamanho-4); color: var(--texto); }
+.comp small { color: var(--texto-suave); font-size: var(--tamanho-2); }
+.comp.fsri { background: var(--verde-claro); }
+.comp.fsri b { color: var(--verde-escuro); }
+.campo[hidden] { display: none; }
