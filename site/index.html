@@ -108,6 +108,8 @@
   /* galera.club */
   .galera { margin-top: var(--espaco-7); display: flex; align-items: center; justify-content: space-between; gap: var(--espaco-4); flex-wrap: wrap; background: var(--amarelo-claro); }
   .galera p { margin: 0; color: var(--texto-suave); }
+  .ferramenta { background: var(--branco); }
+  .ferramenta + .galera { margin-top: var(--espaco-4); }
   .galera strong { display: block; color: var(--azul); font-size: var(--tamanho-4); }
 
   /* Apoio */
@@ -197,6 +199,14 @@
     <!-- A lista vem de /projetos/propostas.js; as ideias novas de ideias.js entram sozinhas no fim. -->
     <gr-propostas></gr-propostas>
   </section>
+
+  <a class="cartao galera ferramenta" href="/partidos/">
+    <div>
+      <strong>Qual partido vota como você?</strong>
+      <p>Responda dez votações reais da Câmara e veja quais partidos votaram mais parecido com você.</p>
+    </div>
+    <span class="botao">Responder →</span>
+  </a>
 
   <a class="cartao galera" href="https://galera.club/gabriel">
     <div>

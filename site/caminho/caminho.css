@@ -59,6 +59,7 @@ dt { color: var(--texto-suave); }
 dd { margin: 0; font-weight: 700; overflow-wrap: anywhere; }
 dd small { font-weight: var(--peso-normal); color: var(--texto-suave); }
 .idade-nao { color: var(--texto); background: var(--amarelo-claro); padding: 0 4px; border-radius: 4px; }
+.convite-partidos { margin: var(--espaco-5) 0 0; padding: var(--espaco-3) var(--espaco-4); background: var(--azul-claro); border-radius: var(--forma-opcao); font-weight: var(--peso-forte); }
 .fonte { font-size: var(--tamanho-1); color: var(--texto-suave); margin: var(--espaco-2) 0 0; }
 .adicionar { display: flex; gap: var(--espaco-2); flex-wrap: wrap; align-items: center; margin-top: var(--espaco-3); }
 .adicionar select { width: auto; padding: 10px 44px 10px 12px; }
