@@ -35,20 +35,20 @@ API = "https://dadosabertos.camara.leg.br/api/v2"
 
 # Cada tema: proposição, regex para achar a votação certa e, depois de conferida, o id fixo.
 TEMAS = [
-    {"id": "reforma-tributaria", "sigla": "PEC", "numero": 45, "ano": 2019, "busca": r"1º turno|primeiro turno", "data_min": "2023-07-01", "data_max": "2023-07-31", "votacao": None},
-    {"id": "arcabouco-fiscal", "sigla": "PLP", "numero": 93, "ano": 2023, "busca": r"[Aa]provad[oa].*(Substitutivo|Projeto)", "data_min": "2023-05-01", "data_max": "2023-05-31", "votacao": None},
-    {"id": "redes-sociais", "sigla": "PL", "numero": 2630, "ano": 2020, "busca": r"[Uu]rg[êe]ncia", "data_min": "2023-04-01", "data_max": "2023-04-30", "votacao": None},
-    {"id": "marco-temporal", "sigla": "PL", "numero": 490, "ano": 2007, "busca": r"[Aa]provad[oa].*(Substitutivo|Projeto|Emenda)", "data_min": "2023-05-01", "data_max": "2023-05-31", "votacao": None},
-    {"id": "saidinha", "sigla": "PL", "numero": 2253, "ano": 2022, "busca": r"[Aa]provad|[Ss]ubstitutivo|[Ee]menda", "data_min": "2024-03-01", "data_max": "2024-03-31", "votacao": None},
-    {"id": "importacao-50", "sigla": "PL", "numero": 914, "ano": 2024, "busca": r"[Aa]provad|[Dd]estaque|[Ee]menda", "data_min": "2024-05-01", "data_max": "2024-06-30", "votacao": None},
-    {"id": "licenciamento", "sigla": "PL", "numero": 2159, "ano": 2021, "busca": r"[Aa]provad|[Ss]ubstitutivo|[Ee]menda", "data_min": "2025-07-01", "data_max": "2025-07-31", "votacao": None},
-    {"id": "blindagem", "sigla": "PEC", "numero": 3, "ano": 2021, "busca": r"1º turno|primeiro turno", "data_min": "2025-09-01", "data_max": "2025-09-30", "votacao": None},
-    {"id": "anistia", "sigla": "PL", "numero": 2162, "ano": 2023, "busca": r"[Uu]rg[êe]ncia", "data_min": "2025-09-01", "data_max": "2025-09-30", "votacao": None},
-    {"id": "ir-5-mil", "sigla": "PL", "numero": 1087, "ano": 2025, "busca": r"[Aa]provad|[Ss]ubstitutivo", "data_min": "2025-10-01", "data_max": "2025-10-31", "votacao": None},
+    {"id": "reforma-tributaria", "sigla": "PEC", "numero": 45, "ano": 2019, "busca": r"1º turno|primeiro turno", "data_min": "2023-07-01", "data_max": "2023-07-31", "votacao": "2196833-326"},
+    {"id": "arcabouco-fiscal", "sigla": "PLP", "numero": 93, "ano": 2023, "busca": r"[Aa]provad[oa].*(Substitutivo|Projeto)", "data_min": "2023-05-01", "data_max": "2023-05-31", "votacao": "2357053-47"},
+    {"id": "redes-sociais", "sigla": "PL", "numero": 2630, "ano": 2020, "busca": r"[Uu]rg[êe]ncia", "data_min": "2023-04-01", "data_max": "2023-04-30", "votacao": "2310837-8"},
+    {"id": "marco-temporal", "sigla": "PL", "numero": 490, "ano": 2007, "busca": r"[Aa]provad[oa].*(Substitutivo|Projeto|Emenda)", "data_min": "2023-05-01", "data_max": "2023-05-31", "votacao": "345311-270"},
+    {"id": "antifaccao", "sigla": "PL", "numero": 5582, "ano": 2025, "busca": r"[Aa]provad[oa].*(Substitutivo|Subemenda|Projeto)", "data_min": "2025-11-01", "data_max": "2025-12-31", "votacao": None},
+    {"id": "mais-deputados", "sigla": "PLP", "numero": 177, "ano": 2023, "busca": r"[Aa]provad[oa].*(Substitutivo|Subemenda|Projeto)", "data_min": "2025-05-01", "data_max": "2025-06-30", "votacao": None},
+    {"id": "licenciamento", "sigla": "PL", "numero": 2159, "ano": 2021, "busca": r"[Aa]provad|[Ss]ubstitutivo|[Ee]menda", "data_min": "2025-07-01", "data_max": "2025-07-31", "votacao": "257161-483"},
+    {"id": "blindagem", "sigla": "PEC", "numero": 3, "ano": 2021, "busca": r"1º turno|primeiro turno", "data_min": "2025-09-01", "data_max": "2025-09-30", "votacao": "2270800-135"},
+    {"id": "anistia", "sigla": "PL", "numero": 2162, "ano": 2023, "busca": r"[Uu]rg[êe]ncia", "data_min": "2025-09-01", "data_max": "2025-09-30", "votacao": "2562149-7"},
+    {"id": "ir-5-mil", "sigla": "PL", "numero": 1087, "ano": 2025, "busca": r"[Aa]provad|[Ss]ubstitutivo", "data_min": "2025-10-01", "data_max": "2025-10-31", "votacao": "2487436-169"},
 ]
 
 # Partidos que mudaram de nome ou se juntaram, para somar com o nome atual.
-APELIDOS = {"UNIÃO": "União", "PODE": "Podemos", "REPUBLICANOS": "Republicanos", "SOLIDARIEDADE": "Solidariedade", "CIDADANIA": "Cidadania", "PCdoB": "PCdoB", "NOVO": "Novo"}
+APELIDOS = {"PTB": "PRD", "PATRIOTA": "PRD", "PSC": "Podemos", "PROS": "Solidariedade", "UNIÃO": "União", "PODE": "Podemos", "REPUBLICANOS": "Republicanos", "SOLIDARIEDADE": "Solidariedade", "CIDADANIA": "Cidadania", "PCdoB": "PCdoB", "NOVO": "Novo"}
 
 
 def log(*a):
