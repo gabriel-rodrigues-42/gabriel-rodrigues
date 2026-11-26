@@ -1,0 +1,99 @@
+/* Busca do site: tela que a lupa abre. Ver busca.js. Depende de tokens.css e moldura.css.
+   Celular: tela cheia. Computador: painel no alto, sobre o fundo azul translúcido. */
+
+.busca {
+  font-family: var(--fonte); color: var(--texto); background: var(--creme);
+  border: 0; padding: 0; margin: 0; width: 100%; max-width: 100%; height: 100dvh; max-height: 100dvh;
+  display: none; flex-direction: column; overflow: hidden;
+}
+.busca[open] { display: flex; animation: busca-entra .18s ease-out; }
+.busca::backdrop { background: rgba(0, 39, 118, .45); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+html.busca-aberta { overflow: hidden; }
+@keyframes busca-entra { from { opacity: 0; transform: translateY(12px); } }
+
+.busca-form {
+  display: flex; align-items: center; gap: var(--espaco-2);
+  padding: calc(var(--espaco-3) + env(safe-area-inset-top, 0px)) var(--espaco-4) var(--espaco-3);
+  border-bottom: 2px solid var(--azul-claro); background: var(--creme);
+}
+.busca-campo {
+  flex: 1; min-width: 0; display: flex; align-items: center; gap: var(--espaco-2);
+  background: var(--branco); border: 2px solid var(--azul-claro); border-radius: var(--forma-pilula);
+  padding: 0 var(--espaco-4); transition: border-color .15s;
+}
+.busca-campo:focus-within { border-color: var(--azul-medio); }
+.busca-campo svg { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--azul); stroke-width: 2.6; stroke-linecap: round; }
+.busca-campo input {
+  flex: 1; min-width: 0; border: 0; background: transparent; outline: none;
+  font: inherit; font-size: var(--tamanho-campo); font-weight: 700; color: var(--texto); padding: 12px 0;
+}
+.busca-campo input::placeholder { color: var(--texto-suave); font-weight: 600; }
+.busca-campo input::-webkit-search-cancel-button { cursor: pointer; }
+.busca-fechar {
+  font: inherit; font-size: var(--tamanho-2); font-weight: var(--peso-forte); color: var(--azul); cursor: pointer;
+  background: none; border: 0; padding: 10px 6px; border-radius: var(--forma-pilula); flex: none;
+}
+.busca-fechar:hover { text-decoration: underline; }
+
+.busca-corpo { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: var(--espaco-2) var(--espaco-4) calc(var(--espaco-6) + env(safe-area-inset-bottom, 0px)); }
+.busca-subtitulo, .busca-contagem {
+  margin: var(--espaco-4) 0 var(--espaco-2); font-size: var(--tamanho-1); font-weight: var(--peso-forte);
+  text-transform: uppercase; letter-spacing: .06em; color: var(--texto-suave);
+}
+.busca-termos { display: flex; flex-wrap: wrap; gap: var(--espaco-2); }
+.busca-termos button {
+  font: inherit; font-size: var(--tamanho-2); font-weight: 700; color: var(--azul); cursor: pointer;
+  background: var(--azul-claro); border: 0; border-radius: var(--forma-pilula); padding: 8px 14px;
+}
+.busca-termos button:hover { background: var(--amarelo-claro); }
+
+.busca-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--espaco-2); }
+.busca-item {
+  display: flex; gap: var(--espaco-3); align-items: flex-start; text-decoration: none; color: var(--texto);
+  background: var(--branco); border-radius: var(--forma-opcao); padding: var(--espaco-3);
+  box-shadow: 0 4px 0 -1px var(--azul-claro); transition: transform .12s, box-shadow .12s;
+}
+.busca-item:hover, .busca-item:focus-visible { transform: translateY(-1px); box-shadow: 0 5px 0 -1px var(--amarelo); }
+.busca-item:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+.busca-icone {
+  flex: none; width: 56px; height: 45px; border-radius: 12px 14px 12px 10px; background: var(--azul-claro);
+  display: grid; place-items: center; overflow: hidden;
+}
+.busca-item[data-tipo="proposta"] .busca-icone { background: var(--amarelo-claro); }
+.busca-item[data-tipo="ferramenta"] .busca-icone { background: var(--verde-claro); }
+.busca-icone img { width: 100%; height: 100%; object-fit: contain; }
+.busca-icone svg { width: 24px; height: 24px; fill: none; stroke: var(--azul); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.busca-texto { display: grid; gap: 2px; min-width: 0; }
+.busca-tipo { font-size: var(--tamanho-1); font-weight: var(--peso-forte); color: var(--texto-suave); }
+.busca-titulo { font-size: var(--tamanho-3); font-weight: var(--peso-forte); color: var(--azul); line-height: 1.25; text-wrap: pretty; }
+.busca-secao { font-size: var(--tamanho-2); font-weight: 700; color: var(--verde-escuro); }
+.busca-trecho {
+  font-size: var(--tamanho-2); color: var(--texto-suave); line-height: 1.45;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden;
+}
+.busca mark { background: var(--amarelo-claro); color: inherit; border-radius: 4px; padding: 0 1px; box-shadow: inset 0 -3px 0 var(--amarelo); }
+.busca-lista-curta .busca-titulo { font-size: var(--tamanho-2); }
+.busca-lista-curta .busca-item { align-items: center; }
+.busca-vazio { font-size: var(--tamanho-3); margin: var(--espaco-5) 0; color: var(--texto); }
+.busca-vazio a { color: var(--azul); font-weight: var(--peso-forte); }
+
+.busca-carregando { display: flex; gap: 6px; justify-content: center; padding: var(--espaco-6); }
+.busca-carregando span { width: 10px; height: 10px; border-radius: 50%; background: var(--azul-claro); animation: busca-ponto 1s infinite; }
+.busca-carregando span:nth-child(2) { animation-delay: .15s; }
+.busca-carregando span:nth-child(3) { animation-delay: .3s; }
+@keyframes busca-ponto { 50% { background: var(--azul-medio); } }
+
+@media (min-width: 720px) {
+  .busca {
+    width: min(680px, calc(100% - 2 * var(--espaco-5))); height: auto; max-height: min(720px, 80dvh);
+    margin: 8vh auto auto; border-radius: var(--forma-cartao); box-shadow: 0 24px 60px rgba(0, 39, 118, .3);
+  }
+  .busca-form { padding: var(--espaco-4) var(--espaco-5); }
+  .busca-corpo { padding: var(--espaco-2) var(--espaco-5) var(--espaco-5); }
+  .busca-lista-curta { grid-template-columns: 1fr 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .busca[open], .busca-carregando span { animation: none; }
+  .busca-item { transition: none; }
+}

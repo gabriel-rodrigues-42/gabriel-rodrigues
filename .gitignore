@@ -4,3 +4,4 @@ __pycache__/
 videos/estudio/midia/
 site/bastidores/estudio.json
 .wrangler/
+site/busca/

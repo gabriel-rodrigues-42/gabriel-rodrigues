@@ -29,6 +29,11 @@
     idiomaRotulo: "Language",
     leitura: "Reading mode",
     leituraTitulo: "Adds a play button to every page and section, to listen with captions",
+    buscar: "Search",
+    buscarRotulo: "Search the site",
+    menuAtalhos: "Shortcuts",
+    previa: "Menu preview",
+    versoes: ["Top", "Bar"],
   } : {
     missao: "Desenvolvedor de software em Goiânia (GO). Estudo política para levar o jeito de trabalhar da engenharia de software para o governo: medir, testar, corrigir e mostrar o código.",
     menu: ["Propostas", "Caminho", "Sobre"],
@@ -45,12 +50,41 @@
     idiomaRotulo: "Idioma",
     leitura: "Modo leitura",
     leituraTitulo: "Coloca um botão de play em cada página e seção, para ouvir com legendas",
+    buscar: "Buscar",
+    buscarRotulo: "Buscar no site",
+    menuAtalhos: "Atalhos",
+    previa: "Prévia do menu",
+    versoes: ["Topo", "Barra"],
   };
 
+  // ---------- Duas versões do menu, para comparar na prévia ----------
+  // "topo": o cabeçalho some quando a pessoa desce e volta, compacto, quando ela sobe.
+  // "barra": no celular, Propostas, Caminho, Sobre e Buscar ficam numa barra fixa embaixo.
+  // Troque com ?menu=topo ou ?menu=barra (fica guardado no navegador). Depois da escolha, sai a outra.
+  const VERSOES = ["topo", "barra"];
+  const CHAVE_MENU = "gr-menu-versao";
+  const PREVIA = /\.pages\.dev$|^localhost$|^127\.0\.0\.1$/.test(location.hostname);
+  const versaoMenu = (() => {
+    const pedida = new URLSearchParams(location.search).get("menu");
+    if (VERSOES.includes(pedida)) { try { localStorage.setItem(CHAVE_MENU, pedida); } catch { /* vale só nesta página */ } return pedida; }
+    try { const salva = localStorage.getItem(CHAVE_MENU); if (VERSOES.includes(salva)) return salva; } catch { /* sem armazenamento */ }
+    return "topo";
+  })();
+  document.documentElement.dataset.menu = versaoMenu;
+
+  // Ícones do menu (traço, herdam a cor do texto).
+  const ICONE = {
+    propostas: '<path d="M4 5.5h7v6H4zM13 5.5h7v6h-7zM4 13.5h7v6H4zM13 13.5h7v6h-7z"/>',
+    caminho: '<circle cx="12" cy="12" r="8.5"/><path d="m15.5 8.5-2.2 4.8-4.8 2.2 2.2-4.8z"/>',
+    sobre: '<circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c.8-3.8 3.6-6 7-6s6.2 2.2 7 6"/>',
+    buscar: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/>',
+  };
+  const svg = (nome) => `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${ICONE[nome]}</svg>`;
+
   const MENU = [
-    { href: RAIZ + "projetos/", texto: T.menu[0], ativo: (p) => p.startsWith("/projetos/") || p.startsWith("/ideias/") },
-    { href: RAIZ + "caminho/", texto: T.menu[1], ativo: (p) => p.startsWith("/caminho/") },
-    { href: RAIZ + "sobre/", texto: T.menu[2], ativo: (p) => p.startsWith("/sobre/") },
+    { href: RAIZ + "projetos/", icone: "propostas", texto: T.menu[0], ativo: (p) => p.startsWith("/projetos/") || p.startsWith("/ideias/") },
+    { href: RAIZ + "caminho/", icone: "caminho", texto: T.menu[1], ativo: (p) => p.startsWith("/caminho/") },
+    { href: RAIZ + "sobre/", icone: "sobre", texto: T.menu[2], ativo: (p) => p.startsWith("/sobre/") },
   ];
 
   // Endereço da mesma página no outro idioma. Vem do <link rel="alternate" hreflang> do <head>
@@ -101,12 +135,108 @@
             </a>
             <nav class="moldura-menu" aria-label="${T.menuRotulo}">${links}</nav>
             <div class="moldura-acoes">
+              <button type="button" class="moldura-buscar" data-buscar aria-label="${T.buscarRotulo}" title="${T.buscarRotulo}" aria-haspopup="dialog">${svg("buscar")}</button>
               <a class="moldura-apoiar" href="${RAIZ}#apoiar">${T.apoiar}</a>
             </div>
           </div>
-        </header>`;
+        </header>
+        <nav class="moldura-barra" aria-label="${T.menuAtalhos}">
+          ${MENU.map((m) => `<a href="${m.href}"${m.ativo(semIdioma) ? ' aria-current="page"' : ""}><span class="moldura-barra-icone">${svg(m.icone)}</span>${m.texto}</a>`).join("")}
+          <button type="button" data-buscar aria-haspopup="dialog"><span class="moldura-barra-icone">${svg("buscar")}</span>${T.buscar}</button>
+        </nav>`;
+      if (versaoMenu === "topo") topoQueSome(this);
+      if (PREVIA) seletorDeVersao();
     }
   }
+
+  // ---------- Versão "topo": some ao descer, volta compacto ao subir ----------
+  // O cabeçalho fica fixo; o <gr-cabecalho> guarda a altura dele para o conteúdo não pular.
+  function topoQueSome(el) {
+    const topo = el.querySelector(".moldura-topo");
+    const raiz = document.documentElement;
+    let altura = 0;
+    const medir = () => {
+      if (topo.hasAttribute("data-compacto")) return;
+      altura = topo.offsetHeight;
+      raiz.style.setProperty("--topo-altura", altura + "px");
+    };
+    medir();
+    new ResizeObserver(medir).observe(topo);
+
+    let ultimo = scrollY, pendente = false;
+    const mostrar = (sim) => topo.toggleAttribute("data-escondido", !sim);
+    function rolou() {
+      pendente = false;
+      const y = Math.max(0, scrollY);
+      const ocupado = raiz.classList.contains("busca-aberta") || topo.contains(document.activeElement);
+      if (y < altura * 0.6) {
+        topo.removeAttribute("data-compacto");
+        mostrar(true);
+        ultimo = y;
+        return;
+      }
+      topo.setAttribute("data-compacto", "");
+      const passo = y - ultimo;
+      if (Math.abs(passo) < 8) return; // tremidinha do dedo não conta
+      if (passo > 0 && !ocupado) mostrar(false);
+      else if (passo < 0) mostrar(true);
+      ultimo = y;
+    }
+    addEventListener("scroll", () => { if (!pendente) { pendente = true; requestAnimationFrame(rolou); } }, { passive: true });
+    // Quem navega pelo teclado e chega no menu sempre o vê.
+    topo.addEventListener("focusin", () => mostrar(true));
+    rolou();
+  }
+
+  // ---------- Seletor da prévia (só em *.pages.dev e no computador local) ----------
+  function seletorDeVersao() {
+    if (document.querySelector(".moldura-previa")) return;
+    const div = document.createElement("div");
+    div.className = "moldura-previa";
+    div.setAttribute("role", "group");
+    div.setAttribute("aria-label", T.previa);
+    div.innerHTML = `<span>${T.previa}</span>` + VERSOES.map((v, i) =>
+      `<a href="?menu=${v}"${v === versaoMenu ? ' aria-current="true"' : ""}>${i + 1}. ${T.versoes[i]}</a>`).join("");
+    const por = () => document.body.appendChild(div);
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", por);
+    else por();
+  }
+
+  // ---------- Busca ----------
+  // A lupa carrega busca.js + busca.css só no primeiro toque.
+  const VERSAO_BUSCA = "2026-11-26";
+  let buscaCarregando = null;
+  function carregarBusca() {
+    if (window.GRBusca) return Promise.resolve();
+    if (buscaCarregando) return buscaCarregando;
+    const css = document.createElement("link");
+    css.rel = "stylesheet";
+    css.href = PASTA + "busca.css?v=" + VERSAO_BUSCA;
+    const cssPronto = new Promise((ok) => { css.onload = ok; css.onerror = ok; });
+    document.head.appendChild(css);
+    buscaCarregando = Promise.all([cssPronto, new Promise((ok, erro) => {
+      const s = document.createElement("script");
+      s.src = PASTA + "busca.js?v=" + VERSAO_BUSCA;
+      s.onload = ok;
+      s.onerror = () => { buscaCarregando = null; erro(); };
+      document.head.appendChild(s);
+    })]);
+    return buscaCarregando;
+  }
+  function abrirBusca() {
+    carregarBusca().then(() => window.GRBusca.abrir(), () => { location.href = RAIZ + "projetos/"; });
+  }
+  // Adianta o download quando o dedo ou o mouse chega perto da lupa.
+  ["pointerover", "touchstart", "focusin"].forEach((ev) => document.addEventListener(ev, (e) => {
+    if (e.target.closest && e.target.closest("[data-buscar]")) carregarBusca().then(() => window.GRBusca.carregar()).catch(() => {});
+  }, { passive: true }));
+  // Atalho de teclado: "/" abre a busca (fora de campos de texto).
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "/" || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.target.closest("input, textarea, select, [contenteditable]")) return;
+    e.preventDefault();
+    abrirBusca();
+  });
 
   class Rodape extends HTMLElement {
     connectedCallback() {
@@ -231,6 +361,7 @@
   if (escolha === "aceito") carregarGtm();
   document.addEventListener("DOMContentLoaded", () => { if (!lerEscolha()) mostrarAviso(); });
   document.addEventListener("click", (e) => {
+    if (e.target.closest("[data-buscar]")) { abrirBusca(); return; }
     const botaoLeitura = e.target.closest("[data-modo-leitura-botao]");
     if (botaoLeitura) {
       const ligada = botaoLeitura.getAttribute("aria-pressed") !== "true";

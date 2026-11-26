@@ -41,6 +41,9 @@ jobs:
       - name: Juntar blocos e roteiros do estúdio para /bastidores/
         run: python3 scripts/bastidores/juntar.py
 
+      - name: Gerar o índice da busca (lupa do cabeçalho)
+        run: python3 scripts/busca/gerar_indice.py
+
       - name: Publicar a pasta site/
         id: deploy
         env:

@@ -1,7 +1,7 @@
 /* Moldura do site: cabeçalho e rodapé iguais em todas as páginas.
    Depende de tokens.css. Use junto com moldura.js:
-     <link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-26b">
-     <script src="/design-system/moldura.js?v=2026-11-26b"></script>
+     <link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-26c">
+     <script src="/design-system/moldura.js?v=2026-11-26c"></script>
      <gr-cabecalho></gr-cabecalho> logo depois de <body>
      <gr-rodape></gr-rodape> logo antes de </body> */
 
@@ -106,3 +106,81 @@ h1, h2, h3 { hyphens: manual; text-wrap: balance; }
 }
 .moldura-cookies button[data-escolha="aceito"] { background: var(--azul); border-color: var(--azul); color: var(--branco); }
 .moldura-cookies button:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+
+/* ---------- Lupa da busca (busca.js abre a tela) ---------- */
+.moldura-buscar {
+  width: 44px; height: 44px; flex: none; display: grid; place-items: center; cursor: pointer;
+  background: var(--azul-claro); color: var(--azul); border: 0; border-radius: 50%; padding: 0;
+  transition: background .15s, color .15s;
+}
+.moldura-buscar svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; }
+.moldura-buscar:hover { background: var(--azul); color: var(--branco); }
+.moldura-buscar:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+
+/* ---------- Versão "topo": cabeçalho fixo que some ao descer e volta compacto ao subir ----------
+   O <gr-cabecalho> guarda a altura (--topo-altura, medida pelo moldura.js) para o conteúdo não pular. */
+html[data-menu="topo"] { scroll-padding-top: 80px; }
+html[data-menu="topo"] gr-cabecalho { height: var(--topo-altura, auto); }
+html[data-menu="topo"] .moldura-topo {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 20;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  transition: transform .28s ease, box-shadow .2s;
+}
+html[data-menu="topo"] .moldura-topo[data-compacto] { box-shadow: 0 8px 16px -12px rgba(0, 39, 118, .45); }
+html[data-menu="topo"] .moldura-topo[data-escondido] { transform: translateY(calc(-100% - 4px)); }
+@media (max-width: 719px) {
+  /* Compacto no celular: logo pequeno, menu e lupa numa linha só. O Apoiar volta lá no topo da página. */
+  html[data-menu="topo"] .moldura-topo[data-compacto] .moldura-topo-dentro {
+    grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "marca menu apoiar";
+    padding: var(--espaco-2) var(--espaco-3); column-gap: var(--espaco-2);
+  }
+  html[data-menu="topo"] .moldura-topo[data-compacto] .moldura-logo { width: 36px; height: 36px; }
+  html[data-menu="topo"] .moldura-topo[data-compacto] .moldura-menu { flex-wrap: nowrap; gap: 2px; justify-content: center; }
+  html[data-menu="topo"] .moldura-topo[data-compacto] .moldura-menu a { padding: 6px 8px; }
+  html[data-menu="topo"] .moldura-topo[data-compacto] .moldura-apoiar { display: none; }
+  html[data-menu="topo"] .moldura-topo[data-compacto] .moldura-buscar { width: 40px; height: 40px; }
+}
+@media (max-width: 359px) {
+  html[data-menu="topo"] .moldura-topo[data-compacto] .moldura-marca { display: none; }
+  html[data-menu="topo"] .moldura-topo[data-compacto] .moldura-topo-dentro { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "menu apoiar"; }
+}
+@media (prefers-reduced-motion: reduce) { html[data-menu="topo"] .moldura-topo { transition: none; } }
+
+/* ---------- Versão "barra": no celular, o menu vira uma barra fixa embaixo, onde o polegar alcança ---------- */
+.moldura-barra { display: none; }
+@media (max-width: 719px) {
+  html[data-menu="barra"] { --barra-altura: 64px; scroll-padding-bottom: calc(var(--barra-altura) + 16px); }
+  html[data-menu="barra"] body { padding-bottom: calc(var(--barra-altura) + env(safe-area-inset-bottom, 0px)); }
+  html[data-menu="barra"] .moldura-menu, html[data-menu="barra"] .moldura-buscar { display: none; }
+  html[data-menu="barra"] .moldura-topo-dentro { grid-template-areas: "marca apoiar"; padding-bottom: var(--espaco-3); }
+  html[data-menu="barra"] .moldura-barra {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 25;
+    height: calc(var(--barra-altura) + env(safe-area-inset-bottom, 0px)); padding: 0 var(--espaco-2) env(safe-area-inset-bottom, 0px);
+    background: var(--creme-vidro); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-top: 2px solid var(--azul-claro); box-shadow: 0 -6px 18px -12px rgba(0, 39, 118, .35);
+  }
+  html[data-menu="barra"] .moldura-cookies { bottom: calc(var(--barra-altura) + env(safe-area-inset-bottom, 0px) + var(--espaco-3)); }
+}
+.moldura-barra a, .moldura-barra button {
+  font: inherit; font-size: var(--tamanho-1); font-weight: var(--peso-forte); color: var(--azul); text-decoration: none;
+  background: none; border: 0; padding: 0; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-width: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.moldura-barra-icone { display: grid; place-items: center; width: 56px; height: 30px; border-radius: var(--forma-pilula); transition: background .15s; }
+.moldura-barra svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.moldura-barra [aria-current="page"] .moldura-barra-icone { background: var(--azul-claro); }
+.moldura-barra [aria-current="page"] svg { stroke-width: 2.6; }
+.moldura-barra :is(a, button):active .moldura-barra-icone { background: var(--amarelo-claro); }
+.moldura-barra :is(a, button):focus-visible { outline: 3px solid var(--azul); outline-offset: -3px; border-radius: 12px; }
+
+/* ---------- Seletor da prévia (só em *.pages.dev): troca entre as duas versões do menu ---------- */
+.moldura-previa {
+  position: fixed; z-index: 26; left: var(--espaco-3); bottom: calc(var(--barra-altura, 0px) + env(safe-area-inset-bottom, 0px) + var(--espaco-3));
+  display: flex; align-items: center; gap: 4px; padding: 4px 4px 4px 12px; font-family: var(--fonte);
+  background: var(--azul); color: var(--branco); border-radius: var(--forma-pilula); box-shadow: 0 6px 18px rgba(0, 39, 118, .3);
+  font-size: var(--tamanho-1); font-weight: var(--peso-forte);
+}
+.moldura-previa a { color: var(--branco); text-decoration: none; padding: 6px 10px; border-radius: var(--forma-pilula); }
+.moldura-previa a[aria-current] { background: var(--amarelo); color: var(--azul); }
