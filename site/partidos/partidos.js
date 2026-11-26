@@ -12,7 +12,7 @@
     voce: r => `You: ${r === "s" ? "Yes" : "No"}`, placar: (s, n) => `Result: ${s} Yes, ${n} No`,
     copiar: "Copy link with my answers", copiado: "Link copied.", limpar: "Clear answers",
     poucos: "Parties with fewer than 3 deputies voting in most of these votes are left out.",
-    fonte: "See the bill",
+    fonte: "See the bill", verResultado: "See result ↓",
   } : {
     carregando: "Carregando as votações…", erro: "Não deu para carregar as votações. Recarregue a página.",
     sim: "Sim", nao: "Não", pular: "Pular", contador: (n, t) => `${n} de ${t} respondidas`,
@@ -22,7 +22,7 @@
     voce: r => `Você: ${r === "s" ? "Sim" : "Não"}`, placar: (s, n) => `Placar: ${s} Sim, ${n} Não`,
     copiar: "Copiar link com minhas respostas", copiado: "Link copiado.", limpar: "Limpar respostas",
     poucos: "Ficam de fora partidos com menos de 3 deputados votando na maioria destas votações.",
-    fonte: "Ver a proposta",
+    fonte: "Ver a proposta", verResultado: "Ver resultado ↓",
   };
   const app = document.getElementById("app");
   const res = document.getElementById("resultado");
@@ -40,9 +40,7 @@
   }
 
   function desenharPerguntas() {
-    const n = Object.keys(resp).length;
-    app.innerHTML = `<p class="contador" id="contador">${T.contador(n, temas.length)}</p>
-      <div class="progresso" aria-hidden="true"><div style="width:${100 * n / temas.length}%"></div></div>
+    app.innerHTML = `<gr-progresso id="progresso" total="${temas.length}"><a href="#resultado" id="ver-resultado"></a></gr-progresso>
       <ol class="temas">${temas.map((t, i) => `
         <li class="tema" data-leitura-parte>
           <h3 id="p-${t.id}">${i + 1}. ${t.txt.pergunta}</h3>
@@ -56,6 +54,18 @@
         <button type="button" class="botao" id="copiar">${T.copiar}</button>
         <span class="copiado" id="copiado" aria-live="polite"></span>
       </div>`;
+    contar();
+  }
+
+  // Atualiza a barra fixa sem redesenhar as perguntas: a pessoa continua onde estava na tela.
+  function contar() {
+    const n = Object.keys(resp).length, barra = document.getElementById("progresso");
+    if (!barra) return;
+    barra.setAttribute("valor", n);
+    barra.setAttribute("rotulo", T.contador(n, temas.length));
+    const ver = document.getElementById("ver-resultado");
+    ver.textContent = n >= 3 ? T.verResultado : "";
+    ver.hidden = n < 3;
   }
 
   function calcular() {
@@ -89,11 +99,18 @@
   function atualizar() { gravarHash(); desenharPerguntas(); calcular(); }
 
   app.addEventListener("click", e => {
+    // O link da barra rola até o resultado sem trocar o endereço, que guarda as respostas.
+    if (e.target.closest("#ver-resultado")) {
+      e.preventDefault();
+      res.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      return;
+    }
     const b = e.target.closest("button"); if (!b) return;
     if (b.dataset.tema) {
-      if (b.dataset.v === "x") delete resp[b.dataset.tema]; else resp[b.dataset.tema] = b.dataset.v;
-      const foco = `[data-tema="${b.dataset.tema}"][data-v="${b.dataset.v}"]`;
-      atualizar(); app.querySelector(foco)?.focus();
+      const id = b.dataset.tema;
+      if (b.dataset.v === "x") delete resp[id]; else resp[id] = b.dataset.v;
+      app.querySelectorAll(`[data-tema="${id}"]`).forEach(o => o.setAttribute("aria-pressed", String(o.dataset.v !== "x" && resp[id] === o.dataset.v)));
+      gravarHash(); contar(); calcular();
     } else if (b.id === "limpar") { resp = {}; atualizar(); }
     else if (b.id === "copiar") {
       const ok = () => { document.getElementById("copiado").textContent = T.copiado; };

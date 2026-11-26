@@ -34,10 +34,12 @@
 <link rel="stylesheet" href="/design-system/componentes.css">
 <link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-26b">
 <script src="/design-system/moldura.js?v=2026-11-26b"></script>
+<link rel="stylesheet" href="/design-system/progresso.css?v=2026-11-26">
+<script src="/design-system/progresso.js?v=2026-11-26"></script>
 <link rel="stylesheet" href="/design-system/contribuir.css">
 <script src="/design-system/contribuir.js"></script>
-<link rel="stylesheet" href="/projetos/reindustrializacao/simulador/simulador.css?v=2026-11-26d">
-<script src="/projetos/reindustrializacao/simulador/simulador.js?v=2026-11-26f" defer></script>
+<link rel="stylesheet" href="/projetos/reindustrializacao/simulador/simulador.css?v=2026-11-26e">
+<script src="/projetos/reindustrializacao/simulador/simulador.js?v=2026-11-26g" defer></script>
 </head>
 <body>
 <gr-cabecalho></gr-cabecalho>
@@ -53,6 +55,9 @@
     <p>The scenarios use what similar Brazilian funds returned from 1994 to 2022. This is not a promise of returns.</p>
     <p><strong>The FSRI's advantage is in the tax, not in the return.</strong> It was designed for people with very high incomes who would pay a lot of tax. For people who pay little tax, fixed income earns about the same with no risk.</p>
   </div>
+
+  <div class="passos">
+  <gr-progresso total="3" valor="1"><a href="#passo-2" id="sim-proximo">Next step ↓</a></gr-progresso>
 
   <section class="passo" id="passo-1" aria-labelledby="t-passo-1">
     <span class="passo-num">Step 1 of 3</span>
@@ -141,6 +146,8 @@
       <p class="status" id="sim-status" aria-live="polite"></p>
     </div>
   </section>
+
+  </div>
 
   <section class="passo" aria-labelledby="t-conta">
     <h2 id="t-conta">How the math works</h2>

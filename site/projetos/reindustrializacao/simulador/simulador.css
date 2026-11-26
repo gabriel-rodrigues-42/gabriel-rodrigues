@@ -13,6 +13,10 @@ h3 { color: var(--azul); margin: 0 0 var(--espaco-2); }
 .aviso-risco p + p { margin-top: var(--espaco-2); }
 
 .passo { margin-top: var(--espaco-7); scroll-margin-top: var(--espaco-5); }
+/* Barra fixa de passos: ocupa a largura do main, de borda a borda. */
+.passos { margin-top: var(--espaco-6); }
+.passos > gr-progresso { --progresso-recuo: var(--espaco-4); background: var(--creme); }
+.passos > .passo:first-of-type { margin-top: var(--espaco-4); }
 .passo-num { display: inline-block; font-weight: var(--peso-forte); color: var(--verde-escuro); text-transform: uppercase; letter-spacing: .06em; font-size: var(--tamanho-1); margin-bottom: var(--espaco-2); }
 
 /* Passo 1 */
