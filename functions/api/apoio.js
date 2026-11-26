@@ -5,7 +5,7 @@
 // Guarda só o necessário (LGPD, art. 6º, III): email, nome, cidade, UF e quando a pessoa consentiu.
 // Não guarda CPF, telefone nem IP.
 
-const VERSAO_PRIVACIDADE = "2026-11-20";
+const VERSAO_PRIVACIDADE = "2026-11-26";
 const UFS = new Set("AC AL AM AP BA CE DF ES GO MA MG MS MT PA PB PE PI PR RJ RN RO RR RS SC SE SP TO EX".split(" "));
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

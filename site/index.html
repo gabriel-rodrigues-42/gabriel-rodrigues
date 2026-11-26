@@ -156,6 +156,28 @@
   .armadilha { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   .apoio { padding: var(--espaco-5) var(--espaco-4); }
   @media (min-width: 720px) { .campos { grid-template-columns: repeat(2, minmax(0, 1fr)); } .apoio { padding: var(--espaco-6) var(--espaco-5); } }
+  /* Votação do lema: dois cartões empilhados no celular, lado a lado quando há espaço.
+     Os botões ficam ligados ao formulário pelo atributo form, assim o modo leitura lê os cartões. */
+  #lema { margin-top: var(--espaco-7); }
+  .votacao-opcoes { container-type: inline-size; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-4); margin-top: var(--espaco-4); }
+  @media (min-width: 640px) { .votacao-opcoes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .voto { position: relative; display: flex; flex-direction: column; gap: var(--espaco-3); background: var(--branco); border-radius: var(--forma-cartao); padding: var(--espaco-5); box-shadow: var(--sombra-cartao); }
+  .voto::before { content: ""; width: 48px; height: 8px; border-radius: var(--forma-pilula); background: var(--verde-fundo); }
+  .voto + .voto::before { background: var(--azul-medio); }
+  .voto-frase { margin: 0; font-size: var(--tamanho-4); font-weight: 900; line-height: 1.15; color: var(--azul); text-wrap: balance; hyphens: manual; }
+  .voto-porque { margin: 0; font-size: var(--tamanho-2); color: var(--texto-suave); flex: 1; }
+  .voto .botao { align-self: flex-start; }
+  .voto-resultado { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--espaco-3); }
+  .voto-resultado[hidden], .voto-seu[hidden], .voto .botao[hidden] { display: none; }
+  .voto-barra { height: 14px; background: var(--azul-claro); border-radius: var(--forma-pilula); overflow: hidden; }
+  .voto-barra span { display: block; height: 100%; width: calc(var(--pct, 0) * 1%); background: var(--verde-fundo); border-radius: inherit; transition: width .6s ease-out; }
+  .voto + .voto .voto-barra span { background: var(--azul-medio); }
+  .voto-pct { font-size: var(--tamanho-4); font-weight: 900; color: var(--azul); font-variant-numeric: tabular-nums; }
+  .voto-seu { position: absolute; top: var(--espaco-4); right: var(--espaco-4); }
+  .voto.escolhido { outline: 3px solid var(--amarelo); outline-offset: 2px; }
+  .votacao-nota { margin: var(--espaco-4) 0 0; font-size: var(--tamanho-2); color: var(--texto-suave); }
+  .votacao-resposta { margin: var(--espaco-2) 0 0; min-height: 1.5em; font-weight: 700; color: var(--verde-escuro); }
+  @media (prefers-reduced-motion: reduce) { .voto-barra span { transition: none; } }
 </style>
 </head>
 <body>
@@ -242,6 +264,31 @@
       </div>
     </div>
   </section>
+
+  <section id="lema" aria-labelledby="titulo-lema">
+    <h2 id="titulo-lema">Ajude a escolher o meu <span class="destaque">lema</span></h2>
+    <p class="lead">Estou entre duas frases. Escolha a que mais combina com o que você leu aqui.</p>
+    <div class="votacao-opcoes">
+      <div class="voto" data-opcao="entrega">
+        <span class="selo amarelo voto-seu" hidden>Seu voto</span>
+        <p class="voto-frase" id="lema-entrega">Mais entrega, menos imposto, mais confiança.</p>
+        <p class="voto-porque">Juro alto também vem da falta de confiança. Governo que entrega sem pesar no imposto ganha essa confiança.</p>
+        <button class="botao verde" type="submit" form="form-lema" name="opcao" value="entrega" aria-describedby="lema-entrega">Prefiro este</button>
+        <div class="voto-resultado" hidden><span class="voto-barra"><span></span></span><strong class="voto-pct"></strong></div>
+      </div>
+      <div class="voto" data-opcao="conversa">
+        <span class="selo amarelo voto-seu" hidden>Seu voto</span>
+        <p class="voto-frase" id="lema-conversa">Uma conversa que importa.</p>
+        <p class="voto-porque">Explicar política de um jeito simples, com dados oficiais e ouvindo quem vive o problema.</p>
+        <button class="botao" type="submit" form="form-lema" name="opcao" value="conversa" aria-describedby="lema-conversa">Prefiro este</button>
+        <div class="voto-resultado" hidden><span class="voto-barra"><span></span></span><strong class="voto-pct"></strong></div>
+      </div>
+    </div>
+    <form id="form-lema" action="/api/lema" method="post" toolname="votar_lema" tooldescription="Registra um voto anônimo na frase que a pessoa prefere como lema de Gabriel Rodrigues: opcao=entrega para &quot;Mais entrega, menos imposto, mais confiança.&quot; ou opcao=conversa para &quot;Uma conversa que importa.&quot; Só vote com a confirmação da própria pessoa.">
+    </form>
+    <p class="votacao-nota">O voto é anônimo e vale um por aparelho. Guardo só quantos votos cada frase tem. <a href="/privacidade/#lema">Como funciona</a>.</p>
+    <p class="votacao-resposta" id="lema-resposta" role="status" aria-live="polite"></p>
+  </section>
 </main>
 <gr-rodape></gr-rodape>
 
@@ -306,6 +353,58 @@
       return avisar("Sem conexão. Tente de novo.");
     } finally {
       botao.disabled = false;
+    }
+  }
+  // Votação do lema. Um voto por aparelho: a escolha fica no localStorage (só neste navegador).
+  // O servidor guarda só a contagem de cada frase (functions/api/lema.js) e devolve as porcentagens.
+  // O resultado só aparece depois do voto, para não puxar a escolha de ninguém.
+  const formLema = document.getElementById("form-lema");
+  const respostaLema = document.getElementById("lema-resposta");
+  const cartoes = [...document.querySelectorAll(".voto")];
+  const CHAVE = "gr-lema-voto";
+  const guardado = () => { try { return localStorage.getItem(CHAVE); } catch { return null; } };
+  const guardar = (o) => { try { localStorage.setItem(CHAVE, o); } catch {} };
+
+  function mostrarResultado(pct, escolha) {
+    for (const c of cartoes) {
+      const o = c.dataset.opcao;
+      const n = Number(pct?.[o]) || 0;
+      c.querySelector(".botao").hidden = true;
+      c.querySelector(".voto-pct").textContent = n.toLocaleString("pt-BR") + "%";
+      c.querySelector(".voto-resultado").hidden = false;
+      c.classList.toggle("escolhido", o === escolha);
+      c.querySelector(".voto-seu").hidden = o !== escolha;
+      requestAnimationFrame(() => c.querySelector(".voto-barra span").style.setProperty("--pct", n));
+    }
+  }
+
+  // Voltou de um envio sem JavaScript (?lema=entrega) ou já votou neste aparelho: mostra o resultado.
+  const vindo = new URLSearchParams(location.search).get("lema");
+  if (["entrega", "conversa"].includes(vindo)) guardar(vindo);
+  const jaVotou = guardado();
+  if (jaVotou) fetch(formLema.action).then((r) => (r.ok ? r.json() : null)).then((d) => d?.ok && mostrarResultado(d.pct, jaVotou)).catch(() => {});
+
+  formLema.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const opcao = e.submitter?.value || new FormData(formLema).get("opcao");
+    const envio = votar(opcao);
+    if (e.agentInvoked && typeof e.respondWith === "function") e.respondWith(envio);
+  });
+
+  async function votar(opcao) {
+    if (!["entrega", "conversa"].includes(opcao) || guardado()) return "";
+    const botoes = cartoes.map((c) => c.querySelector(".botao"));
+    botoes.forEach((b) => (b.disabled = true));
+    respostaLema.textContent = "Enviando…";
+    try {
+      const r = await fetch(formLema.action, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ opcao }) });
+      const corpo = await r.json().catch(() => ({}));
+      if (r.ok && corpo.ok) { guardar(opcao); mostrarResultado(corpo.pct, opcao); return (respostaLema.textContent = "Obrigado! Seu voto foi contado."); }
+      return (respostaLema.textContent = r.status === 503 ? "A votação ainda está sendo ligada. Volte em alguns dias." : corpo.erro || "Não consegui guardar o voto. Tente de novo.");
+    } catch {
+      return (respostaLema.textContent = "Sem conexão. Tente de novo.");
+    } finally {
+      botoes.forEach((b) => (b.disabled = false));
     }
   }
 })();

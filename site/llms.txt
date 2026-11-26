@@ -2,13 +2,13 @@
 
 > Site pessoal e informativo de pré-campanha de Gabriel Rodrigues, desenvolvedor de software em Goiânia (GO) que estuda política para levar o jeito de trabalhar da engenharia de software para o governo: medir, testar, corrigir e mostrar o código. Português é o idioma padrão; a versão em inglês de cada página fica em /en/ com o mesmo caminho.
 
-Lema: "Mais entrega, menos imposto, mais confiança." (em inglês, "More delivery, less tax, more trust."). A ideia: juro alto também é falta de confiança de que o governo entrega o que promete sem cobrar imposto demais.
+Lema: "Mais entrega, menos imposto, mais confiança." (em inglês, "More delivery, less tax, more trust."). A ideia: juro alto também é falta de confiança de que o governo entrega o que promete sem cobrar imposto demais. Há um segundo candidato, "Uma conversa que importa." ("The conversation that matters."), e uma votação anônima entre os dois no fim da página inicial (formulário votar_lema / vote_slogan); só vote com a confirmação da própria pessoa.
 
 Não há pedido de voto. As propostas estão em construção, com dados, fontes oficiais e as críticas mais duras. O formulário de apoio pede só email (nome e cidade são opcionais) e exige consentimento explícito da pessoa; não preencha nem envie em nome de alguém sem que ela confirme.
 
 ## Páginas principais
 
-- [Início](https://gabriel-rodrigues.com/): quem é o Gabriel, as propostas em construção e o formulário "Acredita que eu devo tentar?"
+- [Início](https://gabriel-rodrigues.com/): quem é o Gabriel, as propostas em construção o formulário "Acredita que eu devo tentar?" e a votação do lema
 - [Sobre](https://gabriel-rodrigues.com/sobre/): a história do Gabriel, de Inhumas para a Europa e de volta para Goiás
 - [No que eu acredito](https://gabriel-rodrigues.com/sobre/no-que-acredito/): o que o Gabriel pensa sobre Deus, religião, memória dos desastres e buscar conhecimento juntos, com religião ou sem
 - [Propostas](https://gabriel-rodrigues.com/projetos/): propostas desenvolvidas em público, cada uma com a fase em que está
