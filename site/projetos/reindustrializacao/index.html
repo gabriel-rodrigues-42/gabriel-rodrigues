@@ -118,6 +118,10 @@
   .fato { background: var(--creme); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); }
   .fato small { display: block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); text-transform: uppercase; letter-spacing: .05em; color: var(--texto-suave); }
   .fato b { display: block; font-size: var(--tamanho-4); color: var(--verde-escuro); line-height: 1.2; }
+  .fatos.elevados { grid-template-columns: 1fr; gap: var(--espaco-4); margin-bottom: var(--espaco-5); }
+  .fatos.elevados .fato { background: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); padding: var(--espaco-4) var(--espaco-5); }
+  .fatos.elevados .fato b { font-size: var(--tamanho-5); white-space: nowrap; }
+  @media (min-width: 600px) { .fatos.elevados { grid-template-columns: repeat(3, 1fr); } .fatos.elevados .fato b { font-size: var(--tamanho-4); } }
   .setores { display: flex; flex-wrap: wrap; gap: var(--espaco-2); padding: 0; list-style: none; margin: 0 0 var(--espaco-3); }
   .setores li { background: var(--azul-claro); color: var(--azul); font-weight: var(--peso-forte); font-size: var(--tamanho-1); padding: 6px 12px; border-radius: var(--forma-pilula); }
 
@@ -415,7 +419,7 @@
 
     <h3 class="subtitulo">Quanto fundos parecidos já renderam</h3>
     <p>Insper, Spectra e a associação do setor (ABVCAP) mediram 387 fundos brasileiros que compram parte de empresas, de 1994 a 2022.</p>
-    <div class="fatos">
+    <div class="fatos elevados">
       <div class="fato"><small>Média por ano</small><b>12,7%</b><span class="pequeno">em reais, já sem as taxas</span></div>
       <div class="fato"><small>Comparado ao CDI</small><b>1,1 vez</b><span class="pequeno">ganhou do CDI por pouco</span></div>
       <div class="fato"><small>Melhores contra piores</small><b>25 pontos</b><span class="pequeno">de diferença por ano</span></div>
