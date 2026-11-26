@@ -107,6 +107,10 @@
   .lema-sinal { flex: none; display: grid; place-items: center; width: 1.1em; height: 1.1em; font-size: .9em; line-height: 1; color: var(--branco); background: var(--verde-fundo); border-radius: var(--forma-bolha-1); }
   .lema-linha:nth-child(2) .lema-sinal { background: var(--amarelo); color: var(--azul); border-radius: var(--forma-bolha-2); }
   .lema-linha:nth-child(3) .lema-sinal { border-radius: var(--forma-bolha-3); }
+  /* Cartão largo (computador): as três partes numa linha só, cada uma com o seu sinal. */
+  @container (min-width: 600px) {
+    .lema-frase { display: flex; gap: var(--espaco-5); font-size: min(var(--tamanho-5), 3.5cqi); }
+  }
   .lema-porque { margin: var(--espaco-4) 0 0; padding-top: var(--espaco-3); border-top: 2px solid var(--azul-claro); color: var(--texto-suave); font-size: var(--tamanho-2); }
 
   /* Propostas */
