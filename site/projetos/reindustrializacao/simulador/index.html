@@ -36,7 +36,7 @@
 <script src="/design-system/moldura.js?v=2026-11-26b"></script>
 <link rel="stylesheet" href="/design-system/contribuir.css">
 <script src="/design-system/contribuir.js"></script>
-<link rel="stylesheet" href="/projetos/reindustrializacao/simulador/simulador.css?v=2026-11-26b">
+<link rel="stylesheet" href="/projetos/reindustrializacao/simulador/simulador.css?v=2026-11-26c">
 <script src="/projetos/reindustrializacao/simulador/simulador.js?v=2026-11-26c" defer></script>
 </head>
 <body>
@@ -51,6 +51,7 @@
   <div class="aviso-risco">
     <p><strong>As empresas são inventadas.</strong> O FSRI ainda não existe. Os nomes, os setores e os números de cada cartão servem só para mostrar as regras.</p>
     <p>Os cenários usam o que fundos brasileiros parecidos renderam de 1994 a 2022. Não é promessa de retorno.</p>
+    <p><strong>A vantagem do FSRI está no imposto, não no retorno.</strong> Ele foi pensado para quem tem renda muito alta e pagaria muito imposto. Para quem paga pouco imposto, a renda fixa rende parecido e não tem risco.</p>
   </div>
 
   <section class="passo" id="passo-1" aria-labelledby="t-passo-1">
@@ -60,9 +61,9 @@
       <fieldset class="portas">
         <legend>Por qual porta você entra?</legend>
         <label class="porta"><input type="radio" name="porta" value="menor" checked toolparamdescription="menor: cotas baratas com teto de R$ 20 mil por ano; grande: crédito com ações como garantia">
-          <span><strong>Patrimônio menor</strong>Compra cotas com valor baixo. O teto é de R$ 20 mil por ano, como a CVM já faz com startups (Resolução CVM 88, de 2022).</span></label>
+          <span><strong>Patrimônio menor</strong>Compra cotas com valor baixo, com teto de R$ 20 mil por ano, como a CVM já faz com startups (Resolução CVM 88, de 2022). É para quem quer apoiar uma empresa nacional e aceita o risco.</span></label>
         <label class="porta"><input type="radio" name="porta" value="grande">
-          <span><strong>Patrimônio grande</strong>Pega crédito no banco dando ações como garantia e aplica esse dinheiro nos projetos.</span></label>
+          <span><strong>Patrimônio grande</strong>Pega crédito no banco dando ações como garantia e aplica esse dinheiro nos projetos. É para quem tem renda muito alta e pagaria o imposto mínimo.</span></label>
       </fieldset>
       <div class="campos">
         <div class="campo">
@@ -118,6 +119,11 @@
       </div>
     </div>
     <div id="sim-resultado" aria-live="polite"></div>
+    <div class="leitura-resultado">
+      <h3>O que esse resultado quer dizer</h3>
+      <p>No cenário médio, o FSRI fica perto do CDI. A diferença vem da isenção, não de um retorno maior.</p>
+      <p>Para quem paga pouco imposto, a renda fixa continua sendo a escolha certa. A vantagem aparece para quem ganha mais de R$ 600 mil por ano e paga o imposto mínimo de até 10% sobre a renda (Lei 15.270, de 2025). Para essa pessoa, a comparação é FSRI contra pagar o imposto.</p>
+    </div>
 
     <div class="compartilhar" id="sim-compartilhar" hidden>
       <h3>Compartilhe a sua carteira</h3>
@@ -140,6 +146,7 @@
     <ul class="fontes">
       <li><a href="https://spectrainvest.com/en/estudo/performance-of-brazilian-private-equity-and-venture-capital-funds-1994-2022-2/">Insper, Spectra e ABVCAP, Performance of Brazilian Private Equity and Venture Capital Funds (1994-2022), 2023</a></li>
       <li><a href="https://www.bcb.gov.br/controleinflacao/historicotaxasjuros">Banco Central, histórico da taxa Selic (Copom de 4/11/2026)</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/L15270.htm">Lei 15.270, de 2025 (imposto mínimo sobre rendas acima de R$ 600 mil por ano)</a></li>
       <li><a href="https://conteudo.cvm.gov.br/export/sites/cvm/legislacao/resolucoes/anexos/001/resol088.pdf">CVM, Resolução 88, de 2022 (investimento em startups pela internet)</a></li>
       <li><a href="/projetos/reindustrializacao/">A proposta do FSRI: faixas, seguro, isenção e conflito de interesse</a></li>
     </ul>
