@@ -81,6 +81,7 @@
   h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); }
   h2 { font-size: var(--tamanho-5); line-height: 1.15; color: var(--azul); margin: 0 0 var(--espaco-2); }
   .lead { font-size: var(--tamanho-3); color: var(--texto-suave); margin: 0 0 var(--espaco-3); }
+  .sem-quebra { white-space: nowrap; } /* link curto inteiro numa linha */
   a { color: var(--azul); }
 
   /* Sobre */
@@ -179,7 +180,7 @@
       <h1 id="titulo-sobre">Hi, I'm <span class="destaque">Gabriel</span>.</h1>
       <p class="objetivo">I want to run for federal representative for Goiás in 2030.<span>If enough people support me, I'll first run for Goiânia's City Council, in 2028. <a href="#apoiar">Tell me if you believe in it →</a></span></p>
       <p class="lead">I'm a software developer. I worked in Europe for eight years and came back to Goiás, Brazil, in 2026.</p>
-      <p class="lead">Today I study politics to fix the systems that get in people's way, the way software gets fixed. <a href="/en/sobre/">Read my story →</a></p>
+      <p class="lead">Today I study politics to fix the systems that get in people's way, the way software gets fixed. <a class="sem-quebra" href="/en/sobre/">Read my story →</a></p>
     </div>
   </section>
 
