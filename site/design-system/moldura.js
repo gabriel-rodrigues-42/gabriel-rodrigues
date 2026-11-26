@@ -14,6 +14,7 @@
   const semIdioma = location.pathname.replace(/^\/en(?=\/|$)/, "") || "/";
 
   const T = EN ? {
+    lema: "More delivery, less tax, more trust.",
     missao: "Software developer in Goiânia, Brazil. I study politics to bring the way software engineering works into government: measure, test, fix and show the code.",
     menu: ["Proposals", "Path", "About"],
     menuRotulo: "Main menu",
@@ -30,6 +31,7 @@
     leitura: "Reading mode",
     leituraTitulo: "Adds a play button to every page and section, to listen with captions",
   } : {
+    lema: "Mais entrega, menos imposto, mais confiança.",
     missao: "Desenvolvedor de software em Goiânia (GO). Estudo política para levar o jeito de trabalhar da engenharia de software para o governo: medir, testar, corrigir e mostrar o código.",
     menu: ["Propostas", "Caminho", "Sobre"],
     menuRotulo: "Menu principal",
@@ -117,6 +119,7 @@
           <div class="moldura-rodape-dentro">
             <div>
               <strong>Gabriel Rodrigues</strong>
+              <p class="moldura-lema">${T.lema}</p>
               <p>${T.missao}</p>
             </div>
             <ul>

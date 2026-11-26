@@ -68,7 +68,7 @@
 </script>
 <link rel="stylesheet" href="/design-system/tokens.css?v=2026-11-26">
 <link rel="stylesheet" href="/design-system/componentes.css">
-<link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-24b">
+<link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-26">
 <script src="/design-system/moldura.js"></script>
 <link rel="stylesheet" href="/design-system/galeria.css?v=2026-11-22">
 <script src="/projetos/propostas.js"></script>
@@ -98,6 +98,16 @@
     .sobre-foto { width: 200px; height: 200px; grid-column: 2; grid-row: 1; }
     .jeito { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
+
+  /* Lema: mais, menos, mais. O sinal de cada linha é só desenho (aria-hidden); o texto é lido normalmente. */
+  .lema { container-type: inline-size; margin: var(--espaco-6) 0 0; padding: var(--espaco-5) var(--espaco-5) var(--espaco-4); background: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); }
+  /* Cada parte numa linha só: no celular com letra grande, a fonte diminui com o cartão (cqi) em vez de quebrar a linha. */
+  .lema-frase { margin: 0; display: grid; gap: var(--espaco-2); font-size: min(var(--tamanho-5), 10cqi); white-space: nowrap; font-weight: 900; line-height: 1.1; color: var(--azul); }
+  .lema-linha { display: flex; align-items: center; gap: var(--espaco-3); min-width: 0; }
+  .lema-sinal { flex: none; display: grid; place-items: center; width: 1.1em; height: 1.1em; font-size: .9em; line-height: 1; color: var(--branco); background: var(--verde-fundo); border-radius: var(--forma-bolha-1); }
+  .lema-linha:nth-child(2) .lema-sinal { background: var(--amarelo); color: var(--azul); border-radius: var(--forma-bolha-2); }
+  .lema-linha:nth-child(3) .lema-sinal { background: var(--azul); border-radius: var(--forma-bolha-3); }
+  .lema-porque { margin: var(--espaco-4) 0 0; padding-top: var(--espaco-3); border-top: 2px solid var(--azul-claro); color: var(--texto-suave); font-size: var(--tamanho-2); }
 
   /* Propostas */
   #publicacoes { margin-top: var(--espaco-7); }
@@ -158,6 +168,15 @@
       <p class="lead">I'm a software developer. I worked in Europe for eight years and came back to Goiás, Brazil, in 2026.</p>
       <p class="lead">Today I study politics to fix the systems that get in people's way, the way software gets fixed. <a href="/en/sobre/">Read my story →</a></p>
     </div>
+  </section>
+
+  <section class="lema" aria-label="My motto">
+    <p class="lema-frase">
+      <span class="lema-linha"><span class="lema-sinal" aria-hidden="true">+</span><span>More delivery,</span></span>
+      <span class="lema-linha"><span class="lema-sinal" aria-hidden="true">−</span><span>less tax,</span></span>
+      <span class="lema-linha"><span class="lema-sinal" aria-hidden="true">+</span><span>more trust.</span></span>
+    </p>
+    <p class="lema-porque">High interest rates are also a sign of low trust. When the government delivers what it promises without taxing too much, lenders charge less.</p>
   </section>
 
   <ul class="jeito" aria-label="How I work">
