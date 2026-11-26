@@ -59,7 +59,6 @@ dt { color: var(--texto-suave); }
 dd { margin: 0; font-weight: 700; overflow-wrap: anywhere; }
 dd small { font-weight: var(--peso-normal); color: var(--texto-suave); }
 .idade-nao { color: var(--texto); background: var(--amarelo-claro); padding: 0 4px; border-radius: 4px; }
-.convite-partidos { margin: var(--espaco-5) 0 0; padding: var(--espaco-3) var(--espaco-4); background: var(--azul-claro); border-radius: var(--forma-opcao); font-weight: var(--peso-forte); }
 .fonte { font-size: var(--tamanho-1); color: var(--texto-suave); margin: var(--espaco-2) 0 0; }
 .adicionar { display: flex; gap: var(--espaco-2); flex-wrap: wrap; align-items: center; margin-top: var(--espaco-3); }
 .adicionar select { width: auto; padding: 10px 44px 10px 12px; }
@@ -79,3 +78,13 @@ dd small { font-weight: var(--peso-normal); color: var(--texto-suave); }
 }
 .outros-cargos { margin-top: var(--espaco-5); }
 .outros-cargos summary { cursor: pointer; font-weight: var(--peso-forte); color: var(--azul); padding: var(--espaco-3) 0; }
+
+/* Convite compacto para /partidos/, entre o questionário e as perguntas frequentes. */
+.convite-partidos { display: flex; align-items: center; justify-content: space-between; gap: var(--espaco-3); margin-top: var(--espaco-6); padding: var(--espaco-4) var(--espaco-5); background: var(--azul); color: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); text-decoration: none; }
+.convite-partidos span:first-child { min-width: 0; }
+.convite-partidos strong { display: block; font-size: var(--tamanho-3); line-height: 1.3; }
+.convite-partidos small { display: block; font-size: var(--tamanho-2); }
+.convite-seta { flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--amarelo); color: var(--azul); display: grid; place-items: center; font-weight: 900; font-size: var(--tamanho-4); transition: transform .15s; }
+.convite-partidos:hover .convite-seta { transform: translateX(3px); }
+.convite-partidos:focus-visible { outline: 3px solid var(--amarelo); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .convite-seta { transition: none; } }

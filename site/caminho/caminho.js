@@ -65,7 +65,6 @@
     cargosEx: (m) => "The offices for voters in " + m, cargos: "Offices you can run for",
     ordem: "From the best match with your answers to the weakest.",
     outros: (n) => `Other offices that match less (${n})`,
-    partidos: "Want to compare with real votes in the Chamber? ", partidosLink: "Which party votes like you? →",
     rodape: (g, m, ge) => `Data generated on ${g} from TSE files (${m} and ${ge} elections) and IBGE. Always double-check with the TSE and your state's TRE. Nothing here is legal advice.`,
     faq: (g, lista) => `Data generated on ${g}. TSE files generated on: ${lista}.`, semData: "no date",
   } : {
@@ -111,7 +110,6 @@
     cargosEx: (m) => "Os cargos para quem vota em " + m, cargos: "Cargos que você pode disputar",
     ordem: "Do que mais combina com suas respostas para o que menos combina.",
     outros: (n) => `Outros cargos que combinam menos (${n})`,
-    partidos: "Quer comparar com votações reais da Câmara? ", partidosLink: "Qual partido vota como você? →",
     rodape: (g, m, ge) => `Dados gerados em ${g} a partir dos arquivos do TSE (eleições de ${m} e ${ge}) e do IBGE. Confira sempre no TSE e no TRE do seu estado. Nada aqui é orientação jurídica.`,
     faq: (g, lista) => `Dados gerados em ${g}. Arquivos do TSE gerados em: ${lista}.`, semData: "sem data",
   };
@@ -479,8 +477,6 @@
       fortes.length && fracos.length ? el("details", { class: "outros-cargos" },
         el("summary", {}, T.outros(fracos.length)),
         el("div", { class: "cargos" }, fracos.map((x) => cartaoCargo(x, local)))) : null,
-      el("p", { class: "convite-partidos" }, T.partidos,
-        el("a", { href: (document.documentElement.lang.startsWith("en") ? "/en" : "") + "/partidos/" }, T.partidosLink)),
       el("p", { class: "fonte" }, T.rodape(dataBR(B.gerado_em), B.eleicao_municipal, B.eleicao_geral)),
     );
   }
