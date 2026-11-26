@@ -20,9 +20,8 @@ AGENTE = "mapa-cidade-esponja/1.0 (script de dados abertos; GitHub Actions)"
 OVERPASS = "https://overpass-api.de/api/interpreter"
 NOMINATIM = "https://nominatim.openstreetmap.org/search"
 # Caixa de Goiânia (oeste, sul, leste, norte), com folga.
-CAIXA = (-49.45, -16.85, -49.07, -16.45)
+CAIXA = (-49.55, -16.85, -49.05, -16.45)
 
-CORREGOS = "Botafogo|Capim Puba|Cascavel|Anicuns|Meia Ponte|João Leite|Macambira|Taquaral|Vaca Brava|Barreiro|Fundo|Caveirinha|Areião|Mingau|Água Branca|Serrinha"
 PARQUES = "Jardim Botânico|Areião|Linear|Zoológico|Buritis|Botafogo|Mutirama|Flamboyant|Lago das Rosas|Vaca Brava|Cascavel|Macambira"
 
 
@@ -110,7 +109,9 @@ def camadas():
             feicoes.append(feicao("Polygon", [simplificar(anel, 0.0003)], {"camada": "limite"}))
 
     print("Córregos e rios")
-    for el in overpass(f'way["waterway"~"^(river|stream|canal)$"]["name"~"{CORREGOS}"](area.gyn);out geom;'):
+    s, w, n, e = CAIXA[1], CAIXA[0], CAIXA[3], CAIXA[2]
+    # Todos os córregos com nome em Goiânia e na região metropolitana (a análise de terreno usa esta camada).
+    for el in overpass(f'way["waterway"~"^(river|stream|canal)$"]["name"]({s},{w},{n},{e});out geom;'):
         g = linha(el)
         if len(g) > 1:
             feicoes.append(feicao("LineString", g, {"camada": "corrego", "nome": el["tags"].get("name", "")}))

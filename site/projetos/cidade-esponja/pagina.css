@@ -128,3 +128,6 @@ p { margin: 0 0 var(--espaco-3); }
 .maplibregl-ctrl-attrib { font-family: var(--fonte); }
 .niveis { padding-left: 1.1em; }
 .niveis li + li { margin-top: var(--espaco-2); }
+.selo-grau.analise { background: var(--azul-medio); color: var(--branco); }
+.selo-grau.analise::before { display: none; }
+.bola.analise { background: var(--azul-medio); opacity: .6; border-radius: 4px; }

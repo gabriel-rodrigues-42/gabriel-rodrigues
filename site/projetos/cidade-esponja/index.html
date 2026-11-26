@@ -72,6 +72,7 @@
       <button type="button" class="chip" data-camada="risco" aria-pressed="true"><span class="bola" style="background: var(--livre-roxo)"></span>Áreas de risco</button>
       <button type="button" class="chip" data-camada="agua" aria-pressed="true"><span class="bola" style="background: var(--azul-medio)"></span>Córregos e parques</button>
       <button type="button" class="chip" data-camada="marcos" aria-pressed="true"><span class="bola marco"></span>Marcos da Memória</button>
+      <button type="button" class="chip" data-camada="analise" aria-pressed="false"><span class="bola analise"></span>Análise própria (triagem)</button>
     </div>
     <div class="mapa-e-ficha">
       <div id="mapa" role="region" aria-label="Mapa interativo. A lista de áreas abaixo do mapa abre as mesmas fichas."></div>
@@ -150,10 +151,22 @@
     <li><strong>Ficha de custo pública para cada obra de drenagem</strong>, como as deste mapa: quanto custa, quanta água guarda e quem paga.</li>
   </ul>
 
+  <section id="metodo" aria-labelledby="t-metodo">
+    <h2 id="t-metodo">Como fizemos a análise própria</h2>
+    <p>A camada "Análise própria" mostra onde a água chega primeiro quando um córrego enche. É uma triagem: aponta onde olhar, não diz que uma rua alaga.</p>
+    <ol class="propostas">
+      <li><strong>Terreno.</strong> Usamos o Copernicus GLO-30, um modelo de altura do terreno com pontos a cada 30 metros, aberto e gratuito (<a href="https://registry.opendata.aws/copernicus-dem/">Agência Espacial Europeia</a>). Ele mede a superfície, então prédios e árvores somam altura.</li>
+      <li><strong>Córregos.</strong> Pegamos os córregos e rios com nome do OpenStreetMap, em Goiânia e nas cidades em volta.</li>
+      <li><strong>Altura acima do córrego.</strong> Para cada ponto, calculamos quantos metros ele fica acima do córrego mais próximo. Os técnicos chamam isso de HAND. Fizemos a versão simples, pela distância em linha reta.</li>
+      <li><strong>Classes.</strong> Até 2 metros acima do córrego é fundo de vale: a água chega primeiro. De 2 a 5 metros é beira de vale. Só contamos até 500 metros de um córrego e tiramos manchas menores que 1 hectare.</li>
+    </ol>
+    <p>O que esta análise não vê: galerias e bueiros, ruas que alagam longe de córrego e o efeito das bacias. Por isso ela fica numa camada separada, desligada no começo. O código está aberto em <a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/scripts/cidade-esponja/analise_terreno.py">scripts/cidade-esponja/analise_terreno.py</a>.</p>
+  </section>
+
   <h2>Próximos passos do mapa</h2>
   <ul class="propostas">
     <li><strong>Região metropolitana.</strong> Os córregos não param na divisa. Aparecida de Goiânia, Senador Canedo, Trindade e as outras cidades em volta entram quando houver dado com fonte.</li>
-    <li><strong>Uma análise própria de risco, com o método aberto.</strong> Vamos usar o modelo de terreno aberto da UFRGS e da ANA (ANADEM, 30 metros), achar os fundos de vale onde a água para e simular a chuva forte de Goiânia pela curva do Serviço Geológico. O resultado vai aparecer numa camada separada, com o passo a passo publicado. Serve para apontar onde olhar, não para dizer que uma rua alaga.</li>
+    <li><strong>Melhorar a análise própria.</strong> Trocar o terreno de 30 metros pelo LiDAR da Prefeitura quando ele for aberto, e simular a chuva forte de Goiânia pela curva do Serviço Geológico.</li>
     <li><strong>Relatos de moradores, só se forem reais.</strong> A pessoa marca o ponto, a data e o tipo de alagamento, sem nome nem foto. O relato só aparece no mapa depois de conferido: com outro relato do mesmo lugar ou com notícia ou registro da Defesa Civil.</li>
   </ul>
   <p>Esta proposta ainda está em estudo. As fichas mudam quando chegarem os dados oficiais.</p>

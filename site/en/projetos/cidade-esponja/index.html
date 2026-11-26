@@ -72,6 +72,7 @@
       <button type="button" class="chip" data-camada="risco" aria-pressed="true"><span class="bola" style="background: var(--livre-roxo)"></span>Risk areas</button>
       <button type="button" class="chip" data-camada="agua" aria-pressed="true"><span class="bola" style="background: var(--azul-medio)"></span>Streams and parks</button>
       <button type="button" class="chip" data-camada="marcos" aria-pressed="true"><span class="bola marco"></span>Memory Markers</button>
+      <button type="button" class="chip" data-camada="analise" aria-pressed="false"><span class="bola analise"></span>Our own analysis (screening)</button>
     </div>
     <div class="mapa-e-ficha">
       <div id="mapa" role="region" aria-label="Interactive map. The list of areas below the map opens the same cards."></div>
@@ -150,10 +151,22 @@
     <li><strong>A public cost card for every drainage project</strong>, like the ones on this map: what it costs, how much water it holds and who pays.</li>
   </ul>
 
+  <section id="metodo" aria-labelledby="t-metodo">
+    <h2 id="t-metodo">How we did our own analysis</h2>
+    <p>The "Our own analysis" layer shows where water arrives first when a stream rises. It is a screening: it points to where to look, it does not say that a street floods.</p>
+    <ol class="propostas">
+      <li><strong>Terrain.</strong> We used Copernicus GLO-30, a terrain height model with a point every 30 metres, open and free (<a href="https://registry.opendata.aws/copernicus-dem/">European Space Agency</a>). It measures the surface, so buildings and trees add height.</li>
+      <li><strong>Streams.</strong> We took the named streams and rivers from OpenStreetMap, in Goiânia and the nearby cities.</li>
+      <li><strong>Height above the stream.</strong> For each point, we worked out how many metres it sits above the nearest stream. Specialists call this HAND. We used the simple version, by straight-line distance.</li>
+      <li><strong>Classes.</strong> Up to 2 metres above the stream is a valley bottom: water gets there first. From 2 to 5 metres is the valley edge. We only count up to 500 metres from a stream and drop patches smaller than 1 hectare.</li>
+    </ol>
+    <p>What this analysis does not see: storm drains and culverts, streets that flood far from a stream, and the effect of the basins. That is why it sits in a separate layer, switched off at first. The code is open at <a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/scripts/cidade-esponja/analise_terreno.py">scripts/cidade-esponja/analise_terreno.py</a>.</p>
+  </section>
+
   <h2>Next steps for the map</h2>
   <ul class="propostas">
     <li><strong>The metropolitan area.</strong> Streams do not stop at the city line. Aparecida de Goiânia, Senador Canedo, Trindade and the other nearby cities come in when there is sourced data.</li>
-    <li><strong>Our own risk analysis, with an open method.</strong> We will use the open terrain model from UFRGS and ANA (ANADEM, 30 metres), find the valley bottoms where water collects, and simulate Goiânia's heavy rain using the Geological Survey's rainfall curve. The result will show up as a separate layer, with every step published. It points to where to look, not proof that a street floods.</li>
+    <li><strong>Improve our own analysis.</strong> Swap the 30-metre terrain for the city's LiDAR once it is opened, and simulate Goiânia's heavy rain using the Geological Survey's rainfall curve.</li>
     <li><strong>Residents' reports, only if they are real.</strong> People mark the place, the date and the type of flooding, with no name or photo. A report only shows on the map after it is checked: against another report from the same place, or against news or a Civil Defense record.</li>
   </ul>
   <p>This proposal is still being studied. The cards will change when official data arrives.</p>

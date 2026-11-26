@@ -34,6 +34,13 @@
     inicioTexto: "Each point opens a card with the problem, what can be done and how much it costs the city and the people who live there.",
     marcoSelo: "Proposed marker",
     marcoTexto: "There is no plaque or measured water height yet. The proposal is to record it after every flood.",
+    analiseTitulo: { fundo: "Our analysis: valley bottom", beira: "Our analysis: valley edge" },
+    analiseTexto: {
+      fundo: "This area is up to 2 metres above the nearest stream. In a flood, water gets here first.",
+      beira: "This area is 2 to 5 metres above the nearest stream. In a big flood, water can get here.",
+    },
+    analiseAviso: "This is our own screening, made from an open 30-metre terrain model. It points to where to look. It does not say that a street floods, and it does not replace the official maps.",
+    metodo: "How we did it",
     reserva: "The online base map did not load. Showing streams, parks and main roads only.",
     compartilhar: "Copy link to this card",
     copiado: "Link copied",
@@ -68,6 +75,13 @@
     inicioTexto: "Cada ponto abre uma ficha com o problema, o que dá para fazer e quanto custa para a Prefeitura e para quem mora ali.",
     marcoSelo: "Marco proposto",
     marcoTexto: "Ainda não existe placa nem altura da água medida. A proposta é registrar depois de cada enchente.",
+    analiseTitulo: { fundo: "Análise própria: fundo de vale", beira: "Análise própria: beira de vale" },
+    analiseTexto: {
+      fundo: "Este trecho fica até 2 metros acima do córrego mais próximo. Numa cheia, a água chega aqui primeiro.",
+      beira: "Este trecho fica de 2 a 5 metros acima do córrego mais próximo. Numa cheia grande, a água pode chegar aqui.",
+    },
+    analiseAviso: "É uma triagem nossa, feita com um modelo de terreno aberto de 30 metros. Mostra onde olhar. Não diz que uma rua alaga e não substitui os mapas oficiais.",
+    metodo: "Como fizemos",
     reserva: "O mapa base on-line não carregou. Mostrando só córregos, parques e avenidas principais.",
     compartilhar: "Copiar link desta ficha",
     copiado: "Link copiado",
@@ -151,6 +165,16 @@
     ligarCompartilhar(m.id);
   }
 
+  function fichaAnalise(classe) {
+    ficha.innerHTML = `
+      <p class="selos"><span class="selo-grau analise">${EN ? "Screening" : "Triagem"}</span></p>
+      <h2 class="ficha-titulo" tabindex="-1">${T.analiseTitulo[classe]}</h2>
+      <p>${T.analiseTexto[classe]}</p>
+      <p class="aviso">${T.analiseAviso}</p>
+      <p><a href="#metodo">${T.metodo} ↓</a></p>`;
+    ficha.querySelector(".ficha-titulo")?.focus({ preventScroll: true });
+  }
+
   function ligarCompartilhar(id) {
     const b = ficha.querySelector(".link-ficha");
     b.addEventListener("click", async () => {
@@ -197,8 +221,8 @@
   // ---------- Mapa ----------
   async function iniciar() {
     fichaInicio();
-    const [{ estilo: st, reserva }, osm, posicoes] = await Promise.all([
-      estilo(), pegar(pasta + "osm.geojson"), pegar(pasta + "posicoes.json"),
+    const [{ estilo: st, reserva }, osm, posicoes, analise] = await Promise.all([
+      estilo(), pegar(pasta + "osm.geojson"), pegar(pasta + "posicoes.json"), pegar(pasta + "analise.geojson"),
     ]);
     const geo = pontosGeo(posicoes || {});
     const map = new maplibregl.Map({
@@ -233,6 +257,13 @@
         map.addLayer({ id: "limite", type: "line", source: "osm", filter: ["==", ["get", "camada"], "limite"], paint: { "line-color": cor("azul"), "line-width": 1.5, "line-dasharray": [3, 2], "line-opacity": 0.6 } });
         map.addLayer({ id: "marginal", type: "line", source: "osm", filter: ["==", ["get", "camada"], "marginal"], layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": cor("livre-coral"), "line-width": ["interpolate", ["linear"], ["zoom"], 10, 2, 15, 7], "line-opacity": 0.55 } });
         map.addLayer({ id: "corregos", type: "line", source: "osm", filter: ["==", ["get", "camada"], "corrego"], layout: { "line-cap": "round", "line-join": "round" }, paint: { "line-color": cor("azul-medio"), "line-width": ["interpolate", ["linear"], ["zoom"], 10, 1.5, 15, 5] } });
+      }
+      if (analise) {
+        map.addSource("analise", { type: "geojson", data: analise });
+        const antes = map.getLayer("corregos") ? "corregos" : undefined;
+        map.addLayer({ id: "analise", type: "fill", source: "analise", layout: { visibility: "none" }, paint: {
+          "fill-color": cor("azul-medio"), "fill-opacity": ["match", ["get", "classe"], "fundo", 0.42, 0.16],
+        } }, antes);
       }
       map.addSource("areas", { type: "geojson", data: geo.areas, promoteId: "id" });
       map.addSource("marcos", { type: "geojson", data: geo.marcos, promoteId: "id" });
@@ -271,6 +302,12 @@
       };
       window.abrirAreaCidadeEsponja = abrir;
 
+      map.on("click", "analise", (e) => {
+        if (map.queryRenderedFeatures(e.point, { layers: ["areas", "marcos"].filter((l) => map.getLayer(l)) }).length) return;
+        marcar(null);
+        fichaAnalise(e.features[0].properties.classe);
+        if (matchMedia("(max-width: 899px)").matches) ficha.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
       for (const camada of ["areas", "marcos"]) {
         map.on("click", camada, (e) => abrir(e.features[0].properties.id));
         map.on("mouseenter", camada, () => { map.getCanvas().style.cursor = "pointer"; });
@@ -283,8 +320,9 @@
         risco: [["areas", ["==", ["get", "risco"], 1]], ["areas-halo", ["==", ["get", "risco"], 1]]],
         agua: [["corregos"], ["parques"], ["marginal"]],
         marcos: [["marcos"]],
+        analise: [["analise"]],
       };
-      const estado = { pontos: true, risco: true, agua: true, marcos: true };
+      const estado = { pontos: true, risco: true, agua: true, marcos: true, analise: false };
       const aplicar = () => {
         for (const camada of ["areas", "areas-halo"]) {
           const mostrar = [];

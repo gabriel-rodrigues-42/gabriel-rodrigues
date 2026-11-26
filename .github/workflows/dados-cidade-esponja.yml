@@ -32,6 +32,12 @@ jobs:
         shell: bash
         run: python3 scripts/cidade-esponja/baixar_osm.py 2>&1 | tee baixar.log
 
+      - name: Análise própria do terreno
+        shell: bash
+        run: |
+          pip install -q rasterio scipy numpy shapely
+          python3 scripts/cidade-esponja/analise_terreno.py 2>&1 | tee -a baixar.log
+
       - name: Resumo
         run: |
           echo '```' >> "$GITHUB_STEP_SUMMARY"
