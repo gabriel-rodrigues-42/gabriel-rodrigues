@@ -33,6 +33,7 @@ Site gabriel-rodrigues.com, design system e vídeos do Gabriel Rodrigues, desenv
 ## Regras
 
 - Cores, fontes e formas só por variáveis de `site/design-system/tokens.css`. Precisa de algo novo? Adicione lá primeiro.
+- Links: no meio do texto, sublinhado fino e claro (vem de `componentes.css`; não tire, a cor sozinha não basta). Link sozinho com seta (→) usa `.link-seta`, sem sublinhado. Menu, botões e cartões ficam sem sublinhado.
 - Contraste AA (4,5:1) em todo texto. Texto branco sobre verde usa `--verde-fundo`, nunca `--verde`; texto verde sobre fundo claro usa `--verde-escuro`. Confira com o Lighthouse (Acessibilidade 100).
 - Padrões web: siga o [Modern Web Guidance do Chrome](https://developer.chrome.com/docs/modern-web-guidance). A meta de compatibilidade (Baseline target) deste projeto é Baseline Widely available: use HTML, CSS e JS nativos antes de bibliotecas.
 - Páginas precisam funcionar em 390px de largura sem rolagem lateral.
