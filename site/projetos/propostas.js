@@ -115,7 +115,7 @@ window.PROPOSTAS = [
     cor: "turquesa",
     tipo: "ferramenta",
     fase: 2,
-    titulo: { pt: "Goiânia pode beber a própria chuva", en: "Goiânia can drink its own rain" },
+    titulo: { pt: "Onde Goiânia alaga e o que dá para fazer", en: "Where Goiânia floods and what can be done" },
     gancho: {
       pt: "Um mapa dos pontos que alagam em Goiânia. Toque num ponto e veja o que dá para fazer e quanto custa.",
       en: "A map of the places that flood in Goiânia. Tap a point to see what can be done and what it costs.",
