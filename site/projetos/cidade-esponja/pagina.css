@@ -105,9 +105,6 @@ p { margin: 0 0 var(--espaco-3); }
 /* Cenários da Marginal */
 .cenarios { scroll-margin-top: 90px; }
 .palco { display: block; width: 100%; height: auto; border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); background: var(--azul-claro); margin-bottom: var(--espaco-3); }
-.palco .gota { animation: cair .6s linear infinite; }
-@keyframes cair { from { transform: translateY(-12px); } to { transform: translateY(26px); } }
-@media (prefers-reduced-motion: reduce) { .palco .gota { animation: none; } }
 .controle-chuva { display: flex; flex-wrap: wrap; gap: var(--espaco-3); align-items: center; }
 .controle-chuva label { font-weight: var(--peso-forte); color: var(--azul); flex: 1 1 100%; }
 .controle-chuva input { flex: 1 1 180px; accent-color: var(--azul-medio); min-height: 44px; }

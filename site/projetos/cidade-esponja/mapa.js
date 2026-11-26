@@ -369,66 +369,257 @@
   if (window.maplibregl && maplibregl.supported?.() !== false) iniciar().catch(() => fichaInicio());
   else fichaInicio();
 
-  // ---------- Cenários da Marginal (ilustração fora de escala) ----------
+  // ---------- Cenários da Marginal (ilustração em perspectiva, fora de escala) ----------
+  // O bloco é um pedaço da Marginal visto de lado e de cima. As pistas e o canal correm para o
+  // fundo; os carros entram pela frente ou pelo fundo do bloco e saem pelo outro lado.
   const palco = document.getElementById("palco");
   if (!palco) return;
   const faixa = document.getElementById("chuva");
   const rotulo = document.getElementById("chuva-rotulo");
   const situacao = document.getElementById("situacao");
   const botaoChover = document.getElementById("chover");
+  const parado = matchMedia("(prefers-reduced-motion: reduce)");
+
+  // Projeção oblíqua: x atravessa a via, z é a altura, d é a profundidade (ao longo do córrego).
+  const W = 280, FUNDO = 110, KX = 0.6, KY = 0.45, X0 = 10, Y0 = 228;
+  const P = (x, z, d) => `${(X0 + x + d * KX).toFixed(1)},${(Y0 - z - d * KY).toFixed(1)}`;
+  const poli = (pts, cor, extra = "") => `<polygon points="${pts.join(" ")}" fill="${cor}" ${extra}/>`;
+  const sombra = (pts, o) => `<polygon points="${pts.join(" ")}" fill="#000" opacity="${o}"/>`;
+  const topo = (x1, x2, z, d1 = 0, d2 = FUNDO) => [P(x1, z, d1), P(x2, z, d1), P(x2, z, d2), P(x1, z, d2)];
+  const lado = (x, z1, z2, d1 = 0, d2 = FUNDO) => [P(x, z1, d1), P(x, z2, d1), P(x, z2, d2), P(x, z1, d2)];
+  const frente = (x1, x2, z1, z2, d = 0) => [P(x1, z1, d), P(x2, z1, d), P(x2, z2, d), P(x1, z2, d)];
+
+  // Caixa (carro, pilar, tabuleiro): frente, topo e lado direito, que são as faces visíveis.
+  function caixa(x, z, d, w, h, l, cor) {
+    const f = frente(x, x + w, z, z + h, d), t = topo(x, x + w, z + h, d, d + l), s = lado(x + w, z, z + h, d, d + l);
+    return poli(t, cor) + poli(s, cor) + sombra(s, 0.22) + poli(f, cor) + sombra(f, 0.1);
+  }
+  function carro(x, z, d, cor, opacidade, rumo) {
+    const w = 15, h = 7, l = 22;
+    const vidro = rumo > 0 ? [d + l - 9, d + l - 3] : [d + 3, d + 9];
+    return `<g opacity="${opacidade.toFixed(2)}">${caixa(x, z, d, w, h, l, cor)}${poli(topo(x + 2, x + w - 2, z + h, vidro[0], vidro[1]), "var(--carro-vidro)")}</g>`;
+  }
+  function arvore(x, z, d) {
+    const [bx, by] = P(x, z, d).split(",").map(Number);
+    return `<rect x="${bx - 1.5}" y="${by - 12}" width="3" height="12" fill="var(--carro-terracota)"/><circle cx="${bx}" cy="${by - 17}" r="8" fill="var(--verde)"/><circle cx="${bx + 2.5}" cy="${by - 19}" r="3.5" fill="#fff" opacity=".18"/>`;
+  }
+
+  // Perfil de cada cenário, da esquerda para a direita: trechos planos com altura z.
+  // tipo: pista, grama, parque, calcada, canal. faixas: [centro da faixa, rumo] (+1 vai para o fundo, -1 vem).
   const CEN = {
     hoje: {
-      chao: "M0 110 H150 V170 H210 V110 H360 V200 H0 Z",
-      nivel: (mm) => (mm <= 30 ? 170 - (mm / 30) * 60 : 110 - (mm - 30) * 0.6),
-      pistas: [[30, 104, 115], [215, 104, 115]],
-      estado: (mm) => (mm < 25 ? (EN ? "Road open" : "Pista aberta") : mm <= 35 ? (EN ? "Danger zone: the road usually closes between 25 and 35 mm" : "Zona de perigo: a via costuma fechar entre 25 e 35 mm") : (EN ? "Road closed, water over the lanes" : "Pista fechada, água por cima das faixas")),
+      perfil: [
+        { x1: 0, x2: 14, z: 70, tipo: "grama" }, { x1: 14, x2: 112, z: 70, tipo: "pista" }, { x1: 112, x2: 122, z: 70, tipo: "calcada" },
+        { x1: 122, x2: 168, z: 16, tipo: "canal" },
+        { x1: 168, x2: 178, z: 70, tipo: "calcada" }, { x1: 178, x2: 276, z: 70, tipo: "pista" }, { x1: 276, x2: W, z: 70, tipo: "grama" },
+      ],
+      faixas: [[22, 1, 70], [70, 1, 70], [186, -1, 70], [234, -1, 70]],
+      nivel: (mm) => (mm <= 30 ? 18 + (mm / 30) * 52 : 70 + (mm - 30) * 0.5),
+      transito: (mm) => (mm < 25 ? 1 : mm <= 35 ? 0.5 : 0),
+      estado: (mm) => (mm < 25 ? (EN ? "Road open" : "Pista aberta") : mm <= 35 ? (EN ? "Danger zone: the road usually closes between 25 and 35 mm" : "Zona de perigo: a via costuma fechar entre 25 e 35 mm") : (EN ? "Road closed, water over the lanes. Cars that were on it drive out slowly" : "Pista fechada, água por cima das faixas. Quem estava nela sai devagar")),
     },
     piloto: {
-      chao: "M0 130 H150 V170 H210 V100 H360 V200 H0 Z",
-      nivel: (mm) => { const e = mm * 0.6; return e <= 30 ? 170 - (e / 30) * 40 : 130 - (e - 30) * 0.35; },
-      pistas: [[215, 94, 115]],
-      parque: [10, 140],
+      perfil: [
+        { x1: 0, x2: 122, z: 44, tipo: "parque" },
+        { x1: 122, x2: 168, z: 16, tipo: "canal" },
+        { x1: 168, x2: 178, z: 80, tipo: "calcada" }, { x1: 178, x2: 276, z: 80, tipo: "pista" }, { x1: 276, x2: W, z: 80, tipo: "grama" },
+      ],
+      arvores: [[18, 44], [55, 44], [92, 44]],
+      trilha: [40, 52, 44],
+      faixas: [[186, 1, 80], [210, 1, 80], [234, -1, 80], [258, -1, 80]],
+      nivel: (mm) => { const e = mm * 0.6; return e <= 30 ? 18 + (e / 30) * 26 : 44 + (e - 30) * 0.6; },
+      transito: () => 1,
       estado: (mm) => (mm * 0.6 <= 30 ? (EN ? "Water stays in the channel; park and road open" : "A água fica no canal; parque e pista abertos") : (EN ? "The park floods on purpose; the road stays open" : "O parque alaga de propósito; a pista segue aberta")),
     },
     elevada: {
-      chao: "M0 130 H150 V170 H210 V130 H360 V200 H0 Z",
-      nivel: (mm) => (mm <= 30 ? 170 - (mm / 30) * 40 : 130 - (mm - 30) * 0.35),
-      pistas: [[60, 44, 240]],
-      viaduto: true,
-      parque: [10, 140, 215, 140],
+      perfil: [
+        { x1: 0, x2: 122, z: 50, tipo: "parque" },
+        { x1: 122, x2: 168, z: 16, tipo: "canal" },
+        { x1: 168, x2: W, z: 50, tipo: "parque" },
+      ],
+      arvores: [[16, 50], [200, 50], [252, 50]],
+      trilha: [30, 42, 50],
+      viaduto: { x1: 46, x2: 238, z: 132, pilares: [96, 182] },
+      faixas: [[54, 1, 140], [94, 1, 140], [174, -1, 140], [214, -1, 140]],
+      nivel: (mm) => (mm <= 30 ? 18 + (mm / 30) * 32 : 50 + (mm - 30) * 0.35),
+      transito: () => 1,
       estado: () => (EN ? "Cars pass above; the park floods below, in the shade" : "Os carros passam em cima; o parque alaga embaixo, na sombra"),
     },
   };
-  let cenario = "hoje";
+  const CORES_CARRO = ["var(--livre-coral)", "var(--carro-branco)", "var(--azul-medio)", "var(--carro-prata)", "var(--carro-amarelo-ipe)", "var(--carro-verde-mata)"];
+  const CORES_CHAO = { pista: "var(--carro-grafite)", grama: "var(--verde-claro)", parque: "var(--verde-claro)", calcada: "var(--carro-areia)", canal: "var(--carro-prata)" };
+  const L_CARRO = 22;
 
-  function desenhar() {
+  let cenario = "hoje";
+  let carros = [];
+  let semente = 7;
+  const sorte = () => ((semente = (semente * 9301 + 49297) % 233280) / 233280);
+
+  function povoar() {
+    const c = CEN[cenario];
+    carros = [];
+    c.faixas.forEach(([x, rumo, z], i) => {
+      for (let k = 0; k < 2; k++) {
+        carros.push({ x, z, rumo, d: 10 + k * 48 + i * 11, v: 16 + sorte() * 8, cor: CORES_CARRO[(i * 2 + k) % CORES_CARRO.length] });
+      }
+    });
+  }
+
+  // Desenha só os trechos que passam no filtro: os que ficam abaixo da água vêm antes dela,
+  // os que ficam acima vêm depois, para a lâmina não aparecer por cima de um bloco mais alto.
+  function solo(c, filtro) {
+    let s = "";
+    c.perfil.filter(filtro).forEach((t) => {
+      s += poli(topo(t.x1, t.x2, t.z), CORES_CHAO[t.tipo]);
+      if (t.tipo === "pista") {
+        const meio = (t.x1 + t.x2) / 2;
+        s += `<polyline points="${P(meio, t.z, 0)} ${P(meio, t.z, FUNDO)}" stroke="var(--amarelo)" stroke-width="1.4" fill="none"/>`;
+        [t.x1 + (meio - t.x1) / 2, meio + (t.x2 - meio) / 2].forEach((xm) => {
+          s += `<polyline points="${P(xm, t.z, 0)} ${P(xm, t.z, FUNDO)}" stroke="#fff" stroke-width="1" stroke-dasharray="6 6" fill="none" opacity=".8"/>`;
+        });
+      }
+    });
+    // Paredes visíveis: as que olham para a direita (degrau que desce da esquerda para a direita).
+    for (let i = 0; i < c.perfil.length - 1; i++) {
+      const a = c.perfil[i], b = c.perfil[i + 1];
+      if (a.z > b.z && filtro(a)) {
+        const parede = lado(a.x2, b.z, a.z);
+        s += poli(parede, b.tipo === "canal" || a.tipo === "calcada" ? "var(--carro-prata)" : "var(--carro-areia)") + sombra(parede, 0.25);
+      }
+    }
+    if (c.trilha && filtro({ z: c.trilha[2] })) {
+      const [x1, x2, z] = c.trilha;
+      s += poli(topo(x1, x2, z), "var(--areia)");
+    }
+    return s;
+  }
+
+  function frenteSolo(c) {
+    let pts = [P(0, 0, 0)];
+    c.perfil.forEach((t) => { pts.push(P(t.x1, t.z, 0), P(t.x2, t.z, 0)); });
+    pts.push(P(W, 0, 0));
+    const lado_dir = [P(W, 0, 0), P(W, c.perfil[c.perfil.length - 1].z, 0), P(W, c.perfil[c.perfil.length - 1].z, FUNDO), P(W, 0, FUNDO)];
+    return poli(lado_dir, "var(--carro-areia)") + sombra(lado_dir, 0.3) + poli(pts, "var(--carro-areia)")
+      // camadas de terra, para ler como um corte
+      + `<polyline points="${P(0, 8, 0)} ${P(W, 8, 0)}" stroke="var(--carro-terracota)" stroke-width="1" opacity=".25"/>`;
+  }
+
+  // Água: em cada trecho mais baixo que o nível, uma lâmina (topo) e a face da frente.
+  function agua(c, h) {
+    let topoA = "", frenteA = "";
+    let i = 0;
+    const p = c.perfil;
+    while (i < p.length) {
+      if (p[i].z < h) {
+        let j = i;
+        while (j + 1 < p.length && p[j + 1].z < h) j++;
+        const x1 = p[i].x1, x2 = p[j].x2;
+        topoA += poli(topo(x1, x2, h), "var(--azul-medio)", 'opacity=".72"');
+        const pts = [P(x1, h, 0)];
+        for (let k = i; k <= j; k++) pts.push(P(p[k].x1, p[k].z, 0), P(p[k].x2, p[k].z, 0));
+        pts.push(P(x2, h, 0));
+        frenteA += poli(pts, "var(--azul-medio)", 'opacity=".85"');
+        // lado direito da lâmina na borda do bloco
+        if (x2 === W) { const sd = [P(W, p[j].z, 0), P(W, h, 0), P(W, h, FUNDO), P(W, p[j].z, FUNDO)]; frenteA += poli(sd, "var(--azul-medio)", 'opacity=".85"'); }
+        i = j + 1;
+      } else i++;
+    }
+    return [topoA, frenteA];
+  }
+
+  function viaduto(c) {
+    const v = c.viaduto;
+    if (!v) return ["", ""];
+    const chao = c.perfil[0].z;
+    let pilares = "";
+    [100, 60, 20].forEach((d) => v.pilares.forEach((x) => { pilares += caixa(x - 5, chao, d, 10, v.z - chao, 8, "var(--carro-prata)"); }));
+    const deck = caixa(v.x1, v.z, 0, v.x2 - v.x1, 8, FUNDO, "var(--carro-prata)");
+    const meio = (v.x1 + v.x2) / 2;
+    let faixas = poli(topo(v.x1 + 2, v.x2 - 2, v.z + 8), "var(--carro-grafite)")
+      + `<polyline points="${P(meio, v.z + 8, 0)} ${P(meio, v.z + 8, FUNDO)}" stroke="var(--amarelo)" stroke-width="1.4" fill="none"/>`;
+    [v.x1 + (meio - v.x1) / 2, meio + (v.x2 - meio) / 2].forEach((xm) => {
+      faixas += `<polyline points="${P(xm, v.z + 8, 0)} ${P(xm, v.z + 8, FUNDO)}" stroke="#fff" stroke-width="1" stroke-dasharray="6 6" fill="none" opacity=".8"/>`;
+    });
+    // guarda-corpo
+    faixas += `<polyline points="${P(v.x1, v.z + 11, 0)} ${P(v.x1, v.z + 11, FUNDO)}" stroke="var(--carro-aro-claro)" stroke-width="1.5"/><polyline points="${P(v.x2, v.z + 11, 0)} ${P(v.x2, v.z + 11, FUNDO)}" stroke="var(--carro-aro-claro)" stroke-width="1.5"/>`;
+    return [pilares, deck + faixas];
+  }
+
+  function cancelas(c, fechada) {
+    if (!fechada) return "";
+    let s = "";
+    c.perfil.filter((t) => t.tipo === "pista").forEach((t) => {
+      // na entrada de cada sentido: frente para quem vai ao fundo, fundo para quem vem
+      [[t.x1, 2], [t.x1, FUNDO - 4]].forEach(([x, d]) => {
+        const w = t.x2 - t.x1;
+        for (let k = 0; k < 6; k++) {
+          s += poli(frente(x + (k * w) / 6, x + ((k + 1) * w) / 6, t.z + 6, t.z + 10, d), k % 2 ? "#fff" : "var(--vermelho-fundo)");
+        }
+      });
+    });
+    return s;
+  }
+
+  let ultimo = 0, rodando = 0, visivel = true;
+  function quadro(agora) {
     const c = CEN[cenario];
     const mm = Number(faixa.value);
-    const y = Math.max(20, c.nivel(mm));
-    const arvores = (c.parque || []).reduce((s, v, i, arr) => {
-      if (i % 2) return s;
-      const x0 = v, base = arr[i + 1] - 10;
-      return s + [0, 45, 90].map((dx) => `<g><rect x="${x0 + dx + 18}" y="${base - 8}" width="4" height="12" fill="var(--carro-terracota)"/><circle cx="${x0 + dx + 20}" cy="${base - 14}" r="10" fill="var(--verde)"/></g>`).join("");
-    }, "");
-    const pistas = c.pistas.map(([x, yy, w]) => `<rect x="${x}" y="${yy}" width="${w}" height="6" fill="var(--carro-grafite)"/><rect x="${x + w / 2 - 20}" y="${yy + 2}" width="14" height="2" fill="var(--amarelo)"/><rect x="${x + 10}" y="${yy - 9}" width="22" height="9" rx="3" fill="var(--livre-coral)"/>`).join("");
-    const viaduto = c.viaduto ? `<rect x="88" y="50" width="8" height="${130 - 50}" fill="var(--carro-prata)"/><rect x="264" y="50" width="8" height="${130 - 50}" fill="var(--carro-prata)"/><rect x="0" y="50" width="360" height="90" fill="var(--azul)" opacity=".06"/>` : "";
+    const h = Math.min(c.nivel(mm), 120);
+    const fluxo = c.transito(mm);
+    const dt = ultimo ? Math.min(0.1, (agora - ultimo) / 1000) : 0;
+    ultimo = agora;
+
+    // Carros andam; quem sai do bloco volta pela entrada se a pista estiver aberta.
+    const lento = fluxo === 0 ? 0.35 : fluxo < 1 ? 0.6 : 1;
+    carros.forEach((k) => {
+      if (k.fora) {
+        k.espera -= dt;
+        if (fluxo > 0 && k.espera <= 0) { k.fora = false; k.d = k.rumo > 0 ? 0 : FUNDO - L_CARRO; k.cor = CORES_CARRO[Math.floor(sorte() * CORES_CARRO.length)]; }
+        return;
+      }
+      k.d += k.rumo * k.v * lento * dt;
+      if (k.d > FUNDO - L_CARRO || k.d < 0) { k.fora = true; k.espera = (0.4 + sorte() * 1.6) / Math.max(fluxo, 0.5); }
+    });
+
+    const [aguaTopo, aguaFrente] = agua(c, h);
+    const [pilares, deck] = viaduto(c);
+    const naPista = carros.filter((k) => !k.fora).sort((a, b) => b.d - a.d);
+    const opac = (k) => Math.max(0, Math.min(1, k.d / 8, (FUNDO - L_CARRO - k.d) / 8));
+    const desenhaCarros = (lista) => lista.map((k) => carro(k.x, k.z, k.d, k.cor, opac(k), k.rumo)).join("");
+    const submersos = desenhaCarros(naPista.filter((k) => !c.viaduto && k.z < h));
+    const secos = desenhaCarros(naPista.filter((k) => !c.viaduto && k.z >= h));
+    const emCima = desenhaCarros(naPista.filter(() => c.viaduto));
+    const baixo = (t) => t.z < h, alto = (t) => t.z >= h;
+    const todasArvores = (c.arvores || []).flatMap(([x, z]) => [90, 50, 12].map((d) => [x + (d % 3) * 4, z, d]));
+    const arvores = (seco) => todasArvores.filter(([, z]) => (z >= h) === seco).map(([x, z, d]) => arvore(x, z, d)).join("");
+    const t = agora / 1000;
+    const gotas = mm > 0 ? Array.from({ length: Math.min(36, Math.ceil(mm / 2.5)) }, (_, i) => {
+      const x = (i * 53) % 360, y = ((i * 37 + t * 260) % 240) - 20;
+      return `<line x1="${x}" y1="${y.toFixed(1)}" x2="${x - 3}" y2="${(y + 9).toFixed(1)}" stroke="var(--azul-medio)" stroke-width="1.3" opacity=".7"/>`;
+    }).join("") : "";
+
     palco.innerHTML = `
-      <rect x="0" y="0" width="360" height="200" fill="var(--azul-claro)"/>
-      ${mm > 0 ? Array.from({ length: Math.min(24, Math.ceil(mm / 4)) }, (_, i) => `<line class="gota" x1="${(i * 47) % 360}" y1="${(i * 13) % 40}" x2="${(i * 47) % 360 - 4}" y2="${(i * 13) % 40 + 10}" stroke="var(--azul-medio)" stroke-width="1.5" style="animation-delay:-${(i % 6) * 0.12}s"/>`).join("") : ""}
-      <rect x="0" y="${y}" width="360" height="${200 - y}" fill="var(--azul-medio)" opacity=".75"/>
-      <path d="${c.chao}" fill="var(--areia)"/>
-      ${cenario === "hoje" ? '<path d="M150 110 V170 H210 V110" fill="none" stroke="var(--carro-prata)" stroke-width="4"/>' : '<path d="M150 130 V170 H210" fill="none" stroke="var(--verde-escuro)" stroke-width="3" opacity=".5"/>'}
-      ${(c.parque || []).length ? (c.parque.reduce((s, v, i, a) => (i % 2 ? s : s + `<rect x="${v - 10}" y="${a[i + 1] - 10}" width="${cenario === "piloto" ? 160 : 140}" height="4" fill="var(--verde)"/>`), "")) : ""}
-      ${arvores}${pistas}
-      <rect x="0" y="${y}" width="360" height="${200 - y}" fill="var(--azul-medio)" opacity=".45"/>${viaduto}`;
+      <rect x="0" y="0" width="360" height="240" fill="var(--azul-claro)"/>
+      ${solo(c, baixo)}${arvores(false)}${submersos}${aguaTopo}${solo(c, alto)}${arvores(true)}${secos}${frenteSolo(c)}${aguaFrente}${pilares}${deck}${emCima}${cancelas(c, fluxo === 0)}${gotas}`;
     rotulo.textContent = T.chuva(mm);
     situacao.textContent = c.estado(mm);
+    if (!parado.matches && visivel) rodando = requestAnimationFrame(quadro);
+    else rodando = 0;
   }
+  function desenhar() {
+    if (!rodando) quadro(performance.now());
+  }
+  new IntersectionObserver((e) => {
+    visivel = e[0].isIntersecting;
+    if (visivel) { ultimo = 0; desenhar(); }
+  }).observe(palco);
+  parado.addEventListener?.("change", desenhar);
 
   document.querySelectorAll("[data-cenario]").forEach((b) => b.addEventListener("click", () => {
     cenario = b.dataset.cenario;
     document.querySelectorAll("[data-cenario]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
     document.querySelectorAll("[data-legenda]").forEach((p) => { p.hidden = p.dataset.legenda !== cenario; });
+    povoar();
     desenhar();
   }));
   faixa.addEventListener("input", desenhar);
@@ -436,7 +627,7 @@
   botaoChover.addEventListener("click", () => {
     cancelAnimationFrame(animando);
     const alvo = 60;
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { faixa.value = alvo; desenhar(); return; }
+    if (parado.matches) { faixa.value = alvo; desenhar(); return; }
     const t0 = performance.now();
     const passo = (t) => {
       const p = Math.min(1, (t - t0) / 3500);
@@ -446,5 +637,6 @@
     };
     animando = requestAnimationFrame(passo);
   });
+  povoar();
   desenhar();
 })();
