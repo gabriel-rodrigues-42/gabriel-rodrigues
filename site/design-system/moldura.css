@@ -1,7 +1,7 @@
 /* Moldura do site: cabeçalho e rodapé iguais em todas as páginas.
    Depende de tokens.css. Use junto com moldura.js:
-     <link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-26b">
-     <script src="/design-system/moldura.js?v=2026-11-26b"></script>
+     <link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-26g">
+     <script src="/design-system/moldura.js?v=2026-11-26g"></script>
      <gr-cabecalho></gr-cabecalho> logo depois de <body>
      <gr-rodape></gr-rodape> logo antes de </body> */
 
@@ -27,7 +27,8 @@ h1, h2, h3 { hyphens: manual; text-wrap: balance; }
   display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "marca apoiar" "menu menu";
   align-items: center; column-gap: var(--espaco-3); row-gap: var(--espaco-2);
 }
-.moldura-marca { grid-area: marca; display: flex; align-items: center; gap: var(--espaco-3); text-decoration: none; color: var(--azul); min-width: 0; }
+/* A área de toque é só o logo (no mínimo 44px), não o espaço vazio até o Apoiar. */
+.moldura-marca { grid-area: marca; justify-self: start; min-height: 44px; border-radius: 50%; display: flex; align-items: center; gap: var(--espaco-3); text-decoration: none; color: var(--azul); min-width: 0; }
 .moldura-logo { display: block; width: 48px; height: 48px; flex: none; }
 .moldura-oculto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 .moldura-menu { grid-area: menu; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--espaco-1) var(--espaco-2); }
@@ -69,7 +70,9 @@ h1, h2, h3 { hyphens: manual; text-wrap: balance; }
 .moldura-menu a:focus-visible, .moldura-apoiar:focus-visible, .moldura-marca:focus-visible, .moldura-rodape a:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
 
 @media (min-width: 720px) {
-  .moldura-topo { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  /* O sticky vai no <gr-cabecalho>: no <header> de dentro ele ficaria preso à altura do próprio pai e não grudaria. */
+  gr-cabecalho { position: sticky; top: 0; z-index: 20; }
+  .moldura-topo { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
   .moldura-topo-dentro { grid-template-columns: minmax(0, 1fr) auto auto; grid-template-areas: "marca menu apoiar"; padding: var(--espaco-2) var(--espaco-4); }
   .moldura-logo { width: 52px; height: 52px; }
   .moldura-menu { flex-wrap: nowrap; }
@@ -84,7 +87,9 @@ h1, h2, h3 { hyphens: manual; text-wrap: balance; }
 .moldura-rodape strong { font-size: var(--tamanho-4); font-weight: 900; }
 .moldura-rodape p { margin: var(--espaco-2) 0 0; font-size: var(--tamanho-2); color: var(--branco); opacity: .85; max-width: 460px; }
 .moldura-rodape ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--espaco-2); font-size: var(--tamanho-2); }
-.moldura-rodape a { color: var(--branco); font-weight: 700; text-decoration-color: var(--amarelo); text-underline-offset: 3px; }
+/* Links do rodapé: lista de navegação, então sem sublinhado; ele aparece, amarelo, no mouse e no foco. */
+.moldura-rodape a { color: var(--branco); font-weight: 700; text-decoration: none; }
+.moldura-rodape a:hover, .moldura-rodape a:focus-visible { text-decoration: underline; text-decoration-color: var(--amarelo); text-decoration-thickness: 2px; }
 /* Lema do Gabriel, em amarelo, logo abaixo do nome (contraste 11:1 sobre o azul). */
 .moldura-rodape .moldura-aviso { grid-column: 1 / -1; font-size: var(--tamanho-1); opacity: .7; border-top: 1px solid var(--branco-vidro); padding-top: var(--espaco-4); margin: 0; max-width: none; }
 
@@ -106,3 +111,60 @@ h1, h2, h3 { hyphens: manual; text-wrap: balance; }
 }
 .moldura-cookies button[data-escolha="aceito"] { background: var(--azul); border-color: var(--azul); color: var(--branco); }
 .moldura-cookies button:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+
+/* ---------- Lupa da busca (busca.js abre a tela) ---------- */
+.moldura-buscar {
+  width: 44px; height: 44px; flex: none; display: grid; place-items: center; cursor: pointer;
+  background: var(--azul-claro); color: var(--azul); border: 0; border-radius: 50%; padding: 0;
+  transition: background .15s, color .15s;
+}
+.moldura-buscar svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; }
+.moldura-buscar:hover { background: var(--azul); color: var(--branco); }
+.moldura-buscar:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+
+/* ---------- Barra de baixo: no celular, o menu vira uma barra fixa embaixo, onde o polegar alcança.
+   No computador ela some, e o menu e a lupa ficam no cabeçalho fixo do topo. ---------- */
+.moldura-barra { display: none; }
+@media (max-width: 719px) {
+  html { --barra-altura: 64px; scroll-padding-bottom: calc(var(--barra-altura) + 16px); }
+  body { padding-bottom: calc(var(--barra-altura) + env(safe-area-inset-bottom, 0px)); }
+  .moldura-menu, .moldura-buscar { display: none; }
+  .moldura-topo-dentro { grid-template-areas: "marca apoiar"; padding-bottom: var(--espaco-3); }
+  .moldura-barra {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 25;
+    height: calc(var(--barra-altura) + env(safe-area-inset-bottom, 0px)); padding: 0 var(--espaco-2) env(safe-area-inset-bottom, 0px);
+    background: var(--creme-vidro); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-top: 2px solid var(--azul-claro); box-shadow: 0 -6px 18px -12px rgba(0, 39, 118, .35);
+  }
+  .moldura-cookies { bottom: calc(var(--barra-altura) + env(safe-area-inset-bottom, 0px) + var(--espaco-3)); }
+}
+.moldura-barra a, .moldura-barra button {
+  font: inherit; font-size: var(--tamanho-1); font-weight: var(--peso-forte); color: var(--azul); text-decoration: none;
+  background: none; border: 0; padding: 0; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-width: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.moldura-barra-icone { display: grid; place-items: center; width: 56px; height: 30px; border-radius: var(--forma-pilula); transition: background .15s; }
+.moldura-barra svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.moldura-barra [aria-current="page"] .moldura-barra-icone { background: var(--azul-claro); }
+.moldura-barra [aria-current="page"] svg { stroke-width: 2.6; }
+.moldura-barra :is(a, button):active .moldura-barra-icone { background: var(--amarelo-claro); }
+.moldura-barra :is(a, button):focus-visible { outline: 3px solid var(--azul); outline-offset: -3px; border-radius: 12px; }
+
+/* ---------- Animação do logo (moldura.js põe data-anima ao tocar) ----------
+   O G se desenha em volta das pessoas, a da frente sobe e as estrelas piscam em sequência. Menos de 1 s. */
+.moldura-logo g, .moldura-logo path, .moldura-logo circle { transform-box: fill-box; }
+.logo-pessoa-2 { transform-origin: 50% 100%; }
+.logo-estrelas path { transform-origin: 50% 50%; }
+.moldura-logo[data-anima] .logo-g path { stroke-dasharray: 1; animation: logo-traco .6s ease-in-out; }
+.moldura-logo[data-anima] .logo-g path + path { animation-delay: .08s; animation-fill-mode: backwards; }
+.moldura-logo[data-anima] .logo-pessoa-2 { animation: logo-ergue .45s ease-out .3s; }
+.moldura-logo[data-anima] .logo-estrelas path { animation: logo-pisca .35s ease-out backwards; }
+.moldura-logo[data-anima] .logo-estrelas path:nth-child(1) { animation-delay: .5s; }
+.moldura-logo[data-anima] .logo-estrelas path:nth-child(2) { animation-delay: .6s; }
+.moldura-logo[data-anima] .logo-estrelas path:nth-child(3) { animation-delay: .4s; }
+@keyframes logo-traco { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes logo-ergue { 0%, 100% { transform: none; } 50% { transform: translateY(-9%); } }
+@keyframes logo-pisca { 0% { transform: scale(0); } 60% { transform: scale(1.5); } 100% { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .moldura-logo * { animation: none !important; } }

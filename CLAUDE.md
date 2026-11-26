@@ -7,6 +7,9 @@ Site gabriel-rodrigues.com, design system e vídeos do Gabriel Rodrigues, desenv
 - `site/`: tudo que é publicado. HTML, CSS e JS puros, sem build.
   - `design-system/`: `tokens.css` (cores, formas, tipografia) e `componentes.css`. Vitrine em `/design-system/`.
   - `design-system/moldura.js` + `moldura.css`: cabeçalho e rodapé com o Gabriel e a missão. Toda página nova carrega os dois no `<head>` e usa `<gr-cabecalho>` logo depois de `<body>` e `<gr-rodape>` no fim.
+  - `design-system/busca.js` + `busca.css`: **busca do site**. A lupa do cabeçalho (`data-buscar`, ou a tecla "/") abre uma tela cheia que filtra enquanto a pessoa digita, sem servidor. `moldura.js` só carrega a busca no primeiro toque. O índice (`site/busca/indice-pt.json` e `-en.json`) é gerado no deploy por `scripts/busca/gerar_indice.py` a partir das páginas e de `ideias.js` (fora do Git; rode o script para ver localmente). Página nova entra sozinha; página com `noindex` fica de fora.
+  - Logo: ao tocar, o G se desenha em volta das pessoas, a da frente sobe e as estrelas piscam (menos de 1 s, depois vai para o início; sem animação com `prefers-reduced-motion`). A área de toque é só o logo.
+  - Menu: no celular, Propostas, Caminho, Sobre e Buscar ficam numa barra fixa embaixo (`.moldura-barra`, onde o polegar alcança), e o topo mostra só o logo e o Apoiar. No computador (720px ou mais), a barra some e o cabeçalho fixo do topo traz o menu, a lupa e o Apoiar. Sem menu lateral.
   - `design-system/cidade.js` + `cidade.css`: seletor de cidade `<gr-cidade>` (busca nos 5.571 municípios, localização e CEP), adaptado do galera.club. Use em todo campo de cidade. Lê `caminho/dados/municipios.json`.
   - `design-system/contribuir.js` + `contribuir.css`: convite `<gr-contribuir>` antes do `<gr-rodape>`, que abre o formulário de issue do GitHub já com o link da página. Toda página de proposta usa (está no `_modelo`); listagens usam `tipo="nova"`.
   - `design-system/leitor.js` + `leitor.css`: **modo leitura**. A pessoa liga no rodapé (`moldura.js` carrega o leitor só então) e cada página ganha "Ouvir a página" depois do `<h1>` e um ▶ em cada `<h2>` (ou em cada `[data-leitura-parte]`, como as ideias). Lê todo o texto do `<main>` com legendas (Web Speech API), sem formulários nem botões. Para ajustar: `data-leitura="pular"`, `data-leitura-fala` e `data-leitura-prefixo`. Não ponha botão "Ouvir com legendas" fixo na página: ele apareceria com o modo desligado. O ▶ do leitor já cobre isso. O modo só liga pela chave do rodapé.
@@ -31,6 +34,7 @@ Site gabriel-rodrigues.com, design system e vídeos do Gabriel Rodrigues, desenv
 ## Regras
 
 - Cores, fontes e formas só por variáveis de `site/design-system/tokens.css`. Precisa de algo novo? Adicione lá primeiro.
+- Links: no meio do texto, sublinhado fino e claro (vem de `componentes.css`; não tire, a cor sozinha não basta). Link sozinho com seta (→) usa `.link-seta`, sem sublinhado. Menu, botões e cartões ficam sem sublinhado.
 - Contraste AA (4,5:1) em todo texto. Texto branco sobre verde usa `--verde-fundo`, nunca `--verde`; texto verde sobre fundo claro usa `--verde-escuro`. Confira com o Lighthouse (Acessibilidade 100).
 - Padrões web: siga o [Modern Web Guidance do Chrome](https://developer.chrome.com/docs/modern-web-guidance). A meta de compatibilidade (Baseline target) deste projeto é Baseline Widely available: use HTML, CSS e JS nativos antes de bibliotecas.
 - Páginas precisam funcionar em 390px de largura sem rolagem lateral.
