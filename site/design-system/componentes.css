@@ -25,6 +25,18 @@ body {
 
 /* Cartão */
 .cartao { background: var(--branco); border-radius: var(--forma-cartao); padding: var(--espaco-5); box-shadow: var(--sombra-cartao); }
+/* Links: sublinhado fino e claro, que fica cheio quando o mouse passa ou o teclado foca.
+   No meio do texto o sublinhado fica (WCAG 1.4.1: a cor sozinha não basta para mostrar que é link).
+   Link sozinho com seta (→) usa .link-seta: sem sublinhado, em negrito; a seta já diz que é link. */
+a {
+  text-decoration-thickness: 1px; text-underline-offset: .22em;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  transition: text-decoration-color .15s;
+}
+a:hover, a:focus-visible { text-decoration-color: currentColor; }
+a:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; border-radius: 4px; }
+.link-seta { text-decoration: none; font-weight: var(--peso-forte); }
+.link-seta:hover, .link-seta:focus-visible { text-decoration: underline; text-decoration-thickness: 2px; text-decoration-color: currentColor; }
 a.cartao { display: block; text-decoration: none; color: inherit; transition: transform .15s; }
 a.cartao:hover { transform: translateY(-3px); }
 
