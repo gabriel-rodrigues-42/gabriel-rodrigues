@@ -1,7 +1,7 @@
 /* Moldura do site: cabeçalho e rodapé iguais em todas as páginas.
    Depende de tokens.css. Use junto com moldura.js:
-     <link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-26e">
-     <script src="/design-system/moldura.js?v=2026-11-26e"></script>
+     <link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-26f">
+     <script src="/design-system/moldura.js?v=2026-11-26f"></script>
      <gr-cabecalho></gr-cabecalho> logo depois de <body>
      <gr-rodape></gr-rodape> logo antes de </body> */
 
@@ -151,3 +151,46 @@ h1, h2, h3 { hyphens: manual; text-wrap: balance; }
 .moldura-barra [aria-current="page"] svg { stroke-width: 2.6; }
 .moldura-barra :is(a, button):active .moldura-barra-icone { background: var(--amarelo-claro); }
 .moldura-barra :is(a, button):focus-visible { outline: 3px solid var(--azul); outline-offset: -3px; border-radius: 12px; }
+
+/* ---------- Animação do logo (moldura.js põe data-anima ao tocar) ----------
+   Três versões para escolher na prévia. Todas duram menos de 1 s. */
+.moldura-logo g, .moldura-logo path, .moldura-logo circle { transform-box: fill-box; }
+.logo-pessoa-1, .logo-pessoa-2 { transform-origin: 50% 100%; }
+.logo-estrelas path { transform-origin: 50% 50%; }
+
+/* 1. Pulo: as duas pessoas dão um pulinho, uma depois da outra, e as estrelas brilham. */
+.moldura-logo[data-anima="pulo"] .logo-pessoa-1 { animation: logo-pulo .5s ease-out; }
+.moldura-logo[data-anima="pulo"] .logo-pessoa-2 { animation: logo-pulo .5s ease-out .12s; }
+.moldura-logo[data-anima="pulo"] .logo-estrelas path { animation: logo-brilho .6s ease-out .25s; }
+@keyframes logo-pulo { 0%, 100% { transform: none; } 35% { transform: translateY(-14%) scaleY(1.04); } 60% { transform: translateY(0) scaleY(.94); } }
+@keyframes logo-brilho { 0%, 100% { transform: none; } 45% { transform: scale(1.7) rotate(45deg); } }
+
+/* 2. Desenho: o G se desenha em volta das pessoas, a da frente sobe o braço e as estrelas piscam em sequência. */
+.moldura-logo[data-anima="desenho"] .logo-g path { stroke-dasharray: 1; animation: logo-traco .6s ease-in-out; }
+.moldura-logo[data-anima="desenho"] .logo-g path + path { animation-delay: .08s; animation-fill-mode: backwards; }
+.moldura-logo[data-anima="desenho"] .logo-pessoa-2 { animation: logo-ergue .45s ease-out .3s; }
+.moldura-logo[data-anima="desenho"] .logo-estrelas path { animation: logo-pisca .35s ease-out backwards; }
+.moldura-logo[data-anima="desenho"] .logo-estrelas path:nth-child(1) { animation-delay: .5s; }
+.moldura-logo[data-anima="desenho"] .logo-estrelas path:nth-child(2) { animation-delay: .6s; }
+.moldura-logo[data-anima="desenho"] .logo-estrelas path:nth-child(3) { animation-delay: .4s; }
+@keyframes logo-traco { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes logo-ergue { 0%, 100% { transform: none; } 50% { transform: translateY(-9%); } }
+@keyframes logo-pisca { 0% { transform: scale(0); } 60% { transform: scale(1.5); } 100% { transform: none; } }
+
+/* 3. Aceno: a pessoa de braço erguido acena e as estrelas sobem. */
+.moldura-logo[data-anima="aceno"] .logo-pessoa-2 { animation: logo-aceno .8s ease-in-out; }
+.moldura-logo[data-anima="aceno"] .logo-estrelas { animation: logo-sobe .8s ease-out; }
+@keyframes logo-aceno { 0%, 100% { transform: none; } 20% { transform: rotate(-6deg); } 45% { transform: rotate(5deg); } 70% { transform: rotate(-3deg); } }
+@keyframes logo-sobe { 0%, 100% { transform: none; opacity: 1; } 45% { transform: translateY(-22%); opacity: .4; } 46% { transform: translateY(12%); opacity: 0; } 80% { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) { .moldura-logo * { animation: none !important; } }
+
+/* ---------- Seletor da prévia (só em *.pages.dev): troca entre as animações do logo ---------- */
+.moldura-previa {
+  position: fixed; z-index: 26; left: var(--espaco-3); bottom: calc(var(--barra-altura, 0px) + env(safe-area-inset-bottom, 0px) + var(--espaco-3));
+  display: flex; align-items: center; gap: 2px; padding: 4px 4px 4px 12px; font-family: var(--fonte);
+  background: var(--azul); color: var(--branco); border-radius: var(--forma-pilula); box-shadow: 0 6px 18px rgba(0, 39, 118, .3);
+  font-size: var(--tamanho-1); font-weight: var(--peso-forte);
+}
+.moldura-previa a { color: var(--branco); text-decoration: none; padding: 6px 9px; border-radius: var(--forma-pilula); }
+.moldura-previa a[aria-current] { background: var(--amarelo); color: var(--azul); }

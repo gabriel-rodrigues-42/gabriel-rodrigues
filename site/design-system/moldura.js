@@ -82,14 +82,18 @@
   const LOGO = `
   <g fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
     <g class="logo-g" stroke="var(--logo-g, #009c3b)">
-      <path d="M45.15 34.99H57.78A25.83 25.83 0 1 1 44.91 11.1C40.1 12.69 36.58 15.04 32.82 17.38C28.13 21.14 22.26 20.91 14.39 21.84"/>
-      <path d="M30.24 11.28C23.66 12.45 17.56 15.86 13.98 21.97A21.25 21.25 0 1 0 52.29 39.57H45.15"/>
+      <path pathLength="1" d="M45.15 34.99H57.78A25.83 25.83 0 1 1 44.91 11.1C40.1 12.69 36.58 15.04 32.82 17.38C28.13 21.14 22.26 20.91 14.39 21.84"/>
+      <path pathLength="1" d="M30.24 11.28C23.66 12.45 17.56 15.86 13.98 21.97A21.25 21.25 0 1 0 52.29 39.57H45.15"/>
     </g>
     <g class="logo-pessoas" stroke="var(--logo-pessoas, #002776)">
+      <g class="logo-pessoa-1">
       <path d="M29.65 32.76H23.9A3.99 3.99 0 0 0 19.91 36.75V43.21A1.41 1.41 0 0 0 22.73 43.21M22.73 38.28V52.25M26.6 45.44V53.78"/>
-      <path d="M33.53 36.17V54.01M33.53 42.98A1.41 1.41 0 0 1 30.71 42.98M30.71 53.54V36.17C30.71 32.29 32.82 30.3 36.93 30.06C41.04 29.83 44.33 27.01 46.68 23.49C47.61 22.08 49.96 22.78 49.02 24.66C47.14 28.18 43.97 31.71 43.15 32.65C42.45 33.58 42.33 34.64 42.33 35.46V51.66M37.64 44.27V53.54"/>
       <circle cx="26.31" cy="28.07" r="2.76"/>
+      </g>
+      <g class="logo-pessoa-2">
+      <path d="M33.53 36.17V54.01M33.53 42.98A1.41 1.41 0 0 1 30.71 42.98M30.71 53.54V36.17C30.71 32.29 32.82 30.3 36.93 30.06C41.04 29.83 44.33 27.01 46.68 23.49C47.61 22.08 49.96 22.78 49.02 24.66C47.14 28.18 43.97 31.71 43.15 32.65C42.45 33.58 42.33 34.64 42.33 35.46V51.66M37.64 44.27V53.54"/>
       <circle cx="37.17" cy="25.37" r="2.76"/>
+      </g>
     </g>
   </g>
   <g class="logo-estrelas" fill="var(--logo-estrelas, #c9a800)">
@@ -126,6 +130,51 @@
           <button type="button" data-buscar aria-haspopup="dialog"><span class="moldura-barra-icone">${svg("buscar")}</span>${T.buscar}</button>
         </nav>`;
     }
+  }
+
+  // ---------- Animação do logo ----------
+  // Ao tocar no logo, ele anima antes de ir para o início. Três versões para escolher na prévia
+  // (?logo=pulo, ?logo=desenho ou ?logo=aceno). Quem pediu menos movimento não vê animação.
+  const ANIMACOES = ["pulo", "desenho", "aceno"];
+  const NOMES_ANIMACAO = EN ? ["Hop", "Draw", "Wave"] : ["Pulo", "Desenho", "Aceno"];
+  const PREVIA = /\.pages\.dev$|^localhost$|^127\.0\.0\.1$/.test(location.hostname);
+  const animacaoLogo = (() => {
+    const pedida = new URLSearchParams(location.search).get("logo");
+    if (ANIMACOES.includes(pedida)) { try { localStorage.setItem("gr-logo-animacao", pedida); } catch { /* só nesta página */ } return pedida; }
+    try { const salva = localStorage.getItem("gr-logo-animacao"); if (ANIMACOES.includes(salva)) return salva; } catch { /* sem armazenamento */ }
+    return "desenho";
+  })();
+  const menosMovimento = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function animarLogo(marca) {
+    const logo = marca.querySelector(".moldura-logo");
+    logo.removeAttribute("data-anima");
+    void logo.getBoundingClientRect(); // reinicia a animação se a pessoa tocar de novo
+    logo.setAttribute("data-anima", animacaoLogo);
+    return new Promise((ok) => setTimeout(() => { logo.removeAttribute("data-anima"); ok(); }, 950));
+  }
+
+  document.addEventListener("click", (e) => {
+    const marca = e.target.closest(".moldura-marca");
+    if (!marca || e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0 || menosMovimento()) return;
+    e.preventDefault();
+    const noInicio = location.pathname === marca.pathname;
+    if (noInicio) scrollTo({ top: 0, behavior: "smooth" });
+    const fim = animarLogo(marca);
+    // Fora do início, a animação toca e logo depois a página muda.
+    if (!noInicio) fim.then(() => { location.href = marca.href; });
+  });
+
+  if (PREVIA) {
+    const div = document.createElement("div");
+    div.className = "moldura-previa";
+    div.setAttribute("role", "group");
+    div.setAttribute("aria-label", EN ? "Logo animation preview" : "Prévia da animação do logo");
+    div.innerHTML = `<span>${EN ? "Logo" : "Logo"}</span>` + ANIMACOES.map((a, i) =>
+      `<a href="?logo=${a}"${a === animacaoLogo ? ' aria-current="true"' : ""}>${i + 1}. ${NOMES_ANIMACAO[i]}</a>`).join("");
+    const por = () => document.body.appendChild(div);
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", por);
+    else por();
   }
 
   // ---------- Busca ----------
