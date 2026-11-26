@@ -78,6 +78,7 @@ dd small { font-weight: var(--peso-normal); color: var(--texto-suave); }
 }
 .outros-cargos { margin-top: var(--espaco-5); }
 .outros-cargos summary { cursor: pointer; font-weight: var(--peso-forte); color: var(--azul); padding: var(--espaco-3) 0; }
+@media (max-width: 359px) { .outros-cargos summary { font-size: var(--tamanho-1); } } /* "(4)" na mesma linha até 320px */
 
 /* Convite compacto para /partidos/, entre o questionário e as perguntas frequentes. */
 .convite-partidos { display: flex; align-items: center; justify-content: space-between; gap: var(--espaco-3); margin-top: var(--espaco-6); padding: var(--espaco-4) var(--espaco-5); background: var(--azul); color: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); text-decoration: none; }

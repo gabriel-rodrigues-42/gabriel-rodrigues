@@ -48,7 +48,13 @@
   .fases { list-style: none; padding: 0; margin: var(--espaco-4) 0 0; display: flex; flex-wrap: wrap; gap: var(--espaco-2); counter-reset: fase; }
   .fases li { counter-increment: fase; font-size: var(--tamanho-1); font-weight: var(--peso-forte); color: var(--azul); background: var(--branco); padding: 4px 12px 4px 4px; border-radius: var(--forma-pilula); box-shadow: var(--sombra-cartao); display: flex; align-items: center; gap: 6px; }
   .fases li::before { content: counter(fase); width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: var(--amarelo-escuro); color: var(--branco); }
-  .fases li:last-child::before { background: var(--verde); }
+  .fases li:last-child::before { background: var(--verde-fundo); }
+  /* Celular: as quatro fases cabem numa linha só (390px e até 320px). */
+  @media (max-width: 419px) {
+    .fases { gap: clamp(3px, 1.2vw, 6px); }
+    .fases li { font-size: clamp(12px, 3.6vw, 13px); padding: 3px clamp(5px, 2vw, 10px) 3px 3px; gap: clamp(4px, 1.3vw, 5px); }
+    .fases li::before { width: clamp(17px, 5.2vw, 20px); height: clamp(17px, 5.2vw, 20px); }
+  }
   .sem-js { display: grid; gap: var(--espaco-3); padding: 0; list-style: none; }
   @media (min-width: 720px) {
     .capa { grid-template-columns: minmax(0, 1fr) 280px; gap: var(--espaco-6); }

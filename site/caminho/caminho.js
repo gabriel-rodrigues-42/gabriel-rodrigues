@@ -64,7 +64,7 @@
     erroDados: "Couldn't load the data. Try again in a moment.",
     cargosEx: (m) => "The offices for voters in " + m, cargos: "Offices you can run for",
     ordem: "From the best match with your answers to the weakest.",
-    outros: (n) => `Other offices that match less (${n})`,
+    outros: (n) => `Offices that match less\u00a0(${n})`,
     rodape: (g, m, ge) => `Data generated on ${g} from TSE files (${m} and ${ge} elections) and IBGE. Always double-check with the TSE and your state's TRE. Nothing here is legal advice.`,
     faq: (g, lista) => `Data generated on ${g}. TSE files generated on: ${lista}.`, semData: "no date",
   } : {
@@ -109,7 +109,7 @@
     erroDados: "Não consegui carregar os dados. Tente de novo em instantes.",
     cargosEx: (m) => "Os cargos para quem vota em " + m, cargos: "Cargos que você pode disputar",
     ordem: "Do que mais combina com suas respostas para o que menos combina.",
-    outros: (n) => `Outros cargos que combinam menos (${n})`,
+    outros: (n) => `Cargos que combinam menos\u00a0(${n})`,
     rodape: (g, m, ge) => `Dados gerados em ${g} a partir dos arquivos do TSE (eleições de ${m} e ${ge}) e do IBGE. Confira sempre no TSE e no TRE do seu estado. Nada aqui é orientação jurídica.`,
     faq: (g, lista) => `Dados gerados em ${g}. Arquivos do TSE gerados em: ${lista}.`, semData: "sem data",
   };
