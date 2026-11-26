@@ -18,6 +18,7 @@ Não há pedido de voto. As propostas estão em construção, com dados, fontes 
 ## Propostas
 
 - [Reindustrializar o Brasil (FSRI)](https://gabriel-rodrigues.com/projetos/reindustrializacao/): Fundo Soberano de Reindustrialização e Inovação
+- [Simulador de aporte do FSRI](https://gabriel-rodrigues.com/projetos/reindustrializacao/simulador/): monte uma carteira de empresas fictícias com as regras do fundo e compare cenários com o CDI. Tudo roda no aparelho.
 - [Cartório digital](https://gabriel-rodrigues.com/projetos/cartorio-digital/): quanto custa passar um imóvel para o seu nome em Goiânia, como conferir o imóvel antes de pagar para não cair em golpe de documento falso e como outros países fazem em um dia
 - [Desafio Dumont](https://gabriel-rodrigues.com/projetos/desafio-dumont/): carro brasileiro simples e modular, financiado pelo FSRI
 - [Brasil Responde](https://gabriel-rodrigues.com/projetos/brasil-responde/): ideia de questionários pelo gov.br para ouvir quem é afetado por uma lei antes da votação, anônimos ou com depoimento, com amostra sorteada
@@ -33,6 +34,7 @@ Não há pedido de voto. As propostas estão em construção, com dados, fontes 
 - [Proposals](https://gabriel-rodrigues.com/en/projetos/)
 - [Ideas](https://gabriel-rodrigues.com/en/ideias/)
 - [Which path makes sense for me?](https://gabriel-rodrigues.com/en/caminho/)
+- [FSRI investment simulator](https://gabriel-rodrigues.com/en/projetos/reindustrializacao/simulador/)
 
 ## Optional
 

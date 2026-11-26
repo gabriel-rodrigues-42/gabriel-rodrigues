@@ -118,6 +118,10 @@
   .fato { background: var(--creme); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); }
   .fato small { display: block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); text-transform: uppercase; letter-spacing: .05em; color: var(--texto-suave); }
   .fato b { display: block; font-size: var(--tamanho-4); color: var(--verde-escuro); line-height: 1.2; }
+  .fatos.elevados { grid-template-columns: 1fr; gap: var(--espaco-4); margin-bottom: var(--espaco-5); }
+  .fatos.elevados .fato { background: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); padding: var(--espaco-4) var(--espaco-5); }
+  .fatos.elevados .fato b { font-size: var(--tamanho-5); white-space: nowrap; }
+  @media (min-width: 600px) { .fatos.elevados { grid-template-columns: repeat(3, 1fr); } .fatos.elevados .fato b { font-size: var(--tamanho-4); } }
   .setores { display: flex; flex-wrap: wrap; gap: var(--espaco-2); padding: 0; list-style: none; margin: 0 0 var(--espaco-3); }
   .setores li { background: var(--azul-claro); color: var(--azul); font-weight: var(--peso-forte); font-size: var(--tamanho-1); padding: 6px 12px; border-radius: var(--forma-pilula); }
 
@@ -217,6 +221,9 @@
   .pior-caso { background: var(--areia); border-radius: var(--forma-cartao); padding: var(--espaco-5); margin-top: var(--espaco-5); }
   .pior-caso h3 { margin-top: 0; }
   .pior-caso p:last-child { margin-bottom: 0; }
+  .simulador-bloco { background: var(--verde-claro); }
+  .simulador-bloco ol { padding-left: var(--espaco-5); margin: var(--espaco-3) 0 var(--espaco-5); }
+  .simulador-bloco li + li { margin-top: var(--espaco-2); }
 
   /* Revelar ao rolar */
   .revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
@@ -412,13 +419,20 @@
 
     <h3 class="subtitulo">Quanto fundos parecidos já renderam</h3>
     <p>Insper, Spectra e a associação do setor (ABVCAP) mediram 387 fundos brasileiros que compram parte de empresas, de 1994 a 2022.</p>
-    <div class="fatos">
+    <div class="fatos elevados">
       <div class="fato"><small>Média por ano</small><b>12,7%</b><span class="pequeno">em reais, já sem as taxas</span></div>
       <div class="fato"><small>Comparado ao CDI</small><b>1,1 vez</b><span class="pequeno">ganhou do CDI por pouco</span></div>
       <div class="fato"><small>Melhores contra piores</small><b>25 pontos</b><span class="pequeno">de diferença por ano</span></div>
     </div>
     <p>Na média, esse tipo de investimento ganhou do CDI por pouco. A diferença entre os fundos bons e os ruins foi enorme. Escolher bem quem administra pesa mais que o setor.</p>
     <p>É por isso que o FSRI muda a conta com regras: o seguro corta parte da perda, a isenção aumenta o que sobra do lucro, e a mistura de um projeto rápido com um demorado paga os juros enquanto o demorado amadurece.</p>
+
+    <h3 class="subtitulo">Para quem isso faz sentido</h3>
+    <p>Olhando só o retorno, o FSRI não ganha da renda fixa. Fundos parecidos renderam 1,1 vez o CDI, com muito mais risco.</p>
+    <p>Na porta grande, a conta fica ainda mais apertada. O dinheiro vem de um empréstimo, e o banco cobra juros que acompanham o CDI, porque é quanto o dinheiro custa para ele, mais uma margem. Esses juros comem quase toda a diferença.</p>
+    <p>A vantagem está no imposto. Desde 2026, quem ganha mais de R$ 600 mil por ano paga um imposto mínimo sobre a renda toda, que chega a 10% a partir de R$ 1,2 milhão. Dividendos acima de R$ 50 mil por mês de uma mesma empresa têm 10% retidos na fonte (Lei 15.270, de 2025).</p>
+    <p>Para essa pessoa, a comparação não é FSRI contra renda fixa. É FSRI contra pagar o imposto. No FSRI, o dinheiro vira fábrica aqui e, depois de 5 anos, o lucro sai isento.</p>
+    <p>Para quem paga pouco imposto, a renda fixa continua sendo a escolha certa: rende parecido e não tem risco de perder. A porta menor existe para quem quer apoiar uma empresa nacional e aceita esse risco.</p>
 
     <div class="pior-caso">
       <h3>E se tudo der errado?</h3>
@@ -513,6 +527,22 @@
       <div class="cartao"><span class="onde">Anápolis · DAIA</span><h3>Remédio e equipamento feito aqui</h3><p>Aproveitar o polo farmoquímico do Distrito Agroindustrial de Anápolis para fabricar insumos farmacêuticos ativos e equipamentos médico-hospitalares.</p></div>
       <div class="cartao"><span class="onde">Sudoeste goiano</span><h3>Do agro à tecnologia no campo</h3><p>Maratonas de inovação em agricultura de precisão, drones, sensores de solo e bioinsumos, com UFG, IF Goiano e centros de pesquisa. O capital do agro financia tecnologia nova, sem conflito de interesses.</p></div>
       <div class="cartao"><span class="onde">Todo o estado</span><h3>Tecnologia brasileira em teste</h3><p>Programas piloto, com compras públicas de inovação do Marco Legal das Startups, para testar <a href="/projetos/cartorio-digital/">cartórios digitais</a>, mobilidade e gestão pública criados nas maratonas de inovação locais.</p></div>
+    </div>
+  </section>
+
+  <!-- SIMULADOR -->
+  <section class="capitulo revelar" id="simulador">
+    <div class="cartao simulador-bloco">
+      <span class="ato">Simulador</span>
+      <h2>Monte a sua carteira no FSRI</h2>
+      <p>Agora que você leu as regras, dá para testar. O simulador usa empresas inventadas e os números de fundos brasileiros reais.</p>
+      <ol>
+        <li>Escolha a porta, patrimônio menor ou grande, e quanto aplicaria.</li>
+        <li>Diga a sua área de atuação. O sistema tira as empresas que concorrem com você ou vendem para você.</li>
+        <li>Monte a carteira seguindo as regras, ou use a carteira pronta.</li>
+        <li>Veja os cenários ruim, médio e bom ao lado do CDI e compartilhe o resultado.</li>
+      </ol>
+      <a class="botao verde" href="/projetos/reindustrializacao/simulador/">Abrir o simulador</a>
     </div>
   </section>
 
@@ -617,6 +647,7 @@
       <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12529.htm">Lei nº 12.529, de 30 de novembro de 2011</a>, que estrutura o Sistema Brasileiro de Defesa da Concorrência (Planalto).</li>
       <li><a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp182.htm">Lei Complementar nº 182, de 1º de junho de 2021</a>, o Marco Legal das Startups (Planalto).</li>
       <li><a href="https://spectrainvest.com/en/estudo/performance-of-brazilian-private-equity-and-venture-capital-funds-1994-2022-2/">Performance of Brazilian Private Equity and Venture Capital Funds (1994-2022)</a>, Insper, Spectra Investments e ABVCAP, dados até dezembro de 2022 (em inglês). Fonte dos números do capítulo 6.</li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/L15270.htm">Lei nº 15.270, de 26 de novembro de 2025</a>, que cria o imposto mínimo sobre rendas acima de R$ 600 mil por ano, com alíquota de até 10%, e a retenção de 10% sobre dividendos acima de R$ 50 mil por mês (Presidência da República).</li>
       <li><a href="https://conteudo.cvm.gov.br/export/sites/cvm/legislacao/resolucoes/anexos/001/resol088.pdf">Resolução CVM nº 88, de 27 de abril de 2022</a>, que regula o investimento em startups por plataformas na internet e limita a R$ 20 mil por ano o aporte da maioria das pessoas (CVM).</li>
     </ul>
   </section>

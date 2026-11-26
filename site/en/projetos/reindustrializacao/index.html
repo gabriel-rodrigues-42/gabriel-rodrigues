@@ -118,6 +118,10 @@
   .fato { background: var(--creme); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); }
   .fato small { display: block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); text-transform: uppercase; letter-spacing: .05em; color: var(--texto-suave); }
   .fato b { display: block; font-size: var(--tamanho-4); color: var(--verde-escuro); line-height: 1.2; }
+  .fatos.elevados { grid-template-columns: 1fr; gap: var(--espaco-4); margin-bottom: var(--espaco-5); }
+  .fatos.elevados .fato { background: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); padding: var(--espaco-4) var(--espaco-5); }
+  .fatos.elevados .fato b { font-size: var(--tamanho-5); white-space: nowrap; }
+  @media (min-width: 600px) { .fatos.elevados { grid-template-columns: repeat(3, 1fr); } .fatos.elevados .fato b { font-size: var(--tamanho-4); } }
   .setores { display: flex; flex-wrap: wrap; gap: var(--espaco-2); padding: 0; list-style: none; margin: 0 0 var(--espaco-3); }
   .setores li { background: var(--azul-claro); color: var(--azul); font-weight: var(--peso-forte); font-size: var(--tamanho-1); padding: 6px 12px; border-radius: var(--forma-pilula); }
 
@@ -217,6 +221,9 @@
   .pior-caso { background: var(--areia); border-radius: var(--forma-cartao); padding: var(--espaco-5); margin-top: var(--espaco-5); }
   .pior-caso h3 { margin-top: 0; }
   .pior-caso p:last-child { margin-bottom: 0; }
+  .simulador-bloco { background: var(--verde-claro); }
+  .simulador-bloco ol { padding-left: var(--espaco-5); margin: var(--espaco-3) 0 var(--espaco-5); }
+  .simulador-bloco li + li { margin-top: var(--espaco-2); }
 
   /* Revelar ao rolar */
   .revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
@@ -412,13 +419,20 @@
 
     <h3 class="subtitulo">How much similar funds have earned</h3>
     <p>Insper, Spectra and the industry association (ABVCAP) measured 387 Brazilian funds that buy stakes in companies, from 1994 to 2022.</p>
-    <div class="fatos">
+    <div class="fatos elevados">
       <div class="fato"><small>Average per year</small><b>12.7%</b><span class="pequeno">in reais, after fees</span></div>
       <div class="fato"><small>Compared to CDI</small><b>1.1 times</b><span class="pequeno">beat the CDI by a little</span></div>
       <div class="fato"><small>Best versus worst</small><b>25 points</b><span class="pequeno">of difference per year</span></div>
     </div>
     <p>On average, this kind of investment beat the CDI, Brazil's benchmark interest rate, by a small margin. The gap between good and bad funds was huge. Choosing who manages the money matters more than the sector.</p>
     <p>That's why the FSRI changes the math with rules: the insurance cuts part of the loss, the exemption increases what's left of the profit, and pairing a fast project with a slow one pays the interest while the slow one matures.</p>
+
+    <h3 class="subtitulo">Who this makes sense for</h3>
+    <p>Looking only at returns, the FSRI does not beat fixed income. Similar funds earned 1.1 times the CDI, with much more risk.</p>
+    <p>Through the large-wealth door, the math is even tighter. The money comes from a loan, and the bank charges interest that tracks the CDI, because that is what money costs the bank, plus a margin. That interest eats almost all of the difference.</p>
+    <p>The advantage is in the tax. Since 2026, anyone earning more than R$ 600,000 a year pays a minimum tax on their total income, reaching 10% from R$ 1.2 million. Dividends above R$ 50,000 a month from the same company have 10% withheld at the source (Law 15,270 of 2025).</p>
+    <p>For that person, the comparison is not FSRI versus fixed income. It is FSRI versus paying the tax. In the FSRI, the money becomes a factory here and, after 5 years, the profit is tax-free.</p>
+    <p>For people who pay little tax, fixed income is still the right choice: it earns about the same with no risk of loss. The smaller-wealth door exists for people who want to back a Brazilian company and accept that risk.</p>
 
     <div class="pior-caso">
       <h3>What if everything goes wrong?</h3>
@@ -513,6 +527,22 @@
       <div class="cartao"><span class="onde">Anápolis · DAIA</span><h3>Medicine and equipment made here</h3><p>Use the pharmaceutical cluster of the Anápolis Agro-Industrial District to make active pharmaceutical ingredients and medical and hospital equipment.</p></div>
       <div class="cartao"><span class="onde">Southwest Goiás</span><h3>From agribusiness to agtech</h3><p>Hackathons on precision agriculture, drones, soil sensors and bio-inputs, with UFG, IF Goiano and research centers. Agribusiness capital funds new technology, with no conflict of interest.</p></div>
       <div class="cartao"><span class="onde">The whole state</span><h3>Brazilian technology on trial</h3><p>Pilot programs, through public procurement of innovation under Brazil's Startup Legal Framework, to test <a href="/en/projetos/cartorio-digital/">digital notary offices</a>, mobility and public management created in local innovation marathons.</p></div>
+    </div>
+  </section>
+
+  <!-- SIMULADOR -->
+  <section class="capitulo revelar" id="simulator">
+    <div class="cartao simulador-bloco">
+      <span class="ato">Simulator</span>
+      <h2>Build your own FSRI portfolio</h2>
+      <p>Now that you've read the rules, you can try them. The simulator uses made-up companies and numbers from real Brazilian funds.</p>
+      <ol>
+        <li>Pick a door, smaller or large wealth, and how much you would invest.</li>
+        <li>Tell it your field of work. The system removes companies that compete with you or sell to you.</li>
+        <li>Build the portfolio following the rules, or use the ready-made one.</li>
+        <li>See the bad, average and good scenarios next to the CDI, and share the result.</li>
+      </ol>
+      <a class="botao verde" href="/en/projetos/reindustrializacao/simulador/">Open the simulator</a>
     </div>
   </section>
 
@@ -617,6 +647,7 @@
       <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12529.htm">Law 12.529 of November 30, 2011</a>, which structures the Brazilian Competition Defense System (Planalto).</li>
       <li><a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp182.htm">Complementary Law 182 of June 1, 2021</a>, Brazil's Startup Legal Framework (Planalto).</li>
       <li><a href="https://spectrainvest.com/en/estudo/performance-of-brazilian-private-equity-and-venture-capital-funds-1994-2022-2/">Performance of Brazilian Private Equity and Venture Capital Funds (1994-2022)</a>, Insper, Spectra Investments and ABVCAP, data through December 2022. Source of the numbers in chapter 6.</li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/L15270.htm">Law 15,270 of November 26, 2025</a>, which creates the minimum tax on incomes above R$ 600,000 a year, at up to 10%, and 10% withholding on dividends above R$ 50,000 a month (Office of the President of Brazil).</li>
       <li><a href="https://conteudo.cvm.gov.br/export/sites/cvm/legislacao/resolucoes/anexos/001/resol088.pdf">CVM Resolution 88 of April 27, 2022</a>, which regulates investing in startups through online platforms and caps most people at R$ 20,000 a year (CVM).</li>
     </ul>
   </section>
