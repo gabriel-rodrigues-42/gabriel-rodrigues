@@ -36,8 +36,8 @@
 <script src="/design-system/moldura.js?v=2026-11-26b"></script>
 <link rel="stylesheet" href="/design-system/contribuir.css">
 <script src="/design-system/contribuir.js"></script>
-<link rel="stylesheet" href="/projetos/reindustrializacao/simulador/simulador.css?v=2026-11-26c">
-<script src="/projetos/reindustrializacao/simulador/simulador.js?v=2026-11-26d" defer></script>
+<link rel="stylesheet" href="/projetos/reindustrializacao/simulador/simulador.css?v=2026-11-26d">
+<script src="/projetos/reindustrializacao/simulador/simulador.js?v=2026-11-26e" defer></script>
 </head>
 <body>
 <gr-cabecalho></gr-cabecalho>
@@ -66,6 +66,11 @@
           <span><strong>Patrimônio menor</strong>Compra cotas com valor baixo, com teto de R$ 20 mil por ano, como a CVM já faz com startups (Resolução CVM 88, de 2022). É para quem quer apoiar uma empresa nacional e aceita o risco.</span></label>
       </fieldset>
       <div class="campos">
+        <div class="campo" id="campo-patrimonio">
+          <label for="sim-patrimonio">Seu patrimônio</label>
+          <input id="sim-patrimonio" name="patrimonio" inputmode="numeric" autocomplete="off" value="R$ 50.000.000" aria-describedby="sim-dica-patrimonio" toolparamdescription="Patrimônio total em reais, para comparar com propostas de imposto sobre grandes fortunas">
+          <p class="pequeno" id="sim-dica-patrimonio">Serve para comparar com o que as propostas de taxar grandes fortunas cobrariam.</p>
+        </div>
         <div class="campo">
           <label for="sim-valor">Quanto você aplicaria</label>
           <input id="sim-valor" name="valor" inputmode="numeric" autocomplete="off" value="R$ 10.000.000" aria-describedby="sim-dica" toolparamdescription="Valor em reais">
@@ -146,6 +151,8 @@
     <ul class="fontes">
       <li><a href="https://spectrainvest.com/en/estudo/performance-of-brazilian-private-equity-and-venture-capital-funds-1994-2022-2/">Insper, Spectra e ABVCAP, Performance of Brazilian Private Equity and Venture Capital Funds (1994-2022), 2023</a></li>
       <li><a href="https://www.bcb.gov.br/controleinflacao/historicotaxasjuros">Banco Central, histórico da taxa Selic (Copom de 4/11/2026)</a></li>
+      <li><a href="https://www.tribunapr.com.br/noticias/economia/bancada-do-pt-propoe-tributar-grandes-fortunas-e-investimentos-isentos/">Bancada do PT propõe tributar grandes fortunas (PL 5.852/2026), Tribuna/Gazeta do Povo, 14/11/2026</a></li>
+      <li><a href="https://gabriel-zucman.eu/files/report-g20.pdf">Gabriel Zucman, relatório ao G20 sobre tributação mínima de bilionários (2024)</a></li>
       <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/L15270.htm">Lei 15.270, de 2025 (imposto mínimo sobre rendas acima de R$ 600 mil por ano)</a></li>
       <li><a href="https://conteudo.cvm.gov.br/export/sites/cvm/legislacao/resolucoes/anexos/001/resol088.pdf">CVM, Resolução 88, de 2022 (investimento em startups pela internet)</a></li>
       <li><a href="/projetos/reindustrializacao/">A proposta do FSRI: faixas, seguro, isenção e conflito de interesse</a></li>

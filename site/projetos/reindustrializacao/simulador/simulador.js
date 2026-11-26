@@ -22,6 +22,12 @@
   // Os quartis exatos estão só em imagem no estudo. Usamos a média mais ou menos
   // metade da diferença: 12,7 ± 12,65 ≈ 0% e 25% ao ano.
   const CENARIOS = { ruim: 0, medio: MEDIA, bom: 0.25 };
+  // Imposto anual sobre o patrimônio, por faixa (cada alíquota vale só sobre a parte dentro da faixa).
+  // Projeto da bancada do PT na Câmara, PL 5.852/2026, protocolado em 13/11/2026.
+  const FAIXAS_PL5852 = [[15e6, 30e6, 0.007], [30e6, 70e6, 0.01], [70e6, 200e6, 0.02], [200e6, Infinity, 0.03]];
+  const impostoPL5852 = pat => FAIXAS_PL5852.reduce((s, [de, ate, a]) => s + Math.max(0, Math.min(pat, ate) - de) * a, 0);
+  // Referência levada ao G20 (relatório Zucman, 2024): piso de 2% ao ano, só para bilionários em dólar.
+  const PISO_G20 = 0.02;
   const CDI_PADRAO = 13.65; // Selic de 13,75% (Copom, 4/11/2026) menos 0,10 ponto
 
   const AREAS = [
@@ -123,6 +129,21 @@
         incentivo: 'Aporte incentivado: lucro sem imposto depois de 5 anos',
         semIncentivo: 'Sem incentivo: lucro paga 15% de imposto',
       },
+      imp: {
+        titulo: 'Imposto sobre grandes fortunas ou FSRI?',
+        intro: v => `Com patrimônio de ${v}, veja o que as propostas cobrariam por ano e o que acontece com o aporte no FSRI.`,
+        pl: 'Projeto do PT na Câmara (PL 5.852/2026)', porAno: 'por ano',
+        noPrazo: (n, v) => `${v} em ${n} anos, que não voltam`,
+        isento: 'Isento: o projeto só cobra acima de R$ 15 milhões',
+        plNota: 'De 0,7% a 3% sobre a parte do patrimônio acima de R$ 15 milhões, por faixa. Protocolado em 13/11/2026, ainda não votado.',
+        g20: 'Referência levada ao G20 (2024)',
+        g20Nota: 'Piso de 2% ao ano proposto por Gabriel Zucman. Na proposta, vale só para bilionários em dólar e desconta o imposto que a pessoa já paga. Aqui aparece só para comparar.',
+        lei: 'Lei em vigor (Lei 15.270, de 2025)',
+        leiNota: 'Não cobra sobre o patrimônio, e sim sobre a renda: até 10% para quem ganha mais de R$ 600 mil por ano, desde 2026.',
+        fsri: 'Aporte no FSRI',
+        fsriTexto: (n, v) => `continua seu. No cenário médio, vira ${v} em ${n} anos, se as empresas derem certo.`,
+        nota: 'Conta simplificada: o patrimônio fica igual todos os anos. O imposto não volta. O aporte no FSRI pode voltar maior, menor ou não voltar.',
+      },
       arquivo: 'minha-carteira-fsri.png',
     },
     en: {
@@ -165,6 +186,21 @@
         incentivo: 'Incentivized: tax-free profit after 5 years',
         semIncentivo: 'No incentive: profit pays 15% tax',
       },
+      imp: {
+        titulo: 'Wealth tax or the FSRI?',
+        intro: v => `With a net worth of ${v}, see what the proposals would charge each year and what happens to the FSRI investment.`,
+        pl: 'PT party bill in the Chamber (PL 5,852/2026)', porAno: 'a year',
+        noPrazo: (n, v) => `${v} over ${n} years, never coming back`,
+        isento: 'Exempt: the bill only applies above R$15 million',
+        plNota: 'From 0.7% to 3% on the part of net worth above R$15 million, by bracket. Filed on Nov 13, 2026, not yet voted.',
+        g20: 'Benchmark taken to the G20 (2024)',
+        g20Nota: '2% yearly floor proposed by Gabriel Zucman. In the proposal it applies only to dollar billionaires and subtracts taxes already paid. Shown here only for comparison.',
+        lei: 'Law in force (Law 15,270 of 2025)',
+        leiNota: 'It does not tax net worth but income: up to 10% for people earning more than R$600,000 a year, since 2026.',
+        fsri: 'FSRI investment',
+        fsriTexto: (n, v) => `stays yours. In the average scenario it becomes ${v} in ${n} years, if the companies succeed.`,
+        nota: 'Simplified math: net worth stays the same every year. Tax never comes back. The FSRI investment may come back larger, smaller or not at all.',
+      },
       arquivo: 'my-fsri-portfolio.png',
     },
   }[L];
@@ -179,7 +215,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
   // Estado: tudo só na memória da página.
-  const estado = { porta: 'grande', valor: 10000000, area: '', sel: new Map(), prazo: 10, cdi: CDI_PADRAO };
+  const estado = { porta: 'grande', valor: 10000000, patrimonio: 50000000, area: '', sel: new Map(), prazo: 10, cdi: CDI_PADRAO };
 
   const form = $('#sim-form');
   const campoValor = $('#sim-valor');
@@ -221,18 +257,25 @@
     desenhar();
   });
   // Formata o campo como dinheiro enquanto a pessoa digita, sem mover o cursor.
-  function formatarCampo() {
-    const antes = campoValor.value;
-    const pos = campoValor.selectionStart ?? antes.length;
+  function formatarCampo(campo = campoValor) {
+    const antes = campo.value;
+    const pos = campo.selectionStart ?? antes.length;
     const digitosAntes = antes.slice(0, pos).replace(/\D/g, '').replace(/^0+/, '').length;
     const digitos = antes.replace(/\D/g, '').replace(/^0+/, '').slice(0, 13);
     const novo = digitos ? fmt(+digitos) : '';
-    campoValor.value = novo;
+    campo.value = novo;
     let cursor = novo.length, vistos = 0;
     if (digitosAntes === 0) cursor = novo.search(/\d/) < 0 ? novo.length : novo.search(/\d/);
     else for (let i = 0; i < novo.length; i++) { if (/\d/.test(novo[i]) && ++vistos === digitosAntes) { cursor = i + 1; break; } }
-    if (document.activeElement === campoValor) campoValor.setSelectionRange(cursor, cursor);
+    if (document.activeElement === campo) campo.setSelectionRange(cursor, cursor);
   }
+  const campoPatrimonio = $('#sim-patrimonio');
+  function lerPatrimonio() {
+    const n = parseInt(String(campoPatrimonio.value).replace(/\D/g, ''), 10);
+    return Number.isFinite(n) && n > 0 ? n : 50000000;
+  }
+  campoPatrimonio.addEventListener('input', () => { formatarCampo(campoPatrimonio); estado.patrimonio = lerPatrimonio(); desenharResultado(); });
+  campoPatrimonio.addEventListener('blur', () => { if (!campoPatrimonio.value) campoPatrimonio.value = fmt(lerPatrimonio()); });
   campoValor.addEventListener('input', () => { formatarCampo(); estado.valor = lerValor(); desenharResultado(); desenharNotaValor(); atualizarPcts(); });
   campoValor.addEventListener('blur', () => { if (!campoValor.value) campoValor.value = fmt(lerValor()); });
   form.addEventListener('submit', ev => {
@@ -243,6 +286,7 @@
   });
 
   function desenharNotaValor() {
+    $('#campo-patrimonio').hidden = estado.porta !== 'grande';
     const nota = $('#sim-nota-valor');
     const partes = [];
     if (estado.porta === 'menor' && estado.valor > TETO_MENOR) partes.push(`<span class="nota-teto">${esc(T.teto(fmt(TETO_MENOR)))}</span>`);
@@ -354,6 +398,23 @@
     return { a, V, n, isento, ruim: fsri(CENARIOS.ruim), medio: fsri(CENARIOS.medio), bom: fsri(CENARIOS.bom), cdi, cdiR, seguro, perde: V - seguro };
   }
 
+  function blocoImposto(c) {
+    const pat = estado.patrimonio, n = c.n;
+    const pl = impostoPL5852(pat), g20 = pat * PISO_G20;
+    const I = T.imp;
+    return `<div class="comparativo">
+      <h3>${esc(I.titulo)}</h3>
+      <p>${esc(I.intro(fmt(pat)))}</p>
+      <div class="comp-linhas">
+        <div class="comp"><strong>${esc(I.pl)}</strong><b>${fmt(pl)} ${esc(I.porAno)}</b><span>${esc(pl ? I.noPrazo(n, fmt(pl * n)) : I.isento)}</span><small>${esc(I.plNota)}</small></div>
+        <div class="comp"><strong>${esc(I.g20)}</strong><b>${fmt(g20)} ${esc(I.porAno)}</b><span>${esc(I.noPrazo(n, fmt(g20 * n)))}</span><small>${esc(I.g20Nota)}</small></div>
+        <div class="comp"><strong>${esc(I.lei)}</strong><small>${esc(I.leiNota)}</small></div>
+        <div class="comp fsri"><strong>${esc(I.fsri)}</strong><b>${fmt(c.V)}</b><span>${esc(I.fsriTexto(n, fmt(c.medio)))}</span></div>
+      </div>
+      <p class="pequeno">${esc(I.nota)}</p>
+    </div>`;
+  }
+
   function desenharResultado() {
     const alvo = $('#sim-resultado');
     const comp = $('#sim-compartilhar');
@@ -372,6 +433,7 @@
       ${linha('cdi', T.cdi, c.cdiR, c.cdi, T.cdiNota(estado.cdi), T.comIR)}
     </div>
     <div class="quebra"><h3>${esc(T.quebraT)}</h3><p>${T.quebra(fmt(c.perde), fmt(c.seguro))}</p><p>${esc(T.quebraNota)}</p></div>`;
+    if (estado.porta === 'grande') alvo.insertAdjacentHTML('beforeend', blocoImposto(c));
     comp.hidden = false;
     atualizarLink();
     desenharCartao(c);

@@ -101,3 +101,13 @@ h3 { color: var(--azul); margin: 0 0 var(--espaco-2); }
 .leitura-resultado { margin-top: var(--espaco-5); background: var(--verde-claro); border-radius: var(--forma-cartao); padding: var(--espaco-5); }
 .leitura-resultado p { margin: 0; }
 .leitura-resultado p + p { margin-top: var(--espaco-2); }
+.comparativo { margin-top: var(--espaco-5); background: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); padding: var(--espaco-5); }
+.comparativo > p { margin: 0 0 var(--espaco-3); }
+.comp-linhas { display: grid; gap: var(--espaco-3); margin-bottom: var(--espaco-3); }
+.comp { background: var(--creme); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); display: grid; gap: var(--espaco-1); }
+.comp strong { color: var(--azul); }
+.comp b { font-size: var(--tamanho-4); color: var(--texto); }
+.comp small { color: var(--texto-suave); font-size: var(--tamanho-2); }
+.comp.fsri { background: var(--verde-claro); }
+.comp.fsri b { color: var(--verde-escuro); }
+.campo[hidden] { display: none; }
