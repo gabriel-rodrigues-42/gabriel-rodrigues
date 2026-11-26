@@ -133,24 +133,15 @@
   }
 
   // ---------- Animação do logo ----------
-  // Ao tocar no logo, ele anima antes de ir para o início. Três versões para escolher na prévia
-  // (?logo=pulo, ?logo=desenho ou ?logo=aceno). Quem pediu menos movimento não vê animação.
-  const ANIMACOES = ["pulo", "desenho", "aceno"];
-  const NOMES_ANIMACAO = EN ? ["Hop", "Draw", "Wave"] : ["Pulo", "Desenho", "Aceno"];
-  const PREVIA = /\.pages\.dev$|^localhost$|^127\.0\.0\.1$/.test(location.hostname);
-  const animacaoLogo = (() => {
-    const pedida = new URLSearchParams(location.search).get("logo");
-    if (ANIMACOES.includes(pedida)) { try { localStorage.setItem("gr-logo-animacao", pedida); } catch { /* só nesta página */ } return pedida; }
-    try { const salva = localStorage.getItem("gr-logo-animacao"); if (ANIMACOES.includes(salva)) return salva; } catch { /* sem armazenamento */ }
-    return "desenho";
-  })();
+  // Ao tocar no logo, o G se desenha em volta das pessoas, a da frente sobe e as estrelas piscam.
+  // Depois a página vai para o início. Quem pediu menos movimento não vê animação.
   const menosMovimento = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function animarLogo(marca) {
     const logo = marca.querySelector(".moldura-logo");
     logo.removeAttribute("data-anima");
     void logo.getBoundingClientRect(); // reinicia a animação se a pessoa tocar de novo
-    logo.setAttribute("data-anima", animacaoLogo);
+    logo.setAttribute("data-anima", "");
     return new Promise((ok) => setTimeout(() => { logo.removeAttribute("data-anima"); ok(); }, 950));
   }
 
@@ -164,18 +155,6 @@
     // Fora do início, a animação toca e logo depois a página muda.
     if (!noInicio) fim.then(() => { location.href = marca.href; });
   });
-
-  if (PREVIA) {
-    const div = document.createElement("div");
-    div.className = "moldura-previa";
-    div.setAttribute("role", "group");
-    div.setAttribute("aria-label", EN ? "Logo animation preview" : "Prévia da animação do logo");
-    div.innerHTML = `<span>${EN ? "Logo" : "Logo"}</span>` + ANIMACOES.map((a, i) =>
-      `<a href="?logo=${a}"${a === animacaoLogo ? ' aria-current="true"' : ""}>${i + 1}. ${NOMES_ANIMACAO[i]}</a>`).join("");
-    const por = () => document.body.appendChild(div);
-    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", por);
-    else por();
-  }
 
   // ---------- Busca ----------
   // A lupa carrega busca.js + busca.css só no primeiro toque.
