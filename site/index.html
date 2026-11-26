@@ -99,19 +99,6 @@
     .jeito { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
 
-  /* Lema: mais (verde), menos (amarelo), mais (verde). O sinal de cada linha é só desenho (aria-hidden); o texto é lido normalmente. */
-  .lema { container-type: inline-size; text-align: center; margin: var(--espaco-6) 0 0; padding: var(--espaco-5) var(--espaco-5) var(--espaco-4); background: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); }
-  /* Bloco centralizado no cartão, linhas alinhadas no início para os sinais formarem uma coluna. Cada parte numa linha só: no celular com letra grande, a fonte diminui com o cartão (cqi) em vez de quebrar a linha. */
-  .lema-frase { width: fit-content; margin: 0 auto; display: grid; text-align: start; gap: var(--espaco-2); font-size: min(var(--tamanho-5), 10cqi); white-space: nowrap; font-weight: 900; line-height: 1.1; color: var(--azul); }
-  .lema-linha { display: flex; align-items: center; gap: var(--espaco-3); min-width: 0; }
-  .lema-sinal { flex: none; display: grid; place-items: center; width: 1.1em; height: 1.1em; font-size: .9em; line-height: 1; color: var(--branco); background: var(--verde-fundo); border-radius: var(--forma-bolha-1); }
-  .lema-linha:nth-child(2) .lema-sinal { background: var(--amarelo); color: var(--azul); border-radius: var(--forma-bolha-2); }
-  .lema-linha:nth-child(3) .lema-sinal { border-radius: var(--forma-bolha-3); }
-  /* Cartão largo (computador): as três partes numa linha só, cada uma com o seu sinal. */
-  @container (min-width: 600px) {
-    .lema-frase { display: flex; gap: var(--espaco-5); font-size: min(var(--tamanho-5), 3.5cqi); }
-  }
-  .lema-porque { margin: var(--espaco-4) 0 0; padding-top: var(--espaco-3); border-top: 2px solid var(--azul-claro); color: var(--texto-suave); font-size: var(--tamanho-2); }
 
   /* Propostas */
   #publicacoes { margin-top: var(--espaco-7); }
@@ -196,14 +183,6 @@
     </div>
   </section>
 
-  <section class="lema" aria-label="Meu lema">
-    <p class="lema-frase">
-      <span class="lema-linha"><span class="lema-sinal" aria-hidden="true">+</span><span>Mais entrega,</span></span>
-      <span class="lema-linha"><span class="lema-sinal" aria-hidden="true">−</span><span>menos imposto,</span></span>
-      <span class="lema-linha"><span class="lema-sinal" aria-hidden="true">+</span><span>mais confiança.</span></span>
-    </p>
-    <p class="lema-porque">Juro alto também é falta de confiança. Quando o governo entrega o que promete sem cobrar imposto demais, quem empresta cobra menos.</p>
-  </section>
 
   <ul class="jeito" aria-label="Como eu trabalho">
     <li><strong>Medir</strong>Saber o problema em números antes de mudar.</li>
@@ -272,7 +251,7 @@
       <div class="voto" data-opcao="entrega">
         <span class="selo amarelo voto-seu" hidden>Seu voto</span>
         <p class="voto-frase" id="lema-entrega">Mais entrega, menos imposto, mais confiança.</p>
-        <p class="voto-porque">Juro alto também vem da falta de confiança. Governo que entrega sem pesar no imposto ganha essa confiança.</p>
+        <p class="voto-porque">Juros altos também vêm da falta de confiança. Governo que entrega sem pesar no imposto ganha essa confiança.</p>
         <button class="botao verde" type="submit" form="form-lema" name="opcao" value="entrega" aria-describedby="lema-entrega">Prefiro este</button>
         <div class="voto-resultado" hidden><span class="voto-barra"><span></span></span><strong class="voto-pct"></strong></div>
       </div>
