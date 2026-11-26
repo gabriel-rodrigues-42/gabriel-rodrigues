@@ -207,6 +207,16 @@
   .hashtag { background: var(--branco); color: var(--verde-escuro); font-weight: var(--peso-forte); padding: 6px 12px; border-radius: var(--forma-selo); }
   .fontes { font-size: var(--tamanho-2); color: var(--texto-suave); }
 
+  /* A conta do investidor */
+  .saidas { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--espaco-3); margin-top: var(--espaco-4); }
+  .saida { padding: var(--espaco-4); }
+  .saida strong { display: block; color: var(--azul); font-size: var(--tamanho-3); }
+  .saida p { margin: var(--espaco-1) 0 0; font-size: var(--tamanho-2); }
+  .subtitulo { margin-top: var(--espaco-6); }
+  .pior-caso { background: var(--areia); border-radius: var(--forma-cartao); padding: var(--espaco-5); margin-top: var(--espaco-5); }
+  .pior-caso h3 { margin-top: 0; }
+  .pior-caso p:last-child { margin-bottom: 0; }
+
   /* Revelar ao rolar */
   .revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
   .revelar.visivel { opacity: 1; transform: none; }
@@ -373,10 +383,45 @@
     </div>
   </section>
 
+  <section class="capitulo revelar" id="retorno">
+    <span class="ato">Capítulo 6 · A conta de quem investe</span>
+    <h2>Quanto o investidor ganha?</h2>
+    <p>Ninguém sabe ainda. O FSRI não existe, então não tem retorno medido. Qualquer número que eu pusesse aqui seria chute.</p>
+    <p>O que dá para mostrar é como o dinheiro volta, quanto fundos parecidos já renderam no Brasil e o que acontece se tudo der errado.</p>
+
+    <h3 class="subtitulo">Quem entra</h3>
+    <p>O FSRI é para quem tem patrimônio grande e já pega crédito no banco dando ações como garantia. Essa pessoa não tira dinheiro da poupança. Ela muda o destino de um empréstimo que já faria.</p>
+    <p>Mas o risco é real. Se o projeto quebrar, a dívida com o banco continua. Por isso a pessoa comum fica de fora no começo: em startup, perder tudo é comum.</p>
+
+    <h3 class="subtitulo">Como o dinheiro volta</h3>
+    <div class="saidas">
+      <div class="cartao saida"><strong>Lucro dividido</strong><p>Empresas da Faixa 1, que dão lucro mais cedo, dividem parte dele com os sócios. É o que paga os juros do empréstimo.</p></div>
+      <div class="cartao saida"><strong>Venda na bolsa</strong><p>A empresa abre capital na B3 e o investidor vende a parte dele.</p></div>
+      <div class="cartao saida"><strong>Venda para outra empresa</strong><p>Uma empresa maior compra a startup inteira, e cada sócio recebe a sua parte.</p></div>
+      <div class="cartao saida"><strong>Venda da cota</strong><p>O investidor vende a parte dele no fundo para outro investidor. Se sair antes do prazo mínimo, perde a isenção.</p></div>
+    </div>
+
+    <h3 class="subtitulo">Quanto fundos parecidos já renderam</h3>
+    <p>Insper, Spectra e a associação do setor (ABVCAP) mediram 387 fundos brasileiros que compram parte de empresas, de 1994 a 2022.</p>
+    <div class="fatos">
+      <div class="fato"><small>Média por ano</small><b>12,7%</b><span class="pequeno">em reais, já sem as taxas</span></div>
+      <div class="fato"><small>Comparado ao CDI</small><b>1,1 vez</b><span class="pequeno">ganhou do CDI por pouco</span></div>
+      <div class="fato"><small>Melhores contra piores</small><b>25 pontos</b><span class="pequeno">de diferença por ano</span></div>
+    </div>
+    <p>Na média, esse tipo de investimento ganhou do CDI por pouco. A diferença entre os fundos bons e os ruins foi enorme. Escolher bem quem administra pesa mais que o setor.</p>
+    <p>É por isso que o FSRI muda a conta com regras: o seguro corta parte da perda, a isenção aumenta o que sobra do lucro, e a mistura de um projeto rápido com um demorado paga os juros enquanto o demorado amadurece.</p>
+
+    <div class="pior-caso">
+      <h3>E se tudo der errado?</h3>
+      <p>Se todos os projetos de um aporte quebrarem, o seguro devolve uma parte e o investidor perde o resto. Na Faixa 3, perde pelo menos metade. Na Faixa 1, pelo menos 80%.</p>
+      <p>No CDI, o mesmo dinheiro teria rendido sem esse risco. Por isso o FSRI não serve para quem precisa do dinheiro de volta numa data certa.</p>
+    </div>
+  </section>
+
   <!-- ATO 6: história ilustrativa -->
   <section class="capitulo revelar">
     <div class="historia">
-      <span class="ato">Capítulo 6 · Como uma ideia recebe dinheiro</span>
+      <span class="ato">Capítulo 7 · Como uma ideia recebe dinheiro</span>
       <h2>De um problema real até a bolsa</h2>
       <p>O dinheiro não vai para quem conhece alguém. Ele passa por um funil público, em quatro etapas. Para ver como seria, acompanhe uma equipe imaginária.</p>
       <p class="aviso-ficcao">História ilustrativa. A equipe é inventada; as etapas e as regras são as da proposta.</p>
@@ -415,7 +460,7 @@
 
   <!-- ATO 7 -->
   <section class="capitulo revelar">
-    <span class="ato">Capítulo 7 · A briga desigual</span>
+    <span class="ato">Capítulo 8 · A briga desigual</span>
     <h2>Quando o gigante vende abaixo do custo</h2>
     <p>Uma plataforma brasileira nova costuma quebrar não por ser pior, mas por enfrentar um jogo conhecido: o vencedor leva tudo.</p>
     <div class="linha-tempo">
@@ -435,7 +480,7 @@
 
   <!-- ATO 8 -->
   <section class="capitulo revelar">
-    <span class="ato">Capítulo 8 · Quem ganha</span>
+    <span class="ato">Capítulo 9 · Quem ganha</span>
     <h2>Mais renda fica com quem trabalha</h2>
     <p>As plataformas da Faixa 1 nascem integradas ao Gov.br e ao Pix. Isso derruba o custo de conquistar cada cliente e permite cobrar microtaxas. A proposta fala em algo como 2% a 5%, contra os 25% a 30% que estima para as grandes plataformas estrangeiras.</p>
     <p>Um exemplo que já existe: o <a href="/projetos/galera-club/">galera.club</a>, uma página de link na bio brasileira, com Pix na página e nenhuma taxa por venda.</p>
@@ -451,7 +496,7 @@
 
   <!-- ATO 9 -->
   <section class="capitulo revelar">
-    <span class="ato">Capítulo 9 · Começando por Goiás</span>
+    <span class="ato">Capítulo 10 · Começando por Goiás</span>
     <h2>Goiás como laboratório</h2>
     <p>O modelo pode ganhar um braço regional, aproveitando o que Goiás já tem de vocação.</p>
     <div class="goias">
@@ -464,9 +509,17 @@
 
   <!-- CRÍTICAS -->
   <section class="capitulo revelar" id="criticas">
-    <span class="ato">Capítulo 10 · As críticas</span>
+    <span class="ato">Capítulo 11 · As críticas</span>
     <h2>As críticas mais duras, e as respostas</h2>
     <p>Estas são as objeções que eu esperaria ouvir, respondidas com as regras da própria proposta.</p>
+
+    <details class="critica">
+      <summary>Por que eu arriscaria meu patrimônio em empresas que não conheço e não controlo?</summary>
+      <div class="resposta">
+        <p>Se você precisa desse dinheiro, não deveria. Fundos brasileiros desse tipo renderam, na média, só um pouco mais que o CDI, e a diferença entre os melhores e os piores foi enorme (Insper, Spectra e ABVCAP, 2022).</p>
+        <p>O FSRI não promete retorno. Ele muda a conta para quem já pega crédito com ações em garantia: o seguro corta parte da perda e a isenção aumenta o lucro. As regras estão no <a href="#retorno">capítulo 6</a>.</p>
+      </div>
+    </details>
 
     <details class="critica">
       <summary>Isso é isenção de imposto para rico.</summary>
@@ -511,7 +564,7 @@
 
   <!-- LEI -->
   <section class="capitulo revelar">
-    <span class="ato">Capítulo 11 · Como sai do papel</span>
+    <span class="ato">Capítulo 12 · Como sai do papel</span>
     <h2>O roteiro para virar lei</h2>
     <div class="esferas">
       <div class="cartao">
@@ -551,9 +604,10 @@
   <section class="capitulo">
     <h3>Fontes e referências</h3>
     <ul class="fontes">
-      <li>Proposta de Política Pública: Fundo Soberano de Reindustrialização e Inovação (FSRI), documento de trabalho, 2026. Todos os percentuais, prazos e valores desta página vêm dela e são parâmetros propostos, não dados medidos.</li>
+      <li>Proposta de Política Pública: Fundo Soberano de Reindustrialização e Inovação (FSRI), documento de trabalho, 2026. Os percentuais, prazos e valores da proposta vêm dela e são parâmetros propostos, não dados medidos. A exceção são os números de fundos que já existem, no capítulo 6.</li>
       <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12529.htm">Lei nº 12.529, de 30 de novembro de 2011</a>, que estrutura o Sistema Brasileiro de Defesa da Concorrência (Planalto).</li>
       <li><a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp182.htm">Lei Complementar nº 182, de 1º de junho de 2021</a>, o Marco Legal das Startups (Planalto).</li>
+      <li><a href="https://spectrainvest.com/en/estudo/performance-of-brazilian-private-equity-and-venture-capital-funds-1994-2022-2/">Performance of Brazilian Private Equity and Venture Capital Funds (1994-2022)</a>, Insper, Spectra Investments e ABVCAP, dados até dezembro de 2022 (em inglês). Fonte dos números do capítulo 6.</li>
     </ul>
   </section>
 </main>
