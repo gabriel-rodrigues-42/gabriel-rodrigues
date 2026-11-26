@@ -18,8 +18,7 @@
 
   const raiz = document.documentElement;
 
-  // A barra gruda logo abaixo do cabeçalho enquanto ele estiver à vista; quando ele sai da tela
-  // (ou some ao rolar, na versão "topo" do menu), gruda no topo.
+  // A barra gruda logo abaixo do cabeçalho enquanto ele estiver à vista; quando ele sai da tela, gruda no topo.
   function medirTopo() {
     const topo = document.querySelector(".moldura-topo");
     const fim = topo ? Math.max(0, Math.ceil(topo.getBoundingClientRect().bottom)) : 0;
@@ -34,7 +33,7 @@
     addEventListener("resize", medirTopo, { passive: true });
     // O cabeçalho chega pelo moldura.js; mede de novo quando ele aparecer ou mudar de tamanho.
     const ro = new ResizeObserver(medirTopo);
-    const achar = () => { const t = document.querySelector(".moldura-topo"); if (t) { ro.observe(t); t.addEventListener("transitionend", medirTopo); medirTopo(); } else requestAnimationFrame(achar); };
+    const achar = () => { const t = document.querySelector(".moldura-topo"); if (t) { ro.observe(t); medirTopo(); } else requestAnimationFrame(achar); };
     achar();
   }
 

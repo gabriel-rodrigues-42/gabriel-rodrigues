@@ -32,8 +32,6 @@
     buscar: "Search",
     buscarRotulo: "Search the site",
     menuAtalhos: "Shortcuts",
-    previa: "Menu preview",
-    versoes: ["Top", "Bar"],
   } : {
     missao: "Desenvolvedor de software em Goiânia (GO). Estudo política para levar o jeito de trabalhar da engenharia de software para o governo: medir, testar, corrigir e mostrar o código.",
     menu: ["Propostas", "Caminho", "Sobre"],
@@ -53,24 +51,7 @@
     buscar: "Buscar",
     buscarRotulo: "Buscar no site",
     menuAtalhos: "Atalhos",
-    previa: "Prévia do menu",
-    versoes: ["Topo", "Barra"],
   };
-
-  // ---------- Duas versões do menu, para comparar na prévia ----------
-  // "topo": o cabeçalho some quando a pessoa desce e volta, compacto, quando ela sobe.
-  // "barra": no celular, Propostas, Caminho, Sobre e Buscar ficam numa barra fixa embaixo.
-  // Troque com ?menu=topo ou ?menu=barra (fica guardado no navegador). Depois da escolha, sai a outra.
-  const VERSOES = ["topo", "barra"];
-  const CHAVE_MENU = "gr-menu-versao";
-  const PREVIA = /\.pages\.dev$|^localhost$|^127\.0\.0\.1$/.test(location.hostname);
-  const versaoMenu = (() => {
-    const pedida = new URLSearchParams(location.search).get("menu");
-    if (VERSOES.includes(pedida)) { try { localStorage.setItem(CHAVE_MENU, pedida); } catch { /* vale só nesta página */ } return pedida; }
-    try { const salva = localStorage.getItem(CHAVE_MENU); if (VERSOES.includes(salva)) return salva; } catch { /* sem armazenamento */ }
-    return "topo";
-  })();
-  document.documentElement.dataset.menu = versaoMenu;
 
   // Ícones do menu (traço, herdam a cor do texto).
   const ICONE = {
@@ -144,62 +125,7 @@
           ${MENU.map((m) => `<a href="${m.href}"${m.ativo(semIdioma) ? ' aria-current="page"' : ""}><span class="moldura-barra-icone">${svg(m.icone)}</span>${m.texto}</a>`).join("")}
           <button type="button" data-buscar aria-haspopup="dialog"><span class="moldura-barra-icone">${svg("buscar")}</span>${T.buscar}</button>
         </nav>`;
-      if (versaoMenu === "topo") topoQueSome(this);
-      if (PREVIA) seletorDeVersao();
     }
-  }
-
-  // ---------- Versão "topo": some ao descer, volta compacto ao subir ----------
-  // O cabeçalho fica fixo; o <gr-cabecalho> guarda a altura dele para o conteúdo não pular.
-  function topoQueSome(el) {
-    const topo = el.querySelector(".moldura-topo");
-    const raiz = document.documentElement;
-    let altura = 0;
-    const medir = () => {
-      if (topo.hasAttribute("data-compacto")) return;
-      altura = topo.offsetHeight;
-      raiz.style.setProperty("--topo-altura", altura + "px");
-    };
-    medir();
-    new ResizeObserver(medir).observe(topo);
-
-    let ultimo = scrollY, pendente = false;
-    const mostrar = (sim) => topo.toggleAttribute("data-escondido", !sim);
-    function rolou() {
-      pendente = false;
-      const y = Math.max(0, scrollY);
-      const ocupado = raiz.classList.contains("busca-aberta") || topo.contains(document.activeElement);
-      if (y < altura * 0.6) {
-        topo.removeAttribute("data-compacto");
-        mostrar(true);
-        ultimo = y;
-        return;
-      }
-      topo.setAttribute("data-compacto", "");
-      const passo = y - ultimo;
-      if (Math.abs(passo) < 8) return; // tremidinha do dedo não conta
-      if (passo > 0 && !ocupado) mostrar(false);
-      else if (passo < 0) mostrar(true);
-      ultimo = y;
-    }
-    addEventListener("scroll", () => { if (!pendente) { pendente = true; requestAnimationFrame(rolou); } }, { passive: true });
-    // Quem navega pelo teclado e chega no menu sempre o vê.
-    topo.addEventListener("focusin", () => mostrar(true));
-    rolou();
-  }
-
-  // ---------- Seletor da prévia (só em *.pages.dev e no computador local) ----------
-  function seletorDeVersao() {
-    if (document.querySelector(".moldura-previa")) return;
-    const div = document.createElement("div");
-    div.className = "moldura-previa";
-    div.setAttribute("role", "group");
-    div.setAttribute("aria-label", T.previa);
-    div.innerHTML = `<span>${T.previa}</span>` + VERSOES.map((v, i) =>
-      `<a href="?menu=${v}"${v === versaoMenu ? ' aria-current="true"' : ""}>${i + 1}. ${T.versoes[i]}</a>`).join("");
-    const por = () => document.body.appendChild(div);
-    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", por);
-    else por();
   }
 
   // ---------- Busca ----------
