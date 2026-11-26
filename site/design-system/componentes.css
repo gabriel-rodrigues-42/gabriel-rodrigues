@@ -3,7 +3,7 @@
 * { box-sizing: border-box; }
 body {
   margin: 0; font-family: var(--fonte); background: var(--creme); color: var(--texto);
-  line-height: 1.55; min-height: 100vh; overflow-x: hidden;
+  line-height: 1.55; min-height: 100vh; overflow-x: clip; /* clip, não hidden: hidden quebra position: sticky */
 }
 
 /* Bolhas de fundo */

@@ -1,0 +1,23 @@
+/* <gr-progresso>: barra de progresso que gruda no topo enquanto a pessoa responde. Ver progresso.js. */
+gr-progresso {
+  --progresso-recuo: 0px;
+  display: block; position: sticky; top: var(--progresso-topo, 0px); z-index: 15;
+  margin: 0 calc(-1 * var(--progresso-recuo)) var(--espaco-4);
+  padding: var(--espaco-3) var(--progresso-recuo);
+  background: var(--branco);
+  transition: box-shadow .2s;
+}
+/* Dentro de um cartão, a faixa vai de borda a borda e começa colada no topo dele. */
+.cartao > gr-progresso { --progresso-recuo: var(--espaco-5); margin-top: calc(-1 * var(--espaco-5)); padding-top: var(--espaco-5); border-radius: var(--forma-cartao) var(--forma-cartao) 0 0; }
+gr-progresso[fixo] { box-shadow: 0 8px 14px -10px rgba(0, 39, 118, .35); border-radius: 0; padding-top: var(--espaco-3); }
+.gr-progresso-linha { display: flex; justify-content: space-between; align-items: baseline; gap: var(--espaco-3); flex-wrap: wrap; margin-bottom: var(--espaco-2); }
+.gr-progresso-texto { font-size: var(--tamanho-2); font-weight: var(--peso-forte); color: var(--texto-suave); font-variant-numeric: tabular-nums; }
+gr-progresso[completo] .gr-progresso-texto { color: var(--verde-escuro); }
+.gr-progresso-acao:empty { display: none; }
+.gr-progresso-acao a { font-size: var(--tamanho-2); font-weight: var(--peso-forte); color: var(--azul-medio); }
+.gr-progresso-acao a:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { gr-progresso, gr-progresso .progresso > div { transition: none; } }
+/* Quem navega pelo teclado não deixa o campo focado escondido atrás da barra. */
+html:has(gr-progresso) { scroll-padding-top: calc(var(--progresso-topo, 0px) + 80px); }
+/* overflow-x: hidden no body quebra o sticky; clip corta a rolagem lateral do mesmo jeito. */
+body:has(gr-progresso) { overflow-x: clip; }

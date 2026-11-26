@@ -569,6 +569,35 @@
     }
   })();
 
+  // Barra fixa de passos (<gr-progresso>, do design system): mostra em que passo a pessoa está
+  // enquanto rola, e o link leva ao passo seguinte.
+  (function barraDePassos() {
+    const barra = $('.passos > gr-progresso');
+    if (!barra) return;
+    const passos = [1, 2, 3].map(n => $('#passo-' + n));
+    const proximo = $('#sim-proximo');
+    let atual = 0;
+    function olhar() {
+      const limite = barra.getBoundingClientRect().bottom + 40;
+      let n = 1;
+      passos.forEach((p, i) => { if (p.getBoundingClientRect().top <= limite) n = i + 1; });
+      if (n === atual) return;
+      atual = n;
+      const p = passos[n - 1];
+      barra.setAttribute('valor', n);
+      barra.setAttribute('rotulo', `${p.querySelector('.passo-num').textContent}: ${p.querySelector('h2').textContent}`);
+      proximo.hidden = n === 3;
+      proximo.href = '#passo-' + Math.min(3, n + 1);
+    }
+    proximo.addEventListener('click', ev => {
+      ev.preventDefault();
+      $(proximo.getAttribute('href')).scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
+    addEventListener('scroll', olhar, { passive: true });
+    addEventListener('resize', olhar, { passive: true });
+    olhar();
+  })();
+
   campoCdi.value = String(CDI_PADRAO).replace('.', EN ? '.' : ',');
   desenhar();
   // Redesenha a imagem quando a fonte terminar de carregar

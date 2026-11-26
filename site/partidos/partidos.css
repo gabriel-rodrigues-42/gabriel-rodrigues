@@ -6,8 +6,6 @@ h3 { font-size: var(--tamanho-3); margin: 0; color: var(--azul); line-height: 1.
 .intro { color: var(--texto-suave); margin: 0 0 var(--espaco-5); }
 a { color: var(--azul-medio); }
 .pequeno { font-size: var(--tamanho-1); color: var(--texto-suave); }
-.contador { font-size: var(--tamanho-2); color: var(--texto-suave); font-weight: var(--peso-forte); margin: 0 0 var(--espaco-2); }
-.progresso { margin-bottom: var(--espaco-4); }
 .temas { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--espaco-5); }
 .tema { min-width: 0; }
 .contexto { font-size: var(--tamanho-2); color: var(--texto-suave); margin: var(--espaco-2) 0 var(--espaco-3); }
