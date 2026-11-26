@@ -37,7 +37,7 @@
 <link rel="stylesheet" href="/design-system/contribuir.css">
 <script src="/design-system/contribuir.js"></script>
 <link rel="stylesheet" href="/projetos/reindustrializacao/simulador/simulador.css?v=2026-11-26c">
-<script src="/projetos/reindustrializacao/simulador/simulador.js?v=2026-11-26c" defer></script>
+<script src="/projetos/reindustrializacao/simulador/simulador.js?v=2026-11-26d" defer></script>
 </head>
 <body>
 <gr-cabecalho></gr-cabecalho>
@@ -60,15 +60,15 @@
     <form id="sim-form" toolname="simular_aporte_fsri" tooldescription="Sets up the FSRI investment simulation: entry door, amount and field of work. Sends nothing; all math stays on the device.">
       <fieldset class="portas">
         <legend>Which door do you come in through?</legend>
-        <label class="porta"><input type="radio" name="porta" value="menor" checked toolparamdescription="menor: low-priced fund shares capped at R$ 20,000 a year; grande: credit backed by shares">
-          <span><strong>Smaller wealth</strong>Buys low-priced fund shares. The cap is R$ 20,000 a year, as Brazil's securities regulator (CVM) already does for startups (CVM Resolution 88, 2022). It is for people who want to back a Brazilian company and accept the risk.</span></label>
-        <label class="porta"><input type="radio" name="porta" value="grande">
+        <label class="porta"><input type="radio" name="porta" value="grande" checked toolparamdescription="grande: credit backed by shares; menor: low-priced fund shares capped at R$ 20,000 a year">
           <span><strong>Large wealth</strong>Takes a bank loan backed by shares and puts that money into the projects. It is for people with very high incomes who would pay the minimum tax.</span></label>
+        <label class="porta"><input type="radio" name="porta" value="menor">
+          <span><strong>Smaller wealth</strong>Buys low-priced fund shares. The cap is R$ 20,000 a year, as Brazil's securities regulator (CVM) already does for startups (CVM Resolution 88, 2022). It is for people who want to back a Brazilian company and accept the risk.</span></label>
       </fieldset>
       <div class="campos">
         <div class="campo">
           <label for="sim-valor">How much you would invest</label>
-          <input id="sim-valor" name="valor" inputmode="numeric" autocomplete="off" value="R$10,000" aria-describedby="sim-dica" toolparamdescription="Amount in Brazilian reais">
+          <input id="sim-valor" name="valor" inputmode="numeric" autocomplete="off" value="R$1,000,000" aria-describedby="sim-dica" toolparamdescription="Amount in Brazilian reais">
           <p class="pequeno" id="sim-dica">Sample amount. Change it to yours.</p>
         </div>
         <div class="campo">
