@@ -1,0 +1,116 @@
+/* Modo leitura: botões de ouvir na página e a barra de legendas (leitor.js).
+   Carregado pelo moldura.js só quando a pessoa liga o modo leitura no rodapé.
+   A barra tem altura e larguras fixas: nada pula ao clicar ou quando a frase muda. */
+
+/* ---------- Botões na página ---------- */
+.leitor-pagina { display: inline-flex; align-items: center; gap: var(--espaco-2); margin: var(--espaco-3) 0 var(--espaco-4); }
+.leitor-pagina .leitor-icone { width: 18px; height: 18px; }
+
+.leitor-tocar {
+  float: right; width: 44px; height: 44px; margin: 0 0 var(--espaco-2) var(--espaco-3); padding: 0;
+  display: grid; place-items: center; border: none; cursor: pointer; font-size: 0; line-height: 0;
+  background: var(--verde-fundo); color: var(--branco); border-radius: var(--forma-bolha-1);
+  transition: transform .15s, border-radius .4s;
+}
+.leitor-tocar:hover { transform: scale(1.06); border-radius: var(--forma-bolha-3); }
+.leitor-tocar:focus-visible { outline: 3px solid var(--azul); outline-offset: 3px; }
+.leitor-tocar .leitor-icone { width: 20px; height: 20px; }
+.leitor-tocar[aria-pressed="true"] { background: var(--amarelo); color: var(--azul); }
+
+.leitor-icone { width: 18px; height: 18px; fill: currentColor; flex: none; display: block; }
+
+/* Rótulos empilhados: todos ocupam o mesmo lugar e só o do estado atual aparece.
+   Assim o botão tem sempre a largura do rótulo maior ("Continuar") e não muda de tamanho. */
+.leitor-pilha { display: grid; }
+.leitor-pilha > * { grid-area: 1 / 1; visibility: hidden; display: flex; align-items: center; justify-content: center; }
+.leitor-pagina[data-estado="ouvir"] [data-rotulo="ouvir"], .leitor-pagina[data-estado="ouvir"] [data-icone="ouvir"],
+.leitor-pagina[data-estado="pausar"] [data-rotulo="pausar"], .leitor-pagina[data-estado="pausar"] [data-icone="pausar"],
+.leitor-pagina[data-estado="continuar"] [data-rotulo="continuar"], .leitor-pagina[data-estado="continuar"] [data-icone="continuar"],
+.leitor-pausa[data-estado="pausar"] [data-rotulo="pausar"], .leitor-pausa[data-estado="pausar"] [data-icone="pause"],
+.leitor-pausa[data-estado="continuar"] [data-rotulo="continuar"], .leitor-pausa[data-estado="continuar"] [data-icone="play"],
+.leitor-pausa[data-estado="deNovo"] [data-rotulo="deNovo"], .leitor-pausa[data-estado="deNovo"] [data-icone="play"] { visibility: visible; }
+
+/* Trecho sendo lido. Com CSS Custom Highlight, só a frase; sem ele, o bloco inteiro. */
+::highlight(leitor-frase) { background-color: var(--amarelo-claro); color: var(--texto); }
+.leitor-atual-inteiro { background-color: var(--amarelo-claro); box-shadow: 0 0 0 4px var(--amarelo-claro); border-radius: 6px; }
+tr.leitor-atual-inteiro > * { background-color: var(--amarelo-claro); }
+.leitor-parte-atual { box-shadow: 0 10px 0 -2px var(--amarelo), 0 2px 18px rgba(0, 39, 118, .12); transition: box-shadow .2s; }
+html.leitor-aberto main { cursor: pointer; }
+html.leitor-aberto main :is(a, button, input, select, textarea, label, summary) { cursor: pointer; }
+html.leitor-aberto body { padding-bottom: var(--leitor-altura, 220px); }
+
+/* ---------- Barra de legendas ---------- */
+.leitor {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; font-family: var(--fonte);
+  padding: var(--espaco-3) var(--espaco-4) calc(var(--espaco-3) + env(safe-area-inset-bottom, 0px));
+  background: var(--azul); color: var(--branco); border-radius: 28px 34px 0 0;
+  transform: translateY(110%); visibility: hidden; transition: transform .3s, visibility .3s;
+}
+.leitor.aberta { transform: none; visibility: visible; }
+.leitor-dentro { max-width: 760px; margin: 0 auto; display: grid; gap: var(--espaco-2); }
+.leitor [hidden] { display: none !important; }
+
+.leitor-barra { height: 4px; background: var(--branco-vidro-medio); border-radius: var(--forma-pilula); overflow: hidden; }
+.leitor-barra > div { height: 100%; width: 0; background: var(--amarelo); transition: width .3s; }
+
+.leitor-titulo {
+  font-size: var(--tamanho-1); font-weight: var(--peso-forte); text-transform: uppercase; letter-spacing: .06em; color: var(--amarelo);
+  line-height: 1.4; height: 1.4em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+/* Três linhas fixas. Frase maior rola dentro da caixa, acompanhando a voz. */
+.leitor-texto {
+  font-size: var(--tamanho-4); font-weight: var(--peso-forte); line-height: 1.35; height: calc(3 * 1.35em);
+  overflow: hidden; position: relative; margin-bottom: var(--espaco-1);
+}
+.leitor-palavra.dita { color: var(--amarelo); }
+
+.leitor-controles { display: grid; grid-template-columns: auto auto auto minmax(0, 1fr) auto; gap: var(--espaco-2); align-items: center; }
+.leitor-parar { grid-column: 5; }
+.leitor-opcoes { display: flex; gap: var(--espaco-2); align-items: center; height: 40px; min-width: 0; }
+
+.leitor-botao, .leitor select {
+  font: inherit; font-size: var(--tamanho-2); font-weight: var(--peso-forte); line-height: 1; cursor: pointer;
+  background-color: var(--branco-vidro-medio); color: var(--branco); border: none; border-radius: var(--forma-pilula);
+  height: 44px; padding: 0 var(--espaco-4); display: inline-flex; align-items: center; justify-content: center; gap: var(--espaco-2);
+}
+.leitor-so-icone { width: 44px; padding: 0; }
+.leitor-pausa { background-color: var(--verde-fundo); }
+.leitor-parar { background-color: var(--vermelho-fundo); }
+.leitor-botao:hover { filter: brightness(1.12); }
+.leitor-botao:focus-visible, .leitor select:focus-visible { outline: 3px solid var(--amarelo); outline-offset: 2px; }
+
+.leitor select {
+  --seta-cor: var(--branco); height: 40px; font-size: var(--tamanho-1); padding: 0 32px 0 14px; justify-content: flex-start;
+  background-position: calc(100% - 18px) 52%, calc(100% - 12px) 52%;
+  min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.leitor select option { color: var(--texto); background-color: var(--branco); }
+.leitor-voz { flex: 0 1 15em; }
+.leitor-velocidade { flex: none; width: 4.8em; }
+.leitor-opcoes .leitor-so-icone { width: 40px; height: 40px; flex: none; }
+.leitor-progresso {
+  margin-left: auto; flex: none; font-size: var(--tamanho-1); white-space: nowrap; opacity: .85;
+  font-variant-numeric: tabular-nums;
+}
+.leitor-curto { display: none; }
+/* Tela larga: a frase cabe em duas linhas. */
+@media (min-width: 720px) { .leitor-texto { height: calc(2 * 1.35em); } }
+
+@media (max-width: 560px) {
+  .leitor-texto { font-size: var(--tamanho-3); }
+  .leitor-longo { display: none; }
+  .leitor-curto { display: inline; }
+  .leitor-botao { padding: 0 var(--espaco-3); }
+  .leitor-so-icone { padding: 0; }
+}
+
+/* Dica de voz melhor */
+.leitor-dica {
+  width: min(560px, calc(100% - 32px)); border: none; border-radius: var(--forma-cartao); padding: var(--espaco-5);
+  background: var(--branco); color: var(--texto); font-family: var(--fonte); font-size: var(--tamanho-2);
+}
+.leitor-dica::backdrop { background: color-mix(in srgb, var(--azul) 45%, transparent); }
+.leitor-dica h2 { font-size: var(--tamanho-4); color: var(--azul); margin: 0 0 var(--espaco-3); line-height: 1.2; }
+.leitor-dica ul { margin: 0 0 var(--espaco-4); padding-left: var(--espaco-5); }
+.leitor-dica li { margin-bottom: var(--espaco-2); }
+.leitor-dica form { margin: 0; text-align: right; }

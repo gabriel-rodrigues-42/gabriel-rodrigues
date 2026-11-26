@@ -17,17 +17,15 @@
   const T = EN ? {
     fases: ["Idea", "Research", "Proposal", "Live"],
     fase: (n, nome) => `Stage ${n} of 4: ${nome}`,
-    tipos: { projeto: "Project", ferramenta: "Tool", ideia: "Idea", audio: "Listen" },
+    tipos: { projeto: "Project", ferramenta: "Tool", ideia: "Idea" },
     noAr: "Live",
     construcao: "In progress",
-    todas: { titulo: "Listen to every idea", gancho: "All the ideas, to read or listen to with captions. Each one with the toughest criticism and my answer.", acao: "Read or listen" },
   } : {
     fases: ["Ideia", "Estudo", "Proposta", "No ar"],
     fase: (n, nome) => `Fase ${n} de 4: ${nome}`,
-    tipos: { projeto: "Projeto", ferramenta: "Ferramenta", ideia: "Ideia", audio: "Ouvir" },
+    tipos: { projeto: "Projeto", ferramenta: "Ferramenta", ideia: "Ideia" },
     noAr: "No ar",
     construcao: "Em construção",
-    todas: { titulo: "Ouça todas as ideias", gancho: "Todas as ideias, para ler ou ouvir com legendas. Cada uma com as críticas mais duras e a minha resposta.", acao: "Ler ou ouvir" },
   };
 
   const IMG_PADRAO = "/projetos/img/ideia.svg";
@@ -94,7 +92,6 @@
         id: i.id, href: "/ideias/#" + encodeURIComponent(i.id), cor: "azul", tipo: "ideia", fase: 1,
         titulo: i.titulo, gancho: i.gancho,
       }));
-      lista.push({ href: "/ideias/", img: IMG_PADRAO, cor: "amarelo", tipo: "audio", acao: T.todas.acao, titulo: T.todas.titulo, gancho: T.todas.gancho });
 
       const ul = el("ul", "galeria");
       lista.forEach((p, i) => ul.append(cartao(p, i === 0)));

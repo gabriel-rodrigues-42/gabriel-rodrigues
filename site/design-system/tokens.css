@@ -16,8 +16,10 @@
   --azul: #002776;
   --azul-medio: #2f5bb7;
   --azul-claro: #e6ecf7;
+  --vermelho-fundo: #c62828; /* fundo vermelho com texto branco (contraste 5,6:1, AA): só para ações que fecham ou param */
   --branco: #ffffff;
   --branco-vidro: rgba(255, 255, 255, .08); /* cartão claro sobre fundo azul */
+  --branco-vidro-medio: rgba(255, 255, 255, .16); /* botão claro sobre fundo azul */
   --branco-vidro-forte: rgba(255, 255, 255, .35); /* borda clara sobre fundo azul */
 
   /* Carro do Desafio Dumont: cores de carro de verdade, com tom sóbrio.
@@ -72,6 +74,9 @@
   --tamanho-5: clamp(28px, 6vw, 40px);
   --tamanho-6: clamp(32px, 7vw, 48px);
   --tamanho-numero: clamp(64px, 20vw, 112px); /* número grande do cartão "Apoio nº" (página inicial) */
+  /* Campos de formulário: no iPhone, campo com letra menor que 16px dá zoom
+     na página quando a pessoa toca nele. */
+  --tamanho-campo: 16px;
   /* Título dentro de cartão estreito (ex.: ideia com botão ao lado). Menor no
      celular para "Reindustrializar" caber inteiro numa linha de 360px. */
   --tamanho-titulo-cartao: clamp(24px, 6vw, 40px);
