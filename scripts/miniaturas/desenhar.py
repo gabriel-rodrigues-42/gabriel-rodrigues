@@ -270,10 +270,24 @@ def regulacao_da_cannabis():
                chao(70, 412, 600) + hastes + seta + rolo + pacote + estrela(470, 210, 14, "amarelo-escuro"))
 
 
+def cidade_esponja():
+    """Nuvem com chuva sobre um parque que vira rio: várzea com árvores, córrego ondulado e um pino de mapa."""
+    nuvem = circ(250, 130, 46, "azul-claro") + circ(310, 110, 60, "azul-claro") + circ(375, 135, 42, "azul-claro") + ret(230, 130, 170, 48, "azul-claro", 24)
+    gotas = "".join(traco(f"M{x},{y} L{x - 8},{y + 26}", "azul-medio", 7) for x, y in ((250, 200), (295, 225), (340, 200), (385, 225), (430, 205)))
+    varzea = cam("M70,412 L70,330 Q200,300 350,330 T630,330 L630,412 Z", "verde-claro")
+    rio = cam("M70,372 Q160,340 250,370 T430,370 T630,360 L630,404 Q540,420 430,404 T250,404 T70,404 Z", "azul-medio")
+    brilho = traco("M120,376 Q160,362 200,376 M380,384 Q420,372 460,384", "branco", 5, ' stroke-opacity=".6"')
+    arvores = arvore(120, 340, 26, "verde") + arvore(200, 330, 32) + arvore(500, 336, 28, "verde") + arvore(580, 338, 22)
+    pino = (cam("M560,140 a46,46 0 1 1 92,0 c0,40 -46,86 -46,86 c0,0 -46,-46 -46,-86 Z", "livre-coral")
+            + circ(606, 140, 18, "branco"))
+    return svg("Nuvem com chuva sobre um parque que vira rio, com árvores na margem e um pino de mapa",
+               nuvem + gotas + varzea + rio + brilho + arvores + chao(70, 412, 560) + pino)
+
+
 DESENHOS = {
     "galera-club": galera_club, "reindustrializacao": reindustrializacao, "desafio-dumont": desafio_dumont,
     "cartorio-digital": cartorio_digital, "qual-caminho": qual_caminho, "leis-com-mentalidade-de-software": leis_software,
-    "canal-do-youtube": canal_do_youtube, "brasil-responde": brasil_responde, "pena-do-tamanho-do-dano": pena_do_tamanho_do_dano, "regulacao-da-cannabis": regulacao_da_cannabis, "ideia": ideia, "capa": capa,
+    "canal-do-youtube": canal_do_youtube, "brasil-responde": brasil_responde, "pena-do-tamanho-do-dano": pena_do_tamanho_do_dano, "regulacao-da-cannabis": regulacao_da_cannabis, "cidade-esponja": cidade_esponja, "ideia": ideia, "capa": capa,
 }
 
 if __name__ == "__main__":

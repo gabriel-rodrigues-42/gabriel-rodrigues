@@ -1,0 +1,417 @@
+// Mapa da cidade esponja de Goiânia: os dados das fichas, nos dois idiomas.
+// Mudou o português, mude o inglês junto. Todo número tem fonte e ano.
+//
+// - fontes: links reutilizados pelas fichas (t = nome da fonte, com ano).
+// - opcoes: o menu do que dá para fazer. Cada opção diz o custo para o governo, o custo para quem
+//   mora ali e um caso de comparação. Sem número com fonte, a ficha diz isso.
+// - areas: os pontos do mapa. "busca" vem logo depois do id: o script
+//   scripts/cidade-esponja/baixar_osm.py procura esse texto no OpenStreetMap e grava a posição em
+//   dados/posicoes.json. Sem resultado, o mapa usa "pos" (aproximada, [longitude, latitude]).
+//   grau: critico (entre os 10 piores da Defesa Civil, 2025), muito-alto, alto ou medio
+//   (áreas de risco da Defesa Civil, 2025) e evento (alagamento noticiado com data).
+// - marcos: candidatos aos primeiros Marcos da Memória. Ainda não existe placa nem altura medida.
+
+window.CIDADE_ESPONJA = (() => {
+  const F = {
+    top10: { t: "Jornal Opção, 04/11/2025, citando a Defesa Civil", u: "https://www.jornalopcao.com.br/cidades/veja-quais-os-principais-pontos-criticos-de-alagamentos-em-goiania-762480/" },
+    lista134: { t: "O Hoje, 07/11/2025", u: "https://ohoje.com/2025/11/07/goiania-tem-134-pontos-de-alagamento/" },
+    risco2025: { t: "Curta Mais, 17/01/2025, citando a Defesa Civil", u: "https://curtamais.com.br/goiania/defesa-civil-goiania/" },
+    jan2025: { t: "Jornal Opção, 13/01/2025", u: "https://jornalopcao.com.br/ultimas-noticias/com-chuvas-e-falta-de-drenagem-aumentam-para-126-os-pontos-de-alagamento-e-areas-de-risco-em-goiania-671077/" },
+    jan2025chuva: { t: "Poder Goiás, 15/01/2025, citando Inmet e Cimehgo", u: "https://www.podergoias.com.br/materia/21069/chuvas-intensas-atingem-goiania-e-marcam-recorde-de-19-anos" },
+    dez2025: { t: "O Hoje, 07/12/2025, citando o Cimehgo", u: "https://ohoje.com/2025/12/07/chuva-alagamento-marginal-botafogo/" },
+    nov2026: { t: "O Hoje, 10/11/2026", u: "https://ohoje.com/2026/11/10/prefeitura-de-goiania-atua-em-obras-e-limpeza-apos-forte-chuva/" },
+    cronico: { t: "O Hoje, 08/12/2025", u: "https://ohoje.com/2025/12/08/marginal-botafogo-problema-cronico/" },
+    morte2022: { t: "O Hoje, 22/11/2022", u: "https://ohoje.com/2022/11/22/mulher-morre-apos-cair-em-corrego-durante-chuva-em-goiania/" },
+    morte2026: { t: "Jornal Opção, 18/03/2026", u: "https://www.jornalopcao.com.br/ultimas-noticias/corpo-de-mulher-e-encontrado-15-km-da-marginal-botafogo-em-goiania-805816/" },
+    bacia: { t: "O Hoje, 24/06/2026", u: "https://ohoje.com/2026/06/24/piscinao-de-r-40-milhoes-tenta-conter-alagamentos-na-bacia-do-botafogo/" },
+    entraves: { t: "O Hoje, 05/08/2026", u: "https://ohoje.com/2026/08/05/obra-para-conter-alagamentos-na-marginal-botafogo-em-goiania-esbarra-em-entraves-tecnicos/" },
+    pacote: { t: "Jornal Opção, 18/08/2026", u: "https://www.jornalopcao.com.br/ultimas-noticias/marginal-botafogo-pode-custar-400-milhoes-diz-mabel-858641/" },
+    adiamento: { t: "Jornal Opção, 01/09/2026", u: "https://www.jornalopcao.com.br/ultimas-noticias/apos-orcamento-20-acima-do-previsto-piscinoes-da-marginal-botafogo-podem-ficar-para-2027-863970/" },
+    planoJO: { t: "Jornal Opção, 25/07/2026", u: "https://www.jornalopcao.com.br/reportagem-especial/bacias-de-contencao-reconstrucao-da-marginal-botafogo-e-r-580-milhoes-o-plano-de-goiania-contra-os-alagamentos-850308/" },
+    pddu: { t: "Prefeitura de Goiânia, Plano Diretor de Drenagem, painel do Botafogo, 2026", u: "https://www.goiania.go.gov.br/arg/wp-content/uploads/sites/19/2026/04/Apendice_C___Painel_de_acoes_especificas_Botafogo.pdf" },
+    diagnostico: { t: "Prefeitura de Goiânia, Plano Diretor de Drenagem, diagnóstico do Botafogo, 2024", u: "https://www.goiania.go.gov.br/arg/wp-content/uploads/sites/19/2024/06/02_Botafogo_Diagnostico.pdf" },
+    sgb: { t: "Serviço Geológico do Brasil, 2026", u: "https://www.sgb.gov.br/w/mais-de-6-mil-pessoas-vivem-em-areas-de-risco-geologico-e-hidrologico-em-goiania" },
+    waze: { t: "O Hoje, 06/10/2026", u: "https://ohoje.com/2026/10/06/waze-passa-a-avisar-sobre-vias-alagadas-em-toda-goiania/" },
+    jamel: { t: "O Hoje, 14/05/2022", u: "https://ohoje.com/2022/05/14/apos-dois-anos-de-atraso-complexo-viario-jamel-cecilio-e-inaugurado/" },
+    seul: { t: "Landscape Architecture Foundation", u: "https://landscapeperformance.org/case-study-briefs/cheonggyecheon-stream-restoration" },
+    bishan: { t: "C40, Bishan-Ang Mo Kio Park", u: "https://www.c40.org/wp-content/static/other_uploads/images/1963_AD-Ref_Singapore_Bishan-Park.original.pdf?1538133801=" },
+    spReservatorios: { t: "Prefeitura de São Paulo, SIURB, 2025", u: "https://prefeitura.sp.gov.br/web/obras/w/dez-novos-reservatorios" },
+    spLapenna: { t: "Prefeitura de São Paulo, reservatório Lapenna, 2026", u: "https://prefeitura.sp.gov.br/w/reservat%C3%B3rio-lapenna-em-s%C3%A3o-miguel-paulista-vai-beneficiar-mais-de-400-mil-pessoas-da-zona-leste-%C2%A0" },
+    spLei: { t: "Lei municipal de São Paulo 13.276/2002", u: "http://legislacao.prefeitura.sp.gov.br/lei-13276-de-04-de-janeiro-de-2002" },
+    permeavel: { t: "Estudo com preços SINAPI de 2022 (Zenodo, 2023)", u: "https://zenodo.org/records/10126390" },
+    copenhague: { t: "Climate-ADAPT, Agência Europeia do Ambiente", u: "https://climate-adapt.eea.europa.eu/en/metadata/case-studies/the-economics-of-managing-heavy-rains-and-stormwater-in-copenhagen-2013-the-cloudburst-management-plan/" },
+    bh: { t: "Prefeitura de Belo Horizonte, 2026", u: "https://prefeitura.pbh.gov.br/noticias/bh-tera-mais-recursos-para-investir-em-programa-de-recuperacao-ambiental" },
+    zhengzhou: { t: "Caixin, 2021", u: "https://www.caixinglobal.com/2021-07-27/cover-story-how-historic-rainfall-overwhelmed-zhengzhou-101745293.html" },
+    alerta40199: { t: "Teletime, 08/01/2026", u: "https://teletime.com.br/08/01/2026/defesa-civil-e-abr-telecom-emitiram-805-alertas-de-risco-em-2025/" },
+    portoAlegre: { t: "Agência Brasil, 2024", u: "https://agenciabrasil.ebc.com.br/geral/noticia/2024-05/inundacao-em-porto-alegre-foi-falta-de-manutencao-dizem-especialistas" },
+  };
+
+  const opcoes = {
+    bacia: {
+      nome: { pt: "Bacia de detenção ou parque alagável", en: "Detention basin or floodable park" },
+      oque: { pt: "Um terreno mais baixo guarda a água do temporal e solta devagar. No seco, vira praça ou campo.", en: "A lower area holds storm water and releases it slowly. When dry, it is a square or a playing field." },
+      governo: { pt: "Cerca de R$ 400 a 480 por m³ guardado. A bacia da Vila Redenção guarda 100 mil m³ e custa de R$ 40 a 48 milhões (2026).", en: "About R$ 400 to 480 per m³ stored. The Vila Redenção basin holds 100,000 m³ and costs R$ 40 to 48 million (2026)." },
+      morador: { pt: "Nenhum custo direto.", en: "No direct cost." },
+      caso: { pt: "Belo Horizonte decidiu não canalizar córregos e fez parques lineares com bacias (programa DRENURBS). A 2ª etapa tem US$ 204 milhões do BID (2026).", en: "Belo Horizonte chose not to channel its streams and built linear parks with basins (DRENURBS). Phase 2 has a US$ 204 million IDB loan (2026)." },
+      fontes: ["bacia", "entraves", "bh"],
+    },
+    piscinao: {
+      nome: { pt: "Piscinão enterrado", en: "Underground reservoir" },
+      oque: { pt: "Um tanque de concreto sob a rua ou a praça. Serve onde não há espaço livre.", en: "A concrete tank under a street or square. Useful where there is no open space." },
+      governo: { pt: "De R$ 1.370 a 2.170 por m³ em São Paulo (2025 e 2026). É de 3 a 5 vezes o m³ de uma bacia aberta em Goiânia.", en: "R$ 1,370 to 2,170 per m³ in São Paulo (2025 and 2026). That is 3 to 5 times the cost per m³ of an open basin in Goiânia." },
+      morador: { pt: "Nenhum custo direto.", en: "No direct cost." },
+      caso: { pt: "São Paulo entregou seis reservatórios com 853 mil m³ por R$ 1,6 bilhão desde 2021.", en: "São Paulo delivered six reservoirs with 853,000 m³ for R$ 1.6 billion since 2021." },
+      fontes: ["spReservatorios", "spLapenna"],
+    },
+    varzea: {
+      nome: { pt: "Devolver a várzea ao córrego", en: "Give the floodplain back to the stream" },
+      oque: { pt: "O canal de concreto vira margem de terra e grama. Na chuva, a água ocupa o parque. No seco, o parque é de todo mundo.", en: "The concrete channel becomes earth and grass banks. When it rains, the water fills the park. When dry, the park is for everyone." },
+      governo: { pt: "Sem custo fechado para Goiânia. Em Cingapura, 2,7 km de canal viraram 3,2 km de rio num parque de 62 hectares por € 39 milhões (2009–2012).", en: "No closed cost for Goiânia yet. In Singapore, 2.7 km of canal became 3.2 km of river in a 62-hectare park for € 39 million (2009–2012)." },
+      morador: { pt: "Nenhum custo direto. O parque tende a valorizar o entorno. Em Seul, a terra perto do córrego subiu de 30% a 50%. A proposta precisa proteger quem já mora ali.", en: "No direct cost. Parks tend to raise nearby land values. In Seoul, land near the stream rose 30% to 50%. The proposal must protect current residents." },
+      caso: { pt: "Bishan, em Cingapura, e Cheonggyecheon, em Seul.", en: "Bishan in Singapore and Cheonggyecheon in Seoul." },
+      fontes: ["bishan", "seul"],
+    },
+    infiltracao: {
+      nome: { pt: "Valas e poços de infiltração", en: "Infiltration trenches and wells" },
+      oque: { pt: "Buracos e valas cheios de brita deixam a chuva entrar no chão antes de chegar ao córrego.", en: "Gravel-filled trenches and wells let rain soak into the ground before it reaches the stream." },
+      governo: { pt: "O plano de drenagem de Goiânia propõe valas nos parques Lago das Rosas, Buritis, Areião, Flamboyant e Jardim Botânico. Também propõe que a Prefeitura pague de 50% a 100% dos poços nos lotes (2026).", en: "Goiânia's drainage plan proposes trenches in the Lago das Rosas, Buritis, Areião, Flamboyant and Jardim Botânico parks. It also proposes that the city pay 50% to 100% of wells on private lots (2026)." },
+      morador: { pt: "Proposta de 50% de desconto na taxa de drenagem para quem tiver poço (2026). Não achamos preço por poço com fonte.", en: "A proposed 50% discount on the drainage fee for lots with a well (2026). We found no sourced price per well." },
+      caso: { pt: "Nova York põe biovaletas nas calçadas para captar 25 mm de chuva em 10% das áreas impermeáveis.", en: "New York builds bioswales on sidewalks to capture 25 mm of rain on 10% of impervious areas." },
+      fontes: ["pddu", "planoJO"],
+    },
+    lote: {
+      nome: { pt: "Reservatório no lote", en: "On-lot reservoir" },
+      oque: { pt: "Uma caixa guarda a água do telhado e do quintal durante o temporal e solta depois.", en: "A tank holds water from the roof and yard during the storm and releases it later." },
+      governo: { pt: "Custo de fiscalização. Goiânia já exige um índice de captação de chuva em todo lote (Instrução Normativa Seplanh 1/2024).", en: "Inspection cost. Goiânia already requires a rain-capture index on every lot (Seplanh Normative Instruction 1/2024)." },
+      morador: { pt: "Em São Paulo, a regra pede 9 m³ de reservatório para cada 1.000 m² de área impermeável. Não achamos o preço do m³ com fonte.", en: "In São Paulo, the rule requires 9 m³ of storage per 1,000 m² of impervious area. We found no sourced price per m³." },
+      caso: { pt: "São Paulo, a “lei das piscininhas”, desde 2002.", en: "São Paulo's “little pools law”, since 2002." },
+      fontes: ["spLei"],
+    },
+    permeavel: {
+      nome: { pt: "Calçada e estacionamento que bebem água", en: "Sidewalks and parking that soak up water" },
+      oque: { pt: "Bloco ou concreto poroso deixa a chuva passar em vez de correr para a rua.", en: "Porous blocks or concrete let rain through instead of running into the street." },
+      governo: { pt: "Até 35,8% mais caro que o bloco comum, ou 2,4% mais barato quando dispensa a rede de tubos (preços SINAPI de 2022).", en: "Up to 35.8% more expensive than regular blocks, or 2.4% cheaper when it replaces pipes (SINAPI 2022 prices)." },
+      morador: { pt: "A mesma conta vale para calçada e estacionamento particular.", en: "The same numbers apply to private sidewalks and parking lots." },
+      caso: { pt: "Copenhague fez ruas que guardam água: no Sjælør Boulevard, a solução na superfície custou € 45 milhões contra € 131 milhões em tubos.", en: "Copenhagen built streets that hold water: on Sjælør Boulevard the surface solution cost € 45 million against € 131 million for pipes." },
+      fontes: ["permeavel", "copenhague"],
+    },
+    alerta: {
+      nome: { pt: "Alerta que fecha a via", en: "Warnings that close the road" },
+      oque: { pt: "Nenhuma esponja segura o temporal extremo. Nessas horas, o que salva é fechar a via antes da água chegar.", en: "No sponge holds an extreme storm. Then what saves lives is closing the road before the water arrives." },
+      governo: { pt: "A Marginal já tem 27 totens e cancelas que fecham a via e avisam o Waze sozinhos (2026).", en: "The Marginal already has 27 posts and gates that close the road and alert Waze automatically (2026)." },
+      morador: { pt: "Grátis: mande o seu CEP por SMS para 40199 e receba os alertas da Defesa Civil.", en: "Free: text your postcode (CEP) to 40199 to get Civil Defense alerts." },
+      caso: { pt: "Em Zhengzhou, na China, caíram mais de 200 mm em uma hora em 2021. O alerta não tinha poder de fechar metrô e túneis.", en: "In Zhengzhou, China, over 200 mm fell in one hour in 2021. Warnings had no power to close the subway and tunnels." },
+      fontes: ["waze", "alerta40199", "zhengzhou"],
+    },
+    taxa: {
+      nome: { pt: "Taxa de drenagem com desconto para quem infiltra", en: "Drainage fee with a discount for lots that soak up water" },
+      oque: { pt: "Quem impermeabiliza mais paga mais. Famílias de baixa renda ficam isentas. O dinheiro vai para manutenção, que é o que falha primeiro.", en: "Lots with more paved area pay more. Low-income families are exempt. The money goes to maintenance, which is what fails first." },
+      governo: { pt: "Receita fixa para manter bombas, bocas de lobo e canais. Em Porto Alegre, em 2024, 19 de 23 casas de bombas pararam.", en: "Steady revenue to maintain pumps, drains and channels. In Porto Alegre in 2024, 19 of 23 pump houses stopped." },
+      morador: { pt: "Em Copenhague, a conta de água subiu cerca de 890 coroas por casa por ano, perto de R$ 712 (câmbio aproximado).", en: "In Copenhagen, the water bill rose about DKK 890 per household per year, roughly R$ 712 (approximate rate)." },
+      caso: { pt: "Copenhague paga 58% do plano de chuvas com a tarifa de água.", en: "Copenhagen pays 58% of its cloudburst plan through the water tariff." },
+      fontes: ["copenhague", "portoAlegre", "planoJO"],
+    },
+    elevada: {
+      nome: { pt: "Pista elevada sobre o parque", en: "Elevated road over the park" },
+      oque: { pt: "O córrego ganha a várzea e os carros passam por cima, num viaduto.", en: "The stream gets its floodplain back and cars drive above it on a viaduct." },
+      governo: { pt: "R$ 1,6 bilhão ou mais nos 14 km. É uma conta nossa pela régua do viaduto Jamel Cecílio: R$ 32,5 milhões por 282 metros (2022). Quatro vezes o pacote oficial.", en: "R$ 1.6 billion or more for the 14 km. Our own estimate, based on the Jamel Cecílio viaduct: R$ 32.5 million for 282 metres (2022). Four times the official package." },
+      morador: { pt: "Nenhum custo direto. Sombra e barulho em cima do parque.", en: "No direct cost. Shade and noise over the park." },
+      caso: { pt: "Seul fez o contrário: derrubou uma via elevada de 169 mil carros por dia e devolveu o córrego.", en: "Seoul did the opposite: it tore down an elevated road carrying 169,000 cars a day and restored the stream." },
+      fontes: ["jamel", "seul"],
+    },
+  };
+
+  const M = (pt, en) => ({ pt, en });
+
+  const areas = [
+    {
+      id: "marginal-jamel", busca: "Viaduto Jamel Cecílio, Goiânia",
+      pos: [-49.246, -16.7],
+      nome: M("Marginal Botafogo no Jamel Cecílio", "Marginal Botafogo at Jamel Cecílio"),
+      bairro: M("Jardim Goiás, córrego Botafogo", "Jardim Goiás, Botafogo stream"),
+      grau: "critico", tipo: ["alagamento", "inundacao"], destaque: true,
+      resumo: M(
+        "A pista foi construída na várzea do córrego. Fecha com 25 a 35 mm de chuva em menos de uma hora e teve mais de 40 interdições entre 2019 e 2023.",
+        "The road was built on the stream's floodplain. It closes with 25 to 35 mm of rain in under an hour and was closed more than 40 times between 2019 and 2023."
+      ),
+      eventos: [
+        M("12/01/2025: a via fechou por 15 dias.", "12/01/2025: the road closed for 15 days."),
+        M("06/12/2025: 108,2 mm em menos de duas horas no Jardim Botânico. Motorista ilhado no teto do carro.", "06/12/2025: 108.2 mm in under two hours at Jardim Botânico. A driver stranded on his car roof."),
+        M("09/11/2026: bloqueio preventivo e meia pista restrita.", "09/11/2026: preventive closure and half the road restricted."),
+        M("Duas mortes, em 2022 e em março de 2026: pessoas levadas pela correnteza do canal.", "Two deaths, in 2022 and March 2026: people swept away by the channel's current."),
+      ],
+      plano: M(
+        "Prevê de três a quatro bacias de detenção e a reconstrução do canal, por cerca de R$ 400 milhões (2026). As bacias podem ficar para 2027.",
+        "It includes three to four detention basins and rebuilding the channel, for about R$ 400 million (2026). The basins may slip to 2027."
+      ),
+      opcoes: ["bacia", "varzea", "elevada", "alerta", "infiltracao"],
+      fontes: ["top10", "cronico", "jan2025", "dez2025", "nov2026", "morte2022", "morte2026", "pacote", "adiamento"],
+    },
+    {
+      id: "marginal-anhanguera", busca: "Avenida Anhanguera, Setor Leste Vila Nova, Goiânia",
+      pos: [-49.25, -16.676],
+      nome: M("Marginal Botafogo perto da Anhanguera", "Marginal Botafogo near Anhanguera"),
+      bairro: M("Centro, córrego Botafogo", "Centre, Botafogo stream"),
+      grau: "critico", tipo: ["erosao", "alagamento"],
+      resumo: M(
+        "Em 09/11/2026, mais de 60 mm em três horas fizeram ceder um trecho da pista. A água corre rápida e funda no canal de concreto e come a base da via.",
+        "On 09/11/2026, more than 60 mm in three hours made a stretch of the road collapse. Water runs fast and deep in the concrete channel and eats away the road base."
+      ),
+      eventos: [
+        M("12/01/2025: deslizamento bloqueou a rampa da Rua dos Comerciários.", "12/01/2025: a landslide blocked the Rua dos Comerciários ramp."),
+        M("09/11/2026: trecho da pista cedeu.", "09/11/2026: a stretch of the road collapsed."),
+      ],
+      opcoes: ["bacia", "varzea", "infiltracao", "alerta"],
+      fontes: ["top10", "jan2025", "nov2026"],
+    },
+    {
+      id: "vila-redencao", busca: "Vila Redenção, Goiânia",
+      pos: [-49.237, -16.712],
+      nome: M("Vila Redenção", "Vila Redenção"),
+      bairro: M("Bacia do Botafogo", "Botafogo basin"),
+      grau: "critico", tipo: ["alagamento"],
+      resumo: M(
+        "Está entre os dez pontos mais críticos da Defesa Civil. É onde a Prefeitura quer fazer a primeira bacia de detenção: 100 mil m³, para reduzir em até 50% a vazão no Jamel Cecílio.",
+        "One of the Civil Defense's ten most critical points. The city plans its first detention basin here: 100,000 m³, to cut peak flow at Jamel Cecílio by up to 50%."
+      ),
+      eventos: [
+        M("2026: a licitação da bacia teve um só concorrente, mais de 20% acima do orçado.", "2026: the basin tender drew a single bidder, more than 20% over budget."),
+      ],
+      opcoes: ["bacia", "infiltracao", "lote"],
+      fontes: ["top10", "bacia", "adiamento"],
+    },
+    {
+      id: "av-90-areiao", busca: "Parque Areião, Goiânia",
+      pos: [-49.262, -16.706],
+      nome: M("Avenida 90, perto do Parque Areião", "Avenida 90, near Parque Areião"),
+      bairro: M("Setor Sul e Pedro Ludovico", "Setor Sul and Pedro Ludovico"),
+      grau: "evento", tipo: ["enxurrada"],
+      resumo: M(
+        "Em 06/12/2025, a enxurrada arrastou carros. A água chegou a cerca de meio metro.",
+        "On 06/12/2025, the flash flood dragged cars. Water reached about half a metre."
+      ),
+      eventos: [M("06/12/2025: carros arrastados, água a cerca de 0,5 m.", "06/12/2025: cars dragged, water about 0.5 m deep.")],
+      opcoes: ["infiltracao", "permeavel", "lote", "bacia"],
+      fontes: ["dez2025", "pddu"],
+    },
+    {
+      id: "setor-sul", busca: "Setor Sul, Goiânia",
+      pos: [-49.258, -16.69],
+      nome: M("Setor Sul e Avenida 87", "Setor Sul and Avenida 87"),
+      bairro: M("Região Sul", "South region"),
+      grau: "critico", tipo: ["alagamento", "enxurrada"],
+      resumo: M("Está entre os dez pontos mais críticos da Defesa Civil (2025). A Av. 87 alagou em 06/12/2025.", "One of the Civil Defense's ten most critical points (2025). Av. 87 flooded on 06/12/2025."),
+      eventos: [M("06/12/2025: Av. 87 alagada.", "06/12/2025: Av. 87 flooded.")],
+      opcoes: ["infiltracao", "permeavel", "lote"],
+      fontes: ["top10", "dez2025"],
+    },
+    {
+      id: "pedro-ludovico", busca: "Setor Pedro Ludovico, Goiânia",
+      pos: [-49.248, -16.712],
+      nome: M("Setor Pedro Ludovico", "Setor Pedro Ludovico"),
+      bairro: M("Região Sul", "South region"),
+      grau: "critico", tipo: ["alagamento"],
+      resumo: M("Está entre os dez pontos mais críticos da Defesa Civil (2025). Alagou em 06/12/2025.", "One of the Civil Defense's ten most critical points (2025). It flooded on 06/12/2025."),
+      eventos: [M("06/12/2025: ruas alagadas.", "06/12/2025: streets flooded.")],
+      opcoes: ["infiltracao", "permeavel", "lote"],
+      fontes: ["top10", "dez2025"],
+    },
+    {
+      id: "parque-amazonia", busca: "Parque Amazônia, Goiânia",
+      pos: [-49.278, -16.727],
+      nome: M("Parque Amazônia e Av. Feira de Santana", "Parque Amazônia and Av. Feira de Santana"),
+      bairro: M("Região Sudoeste, córrego Cascavel", "Southwest region, Cascavel stream"),
+      grau: "critico", tipo: ["alagamento", "enxurrada"],
+      resumo: M("Está entre os dez pontos mais críticos da Defesa Civil (2025), com cerca de dez pontos no bairro.", "One of the Civil Defense's ten most critical points (2025), with about ten spots in the neighbourhood."),
+      eventos: [M("12/01/2025: a parte baixa da Av. Feira de Santana alagou.", "12/01/2025: the low end of Av. Feira de Santana flooded.")],
+      opcoes: ["infiltracao", "bacia", "permeavel", "lote"],
+      fontes: ["top10", "jan2025"],
+    },
+    {
+      id: "joao-braz", busca: "Parque Industrial João Braz, Goiânia",
+      pos: [-49.365, -16.685],
+      nome: M("Parque Industrial João Braz", "Parque Industrial João Braz"),
+      bairro: M("Região Oeste", "West region"),
+      grau: "critico", tipo: ["alagamento"],
+      resumo: M("Está entre os dez pontos mais críticos da Defesa Civil (2025).", "One of the Civil Defense's ten most critical points (2025)."),
+      eventos: [],
+      opcoes: ["infiltracao", "bacia", "lote"],
+      fontes: ["top10"],
+    },
+    {
+      id: "goiania-viva", busca: "Residencial Goiânia Viva, Goiânia",
+      pos: [-49.375, -16.69],
+      nome: M("Residencial Goiânia Viva", "Residencial Goiânia Viva"),
+      bairro: M("Região Oeste", "West region"),
+      grau: "critico", tipo: ["alagamento"],
+      resumo: M("Está entre os dez pontos mais críticos da Defesa Civil (2025). Em 09/11/2026, a Prefeitura desobstruiu pontes sobre o córrego.", "One of the Civil Defense's ten most critical points (2025). On 09/11/2026 the city cleared blocked bridges over the stream."),
+      eventos: [M("09/11/2026: pontes desobstruídas depois da chuva.", "09/11/2026: bridges cleared after the rain.")],
+      opcoes: ["varzea", "bacia", "alerta"],
+      fontes: ["top10", "nov2026"],
+    },
+    {
+      id: "finsocial", busca: "Vila Finsocial, Goiânia",
+      pos: [-49.335, -16.625],
+      nome: M("Vila Finsocial: Ruas VF-82 e VF-96", "Vila Finsocial: VF-82 and VF-96 streets"),
+      bairro: M("Região Noroeste", "Northwest region"),
+      grau: "critico", tipo: ["alagamento", "enxurrada"],
+      resumo: M("Dois dos dez pontos mais críticos da Defesa Civil ficam aqui (2025).", "Two of the Civil Defense's ten most critical points are here (2025)."),
+      eventos: [M("09/11/2026: pontes desobstruídas depois da chuva.", "09/11/2026: bridges cleared after the rain.")],
+      opcoes: ["infiltracao", "permeavel", "bacia"],
+      fontes: ["top10", "nov2026"],
+    },
+    {
+      id: "novo-mundo", busca: "Jardim Novo Mundo, Goiânia",
+      pos: [-49.207, -16.663],
+      nome: M("UPA do Jardim Novo Mundo", "Jardim Novo Mundo emergency clinic"),
+      bairro: M("Região Leste", "East region"),
+      grau: "evento", tipo: ["alagamento"],
+      resumo: M("Em 09/11/2026, a água entrou na unidade de saúde.", "On 09/11/2026, water got into the health clinic."),
+      eventos: [M("09/11/2026: água dentro da UPA.", "09/11/2026: water inside the clinic.")],
+      opcoes: ["infiltracao", "lote", "permeavel"],
+      fontes: ["nov2026"],
+    },
+    {
+      id: "praca-biblia", busca: "Terminal Praça da Bíblia, Goiânia",
+      pos: [-49.232, -16.668],
+      nome: M("Terminal Praça da Bíblia", "Praça da Bíblia bus terminal"),
+      bairro: M("Setor Leste Universitário", "Setor Leste Universitário"),
+      grau: "evento", tipo: ["alagamento"],
+      resumo: M("Alagou em 09/11/2026, quando caíram mais de 60 mm em três horas no Leste Universitário.", "It flooded on 09/11/2026, when more than 60 mm fell in three hours in Leste Universitário."),
+      eventos: [M("09/11/2026: terminal alagado.", "09/11/2026: terminal flooded.")],
+      opcoes: ["permeavel", "infiltracao", "piscinao"],
+      fontes: ["nov2026"],
+    },
+    {
+      id: "vila-roriz", busca: "Vila Roriz, Goiânia",
+      pos: [-49.262, -16.645],
+      nome: M("Vila Roriz", "Vila Roriz"),
+      bairro: M("Norte, perto do Botafogo e do Meia Ponte", "North, near the Botafogo and Meia Ponte"),
+      grau: "muito-alto", tipo: ["inundacao"],
+      resumo: M("Risco muito alto de inundação na lista de áreas de risco da Defesa Civil (2025).", "Very high flood risk in the Civil Defense risk-area list (2025)."),
+      eventos: [],
+      opcoes: ["varzea", "alerta", "bacia"],
+      fontes: ["risco2025", "sgb"],
+    },
+    {
+      id: "gentil-meirelles", busca: "Setor Gentil Meirelles, Goiânia",
+      pos: [-49.29, -16.655],
+      nome: M("Setor Gentil Meirelles", "Setor Gentil Meirelles"),
+      bairro: M("Região Campinas", "Campinas region"),
+      grau: "muito-alto", tipo: ["inundacao"],
+      resumo: M("Risco muito alto de inundação na lista de áreas de risco da Defesa Civil (2025).", "Very high flood risk in the Civil Defense risk-area list (2025)."),
+      eventos: [],
+      opcoes: ["varzea", "alerta", "bacia"],
+      fontes: ["risco2025"],
+    },
+    {
+      id: "caicara", busca: "Conjunto Caiçara, Goiânia",
+      pos: [-49.335, -16.672],
+      nome: M("Conjunto Caiçara", "Conjunto Caiçara"),
+      bairro: M("Região Oeste", "West region"),
+      grau: "muito-alto", tipo: ["inundacao"],
+      resumo: M("Risco muito alto de inundação na lista da Defesa Civil (2025). Também tem setor no plano de risco do Serviço Geológico (2026). A posição no mapa é aproximada.", "Very high flood risk in the Civil Defense list (2025). It also has a sector in the Geological Survey's risk plan (2026). The map position is approximate."),
+      eventos: [],
+      opcoes: ["varzea", "alerta", "bacia"],
+      fontes: ["risco2025", "sgb"],
+    },
+    {
+      id: "vila-fernandes", busca: "Vila Fernandes, Goiânia",
+      pos: [-49.3, -16.665],
+      nome: M("Vilas Fernandes, São José e Maria Rosa", "Vila Fernandes, São José and Maria Rosa"),
+      bairro: M("Região Oeste e Campinas", "West and Campinas region"),
+      grau: "muito-alto", tipo: ["inundacao"],
+      resumo: M("Risco muito alto de inundação na lista da Defesa Civil (2025). A posição no mapa é aproximada.", "Very high flood risk in the Civil Defense list (2025). The map position is approximate."),
+      eventos: [],
+      opcoes: ["varzea", "alerta", "bacia"],
+      fontes: ["risco2025"],
+    },
+    {
+      id: "recanto-bosque", busca: "Residencial Recanto do Bosque, Goiânia",
+      pos: [-49.31, -16.6],
+      nome: M("Residencial Recanto do Bosque", "Residencial Recanto do Bosque"),
+      bairro: M("Região Noroeste", "Northwest region"),
+      grau: "muito-alto", tipo: ["inundacao"],
+      resumo: M("Risco muito alto de inundação na lista da Defesa Civil (2025). A posição no mapa é aproximada.", "Very high flood risk in the Civil Defense list (2025). The map position is approximate."),
+      eventos: [],
+      opcoes: ["varzea", "alerta", "bacia"],
+      fontes: ["risco2025"],
+    },
+    {
+      id: "campinas", busca: "Setor Campinas, Goiânia",
+      pos: [-49.29, -16.668],
+      nome: M("Setor Campinas", "Setor Campinas"),
+      bairro: M("Córregos Cascavel e Anicuns", "Cascavel and Anicuns streams"),
+      grau: "alto", tipo: ["inundacao"],
+      resumo: M("Risco alto de inundação na lista da Defesa Civil (2025), com setor no plano de risco do Serviço Geológico (2026).", "High flood risk in the Civil Defense list (2025), with a sector in the Geological Survey's risk plan (2026)."),
+      eventos: [],
+      opcoes: ["varzea", "bacia", "infiltracao"],
+      fontes: ["risco2025", "sgb"],
+    },
+    {
+      id: "norte-ferroviario", busca: "Setor Norte Ferroviário, Goiânia",
+      pos: [-49.262, -16.655],
+      nome: M("Setor Norte Ferroviário", "Setor Norte Ferroviário"),
+      bairro: M("Córrego Capim Puba", "Capim Puba stream"),
+      grau: "alto", tipo: ["inundacao"],
+      resumo: M("Risco alto de inundação na lista da Defesa Civil (2025). O Capim Puba é um dos cursos d'água de maior risco da cidade.", "High flood risk in the Civil Defense list (2025). The Capim Puba is one of the city's highest-risk streams."),
+      eventos: [],
+      opcoes: ["varzea", "bacia", "alerta"],
+      fontes: ["risco2025", "top10"],
+    },
+    {
+      id: "setor-aeroporto", busca: "Setor Aeroporto, Goiânia",
+      pos: [-49.27, -16.676],
+      nome: M("Setor Aeroporto", "Setor Aeroporto"),
+      bairro: M("Córrego Capim Puba", "Capim Puba stream"),
+      grau: "medio", tipo: ["inundacao"],
+      resumo: M("Risco médio de inundação na lista da Defesa Civil (2025), com setor no plano de risco do Serviço Geológico (2026).", "Medium flood risk in the Civil Defense list (2025), with a sector in the Geological Survey's risk plan (2026)."),
+      eventos: [],
+      opcoes: ["infiltracao", "lote", "bacia"],
+      fontes: ["risco2025", "sgb"],
+    },
+    {
+      id: "jardim-america", busca: "Avenida dos Alpes, Jardim América, Goiânia",
+      pos: [-49.282, -16.715],
+      nome: M("Ponte da Av. Alpes, no Jardim América", "Av. Alpes bridge, Jardim América"),
+      bairro: M("Córrego Cascavel", "Cascavel stream"),
+      grau: "muito-alto", tipo: ["erosao"],
+      resumo: M("Risco muito alto de erosão na lista da Defesa Civil (2025), na divisa com o Parque Amazônia.", "Very high erosion risk in the Civil Defense list (2025), on the border with Parque Amazônia."),
+      eventos: [],
+      opcoes: ["varzea", "bacia", "infiltracao"],
+      fontes: ["risco2025"],
+    },
+  ];
+
+  const marcos = [
+    {
+      id: "marco-jamel", pos: [-49.2438, -16.7016],
+      nome: M("Primeiro marco proposto: Jamel Cecílio", "First proposed marker: Jamel Cecílio"),
+      texto: M(
+        "O ponto aparece nos três temporais confirmados (jan/2025, dez/2025 e nov/2026). Ninguém registrou até onde a água subiu.",
+        "This spot shows up in all three confirmed storms (Jan 2025, Dec 2025 and Nov 2026). Nobody recorded how high the water rose."
+      ),
+      fontes: ["jan2025", "dez2025", "nov2026"],
+    },
+    {
+      id: "marco-av90", pos: [-49.2615, -16.7055],
+      nome: M("Marco proposto: Av. 90", "Proposed marker: Av. 90"),
+      texto: M(
+        "Em 06/12/2025, a água chegou a cerca de meio metro, segundo relato na imprensa. Medida oficial: não existe.",
+        "On 06/12/2025, water reached about half a metre, according to press reports. Official measurement: none."
+      ),
+      fontes: ["dez2025"],
+    },
+    {
+      id: "marco-joao-leite", busca: "Ribeirão João Leite, Goiânia", pos: [-49.235, -16.64],
+      nome: M("Marco proposto: Ribeirão João Leite", "Proposed marker: João Leite stream"),
+      texto: M(
+        "Transbordou em 12–13/01/2025, com 135,5 mm em 24 horas, e isolou bairros. A posição no mapa é aproximada.",
+        "It overflowed on 12–13/01/2025, with 135.5 mm in 24 hours, and cut off neighbourhoods. The map position is approximate."
+      ),
+      fontes: ["jan2025chuva"],
+    },
+  ];
+
+  return { fontes: F, opcoes, areas, marcos };
+})();

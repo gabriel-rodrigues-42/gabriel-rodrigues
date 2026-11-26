@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Goiânia flood map: the sponge city · Gabriel Rodrigues</title>
+<meta name="description" content="An open map of the places that flood in Goiânia. Tap a point to see what can be done, what it costs the city and residents, and which city already did it.">
+<link rel="canonical" href="https://gabriel-rodrigues.com/en/projetos/cidade-esponja/">
+<link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/projetos/cidade-esponja/">
+<link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/cidade-esponja/">
+<link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/projetos/cidade-esponja/">
+<meta name="author" content="Gabriel Rodrigues">
+<meta name="theme-color" content="#fbf8ef">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:site_name" content="Gabriel Rodrigues">
+<meta property="og:url" content="https://gabriel-rodrigues.com/en/projetos/cidade-esponja/">
+<meta property="og:title" content="Goiânia flood map: the sponge city · Gabriel Rodrigues">
+<meta property="og:description" content="Tap a place that floods and see what can be done, what it costs and which city already did it.">
+<meta property="og:image" content="https://gabriel-rodrigues.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gabriel Rodrigues, software engineering in service of Brazil">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Goiânia flood map: the sponge city · Gabriel Rodrigues">
+<meta name="twitter:description" content="Tap a place that floods and see what can be done, what it costs and which city already did it.">
+<meta name="twitter:image" content="https://gabriel-rodrigues.com/og.jpg">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "Goiânia can drink its own rain",
+ "description": "An open map of the places that flood in Goiânia, with improvement options, costs and comparisons with other cities.",
+ "inLanguage": "en",
+ "image": "https://gabriel-rodrigues.com/og.jpg",
+ "author": { "@type": "Person", "name": "Gabriel Rodrigues", "url": "https://gabriel-rodrigues.com/en/" },
+ "mainEntityOfPage": "https://gabriel-rodrigues.com/en/projetos/cidade-esponja/",
+ "datePublished": "2026-11-23"
+}
+</script>
+<link rel="stylesheet" href="/design-system/tokens.css?v=2026-11-22">
+<link rel="stylesheet" href="/design-system/componentes.css">
+<link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-22">
+<script src="/design-system/moldura.js"></script>
+<link rel="stylesheet" href="/design-system/contribuir.css">
+<script src="/design-system/contribuir.js"></script>
+<link rel="stylesheet" href="/vendor/maplibre-gl-5.24.0/maplibre-gl.css">
+<link rel="stylesheet" href="/projetos/cidade-esponja/pagina.css">
+<script src="/vendor/maplibre-gl-5.24.0/maplibre-gl.js" defer></script>
+<script src="/projetos/cidade-esponja/areas.js" defer></script>
+<script src="/projetos/cidade-esponja/mapa.js" defer></script>
+</head>
+<body>
+<gr-cabecalho></gr-cabecalho>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
+<main>
+  <div class="topo">
+    <nav><a href="/en/projetos/">← Proposals</a></nav>
+    <span class="selo">In study · Goiânia</span>
+    <h1>Goiânia can <span class="destaque">drink</span> its own rain</h1>
+    <p class="lead">The city floods almost always in the same places. The data exists, but it is scattered across PDFs and news stories. This map brings together what is public. Tap a point to see what can be done and what it costs. Goiânia is the example. The idea works for any city in Brazil.</p>
+  </div>
+
+  <section class="bloco-mapa" aria-label="Map of floods in Goiânia">
+    <div class="chips" role="group" aria-label="Map layers">
+      <button type="button" class="chip" data-camada="pontos" aria-pressed="true"><span class="bola" style="background: var(--livre-coral)"></span>Flood points</button>
+      <button type="button" class="chip" data-camada="risco" aria-pressed="true"><span class="bola" style="background: var(--livre-roxo)"></span>Risk areas</button>
+      <button type="button" class="chip" data-camada="agua" aria-pressed="true"><span class="bola" style="background: var(--azul-medio)"></span>Streams and parks</button>
+      <button type="button" class="chip" data-camada="marcos" aria-pressed="true"><span class="bola marco"></span>Memory Markers</button>
+      <button type="button" class="chip" data-camada="analise" aria-pressed="false"><span class="bola analise"></span>Our own analysis (screening)</button>
+    </div>
+    <div class="mapa-e-ficha">
+      <div id="mapa" role="region" aria-label="Interactive map. The list of areas below the map opens the same cards."></div>
+      <aside id="ficha" class="ficha" aria-live="polite"></aside>
+    </div>
+    <p id="aviso-reserva" class="aviso-reserva" hidden></p>
+    <details class="lista">
+      <summary>See all areas as a list</summary>
+      <ul id="lista-areas"></ul>
+    </details>
+    <p class="fontes">Approximate positions, based on the name of the neighbourhood or street. The official Civil Defense list has no public coordinates. Map: © OpenStreetMap contributors.</p>
+  </section>
+
+  <h2>What we already know</h2>
+  <div class="numeros">
+    <div class="cartao"><strong>134</strong>flood points on the Civil Defense list. There were 20 in 2010. <span class="fontes"><a href="https://ohoje.com/2025/11/07/goiania-tem-134-pontos-de-alagamento/">O Hoje, 2025</a>; <a href="https://creago.org.br/noticia/view/1808/cinco-pontos-do-plano-diretor-de-goiania-ameacam-piorar-inundacoes">CREA-GO, 2023</a></span></div>
+    <div class="cartao"><strong>6,464</strong>people live in 120 risk sectors. Flooding is the most common risk. <span class="fontes"><a href="https://www.sgb.gov.br/w/mais-de-6-mil-pessoas-vivem-em-areas-de-risco-geologico-e-hidrologico-em-goiania">Geological Survey of Brazil, 2026</a></span></div>
+    <div class="cartao"><strong>12 cm</strong>error in the laser survey (LiDAR) the city made in 2024. It is not open to the public. <span class="fontes"><a href="https://www.goiania.go.gov.br/arg/wp-content/uploads/sites/19/2024/06/02_Botafogo_Diagnostico.pdf">Drainage Plan, 2024</a></span></div>
+    <div class="cartao"><strong>R$&nbsp;400 mi</strong>is the estimated package for the Marginal Botafogo, with basins and a new channel. <span class="fontes"><a href="https://www.jornalopcao.com.br/ultimas-noticias/marginal-botafogo-pode-custar-400-milhoes-diz-mabel-858641/">Jornal Opção, 2026</a></span></div>
+  </div>
+  <p>The list of 134 points only reached the public through the press. The Geological Survey's maps have no published polygons. LiDAR, a laser survey flown by drones, measures the ground to within centimetres. The city has already paid for it. With this data open, anyone could check where the water ends up.</p>
+
+  <section id="cenarios" class="cenarios" aria-labelledby="t-cenarios">
+    <h2 id="t-cenarios">The Marginal Botafogo in three scenarios</h2>
+    <p>I have seen a car inside the Botafogo stream and people being pulled out by a tow truck. One rainy day, the city's alert made my Uber driver change route. The warning worked. The channel still swallows cars.</p>
+    <div class="chips" role="group" aria-label="Choose the scenario">
+      <button type="button" class="chip" data-cenario="hoje" aria-pressed="true">Today</button>
+      <button type="button" class="chip" data-cenario="piloto" aria-pressed="false">Official plan + pilot park</button>
+      <button type="button" class="chip" data-cenario="elevada" aria-pressed="false">Elevated road</button>
+    </div>
+    <svg id="palco" class="palco" viewBox="0 0 360 200" role="img" aria-label="Cross-section of the Marginal Botafogo: the channel, the lanes and the water level"></svg>
+    <div class="controle-chuva">
+      <label for="chuva" id="chuva-rotulo">Rain in one hour: 0 mm</label>
+      <input type="range" id="chuva" min="0" max="80" step="1" value="0">
+      <button type="button" id="chover" class="botao">Make it rain</button>
+    </div>
+    <p id="situacao" class="situacao" aria-live="polite"></p>
+    <p data-legenda="hoje">Today the channel is deep and made of concrete, and the road runs right beside it, on top of the floodplain. It closes with 25 to 35 mm of rain in under an hour (<a href="https://ohoje.com/2025/12/08/marginal-botafogo-problema-cronico/">O Hoje, 2025</a>). Two people died swept away by the current, in 2022 and in 2026.</p>
+    <p data-legenda="piloto" hidden>The official plan puts detention basins upstream, for about R$&nbsp;400 million (<a href="https://www.jornalopcao.com.br/ultimas-noticias/marginal-botafogo-pode-custar-400-milhoes-diz-mabel-858641/">Jornal Opção, 2026</a>). The first one promises up to 50% less water at Jamel Cecílio. I would add a pilot stretch: one bank becomes a park that floods, and the road stays on the other side. The pilot has no closed cost yet, because it depends on a traffic study.</p>
+    <p data-legenda="elevada" hidden>A road on a viaduct keeps every car. Over 14 km it would cost R$&nbsp;1.6 billion or more, four times the official package. This is our own estimate, based on the Jamel Cecílio viaduct: R$&nbsp;32.5 million for 282 metres (<a href="https://ohoje.com/2022/05/14/apos-dois-anos-de-atraso-complexo-viario-jamel-cecilio-e-inaugurado/">O Hoje, 2022</a>). Seoul did the opposite in 2005: it tore down its elevated road and opened up the stream.</p>
+    <p class="fontes">Illustration, not to scale. The 25 to 35 mm limit comes from the press. In the pilot, upstream water drops 40% only as an example of what the basins do.</p>
+  </section>
+
+  <h2>Who already did it</h2>
+  <div class="casos">
+    <div class="cartao"><h3>Seoul, South Korea</h3><p>Tore down a 5.6 km elevated road carrying 169,000 cars a day and opened up the Cheonggyecheon stream (2003–2005). Bus use rose 15.1% by 2008.</p><p class="fontes"><a href="https://landscapeperformance.org/case-study-briefs/cheonggyecheon-stream-restoration">Landscape Architecture Foundation</a></p></div>
+    <div class="cartao"><h3>Singapore</h3><p>A 2.7 km concrete canal became a 3.2 km river in a 62-hectare park, for €&nbsp;39 million (2009–2012).</p><p class="fontes"><a href="https://www.c40.org/wp-content/static/other_uploads/images/1963_AD-Ref_Singapore_Bishan-Park.original.pdf?1538133801=">C40</a></p></div>
+    <div class="cartao"><h3>Copenhagen, Denmark</h3><p>After the 2011 cloudburst, it chose to store water in streets and parks. It cost DKK 11 billion, against DKK 20 billion for pipes only (2015).</p><p class="fontes"><a href="https://climate-adapt.eea.europa.eu/en/metadata/case-studies/the-economics-of-managing-heavy-rains-and-stormwater-in-copenhagen-2013-the-cloudburst-management-plan/">Climate-ADAPT</a></p></div>
+    <div class="cartao"><h3>Belo Horizonte</h3><p>Stopped channelling streams and built linear parks with basins. Phase 2 has a US$&nbsp;204 million loan from the IDB (2026).</p><p class="fontes"><a href="https://prefeitura.pbh.gov.br/noticias/bh-tera-mais-recursos-para-investir-em-programa-de-recuperacao-ambiental">Belo Horizonte City Hall, 2026</a></p></div>
+    <div class="cartao"><h3>Zhengzhou, China</h3><p>It was a sponge city and still flooded in 2021, with more than 200 mm in one hour. Warnings had no power to close the subway and tunnels.</p><p class="fontes"><a href="https://www.caixinglobal.com/2021-07-27/cover-story-how-historic-rainfall-overwhelmed-zhengzhou-101745293.html">Caixin, 2021</a></p></div>
+    <div class="cartao"><h3>Porto Alegre</h3><p>In May 2024 the city flooded with the Guaíba below its design level. At the peak, 19 of 23 pump houses were down.</p><p class="fontes"><a href="https://agenciabrasil.ebc.com.br/geral/noticia/2024-05/inundacao-em-porto-alegre-foi-falta-de-manutencao-dizem-especialistas">Agência Brasil, 2024</a></p></div>
+  </div>
+  <p>Storing water on the surface is cheaper than pipes when there is public space. The Botafogo corridor is almost all public: the streambed, the lanes and eight parks.</p>
+
+  <section id="marcos" aria-labelledby="t-marcos">
+    <h2 id="t-marcos">Memory Markers on the map</h2>
+    <p>In <a href="/en/sobre/no-que-acredito/">What I believe</a>, I propose a plaque at the highest level of each disaster, an open map with all the plaques, and a rule. Public works or new subdivisions below the mark must explain in writing why they are safe.</p>
+    <p>The yellow points on the map are the first candidates. At none of them did anyone measure how high the water rose. The press recorded only rainfall in millimetres and reports like "half a metre" on Av. 90.</p>
+    <p>The first marker I would propose is on the Marginal, at Jamel Cecílio. It shows up in all three confirmed storms, sits on the city's north-south axis and on the stream where two people died. The height would come from the water line in dated photos and videos, on the kerb and the viaduct pillars, checked against the ground height measured by LiDAR. The Civil Defense would measure it, with the UFG team that wrote the drainage plan.</p>
+    <p>Each marker would have a risk level, using the same names the Geological Survey already uses:</p>
+    <ul class="niveis">
+      <li><strong>Very high:</strong> no new housing below the mark.</li>
+      <li><strong>High:</strong> the project needs a written justification and a notice of risk recorded on the property deed. That way, later buyers know too.</li>
+      <li><strong>Medium:</strong> a public warning on the map and on the plaque.</li>
+    </ul>
+    <p>In Japan, the stones marking past tsunamis were ignored by towns protected by sea walls. "It takes about three generations for people to forget," says professor Fumihiko Imamura (<a href="https://en.wikipedia.org/wiki/Tsunami_stone">Tsunami stone</a>). That is why the plaque needs a rule. And the rule needs LiDAR: it shows whether a project sits below the mark.</p>
+  </section>
+
+  <h2>What I propose for Brazil, with Goiânia as the example</h2>
+  <ul class="propostas">
+    <li><strong>Open the data.</strong> The spreadsheet of flood points with coordinates, the Geological Survey polygons, the 2024 LiDAR and the drainage plan's flood maps, in open formats. Anyone can request this data without giving a reason (Law 12,527/2011, art. 10).</li>
+    <li><strong>Put the Memory Markers into the Civil Defense Law</strong> (Law 12,608/2012), with the three risk levels above. The law already requires mapping risk areas. It does not yet require recording how high the water reached.</li>
+    <li><strong>Complete the official plan for the Marginal</strong> with a stretch where the stream gets its floodplain back. Before a lane is removed, traffic gets another way out: buses with their own lane on the north-south axis and parallel routes. The stretch would be measured before and after with the rain gauges the city already has.</li>
+    <li><strong>A fair drainage fee.</strong> Lots with more paved area pay more. Lots that hold water on site get a discount, and low-income families are exempt. Germany and Philadelphia (USA) charge this way (<a href="https://water.phila.gov/development/stormwater-plan-review/manual/chapter-6/6-3-stormwater-credits/">Philadelphia</a>). In Brazil, the Sanitation Framework already allows it (Law 14,026/2020). The money goes to maintenance.</li>
+    <li><strong>Protect the people who already live near the park.</strong> Before announcing the project, the city marks Special Zones of Social Interest (City Statute, Law 10,257/2001) around it. In Washington, the housing plan for the 11th Street Bridge Park came before the park, with a community land trust that bought homes to keep rents low (<a href="https://s3.amazonaws.com/cdn.catalog.results4america.org/content/uploads/Updated-RFA_EMC_Case_Study_35_Washington_DC_R1v1.pdf">case study</a>).</li>
+    <li><strong>A public cost card for every drainage project</strong>, like the ones on this map: what it costs, how much water it holds and who pays.</li>
+  </ul>
+
+  <section id="metodo" aria-labelledby="t-metodo">
+    <h2 id="t-metodo">How we did our own analysis</h2>
+    <p>The "Our own analysis" layer shows where water arrives first when a stream rises. It is a screening: it points to where to look, it does not say that a street floods.</p>
+    <ol class="propostas">
+      <li><strong>Terrain.</strong> We used Copernicus GLO-30, a terrain height model with a point every 30 metres, open and free (<a href="https://registry.opendata.aws/copernicus-dem/">European Space Agency</a>). It measures the surface, so buildings and trees add height.</li>
+      <li><strong>Streams.</strong> We took the named streams and rivers from OpenStreetMap, in Goiânia and the nearby cities.</li>
+      <li><strong>Height above the stream.</strong> For each point, we worked out how many metres it sits above the nearest stream. Specialists call this HAND. We used the simple version, by straight-line distance.</li>
+      <li><strong>Classes.</strong> Up to 2 metres above the stream is a valley bottom: water gets there first. From 2 to 5 metres is the valley edge. We only count up to 500 metres from a stream and drop patches smaller than 1 hectare.</li>
+    </ol>
+    <p>What this analysis does not see: storm drains and culverts, streets that flood far from a stream, and the effect of the basins. That is why it sits in a separate layer, switched off at first. The code is open at <a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/scripts/cidade-esponja/analise_terreno.py">scripts/cidade-esponja/analise_terreno.py</a>.</p>
+  </section>
+
+  <h2>Next steps for the map</h2>
+  <ul class="propostas">
+    <li><strong>The metropolitan area.</strong> Streams do not stop at the city line. Aparecida de Goiânia, Senador Canedo, Trindade and the other nearby cities come in when there is sourced data.</li>
+    <li><strong>Improve our own analysis.</strong> Swap the 30-metre terrain for the city's LiDAR once it is opened, and simulate Goiânia's heavy rain using the Geological Survey's rainfall curve.</li>
+    <li><strong>Residents' reports, only if they are real.</strong> People mark the place, the date and the type of flooding, with no name or photo. A report only shows on the map after it is checked: against another report from the same place, or against news or a Civil Defense record.</li>
+  </ul>
+  <p>This proposal is still being studied. The cards will change when official data arrives.</p>
+
+  <h2>How to tell if it worked</h2>
+  <p>Two public numbers, year by year: how many points are on the Civil Defense list, and how many times the Marginal Botafogo closed.</p>
+
+  <h2>Sources</h2>
+  <ul class="fontes">
+    <li><a href="https://www.jornalopcao.com.br/cidades/veja-quais-os-principais-pontos-criticos-de-alagamentos-em-goiania-762480/">The 10 most critical points, citing the Civil Defense (Jornal Opção, 2025)</a></li>
+    <li><a href="https://curtamais.com.br/goiania/defesa-civil-goiania/">The Civil Defense's 33 risk areas (Curta Mais, 2025)</a></li>
+    <li><a href="https://www.sgb.gov.br/w/mais-de-6-mil-pessoas-vivem-em-areas-de-risco-geologico-e-hidrologico-em-goiania">Municipal Risk Reduction Plan (Geological Survey of Brazil, 2026)</a></li>
+    <li><a href="https://www.goiania.go.gov.br/arg/wp-content/uploads/sites/19/2026/04/Apendice_C___Painel_de_acoes_especificas_Botafogo.pdf">Urban Drainage Master Plan, Botafogo actions (Goiânia City Hall and UFG, 2026)</a></li>
+    <li><a href="https://ohoje.com/2025/12/07/chuva-alagamento-marginal-botafogo/">Storm of 06/12/2025 (O Hoje, 2025)</a> and <a href="https://ohoje.com/2026/11/10/prefeitura-de-goiania-atua-em-obras-e-limpeza-apos-forte-chuva/">of 09/11/2026 (O Hoje, 2026)</a></li>
+    <li><a href="https://ohoje.com/2026/06/24/piscinao-de-r-40-milhoes-tenta-conter-alagamentos-na-bacia-do-botafogo/">Vila Redenção basin (O Hoje, 2026)</a></li>
+    <li>Base map: <a href="https://openfreemap.org">OpenFreeMap</a> and <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> (ODbL licence). Map library: <a href="https://maplibre.org">MapLibre</a>.</li>
+    <li>Foreign-currency values are shown in their original currency. Each map card lists its own sources.</li>
+  </ul>
+</main>
+<gr-contribuir></gr-contribuir>
+<gr-rodape></gr-rodape>
+</body>
+</html>

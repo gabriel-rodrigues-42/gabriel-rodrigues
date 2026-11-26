@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapa dos alagamentos de Goiânia: a cidade esponja · Gabriel Rodrigues</title>
+<meta name="description" content="Um mapa aberto dos pontos que alagam em Goiânia. Toque num ponto e veja o que dá para fazer, quanto custa para a Prefeitura e para quem mora ali e qual cidade já fez.">
+<link rel="canonical" href="https://gabriel-rodrigues.com/projetos/cidade-esponja/">
+<link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/projetos/cidade-esponja/">
+<link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/cidade-esponja/">
+<link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/projetos/cidade-esponja/">
+<meta name="author" content="Gabriel Rodrigues">
+<meta name="theme-color" content="#fbf8ef">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:site_name" content="Gabriel Rodrigues">
+<meta property="og:url" content="https://gabriel-rodrigues.com/projetos/cidade-esponja/">
+<meta property="og:title" content="Mapa dos alagamentos de Goiânia: a cidade esponja · Gabriel Rodrigues">
+<meta property="og:description" content="Toque num ponto que alaga e veja o que dá para fazer, quanto custa e qual cidade já fez.">
+<meta property="og:image" content="https://gabriel-rodrigues.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gabriel Rodrigues, engenharia de software a serviço do Brasil">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mapa dos alagamentos de Goiânia: a cidade esponja · Gabriel Rodrigues">
+<meta name="twitter:description" content="Toque num ponto que alaga e veja o que dá para fazer, quanto custa e qual cidade já fez.">
+<meta name="twitter:image" content="https://gabriel-rodrigues.com/og.jpg">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "Goiânia pode beber a própria chuva",
+ "description": "Um mapa aberto dos pontos que alagam em Goiânia, com opções de melhoria, custos e comparações com outras cidades.",
+ "inLanguage": "pt-BR",
+ "image": "https://gabriel-rodrigues.com/og.jpg",
+ "author": { "@type": "Person", "name": "Gabriel Rodrigues", "url": "https://gabriel-rodrigues.com/" },
+ "mainEntityOfPage": "https://gabriel-rodrigues.com/projetos/cidade-esponja/",
+ "datePublished": "2026-11-23"
+}
+</script>
+<link rel="stylesheet" href="/design-system/tokens.css?v=2026-11-22">
+<link rel="stylesheet" href="/design-system/componentes.css">
+<link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-22">
+<script src="/design-system/moldura.js"></script>
+<link rel="stylesheet" href="/design-system/contribuir.css">
+<script src="/design-system/contribuir.js"></script>
+<link rel="stylesheet" href="/vendor/maplibre-gl-5.24.0/maplibre-gl.css">
+<link rel="stylesheet" href="/projetos/cidade-esponja/pagina.css">
+<script src="/vendor/maplibre-gl-5.24.0/maplibre-gl.js" defer></script>
+<script src="/projetos/cidade-esponja/areas.js" defer></script>
+<script src="/projetos/cidade-esponja/mapa.js" defer></script>
+</head>
+<body>
+<gr-cabecalho></gr-cabecalho>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
+<main>
+  <div class="topo">
+    <nav><a href="/projetos/">← Propostas</a></nav>
+    <span class="selo">Em estudo · Goiânia</span>
+    <h1>Goiânia pode <span class="destaque">beber</span> a própria chuva</h1>
+    <p class="lead">A cidade alaga quase sempre nos mesmos lugares. Os dados existem, mas estão espalhados em PDFs e notícias. Este mapa junta o que é público. Toque num ponto e veja o que dá para fazer e quanto custa. Goiânia é o exemplo. A ideia serve para qualquer cidade do Brasil.</p>
+  </div>
+
+  <section class="bloco-mapa" aria-label="Mapa dos alagamentos de Goiânia">
+    <div class="chips" role="group" aria-label="Camadas do mapa">
+      <button type="button" class="chip" data-camada="pontos" aria-pressed="true"><span class="bola" style="background: var(--livre-coral)"></span>Pontos de alagamento</button>
+      <button type="button" class="chip" data-camada="risco" aria-pressed="true"><span class="bola" style="background: var(--livre-roxo)"></span>Áreas de risco</button>
+      <button type="button" class="chip" data-camada="agua" aria-pressed="true"><span class="bola" style="background: var(--azul-medio)"></span>Córregos e parques</button>
+      <button type="button" class="chip" data-camada="marcos" aria-pressed="true"><span class="bola marco"></span>Marcos da Memória</button>
+      <button type="button" class="chip" data-camada="analise" aria-pressed="false"><span class="bola analise"></span>Análise própria (triagem)</button>
+    </div>
+    <div class="mapa-e-ficha">
+      <div id="mapa" role="region" aria-label="Mapa interativo. A lista de áreas abaixo do mapa abre as mesmas fichas."></div>
+      <aside id="ficha" class="ficha" aria-live="polite"></aside>
+    </div>
+    <p id="aviso-reserva" class="aviso-reserva" hidden></p>
+    <details class="lista">
+      <summary>Ver todas as áreas em lista</summary>
+      <ul id="lista-areas"></ul>
+    </details>
+    <p class="fontes">Posições aproximadas, a partir do nome do bairro ou da rua. A lista oficial da Defesa Civil não tem coordenadas públicas. Mapa: © colaboradores do OpenStreetMap.</p>
+  </section>
+
+  <h2>O que já se sabe</h2>
+  <div class="numeros">
+    <div class="cartao"><strong>134</strong>pontos de alagamento na lista da Defesa Civil. Eram 20 em 2010. <span class="fontes"><a href="https://ohoje.com/2025/11/07/goiania-tem-134-pontos-de-alagamento/">O Hoje, 2025</a>; <a href="https://creago.org.br/noticia/view/1808/cinco-pontos-do-plano-diretor-de-goiania-ameacam-piorar-inundacoes">CREA-GO, 2023</a></span></div>
+    <div class="cartao"><strong>6.464</strong>pessoas moram em 120 setores de risco. A inundação é o risco mais comum. <span class="fontes"><a href="https://www.sgb.gov.br/w/mais-de-6-mil-pessoas-vivem-em-areas-de-risco-geologico-e-hidrologico-em-goiania">Serviço Geológico do Brasil, 2026</a></span></div>
+    <div class="cartao"><strong>12 cm</strong>de erro no levantamento a laser (LiDAR) que a Prefeitura fez em 2024. Ele não está aberto ao público. <span class="fontes"><a href="https://www.goiania.go.gov.br/arg/wp-content/uploads/sites/19/2024/06/02_Botafogo_Diagnostico.pdf">Plano de Drenagem, 2024</a></span></div>
+    <div class="cartao"><strong>R$&nbsp;400 mi</strong>é o pacote estimado para a Marginal Botafogo, com bacias e canal novo. <span class="fontes"><a href="https://www.jornalopcao.com.br/ultimas-noticias/marginal-botafogo-pode-custar-400-milhoes-diz-mabel-858641/">Jornal Opção, 2026</a></span></div>
+  </div>
+  <p>A lista dos 134 pontos só chegou ao público por jornal. Os mapas do Serviço Geológico não têm os polígonos publicados. O LiDAR, um levantamento feito com laser a partir de drones, mede o terreno com erro de centímetros. A cidade já pagou por ele. Com esses dados abertos, qualquer pessoa conferiria onde a água vai parar.</p>
+
+  <section id="cenarios" class="cenarios" aria-labelledby="t-cenarios">
+    <h2 id="t-cenarios">A Marginal Botafogo em três cenários</h2>
+    <p>Já vi carro dentro do córrego Botafogo e gente sendo tirada por guincho. Num dia de chuva, o alerta da cidade fez o motorista do meu Uber mudar de caminho. O aviso funcionou. O canal continua engolindo carro.</p>
+    <div class="chips" role="group" aria-label="Escolha o cenário">
+      <button type="button" class="chip" data-cenario="hoje" aria-pressed="true">Hoje</button>
+      <button type="button" class="chip" data-cenario="piloto" aria-pressed="false">Plano oficial + parque-piloto</button>
+      <button type="button" class="chip" data-cenario="elevada" aria-pressed="false">Pista elevada</button>
+    </div>
+    <svg id="palco" class="palco" viewBox="0 0 360 200" role="img" aria-label="Corte da Marginal Botafogo: o canal, as pistas e o nível da água"></svg>
+    <div class="controle-chuva">
+      <label for="chuva" id="chuva-rotulo">Chuva em uma hora: 0 mm</label>
+      <input type="range" id="chuva" min="0" max="80" step="1" value="0">
+      <button type="button" id="chover" class="botao">Fazer chover</button>
+    </div>
+    <p id="situacao" class="situacao" aria-live="polite"></p>
+    <p data-legenda="hoje">Hoje o canal é fundo, de concreto, e a pista corre colada nele, em cima da várzea. Ela fecha com 25 a 35 mm de chuva em menos de uma hora (<a href="https://ohoje.com/2025/12/08/marginal-botafogo-problema-cronico/">O Hoje, 2025</a>). Duas pessoas morreram levadas pela correnteza, em 2022 e em 2026.</p>
+    <p data-legenda="piloto" hidden>O plano oficial põe bacias de detenção rio acima, por cerca de R$&nbsp;400 milhões (<a href="https://www.jornalopcao.com.br/ultimas-noticias/marginal-botafogo-pode-custar-400-milhoes-diz-mabel-858641/">Jornal Opção, 2026</a>). A primeira promete até 50% menos água no Jamel Cecílio. Eu somaria um trecho-piloto: uma margem vira parque que alaga, e a pista fica do outro lado. O piloto ainda não tem custo fechado, porque depende de um estudo de trânsito.</p>
+    <p data-legenda="elevada" hidden>A pista em viaduto mantém todos os carros. Nos 14 km, custaria R$&nbsp;1,6 bilhão ou mais, quatro vezes o pacote oficial. A conta é nossa, pela régua do viaduto Jamel Cecílio: R$&nbsp;32,5 milhões por 282 metros (<a href="https://ohoje.com/2022/05/14/apos-dois-anos-de-atraso-complexo-viario-jamel-cecilio-e-inaugurado/">O Hoje, 2022</a>). Seul fez o contrário em 2005: derrubou a via elevada e abriu o córrego.</p>
+    <p class="fontes">Ilustração fora de escala. O limite de 25 a 35 mm é da imprensa. No piloto, a água rio acima cai 40% só como exemplo do efeito das bacias.</p>
+  </section>
+
+  <h2>Quem já fez</h2>
+  <div class="casos">
+    <div class="cartao"><h3>Seul, Coreia do Sul</h3><p>Derrubou uma via elevada de 5,6 km, com 169 mil carros por dia, e abriu o córrego Cheonggyecheon (2003–2005). O uso de ônibus subiu 15,1% até 2008.</p><p class="fontes"><a href="https://landscapeperformance.org/case-study-briefs/cheonggyecheon-stream-restoration">Landscape Architecture Foundation</a></p></div>
+    <div class="cartao"><h3>Cingapura</h3><p>Um canal de concreto de 2,7 km virou um rio de 3,2 km num parque de 62 hectares, por €&nbsp;39 milhões (2009–2012).</p><p class="fontes"><a href="https://www.c40.org/wp-content/static/other_uploads/images/1963_AD-Ref_Singapore_Bishan-Park.original.pdf?1538133801=">C40</a></p></div>
+    <div class="cartao"><h3>Copenhague, Dinamarca</h3><p>Depois do temporal de 2011, escolheu guardar água em ruas e parques. Custou 11 bilhões de coroas, contra 20 bilhões só com tubos (2015).</p><p class="fontes"><a href="https://climate-adapt.eea.europa.eu/en/metadata/case-studies/the-economics-of-managing-heavy-rains-and-stormwater-in-copenhagen-2013-the-cloudburst-management-plan/">Climate-ADAPT</a></p></div>
+    <div class="cartao"><h3>Belo Horizonte</h3><p>Decidiu não canalizar mais córregos e fez parques lineares com bacias. A segunda etapa tem US$&nbsp;204 milhões do BID (2026).</p><p class="fontes"><a href="https://prefeitura.pbh.gov.br/noticias/bh-tera-mais-recursos-para-investir-em-programa-de-recuperacao-ambiental">Prefeitura de BH, 2026</a></p></div>
+    <div class="cartao"><h3>Zhengzhou, China</h3><p>Era cidade esponja e alagou em 2021, com mais de 200 mm em uma hora. O alerta não tinha poder de fechar metrô e túneis.</p><p class="fontes"><a href="https://www.caixinglobal.com/2021-07-27/cover-story-how-historic-rainfall-overwhelmed-zhengzhou-101745293.html">Caixin, 2021</a></p></div>
+    <div class="cartao"><h3>Porto Alegre</h3><p>Em maio de 2024, a cidade alagou com o Guaíba abaixo da cota de projeto. No pico, 19 de 23 casas de bombas estavam paradas.</p><p class="fontes"><a href="https://agenciabrasil.ebc.com.br/geral/noticia/2024-05/inundacao-em-porto-alegre-foi-falta-de-manutencao-dizem-especialistas">Agência Brasil, 2024</a></p></div>
+  </div>
+  <p>Guardar água na superfície sai mais barato que tubo quando há espaço público. O corredor do Botafogo é quase todo público: o leito, as pistas e oito parques.</p>
+
+  <section id="marcos" aria-labelledby="t-marcos">
+    <h2 id="t-marcos">Marcos da Memória no mapa</h2>
+    <p>Em <a href="/sobre/no-que-acredito/">No que acredito</a>, proponho uma placa no nível máximo de cada desastre, um mapa aberto com todas as placas e uma regra. Obra pública ou loteamento novo abaixo da marca precisa explicar por escrito por que é seguro.</p>
+    <p>Os pontos amarelos do mapa são os primeiros candidatos. Em nenhum deles alguém mediu até onde a água subiu. A imprensa registrou só a chuva em milímetros e relatos como "meio metro" na Av. 90.</p>
+    <p>O primeiro marco que eu proporia fica na Marginal, no Jamel Cecílio. O ponto aparece nos três temporais confirmados, fica no eixo norte-sul da cidade e no córrego das duas mortes. A altura sairia da linha d'água em fotos e vídeos com data, no meio-fio e nos pilares do viaduto, cruzada com a altura do terreno medida pelo LiDAR. A Defesa Civil mediria, com a equipe da UFG que fez o plano de drenagem.</p>
+    <p>Cada marco teria um nível de risco, com os mesmos nomes que o Serviço Geológico já usa:</p>
+    <ul class="niveis">
+      <li><strong>Muito alto:</strong> não pode ter moradia nova abaixo da marca.</li>
+      <li><strong>Alto:</strong> a obra precisa de justificativa por escrito e de um termo de ciência anotado na matrícula do imóvel. Assim, quem compra depois também fica sabendo.</li>
+      <li><strong>Médio:</strong> aviso público no mapa e na placa.</li>
+    </ul>
+    <p>No Japão, as pedras que marcam os tsunamis foram ignoradas por cidades com muros de contenção. "Leva cerca de três gerações para as pessoas esquecerem", diz o professor Fumihiko Imamura (<a href="https://en.wikipedia.org/wiki/Tsunami_stone">Tsunami stone</a>). Por isso a placa precisa vir com regra. E a regra precisa do LiDAR: é ele que mostra se uma obra fica abaixo da marca.</p>
+  </section>
+
+  <h2>O que proponho para o Brasil, com Goiânia de exemplo</h2>
+  <ul class="propostas">
+    <li><strong>Abrir os dados.</strong> A planilha dos pontos com coordenadas, os polígonos do Serviço Geológico, o LiDAR de 2024 e as manchas de inundação do plano de drenagem, em formato aberto. Qualquer pessoa pode pedir esses dados, sem dizer o motivo (Lei 12.527/2011, art. 10).</li>
+    <li><strong>Pôr os Marcos da Memória na Lei de Defesa Civil</strong> (Lei 12.608/2012), com os três níveis de risco acima. A lei já manda mapear áreas de risco. Falta mandar registrar até onde a água chegou.</li>
+    <li><strong>Completar o plano oficial da Marginal</strong> com um trecho onde o córrego volta a ter várzea. Antes de tirar uma faixa, o trânsito ganha outra saída: ônibus com faixa própria no eixo norte-sul e rotas paralelas. O trecho seria medido antes e depois com os pluviômetros que a cidade já tem.</li>
+    <li><strong>Uma taxa de drenagem justa.</strong> Paga mais quem cobre mais o terreno de concreto. Quem segura a água no lote ganha desconto, e famílias de baixa renda ficam isentas. A Alemanha e a Filadélfia (EUA) cobram assim (<a href="https://water.phila.gov/development/stormwater-plan-review/manual/chapter-6/6-3-stormwater-credits/">Filadélfia</a>). No Brasil, o Marco do Saneamento já permite (Lei 14.026/2020). O dinheiro vai para a manutenção.</li>
+    <li><strong>Proteger quem já mora perto do parque.</strong> Antes de anunciar a obra, a cidade demarca Zonas Especiais de Interesse Social (Estatuto da Cidade, Lei 10.257/2001) no entorno. Em Washington, o plano de moradia do 11th Street Bridge Park veio antes do parque, com um fundo comunitário que comprou casas para manter o aluguel baixo (<a href="https://s3.amazonaws.com/cdn.catalog.results4america.org/content/uploads/Updated-RFA_EMC_Case_Study_35_Washington_DC_R1v1.pdf">estudo de caso</a>).</li>
+    <li><strong>Ficha de custo pública para cada obra de drenagem</strong>, como as deste mapa: quanto custa, quanta água guarda e quem paga.</li>
+  </ul>
+
+  <section id="metodo" aria-labelledby="t-metodo">
+    <h2 id="t-metodo">Como fizemos a análise própria</h2>
+    <p>A camada "Análise própria" mostra onde a água chega primeiro quando um córrego enche. É uma triagem: aponta onde olhar, não diz que uma rua alaga.</p>
+    <ol class="propostas">
+      <li><strong>Terreno.</strong> Usamos o Copernicus GLO-30, um modelo de altura do terreno com pontos a cada 30 metros, aberto e gratuito (<a href="https://registry.opendata.aws/copernicus-dem/">Agência Espacial Europeia</a>). Ele mede a superfície, então prédios e árvores somam altura.</li>
+      <li><strong>Córregos.</strong> Pegamos os córregos e rios com nome do OpenStreetMap, em Goiânia e nas cidades em volta.</li>
+      <li><strong>Altura acima do córrego.</strong> Para cada ponto, calculamos quantos metros ele fica acima do córrego mais próximo. Os técnicos chamam isso de HAND. Fizemos a versão simples, pela distância em linha reta.</li>
+      <li><strong>Classes.</strong> Até 2 metros acima do córrego é fundo de vale: a água chega primeiro. De 2 a 5 metros é beira de vale. Só contamos até 500 metros de um córrego e tiramos manchas menores que 1 hectare.</li>
+    </ol>
+    <p>O que esta análise não vê: galerias e bueiros, ruas que alagam longe de córrego e o efeito das bacias. Por isso ela fica numa camada separada, desligada no começo. O código está aberto em <a href="https://github.com/gabriel-rodrigues-42/gabriel-rodrigues/blob/main/scripts/cidade-esponja/analise_terreno.py">scripts/cidade-esponja/analise_terreno.py</a>.</p>
+  </section>
+
+  <h2>Próximos passos do mapa</h2>
+  <ul class="propostas">
+    <li><strong>Região metropolitana.</strong> Os córregos não param na divisa. Aparecida de Goiânia, Senador Canedo, Trindade e as outras cidades em volta entram quando houver dado com fonte.</li>
+    <li><strong>Melhorar a análise própria.</strong> Trocar o terreno de 30 metros pelo LiDAR da Prefeitura quando ele for aberto, e simular a chuva forte de Goiânia pela curva do Serviço Geológico.</li>
+    <li><strong>Relatos de moradores, só se forem reais.</strong> A pessoa marca o ponto, a data e o tipo de alagamento, sem nome nem foto. O relato só aparece no mapa depois de conferido: com outro relato do mesmo lugar ou com notícia ou registro da Defesa Civil.</li>
+  </ul>
+  <p>Esta proposta ainda está em estudo. As fichas mudam quando chegarem os dados oficiais.</p>
+
+  <h2>Como medir se deu certo</h2>
+  <p>Dois números públicos, ano a ano: quantos pontos tem a lista da Defesa Civil e quantas vezes a Marginal Botafogo fechou.</p>
+
+  <h2>Fontes</h2>
+  <ul class="fontes">
+    <li><a href="https://www.jornalopcao.com.br/cidades/veja-quais-os-principais-pontos-criticos-de-alagamentos-em-goiania-762480/">Os 10 pontos mais críticos, citando a Defesa Civil (Jornal Opção, 2025)</a></li>
+    <li><a href="https://curtamais.com.br/goiania/defesa-civil-goiania/">As 33 áreas de risco da Defesa Civil (Curta Mais, 2025)</a></li>
+    <li><a href="https://www.sgb.gov.br/w/mais-de-6-mil-pessoas-vivem-em-areas-de-risco-geologico-e-hidrologico-em-goiania">Plano Municipal de Redução de Riscos (Serviço Geológico do Brasil, 2026)</a></li>
+    <li><a href="https://www.goiania.go.gov.br/arg/wp-content/uploads/sites/19/2026/04/Apendice_C___Painel_de_acoes_especificas_Botafogo.pdf">Plano Diretor de Drenagem Urbana, ações no Botafogo (Prefeitura de Goiânia e UFG, 2026)</a></li>
+    <li><a href="https://ohoje.com/2025/12/07/chuva-alagamento-marginal-botafogo/">Temporal de 06/12/2025 (O Hoje, 2025)</a> e <a href="https://ohoje.com/2026/11/10/prefeitura-de-goiania-atua-em-obras-e-limpeza-apos-forte-chuva/">de 09/11/2026 (O Hoje, 2026)</a></li>
+    <li><a href="https://ohoje.com/2026/06/24/piscinao-de-r-40-milhoes-tenta-conter-alagamentos-na-bacia-do-botafogo/">Bacia da Vila Redenção (O Hoje, 2026)</a></li>
+    <li>Mapa base: <a href="https://openfreemap.org">OpenFreeMap</a> e <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> (licença ODbL). Biblioteca de mapa: <a href="https://maplibre.org">MapLibre</a>.</li>
+    <li>Valores em moeda estrangeira estão na moeda original. Cada ficha do mapa lista as próprias fontes.</li>
+  </ul>
+</main>
+<gr-contribuir></gr-contribuir>
+<gr-rodape></gr-rodape>
+</body>
+</html>
