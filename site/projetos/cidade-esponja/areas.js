@@ -105,7 +105,7 @@ window.CIDADE_ESPONJA = (() => {
     },
     taxa: {
       nome: { pt: "Taxa de drenagem com desconto para quem infiltra", en: "Drainage fee with a discount for lots that soak up water" },
-      oque: { pt: "Quem impermeabiliza mais paga mais. O dinheiro vai para manutenção, que é o que falha primeiro.", en: "Lots with more paved area pay more. The money goes to maintenance, which is what fails first." },
+      oque: { pt: "Quem impermeabiliza mais paga mais. Famílias de baixa renda ficam isentas. O dinheiro vai para manutenção, que é o que falha primeiro.", en: "Lots with more paved area pay more. Low-income families are exempt. The money goes to maintenance, which is what fails first." },
       governo: { pt: "Receita fixa para manter bombas, bocas de lobo e canais. Em Porto Alegre, em 2024, 19 de 23 casas de bombas pararam.", en: "Steady revenue to maintain pumps, drains and channels. In Porto Alegre in 2024, 19 of 23 pump houses stopped." },
       morador: { pt: "Em Copenhague, a conta de água subiu cerca de 890 coroas por casa por ano, perto de R$ 712 (câmbio aproximado).", en: "In Copenhagen, the water bill rose about DKK 890 per household per year, roughly R$ 712 (approximate rate)." },
       caso: { pt: "Copenhague paga 58% do plano de chuvas com a tarifa de água.", en: "Copenhagen pays 58% of its cloudburst plan through the water tariff." },
@@ -386,7 +386,7 @@ window.CIDADE_ESPONJA = (() => {
   const marcos = [
     {
       id: "marco-jamel", pos: [-49.2438, -16.7016],
-      nome: M("Marco proposto: Jamel Cecílio", "Proposed marker: Jamel Cecílio"),
+      nome: M("Primeiro marco proposto: Jamel Cecílio", "First proposed marker: Jamel Cecílio"),
       texto: M(
         "O ponto aparece nos três temporais confirmados (jan/2025, dez/2025 e nov/2026). Ninguém registrou até onde a água subiu.",
         "This spot shows up in all three confirmed storms (Jan 2025, Dec 2025 and Nov 2026). Nobody recorded how high the water rose."

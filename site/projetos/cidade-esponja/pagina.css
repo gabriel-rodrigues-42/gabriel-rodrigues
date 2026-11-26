@@ -126,3 +126,5 @@ p { margin: 0 0 var(--espaco-3); }
 .maplibregl-ctrl-group { border-radius: var(--forma-opcao) !important; box-shadow: var(--sombra-cartao) !important; }
 .maplibregl-ctrl-group button { width: 40px; height: 40px; }
 .maplibregl-ctrl-attrib { font-family: var(--fonte); }
+.niveis { padding-left: 1.1em; }
+.niveis li + li { margin-top: var(--espaco-2); }
