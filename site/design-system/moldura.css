@@ -1,7 +1,7 @@
 /* Moldura do site: cabeçalho e rodapé iguais em todas as páginas.
    Depende de tokens.css. Use junto com moldura.js:
-     <link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-26d">
-     <script src="/design-system/moldura.js?v=2026-11-26d"></script>
+     <link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-26e">
+     <script src="/design-system/moldura.js?v=2026-11-26e"></script>
      <gr-cabecalho></gr-cabecalho> logo depois de <body>
      <gr-rodape></gr-rodape> logo antes de </body> */
 
@@ -27,7 +27,8 @@ h1, h2, h3 { hyphens: manual; text-wrap: balance; }
   display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "marca apoiar" "menu menu";
   align-items: center; column-gap: var(--espaco-3); row-gap: var(--espaco-2);
 }
-.moldura-marca { grid-area: marca; display: flex; align-items: center; gap: var(--espaco-3); text-decoration: none; color: var(--azul); min-width: 0; }
+/* A área de toque é só o logo (no mínimo 44px), não o espaço vazio até o Apoiar. */
+.moldura-marca { grid-area: marca; justify-self: start; min-height: 44px; border-radius: 50%; display: flex; align-items: center; gap: var(--espaco-3); text-decoration: none; color: var(--azul); min-width: 0; }
 .moldura-logo { display: block; width: 48px; height: 48px; flex: none; }
 .moldura-oculto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 .moldura-menu { grid-area: menu; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--espaco-1) var(--espaco-2); }
