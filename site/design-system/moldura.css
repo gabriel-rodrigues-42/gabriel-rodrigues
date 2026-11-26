@@ -1,6 +1,6 @@
 /* Moldura do site: cabeçalho e rodapé iguais em todas as páginas.
    Depende de tokens.css. Use junto com moldura.js:
-     <link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-24b">
+     <link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-26">
      <script src="/design-system/moldura.js"></script>
      <gr-cabecalho></gr-cabecalho> logo depois de <body>
      <gr-rodape></gr-rodape> logo antes de </body> */
@@ -84,6 +84,8 @@ h1, h2, h3 { hyphens: manual; text-wrap: balance; }
 .moldura-rodape p { margin: var(--espaco-2) 0 0; font-size: var(--tamanho-2); color: var(--branco); opacity: .85; max-width: 460px; }
 .moldura-rodape ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--espaco-2); font-size: var(--tamanho-2); }
 .moldura-rodape a { color: var(--branco); font-weight: 700; text-decoration-color: var(--amarelo); text-underline-offset: 3px; }
+/* Lema do Gabriel, em amarelo, logo abaixo do nome (contraste 11:1 sobre o azul). */
+.moldura-rodape .moldura-lema { margin: var(--espaco-1) 0 0; color: var(--amarelo); opacity: 1; font-size: var(--tamanho-3); font-weight: var(--peso-forte); text-wrap: balance; }
 .moldura-rodape .moldura-aviso { grid-column: 1 / -1; font-size: var(--tamanho-1); opacity: .7; border-top: 1px solid var(--branco-vidro); padding-top: var(--espaco-4); margin: 0; max-width: none; }
 
 @media (min-width: 720px) { .moldura-rodape-dentro { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); } }
