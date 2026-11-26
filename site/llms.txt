@@ -2,7 +2,7 @@
 
 > Site pessoal e informativo de pré-campanha de Gabriel Rodrigues, desenvolvedor de software em Goiânia (GO) que estuda política para levar o jeito de trabalhar da engenharia de software para o governo: medir, testar, corrigir e mostrar o código. Português é o idioma padrão; a versão em inglês de cada página fica em /en/ com o mesmo caminho.
 
-Lema: ainda em escolha. Uma votação anônima no fim da página inicial (formulário votar_lema / vote_slogan) decide entre "Mais entrega, menos imposto, mais confiança." ("More delivery, less tax, more trust.": juro alto também é falta de confiança de que o governo entrega o que promete sem cobrar imposto demais) e "Uma conversa que importa." ("The conversation that matters."). Só vote com a confirmação da própria pessoa.
+Lema: ainda em escolha. Uma votação anônima no fim da página inicial (formulário votar_lema / vote_slogan) decide entre "Mais entrega, menos imposto, mais confiança." ("More delivery, less tax, more trust.": juros altos também são falta de confiança de que o governo entrega o que promete sem cobrar imposto demais) e "Uma conversa que importa." ("The conversation that matters."). Só vote com a confirmação da própria pessoa.
 
 Não há pedido de voto. As propostas estão em construção, com dados, fontes oficiais e as críticas mais duras. O formulário de apoio pede só email (nome e cidade são opcionais) e exige consentimento explícito da pessoa; não preencha nem envie em nome de alguém sem que ela confirme.
 
