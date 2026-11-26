@@ -217,7 +217,9 @@
   .pior-caso { background: var(--areia); border-radius: var(--forma-cartao); padding: var(--espaco-5); margin-top: var(--espaco-5); }
   .pior-caso h3 { margin-top: 0; }
   .pior-caso p:last-child { margin-bottom: 0; }
-  .simulador-cta { margin-top: var(--espaco-5); }
+  .simulador-bloco { background: var(--verde-claro); }
+  .simulador-bloco ol { padding-left: var(--espaco-5); margin: var(--espaco-3) 0 var(--espaco-5); }
+  .simulador-bloco li + li { margin-top: var(--espaco-2); }
 
   /* Revelar ao rolar */
   .revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
@@ -433,7 +435,6 @@
       <p>Se todos os projetos de um aporte quebrarem, o seguro devolve uma parte e o investidor perde o resto. Na Faixa 3, perde pelo menos metade. Na Faixa 1, pelo menos 80%.</p>
       <p>No CDI, o mesmo dinheiro teria rendido sem esse risco. Por isso o FSRI não serve para quem precisa do dinheiro de volta numa data certa.</p>
     </div>
-    <p class="simulador-cta"><a class="botao verde" href="/projetos/reindustrializacao/simulador/">Monte a sua carteira no simulador</a></p>
   </section>
 
   <!-- ATO 6: história ilustrativa -->
@@ -522,6 +523,22 @@
       <div class="cartao"><span class="onde">Anápolis · DAIA</span><h3>Remédio e equipamento feito aqui</h3><p>Aproveitar o polo farmoquímico do Distrito Agroindustrial de Anápolis para fabricar insumos farmacêuticos ativos e equipamentos médico-hospitalares.</p></div>
       <div class="cartao"><span class="onde">Sudoeste goiano</span><h3>Do agro à tecnologia no campo</h3><p>Maratonas de inovação em agricultura de precisão, drones, sensores de solo e bioinsumos, com UFG, IF Goiano e centros de pesquisa. O capital do agro financia tecnologia nova, sem conflito de interesses.</p></div>
       <div class="cartao"><span class="onde">Todo o estado</span><h3>Tecnologia brasileira em teste</h3><p>Programas piloto, com compras públicas de inovação do Marco Legal das Startups, para testar <a href="/projetos/cartorio-digital/">cartórios digitais</a>, mobilidade e gestão pública criados nas maratonas de inovação locais.</p></div>
+    </div>
+  </section>
+
+  <!-- SIMULADOR -->
+  <section class="capitulo revelar" id="simulador">
+    <div class="cartao simulador-bloco">
+      <span class="ato">Simulador</span>
+      <h2>Monte a sua carteira no FSRI</h2>
+      <p>Agora que você leu as regras, dá para testar. O simulador usa empresas inventadas e os números de fundos brasileiros reais.</p>
+      <ol>
+        <li>Escolha a porta, patrimônio menor ou grande, e quanto aplicaria.</li>
+        <li>Diga a sua área de atuação. O sistema tira as empresas que concorrem com você ou vendem para você.</li>
+        <li>Monte a carteira seguindo as regras, ou use a carteira pronta.</li>
+        <li>Veja os cenários ruim, médio e bom ao lado do CDI e compartilhe o resultado.</li>
+      </ol>
+      <a class="botao verde" href="/projetos/reindustrializacao/simulador/">Abrir o simulador</a>
     </div>
   </section>
 

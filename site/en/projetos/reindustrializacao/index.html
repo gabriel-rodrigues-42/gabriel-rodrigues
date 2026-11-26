@@ -217,7 +217,9 @@
   .pior-caso { background: var(--areia); border-radius: var(--forma-cartao); padding: var(--espaco-5); margin-top: var(--espaco-5); }
   .pior-caso h3 { margin-top: 0; }
   .pior-caso p:last-child { margin-bottom: 0; }
-  .simulador-cta { margin-top: var(--espaco-5); }
+  .simulador-bloco { background: var(--verde-claro); }
+  .simulador-bloco ol { padding-left: var(--espaco-5); margin: var(--espaco-3) 0 var(--espaco-5); }
+  .simulador-bloco li + li { margin-top: var(--espaco-2); }
 
   /* Revelar ao rolar */
   .revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
@@ -433,7 +435,6 @@
       <p>If every project in an investment fails, the insurance returns a part and the investor loses the rest. In Tier 3, they lose at least half. In Tier 1, at least 80%.</p>
       <p>In the CDI, the same money would have earned without that risk. That's why the FSRI is not for anyone who needs the money back on a set date.</p>
     </div>
-    <p class="simulador-cta"><a class="botao verde" href="/en/projetos/reindustrializacao/simulador/">Build your portfolio in the simulator</a></p>
   </section>
 
   <!-- ATO 6: história ilustrativa -->
@@ -522,6 +523,22 @@
       <div class="cartao"><span class="onde">Anápolis · DAIA</span><h3>Medicine and equipment made here</h3><p>Use the pharmaceutical cluster of the Anápolis Agro-Industrial District to make active pharmaceutical ingredients and medical and hospital equipment.</p></div>
       <div class="cartao"><span class="onde">Southwest Goiás</span><h3>From agribusiness to agtech</h3><p>Hackathons on precision agriculture, drones, soil sensors and bio-inputs, with UFG, IF Goiano and research centers. Agribusiness capital funds new technology, with no conflict of interest.</p></div>
       <div class="cartao"><span class="onde">The whole state</span><h3>Brazilian technology on trial</h3><p>Pilot programs, through public procurement of innovation under Brazil's Startup Legal Framework, to test <a href="/en/projetos/cartorio-digital/">digital notary offices</a>, mobility and public management created in local innovation marathons.</p></div>
+    </div>
+  </section>
+
+  <!-- SIMULADOR -->
+  <section class="capitulo revelar" id="simulator">
+    <div class="cartao simulador-bloco">
+      <span class="ato">Simulator</span>
+      <h2>Build your own FSRI portfolio</h2>
+      <p>Now that you've read the rules, you can try them. The simulator uses made-up companies and numbers from real Brazilian funds.</p>
+      <ol>
+        <li>Pick a door, smaller or large wealth, and how much you would invest.</li>
+        <li>Tell it your field of work. The system removes companies that compete with you or sell to you.</li>
+        <li>Build the portfolio following the rules, or use the ready-made one.</li>
+        <li>See the bad, average and good scenarios next to the CDI, and share the result.</li>
+      </ol>
+      <a class="botao verde" href="/en/projetos/reindustrializacao/simulador/">Open the simulator</a>
     </div>
   </section>
 
