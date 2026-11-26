@@ -97,3 +97,4 @@ h3 { color: var(--azul); margin: 0 0 var(--espaco-2); }
 .recebida p { margin: 0; }
 .visualmente-oculto { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .peso label span { white-space: nowrap; }
+#sim-nota-valor { background: var(--amarelo-claro); color: var(--texto); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); margin-top: var(--espaco-4); }
