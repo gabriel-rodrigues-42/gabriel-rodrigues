@@ -111,7 +111,7 @@
       teto: v => `O teto da porta menor é ${v} por ano. A simulação usa esse valor.`,
       pronta: 'Montamos uma carteira pronta, como faria um gestor. Você pode mudar à vontade.',
       prontaFalta: 'Não sobrou empresa da Faixa 1 e da Faixa 3 sem conflito para montar a carteira pronta.',
-      recebida: 'Alguém compartilhou esta carteira com você. Os valores usam o padrão de R$ 1 milhão. Ponha o seu valor e a sua área no passo 1.',
+      recebida: 'Alguém compartilhou esta carteira com você. Os valores usam o padrão de R$ 10 milhões. Ponha o seu valor e a sua área no passo 1.',
       linkOk: 'Link copiado.', linkErro: 'Não deu para copiar. O link está na barra do navegador.',
       imgOk: 'Imagem pronta.', baixada: 'Imagem baixada.',
       card: {
@@ -153,7 +153,7 @@
       teto: v => `The smaller-wealth cap is ${v} a year. The simulation uses that amount.`,
       pronta: 'We built a ready-made portfolio, the way a manager would. Change it as you like.',
       prontaFalta: 'There is no Tier 1 and Tier 3 company left without a conflict to build the ready-made portfolio.',
-      recebida: 'Someone shared this portfolio with you. Amounts use the R$ 1 million default. Enter your own amount and field in step 1.',
+      recebida: 'Someone shared this portfolio with you. Amounts use the R$ 10 million default. Enter your own amount and field in step 1.',
       linkOk: 'Link copied.', linkErro: 'Could not copy. The link is in the address bar.',
       imgOk: 'Image ready.', baixada: 'Image downloaded.',
       card: {
@@ -179,7 +179,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
   // Estado: tudo só na memória da página.
-  const estado = { porta: 'grande', valor: 1000000, area: '', sel: new Map(), prazo: 10, cdi: CDI_PADRAO };
+  const estado = { porta: 'grande', valor: 10000000, area: '', sel: new Map(), prazo: 10, cdi: CDI_PADRAO };
 
   const form = $('#sim-form');
   const campoValor = $('#sim-valor');
@@ -198,7 +198,7 @@
 
   function lerValor() {
     const n = parseInt(String(campoValor.value).replace(/\D/g, ''), 10);
-    return Number.isFinite(n) && n > 0 ? n : (estado.porta === 'menor' ? 10000 : 1000000);
+    return Number.isFinite(n) && n > 0 ? n : (estado.porta === 'menor' ? 10000 : 10000000);
   }
 
   function valorUsado() {
@@ -209,7 +209,7 @@
   form.addEventListener('change', ev => {
     if (ev.target.name === 'porta') {
       estado.porta = ev.target.value;
-      campoValor.value = fmt(estado.porta === 'menor' ? 10000 : 1000000);
+      campoValor.value = fmt(estado.porta === 'menor' ? 10000 : 10000000);
     }
     estado.valor = lerValor();
     estado.area = campoArea.value;
