@@ -122,7 +122,6 @@
         rodape2: 'Não é promessa de retorno. Empresas inventadas.',
         incentivo: 'Aporte incentivado: lucro sem imposto depois de 5 anos',
         semIncentivo: 'Sem incentivo: lucro paga 15% de imposto',
-        quebra: v => `Se todas quebrarem: perde pelo menos ${v} de cada R$ 100.`,
       },
       arquivo: 'minha-carteira-fsri.png',
     },
@@ -165,7 +164,6 @@
         rodape2: 'Not a promise of returns. Made-up companies.',
         incentivo: 'Incentivized: tax-free profit after 5 years',
         semIncentivo: 'No incentive: profit pays 15% tax',
-        quebra: v => `If they all fail: lose at least ${v} of every R$100.`,
       },
       arquivo: 'my-fsri-portfolio.png',
     },
@@ -434,8 +432,8 @@
     const total = totalPeso();
     const itens = [...estado.sel].map(([id, p]) => ({ e: EMPRESAS.find(x => x.id === id), w: p / total })).sort((a, b) => a.e.f - b.e.f || b.w - a.w);
     const corFaixa = { 1: cor('--verde-fundo'), 2: cor('--azul'), 3: cor('--amarelo') };
-    const alturaItem = itens.length > 6 ? 52 : 64;
-    itens.slice(0, 8).forEach(i => {
+    const alturaItem = itens.length > 5 ? 52 : 64;
+    itens.slice(0, 6).forEach(i => {
       ctx.fillStyle = corFaixa[i.e.f];
       roundRect(ctx, 80, y - 34, 120, 44, 22); ctx.fill();
       ctx.fillStyle = i.e.f === 3 ? cor('--azul') : cor('--branco');
@@ -445,7 +443,7 @@
       ctx.textAlign = 'right'; ctx.fillText(fmtParte(i.w), W - 80, y); ctx.textAlign = 'left';
       y += alturaItem;
     });
-    if (itens.length > 8) { ctx.fillStyle = cor('--texto-suave'); ctx.font = `700 28px ${fonte}`; ctx.fillText(`+ ${itens.length - 8}`, 220, y); y += 40; }
+    if (itens.length > 6) { ctx.fillStyle = cor('--texto-suave'); ctx.font = `700 28px ${fonte}`; ctx.fillText(`+ ${itens.length - 6}`, 220, y); y += 40; }
 
     // Selo do incentivo
     y += 10;
@@ -468,12 +466,6 @@
       ctx.fillStyle = cor('--azul-claro'); roundRect(ctx, 80, y + 14, W - 160, 16, 8); ctx.fill();
       ctx.fillStyle = cb; roundRect(ctx, 80, y + 14, Math.max(16, (W - 160) * v / max), 16, 8); ctx.fill();
     });
-
-    // Pior caso
-    y += 100;
-    ctx.fillStyle = cor('--azul'); roundRect(ctx, 80, y - 50, W - 160, 76, 38); ctx.fill();
-    ctx.fillStyle = cor('--branco'); ctx.font = `800 28px ${fonte}`;
-    ctx.fillText(T.card.quebra(fmt(c.perde / c.V * 100)), 110, y - 2);
 
     // Rodapé
     ctx.fillStyle = cor('--texto-suave'); ctx.font = `700 24px ${fonte}`;
