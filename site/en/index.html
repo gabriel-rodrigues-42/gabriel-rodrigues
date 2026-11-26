@@ -99,14 +99,14 @@
     .jeito { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
 
-  /* Lema: mais, menos, mais. O sinal de cada linha é só desenho (aria-hidden); o texto é lido normalmente. */
-  .lema { container-type: inline-size; margin: var(--espaco-6) 0 0; padding: var(--espaco-5) var(--espaco-5) var(--espaco-4); background: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); }
+  /* Lema: mais (verde), menos (amarelo), mais (verde). O sinal de cada linha é só desenho (aria-hidden); o texto é lido normalmente. */
+  .lema { container-type: inline-size; text-align: center; margin: var(--espaco-6) 0 0; padding: var(--espaco-5) var(--espaco-5) var(--espaco-4); background: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); }
   /* Cada parte numa linha só: no celular com letra grande, a fonte diminui com o cartão (cqi) em vez de quebrar a linha. */
   .lema-frase { margin: 0; display: grid; gap: var(--espaco-2); font-size: min(var(--tamanho-5), 10cqi); white-space: nowrap; font-weight: 900; line-height: 1.1; color: var(--azul); }
-  .lema-linha { display: flex; align-items: center; gap: var(--espaco-3); min-width: 0; }
+  .lema-linha { display: flex; align-items: center; justify-content: center; gap: var(--espaco-3); min-width: 0; }
   .lema-sinal { flex: none; display: grid; place-items: center; width: 1.1em; height: 1.1em; font-size: .9em; line-height: 1; color: var(--branco); background: var(--verde-fundo); border-radius: var(--forma-bolha-1); }
   .lema-linha:nth-child(2) .lema-sinal { background: var(--amarelo); color: var(--azul); border-radius: var(--forma-bolha-2); }
-  .lema-linha:nth-child(3) .lema-sinal { background: var(--azul); border-radius: var(--forma-bolha-3); }
+  .lema-linha:nth-child(3) .lema-sinal { border-radius: var(--forma-bolha-3); }
   .lema-porque { margin: var(--espaco-4) 0 0; padding-top: var(--espaco-3); border-top: 2px solid var(--azul-claro); color: var(--texto-suave); font-size: var(--tamanho-2); }
 
   /* Propostas */
