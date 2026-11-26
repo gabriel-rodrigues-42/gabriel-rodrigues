@@ -51,7 +51,6 @@
   <div class="aviso-risco">
     <p><strong>The companies are made up.</strong> The FSRI does not exist yet. The names, sectors and numbers on each card are only there to show the rules.</p>
     <p>The scenarios use what similar Brazilian funds returned from 1994 to 2022. This is not a promise of returns.</p>
-    <p>Nothing you type leaves your device.</p>
   </div>
 
   <section class="passo" id="passo-1" aria-labelledby="t-passo-1">
@@ -67,9 +66,9 @@
       </fieldset>
       <div class="campos">
         <div class="campo">
-          <label for="sim-valor">How much you would invest (R$)</label>
-          <input id="sim-valor" name="valor" inputmode="numeric" autocomplete="off" value="10000" toolparamdescription="Amount in reais, digits only">
-          <p class="pequeno">If you leave it as is, the math uses R$ 10,000.</p>
+          <label for="sim-valor">How much you would invest</label>
+          <input id="sim-valor" name="valor" inputmode="numeric" autocomplete="off" value="R$10,000" aria-describedby="sim-dica" toolparamdescription="Amount in Brazilian reais">
+          <p class="pequeno" id="sim-dica">Sample amount. Change it to yours.</p>
         </div>
         <div class="campo">
           <label for="sim-area">Your field of work</label>

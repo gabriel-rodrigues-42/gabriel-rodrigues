@@ -211,7 +211,7 @@
   form.addEventListener('change', ev => {
     if (ev.target.name === 'porta') {
       estado.porta = ev.target.value;
-      campoValor.value = estado.porta === 'menor' ? '10000' : '1000000';
+      campoValor.value = fmt(estado.porta === 'menor' ? 10000 : 1000000);
     }
     estado.valor = lerValor();
     estado.area = campoArea.value;
@@ -222,7 +222,21 @@
     }
     desenhar();
   });
-  campoValor.addEventListener('input', () => { estado.valor = lerValor(); desenharResultado(); desenharNotaValor(); });
+  // Formata o campo como dinheiro enquanto a pessoa digita, sem mover o cursor.
+  function formatarCampo() {
+    const antes = campoValor.value;
+    const pos = campoValor.selectionStart ?? antes.length;
+    const digitosAntes = antes.slice(0, pos).replace(/\D/g, '').replace(/^0+/, '').length;
+    const digitos = antes.replace(/\D/g, '').replace(/^0+/, '').slice(0, 13);
+    const novo = digitos ? fmt(+digitos) : '';
+    campoValor.value = novo;
+    let cursor = novo.length, vistos = 0;
+    if (digitosAntes === 0) cursor = novo.search(/\d/) < 0 ? novo.length : novo.search(/\d/);
+    else for (let i = 0; i < novo.length; i++) { if (/\d/.test(novo[i]) && ++vistos === digitosAntes) { cursor = i + 1; break; } }
+    if (document.activeElement === campoValor) campoValor.setSelectionRange(cursor, cursor);
+  }
+  campoValor.addEventListener('input', () => { formatarCampo(); estado.valor = lerValor(); desenharResultado(); desenharNotaValor(); atualizarPcts(); });
+  campoValor.addEventListener('blur', () => { if (!campoValor.value) campoValor.value = fmt(lerValor()); });
   form.addEventListener('submit', ev => {
     ev.preventDefault();
     estado.valor = lerValor(); estado.area = campoArea.value;
