@@ -19,7 +19,7 @@ window.SEM_NOMES = {
       rotulo: "They called me a fence-sitter",
       saidas: [
         { piada: "The only exemption I want is on my income tax. Nobody gave me that one.", fecho: "I'm not on the fence. I'm on top of the problem, which is a lot higher.", ref: "isentao" },
-        { piada: "Sam looked like a fence-sitter too. He held the Ring and gave it back.", fecho: "The problem isn't who holds the Ring. It's a system that gives too much power to anyone who holds it.", ref: "anel" },
+        { piada: "The Hulk looked like a fence-sitter too, quiet in the corner. He only turns green when he sees the price of rice.", fecho: "What makes me angry isn't a side. It's paying taxes and still waiting in line at the health clinic.", ref: "isentao" },
         { piada: "Shrek didn't want to join the kingdom's fight either. He just wanted his swamp in peace.", fecho: "In the end, the one who fixed the story lived far from the court.", ref: "shrek" },
         { piada: "It's not sitting on the fence. I just read the label before taking the medicine.", fecho: "Every proposal I make comes with its source and the toughest criticism next to it.", ref: "nazare" }
       ]
@@ -28,7 +28,7 @@ window.SEM_NOMES = {
       id: "governo",
       rotulo: "Come on, trash the government",
       saidas: [
-        { piada: "Trashing is easy. Hard is being Señor Barriga, owed 14 months of rent while nobody leaves the vecindad.", fecho: "What I criticize is the tax hidden in the price of rice and the power bill. That comes from many governments.", ref: "chaves" },
+        { piada: "Trashing the government is like complaining about Señor Barriga: he collects the rent every month, and the vecindad keeps falling apart.", fecho: "What I criticize is the tax hidden in the price of rice and the power bill. That comes from many governments.", ref: "chaves" },
         { piada: "Every government is a bit of Buzz Lightyear: it promises to go to infinity and beyond and forgets to say when.", fecho: "I want promises with a deadline and a number to check later.", ref: "toy-story" },
         { piada: "Government is like the Wizard of Oz: the big screen is pretty. I want to see who's pulling the levers.", fecho: "Open public accounts, online, for anyone to check.", ref: "oz" },
         { piada: "I talk like the critic in Ratatouille: I taste the dish and say what was missing.", fecho: "Criticism without a recipe to fix it is just complaining.", ref: "ratatouille" }
@@ -82,7 +82,6 @@ window.SEM_NOMES = {
     { id: "oz", nome: "The Great Oz", obra: "Oz the Great and Powerful (2013)", jeito: "Huge speeches, special effects, colored smoke.", piada: "Pull the curtain and there's a man working levers.", sistema: "Open public accounts are the curtain pulled back for everyone." },
     { id: "toy-story", nome: "Buzz Lightyear", obra: "Toy Story (1995)", jeito: "Promises to go to infinity and beyond.", piada: "He just forgets to say when.", sistema: "A good promise has a deadline and a number to check later." },
     { id: "chaves", nome: "Señor Barriga", obra: "El Chavo (on Brazilian TV since 1984, the childhood of anyone born in the 1990s)", jeito: "Always shows up at the vecindad to collect.", piada: "He's owed 14 months of rent and nobody moves out.", sistema: "Tax is hidden in the price of everything, even rice, and almost nobody knows how much they pay." },
-    { id: "anel", nome: "The Ring", obra: "The Lord of the Rings: The Fellowship of the Ring (2001)", jeito: "The power that changes anyone who holds it.", piada: "Even the calmest hobbit gets weird.", sistema: "Instead of looking for the right person for the Ring, you can write rules that limit the Ring." },
     { id: "guerra-civil", nome: "Team Cap vs Team Iron Man", obra: "Captain America: Civil War (2016)", jeito: "Two heroes, each right in their own way, wrecking the city.", piada: "I'm with the crew that rebuilds afterwards.", sistema: "The people who live in the city pay for the fight." },
     { id: "avenida-brasil", nome: "The Villain of the Episode", obra: "Avenida Brasil (2012), a Brazilian soap opera", jeito: "Every day politics picks a new villain and freezes on their face at the end.", piada: "With the \"oi, oi, oi\" song playing.", sistema: "The soap opera holds your attention, and the real problem gets no episode." },
     { id: "nazare", nome: "The Confused Math Lady", obra: "Senhora do Destino (2004), a soap opera that became a meme", jeito: "Whoever drops a number in the group without saying where it came from.", piada: "Make her face: if the math doesn't add up, don't send it.", sistema: "A number without an official source and a year is a rumor." },

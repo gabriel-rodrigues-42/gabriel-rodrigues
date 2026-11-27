@@ -24,7 +24,7 @@ window.SEM_NOMES = {
       rotulo: "Me chamaram de isentão",
       saidas: [
         { piada: "Isentão eu queria ser no Imposto de Renda. Esse benefício ninguém me deu.", fecho: "Não fico em cima do muro. Fico em cima do problema, que é bem mais alto.", ref: "isentao" },
-        { piada: "O Sam também parecia isentão. Segurou o anel e devolveu.", fecho: "O problema não é quem segura o anel. É um sistema que dá poder demais a qualquer um que segure.", ref: "anel" },
+        { piada: "O Hulk também parecia isentão, quieto no canto. Só fica verde quando vê o preço do arroz.", fecho: "O que me tira do sério não é lado. É pagar imposto e ainda esperar na fila do posto de saúde.", ref: "isentao" },
         { piada: "O Shrek também não queria entrar na briga do reino. Ele só queria o pântano dele em paz.", fecho: "No fim, quem resolveu a história foi quem estava longe da corte.", ref: "shrek" },
         { piada: "Não é isenção. É que eu leio a bula antes de tomar o remédio.", fecho: "Toda proposta que eu faço vem com a fonte e com as críticas mais duras junto.", ref: "nazare" }
       ]
@@ -33,7 +33,7 @@ window.SEM_NOMES = {
       id: "governo",
       rotulo: "Fala mal do governo aí",
       saidas: [
-        { piada: "Falar mal é fácil. Difícil é ser o Seu Barriga e cobrar 14 meses de aluguel sem ninguém se mudar da vila.", fecho: "O que eu critico é o imposto escondido no preço do arroz e da conta de luz. Esse vem de vários governos.", ref: "chaves" },
+        { piada: "Falar mal do governo é igual reclamar do Seu Barriga: ele cobra o aluguel todo mês, e a vila continua caindo aos pedaços.", fecho: "O que eu critico é o imposto escondido no preço do arroz e da conta de luz. Esse vem de vários governos.", ref: "chaves" },
         { piada: "Todo governo tem um pouco de Buzz Lightyear: promete ir ao infinito e além e esquece de dizer quando.", fecho: "Quero promessa com prazo e com um número para conferir depois.", ref: "toy-story" },
         { piada: "Governo é igual Mágico de Oz: o bonito é o telão. Eu quero ver quem está puxando as alavancas.", fecho: "Conta pública aberta, na internet, para qualquer pessoa conferir.", ref: "oz" },
         { piada: "Eu falo igual ao crítico do Ratatouille: provo o prato e digo o que faltou.", fecho: "Crítica que não vem com receita de conserto é só reclamação.", ref: "ratatouille" }
@@ -87,7 +87,6 @@ window.SEM_NOMES = {
     { id: "oz", nome: "O Grande Oz", obra: "Oz: Mágico e Poderoso (2013)", jeito: "Discurso enorme, efeito especial, fumaça colorida.", piada: "Puxa a cortina e tem um senhor mexendo em alavanca.", sistema: "Conta pública aberta é a cortina puxada para todo mundo ver." },
     { id: "toy-story", nome: "O Buzz Lightyear", obra: "Toy Story (1995)", jeito: "Promete ir ao infinito e além.", piada: "Só esquece de dizer quando.", sistema: "Promessa boa tem prazo e um número para conferir depois." },
     { id: "chaves", nome: "O Seu Barriga", obra: "Chaves (no SBT desde 1984, na infância de quem nasceu nos anos 1990)", jeito: "Chega na vila sempre cobrando.", piada: "Cobra 14 meses de aluguel e ninguém se muda.", sistema: "O imposto vem escondido no preço de tudo, até do arroz, e quase ninguém sabe quanto paga." },
-    { id: "anel", nome: "O Anel", obra: "O Senhor dos Anéis: A Sociedade do Anel (2001)", jeito: "O poder que muda qualquer um que segura.", piada: "Até o hobbit mais tranquilo fica esquisito.", sistema: "Em vez de procurar a pessoa certa para o anel, dá para fazer regra que limite o anel." },
     { id: "guerra-civil", nome: "O Time Cap contra o Time Homem de Ferro", obra: "Capitão América: Guerra Civil (2016)", jeito: "Dois heróis, cada um certo do seu jeito, quebrando a cidade.", piada: "Eu sou da turma que reconstrói depois.", sistema: "A conta da briga quem paga é quem mora na cidade." },
     { id: "avenida-brasil", nome: "O Vilão do Capítulo", obra: "Avenida Brasil (2012)", jeito: "Todo dia a política escolhe um vilão novo e congela a cara dele no fim.", piada: "Com o \"oi, oi, oi\" tocando no fundo.", sistema: "Novela prende a atenção, e o problema de verdade fica sem capítulo." },
     { id: "nazare", nome: "A Nazaré Fazendo Conta", obra: "Senhora do Destino (2004), que virou meme", jeito: "Quem joga um número no grupo sem dizer de onde veio.", piada: "Faz a cara da Nazaré: se a conta não fecha, não manda.", sistema: "Número sem fonte oficial e sem ano é boato." },
