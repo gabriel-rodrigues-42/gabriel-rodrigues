@@ -220,10 +220,13 @@
       form.querySelector("[data-saida=compra]").textContent = fmt.format(compra);
       form.querySelector("[data-saida=juntou]").textContent = fmt.format(juntou);
       form.querySelector("[data-saida=leva]").textContent = fmt.format(leva);
+      form.querySelector("[data-saida=desconto]").textContent = anos < 5
+        ? (EN ? `Leaves ${fmt.format(juntou - leva)} behind (10% before 5 years)` : `Deixa ${fmt.format(juntou - leva)} (10%, antes de 5 anos)`)
+        : (EN ? "No discount: 5 years or more" : "Sem desconto: 5 anos ou mais");
       form.querySelector("[data-saida=anos]").textContent = anos;
       form.querySelector("[data-saida=regra]").textContent = anos < 5
-        ? (EN ? "Before 5 years, the family takes 90% to the next home." : "Antes de 5 anos, a família leva 90% para o próximo apartamento.")
-        : (EN ? "After 5 years, the family takes all of it." : "Depois de 5 anos, a família leva tudo.");
+        ? (EN ? "Before 5 years, the family takes 90% to the next home and leaves 10%." : "Antes de 5 anos, a família leva 90% para o próximo apartamento e deixa 10%.")
+        : (EN ? "With 5 years or more, the family takes all of it." : "Com 5 anos ou mais, a família leva tudo.");
     };
     form.addEventListener("input", calc);
     form.addEventListener("submit", (e) => e.preventDefault());

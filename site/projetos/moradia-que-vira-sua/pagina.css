@@ -143,3 +143,4 @@ p { margin: 0 0 var(--espaco-3); }
 .nota-calc { font-size: var(--tamanho-1); color: var(--texto-suave); }
 .calc .resultado output[data-saida="pct"], .calc .resultado output[data-saida="anos"] { display: inline; font-size: inherit; color: inherit; font-weight: inherit; }
 .calc .resultado output { display: block; }
+.calc .resultado small { display: block; font-size: var(--tamanho-1); color: var(--texto-suave); margin-top: var(--espaco-1); }

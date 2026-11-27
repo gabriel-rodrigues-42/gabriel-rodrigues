@@ -103,16 +103,16 @@
         <div>
           <label for="anos">Time living in the flat</label>
           <select id="anos" name="anos" toolparamdescription="How many years the family lives in the flat, from 1 to 10">
-            <option value="1">1 year</option><option value="2">2 years</option><option value="3">3 years</option><option value="4">4 years</option>
-            <option value="5" selected>5 years</option><option value="6">6 years</option><option value="8">8 years</option><option value="10">10 years</option>
+            <option value="1">1 year</option><option value="2">2 years</option><option value="3" selected>3 years</option><option value="4">4 years</option>
+            <option value="5">5 years</option><option value="6">6 years</option><option value="8">8 years</option><option value="10">10 years</option>
           </select>
         </div>
       </div>
       <div class="resultado" aria-live="polite">
         <div>Payment (<output data-saida="pct"></output> of income)<output data-saida="parcela"></output></div>
         <div>Per month, goes to the purchase<output data-saida="compra"></output></div>
-        <div>Saved in <output data-saida="anos"></output> years<output data-saida="juntou"></output></div>
-        <div>If moving now, takes<output data-saida="leva"></output></div>
+        <div>Saved in <output data-saida="anos"></output> years (the 1st is free)<output data-saida="juntou"></output></div>
+        <div>If moving now, takes<output data-saida="leva"></output><small data-saida="desconto"></small></div>
       </div>
       <p class="nota-calc" style="margin: var(--espaco-3) 0 0"><output data-saida="regra"></output> The first year is free and is not counted. The income bands are those of the Minha Casa, Minha Vida law (Law 14,620/2023, art. 5), which the government updates every year. This simulates the proposal; it is not a contract.</p>
     </form>

@@ -103,16 +103,16 @@
         <div>
           <label for="anos">Tempo morando no apartamento</label>
           <select id="anos" name="anos" toolparamdescription="Quantos anos a família mora no apartamento, de 1 a 10">
-            <option value="1">1 ano</option><option value="2">2 anos</option><option value="3">3 anos</option><option value="4">4 anos</option>
-            <option value="5" selected>5 anos</option><option value="6">6 anos</option><option value="8">8 anos</option><option value="10">10 anos</option>
+            <option value="1">1 ano</option><option value="2">2 anos</option><option value="3" selected>3 anos</option><option value="4">4 anos</option>
+            <option value="5">5 anos</option><option value="6">6 anos</option><option value="8">8 anos</option><option value="10">10 anos</option>
           </select>
         </div>
       </div>
       <div class="resultado" aria-live="polite">
         <div>Parcela (<output data-saida="pct"></output> da renda)<output data-saida="parcela"></output></div>
         <div>Por mês, vai para a compra<output data-saida="compra"></output></div>
-        <div>Guardado em <output data-saida="anos"></output> anos<output data-saida="juntou"></output></div>
-        <div>Se mudar agora, leva<output data-saida="leva"></output></div>
+        <div>Guardado em <output data-saida="anos"></output> anos (o 1º é grátis)<output data-saida="juntou"></output></div>
+        <div>Se mudar agora, leva<output data-saida="leva"></output><small data-saida="desconto"></small></div>
       </div>
       <p class="nota-calc" style="margin: var(--espaco-3) 0 0"><output data-saida="regra"></output> O primeiro ano é grátis e não conta na conta. As faixas de renda são as da lei do Minha Casa, Minha Vida (Lei 14.620/2023, art. 5º), que o governo atualiza todo ano. É uma simulação da proposta, não um contrato.</p>
     </form>
