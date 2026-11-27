@@ -87,7 +87,7 @@
     <h2>One free year, then rent that turns into a purchase</h2>
     <ol class="fluxo">
       <li><span class="n">1</span><div><strong>First year without paying</strong>For people leaving a risk area or an occupation without papers. It is time to settle into the new place.</div></li>
-      <li><span class="n">2</span><div><strong>Then a payment that fits the income</strong>From 10% of income, for those who earn least, up to 30%, for those who earn most. Never more than 30%, the same limit used in the United States and Singapore.</div></li>
+      <li><span class="n">2</span><div><strong>Then a payment that fits the income</strong>From 10% of income, for those who earn least, up to 30%, for those who earn most. Never more than 30%, the same limit used in the United States and Singapore. And never more than the rent of a similar flat in the area.</div></li>
       <li><span class="n">3</span><div><strong>Half of the payment goes to the purchase</strong>That money is saved in the family's name. The public fund covers the rest of the price, as Minha Casa, Minha Vida already does.</div></li>
       <li><span class="n">4</span><div><strong>Need to move? Take the money with you</strong>The family takes what it saved to another flat in the program. Before 5 years, it takes 90%. After 5 years, it takes all of it. The discount is there to discourage people who join only to leave.</div></li>
       <li><span class="n">5</span><div><strong>Stopped paying? The savings cover it first</strong>The saved money pays the instalments until it runs out. Nobody is evicted by surprise. Only when the balance reaches zero does eviction follow today's rules.</div></li>
@@ -97,8 +97,16 @@
     <form class="cartao calc" id="calculadora" toolname="calculate_rent_that_becomes_home" tooldescription="Calculates the monthly payment and how much goes to buying the flat in the program The rent that becomes your home, from the family's income and time living there.">
       <div class="campos">
         <div>
-          <label for="renda">Family income per month (R$)</label>
-          <input id="renda" name="renda" type="number" inputmode="numeric" min="0" step="50" value="2000" toolparamdescription="Family's gross monthly income, in Brazilian reais">
+          <label for="renda">Family income per month</label>
+          <input id="renda" name="renda" type="text" inputmode="numeric" autocomplete="off" data-dinheiro value="R$ 2,000" toolparamdescription="Family's gross monthly income, in Brazilian reais">
+        </div>
+        <div>
+          <label for="preco">Price of the flat</label>
+          <input id="preco" name="preco" type="text" inputmode="numeric" autocomplete="off" data-dinheiro value="R$ 200,000" toolparamdescription="Price of the flat, in Brazilian reais">
+        </div>
+        <div>
+          <label for="aluguel">Rent for a similar flat in the area</label>
+          <input id="aluguel" name="aluguel" type="text" inputmode="numeric" autocomplete="off" data-dinheiro value="R$ 1,200" toolparamdescription="Monthly rent for a similar flat in the same neighbourhood, in Brazilian reais. It caps the payment.">
         </div>
         <div>
           <label for="anos">Time living in the flat</label>
@@ -109,12 +117,13 @@
         </div>
       </div>
       <div class="resultado" aria-live="polite">
-        <div>Payment (<output data-saida="pct"></output> of income)<output data-saida="parcela"></output></div>
+        <div><span data-saida="rotulo"></span><output data-saida="parcela"></output></div>
         <div>Per month, goes to the purchase<output data-saida="compra"></output></div>
         <div>Saved in <output data-saida="anos"></output> years (the 1st is free)<output data-saida="juntou"></output></div>
         <div>If moving now, takes<output data-saida="leva"></output><small data-saida="desconto"></small></div>
+        <div>Of the price, already paid<output data-saida="parte"></output></div>
       </div>
-      <p class="nota-calc" style="margin: var(--espaco-3) 0 0"><output data-saida="regra"></output> The first year is free and is not counted. The income bands are those of the Minha Casa, Minha Vida law (Law 14,620/2023, art. 5), which the government updates every year. This simulates the proposal; it is not a contract.</p>
+      <p class="nota-calc" style="margin: var(--espaco-3) 0 0"><output data-saida="regra"></output> The payment never exceeds the rent of a similar flat in the area: people who earn more pay the market price, and no more. The first year is free and is not counted. The income bands are those of the Minha Casa, Minha Vida law (Law 14,620/2023, art. 5), which the government updates every year. This simulates the proposal; it is not a contract.</p>
     </form>
   </section>
 

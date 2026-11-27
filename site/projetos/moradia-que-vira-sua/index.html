@@ -87,7 +87,7 @@
     <h2>Um ano grátis, depois um aluguel que vira compra</h2>
     <ol class="fluxo">
       <li><span class="n">1</span><div><strong>Primeiro ano sem pagar</strong>Para quem sai de área de risco ou de ocupação sem documento. É o tempo de arrumar a vida no lugar novo.</div></li>
-      <li><span class="n">2</span><div><strong>Depois, uma parcela que cabe na renda</strong>De 10% da renda, para quem ganha menos, até 30%, para quem ganha mais. Nunca passa de 30%, a mesma régua dos Estados Unidos e de Singapura.</div></li>
+      <li><span class="n">2</span><div><strong>Depois, uma parcela que cabe na renda</strong>De 10% da renda, para quem ganha menos, até 30%, para quem ganha mais. Nunca passa de 30%, a mesma régua dos Estados Unidos e de Singapura. E nunca passa do aluguel de um apartamento parecido no bairro.</div></li>
       <li><span class="n">3</span><div><strong>Metade da parcela vai para a compra</strong>Esse dinheiro fica guardado no nome da família. O fundo público completa o preço do apartamento, como o Minha Casa, Minha Vida já faz.</div></li>
       <li><span class="n">4</span><div><strong>Precisa mudar? Leva o dinheiro junto</strong>A família leva o que juntou para outro apartamento do programa. Antes de 5 anos, leva 90%. Depois de 5 anos, leva tudo. O desconto existe para desestimular quem entra só para sair.</div></li>
       <li><span class="n">5</span><div><strong>Parou de pagar? O saldo cobre primeiro</strong>O dinheiro guardado paga as parcelas até acabar. Ninguém é despejado de surpresa. Só quando o saldo zera segue o despejo pelas regras de hoje.</div></li>
@@ -97,8 +97,16 @@
     <form class="cartao calc" id="calculadora" toolname="calcular_aluguel_que_vira_casa" tooldescription="Calcula a parcela mensal e quanto vira compra do apartamento no programa O aluguel que vira a sua casa, a partir da renda da família e do tempo morando.">
       <div class="campos">
         <div>
-          <label for="renda">Renda da família por mês (R$)</label>
-          <input id="renda" name="renda" type="number" inputmode="numeric" min="0" step="50" value="2000" toolparamdescription="Renda bruta mensal da família, em reais">
+          <label for="renda">Renda da família por mês</label>
+          <input id="renda" name="renda" type="text" inputmode="numeric" autocomplete="off" data-dinheiro value="R$ 2.000" toolparamdescription="Renda bruta mensal da família, em reais">
+        </div>
+        <div>
+          <label for="preco">Preço do apartamento</label>
+          <input id="preco" name="preco" type="text" inputmode="numeric" autocomplete="off" data-dinheiro value="R$ 200.000" toolparamdescription="Preço do apartamento, em reais">
+        </div>
+        <div>
+          <label for="aluguel">Aluguel de um apartamento parecido no bairro</label>
+          <input id="aluguel" name="aluguel" type="text" inputmode="numeric" autocomplete="off" data-dinheiro value="R$ 1.200" toolparamdescription="Quanto custa por mês alugar um apartamento parecido no mesmo bairro, em reais. É o teto da parcela.">
         </div>
         <div>
           <label for="anos">Tempo morando no apartamento</label>
@@ -109,12 +117,13 @@
         </div>
       </div>
       <div class="resultado" aria-live="polite">
-        <div>Parcela (<output data-saida="pct"></output> da renda)<output data-saida="parcela"></output></div>
+        <div><span data-saida="rotulo"></span><output data-saida="parcela"></output></div>
         <div>Por mês, vai para a compra<output data-saida="compra"></output></div>
         <div>Guardado em <output data-saida="anos"></output> anos (o 1º é grátis)<output data-saida="juntou"></output></div>
         <div>Se mudar agora, leva<output data-saida="leva"></output><small data-saida="desconto"></small></div>
+        <div>Do preço do apartamento, já pago<output data-saida="parte"></output></div>
       </div>
-      <p class="nota-calc" style="margin: var(--espaco-3) 0 0"><output data-saida="regra"></output> O primeiro ano é grátis e não conta na conta. As faixas de renda são as da lei do Minha Casa, Minha Vida (Lei 14.620/2023, art. 5º), que o governo atualiza todo ano. É uma simulação da proposta, não um contrato.</p>
+      <p class="nota-calc" style="margin: var(--espaco-3) 0 0"><output data-saida="regra"></output> A parcela nunca passa do aluguel de um apartamento parecido no bairro: quem ganha mais paga o preço de mercado, e não mais que isso. O primeiro ano é grátis e não conta na conta. As faixas de renda são as da lei do Minha Casa, Minha Vida (Lei 14.620/2023, art. 5º), que o governo atualiza todo ano. É uma simulação da proposta, não um contrato.</p>
     </form>
   </section>
 

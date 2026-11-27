@@ -206,20 +206,36 @@
     const fmt = new Intl.NumberFormat(EN ? "en-US" : "pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
     // Faixas de renda urbana da Lei 14.620/2023, art. 5º (valores da lei; o ministério atualiza todo ano).
     const pct = (renda) => renda <= 2640 ? .10 : renda <= 4400 ? .15 : renda <= 8000 ? .20 : .30;
+    const num = (campo) => Number(String(campo.value).replace(/\D/g, "")) || 0;
+    const fmtNum = new Intl.NumberFormat(EN ? "en-US" : "pt-BR");
+    // Formata os campos de dinheiro enquanto a pessoa digita: "R$ 20.000".
+    form.querySelectorAll("[data-dinheiro]").forEach((campo) => {
+      campo.addEventListener("input", () => {
+        const n = num(campo);
+        campo.value = n ? "R$ " + fmtNum.format(n) : "";
+      });
+    });
     const calc = () => {
-      const renda = Math.max(0, Number(form.renda.value) || 0);
+      const renda = num(form.renda);
+      const preco = num(form.preco);
+      const aluguel = num(form.aluguel);
       const anos = Number(form.anos.value);
       const p = pct(renda);
-      const parcela = Math.round(renda * p);
+      const pelaRenda = Math.round(renda * p);
+      const noTeto = aluguel > 0 && aluguel < pelaRenda;
+      const parcela = noTeto ? aluguel : pelaRenda;
+      form.querySelector("[data-saida=rotulo]").textContent = noTeto
+        ? (EN ? "Payment (capped at the area's rent)" : "Parcela (no teto: o aluguel do bairro)")
+        : (EN ? `Payment (${Math.round(p * 100)}% of income)` : `Parcela (${Math.round(p * 100)}% da renda)`);
       const compra = Math.round(parcela / 2);
       const meses = Math.max(0, (anos - 1) * 12);
       const juntou = compra * meses;
       const leva = anos < 5 ? Math.round(juntou * .9) : juntou;
-      form.querySelector("[data-saida=pct]").textContent = Math.round(p * 100) + "%";
       form.querySelector("[data-saida=parcela]").textContent = fmt.format(parcela);
       form.querySelector("[data-saida=compra]").textContent = fmt.format(compra);
       form.querySelector("[data-saida=juntou]").textContent = fmt.format(juntou);
       form.querySelector("[data-saida=leva]").textContent = fmt.format(leva);
+      form.querySelector("[data-saida=parte]").textContent = preco ? fmtNum.format(Math.min(100, Math.round(juntou / preco * 1000) / 10)) + "%" : "–";
       form.querySelector("[data-saida=desconto]").textContent = anos < 5
         ? (EN ? `Leaves ${fmt.format(juntou - leva)} behind (10% before 5 years)` : `Deixa ${fmt.format(juntou - leva)} (10%, antes de 5 anos)`)
         : (EN ? "No discount: 5 years or more" : "Sem desconto: 5 anos ou mais");

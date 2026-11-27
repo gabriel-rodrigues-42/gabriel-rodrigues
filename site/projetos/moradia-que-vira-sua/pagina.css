@@ -127,7 +127,7 @@ p { margin: 0 0 var(--espaco-3); }
 /* Calculadora */
 .calc { padding: var(--espaco-5); }
 .calc label { display: block; font-weight: var(--peso-forte); color: var(--azul); margin-bottom: var(--espaco-2); }
-.calc input[type="number"], .calc select { font: inherit; font-size: var(--tamanho-campo); width: 100%; max-width: 260px; padding: 10px 12px; border: 2px solid var(--azul-claro); border-radius: var(--forma-opcao); background-color: var(--branco); color: var(--texto); }
+.calc input, .calc select { font: inherit; font-size: var(--tamanho-campo); width: 100%; max-width: 260px; padding: 10px 12px; border: 2px solid var(--azul-claro); border-radius: var(--forma-opcao); background-color: var(--branco); color: var(--texto); }
 .calc .campos { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--espaco-4); margin-bottom: var(--espaco-4); }
 
 .calc .resultado { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--espaco-3); }
