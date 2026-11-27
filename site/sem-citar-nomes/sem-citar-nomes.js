@@ -5,9 +5,9 @@
   const en = document.documentElement.lang.startsWith("en");
   const T = en ? {
     escolha: "What did they say to you?",
-    sortear: "Draw a way out", outra: "Draw another one", copiar: "Copy", copiado: "Copied",
-    serio: "If you want to get serious:", ver: "See in the dictionary",
-    jeito: "The style", piada: "The joke", sistema: "The system"
+    sortear: "Get a comeback", outra: "Another one", copiar: "Copy", copiado: "Copied",
+    serio: "Then, to get serious:", ver: "See it in the dictionary",
+    jeito: "How they operate", piada: "The joke", sistema: "The real problem"
   } : {
     escolha: "O que falaram para você?",
     sortear: "Sortear uma saída", outra: "Sortear outra", copiar: "Copiar", copiado: "Copiado",
