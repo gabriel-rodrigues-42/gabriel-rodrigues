@@ -144,3 +144,19 @@ p { margin: 0 0 var(--espaco-3); }
 .calc .resultado output[data-saida="pct"], .calc .resultado output[data-saida="anos"] { display: inline; font-size: inherit; color: inherit; font-weight: inherit; }
 .calc .resultado output { display: block; }
 .calc .resultado small { display: block; font-size: var(--tamanho-1); color: var(--texto-suave); margin-top: var(--espaco-1); }
+
+/* Calculadora: campos alinhados pela base e resultados numa linha no computador */
+.calc { container-type: inline-size; }
+.calc input, .calc select { max-width: none; }
+.calc .resultado > div { display: grid; grid-template-rows: subgrid; grid-row: span 3; row-gap: var(--espaco-1); }
+.calc .resultado .rot { align-self: start; }
+.calc .resultado small:empty { display: none; }
+@container (min-width: 600px) {
+  .calc .campos { grid-template-columns: repeat(4, 1fr); gap: var(--espaco-2) var(--espaco-3); }
+  .calc .campos > div { display: grid; grid-template-rows: subgrid; grid-row: span 2; }
+  .calc .campos label { align-self: end; margin-bottom: 0; }
+  .calc .resultado { grid-template-columns: repeat(5, 1fr); gap: var(--espaco-2); }
+  .calc .resultado > div { padding: var(--espaco-3) var(--espaco-2) var(--espaco-3) var(--espaco-3); }
+  .calc .resultado output { font-size: var(--tamanho-3); }
+  .calc .resultado .rot { font-size: var(--tamanho-1); }
+}
