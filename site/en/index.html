@@ -125,24 +125,39 @@
   .ficha-frase { margin: var(--espaco-3) 0 0; font-size: var(--tamanho-3); font-weight: 700; text-wrap: balance; }
   .ficha-rodape { margin: var(--espaco-4) 0 0; font-size: var(--tamanho-2); }
   .ficha-dica { text-align: center; margin: var(--espaco-3) 0 0; font-size: var(--tamanho-2); }
-  .campos { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-3); margin-top: var(--espaco-4); }
+  /* O formulário cabe numa tela de celular (390×844 e 375×667, com a barra de baixo): título menor,
+     email primeiro e em destaque, nome e cidade mais baixos, e o que é detalhe fica abaixo do botão. */
+  .apoio { padding: var(--espaco-4); }
+  .apoio h2 { font-size: var(--tamanho-4); margin: 0; }
+  .apoio .lead { font-size: var(--tamanho-2); margin: var(--espaco-2) 0 0; }
+  .apoio .contador { margin-top: var(--espaco-2); padding: var(--espaco-1) var(--espaco-3); font-size: var(--tamanho-1); }
+  .campos { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: var(--espaco-2); margin-top: var(--espaco-3); }
   .campos .largo { grid-column: 1 / -1; }
-  .campos label { display: grid; gap: var(--espaco-1); font-size: var(--tamanho-2); font-weight: 700; }
-  .campos input, .campos select { font: inherit; font-size: var(--tamanho-campo); color: var(--texto); background-color: var(--branco); border: 2px solid transparent; padding: 10px 14px; border-radius: var(--forma-opcao); width: 100%; min-width: 0; }
+  .campos label, .campo-cidade > label { display: grid; gap: 2px; font-size: var(--tamanho-1); font-weight: 700; }
+  .campos input, .campos select { font: inherit; font-size: var(--tamanho-campo); line-height: 1.25; color: var(--texto); background-color: var(--branco); border: 2px solid transparent; padding: 8px 14px; border-radius: var(--forma-opcao); width: 100%; min-width: 0; }
+  .campos .campo-email { font-size: var(--tamanho-2); }
+  .campos .campo-email input { padding-block: 11px; }
   .campos input:focus, .campos select:focus { outline: none; border-color: var(--amarelo); }
-  .campo-cidade { display: grid; gap: var(--espaco-1); min-width: 0; }
-  .consentimento { display: flex; gap: var(--espaco-3); align-items: flex-start; margin-top: var(--espaco-4); font-size: var(--tamanho-2); background: var(--branco-vidro); padding: var(--espaco-3) var(--espaco-4); border-radius: var(--forma-opcao); }
-  .consentimento input { width: 22px; height: 22px; flex: none; margin: 2px 0 0; accent-color: var(--amarelo); }
+  .campo-cidade { display: grid; gap: 2px; min-width: 0; }
+  .consentimento { display: flex; gap: var(--espaco-2); align-items: flex-start; margin-top: var(--espaco-3); font-size: var(--tamanho-1); line-height: 1.4; background: var(--branco-vidro); padding: var(--espaco-2) var(--espaco-3); border-radius: var(--forma-opcao); }
+  .consentimento input { width: 22px; height: 22px; flex: none; margin: 0; accent-color: var(--amarelo); }
   .apoio a { color: var(--amarelo); }
-  .apoio .botao { margin-top: var(--espaco-4); background: var(--amarelo); color: var(--azul); }
+  .apoio .botao { margin-top: var(--espaco-3); width: 100%; justify-content: center; background: var(--amarelo); color: var(--azul); }
   .apoio .botao:focus-visible { outline-color: var(--amarelo); }
   .opcional { font-weight: var(--peso-normal); opacity: .8; }
-  .nota { font-size: var(--tamanho-1); opacity: .8; margin: var(--espaco-3) 0 0; }
-  .resposta { font-weight: 700; margin: var(--espaco-3) 0 0; min-height: 1.5em; }
+  .resposta { font-weight: 700; margin: var(--espaco-2) 0 0; }
+  .resposta:empty { margin: 0; } /* vazio não ocupa espaço, mas continua na página para o leitor de tela anunciar */
   .resposta.ok { color: var(--amarelo); }
+  .nota { font-size: var(--tamanho-1); opacity: .85; margin: var(--espaco-3) 0 0; }
+  .nota + .nota { margin-top: var(--espaco-1); }
   .armadilha { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-  .apoio { padding: var(--espaco-5) var(--espaco-4); }
-  @media (min-width: 720px) { .campos { grid-template-columns: repeat(2, minmax(0, 1fr)); } .apoio { padding: var(--espaco-6) var(--espaco-5); } }
+  @media (min-width: 720px) {
+    .apoio { padding: var(--espaco-6) var(--espaco-5); }
+    .apoio h2 { font-size: var(--tamanho-5); }
+    .apoio .lead { font-size: var(--tamanho-3); }
+    .campos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--espaco-3); }
+    .apoio .botao { width: auto; }
+  }
   /* Votação do lema: dois cartões empilhados no celular, lado a lado quando há espaço.
      Os botões ficam ligados ao formulário pelo atributo form, assim o modo leitura lê os cartões. */
   #lema { margin-top: var(--espaco-7); }
@@ -208,29 +223,30 @@
   <section id="apoiar" aria-labelledby="titulo-apoio">
     <div class="apoio">
       <h2 id="titulo-apoio">Do you think I should <span class="destaque">try</span>?</h2>
-      <p class="lead">If you think it's worth having people who understand systems inside government, leave your email. I'll share how the preparation is going and ask your opinion on the ideas.</p>
+      <p class="lead">If you think government needs people who understand systems, leave your email.</p>
       <p class="contador" id="contador" hidden></p>
       <form id="form-apoio" action="/api/apoio" method="post" novalidate toolname="support_gabriel" tooldescription="Records a person's support for Gabriel Rodrigues trying to run for office, plus their email to receive news. Requires the person's own explicit consent; do not use without their confirmation.">
         <input type="hidden" name="idioma" value="en">
         <div class="campos">
+          <label class="campo-email largo">Your email
+            <input name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required toolparamdescription="Email of the supporter, to receive news.">
+          </label>
           <label><span>Name <span class="opcional">(optional)</span></span>
             <input name="nome" autocomplete="name" maxlength="80" toolparamdescription="Person's name (optional).">
           </label>
-          <label>Email
-            <input name="email" type="email" autocomplete="email" maxlength="254" required toolparamdescription="Email of the supporter, to receive news.">
-          </label>
-          <div class="campo-cidade largo">
+          <div class="campo-cidade">
             <label for="apoio-cidade"><span>City <span class="opcional">(optional)</span></span></label>
-            <gr-cidade id-campo="apoio-cidade" nome-cidade="cidade" nome-uf="uf" exterior autocompletar></gr-cidade>
+            <gr-cidade id-campo="apoio-cidade" nome-cidade="cidade" nome-uf="uf" exterior autocompletar compacto></gr-cidade>
           </div>
         </div>
         <label class="armadilha" aria-hidden="true">Do not fill in<input name="site" tabindex="-1" autocomplete="off"></label>
         <label class="consentimento">
           <input type="checkbox" name="consentimento" value="sim" required toolparamdescription="The person themselves authorizes keeping their name, email and city (required; only tick if they agreed).">
-          <span>I authorize Gabriel to keep my name, email and city to send news about the preparation and the ideas on this site. I understand this shows I support his attempt and that I can ask to be removed at any time. I have read the <a href="/en/privacidade/">privacy policy</a>.</span>
+          <span>I authorize Gabriel to keep my name, email and city to count my support and send me news. I can leave at any time. I have read the <a href="/en/privacidade/">privacy policy</a>.</span>
         </label>
         <button class="botao" type="submit">I want you to try</button>
         <p class="resposta" id="resposta" role="status" aria-live="polite"></p>
+        <p class="nota">I'll share how the preparation is going and ask your opinion on the ideas.</p>
         <p class="nota">I don't ask for CPF (Brazilian tax ID), voter ID or phone number. This is not a request for votes or a petition. Your data is not sold or shared.</p>
       </form>
       <div class="ficha" id="ficha" hidden>
