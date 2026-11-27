@@ -76,6 +76,14 @@
   /* Capa */
   .capa-acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-3); margin-top: var(--espaco-5); }
   .botao { display: inline-flex; align-items: center; gap: var(--espaco-2); }
+  /* Chamada para o vídeo curto (link leve: nada do YouTube carrega na página) */
+  .video-curto { display: flex; align-items: center; gap: var(--espaco-3); margin-top: var(--espaco-4); padding: var(--espaco-3) var(--espaco-4); background: var(--amarelo-claro); border-radius: var(--forma-cartao); color: var(--texto); text-decoration: none; }
+  .video-curto:hover strong { text-decoration: underline; }
+  .video-curto:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+  .video-curto .play { flex: none; width: 48px; height: 48px; border-radius: 50%; background: var(--verde-fundo); color: var(--branco); display: grid; place-items: center; }
+  .video-curto .play svg { width: 20px; height: 20px; fill: currentColor; margin-left: 3px; }
+  .video-curto strong { display: block; color: var(--azul); font-size: var(--tamanho-3); line-height: 1.25; }
+  .video-curto span.suave { display: block; font-size: var(--tamanho-2); }
   .icone { width: 18px; height: 18px; fill: currentColor; flex: none; }
 
   /* Três passos do Buy, Borrow, Die */
@@ -250,6 +258,10 @@
     <span class="selo" style="margin-top: var(--espaco-5)">Proposta em estudo</span>
     <h1>O dinheiro para reindustrializar o Brasil <span class="destaque">já existe</span>. <span class="linha">Ele só está parado.</span></h1>
     <p class="lead">Quem tem muito patrimônio já pega crédito no banco dando as próprias ações como garantia. A proposta do Fundo Soberano de Reindustrialização e Inovação, o FSRI, é fazer esse dinheiro virar fábrica, patente e plataforma brasileira.</p>
+    <a class="video-curto" href="https://youtube.com/shorts/6Z7ZIdDEMwk">
+      <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+      <span><strong>Prefere ver em vídeo?</strong><span class="suave">Assista ao vídeo curto no YouTube.</span></span>
+    </a>
   </header>
 
   <!-- ATO 1 -->
@@ -311,7 +323,7 @@
     <h2>Três faixas, do aplicativo ao chip</h2>
     <p>Ninguém sério coloca dinheiro num chip brasileiro que leva 15 anos para dar retorno. A não ser que o risco seja dividido. Por isso o Estado entra como garantidor de parte do prejuízo, pelo BNDES e pela Finep (o banco de desenvolvimento e a agência de inovação do governo federal) e com dinheiro do próprio fundo. Quanto maior o risco, maior a proteção.</p>
 
-    <div class="abas" role="tablist" aria-label="Faixas de risco">
+    <div class="abas" role="tablist">
       <button class="aba" role="tab" id="aba-1" aria-controls="faixa-1" aria-selected="true" type="button">Faixa 1</button>
       <button class="aba" role="tab" id="aba-2" aria-controls="faixa-2" aria-selected="false" tabindex="-1" type="button">Faixa 2</button>
       <button class="aba" role="tab" id="aba-3" aria-controls="faixa-3" aria-selected="false" tabindex="-1" type="button">Faixa 3</button>
@@ -370,7 +382,7 @@
     <h2>Se o projeto quebrar, quem paga?</h2>
     <p>Esta é a pergunta que todo mundo deveria fazer. A resposta da proposta: o investidor sempre paga a maior parte. Escolha uma faixa e veja como fica um prejuízo, a cada R$ 100 aportados, num projeto que faliu de verdade.</p>
     <div class="cartao simulador">
-      <div class="opcoes" role="radiogroup" aria-label="Escolha a faixa">
+      <div class="opcoes" role="radiogroup">
         <button class="opcao" type="button" role="radio" aria-checked="false" data-estado="20">Faixa 1</button>
         <button class="opcao" type="button" role="radio" aria-checked="false" data-estado="35">Faixa 2</button>
         <button class="opcao marcada" type="button" role="radio" aria-checked="true" data-estado="50">Faixa 3</button>
