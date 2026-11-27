@@ -1,17 +1,10 @@
 /* Página do mapa da cidade esponja (PT e EN usam o mesmo arquivo). */
-main { max-width: 1180px; margin: 0 auto; padding: var(--espaco-6) var(--espaco-4) var(--espaco-7); }
+main { max-width: 1180px; padding: var(--espaco-6) var(--espaco-4) var(--espaco-7); }
 main > :not(.bloco-mapa):not(.casos) { max-width: 760px; margin-left: auto; margin-right: auto; }
-nav a { font-weight: var(--peso-forte); text-decoration: none; color: var(--azul); }
-a { color: var(--azul); }
-h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); text-wrap: balance; hyphens: none; }
-h2 { font-size: var(--tamanho-5); line-height: 1.15; color: var(--azul); margin: var(--espaco-7) auto var(--espaco-3); text-wrap: balance; }
-h3 { font-size: var(--tamanho-3); color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-2); line-height: 1.25; }
-p { margin: 0 0 var(--espaco-3); }
+h2 { margin: var(--espaco-7) auto var(--espaco-3); text-wrap: balance; }
+h3 { margin: var(--espaco-4) 0 var(--espaco-2); }
 .topo { margin-bottom: var(--espaco-5); }
 .topo .selo { margin-top: var(--espaco-4); }
-.lead { font-size: var(--tamanho-3); color: var(--texto-suave); }
-.fontes { font-size: var(--tamanho-2); color: var(--texto-suave); }
-.fontes li + li { margin-top: var(--espaco-2); }
 .bola { display: inline-block; flex: none; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--branco); box-shadow: 0 0 0 1px rgba(0, 0, 0, .15); }
 .bola.marco { background: var(--amarelo); border: 3px solid var(--azul); }
 
@@ -97,10 +90,7 @@ p { margin: 0 0 var(--espaco-3); }
 .bloco-mapa > .fontes { margin-top: var(--espaco-3); font-size: var(--tamanho-1); }
 
 /* Números */
-.numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: var(--espaco-4); margin-bottom: var(--espaco-4); }
-.numeros .cartao { padding: var(--espaco-4); }
-.numeros strong { display: block; font-size: var(--tamanho-5); color: var(--verde-escuro); line-height: 1.1; margin-bottom: var(--espaco-1); }
-.numeros .fontes { display: block; margin-top: var(--espaco-2); font-size: var(--tamanho-1); }
+.numeros { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); margin-bottom: var(--espaco-4); }
 
 /* Cenários da Marginal */
 .palco { display: block; width: 100%; height: auto; border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); background: var(--azul-claro); margin-bottom: var(--espaco-3); }

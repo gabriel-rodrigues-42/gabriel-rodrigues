@@ -33,18 +33,10 @@
 <script src="/design-system/moldura.js"></script>
 <link rel="stylesheet" href="/design-system/contribuir.css">
 <script src="/design-system/contribuir.js"></script>
+<link rel="stylesheet" href="/design-system/proposta.css">
 <style>
-  main { max-width: 760px; margin: 0 auto; padding: var(--espaco-7) var(--espaco-4); }
-  h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); }
-  h2 { font-size: var(--tamanho-4); color: var(--azul); margin: var(--espaco-6) 0 var(--espaco-2); }
-  .lead { font-size: var(--tamanho-3); color: var(--texto-suave); }
   .video { position: relative; aspect-ratio: 16 / 9; border-radius: var(--forma-cartao); overflow: hidden; box-shadow: var(--sombra-cartao); margin-top: var(--espaco-5); background: var(--azul-claro); }
   .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-  .numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--espaco-4); }
-  .numeros strong { display: block; font-size: var(--tamanho-5); color: var(--verde-escuro); line-height: 1.1; }
-  .fontes { font-size: var(--tamanho-2); color: var(--texto-suave); }
-  a { color: var(--azul); }
-  nav a { font-weight: 800; text-decoration: none; }
 </style>
 </head>
 <body>
@@ -59,26 +51,36 @@
   <!-- Vídeo: troque VIDEO_ID pelo ID do YouTube, ou apague este bloco -->
   <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID" title="[Título do vídeo]" allowfullscreen loading="lazy"></iframe></div>
 
-  <h2>Como funciona hoje</h2>
-  <p>[Descreva o sistema atual como um fluxo: quem faz o quê, em que ordem, onde trava. Pense como engenheiro: entradas, saídas, gargalos.]</p>
+  <section class="capitulo">
+    <h2>Como funciona hoje</h2>
+    <p>[Descreva o sistema atual como um fluxo: quem faz o quê, em que ordem, onde trava. Pense como engenheiro: entradas, saídas, gargalos.]</p>
+  </section>
 
-  <h2>Os números</h2>
-  <div class="numeros">
-    <div class="cartao"><strong>[número]</strong>[o que ele mede] <span class="fontes">[fonte]</span></div>
-    <div class="cartao"><strong>[número]</strong>[o que ele mede] <span class="fontes">[fonte]</span></div>
-    <div class="cartao"><strong>[número]</strong>[o que ele mede] <span class="fontes">[fonte]</span></div>
-  </div>
+  <section class="capitulo">
+    <h2>Os números</h2>
+    <div class="numeros">
+      <div class="cartao"><strong>[número]</strong>[o que ele mede] <span class="fontes">[fonte]</span></div>
+      <div class="cartao"><strong>[número]</strong>[o que ele mede] <span class="fontes">[fonte]</span></div>
+      <div class="cartao"><strong>[número]</strong>[o que ele mede] <span class="fontes">[fonte]</span></div>
+    </div>
+  </section>
 
-  <h2>O que proponho</h2>
-  <p>[A mudança em linguagem simples. Se for lei: o que muda, quem é afetado, como medir se funcionou.]</p>
+  <section class="capitulo">
+    <h2>O que proponho</h2>
+    <p>[A mudança em linguagem simples. Se for lei: o que muda, quem é afetado, como medir se funcionou.]</p>
+  </section>
 
-  <h2>Como medir se deu certo</h2>
-  <p>[Um ou dois indicadores públicos e onde acompanhar.]</p>
+  <section class="capitulo">
+    <h2>Como medir se deu certo</h2>
+    <p>[Um ou dois indicadores públicos e onde acompanhar.]</p>
+  </section>
 
-  <h2>Fontes</h2>
-  <ul class="fontes">
-    <li><a href="[link oficial]">[Nome da fonte, órgão e ano]</a></li>
-  </ul>
+  <section class="capitulo">
+    <h2>Fontes</h2>
+    <ul class="fontes">
+      <li><a href="[link oficial]">[Nome da fonte, órgão e ano]</a></li>
+    </ul>
+  </section>
 </main>
 <gr-contribuir></gr-contribuir>
 <gr-rodape></gr-rodape>

@@ -55,24 +55,14 @@
 <script src="/design-system/contribuir.js"></script>
 <link rel="stylesheet" href="/design-system/video-curto.css">
 <script src="/design-system/video-curto.js" defer></script>
+<link rel="stylesheet" href="/design-system/proposta.css">
 <style>
-  main { max-width: 760px; margin: 0 auto; padding: var(--espaco-7) var(--espaco-4) var(--espaco-7); }
-  nav a { font-weight: var(--peso-forte); text-decoration: none; color: var(--azul); }
-  a { color: var(--azul); }
-  h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); }
   /* Segunda frase do título sempre na linha de baixo, como manchete. */
   h1 .linha { display: block; }
-  h2 { font-size: var(--tamanho-5); line-height: 1.15; color: var(--azul); margin: 0 0 var(--espaco-3); }
-  h3 { font-size: var(--tamanho-4); color: var(--azul); margin: 0 0 var(--espaco-2); line-height: 1.25; }
-  p { margin: 0 0 var(--espaco-3); }
-  .lead { font-size: var(--tamanho-3); color: var(--texto-suave); }
-  .grande { font-size: var(--tamanho-4); font-weight: var(--peso-forte); line-height: 1.35; }
   .suave { color: var(--texto-suave); }
   .pequeno { font-size: var(--tamanho-2); }
 
   /* Capítulos */
-  .capitulo { margin-top: var(--espaco-7); }
-  .ato { display: inline-block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); letter-spacing: .08em; text-transform: uppercase; color: var(--verde-escuro); margin-bottom: var(--espaco-2); }
   .pausa { text-align: center; padding: var(--espaco-6) var(--espaco-4); font-size: var(--tamanho-5); font-weight: var(--peso-forte); line-height: 1.2; color: var(--azul); }
 
   /* Capa */
@@ -101,14 +91,9 @@
   @media (max-width: 560px) { .duas { grid-template-columns: 1fr; } }
 
   /* Fluxo do dinheiro */
-  .fluxo { list-style: none; padding: 0; margin: var(--espaco-5) 0 0; position: relative; }
-  .fluxo::before { content: ""; position: absolute; left: 27px; top: 20px; bottom: 20px; width: 6px; background: var(--amarelo); border-radius: var(--forma-pilula); }
-  .fluxo li { position: relative; display: grid; grid-template-columns: 60px 1fr; gap: var(--espaco-4); align-items: start; padding-bottom: var(--espaco-5); }
-  .fluxo li:last-child { padding-bottom: 0; }
-  .fluxo .n { width: 60px; height: 60px; display: grid; place-items: center; background: var(--verde-fundo); color: var(--branco); font-weight: var(--peso-forte); font-size: var(--tamanho-4); border-radius: var(--forma-bolha-1); box-shadow: var(--sombra-clay); position: relative; }
-  .fluxo li:nth-child(even) .n { background: var(--azul); border-radius: var(--forma-bolha-2); }
+  .fluxo .n { background: var(--verde-fundo); }
+  .fluxo li:nth-child(even) .n { background: var(--azul); }
   .fluxo li:last-child .n { background: var(--amarelo); color: var(--azul); border-radius: var(--forma-bolha-3); }
-  .fluxo strong { display: block; color: var(--azul); font-size: var(--tamanho-3); margin-top: var(--espaco-2); }
 
   /* Faixas de risco */
   .abas { display: flex; flex-wrap: wrap; gap: var(--espaco-2); margin: var(--espaco-4) 0; }
@@ -193,26 +178,13 @@
   @media (max-width: 560px) { .goias { grid-template-columns: 1fr; } }
 
   /* Críticas */
-  .critica { background: var(--branco); border-radius: var(--forma-opcao); box-shadow: var(--sombra-cartao); margin-top: var(--espaco-4); }
-  .critica summary { cursor: pointer; list-style: none; padding: var(--espaco-4) var(--espaco-5); font-weight: var(--peso-forte); color: var(--azul); display: flex; gap: var(--espaco-3); justify-content: space-between; align-items: center; }
-  .critica summary::-webkit-details-marker { display: none; }
-  .critica summary::after { content: "+"; flex: none; width: 32px; height: 32px; display: grid; place-items: center; background: var(--amarelo); color: var(--azul); border-radius: var(--forma-bolha-1); font-size: var(--tamanho-4); }
-  .critica[open] summary::after { content: "−"; }
-  .critica summary:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; border-radius: var(--forma-opcao); }
-  .critica .resposta { padding: 0 var(--espaco-5) var(--espaco-4); }
-  .critica .resposta p:last-child { margin-bottom: 0; }
 
   /* Lei */
   .esferas { display: grid; gap: var(--espaco-4); margin-top: var(--espaco-4); }
   .esferas .selo { margin-bottom: var(--espaco-2); }
   .esferas ul { margin: 0; padding-left: 1.1em; }
 
-  .conversa { background: var(--amarelo-claro); border-radius: var(--forma-cartao); padding: var(--espaco-6) var(--espaco-5); text-align: center; }
-  .conversa p.grande { color: var(--azul); }
   .conversa .capa-acoes { justify-content: center; }
-  .hashtags { display: flex; flex-wrap: wrap; gap: var(--espaco-2); justify-content: center; margin-top: var(--espaco-4); }
-  .hashtag { background: var(--branco); color: var(--verde-escuro); font-weight: var(--peso-forte); padding: 6px 12px; border-radius: var(--forma-selo); }
-  .fontes { font-size: var(--tamanho-2); color: var(--texto-suave); }
 
   /* A conta do investidor */
   .saidas { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--espaco-3); margin-top: var(--espaco-4); }
