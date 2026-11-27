@@ -74,6 +74,8 @@
 <script src="/projetos/propostas.js"></script>
 <script src="/design-system/galeria.js"></script>
 <link rel="stylesheet" href="/design-system/cidade.css">
+<link rel="stylesheet" href="/design-system/ficha.css">
+<script src="/design-system/ficha.js" defer></script>
 <script src="/design-system/cidade.js" defer></script>
 <style>
   main { max-width: 760px; margin: 0 auto; padding: var(--espaco-6) var(--espaco-4) 0; }
@@ -117,14 +119,6 @@
   .apoio .destaque { background: none; color: var(--amarelo); }
   .contador { display: inline-block; margin: 0; padding: var(--espaco-2) var(--espaco-4); border-radius: var(--forma-opcao); background: var(--branco-vidro); color: var(--amarelo); font-weight: 700; text-wrap: balance; }
   .contador[hidden] { display: none; }
-  .ficha { margin-top: var(--espaco-5); }
-  .ficha[hidden] { display: none; }
-  .ficha-cartao { background: var(--amarelo); color: var(--azul); border-radius: var(--forma-cartao); padding: var(--espaco-5); text-align: center; max-width: 420px; margin-inline: auto; box-shadow: var(--sombra-clay); }
-  .ficha-rotulo { margin: 0; font-weight: var(--peso-forte); font-size: var(--tamanho-3); text-transform: uppercase; letter-spacing: .08em; }
-  .ficha-numero { margin: 0; font-weight: var(--peso-forte); font-size: var(--tamanho-numero); line-height: 1; font-variant-numeric: tabular-nums; }
-  .ficha-frase { margin: var(--espaco-3) 0 0; font-size: var(--tamanho-3); font-weight: 700; text-wrap: balance; }
-  .ficha-rodape { margin: var(--espaco-4) 0 0; font-size: var(--tamanho-2); }
-  .ficha-dica { text-align: center; margin: var(--espaco-3) 0 0; font-size: var(--tamanho-2); }
   /* O formulário cabe numa tela de celular (390×844 e 375×667, com a barra de baixo): título menor,
      email primeiro e em destaque, nome e cidade mais baixos, e o que é detalhe fica abaixo do botão. */
   .apoio { padding: var(--espaco-4); }
@@ -142,8 +136,8 @@
   .consentimento { display: flex; gap: var(--espaco-2); align-items: flex-start; margin-top: var(--espaco-3); font-size: var(--tamanho-1); line-height: 1.4; background: var(--branco-vidro); padding: var(--espaco-2) var(--espaco-3); border-radius: var(--forma-opcao); }
   .consentimento input { width: 22px; height: 22px; flex: none; margin: 0; accent-color: var(--amarelo); }
   .apoio a { color: var(--amarelo); }
-  .apoio .botao { margin-top: var(--espaco-3); width: 100%; justify-content: center; background: var(--amarelo); color: var(--azul); }
-  .apoio .botao:focus-visible { outline-color: var(--amarelo); }
+  #form-apoio .botao { margin-top: var(--espaco-3); width: 100%; justify-content: center; background: var(--amarelo); color: var(--azul); }
+  #form-apoio .botao:focus-visible { outline-color: var(--amarelo); }
   .opcional { font-weight: var(--peso-normal); opacity: .8; }
   .resposta { font-weight: 700; margin: var(--espaco-2) 0 0; }
   .resposta:empty { margin: 0; } /* vazio não ocupa espaço, mas continua na página para o leitor de tela anunciar */
@@ -156,7 +150,7 @@
     .apoio h2 { font-size: var(--tamanho-5); }
     .apoio .lead { font-size: var(--tamanho-3); }
     .campos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--espaco-3); }
-    .apoio .botao { width: auto; }
+    #form-apoio .botao { width: auto; }
   }
   /* Votação do lema: dois cartões empilhados no celular, lado a lado quando há espaço.
      Os botões ficam ligados ao formulário pelo atributo form, assim o modo leitura lê os cartões. */
@@ -249,15 +243,20 @@
         <p class="nota">I'll share how the preparation is going and ask your opinion on the ideas.</p>
         <p class="nota">I don't ask for CPF (Brazilian tax ID), voter ID or phone number. This is not a request for votes or a petition. Your data is not sold or shared.</p>
       </form>
-      <div class="ficha" id="ficha" hidden>
-        <div class="ficha-cartao">
-          <p class="ficha-rotulo">Supporter no.</p>
+      <dialog class="ficha" id="ficha" aria-labelledby="ficha-rotulo" data-leitura="pular" data-texto="I told Gabriel he should try. gabriel-rodrigues.com" data-arquivo="support-gabriel-rodrigues.png">
+        <div class="ficha-cartao" tabindex="-1">
+          <p class="ficha-rotulo" id="ficha-rotulo">Supporter no.</p>
           <p class="ficha-numero" id="ficha-numero"></p>
           <p class="ficha-frase" id="ficha-frase"></p>
           <p class="ficha-rodape">gabriel-rodrigues.com · <span id="ficha-data"></span></p>
         </div>
-        <p class="ficha-dica">Take a screenshot and share it if you like.</p>
-      </div>
+        <p class="ficha-dica">Take a screenshot or share it, if you like.</p>
+        <div class="ficha-acoes">
+          <button class="botao" type="button" data-ficha="compartilhar" hidden>Share</button>
+          <button class="botao" type="button" data-ficha="salvar">Save image</button>
+          <form method="dialog"><button class="botao botao-fechar">Close</button></form>
+        </div>
+      </dialog>
     </div>
   </section>
 
@@ -323,8 +322,7 @@
     document.getElementById("ficha-numero").textContent = posicao.toLocaleString("en-US");
     document.getElementById("ficha-frase").textContent = `${primeiro ? primeiro + ", you" : "You"} were the ${ordinal(posicao)} person to say I should try.`;
     document.getElementById("ficha-data").textContent = new Date().toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" });
-    ficha.hidden = false;
-    ficha.scrollIntoView({ behavior: "smooth", block: "center" });
+    grFicha.abrir(ficha, posicao, (x) => x.toLocaleString("en-US"));
   }
 
   // Envio. Também atende agentes de IA pelo WebMCP declarativo (atributos toolname/tooldescription
