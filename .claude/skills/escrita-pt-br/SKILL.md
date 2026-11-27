@@ -24,6 +24,7 @@ Três em cada dez brasileiros de 15 a 64 anos são analfabetos funcionais (Inaf 
 - **Palavra de casa, não de escritório.** Use a tabela da seção 4.
 - **Primeira pessoa, sem palco.** "Eu vi", "eu errei", "eu não sei ainda". Nada de "minha jornada", "meu propósito".
 - **Termine no fato.** A última frase de um parágrafo conta o que aconteceu. Não precisa de moral da história.
+- **Texto curto, uma frase por linha.** Em cartão, chamada ou explicação de 1 a 3 frases, ponha `class="frases"` no parágrafo. Texto corrido longo flui normal.
 
 ## 3. O que entrega texto de IA (corte)
 

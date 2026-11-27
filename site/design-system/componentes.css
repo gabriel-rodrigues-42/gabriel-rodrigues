@@ -78,6 +78,11 @@ select {
 }
 select::-ms-expand { display: none; }
 
+/* Texto curto, uma frase por linha: cartões, explicações e chamadas de 1 a 3 frases.
+   Ponha class="frases" no parágrafo e escreva normal: o moldura.js põe cada frase num
+   <span class="frase"> e cada uma começa em linha nova. Texto corrido longo fica sem. */
+.frases > .frase { display: block; }
+
 /* Revelar ao rolar: o elemento com .revelar aparece quando entra na tela.
    Quem liga é o moldura.js (põe .visivel). Sem animação com movimento reduzido. */
 .revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }

@@ -17,6 +17,8 @@ h1, h2, h3, h4, p, li, dd, dt, a, strong, span, label { overflow-wrap: break-wor
 /* Títulos como manchete: palavra inteira, sem hífen, linhas equilibradas.
    O tamanho (tokens.css) garante que a maior palavra caiba em 360px. */
 h1, h2, h3 { hyphens: manual; text-wrap: balance; }
+/* Parágrafos sem palavra sozinha na última linha (onde o navegador já suporta). */
+p, li, dd, figcaption, blockquote { text-wrap: pretty; }
 
 /* ---------- Cabeçalho (mobile first) ----------
    Celular: logo + botão Apoiar no topo; o menu fica na barra de baixo.

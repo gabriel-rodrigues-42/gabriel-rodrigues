@@ -170,6 +170,37 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", revelarAoRolar);
   else revelarAoRolar();
 
+  // ---------- Texto curto: uma frase por linha ----------
+  // Em todo elemento com .frases, cada frase vira um <span class="frase"> (o CSS em componentes.css
+  // põe uma por linha). Quebra depois de . ! ? … quando a próxima começa com maiúscula, então
+  // "art. 108" e "R$ 1.500" ficam inteiros. Links e negritos no meio seguem com a frase deles.
+  // Componente que escreve o texto depois (como <gr-contribuir>) chama window.grFrases(el).
+  const FIM_DE_FRASE = /(?<=[.!?…]["”»)]?)\s+(?=["“«(]?\p{Lu})/u;
+  function dividirFrases(el) {
+    if (el.querySelector(":scope > .frase")) return;
+    const frases = [[]];
+    for (const no of [...el.childNodes]) {
+      if (no.nodeType !== Node.TEXT_NODE) { frases.at(-1).push(no); continue; }
+      no.textContent.split(FIM_DE_FRASE).forEach((t, i) => {
+        if (i) frases.push([]);
+        if (t) frases.at(-1).push(document.createTextNode(t));
+      });
+    }
+    if (frases.length < 2) return;
+    el.replaceChildren();
+    frases.forEach((nos, i) => {
+      const s = document.createElement("span");
+      s.className = "frase";
+      s.append(...nos);
+      el.append(s);
+      if (i < frases.length - 1) el.append(" "); // o texto copiado e o lido em voz alta continuam com espaço
+    });
+  }
+  window.grFrases = dividirFrases;
+  function dividirTodas() { document.querySelectorAll(".frases").forEach(dividirFrases); }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", dividirTodas);
+  else dividirTodas();
+
   // ---------- Módulos carregados sob demanda (busca e modo leitura) ----------
   // Põe nome.css e nome.js na página uma vez só e espera os dois.
   // Se o script falhar, a próxima chamada tenta de novo.

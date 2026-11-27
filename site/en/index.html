@@ -178,7 +178,7 @@
       <span class="selo">Goiânia · Goiás · Brazil</span>
       <h1 id="titulo-sobre">Hi, I'm <span class="destaque">Gabriel</span>.</h1>
       <p class="objetivo">I want to run for federal representative for Goiás in 2030.<span>If enough people support me, I'll first run for Goiânia's City Council, in 2028. <a class="link-seta" href="#apoiar">Tell me if you believe in it →</a></span></p>
-      <p class="lead">I'm a software developer. I worked in Europe for eight years and came back to Goiás, Brazil, in 2026.</p>
+      <p class="lead frases">I'm a software developer. I worked in Europe for eight years and came back to Goiás, Brazil, in 2026.</p>
       <p class="lead">Today I study politics to fix the systems that get in people's way, the way software gets fixed. <a class="sem-quebra link-seta" href="/en/sobre/">Read my story →</a></p>
     </div>
   </section>
@@ -192,7 +192,7 @@
 
   <section id="publicacoes" aria-labelledby="titulo-publicacoes">
     <h2 id="titulo-publicacoes">Proposals in <span class="destaque">progress</span></h2>
-    <p class="lead">Ideas I'm studying in public. Each one shows which stage it is at, the numbers with sources and the toughest criticism, with my answer.</p>
+    <p class="lead frases">Ideas I'm studying in public. Each one shows which stage it is at, the numbers with sources and the toughest criticism, with my answer.</p>
     <!-- A lista vem de /projetos/propostas.js; as ideias novas de ideias-en.js entram sozinhas no fim. -->
     <gr-propostas></gr-propostas>
   </section>
@@ -252,14 +252,14 @@
       <div class="voto" data-opcao="entrega">
         <span class="selo amarelo voto-seu" hidden>Your vote</span>
         <p class="voto-frase" id="lema-entrega">More delivery, less tax, more trust.</p>
-        <p class="voto-porque">High interest rates also come from low trust. A government that delivers without heavy taxes earns that trust.</p>
+        <p class="voto-porque frases">High interest rates also come from low trust. A government that delivers without heavy taxes earns that trust.</p>
         <button class="botao verde" type="submit" form="form-lema" name="opcao" value="entrega" aria-describedby="lema-entrega">I prefer this one</button>
         <div class="voto-resultado" hidden><span class="voto-barra"><span></span></span><strong class="voto-pct"></strong></div>
       </div>
       <div class="voto" data-opcao="conversa">
         <span class="selo amarelo voto-seu" hidden>Your vote</span>
         <p class="voto-frase" id="lema-conversa">The conversation that matters.</p>
-        <p class="voto-porque">Politics explained simply, with official data, listening to the people who live the problem.</p>
+        <p class="voto-porque frases">Politics explained simply, with official data, listening to the people who live the problem.</p>
         <button class="botao" type="submit" form="form-lema" name="opcao" value="conversa" aria-describedby="lema-conversa">I prefer this one</button>
         <div class="voto-resultado" hidden><span class="voto-barra"><span></span></span><strong class="voto-pct"></strong></div>
       </div>
@@ -267,7 +267,7 @@
     <form id="form-lema" action="/api/lema" method="post" toolname="vote_slogan" tooldescription="Records an anonymous vote for the phrase the person prefers as Gabriel Rodrigues's slogan: opcao=entrega for &quot;More delivery, less tax, more trust.&quot; or opcao=conversa for &quot;The conversation that matters.&quot; Only vote with the person's own confirmation.">
       <input type="hidden" name="idioma" value="en">
     </form>
-    <p class="votacao-nota">Your vote is anonymous, one per device. I only keep how many votes each phrase has. <a href="/en/privacidade/#lema">How it works</a>.</p>
+    <p class="votacao-nota frases">Your vote is anonymous, one per device. I only keep how many votes each phrase has. <a href="/en/privacidade/#lema">How it works</a>.</p>
     <p class="votacao-resposta" id="lema-resposta" role="status" aria-live="polite"></p>
   </section>
 </main>

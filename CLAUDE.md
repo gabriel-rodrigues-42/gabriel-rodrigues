@@ -38,6 +38,7 @@ Site gabriel-rodrigues.com, design system e vídeos do Gabriel Rodrigues, desenv
 - Link para seção (`#algo`): o `moldura.css` já deixa a seção abaixo do cabeçalho fixo (`scroll-padding-top` no `html`). Não ponha `scroll-margin-top` na página. Mudou a altura do cabeçalho? Atualize `--cabecalho-altura`.
 
 - Cores, fontes e formas só por variáveis de `site/design-system/tokens.css`. Precisa de algo novo? Adicione lá primeiro.
+- Texto curto (cartão, chamada, explicação de 1 a 3 frases): `class="frases"` no parágrafo, e cada frase começa em linha nova (`moldura.js` divide sozinho; CSS em `componentes.css`). Texto corrido longo fica sem. Parágrafos já usam `text-wrap: pretty` (sem palavra sozinha na última linha).
 - Links: no meio do texto, sublinhado fino e claro (vem de `componentes.css`; não tire, a cor sozinha não basta). Link sozinho com seta (→) usa `.link-seta`, sem sublinhado. Menu, botões e cartões ficam sem sublinhado.
 - Contraste AA (4,5:1) em todo texto. Texto branco sobre verde usa `--verde-fundo`, nunca `--verde`; texto verde sobre fundo claro usa `--verde-escuro`. Confira com o Lighthouse (Acessibilidade 100).
 - Padrões web: siga o [Modern Web Guidance do Chrome](https://developer.chrome.com/docs/modern-web-guidance). A meta de compatibilidade (Baseline target) deste projeto é Baseline Widely available: use HTML, CSS e JS nativos antes de bibliotecas.
