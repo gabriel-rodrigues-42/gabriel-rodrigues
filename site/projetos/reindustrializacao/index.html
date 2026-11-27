@@ -47,10 +47,10 @@
  "datePublished": "2026-11-19"
 }
 </script>
-<link rel="stylesheet" href="/design-system/tokens.css?v=2026-11-26">
+<link rel="stylesheet" href="/design-system/tokens.css">
 <link rel="stylesheet" href="/design-system/componentes.css">
-<link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-26g">
-<script src="/design-system/moldura.js?v=2026-11-26g"></script>
+<link rel="stylesheet" href="/design-system/moldura.css">
+<script src="/design-system/moldura.js"></script>
 <link rel="stylesheet" href="/design-system/contribuir.css">
 <script src="/design-system/contribuir.js"></script>
 <link rel="stylesheet" href="/design-system/video-curto.css">
@@ -228,11 +228,7 @@
   .simulador-bloco ol { padding-left: var(--espaco-5); margin: var(--espaco-3) 0 var(--espaco-5); }
   .simulador-bloco li + li { margin-top: var(--espaco-2); }
 
-  /* Revelar ao rolar */
-  .revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
-  .revelar.visivel { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) {
-    .revelar { opacity: 1; transform: none; transition: none; }
     .barra-divisao div { transition: none; }
   }
 </style>
@@ -665,17 +661,6 @@
 <script>
 (function () {
   "use strict";
-
-  // Revelar capítulos ao rolar
-  const revelar = document.querySelectorAll(".revelar");
-  if ("IntersectionObserver" in window) {
-    const obs = new IntersectionObserver((entradas) => {
-      entradas.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("visivel"); obs.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    revelar.forEach((el) => obs.observe(el));
-  } else {
-    revelar.forEach((el) => el.classList.add("visivel"));
-  }
 
   // Abas das faixas
   const abas = [...document.querySelectorAll(".aba")];

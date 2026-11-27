@@ -1,0 +1,40 @@
+/* Base das páginas de proposta (projetos/*): títulos, capítulos, números, fluxo, críticas e conversa.
+   Cada página carrega este arquivo antes do seu pagina.css e só escreve lá o que é dela.
+   Cores, formas e fontes só por variáveis de tokens.css. */
+main { max-width: 760px; margin: 0 auto; padding: var(--espaco-7) var(--espaco-4); }
+nav a { font-weight: var(--peso-forte); text-decoration: none; color: var(--azul); }
+a { color: var(--azul); }
+h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); }
+h2 { font-size: var(--tamanho-5); line-height: 1.15; color: var(--azul); margin: 0 0 var(--espaco-3); }
+h3 { font-size: var(--tamanho-4); color: var(--azul); margin: 0 0 var(--espaco-2); line-height: 1.25; }
+p { margin: 0 0 var(--espaco-3); }
+.lead { font-size: var(--tamanho-3); color: var(--texto-suave); }
+.grande { font-size: var(--tamanho-4); font-weight: var(--peso-forte); line-height: 1.35; }
+.capitulo { margin-top: var(--espaco-7); }
+.ato { display: inline-block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); letter-spacing: .08em; text-transform: uppercase; color: var(--verde-escuro); margin-bottom: var(--espaco-2); }
+.numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--espaco-4); margin-top: var(--espaco-4); }
+.numeros .cartao { padding: var(--espaco-4); }
+.numeros strong { display: block; font-size: var(--tamanho-5); color: var(--verde-escuro); line-height: 1.1; margin-bottom: var(--espaco-1); }
+.fontes { font-size: var(--tamanho-2); color: var(--texto-suave); }
+.numeros .fontes { display: block; margin-top: var(--espaco-2); font-size: var(--tamanho-1); }
+.fluxo { list-style: none; padding: 0; margin: var(--espaco-5) 0 0; position: relative; }
+.fluxo::before { content: ""; position: absolute; left: 27px; top: 20px; bottom: 20px; width: 6px; background: var(--amarelo); border-radius: var(--forma-pilula); }
+.fluxo li { position: relative; display: grid; grid-template-columns: 60px 1fr; gap: var(--espaco-4); align-items: start; padding-bottom: var(--espaco-5); }
+.fluxo li:last-child { padding-bottom: 0; }
+.fluxo .n { width: 60px; height: 60px; display: grid; place-items: center; background: var(--azul); color: var(--branco); font-weight: var(--peso-forte); font-size: var(--tamanho-4); border-radius: var(--forma-bolha-1); box-shadow: var(--sombra-clay); position: relative; }
+.fluxo li:nth-child(even) .n { border-radius: var(--forma-bolha-2); }
+.fluxo strong { display: block; color: var(--azul); font-size: var(--tamanho-3); margin-top: var(--espaco-2); }
+.fluxo .trava { display: inline-block; margin-top: var(--espaco-2); background: var(--areia); color: var(--texto); font-size: var(--tamanho-1); font-weight: var(--peso-forte); padding: 4px 10px; border-radius: var(--forma-selo); }
+.critica { background: var(--branco); border-radius: var(--forma-opcao); box-shadow: var(--sombra-cartao); margin-top: var(--espaco-4); }
+.critica summary { cursor: pointer; list-style: none; padding: var(--espaco-4) var(--espaco-5); font-weight: var(--peso-forte); color: var(--azul); display: flex; gap: var(--espaco-3); justify-content: space-between; align-items: center; }
+.critica summary::-webkit-details-marker { display: none; }
+.critica summary::after { content: "+"; flex: none; width: 32px; height: 32px; display: grid; place-items: center; background: var(--amarelo); color: var(--azul); border-radius: var(--forma-bolha-1); font-size: var(--tamanho-4); }
+.critica[open] summary::after { content: "−"; }
+.critica summary:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; border-radius: var(--forma-opcao); }
+.critica .resposta { padding: 0 var(--espaco-5) var(--espaco-4); }
+.critica .resposta p:last-child { margin-bottom: 0; }
+.conversa { background: var(--amarelo-claro); border-radius: var(--forma-cartao); padding: var(--espaco-6) var(--espaco-5); text-align: center; }
+.conversa p.grande { color: var(--azul); }
+.hashtags { display: flex; flex-wrap: wrap; gap: var(--espaco-2); justify-content: center; margin-top: var(--espaco-4); }
+.hashtag { background: var(--branco); color: var(--verde-escuro); font-weight: var(--peso-forte); padding: 6px 12px; border-radius: var(--forma-selo); }
+.fontes li + li { margin-top: var(--espaco-2); }

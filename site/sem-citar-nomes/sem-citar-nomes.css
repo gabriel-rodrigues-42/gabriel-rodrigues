@@ -1,8 +1,8 @@
 /* Página /sem-citar-nomes/. Cores, formas e fontes só por variáveis de tokens.css. */
 main { max-width: 720px; margin: 0 auto; padding: var(--espaco-6) var(--espaco-4) var(--espaco-7); }
-h1 { font-size: var(--tamanho-5); line-height: 1.15; margin: var(--espaco-4) 0 var(--espaco-2); color: var(--azul); text-wrap: balance; }
-h2 { font-size: var(--tamanho-4); margin: var(--espaco-7) 0 var(--espaco-3); color: var(--azul); line-height: 1.25; text-wrap: balance; }
-h3 { font-size: var(--tamanho-3); margin: 0; color: var(--azul); line-height: 1.3; text-wrap: balance; }
+h1 { font-size: var(--tamanho-5); line-height: 1.15; margin: var(--espaco-4) 0 var(--espaco-2); color: var(--azul); }
+h2 { font-size: var(--tamanho-4); margin: var(--espaco-7) 0 var(--espaco-3); color: var(--azul); line-height: 1.25; }
+h3 { font-size: var(--tamanho-3); margin: 0; color: var(--azul); line-height: 1.3; }
 .intro { color: var(--texto-suave); margin: 0 0 var(--espaco-5); text-wrap: pretty; }
 a { color: var(--azul-medio); }
 .pergunta { font-weight: var(--peso-forte); color: var(--azul); margin: 0 0 var(--espaco-3); }
@@ -17,11 +17,10 @@ a { color: var(--azul-medio); }
 .saida figcaption { color: var(--texto); text-wrap: pretty; }
 .serio { color: var(--texto-suave); font-size: var(--tamanho-2); display: block; margin-bottom: var(--espaco-1); }
 .ref { margin: var(--espaco-3) 0 0; font-size: var(--tamanho-2); }
-.ref a { color: var(--azul-medio); }
 .acoes { display: flex; gap: var(--espaco-3); margin-top: var(--espaco-4); flex-wrap: wrap; }
 .arquetipos { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--espaco-4); }
 @media (min-width: 600px) { .arquetipos { grid-template-columns: 1fr 1fr; } }
-.arquetipo { min-width: 0; scroll-margin-top: 96px; }
+.arquetipo { min-width: 0; }
 .arquetipo:target { outline: 3px solid var(--verde); }
 .obra { font-size: var(--tamanho-1); color: var(--texto-suave); margin: var(--espaco-1) 0 var(--espaco-3); }
 .arquetipo dl { margin: 0; }

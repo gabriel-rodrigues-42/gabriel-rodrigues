@@ -79,13 +79,14 @@
   function buscar(q) {
     const palavras = sem(q).split(/[^a-z0-9$%,.]+/).map((p) => p.replace(/^[,.]+|[,.]+$/g, "")).filter((p) => p.length > 1 || /\d/.test(p));
     if (!palavras.length) return [];
+    const inicios = palavras.map((p) => new RegExp("(^|[^a-z0-9])" + p.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     const achados = [];
     for (const it of indice) {
       let pontos = 0;
       let secao = -1;
       let ok = true;
-      for (const p of palavras) {
-        const inicio = new RegExp("(^|[^a-z0-9])" + p.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+      for (const [n, p] of palavras.entries()) {
+        const inicio = inicios[n];
         let pp = 0;
         if (it._t.includes(p)) pp += inicio.test(it._t) ? 12 : 6;
         const s = it._s.findIndex((h) => h.includes(p));
@@ -103,9 +104,9 @@
   }
 
   // Trecho do texto em volta da primeira palavra achada, com as palavras marcadas.
-  function trecho(texto, palavras) {
+  // "base" é o texto já sem acentos e em minúsculas (vem pronto do índice).
+  function trecho(texto, base, palavras) {
     if (!texto) return "";
-    const base = sem(texto);
     let pos = -1;
     for (const p of palavras) { const i = base.indexOf(p); if (i >= 0 && (pos < 0 || i < pos)) pos = i; }
     let ini = 0, fim = Math.min(texto.length, 150);
@@ -221,7 +222,7 @@
     }
     corpo.innerHTML = `<p class="busca-contagem">${T.achou(achados.length)}</p><ul class="busca-lista">${achados.map(({ it, secao, palavras }) => {
       const sec = secao >= 0 ? `<span class="busca-secao">${T.secao}: ${marcar(it.s[secao][0], palavras)}</span>` : "";
-      const txt = trecho(it.x || it.d, palavras) || esc(it.d || "");
+      const txt = (it.x ? trecho(it.x, it._x, palavras) : trecho(it.d, it._d, palavras)) || esc(it.d || "");
       return item(it, { palavras, html: sec + `<span class="busca-trecho">${txt}</span>` }, destino(it, secao));
     }).join("")}</ul>`;
   }

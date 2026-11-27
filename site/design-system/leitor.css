@@ -34,7 +34,7 @@
 ::highlight(leitor-frase) { background-color: var(--amarelo-claro); color: var(--texto); }
 .leitor-atual-inteiro { background-color: var(--amarelo-claro); box-shadow: 0 0 0 4px var(--amarelo-claro); border-radius: 6px; }
 tr.leitor-atual-inteiro > * { background-color: var(--amarelo-claro); }
-.leitor-parte-atual { box-shadow: 0 10px 0 -2px var(--amarelo), 0 2px 18px rgba(0, 39, 118, .12); transition: box-shadow .2s; }
+.leitor-parte-atual { box-shadow: 0 10px 0 -2px var(--amarelo), 0 2px 18px color-mix(in srgb, var(--azul) 12%, transparent); transition: box-shadow .2s; }
 html.leitor-aberto main { cursor: pointer; }
 html.leitor-aberto main :is(a, button, input, select, textarea, label, summary) { cursor: pointer; }
 html.leitor-aberto body { padding-bottom: var(--leitor-altura, 220px); }

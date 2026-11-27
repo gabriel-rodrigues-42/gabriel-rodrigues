@@ -43,12 +43,13 @@
  "datePublished": "2026-11-22"
 }
 </script>
-<link rel="stylesheet" href="/design-system/tokens.css?v=2026-11-26">
+<link rel="stylesheet" href="/design-system/tokens.css">
 <link rel="stylesheet" href="/design-system/componentes.css">
-<link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-26g">
-<script src="/design-system/moldura.js?v=2026-11-26g"></script>
+<link rel="stylesheet" href="/design-system/moldura.css">
+<script src="/design-system/moldura.js"></script>
 <link rel="stylesheet" href="/design-system/contribuir.css">
 <script src="/design-system/contribuir.js"></script>
+<link rel="stylesheet" href="/design-system/proposta.css">
 <link rel="stylesheet" href="/projetos/pena-do-tamanho-do-dano/pagina.css">
 <script src="/projetos/pena-do-tamanho-do-dano/calculadora.js" defer></script>
 </head>
@@ -261,11 +262,5 @@
 </main>
 <gr-contribuir></gr-contribuir>
 <gr-rodape></gr-rodape>
-<script>
-(() => {
-  const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("visivel"); io.unobserve(e.target); } }), { threshold: .12 }) : null;
-  document.querySelectorAll(".revelar").forEach((el) => io ? io.observe(el) : el.classList.add("visivel"));
-})();
-</script>
 </body>
 </html>

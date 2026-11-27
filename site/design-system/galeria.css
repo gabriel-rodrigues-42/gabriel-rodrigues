@@ -18,7 +18,7 @@ gr-propostas { display: block; }
   color: var(--texto); text-decoration: none; overflow: hidden;
   transition: transform .18s ease, box-shadow .18s ease;
 }
-.slot > a:hover { transform: translateY(-4px) rotate(-.6deg); box-shadow: 0 14px 0 -2px var(--azul-claro), 0 8px 26px rgba(0, 39, 118, .14); }
+.slot > a:hover { transform: translateY(-4px) rotate(-.6deg); box-shadow: 0 14px 0 -2px var(--azul-claro), 0 8px 26px color-mix(in srgb, var(--azul) 14%, transparent); }
 .slot:nth-child(even) > a:hover { transform: translateY(-4px) rotate(.6deg); }
 .slot > a:focus-visible { outline: 3px solid var(--azul); outline-offset: 3px; }
 

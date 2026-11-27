@@ -9,7 +9,7 @@ gr-progresso {
 }
 /* Dentro de um cartão, a faixa vai de borda a borda e começa colada no topo dele. */
 .cartao > gr-progresso { --progresso-recuo: var(--espaco-5); margin-top: calc(-1 * var(--espaco-5)); padding-top: var(--espaco-5); border-radius: var(--forma-cartao) var(--forma-cartao) 0 0; }
-gr-progresso[fixo] { box-shadow: 0 8px 14px -10px rgba(0, 39, 118, .35); border-radius: 0; padding-top: var(--espaco-3); }
+gr-progresso[fixo] { box-shadow: 0 8px 14px -10px color-mix(in srgb, var(--azul) 35%, transparent); border-radius: 0; padding-top: var(--espaco-3); }
 .gr-progresso-linha { display: flex; justify-content: space-between; align-items: baseline; gap: var(--espaco-3); flex-wrap: wrap; margin-bottom: var(--espaco-2); }
 .gr-progresso-texto { font-size: var(--tamanho-2); font-weight: var(--peso-forte); color: var(--texto-suave); font-variant-numeric: tabular-nums; }
 gr-progresso[completo] .gr-progresso-texto { color: var(--verde-escuro); }

@@ -43,26 +43,16 @@
  "datePublished": "2026-11-20"
 }
 </script>
-<link rel="stylesheet" href="/design-system/tokens.css?v=2026-11-26">
+<link rel="stylesheet" href="/design-system/tokens.css">
 <link rel="stylesheet" href="/design-system/componentes.css">
-<link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-26g">
-<script src="/design-system/moldura.js?v=2026-11-26g"></script>
+<link rel="stylesheet" href="/design-system/moldura.css">
+<script src="/design-system/moldura.js"></script>
 <link rel="stylesheet" href="/design-system/contribuir.css">
 <script src="/design-system/contribuir.js"></script>
+<link rel="stylesheet" href="/design-system/proposta.css">
 <style>
-  main { max-width: 760px; margin: 0 auto; padding: var(--espaco-7) var(--espaco-4); }
-  nav a { font-weight: var(--peso-forte); text-decoration: none; color: var(--azul); }
-  a { color: var(--azul); }
-  h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: var(--espaco-4) 0 var(--espaco-3); }
-  h2 { font-size: var(--tamanho-5); line-height: 1.15; color: var(--azul); margin: 0 0 var(--espaco-3); }
-  h3 { font-size: var(--tamanho-4); color: var(--azul); margin: 0 0 var(--espaco-2); line-height: 1.25; }
-  p { margin: 0 0 var(--espaco-3); }
-  .lead { font-size: var(--tamanho-3); color: var(--texto-suave); }
-  .grande { font-size: var(--tamanho-4); font-weight: var(--peso-forte); line-height: 1.35; }
   .pequeno { font-size: var(--tamanho-2); }
   .suave { color: var(--texto-suave); }
-  .capitulo { margin-top: var(--espaco-7); }
-  .ato { display: inline-block; font-size: var(--tamanho-1); font-weight: var(--peso-forte); letter-spacing: .08em; text-transform: uppercase; color: var(--verde-escuro); margin-bottom: var(--espaco-2); }
   .pausa { text-align: center; padding: var(--espaco-6) var(--espaco-4); font-size: var(--tamanho-5); font-weight: var(--peso-forte); line-height: 1.2; color: var(--azul); }
   .capa-acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-3); margin-top: var(--espaco-5); }
   .ilustra { display: block; width: 100%; height: auto; margin: var(--espaco-5) 0 var(--espaco-2); }
@@ -94,12 +84,6 @@
   .escolha { font-size: var(--tamanho-2); color: var(--texto-suave); text-align: center; margin: 0; min-height: 3em; }
 
   /* Números */
-  .numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--espaco-4); margin-top: var(--espaco-4); }
-  .numeros .cartao { padding: var(--espaco-4); }
-  .numeros strong { display: block; font-size: var(--tamanho-5); color: var(--verde-escuro); line-height: 1.1; margin-bottom: var(--espaco-1); }
-  .fontes { font-size: var(--tamanho-2); color: var(--texto-suave); }
-  .numeros .fontes { display: block; margin-top: var(--espaco-2); font-size: var(--tamanho-1); }
-  .fontes li + li { margin-top: var(--espaco-2); }
 
   /* Comparação de barras */
   .barras { display: grid; gap: var(--espaco-3); margin-top: var(--espaco-4); }
@@ -112,14 +96,7 @@
   @media (max-width: 420px) { .linha-barra { grid-template-columns: 1fr; gap: var(--espaco-1); } }
 
   /* Fluxos */
-  .fluxo { list-style: none; padding: 0; margin: var(--espaco-5) 0 0; position: relative; }
-  .fluxo::before { content: ""; position: absolute; left: 27px; top: 20px; bottom: 20px; width: 6px; background: var(--amarelo); border-radius: var(--forma-pilula); }
-  .fluxo li { position: relative; display: grid; grid-template-columns: 60px 1fr; gap: var(--espaco-4); align-items: start; padding-bottom: var(--espaco-5); }
-  .fluxo li:last-child { padding-bottom: 0; }
-  .fluxo .n { width: 60px; height: 60px; display: grid; place-items: center; background: var(--azul); color: var(--branco); font-weight: var(--peso-forte); font-size: var(--tamanho-4); border-radius: var(--forma-bolha-1); box-shadow: var(--sombra-clay); position: relative; }
   .fluxo li:nth-child(even) .n { border-radius: var(--forma-bolha-2); background: var(--verde); }
-  .fluxo strong { display: block; color: var(--azul); font-size: var(--tamanho-3); margin-top: var(--espaco-2); }
-  .fluxo .trava { display: inline-block; margin-top: var(--espaco-2); background: var(--areia); color: var(--texto); font-size: var(--tamanho-1); font-weight: var(--peso-forte); padding: 4px 10px; border-radius: var(--forma-selo); }
 
   .duas { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-4); margin-top: var(--espaco-4); }
   .duas .cartao { padding: var(--espaco-4); }
@@ -153,25 +130,10 @@
   .camada li + li { margin-top: var(--espaco-2); }
 
   /* Críticas */
-  .critica { background: var(--branco); border-radius: var(--forma-opcao); box-shadow: var(--sombra-cartao); margin-top: var(--espaco-4); }
-  .critica summary { cursor: pointer; list-style: none; padding: var(--espaco-4) var(--espaco-5); font-weight: var(--peso-forte); color: var(--azul); display: flex; gap: var(--espaco-3); justify-content: space-between; align-items: center; }
-  .critica summary::-webkit-details-marker { display: none; }
-  .critica summary::after { content: "+"; flex: none; width: 32px; height: 32px; display: grid; place-items: center; background: var(--amarelo); color: var(--azul); border-radius: var(--forma-bolha-1); font-size: var(--tamanho-4); }
-  .critica[open] summary::after { content: "−"; }
-  .critica summary:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; border-radius: var(--forma-opcao); }
-  .critica .resposta { padding: 0 var(--espaco-5) var(--espaco-4); }
-  .critica .resposta p:last-child { margin-bottom: 0; }
 
-  .conversa { background: var(--amarelo-claro); border-radius: var(--forma-cartao); padding: var(--espaco-6) var(--espaco-5); text-align: center; }
-  .conversa p.grande { color: var(--azul); }
   .conversa .capa-acoes { justify-content: center; }
-  .hashtags { display: flex; flex-wrap: wrap; gap: var(--espaco-2); justify-content: center; margin-top: var(--espaco-4); }
-  .hashtag { background: var(--branco); color: var(--verde-escuro); font-weight: var(--peso-forte); padding: 6px 12px; border-radius: var(--forma-selo); }
 
-  .revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
-  .revelar.visivel { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) {
-    .revelar { opacity: 1; transform: none; transition: none; }
     .barra div, .painel { transition: none; }
   }
 </style>
@@ -562,9 +524,6 @@
   grupo("op-parte", (v) => { parte = v; });
   $("nota-calc").textContent = "Estimativa didática. O piso de 2% ao ano sobre o patrimônio é a referência proposta ao G20 em 2024 e inclui o imposto que a pessoa já paga, então o valor novo seria menor. Para comparar, o imposto mínimo da Lei 15.270/2025 deve render R$ 25,2 bilhões em 2026, pela estimativa da Fazenda.";
   calcular();
-
-  const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("visivel"); io.unobserve(e.target); } }), { threshold: .12 }) : null;
-  document.querySelectorAll(".revelar").forEach((el) => io ? io.observe(el) : el.classList.add("visivel"));
 })();
 </script>
 </body>
