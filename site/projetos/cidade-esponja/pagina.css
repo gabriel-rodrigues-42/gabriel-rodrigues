@@ -34,7 +34,7 @@ p { margin: 0 0 var(--espaco-3); }
 }
 .ficha {
   background: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao);
-  padding: var(--espaco-5); scroll-margin-top: 90px; min-width: 0;
+  padding: var(--espaco-5); min-width: 0;
 }
 @media (min-width: 900px) {
   .mapa-e-ficha { grid-template-columns: minmax(0, 1fr) 380px; align-items: start; }
@@ -103,7 +103,6 @@ p { margin: 0 0 var(--espaco-3); }
 .numeros .fontes { display: block; margin-top: var(--espaco-2); font-size: var(--tamanho-1); }
 
 /* Cenários da Marginal */
-.cenarios { scroll-margin-top: 90px; }
 .palco { display: block; width: 100%; height: auto; border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); background: var(--azul-claro); margin-bottom: var(--espaco-3); }
 .controle-chuva { display: flex; flex-wrap: wrap; gap: var(--espaco-3); align-items: center; }
 .controle-chuva label { font-weight: var(--peso-forte); color: var(--azul); flex: 1 1 100%; }

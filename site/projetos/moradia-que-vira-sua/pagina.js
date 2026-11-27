@@ -254,8 +254,4 @@
     form.addEventListener("submit", (e) => e.preventDefault());
     calc();
   }
-
-  // Revelar capítulos ao rolar
-  const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("visivel"); io.unobserve(e.target); } }), { threshold: .08 }) : null;
-  document.querySelectorAll(".revelar").forEach((el) => io ? io.observe(el) : el.classList.add("visivel"));
 })();

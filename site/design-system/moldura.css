@@ -69,7 +69,11 @@ h1, h2, h3 { hyphens: manual; text-wrap: balance; }
 .moldura-apoiar:hover { background: var(--verde-escuro); }
 .moldura-menu a:focus-visible, .moldura-apoiar:focus-visible, .moldura-marca:focus-visible, .moldura-rodape a:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
 
+/* Link para uma seção (#algo): a seção para um pouco abaixo do topo.
+   No computador, desconta também o cabeçalho fixo. Vale para o site todo; não use scroll-margin-top na página. */
+html { scroll-padding-top: var(--espaco-4); }
 @media (min-width: 720px) {
+  html { --cabecalho-altura: 70px; scroll-padding-top: calc(var(--cabecalho-altura) + var(--espaco-4)); }
   /* O sticky vai no <gr-cabecalho>: no <header> de dentro ele ficaria preso à altura do próprio pai e não grudaria. */
   gr-cabecalho { position: sticky; top: 0; z-index: 20; }
   .moldura-topo { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }

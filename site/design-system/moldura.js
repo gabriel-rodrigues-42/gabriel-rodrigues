@@ -157,6 +157,19 @@
     if (!noInicio) fim.then(() => { location.href = marca.href; });
   });
 
+  // ---------- Revelar ao rolar ----------
+  // Todo elemento com .revelar aparece quando entra na tela (o CSS está em componentes.css).
+  function revelarAoRolar() {
+    const itens = document.querySelectorAll(".revelar");
+    if (!itens.length) return;
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add("visivel"); io.unobserve(e.target); }
+    }), { threshold: .12 });
+    itens.forEach((el) => io.observe(el));
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", revelarAoRolar);
+  else revelarAoRolar();
+
   // ---------- Módulos carregados sob demanda (busca e modo leitura) ----------
   // Põe nome.css e nome.js na página uma vez só e espera os dois.
   // Se o script falhar, a próxima chamada tenta de novo.
@@ -180,7 +193,7 @@
 
   // ---------- Busca ----------
   // A lupa carrega busca.js + busca.css só no primeiro toque.
-  const VERSAO_BUSCA = "2026-11-27";
+  const VERSAO_BUSCA = "dev"; // o deploy troca pelo hash (scripts/versao/carimbar.py)
   const carregarBusca = () => carregarModulo("busca", VERSAO_BUSCA);
   function abrirBusca() {
     carregarBusca().then(() => window.GRBusca.abrir(), () => { location.href = RAIZ + "projetos/"; });
@@ -239,7 +252,7 @@
   // Ligado no rodapé, carrega leitor.js + leitor.css, que põem um ▶ em cada página e seção
   // e mostram as legendas. A escolha fica no navegador (localStorage).
   const CHAVE_LEITURA = "gr-modo-leitura"; // "ligado" | ausente
-  const VERSAO_LEITOR = "2026-11-27";
+  const VERSAO_LEITOR = "dev"; // o deploy troca pelo hash (scripts/versao/carimbar.py)
   function leituraLigada() { try { return localStorage.getItem(CHAVE_LEITURA) === "ligado"; } catch { return false; } }
   function salvarLeitura(ligada) {
     try { ligada ? localStorage.setItem(CHAVE_LEITURA, "ligado") : localStorage.removeItem(CHAVE_LEITURA); } catch { /* sem armazenamento: vale só nesta página */ }

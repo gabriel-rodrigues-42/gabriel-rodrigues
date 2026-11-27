@@ -20,7 +20,7 @@ a { color: var(--azul-medio); }
 .acoes { display: flex; gap: var(--espaco-3); margin-top: var(--espaco-4); flex-wrap: wrap; }
 .arquetipos { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--espaco-4); }
 @media (min-width: 600px) { .arquetipos { grid-template-columns: 1fr 1fr; } }
-.arquetipo { min-width: 0; scroll-margin-top: 96px; }
+.arquetipo { min-width: 0; }
 .arquetipo:target { outline: 3px solid var(--verde); }
 .obra { font-size: var(--tamanho-1); color: var(--texto-suave); margin: var(--espaco-1) 0 var(--espaco-3); }
 .arquetipo dl { margin: 0; }

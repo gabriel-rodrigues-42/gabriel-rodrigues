@@ -77,3 +77,11 @@ select {
   background-repeat: no-repeat;
 }
 select::-ms-expand { display: none; }
+
+/* Revelar ao rolar: o elemento com .revelar aparece quando entra na tela.
+   Quem liga é o moldura.js (põe .visivel). Sem animação com movimento reduzido. */
+.revelar { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+.revelar.visivel { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .revelar { opacity: 1; transform: none; transition: none; }
+}
