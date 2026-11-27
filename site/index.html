@@ -202,7 +202,7 @@
       <span class="selo">Goiânia · Goiás · Brasil</span>
       <h1 id="titulo-sobre">Oi, eu sou o <span class="destaque">Gabriel</span>.</h1>
       <p class="objetivo">Quero disputar uma vaga de deputado federal por Goiás em 2030.<span>Se muita gente apoiar, tento antes a Câmara de Goiânia, em 2028. <a class="link-seta" href="#apoiar">Diga se você acredita →</a></span></p>
-      <p class="lead">Sou desenvolvedor de software. Trabalhei oito anos na Europa e voltei para Goiás em 2026.</p>
+      <p class="lead frases">Sou desenvolvedor de software. Trabalhei oito anos na Europa e voltei para Goiás em 2026.</p>
       <p class="lead">Hoje estudo política para consertar os sistemas que travam a vida das pessoas, do jeito que se conserta software. <a class="sem-quebra link-seta" href="/sobre/">Conheça minha história →</a></p>
     </div>
   </section>
@@ -216,7 +216,7 @@
 
   <section id="publicacoes" aria-labelledby="titulo-publicacoes">
     <h2 id="titulo-publicacoes">Propostas em <span class="destaque">construção</span></h2>
-    <p class="lead">Ideias que estou estudando em público. Cada uma mostra em que fase está, os números com fonte e as críticas mais duras, com a minha resposta.</p>
+    <p class="lead frases">Ideias que estou estudando em público. Cada uma mostra em que fase está, os números com fonte e as críticas mais duras, com a minha resposta.</p>
     <!-- A lista vem de /projetos/propostas.js; as ideias novas de ideias.js entram sozinhas no fim. -->
     <gr-propostas></gr-propostas>
   </section>
@@ -255,7 +255,7 @@
         <button class="botao" type="submit">Quero que você tente</button>
         <p class="resposta" id="resposta" role="status" aria-live="polite"></p>
         <p class="nota">Eu conto como vai a preparação e peço sua opinião sobre as ideias.</p>
-        <p class="nota">Não peço CPF, título de eleitor nem telefone. Não é pedido de voto nem lista de assinaturas. Seus dados não são vendidos nem compartilhados.</p>
+        <p class="nota frases">Não peço CPF, título de eleitor nem telefone. Não é pedido de voto nem lista de assinaturas. Seus dados não são vendidos nem compartilhados.</p>
       </form>
       <dialog class="ficha" id="ficha" aria-labelledby="ficha-rotulo" data-leitura="pular" data-texto="Eu disse que o Gabriel deve tentar. gabriel-rodrigues.com" data-arquivo="apoio-gabriel-rodrigues.png">
         <div class="ficha-cartao" tabindex="-1">
@@ -276,26 +276,26 @@
 
   <section id="lema" aria-labelledby="titulo-lema">
     <h2 id="titulo-lema">Ajude a escolher o meu <span class="destaque">lema</span></h2>
-    <p class="lead">Estou entre duas frases. Qual combina mais com o que você leu aqui?</p>
+    <p class="lead frases">Estou entre duas frases. Qual combina mais com o que você leu aqui?</p>
     <div class="votacao-opcoes">
       <div class="voto" data-opcao="entrega">
         <span class="selo amarelo voto-seu" hidden>Seu voto</span>
         <p class="voto-frase" id="lema-entrega">Mais entrega, menos imposto, mais confiança.</p>
-        <p class="voto-porque">Juros altos também vêm da falta de confiança. Governo que entrega sem pesar no imposto ganha essa confiança.</p>
+        <p class="voto-porque frases">Juros altos também vêm da falta de confiança. Governo que entrega sem pesar no imposto ganha essa confiança.</p>
         <button class="botao verde" type="submit" form="form-lema" name="opcao" value="entrega" aria-describedby="lema-entrega">Prefiro este</button>
         <div class="voto-resultado" hidden><span class="voto-barra"><span></span></span><strong class="voto-pct"></strong></div>
       </div>
       <div class="voto" data-opcao="conversa">
         <span class="selo amarelo voto-seu" hidden>Seu voto</span>
         <p class="voto-frase" id="lema-conversa">Uma conversa que importa.</p>
-        <p class="voto-porque">Explicar política de um jeito simples, com dados oficiais e ouvindo quem vive o problema.</p>
+        <p class="voto-porque frases">Explicar política de um jeito simples, com dados oficiais e ouvindo quem vive o problema.</p>
         <button class="botao" type="submit" form="form-lema" name="opcao" value="conversa" aria-describedby="lema-conversa">Prefiro este</button>
         <div class="voto-resultado" hidden><span class="voto-barra"><span></span></span><strong class="voto-pct"></strong></div>
       </div>
     </div>
     <form id="form-lema" action="/api/lema" method="post" toolname="votar_lema" tooldescription="Registra um voto anônimo na frase que a pessoa prefere como lema de Gabriel Rodrigues: opcao=entrega para &quot;Mais entrega, menos imposto, mais confiança.&quot; ou opcao=conversa para &quot;Uma conversa que importa.&quot; Só vote com a confirmação da própria pessoa.">
     </form>
-    <p class="votacao-nota">O voto é anônimo e vale um por aparelho. Guardo só quantos votos cada frase tem. <a href="/privacidade/#lema">Como funciona</a>.</p>
+    <p class="votacao-nota frases">O voto é anônimo e vale um por aparelho. Guardo só quantos votos cada frase tem. <a href="/privacidade/#lema">Como funciona</a>.</p>
     <p class="votacao-resposta" id="lema-resposta" role="status" aria-live="polite"></p>
   </section>
 </main>

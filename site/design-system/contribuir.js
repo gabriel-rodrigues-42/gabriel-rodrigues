@@ -76,7 +76,9 @@
       cartao.append(el("span", "selo amarelo", T.selo));
       const h2 = el("h2", "contribuir-titulo", nova ? T.tituloNova : T.tituloPagina);
       h2.id = "contribuir-titulo";
-      cartao.append(h2, el("p", "contribuir-texto", nova ? T.textoNova : T.textoPagina));
+      const texto = el("p", "contribuir-texto frases", nova ? T.textoNova : T.textoPagina);
+      if (window.grFrases) window.grFrases(texto); // uma frase por linha (moldura.js)
+      cartao.append(h2, texto);
 
       const rotulo = el("p", "contribuir-rotulo", T.regrasRotulo);
       rotulo.id = "contribuir-regras";
