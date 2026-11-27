@@ -172,4 +172,14 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/partidos/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/partidos/"/>
   </url>
+  <url><loc>https://gabriel-rodrigues.com/sem-citar-nomes/</loc><lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/sem-citar-nomes/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/sem-citar-nomes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/sem-citar-nomes/"/>
+  </url>
+  <url><loc>https://gabriel-rodrigues.com/en/sem-citar-nomes/</loc><lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/sem-citar-nomes/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/sem-citar-nomes/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/sem-citar-nomes/"/>
+  </url>
 </urlset>

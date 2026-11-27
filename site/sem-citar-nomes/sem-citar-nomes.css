@@ -1,0 +1,31 @@
+/* Página /sem-citar-nomes/. Cores, formas e fontes só por variáveis de tokens.css. */
+main { max-width: 720px; margin: 0 auto; padding: var(--espaco-6) var(--espaco-4) var(--espaco-7); }
+h1 { font-size: var(--tamanho-5); line-height: 1.15; margin: var(--espaco-4) 0 var(--espaco-2); color: var(--azul); text-wrap: balance; }
+h2 { font-size: var(--tamanho-4); margin: var(--espaco-7) 0 var(--espaco-3); color: var(--azul); line-height: 1.25; text-wrap: balance; }
+h3 { font-size: var(--tamanho-3); margin: 0; color: var(--azul); line-height: 1.3; text-wrap: balance; }
+.intro { color: var(--texto-suave); margin: 0 0 var(--espaco-5); text-wrap: pretty; }
+a { color: var(--azul-medio); }
+.pergunta { font-weight: var(--peso-forte); color: var(--azul); margin: 0 0 var(--espaco-3); }
+.situacoes { display: grid; gap: var(--espaco-2); }
+@media (min-width: 600px) { .situacoes { grid-template-columns: 1fr 1fr; } }
+.situacoes .opcao[aria-pressed="true"] { background: var(--verde-claro); border-color: var(--verde); font-weight: var(--peso-forte); }
+.resposta:empty { display: none; }
+.resposta { margin-top: var(--espaco-5); }
+.saida { margin: 0; background: var(--amarelo-claro); border-radius: var(--forma-opcao); padding: var(--espaco-4); }
+.saida blockquote { margin: 0; }
+.piada { font-size: var(--tamanho-3); font-weight: var(--peso-forte); color: var(--azul); margin: 0 0 var(--espaco-3); text-wrap: pretty; }
+.saida figcaption { color: var(--texto); text-wrap: pretty; }
+.serio { color: var(--texto-suave); font-size: var(--tamanho-2); display: block; margin-bottom: var(--espaco-1); }
+.ref { margin: var(--espaco-3) 0 0; font-size: var(--tamanho-2); }
+.ref a { color: var(--azul-medio); }
+.acoes { display: flex; gap: var(--espaco-3); margin-top: var(--espaco-4); flex-wrap: wrap; }
+.arquetipos { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--espaco-4); }
+@media (min-width: 600px) { .arquetipos { grid-template-columns: 1fr 1fr; } }
+.arquetipo { min-width: 0; scroll-margin-top: 96px; }
+.arquetipo:target { outline: 3px solid var(--verde); }
+.obra { font-size: var(--tamanho-1); color: var(--texto-suave); margin: var(--espaco-1) 0 var(--espaco-3); }
+.arquetipo dl { margin: 0; }
+.arquetipo dt { font-size: var(--tamanho-1); font-weight: var(--peso-forte); color: var(--verde-escuro); text-transform: uppercase; letter-spacing: .05em; margin-top: var(--espaco-2); }
+.arquetipo dd { margin: 0; font-size: var(--tamanho-2); }
+.regras { padding-left: 20px; }
+.regras li { margin: var(--espaco-2) 0; }

@@ -15,6 +15,7 @@ Não há pedido de voto. As propostas estão em construção, com dados, fontes 
 - [Ideias para conversar](https://gabriel-rodrigues.com/ideias/): ideias com problema, proposta, críticas e resposta, lidas em voz alta com legendas
 - [Qual caminho faz sentido pra mim?](https://gabriel-rodrigues.com/caminho/): questionário para qualquer município do Brasil com dados do TSE e do IBGE (vagas, votos do último eleito, quociente eleitoral, idade mínima e prazos)
 - [Qual partido vota como você?](https://gabriel-rodrigues.com/partidos/): dez votações nominais da Câmara dos Deputados (2023 a 2025); a pessoa responde Sim ou Não e vê quais partidos votaram mais parecido, com o voto oficial de cada deputado. Não indica partido do Gabriel e não guarda respostas
+- [Sem citar nomes](https://gabriel-rodrigues.com/sem-citar-nomes/): saídas bem-humoradas com personagens de filme, desenho e novela (1993 para cá) para quando tentam empurrar alguém para um lado na política. A pessoa escolhe a situação e sorteia uma resposta; o dicionário traz cada arquétipo com obra e ano. Nenhum nome de pessoa real e nenhuma acusação
 
 ## Propostas
 
@@ -37,6 +38,7 @@ Não há pedido de voto. As propostas estão em construção, com dados, fontes 
 - [Ideas](https://gabriel-rodrigues.com/en/ideias/)
 - [Which path makes sense for me?](https://gabriel-rodrigues.com/en/caminho/)
 - [Which party votes like you?](https://gabriel-rodrigues.com/en/partidos/)
+- [No names](https://gabriel-rodrigues.com/en/sem-citar-nomes/)
 - [FSRI investment simulator](https://gabriel-rodrigues.com/en/projetos/reindustrializacao/simulador/)
 
 ## Optional
