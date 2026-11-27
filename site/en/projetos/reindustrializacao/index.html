@@ -53,6 +53,8 @@
 <script src="/design-system/moldura.js"></script>
 <link rel="stylesheet" href="/design-system/contribuir.css">
 <script src="/design-system/contribuir.js"></script>
+<link rel="stylesheet" href="/design-system/video-curto.css">
+<script src="/design-system/video-curto.js" defer></script>
 <style>
   main { max-width: 760px; margin: 0 auto; padding: var(--espaco-7) var(--espaco-4) var(--espaco-7); }
   nav a { font-weight: var(--peso-forte); text-decoration: none; color: var(--azul); }
@@ -77,13 +79,6 @@
   .capa-acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-3); margin-top: var(--espaco-5); }
   .botao { display: inline-flex; align-items: center; gap: var(--espaco-2); }
   /* Chamada para o vídeo curto (link leve: nada do YouTube carrega na página) */
-  .video-curto { display: flex; align-items: center; gap: var(--espaco-3); margin-top: var(--espaco-4); padding: var(--espaco-3) var(--espaco-4); background: var(--amarelo-claro); border-radius: var(--forma-cartao); color: var(--texto); text-decoration: none; }
-  .video-curto:hover strong { text-decoration: underline; }
-  .video-curto:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
-  .video-curto .play { flex: none; width: 48px; height: 48px; border-radius: 50%; background: var(--verde-fundo); color: var(--branco); display: grid; place-items: center; }
-  .video-curto .play svg { width: 20px; height: 20px; fill: currentColor; margin-left: 3px; }
-  .video-curto strong { display: block; color: var(--azul); font-size: var(--tamanho-3); line-height: 1.25; }
-  .video-curto span.suave { display: block; font-size: var(--tamanho-2); }
   .icone { width: 18px; height: 18px; fill: currentColor; flex: none; }
 
   /* Três passos do Buy, Borrow, Die */
@@ -256,7 +251,7 @@
     <p class="lead">People with large fortunes already borrow from banks using their own shares as collateral. The proposal for the Sovereign Fund for Reindustrialization and Innovation, the FSRI (from its Portuguese name), is to turn that money into Brazilian factories, patents and platforms.</p>
     <a class="video-curto" href="https://youtube.com/shorts/6Z7ZIdDEMwk">
       <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
-      <span><strong>Prefer video?</strong><span class="suave">Watch the short video on YouTube (in Portuguese).</span></span>
+      <span><strong>Prefer video?</strong><span class="suave">Watch the short video (in&nbsp;Portuguese).</span></span>
     </a>
   </header>
 

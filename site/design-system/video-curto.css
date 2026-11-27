@@ -1,0 +1,21 @@
+/* Cartão de vídeo curto (YouTube Short) que abre o vídeo dentro da página.
+   Uso: veja o topo de video-curto.js. */
+
+.video-curto { display: flex; align-items: center; gap: var(--espaco-3); margin-block: var(--espaco-4); padding: var(--espaco-3) var(--espaco-4); background: var(--amarelo-claro); border-radius: var(--forma-cartao); color: var(--texto); text-decoration: none; }
+.video-curto:hover strong { text-decoration: underline; }
+.video-curto:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+.video-curto .play { flex: none; width: 48px; height: 48px; border-radius: 50%; background: var(--verde-fundo); color: var(--branco); display: grid; place-items: center; }
+.video-curto .play svg { width: 20px; height: 20px; fill: currentColor; margin-left: 3px; }
+.video-curto strong { display: block; color: var(--azul); font-size: var(--tamanho-3); line-height: 1.25; }
+.video-curto span.suave { display: block; font-size: var(--tamanho-2); }
+
+/* Janela com o player vertical (9:16). Cabe na tela do celular sem rolagem. */
+.video-curto-janela { padding: 0; border: 0; background: transparent; max-width: 100vw; max-height: 100dvh; overflow: visible; }
+.video-curto-janela::backdrop { background: color-mix(in srgb, var(--texto) 94%, transparent); }
+.video-curto-janela .caixa { display: grid; gap: var(--espaco-3); justify-items: center; }
+.video-curto-janela .tela { width: min(92vw, calc((100dvh - 120px) * 9 / 16), 420px); aspect-ratio: 9 / 16; border-radius: var(--forma-opcao); overflow: hidden; background: var(--texto); }
+.video-curto-janela iframe { display: block; width: 100%; height: 100%; border: 0; }
+.video-curto-janela .acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-3); justify-content: center; align-items: center; }
+.video-curto-janela .fechar { font: inherit; font-weight: var(--peso-forte); font-size: var(--tamanho-3); min-height: 44px; padding: var(--espaco-2) var(--espaco-5); border: 0; border-radius: var(--forma-pilula); background: var(--creme); color: var(--texto); cursor: pointer; }
+.video-curto-janela .fechar:focus-visible, .video-curto-janela .fora:focus-visible { outline: 3px solid var(--amarelo); outline-offset: 2px; }
+.video-curto-janela .fora { color: var(--creme); font-size: var(--tamanho-2); }
