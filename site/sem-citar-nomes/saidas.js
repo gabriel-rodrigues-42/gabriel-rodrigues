@@ -3,7 +3,7 @@
   Regras (ver CLAUDE.md):
   - Nenhum nome de pessoa real. Cada arquétipo é um jeito de fazer política, e quem lê liga a quem quiser.
   - Zoar o jeito e o sistema, nunca insinuar crime (nada de "roubou", "desviou", "multiplicou dinheiro").
-  - Referências de 1993 para cá, com obra e ano.
+  - Referências que quem cresceu dos anos 1990 para cá conhece, com a obra de onde vêm.
   - Toda saída tem a piada e um fecho que puxa a conversa para o sistema.
   A versão em inglês fica em saidas-en.js, com os mesmos ids.
 */
@@ -24,7 +24,7 @@ window.SEM_NOMES = {
       rotulo: "Me chamaram de isentão",
       saidas: [
         { piada: "Isentão eu queria ser no Imposto de Renda. Esse benefício ninguém me deu.", fecho: "Não fico em cima do muro. Fico em cima do problema, que é bem mais alto.", ref: "isentao" },
-        { piada: "O Hulk também parecia isentão, quieto no canto. Só fica verde quando vê o preço do arroz.", fecho: "O que me tira do sério não é lado. É pagar imposto e ainda esperar na fila do posto de saúde.", ref: "isentao" },
+        { piada: "O Bruce Banner também parece isentão, quieto no canto. Só vira Hulk quando vê o preço do arroz.", fecho: "O que me tira do sério não é lado. É pagar imposto e ainda esperar na fila do posto de saúde.", ref: "isentao" },
         { piada: "O Shrek também não queria entrar na briga do reino. Ele só queria o pântano dele em paz.", fecho: "No fim, quem resolveu a história foi quem estava longe da corte.", ref: "shrek" },
         { piada: "Não é isenção. É que eu leio a bula antes de tomar o remédio.", fecho: "Toda proposta que eu faço vem com a fonte e com as críticas mais duras junto.", ref: "nazare" }
       ]
@@ -79,18 +79,18 @@ window.SEM_NOMES = {
     }
   ],
   arquetipos: [
-    { id: "robin-hood", nome: "O Robin Hood", obra: "Shrek (2001)", jeito: "Promete tirar de quem tem muito para dar a quem tem pouco.", piada: "No Shrek ele chega cantando para salvar a princesa, e ela resolve sozinha.", sistema: "Distribuir sem saber quanto custa e de onde sai acaba pesando em quem trabalha." },
-    { id: "tio-patinhas", nome: "O Tio Patinhas", obra: "DuckTales (2017)", jeito: "Acha que o país é uma caixa-forte e que bom mesmo é dinheiro guardado.", piada: "Nada nas moedas, mas a moeda não sai de lá.", sistema: "Dinheiro parado em juro alto não vira fábrica nem emprego." },
-    { id: "voldemort", nome: "Aquele-Que-Não-Deve-Ser-Nomeado", obra: "Harry Potter (livro de 1997, filme de 2001)", jeito: "Qualquer nome que, só de falar, faz o almoço de domingo pegar fogo.", piada: "Toda família tem o seu, e cada um mora num lado da mesa.", sistema: "Quando a conversa é sobre uma pessoa, ninguém fala da regra que vale para todas." },
+    { id: "robin-hood", nome: "O Robin Hood", obra: "Lenda inglesa medieval, recontada em filmes e desenhos", jeito: "Promete tirar de quem tem muito para dar a quem tem pouco.", piada: "Tira dos ricos e dá aos pobres, mas ninguém nunca viu a prestação de contas da floresta de Sherwood.", sistema: "Distribuir sem dizer quanto custa e de onde sai acaba pesando em quem trabalha." },
+    { id: "tio-patinhas", nome: "O Tio Patinhas", obra: "Quadrinhos da Disney (desde 1947) e o desenho DuckTales (1987)", jeito: "Trata o país como uma caixa-forte: dinheiro bom é dinheiro parado.", piada: "Mergulha numa montanha de moedas, e nenhuma delas sai da caixa-forte.", sistema: "Dinheiro parado em juro alto não vira fábrica nem emprego." },
+    { id: "voldemort", nome: "Aquele-Que-Não-Deve-Ser-Nomeado", obra: "Harry Potter (livro de 1997, filme de 2001)", jeito: "Qualquer nome que, só de falar, faz o almoço de domingo pegar fogo.", piada: "Toda família tem o seu. Só não concorda sobre quem é.", sistema: "Quando a conversa é sobre uma pessoa, ninguém fala da regra que vale para todas." },
     { id: "harry-potter", nome: "O Chapéu Seletor", obra: "Harry Potter (livro de 1997, filme de 2001)", jeito: "Quem quer te pôr numa casa antes de você abrir a boca.", piada: "Eu peço a Lufa-Lufa, a casa de quem trabalha.", sistema: "Rótulo não diz o que a pessoa faria com o seu imposto." },
     { id: "thanos", nome: "O Thanos", obra: "Vingadores: Guerra Infinita (2018)", jeito: "Promete resolver tudo com um estalo de dedos.", piada: "Resolve, mas some metade de tudo que é vivo.", sistema: "Mudança grande sem teste e sem medir o custo é estalo no escuro." },
-    { id: "oz", nome: "O Grande Oz", obra: "Oz: Mágico e Poderoso (2013)", jeito: "Discurso enorme, efeito especial, fumaça colorida.", piada: "Puxa a cortina e tem um senhor mexendo em alavanca.", sistema: "Conta pública aberta é a cortina puxada para todo mundo ver." },
+    { id: "oz", nome: "O Mágico de Oz", obra: "O Mágico de Oz (livro de 1900, filme de 1939)", jeito: "Voz de trovão, cabeça gigante, fumaça colorida.", piada: "Puxa a cortina e tem um senhor mexendo em alavanca.", sistema: "Conta pública aberta é a cortina puxada para todo mundo ver." },
     { id: "toy-story", nome: "O Buzz Lightyear", obra: "Toy Story (1995)", jeito: "Promete ir ao infinito e além.", piada: "Só esquece de dizer quando.", sistema: "Promessa boa tem prazo e um número para conferir depois." },
-    { id: "chaves", nome: "O Seu Barriga", obra: "Chaves (no SBT desde 1984, na infância de quem nasceu nos anos 1990)", jeito: "Chega na vila sempre cobrando.", piada: "Cobra 14 meses de aluguel e ninguém se muda.", sistema: "O imposto vem escondido no preço de tudo, até do arroz, e quase ninguém sabe quanto paga." },
+    { id: "chaves", nome: "O Seu Barriga", obra: "Chaves (série mexicana de 1973, no SBT desde 1984)", jeito: "Chega na vila sempre cobrando.", piada: "O Seu Madruga deve 14 meses de aluguel, e o Seu Barriga volta todo mês para cobrar.", sistema: "O imposto vem escondido no preço de tudo, até do arroz, e quase ninguém sabe quanto paga." },
     { id: "guerra-civil", nome: "O Time Cap contra o Time Homem de Ferro", obra: "Capitão América: Guerra Civil (2016)", jeito: "Dois heróis, cada um certo do seu jeito, quebrando a cidade.", piada: "Eu sou da turma que reconstrói depois.", sistema: "A conta da briga quem paga é quem mora na cidade." },
     { id: "avenida-brasil", nome: "O Vilão do Capítulo", obra: "Avenida Brasil (2012)", jeito: "Todo dia a política escolhe um vilão novo e congela a cara dele no fim.", piada: "Com o \"oi, oi, oi\" tocando no fundo.", sistema: "Novela prende a atenção, e o problema de verdade fica sem capítulo." },
     { id: "nazare", nome: "A Nazaré Fazendo Conta", obra: "Senhora do Destino (2004), que virou meme", jeito: "Quem joga um número no grupo sem dizer de onde veio.", piada: "Faz a cara da Nazaré: se a conta não fecha, não manda.", sistema: "Número sem fonte oficial e sem ano é boato." },
-    { id: "pokemon", nome: "O Treinador Pokémon", obra: "Pokémon (na TV brasileira desde 1999)", jeito: "Quer pegar todos para o seu time.", piada: "E ainda pergunta se você é de fogo ou de água.", sistema: "Ninguém precisa de time. Precisa saber como cada partido votou de verdade." },
+    { id: "pokemon", nome: "O Treinador Pokémon", obra: "Pokémon (desenho japonês de 1997, na TV brasileira desde 1999)", jeito: "Quer pegar todos para o seu time.", piada: "E ainda pergunta se você é de fogo ou de água.", sistema: "Ninguém precisa de time. Precisa saber como cada partido votou de verdade." },
     { id: "matrix", nome: "O Escolhido", obra: "Matrix (1999)", jeito: "Aparece a cada eleição dizendo que só ele salva.", piada: "Eu fico com o pessoal que conserta a nave.", sistema: "País bom funciona mesmo quando o governante é ruim." },
     { id: "paredao", nome: "O Paredão", obra: "Big Brother Brasil (desde 2002)", jeito: "A política virou votar para eliminar alguém.", piada: "E eu não quero sair no almoço de domingo.", sistema: "Eliminar pessoa não muda a regra que fez o problema." }
   ]
