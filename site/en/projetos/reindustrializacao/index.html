@@ -76,6 +76,14 @@
   /* Capa */
   .capa-acoes { display: flex; flex-wrap: wrap; gap: var(--espaco-3); margin-top: var(--espaco-5); }
   .botao { display: inline-flex; align-items: center; gap: var(--espaco-2); }
+  /* Chamada para o vídeo curto (link leve: nada do YouTube carrega na página) */
+  .video-curto { display: flex; align-items: center; gap: var(--espaco-3); margin-top: var(--espaco-4); padding: var(--espaco-3) var(--espaco-4); background: var(--amarelo-claro); border-radius: var(--forma-cartao); color: var(--texto); text-decoration: none; }
+  .video-curto:hover strong { text-decoration: underline; }
+  .video-curto:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+  .video-curto .play { flex: none; width: 48px; height: 48px; border-radius: 50%; background: var(--verde-fundo); color: var(--branco); display: grid; place-items: center; }
+  .video-curto .play svg { width: 20px; height: 20px; fill: currentColor; margin-left: 3px; }
+  .video-curto strong { display: block; color: var(--azul); font-size: var(--tamanho-3); line-height: 1.25; }
+  .video-curto span.suave { display: block; font-size: var(--tamanho-2); }
   .icone { width: 18px; height: 18px; fill: currentColor; flex: none; }
 
   /* Três passos do Buy, Borrow, Die */
@@ -250,6 +258,10 @@
     <span class="selo" style="margin-top: var(--espaco-5)">Proposal under study</span>
     <h1>The money to reindustrialize Brazil <span class="destaque">already exists</span>. <span class="linha">It's just sitting still.</span></h1>
     <p class="lead">People with large fortunes already borrow from banks using their own shares as collateral. The proposal for the Sovereign Fund for Reindustrialization and Innovation, the FSRI (from its Portuguese name), is to turn that money into Brazilian factories, patents and platforms.</p>
+    <a class="video-curto" href="https://youtube.com/shorts/6Z7ZIdDEMwk">
+      <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+      <span><strong>Prefer video?</strong><span class="suave">Watch the short video on YouTube (in Portuguese).</span></span>
+    </a>
   </header>
 
   <!-- ATO 1 -->
@@ -311,7 +323,7 @@
     <h2>Three tiers, from the app to the chip</h2>
     <p>No serious investor puts money into a Brazilian chip that takes 15 years to pay off. Unless the risk is shared. That's why the State, through BNDES and FINEP (Brazil's development bank and innovation agency) and with the fund's own resources, comes in as a partial guarantor, and the protection grows with the risk.</p>
 
-    <div class="abas" role="tablist" aria-label="Risk tiers">
+    <div class="abas" role="tablist">
       <button class="aba" role="tab" id="aba-1" aria-controls="faixa-1" aria-selected="true" type="button">Tier 1</button>
       <button class="aba" role="tab" id="aba-2" aria-controls="faixa-2" aria-selected="false" tabindex="-1" type="button">Tier 2</button>
       <button class="aba" role="tab" id="aba-3" aria-controls="faixa-3" aria-selected="false" tabindex="-1" type="button">Tier 3</button>
@@ -370,7 +382,7 @@
     <h2>If the project fails, who pays?</h2>
     <p>That's the question everyone should ask. The proposal's answer: the investor always pays most of it. Pick a tier and see how a loss splits, for every R$ 100 invested, in a project that truly went bankrupt.</p>
     <div class="cartao simulador">
-      <div class="opcoes" role="radiogroup" aria-label="Pick the tier">
+      <div class="opcoes" role="radiogroup">
         <button class="opcao" type="button" role="radio" aria-checked="false" data-estado="20">Tier 1</button>
         <button class="opcao" type="button" role="radio" aria-checked="false" data-estado="35">Tier 2</button>
         <button class="opcao marcada" type="button" role="radio" aria-checked="true" data-estado="50">Tier 3</button>
