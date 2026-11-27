@@ -105,7 +105,7 @@
           <input id="preco" name="preco" type="text" inputmode="numeric" autocomplete="off" data-dinheiro value="R$ 200,000" toolparamdescription="Price of the flat, in Brazilian reais">
         </div>
         <div>
-          <label for="aluguel">Rent for a similar flat in the area</label>
+          <label for="aluguel">Rent for a similar flat</label>
           <input id="aluguel" name="aluguel" type="text" inputmode="numeric" autocomplete="off" data-dinheiro value="R$ 1,200" toolparamdescription="Monthly rent for a similar flat in the same neighbourhood, in Brazilian reais. It caps the payment.">
         </div>
         <div>
@@ -117,11 +117,11 @@
         </div>
       </div>
       <div class="resultado" aria-live="polite">
-        <div><span data-saida="rotulo"></span><output data-saida="parcela"></output></div>
-        <div>Per month, goes to the purchase<output data-saida="compra"></output></div>
-        <div>Saved in <output data-saida="anos"></output> years (the 1st is free)<output data-saida="juntou"></output></div>
-        <div>If moving now, takes<output data-saida="leva"></output><small data-saida="desconto"></small></div>
-        <div>Of the price, already paid<output data-saida="parte"></output></div>
+        <div><span class="rot" data-saida="rotulo"></span><output data-saida="parcela"></output><small></small></div>
+        <div><span class="rot">Goes to the purchase, per month</span><output data-saida="compra"></output><small></small></div>
+        <div><span class="rot">Saved in <output data-saida="anos"></output> years</span><output data-saida="juntou"></output><small>The 1st year is free</small></div>
+        <div><span class="rot">If moving now, takes</span><output data-saida="leva"></output><small data-saida="desconto"></small></div>
+        <div><span class="rot">Already paid of the flat's price</span><output data-saida="parte"></output><small></small></div>
       </div>
       <p class="nota-calc" style="margin: var(--espaco-3) 0 0"><output data-saida="regra"></output> The payment never exceeds the rent of a similar flat in the area: people who earn more pay the market price, and no more. The first year is free and is not counted. The income bands are those of the Minha Casa, Minha Vida law (Law 14,620/2023, art. 5), which the government updates every year. This simulates the proposal; it is not a contract.</p>
     </form>

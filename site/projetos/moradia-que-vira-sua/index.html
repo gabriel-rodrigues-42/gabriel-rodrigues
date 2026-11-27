@@ -105,7 +105,7 @@
           <input id="preco" name="preco" type="text" inputmode="numeric" autocomplete="off" data-dinheiro value="R$ 200.000" toolparamdescription="Preço do apartamento, em reais">
         </div>
         <div>
-          <label for="aluguel">Aluguel de um apartamento parecido no bairro</label>
+          <label for="aluguel">Aluguel de um apartamento parecido</label>
           <input id="aluguel" name="aluguel" type="text" inputmode="numeric" autocomplete="off" data-dinheiro value="R$ 1.200" toolparamdescription="Quanto custa por mês alugar um apartamento parecido no mesmo bairro, em reais. É o teto da parcela.">
         </div>
         <div>
@@ -117,11 +117,11 @@
         </div>
       </div>
       <div class="resultado" aria-live="polite">
-        <div><span data-saida="rotulo"></span><output data-saida="parcela"></output></div>
-        <div>Por mês, vai para a compra<output data-saida="compra"></output></div>
-        <div>Guardado em <output data-saida="anos"></output> anos (o 1º é grátis)<output data-saida="juntou"></output></div>
-        <div>Se mudar agora, leva<output data-saida="leva"></output><small data-saida="desconto"></small></div>
-        <div>Do preço do apartamento, já pago<output data-saida="parte"></output></div>
+        <div><span class="rot" data-saida="rotulo"></span><output data-saida="parcela"></output><small></small></div>
+        <div><span class="rot">Vai para a compra, por mês</span><output data-saida="compra"></output><small></small></div>
+        <div><span class="rot">Guardado em <output data-saida="anos"></output> anos</span><output data-saida="juntou"></output><small>O 1º ano é grátis</small></div>
+        <div><span class="rot">Se mudar agora, leva</span><output data-saida="leva"></output><small data-saida="desconto"></small></div>
+        <div><span class="rot">Já pago do preço do apartamento</span><output data-saida="parte"></output><small></small></div>
       </div>
       <p class="nota-calc" style="margin: var(--espaco-3) 0 0"><output data-saida="regra"></output> A parcela nunca passa do aluguel de um apartamento parecido no bairro: quem ganha mais paga o preço de mercado, e não mais que isso. O primeiro ano é grátis e não conta na conta. As faixas de renda são as da lei do Minha Casa, Minha Vida (Lei 14.620/2023, art. 5º), que o governo atualiza todo ano. É uma simulação da proposta, não um contrato.</p>
     </form>
