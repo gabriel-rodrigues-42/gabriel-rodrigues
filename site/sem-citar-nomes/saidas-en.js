@@ -19,7 +19,7 @@ window.SEM_NOMES = {
       rotulo: "They called me a fence-sitter",
       saidas: [
         { piada: "The only exemption I want is on my income tax. Nobody gave me that one.", fecho: "I'm not on the fence. I'm on top of the problem, which is a lot higher.", ref: "isentao" },
-        { piada: "Sam looked like a fence-sitter too. He held the Ring and gave it back.", fecho: "The problem isn't who holds the Ring. It's a system that gives too much power to anyone who holds it.", ref: "anel" },
+        { piada: "Frodo looked like a fence-sitter too, quiet in the Shire. And he was the one who agreed to carry the Ring to destroy it.", fecho: "The problem isn't who holds the Ring. It's a system that gives too much power to anyone who holds it.", ref: "anel" },
         { piada: "Shrek didn't want to join the kingdom's fight either. He just wanted his swamp in peace.", fecho: "In the end, the one who fixed the story lived far from the court.", ref: "shrek" },
         { piada: "It's not sitting on the fence. I just read the label before taking the medicine.", fecho: "Every proposal I make comes with its source and the toughest criticism next to it.", ref: "nazare" }
       ]

@@ -24,7 +24,7 @@ window.SEM_NOMES = {
       rotulo: "Me chamaram de isentão",
       saidas: [
         { piada: "Isentão eu queria ser no Imposto de Renda. Esse benefício ninguém me deu.", fecho: "Não fico em cima do muro. Fico em cima do problema, que é bem mais alto.", ref: "isentao" },
-        { piada: "O Sam também parecia isentão. Segurou o anel e devolveu.", fecho: "O problema não é quem segura o anel. É um sistema que dá poder demais a qualquer um que segure.", ref: "anel" },
+        { piada: "O Frodo também parecia isentão, quieto lá no Condado. E foi ele que topou levar o anel para destruir.", fecho: "O problema não é quem segura o anel. É um sistema que dá poder demais a qualquer um que segure.", ref: "anel" },
         { piada: "O Shrek também não queria entrar na briga do reino. Ele só queria o pântano dele em paz.", fecho: "No fim, quem resolveu a história foi quem estava longe da corte.", ref: "shrek" },
         { piada: "Não é isenção. É que eu leio a bula antes de tomar o remédio.", fecho: "Toda proposta que eu faço vem com a fonte e com as críticas mais duras junto.", ref: "nazare" }
       ]
