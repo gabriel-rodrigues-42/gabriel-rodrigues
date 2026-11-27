@@ -174,6 +174,21 @@
   .votacao-nota { margin: var(--espaco-4) 0 0; font-size: var(--tamanho-2); color: var(--texto-suave); }
   .votacao-resposta { margin: var(--espaco-2) 0 0; min-height: 1.5em; font-weight: 700; color: var(--verde-escuro); }
   @media (prefers-reduced-motion: reduce) { .voto-barra span { transition: none; } }
+  /* No celular, a votação cabe numa tela (com a barra de baixo): título e cartões mais baixos,
+     botão ao lado da explicação. Do computador em diante fica como antes. */
+  @media (max-width: 719px) {
+    #lema h2 { font-size: var(--tamanho-4); margin-bottom: 0; }
+    #lema .lead { font-size: var(--tamanho-2); margin: var(--espaco-1) 0 0; text-wrap: balance; }
+    .votacao-opcoes { gap: var(--espaco-3); margin-top: var(--espaco-3); }
+    .voto { gap: var(--espaco-2); padding: var(--espaco-4); }
+    .voto::before { width: 36px; height: 6px; }
+    .voto-frase { font-size: var(--tamanho-3); }
+    .voto-porque { font-size: var(--tamanho-1); line-height: 1.45; }
+    .voto .botao { padding: 8px 18px; }
+    .voto-pct { font-size: var(--tamanho-3); }
+    .voto-seu { top: var(--espaco-3); right: var(--espaco-3); }
+    .votacao-nota { margin-top: var(--espaco-3); font-size: var(--tamanho-1); }
+  }
 </style>
 </head>
 <body>
@@ -261,7 +276,7 @@
 
   <section id="lema" aria-labelledby="titulo-lema">
     <h2 id="titulo-lema">Ajude a escolher o meu <span class="destaque">lema</span></h2>
-    <p class="lead">Estou entre duas frases. Escolha a que mais combina com o que você leu aqui.</p>
+    <p class="lead">Estou entre duas frases. Qual combina mais com o que você leu aqui?</p>
     <div class="votacao-opcoes">
       <div class="voto" data-opcao="entrega">
         <span class="selo amarelo voto-seu" hidden>Seu voto</span>
