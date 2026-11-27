@@ -1,0 +1,13 @@
+# Cabeçalhos das páginas estáticas (Cloudflare Pages). Não valem para /api/*, que são Functions.
+
+# HSTS: o navegador passa a usar só HTTPS por 1 ano.
+# Sem includeSubDomains nem preload por enquanto: preload é difícil de desfazer e
+# ainda não conferimos se todo subdomínio tem HTTPS. As prévias *.pages.dev já são HTTPS sempre.
+/*
+  Strict-Transport-Security: max-age=31536000
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/.well-known/security.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=86400
