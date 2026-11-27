@@ -54,6 +54,12 @@ gr-cidade .gr-cidade-cep label { display: block; margin: 0 0 var(--espaco-1); fo
 .gr-cidade-cep-linha { display: flex; flex-wrap: wrap; gap: var(--espaco-2) var(--espaco-4); align-items: center; }
 gr-cidade .gr-cidade-cep-linha input { flex: 1 1 160px; width: auto; min-width: 0; }
 
+/* Versão compacta (atributo compacto): três atalhos numa linha, letra e ícones menores */
+gr-cidade[compacto] .gr-cidade { gap: var(--espaco-1); }
+gr-cidade[compacto] .gr-cidade-atalhos { gap: var(--espaco-1) var(--espaco-3); }
+gr-cidade[compacto] .gr-cidade-atalhos button { gap: 4px; font-size: var(--tamanho-1); padding: 6px 0; }
+gr-cidade[compacto] .gr-cidade-atalhos svg { width: 15px; height: 15px; }
+
 .gr-cidade-status { margin: 0; font-size: var(--tamanho-2); min-height: 0; }
 .gr-cidade-status:empty { display: none; }
 .gr-cidade-status.ok { font-weight: 700; }

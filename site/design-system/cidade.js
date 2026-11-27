@@ -11,6 +11,8 @@
 //   nome-uf       nome do <input hidden> com a UF ("EX" para quem mora fora, se tiver `exterior`)
 //   ibge          código IBGE já escolhido (ex.: vindo do endereço da página)
 //   exterior      mostra a opção "Moro fora do Brasil"
+//   compacto      atalhos com nomes curtos e letra menor, numa linha só (para formulários que precisam
+//                 caber na tela, como o de apoio da página inicial); o leitor de tela ouve o nome completo
 //   autocompletar deixa o navegador preencher a cidade salva (autocomplete="address-level2");
 //                 o nome preenchido é casado com a lista e a UF vem junto
 //   placeholder   texto de exemplo do campo
@@ -35,6 +37,7 @@
   const T = EN ? {
     fora: "Outside Brazil", placeholder: "Type the name of your city", apagar: "Clear the city", encontradas: "Cities found",
     cep: "CEP (Brazilian postal code)", porNome: "Search by name", local: "Use my location", porCep: "Search by CEP", exterior: "I live outside Brazil",
+    curto: { local: "My location", cep: "CEP", exterior: "Outside Brazil" },
     habitantes: "inhabitants (IBGE, 2022 Census)", erroLista: "Couldn't load the list of cities. Try again in a moment.",
     nada: "No city with that name. Try the CEP.", varias: "There is more than one city with that name. Pick yours from the list.",
     escolha: "Pick your city from the list.", semGeo: "This browser doesn't share location. Type the name or use the CEP.",
@@ -45,6 +48,7 @@
   } : {
     fora: "Fora do Brasil", placeholder: "Digite o nome da sua cidade", apagar: "Apagar a cidade", encontradas: "Cidades encontradas",
     cep: "CEP", porNome: "Buscar pelo nome", local: "Usar minha localização", porCep: "Buscar pelo CEP", exterior: "Moro fora do Brasil",
+    curto: { local: "Minha localização", cep: "CEP", exterior: "Fora do Brasil" },
     habitantes: "habitantes (IBGE, Censo 2022)", erroLista: "Não consegui carregar a lista de cidades. Tente de novo em instantes.",
     nada: "Nenhuma cidade com esse nome. Tente pelo CEP.", varias: "Tem mais de uma cidade com esse nome. Escolha a sua na lista.",
     escolha: "Escolha sua cidade na lista.", semGeo: "Este navegador não informa a localização. Digite o nome ou use o CEP.",
@@ -109,6 +113,11 @@
       this.valor = null;
       this.resultados = [];
       this.foco = -1;
+      // Atalho: com `compacto`, mostra o nome curto e deixa o completo para o leitor de tela.
+      const curto = this.hasAttribute("compacto");
+      const atalho = (acao, icone, texto) => curto
+        ? `<button type="button" data-acao="${acao}" aria-label="${texto}">${icone}<span aria-hidden="true">${T.curto[acao]}</span></button>`
+        : `<button type="button" data-acao="${acao}">${icone}<span>${texto}</span></button>`;
 
       this.innerHTML = `
         <div class="gr-cidade">
@@ -128,9 +137,9 @@
             </div>
           </div>
           <div class="gr-cidade-atalhos">
-            <button type="button" data-acao="local">${ICONE_LOCAL}<span>${T.local}</span></button>
-            <button type="button" data-acao="cep">${ICONE_CEP}<span>${T.porCep}</span></button>
-            ${this.hasAttribute("exterior") ? `<button type="button" data-acao="exterior">${ICONE_MUNDO}<span>${T.exterior}</span></button>` : ""}
+            ${atalho("local", ICONE_LOCAL, T.local)}
+            ${atalho("cep", ICONE_CEP, T.porCep)}
+            ${this.hasAttribute("exterior") ? atalho("exterior", ICONE_MUNDO, T.exterior) : ""}
           </div>
           <p class="gr-cidade-status" role="status" aria-live="polite"></p>
         </div>`;
