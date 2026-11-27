@@ -152,11 +152,14 @@ p { margin: 0 0 var(--espaco-3); }
 .calc .resultado .rot { align-self: start; }
 .calc .resultado small:empty { display: none; }
 @container (min-width: 600px) {
-  .calc .campos { grid-template-columns: repeat(4, 1fr); gap: var(--espaco-2) var(--espaco-3); }
+  .calc .campos { grid-template-columns: repeat(2, 1fr); gap: var(--espaco-4) var(--espaco-5); }
   .calc .campos > div { display: grid; grid-template-rows: subgrid; grid-row: span 2; }
   .calc .campos label { align-self: end; margin-bottom: 0; }
-  .calc .resultado { grid-template-columns: repeat(5, 1fr); gap: var(--espaco-2); }
-  .calc .resultado > div { padding: var(--espaco-3) var(--espaco-2) var(--espaco-3) var(--espaco-3); }
-  .calc .resultado output { font-size: var(--tamanho-3); }
-  .calc .resultado .rot { font-size: var(--tamanho-1); }
+  .calc .resultado { grid-template-columns: 1fr; gap: 0; background: var(--creme); border-radius: var(--forma-opcao); padding: var(--espaco-2) var(--espaco-5); }
+  .calc .resultado > div { grid-row: auto; grid-template-rows: none; grid-template-columns: 1fr auto; align-items: center; column-gap: var(--espaco-4); row-gap: 2px; background: none; border-radius: 0; padding: var(--espaco-3) 0; }
+  .calc .resultado > div + div { border-top: 1px solid var(--areia); }
+  .calc .resultado .rot { grid-column: 1; grid-row: 1; align-self: end; font-size: var(--tamanho-2); }
+  .calc .resultado small { grid-column: 1; grid-row: 2; margin: 0; align-self: start; }
+  .calc .resultado > div > output { grid-column: 2; grid-row: 1 / span 2; text-align: right; font-size: var(--tamanho-4); }
+  .calc .resultado > div:first-child > output { color: var(--azul); }
 }
