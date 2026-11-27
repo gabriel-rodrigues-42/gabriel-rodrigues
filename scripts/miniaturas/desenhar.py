@@ -284,10 +284,28 @@ def cidade_esponja():
                nuvem + gotas + varzea + rio + brilho + arvores + chao(70, 412, 560) + pino)
 
 
+def moradia_que_vira_sua():
+    """Prédio baixo com lojas de toldo no térreo, jardim no telhado, árvores e um ônibus na frente; uma chave amarela no céu."""
+    corpo = ret(150, 150, 400, 210, "areia") + ret(142, 142, 416, 12, "azul") + ret(142, 352, 416, 10, "azul")
+    janelas = "".join(ret(178 + k * 92, 172 + a * 58, 46, 36, "azul-claro", 4) for a in range(3) for k in range(4))
+    varandas = "".join(traco(f"M{172 + k * 92},{214 + a * 58} h58", "verde-escuro", 6) for a, k in ((0, 1), (1, 3), (2, 0), (1, 2)))
+    telhado = ret(150, 124, 400, 18, "verde-claro") + arvore(200, 138, 16, "verde") + arvore(300, 138, 18) + arvore(400, 138, 16, "verde") + arvore(500, 138, 18)
+    terreo = ret(150, 362, 400, 70, "azul")
+    lojas = ""
+    for i, cor in enumerate(("verde", "livre-coral", "amarelo-escuro")):
+        x = 160 + i * 130
+        lojas += ret(x, 370, 120, 14, cor, 4) + "".join(circ(x + 10 + j * 20, 384, 10, cor) for j in range(6)) + ret(x + 10, 396, 100, 36, "azul-claro", 3) + ret(x + 48, 400, 24, 32, "azul-medio")
+    arvores = arvore(110, 432, 30) + arvore(600, 432, 26, "verde")
+    onibus = ret(380, 440, 230, 60, "verde-fundo", 12) + "".join(ret(396 + k * 42, 450, 32, 22, "azul-claro", 4) for k in range(5)) + circ(420, 502, 12, "azul") + circ(570, 502, 12, "azul")
+    chave = (circ(600, 96, 30, "amarelo") + circ(600, 96, 12, "branco") + ret(625, 90, 60, 12, "amarelo", 4) + ret(665, 100, 10, 18, "amarelo", 2) + ret(645, 100, 10, 14, "amarelo", 2))
+    return svg("Prédio baixo com lojas de toldo colorido no térreo, jardim no telhado, árvores na calçada, um ônibus na frente e uma chave amarela",
+               telhado + corpo + janelas + varandas + terreo + lojas + chao(70, 432, 560) + arvores + onibus + chave)
+
+
 DESENHOS = {
     "galera-club": galera_club, "reindustrializacao": reindustrializacao, "desafio-dumont": desafio_dumont,
     "cartorio-digital": cartorio_digital, "qual-caminho": qual_caminho, "leis-com-mentalidade-de-software": leis_software,
-    "canal-do-youtube": canal_do_youtube, "brasil-responde": brasil_responde, "pena-do-tamanho-do-dano": pena_do_tamanho_do_dano, "regulacao-da-cannabis": regulacao_da_cannabis, "cidade-esponja": cidade_esponja, "ideia": ideia, "capa": capa,
+    "canal-do-youtube": canal_do_youtube, "brasil-responde": brasil_responde, "pena-do-tamanho-do-dano": pena_do_tamanho_do_dano, "regulacao-da-cannabis": regulacao_da_cannabis, "cidade-esponja": cidade_esponja, "moradia-que-vira-sua": moradia_que_vira_sua, "ideia": ideia, "capa": capa,
 }
 
 if __name__ == "__main__":

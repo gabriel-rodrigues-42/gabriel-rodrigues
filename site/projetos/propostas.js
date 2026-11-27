@@ -109,6 +109,19 @@ window.PROPOSTAS = [
     },
   },
   {
+    id: "moradia-que-vira-sua",
+    href: "/projetos/moradia-que-vira-sua/",
+    img: "/projetos/img/moradia-que-vira-sua.svg",
+    cor: "verde",
+    tipo: "projeto",
+    fase: 1,
+    titulo: { pt: "O aluguel que vira a sua casa", en: "The rent that becomes your home" },
+    gancho: {
+      pt: "Moradia segura perto do ônibus, com jardim e mercado no térreo. Um ano grátis, e parte do aluguel compra o apartamento.",
+      en: "Safe housing near the bus, with a garden and a grocery downstairs. One free year, and part of the rent buys the flat.",
+    },
+  },
+  {
     id: "cidade-esponja",
     href: "/projetos/cidade-esponja/",
     img: "/projetos/img/cidade-esponja.svg",
