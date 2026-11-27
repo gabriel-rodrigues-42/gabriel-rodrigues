@@ -46,6 +46,7 @@ Site gabriel-rodrigues.com, design system e vídeos do Gabriel Rodrigues, desenv
 - Agentes de IA: `site/llms.txt` resume o site e lista as páginas; página nova entra nele. Formulário novo ganha WebMCP declarativo (`toolname`, `tooldescription` no `<form>` e `toolparamdescription` nos campos), sem `toolautosubmit`: a pessoa sempre confirma o envio.
 - Bastidores são públicos: `/bastidores/` não tem autenticação de verdade (a "senha" 42 está no código). Nada confidencial ou que precise de login entra lá, nem em `videos/estudio/blocos.json` e `roteiros/`, que vão para o site: dado pessoal, contato, endereço, rotina, estratégia, rascunho que não pode vazar, chave ou senha. Se pedirem algo assim, recuse e avise o Gabriel. Para proteger de verdade, primeiro ponha autenticação real (Cloudflare Access ou Pages Function com segredo e D1).
 - Dados pessoais: colete o mínimo (LGPD). Nada de CPF, título de eleitor ou lista com cara de abaixo-assinado.
+- Segurança: `site/_headers` manda HSTS (1 ano, sem `includeSubDomains` nem `preload` por enquanto), `nosniff` e `Referrer-Policy` nas páginas estáticas (não vale para `/api/*`). `site/.well-known/security.txt` (RFC 9116) tem `Expires`: renove antes de vencer, no máximo 1 ano à frente (vence em 2027-11-01).
 
 ## Ideias
 

@@ -1,0 +1,7 @@
+# Achou uma falha de segurança no gabriel-rodrigues.com? Me escreva antes de divulgar.
+# Found a security issue on gabriel-rodrigues.com? Please email me before disclosing it.
+# RFC 9116. Renove o Expires antes de vencer (no máximo 1 ano à frente).
+Contact: mailto:gabrielr47@gmail.com
+Expires: 2027-11-01T00:00:00.000Z
+Preferred-Languages: pt, en
+Canonical: https://gabriel-rodrigues.com/.well-known/security.txt

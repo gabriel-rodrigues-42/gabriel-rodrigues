@@ -6,3 +6,6 @@
 /wp-admin /bastidores/?de=wp-admin 302
 /wp-admin/* /bastidores/?de=wp-admin 302
 /wp-login.php /bastidores/?de=wp-admin 302
+
+# RFC 9116: o lugar oficial é /.well-known/; o antigo /security.txt aponta para lá.
+/security.txt /.well-known/security.txt 301
