@@ -98,7 +98,7 @@
 
   // Calçada, jardim de chuva, caixa que guarda água e a rua.
   function rua(o) {
-    let s = r(0, CHAO, 800, 18, "areia") + r(0, CHAO + 18, 800, 52, "texto-suave") + `<rect x="0" y="${CHAO + 70}" width="800" height="60" style="fill:${C("livre-terra")};opacity:.35"/>`;
+    let s = r(0, CHAO, 800, 18, "areia") + r(0, CHAO + 18, 800, 52, "texto-suave") + r(0, CHAO + 70, 800, 60, "livre-terra", 'opacity=".35"');
     for (let k = 0; k < 9; k++) s += r(20 + k * 90, CHAO + 42, 44, 4, "branco");
     let agua = "";
     (o.jardinsDeChuva || []).forEach((x) => {
@@ -143,7 +143,7 @@
   // Prédio vizinho, só para dar contexto à rua.
   function vizinho(x, w, h, cor) {
     let v = r(x, CHAO - h, w, h, cor);
-    for (let y = CHAO - h + 16; y < CHAO - 30; y += 40) for (let k = 0; k < Math.floor(w / 40); k++) v += r(x + 12 + k * 40, y, 22, 22, cor === "areia" ? "branco" : "branco", 'rx="2"');
+    for (let y = CHAO - h + 16; y < CHAO - 30; y += 40) for (let k = 0; k < Math.floor(w / 40); k++) v += r(x + 12 + k * 40, y, 22, 22, "branco", 'rx="2"');
     return v;
   }
 
@@ -158,11 +158,13 @@
       + rua({ jardinsDeChuva: [180, 420], arvores: [100, 560, 720] }) + transporte(660, "ponto"),
   };
 
-  document.querySelectorAll("[data-modelo]").forEach((fig) => {
-    const nome = fig.dataset.modelo;
-    const svg = fig.querySelector("svg");
-    svg.insertAdjacentHTML("beforeend", MODELOS[nome]());
-  });
+  // Cada prédio só é desenhado quando a aba dele abre pela primeira vez.
+  function desenhar(painel) {
+    painel.querySelectorAll("[data-modelo]:not([data-desenhado])").forEach((fig) => {
+      fig.querySelector("svg").insertAdjacentHTML("beforeend", MODELOS[fig.dataset.modelo]());
+      fig.dataset.desenhado = "";
+    });
+  }
 
   // Abas dos modelos
   const abas = [...document.querySelectorAll(".abas-modelo [role=tab]")];
@@ -171,10 +173,13 @@
       const sel = a === aba;
       a.setAttribute("aria-selected", sel);
       a.tabIndex = sel ? 0 : -1;
-      document.getElementById(a.getAttribute("aria-controls")).hidden = !sel;
+      const painel = document.getElementById(a.getAttribute("aria-controls"));
+      painel.hidden = !sel;
+      if (sel) desenhar(painel);
     });
     if (focar) aba.focus();
   }
+  document.querySelectorAll(".modelo-painel:not([hidden])").forEach(desenhar);
   abas.forEach((a, i) => {
     a.addEventListener("click", () => abrir(a));
     a.addEventListener("keydown", (e) => {
@@ -215,6 +220,7 @@
         campo.value = n ? "R$ " + fmtNum.format(n) : "";
       });
     });
+    const saida = Object.fromEntries([...form.querySelectorAll("[data-saida]")].map((el) => [el.dataset.saida, el]));
     const calc = () => {
       const renda = num(form.renda);
       const preco = num(form.preco);
@@ -224,23 +230,23 @@
       const pelaRenda = Math.round(renda * p);
       const noTeto = aluguel > 0 && aluguel < pelaRenda;
       const parcela = noTeto ? aluguel : pelaRenda;
-      form.querySelector("[data-saida=rotulo]").textContent = noTeto
+      saida.rotulo.textContent = noTeto
         ? (EN ? "Payment (capped at the area's rent)" : "Parcela (no teto: o aluguel do bairro)")
         : (EN ? `Payment (${Math.round(p * 100)}% of income)` : `Parcela (${Math.round(p * 100)}% da renda)`);
       const compra = Math.round(parcela / 2);
       const meses = Math.max(0, (anos - 1) * 12);
       const juntou = compra * meses;
       const leva = anos < 5 ? Math.round(juntou * .9) : juntou;
-      form.querySelector("[data-saida=parcela]").textContent = fmt.format(parcela);
-      form.querySelector("[data-saida=compra]").textContent = fmt.format(compra);
-      form.querySelector("[data-saida=juntou]").textContent = fmt.format(juntou);
-      form.querySelector("[data-saida=leva]").textContent = fmt.format(leva);
-      form.querySelector("[data-saida=parte]").textContent = preco ? fmtNum.format(Math.min(100, Math.round(juntou / preco * 1000) / 10)) + "%" : "–";
-      form.querySelector("[data-saida=desconto]").textContent = anos < 5
+      saida.parcela.textContent = fmt.format(parcela);
+      saida.compra.textContent = fmt.format(compra);
+      saida.juntou.textContent = fmt.format(juntou);
+      saida.leva.textContent = fmt.format(leva);
+      saida.parte.textContent = preco ? fmtNum.format(Math.min(100, Math.round(juntou / preco * 1000) / 10)) + "%" : "–";
+      saida.desconto.textContent = anos < 5
         ? (EN ? `Leaves ${fmt.format(juntou - leva)} behind (10% before 5 years)` : `Deixa ${fmt.format(juntou - leva)} (10%, antes de 5 anos)`)
         : (EN ? "No discount: 5 years or more" : "Sem desconto: 5 anos ou mais");
-      form.querySelector("[data-saida=anos]").textContent = anos;
-      form.querySelector("[data-saida=regra]").textContent = anos < 5
+      saida.anos.textContent = anos;
+      saida.regra.textContent = anos < 5
         ? (EN ? "Before 5 years, the family takes 90% to the next home and leaves 10%." : "Antes de 5 anos, a família leva 90% para o próximo apartamento e deixa 10%.")
         : (EN ? "With 5 years or more, the family takes all of it." : "Com 5 anos ou mais, a família leva tudo.");
     };

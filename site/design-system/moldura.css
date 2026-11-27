@@ -1,7 +1,7 @@
 /* Moldura do site: cabeçalho e rodapé iguais em todas as páginas.
    Depende de tokens.css. Use junto com moldura.js:
-     <link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-26g">
-     <script src="/design-system/moldura.js?v=2026-11-26g"></script>
+     <link rel="stylesheet" href="/design-system/moldura.css?v=2026-11-27a">
+     <script src="/design-system/moldura.js?v=2026-11-27a"></script>
      <gr-cabecalho></gr-cabecalho> logo depois de <body>
      <gr-rodape></gr-rodape> logo antes de </body> */
 
@@ -19,19 +19,19 @@ h1, h2, h3, h4, p, li, dd, dt, a, strong, span, label { overflow-wrap: break-wor
 h1, h2, h3 { hyphens: manual; text-wrap: balance; }
 
 /* ---------- Cabeçalho (mobile first) ----------
-   Celular: logo + botão Apoiar na primeira linha, menu centralizado embaixo.
+   Celular: logo + botão Apoiar no topo; o menu fica na barra de baixo.
    A partir de 720px: logo, menu e Apoiar numa linha só, fixo no topo. */
 .moldura-topo { background: var(--creme-vidro); border-bottom: 2px solid var(--azul-claro); }
 .moldura-topo-dentro {
-  max-width: 960px; margin: 0 auto; padding: var(--espaco-3) var(--espaco-4) var(--espaco-2);
-  display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "marca apoiar" "menu menu";
-  align-items: center; column-gap: var(--espaco-3); row-gap: var(--espaco-2);
+  max-width: 960px; margin: 0 auto; padding: var(--espaco-3) var(--espaco-4);
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "marca apoiar";
+  align-items: center; column-gap: var(--espaco-3);
 }
 /* A área de toque é só o logo (no mínimo 44px), não o espaço vazio até o Apoiar. */
-.moldura-marca { grid-area: marca; justify-self: start; min-height: 44px; border-radius: 50%; display: flex; align-items: center; gap: var(--espaco-3); text-decoration: none; color: var(--azul); min-width: 0; }
+.moldura-marca { grid-area: marca; justify-self: start; min-height: 44px; border-radius: 50%; display: flex; align-items: center; text-decoration: none; color: var(--azul); min-width: 0; }
 .moldura-logo { display: block; width: 48px; height: 48px; flex: none; }
 .moldura-oculto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
-.moldura-menu { grid-area: menu; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--espaco-1) var(--espaco-2); }
+.moldura-menu { grid-area: menu; display: flex; gap: var(--espaco-1) var(--espaco-2); }
 .moldura-menu a, .moldura-apoiar {
   font-size: var(--tamanho-2); font-weight: var(--peso-forte); color: var(--azul); text-decoration: none;
   padding: 6px 10px; border-radius: var(--forma-pilula); white-space: nowrap;
@@ -75,7 +75,6 @@ h1, h2, h3 { hyphens: manual; text-wrap: balance; }
   .moldura-topo { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
   .moldura-topo-dentro { grid-template-columns: minmax(0, 1fr) auto auto; grid-template-areas: "marca menu apoiar"; padding: var(--espaco-2) var(--espaco-4); }
   .moldura-logo { width: 52px; height: 52px; }
-  .moldura-menu { flex-wrap: nowrap; }
 }
 
 /* ---------- Rodapé ---------- */
@@ -129,13 +128,12 @@ h1, h2, h3 { hyphens: manual; text-wrap: balance; }
   html { --barra-altura: 64px; scroll-padding-bottom: calc(var(--barra-altura) + 16px); }
   body { padding-bottom: calc(var(--barra-altura) + env(safe-area-inset-bottom, 0px)); }
   .moldura-menu, .moldura-buscar { display: none; }
-  .moldura-topo-dentro { grid-template-areas: "marca apoiar"; padding-bottom: var(--espaco-3); }
   .moldura-barra {
     display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 25;
     height: calc(var(--barra-altura) + env(safe-area-inset-bottom, 0px)); padding: 0 var(--espaco-2) env(safe-area-inset-bottom, 0px);
     background: var(--creme-vidro); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    border-top: 2px solid var(--azul-claro); box-shadow: 0 -6px 18px -12px rgba(0, 39, 118, .35);
+    border-top: 2px solid var(--azul-claro); box-shadow: 0 -6px 18px -12px color-mix(in srgb, var(--azul) 35%, transparent);
   }
   .moldura-cookies { bottom: calc(var(--barra-altura) + env(safe-area-inset-bottom, 0px) + var(--espaco-3)); }
 }

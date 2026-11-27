@@ -108,8 +108,9 @@
     connectedCallback() {
       if (this.dataset.pronto) return;
       this.dataset.pronto = "1";
-      const links = MENU.map((m) =>
-        `<a href="${m.href}"${m.ativo(semIdioma) ? ' aria-current="page"' : ""}>${m.texto}</a>`
+      // Os mesmos links vão no topo (computador) e na barra de baixo (celular).
+      const links = (icone) => MENU.map((m) =>
+        `<a href="${m.href}"${m.ativo(semIdioma) ? ' aria-current="page"' : ""}>${icone ? `<span class="moldura-barra-icone">${svg(m.icone)}</span>` : ""}${m.texto}</a>`
       ).join("");
       this.innerHTML = `
         <header class="moldura-topo">
@@ -118,7 +119,7 @@
               <svg class="moldura-logo" viewBox="4 5 56 55" aria-hidden="true" focusable="false">${LOGO}</svg>
               <span class="moldura-oculto">Gabriel Rodrigues</span>
             </a>
-            <nav class="moldura-menu" aria-label="${T.menuRotulo}">${links}</nav>
+            <nav class="moldura-menu" aria-label="${T.menuRotulo}">${links(false)}</nav>
             <div class="moldura-acoes">
               <button type="button" class="moldura-buscar" data-buscar aria-label="${T.buscarRotulo}" title="${T.buscarRotulo}" aria-haspopup="dialog">${svg("buscar")}</button>
               <a class="moldura-apoiar" href="${RAIZ}#apoiar">${T.apoiar}</a>
@@ -126,7 +127,7 @@
           </div>
         </header>
         <nav class="moldura-barra" aria-label="${T.menuAtalhos}">
-          ${MENU.map((m) => `<a href="${m.href}"${m.ativo(semIdioma) ? ' aria-current="page"' : ""}><span class="moldura-barra-icone">${svg(m.icone)}</span>${m.texto}</a>`).join("")}
+          ${links(true)}
           <button type="button" data-buscar aria-haspopup="dialog"><span class="moldura-barra-icone">${svg("buscar")}</span>${T.buscar}</button>
         </nav>`;
     }
@@ -156,34 +157,42 @@
     if (!noInicio) fim.then(() => { location.href = marca.href; });
   });
 
-  // ---------- Busca ----------
-  // A lupa carrega busca.js + busca.css só no primeiro toque.
-  const VERSAO_BUSCA = "2026-11-26";
-  let buscaCarregando = null;
-  function carregarBusca() {
-    if (window.GRBusca) return Promise.resolve();
-    if (buscaCarregando) return buscaCarregando;
+  // ---------- Módulos carregados sob demanda (busca e modo leitura) ----------
+  // Põe nome.css e nome.js na página uma vez só e espera os dois.
+  // Se o script falhar, a próxima chamada tenta de novo.
+  const carregando = {};
+  function carregarModulo(nome, versao) {
+    if (carregando[nome]) return carregando[nome];
     const css = document.createElement("link");
     css.rel = "stylesheet";
-    css.href = PASTA + "busca.css?v=" + VERSAO_BUSCA;
+    css.href = PASTA + nome + ".css?v=" + versao;
     const cssPronto = new Promise((ok) => { css.onload = ok; css.onerror = ok; });
     document.head.appendChild(css);
-    buscaCarregando = Promise.all([cssPronto, new Promise((ok, erro) => {
+    carregando[nome] = Promise.all([cssPronto, new Promise((ok, erro) => {
       const s = document.createElement("script");
-      s.src = PASTA + "busca.js?v=" + VERSAO_BUSCA;
+      s.src = PASTA + nome + ".js?v=" + versao;
       s.onload = ok;
-      s.onerror = () => { buscaCarregando = null; erro(); };
+      s.onerror = () => { carregando[nome] = null; css.remove(); erro(); };
       document.head.appendChild(s);
     })]);
-    return buscaCarregando;
+    return carregando[nome];
   }
+
+  // ---------- Busca ----------
+  // A lupa carrega busca.js + busca.css só no primeiro toque.
+  const VERSAO_BUSCA = "2026-11-27";
+  const carregarBusca = () => carregarModulo("busca", VERSAO_BUSCA);
   function abrirBusca() {
     carregarBusca().then(() => window.GRBusca.abrir(), () => { location.href = RAIZ + "projetos/"; });
   }
   // Adianta o download quando o dedo ou o mouse chega perto da lupa.
+  // Os ouvintes saem assim que o índice começa a baixar.
+  const adiantar = new AbortController();
   ["pointerover", "touchstart", "focusin"].forEach((ev) => document.addEventListener(ev, (e) => {
-    if (e.target.closest && e.target.closest("[data-buscar]")) carregarBusca().then(() => window.GRBusca.carregar()).catch(() => {});
-  }, { passive: true }));
+    if (!e.target.closest || !e.target.closest("[data-buscar]")) return;
+    adiantar.abort();
+    carregarBusca().then(() => window.GRBusca.carregar()).catch(() => {});
+  }, { passive: true, signal: adiantar.signal }));
   // Atalho de teclado: "/" abre a busca (fora de campos de texto).
   document.addEventListener("keydown", (e) => {
     if (e.key !== "/" || e.ctrlKey || e.metaKey || e.altKey) return;
@@ -230,29 +239,13 @@
   // Ligado no rodapé, carrega leitor.js + leitor.css, que põem um ▶ em cada página e seção
   // e mostram as legendas. A escolha fica no navegador (localStorage).
   const CHAVE_LEITURA = "gr-modo-leitura"; // "ligado" | ausente
-  const VERSAO_LEITOR = "2026-11-24";
+  const VERSAO_LEITOR = "2026-11-27";
   function leituraLigada() { try { return localStorage.getItem(CHAVE_LEITURA) === "ligado"; } catch { return false; } }
   function salvarLeitura(ligada) {
     try { ligada ? localStorage.setItem(CHAVE_LEITURA, "ligado") : localStorage.removeItem(CHAVE_LEITURA); } catch { /* sem armazenamento: vale só nesta página */ }
   }
 
-  let leitorCarregando = null;
-  function carregarLeitor() {
-    if (window.GRLeitor) return Promise.resolve();
-    if (leitorCarregando) return leitorCarregando;
-    const css = document.createElement("link");
-    css.rel = "stylesheet";
-    css.href = PASTA + "leitor.css?v=" + VERSAO_LEITOR;
-    document.head.appendChild(css);
-    leitorCarregando = new Promise((ok, erro) => {
-      const s = document.createElement("script");
-      s.src = PASTA + "leitor.js?v=" + VERSAO_LEITOR;
-      s.onload = ok;
-      s.onerror = erro;
-      document.head.appendChild(s);
-    });
-    return leitorCarregando;
-  }
+  const carregarLeitor = () => carregarModulo("leitor", VERSAO_LEITOR);
 
   function aplicarLeitura(ligada) {
     document.querySelectorAll("[data-modo-leitura-botao]").forEach((b) => b.setAttribute("aria-pressed", String(ligada)));

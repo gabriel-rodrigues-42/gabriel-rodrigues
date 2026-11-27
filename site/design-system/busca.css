@@ -7,7 +7,7 @@
   display: none; flex-direction: column; overflow: hidden;
 }
 .busca[open] { display: flex; animation: busca-entra .18s ease-out; }
-.busca::backdrop { background: rgba(0, 39, 118, .45); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+.busca::backdrop { background: color-mix(in srgb, var(--azul) 45%, transparent); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
 html.busca-aberta { overflow: hidden; }
 @keyframes busca-entra { from { opacity: 0; transform: translateY(12px); } }
 
@@ -86,7 +86,7 @@ html.busca-aberta { overflow: hidden; }
 @media (min-width: 720px) {
   .busca {
     width: min(680px, calc(100% - 2 * var(--espaco-5))); height: auto; max-height: min(720px, 80dvh);
-    margin: 8vh auto auto; border-radius: var(--forma-cartao); box-shadow: 0 24px 60px rgba(0, 39, 118, .3);
+    margin: 8vh auto auto; border-radius: var(--forma-cartao); box-shadow: 0 24px 60px color-mix(in srgb, var(--azul) 30%, transparent);
   }
   .busca-form { padding: var(--espaco-4) var(--espaco-5); }
   .busca-corpo { padding: var(--espaco-2) var(--espaco-5) var(--espaco-5); }
