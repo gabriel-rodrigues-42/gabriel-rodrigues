@@ -336,7 +336,7 @@
     if (!Number.isInteger(posicao) || posicao < 1) return;
     const primeiro = (nome || "").trim().split(" ")[0];
     document.getElementById("ficha-numero").textContent = posicao.toLocaleString("en-US");
-    document.getElementById("ficha-frase").textContent = `${primeiro ? primeiro + ", you" : "You"} were the ${ordinal(posicao)} person to say I should try.`;
+    document.getElementById("ficha-frase").textContent = `${primeiro ? primeiro + ", your" : "Your"} support was the ${ordinal(posicao)} to say I should try.`;
     document.getElementById("ficha-data").textContent = new Date().toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric" });
     grFicha.abrir(ficha, posicao, (x) => x.toLocaleString("en-US"));
   }

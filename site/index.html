@@ -333,7 +333,7 @@
     const primeiro = (nome || "").trim().split(" ")[0];
     const n = posicao.toLocaleString("pt-BR");
     document.getElementById("ficha-numero").textContent = n;
-    document.getElementById("ficha-frase").textContent = `${primeiro ? primeiro + ", você" : "Você"} foi a ${n}ª pessoa a dizer que eu devo tentar.`;
+    document.getElementById("ficha-frase").textContent = `${primeiro ? primeiro + ", seu" : "Seu"} apoio foi o ${n}º a dizer que eu devo tentar.`;
     document.getElementById("ficha-data").textContent = new Date().toLocaleDateString("pt-BR");
     grFicha.abrir(ficha, posicao, (x) => x.toLocaleString("pt-BR"));
   }

@@ -1,5 +1,7 @@
 // GET /api/apoios — quantas pessoas já mandaram o formulário "Acredita que eu devo tentar?".
 // Lê só a contagem da tabela apoios (db/apoios.sql), nunca uma linha de alguém (LGPD).
+// É a contagem de emails únicos (o email é a chave da tabela), não a de envios: o número do
+// cartão "Apoio nº" (tabela apoios_numero) sobe a cada envio e pode ser maior que este total.
 // Devolve um número arredondado para baixo em centenas, e só quando passa de 1.000:
 //   { "mostrar": true, "mais_de": 1200 }   ou   { "mostrar": false }
 // O total exato não sai daqui. A página escreve "Mais de 1.200 pessoas…".
