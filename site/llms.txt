@@ -9,7 +9,7 @@ Não há pedido de voto. As propostas estão em construção, com dados, fontes 
 ## Páginas principais
 
 - [Início](https://gabriel-rodrigues.com/): quem é o Gabriel, as propostas em construção o formulário "Acredita que eu devo tentar?" e a votação do lema
-- [Sobre](https://gabriel-rodrigues.com/sobre/): a história do Gabriel, de Inhumas para a Europa e de volta para Goiás
+- [Sobre](https://gabriel-rodrigues.com/sobre/): a história do Gabriel, nascido em Inhumas (GO), oito anos na Europa e hoje morando em Goiânia
 - [No que eu acredito](https://gabriel-rodrigues.com/sobre/no-que-acredito/): o que o Gabriel pensa sobre Deus, religião, memória dos desastres e buscar conhecimento juntos, com religião ou sem
 - [Propostas](https://gabriel-rodrigues.com/projetos/): propostas desenvolvidas em público, cada uma com a fase em que está
 - [Ideias para conversar](https://gabriel-rodrigues.com/ideias/): ideias com problema, proposta, críticas e resposta, lidas em voz alta com legendas
