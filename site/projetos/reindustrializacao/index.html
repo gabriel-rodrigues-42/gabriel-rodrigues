@@ -111,7 +111,8 @@
   .fatos.elevados .fato b { font-size: var(--tamanho-5); white-space: nowrap; }
   @media (min-width: 600px) { .fatos.elevados { grid-template-columns: repeat(3, 1fr); } .fatos.elevados .fato b { font-size: var(--tamanho-4); } }
   .setores { display: flex; flex-wrap: wrap; gap: var(--espaco-2); padding: 0; list-style: none; margin: 0 0 var(--espaco-3); }
-  .setores a { color: inherit; text-decoration: none; }
+  .trilha-moradia { margin-top: var(--espaco-5); }
+  .trilha-moradia h3 { margin-top: var(--espaco-3); }
   .setores li { background: var(--azul-claro); color: var(--azul); font-weight: var(--peso-forte); font-size: var(--tamanho-1); padding: 6px 12px; border-radius: var(--forma-pilula); }
 
   /* Simulador do prejuízo */
@@ -296,7 +297,7 @@
     <div class="cartao faixa-painel" role="tabpanel" id="faixa-1" aria-labelledby="aba-1">
       <span class="selo">Baixo risco · retorno rápido</span>
       <h3>Plataformas digitais e infraestrutura</h3>
-      <ul class="setores"><li>Mobilidade urbana</li><li>Bilheteria de eventos</li><li>Nuvem nacional</li><li>Cartórios digitais com histórico que não se apaga</li><li>Software para empresas</li><li>Empresas de pagamento e crédito digital</li><li><a href="/projetos/moradia-que-vira-sua/">Moradia que vira sua →</a></li></ul>
+      <ul class="setores"><li>Mobilidade urbana</li><li>Bilheteria de eventos</li><li>Nuvem nacional</li><li>Cartórios digitais com histórico que não se apaga</li><li>Software para empresas</li><li>Empresas de pagamento e crédito digital</li></ul>
       <div class="fatos">
         <div class="fato"><small>Tempo até o retorno</small><b>2 a 4 anos</b></div>
         <div class="fato"><small>Seguro estatal</small><b>até 20%</b></div>
@@ -325,6 +326,18 @@
         <div class="fato"><small>Regra</small><b>obrigatória</b></div>
       </div>
       <p class="pequeno suave">Ter pelo menos um projeto nesta faixa é obrigatório para destravar as isenções das Faixas 1 e 2.</p>
+    </div>
+
+    <div class="cartao trilha-moradia">
+      <span class="selo">Fora das faixas · trilha própria</span>
+      <h3>Moradia: risco baixo, prazo longo</h3>
+      <p>Prédio de moradia não cabe em nenhuma faixa. O risco é menor que o da Faixa 1: o prédio é a garantia, parte dos apartamentos paga preço de mercado e o governo paga a parte social. Mas o prédio leva anos para ficar pronto e décadas para se pagar. Funciona como um fundo imobiliário de renda, com risco menor e lucro limitado.</p>
+      <div class="fatos">
+        <div class="fato"><small>Renda</small><b>desde o 2º ano</b></div>
+        <div class="fato"><small>Seguro estatal</small><b>até 10%</b></div>
+        <div class="fato"><small>Regra</small><b>fora dos 40% da Faixa 1</b></div>
+      </div>
+      <p class="pequeno suave">O aporte com moradia continua precisando de um projeto da Faixa 1 e um da Faixa 3. <a href="/projetos/moradia-que-vira-sua/">Veja a proposta de moradia</a>.</p>
     </div>
 
     <h3 style="margin-top: var(--espaco-6)">Um projeto rápido e um demorado, juntos</h3>

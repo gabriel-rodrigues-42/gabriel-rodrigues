@@ -12,6 +12,9 @@
     1: { seguro: 0.20, prazo: '2–4' },
     2: { seguro: 0.35, prazo: '5–8' },
     3: { seguro: 0.50, prazo: '10–15' },
+    // Trilha Moradia: fora das faixas. Risco baixo (o prédio é a garantia e o governo paga a parte social),
+    // prazo longo, renda desde o 2º ano. Não conta nos 40% da Faixa 1.
+    4: { seguro: 0.10, prazo: '2–25' },
   };
   const MIN_F1 = 0.40;          // Faixa 1 com no mínimo 40% do aporte
   const TETO_MENOR = 20000;     // R$ 20 mil por ano (Resolução CVM 88/2022)
@@ -60,9 +63,9 @@
       pt: ['Software para empresas', 'Sistema de caixa e estoque para comércio de bairro.'],
       en: ['Business software', 'Checkout and stock system for neighborhood stores.'] },
     // Liga com a proposta /projetos/moradia-que-vira-sua/ (prop: link para a proposta)
-    { id: 'morada', f: 1, nome: 'Morada Viva', conc: ['imobiliario'], forn: [], prop: 'moradia-que-vira-sua',
-      pt: ['Moradia', 'Prédios perto do BRT, com lojas no térreo. Parte do aluguel vira a compra do apartamento. A renda começa no 2º ano, mas o prédio leva décadas para se pagar.'],
-      en: ['Housing', 'Buildings near the BRT, with shops on the ground floor. Part of the rent goes toward buying the flat. Income starts in year 2, but the building takes decades to pay for itself.'] },
+    { id: 'morada', f: 4, nome: 'Morada Viva', conc: ['imobiliario'], forn: [], prop: 'moradia-que-vira-sua',
+      pt: ['Moradia', 'Prédios perto do BRT, com lojas no térreo. Parte do aluguel vira a compra do apartamento. Funciona como um fundo imobiliário de renda: dinheiro todo mês desde o 2º ano, risco baixo e lucro menor.'],
+      en: ['Housing', 'Buildings near the BRT, with shops on the ground floor. Part of the rent goes toward buying the flat. It works like an income real estate fund: money every month from year 2, low risk and lower profit.'] },
     { id: 'pulso', f: 2, nome: 'Pulso Vivo', conc: ['saude'], forn: ['saude'],
       pt: ['Equipamento médico', 'Sensores de monitoramento para leito de hospital.'],
       en: ['Medical equipment', 'Monitoring sensors for hospital beds.'] },
@@ -91,7 +94,7 @@
 
   const T = {
     pt: {
-      ficticia: 'Empresa fictícia', faixa: n => `Faixa ${n}`,
+      ficticia: 'Empresa fictícia', faixa: n => n === 4 ? 'Trilha Moradia' : `Faixa ${n}`, faixaCurta: n => n === 4 ? 'Moradia' : `Faixa ${n}`,
       retorno: 'Retorno em', anos: a => `${a} anos`, seguro: 'Seguro até',
       escolher: 'Escolher', escolhida: 'Na carteira ✓', peso: 'Parte do aporte',
       conc: a => `Tirada: concorre com quem atua em ${a.toLowerCase()}.`,
@@ -119,7 +122,7 @@
       pronta: 'Montamos uma carteira pronta, como faria um gestor. Você pode mudar à vontade.',
       prontaFalta: 'Não sobrou empresa da Faixa 1 e da Faixa 3 sem conflito para montar a carteira pronta.',
       recebida: 'Alguém compartilhou esta carteira com você. Os valores usam o padrão de R$ 10 milhões. Ponha o seu valor e a sua área no passo 1.',
-      deMoradia: 'Você veio da proposta de moradia. A carteira já tem a Morada Viva, uma construtora inventada, e uma empresa da Faixa 3, que a regra exige. Os valores usam o padrão de R$ 10 milhões. Ponha o seu valor e a sua área no passo 1.',
+      deMoradia: 'Você veio da proposta de moradia. A carteira já tem a Morada Viva, uma construtora inventada da Trilha Moradia, mais uma empresa da Faixa 1 e uma da Faixa 3, que as regras exigem. A moradia não conta nos 40% da Faixa 1. Os cenários usam números de fundos de empresas: a moradia tende a render menos, com menos sobe e desce. Os valores usam o padrão de R$ 10 milhões. Ponha o seu valor e a sua área no passo 1.',
       proposta: 'Ver a proposta',
       linkOk: 'Link copiado.', linkErro: 'Não deu para copiar. O link está na barra do navegador.',
       imgOk: 'Imagem pronta.', baixada: 'Imagem baixada.',
@@ -148,7 +151,7 @@
       arquivo: 'minha-carteira-fsri.png',
     },
     en: {
-      ficticia: 'Fictional company', faixa: n => `Tier ${n}`,
+      ficticia: 'Fictional company', faixa: n => n === 4 ? 'Housing track' : `Tier ${n}`, faixaCurta: n => n === 4 ? 'Housing' : `Tier ${n}`,
       retorno: 'Returns in', anos: a => `${a} years`, seguro: 'Insurance up to',
       escolher: 'Pick', escolhida: 'In portfolio ✓', peso: 'Share of the investment',
       conc: a => `Removed: competes with people in ${a.toLowerCase()}.`,
@@ -176,7 +179,7 @@
       pronta: 'We built a ready-made portfolio, the way a manager would. Change it as you like.',
       prontaFalta: 'There is no Tier 1 and Tier 3 company left without a conflict to build the ready-made portfolio.',
       recebida: 'Someone shared this portfolio with you. Amounts use the R$ 10 million default. Enter your own amount and field in step 1.',
-      deMoradia: 'You came from the housing proposal. The portfolio already has Morada Viva, a made-up builder, and a Tier 3 company, as the rules require. Amounts use the R$ 10 million default. Enter your own amount and field in step 1.',
+      deMoradia: 'You came from the housing proposal. The portfolio already has Morada Viva, a made-up builder in the Housing track, plus a Tier 1 and a Tier 3 company, as the rules require. Housing does not count toward the 40% in Tier 1. The scenarios use figures from company funds: housing tends to earn less, with fewer ups and downs. Amounts use the R$ 10 million default. Enter your own amount and field in step 1.',
       proposta: 'See the proposal',
       linkOk: 'Link copied.', linkErro: 'Could not copy. The link is in the address bar.',
       imgOk: 'Image ready.', baixada: 'Image downloaded.',
@@ -494,13 +497,13 @@
     let y = 290;
     const total = totalPeso();
     const itens = [...estado.sel].map(([id, p]) => ({ e: EMPRESAS.find(x => x.id === id), w: p / total })).sort((a, b) => a.e.f - b.e.f || b.w - a.w);
-    const corFaixa = { 1: cor('--verde-fundo'), 2: cor('--azul'), 3: cor('--amarelo') };
+    const corFaixa = { 1: cor('--verde-fundo'), 2: cor('--azul'), 3: cor('--amarelo'), 4: cor('--verde-claro') };
     const alturaItem = itens.length > 5 ? 52 : 64;
     itens.slice(0, 6).forEach(i => {
       ctx.fillStyle = corFaixa[i.e.f];
       roundRect(ctx, 80, y - 34, 120, 44, 22); ctx.fill();
-      ctx.fillStyle = i.e.f === 3 ? cor('--azul') : cor('--branco');
-      ctx.font = `800 24px ${fonte}`; ctx.fillText(T.faixa(i.e.f), 96, y - 4);
+      ctx.fillStyle = i.e.f === 3 ? cor('--azul') : i.e.f === 4 ? cor('--verde-escuro') : cor('--branco');
+      ctx.font = `800 24px ${fonte}`; ctx.fillText(T.faixaCurta(i.e.f), 96, y - 4);
       ctx.fillStyle = cor('--texto'); ctx.font = `800 36px ${fonte}`;
       ctx.fillText(i.e.nome, 220, y);
       ctx.textAlign = 'right'; ctx.fillText(fmtParte(i.w), W - 80, y); ctx.textAlign = 'left';

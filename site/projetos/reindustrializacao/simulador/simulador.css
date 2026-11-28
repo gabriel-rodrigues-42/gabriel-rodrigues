@@ -48,6 +48,7 @@ h3 { color: var(--azul); margin: 0 0 var(--espaco-2); }
 .faixa.f1 { background: var(--verde-fundo); }
 .faixa.f2 { background: var(--azul); }
 .faixa.f3 { background: var(--amarelo); color: var(--azul); }
+.faixa.f4 { background: var(--verde-claro); color: var(--verde-escuro); }
 .empresa h3 { font-size: var(--tamanho-4); margin: var(--espaco-1) 0 0; overflow-wrap: anywhere; }
 .empresa .setor { font-weight: var(--peso-forte); color: var(--verde-escuro); font-size: var(--tamanho-2); margin: 0; }
 .empresa p { margin: 0; }
