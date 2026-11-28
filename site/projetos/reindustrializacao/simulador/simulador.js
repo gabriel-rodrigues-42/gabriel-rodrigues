@@ -373,7 +373,7 @@
     const passo = card.getBoundingClientRect().width + parseFloat(getComputedStyle(lista).columnGap || 0);
     lista.scrollBy({ left: dir * passo, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   }
-  document.querySelectorAll('.carrossel .seta').forEach(b => b.addEventListener('click', () => mover(+b.dataset.dir)));
+  document.querySelectorAll('.carrossel-nav .seta').forEach(b => b.addEventListener('click', () => mover(+b.dataset.dir)));
   function atualizarPosicao() {
     const cards = [...lista.querySelectorAll('.empresa')];
     const nav = $('.carrossel-nav');
