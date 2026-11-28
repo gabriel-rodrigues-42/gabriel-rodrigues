@@ -37,7 +37,7 @@ h3 { color: var(--azul); margin: 0 0 var(--espaco-2); }
 /* Passo 2: cartões */
 .conflitos { background: var(--azul-claro); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); margin: var(--espaco-4) 0; }
 .conflitos p { margin: 0; }
-.abas-faixa { margin-top: var(--espaco-4); }
+.segmento.abas-faixa { margin-top: var(--espaco-5); }
 .abas-faixa label { padding-inline: 4px; }
 @media (max-width: 480px) { .abas-faixa label { font-size: var(--tamanho-2); padding: 10px 2px; } .abas-faixa .conta { margin-left: 3px; min-width: 18px; height: 18px; } }
 .conta { display: inline-grid; place-items: center; min-width: 20px; height: 20px; margin-left: 6px; border-radius: var(--forma-pilula); background: var(--amarelo); color: var(--azul); font-size: var(--tamanho-1); font-weight: var(--peso-forte); vertical-align: 1px; }
@@ -57,9 +57,11 @@ h3 { color: var(--azul); margin: 0 0 var(--espaco-2); }
 .faixa-topo .faixa-info { margin: 0; flex: 1 1 16em; }
 .carrossel-nav { display: flex; align-items: center; gap: var(--espaco-2); margin-left: auto; }
 .carrossel-nav[hidden] { display: none; }
-.carrossel-nav span { font-size: var(--tamanho-2); color: var(--texto-suave); min-width: 4.5em; text-align: center; font-variant-numeric: tabular-nums; }
-.seta { width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border-radius: var(--forma-pilula); border: 2px solid var(--azul-claro); background-color: var(--branco); color: var(--azul); font: inherit; font-size: var(--tamanho-3); cursor: pointer; }
+.carrossel-nav span { font-size: var(--tamanho-2); line-height: 1; color: var(--texto-suave); min-width: 4.5em; text-align: center; font-variant-numeric: tabular-nums; }
+.seta { width: 44px; height: 44px; display: grid; place-items: center; padding: 0; line-height: 0; border-radius: var(--forma-pilula); border: 2px solid var(--azul-claro); background-color: var(--branco); color: var(--azul); font: inherit; font-size: var(--tamanho-3); cursor: pointer; }
 .seta:disabled { opacity: .4; cursor: default; }
+.seta:not(:disabled):hover { border-color: var(--azul-medio); }
+.seta svg { display: block; }
 .seta:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
 .entrando > .empresa { animation: entra .45s cubic-bezier(.2, .8, .3, 1) both; animation-delay: calc(var(--i) * 70ms); }
 @keyframes entra { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
