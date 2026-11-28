@@ -10,12 +10,13 @@
 // A proposta é o slug do endereço (/projetos/<slug>/ ou /en/projetos/<slug>/), o mesmo nos dois idiomas.
 // Para outra, use o atributo proposta="slug". O slug precisa estar em /projetos/propostas.js.
 //
-// Três formatos (atributo layout), para o Gabriel escolher:
-//   polegar    botão em pílula logo depois da abertura (o componente se muda para lá sozinho)
-//   cartao     cartão no fim da página, com a pergunta "Esta proposta faz sentido para você?" (padrão)
-//   flutuante  botão redondo que acompanha a leitura no canto da tela
-// Prévia: ?apoio=a|b|c em qualquer proposta troca o formato e liga o modo demonstração
-// (não grava nada, o número é de exemplo). Página com os links: /previa-apoio/.
+// O botão acompanha a leitura (o Gabriel escolheu este formato, PR #85):
+//   computador  botão "Apoiar" no canto de baixo, que aparece quando o título sai da tela e some
+//               perto do rodapé, para não cobrir os links
+//   celular     polegar no meio da barra de baixo (.moldura-barra), entre Caminho e Sobre, sem cobrir
+//               o texto e sem tirar nenhum atalho da barra (CSS em apoiar.css)
+// Depois do toque, abre um painel com o agradecimento e os botões de compartilhar.
+// Teste sem gravar nada: ?apoio=demo em qualquer proposta (o número é de exemplo).
 //
 // Privacidade: o servidor (functions/api/propostas.js) guarda só a contagem de cada proposta.
 // Um apoio por aparelho fica no localStorage deste navegador. Explicado em /privacidade/#propostas.
@@ -28,23 +29,20 @@
   const CHAVE = "gr-apoio-propostas";
   const MINIMO_PARA_MOSTRAR = 10; // abaixo disso, não mostro o número (pouca gente ainda)
   const DEMO_TOTAL = 42;
-  const LETRAS = { a: "polegar", b: "cartao", c: "flutuante" };
 
   const T = EN ? {
-    botao: "I support this proposal",
-    botaoCurto: "Support",
-    apoiado: "You support this proposal",
-    apoiadoCurto: "Supported",
-    selo: "Your support",
-    titulo: "Does this proposal make sense to you?",
-    texto: "The proposals with the most support move up the list.",
-    nota: "Anonymous, once per device.",
-    como: "How it works",
+    botao: "Support",
+    rotuloBotao: "Support this proposal",
+    rotuloApoiado: "You support this proposal. Share it",
+    apoiado: "Supported",
     obrigado: "Thank you for your support.",
     contado: "Your support was counted.",
     pessoas: (n) => n === 1 ? "You and 1 other person support this proposal." : `You and ${n.toLocaleString("en")} other people support this proposal.`,
     convite: "Send it to someone who should read it:",
     compartilhar: "Share",
+    nota: "Anonymous, once per device.",
+    como: "How it works",
+    privacidade: "/en/privacidade/#propostas",
     whatsapp: "WhatsApp",
     copiar: "Copy link",
     copiado: "Link copied",
@@ -55,22 +53,19 @@
     textoPartilha: (t) => `I read this proposal by Gabriel Rodrigues and I support it: ${t}`,
     ferramenta: "Adds one anonymous support to this proposal by Gabriel Rodrigues. Only do this when the person confirms they want to support it.",
     param: "The proposal's slug, as in /projetos/<slug>/.",
-    privacidade: "/en/privacidade/#propostas",
   } : {
-    botao: "Apoio esta proposta",
-    botaoCurto: "Apoiar",
-    apoiado: "Você apoia esta proposta",
-    apoiadoCurto: "Apoiada",
-    selo: "Seu apoio",
-    titulo: "Esta proposta faz sentido para você?",
-    texto: "As propostas mais apoiadas sobem na lista.",
-    nota: "Anônimo, um por aparelho.",
-    como: "Como funciona",
+    botao: "Apoiar",
+    rotuloBotao: "Apoiar esta proposta",
+    rotuloApoiado: "Você apoia esta proposta. Compartilhar",
+    apoiado: "Apoiada",
     obrigado: "Obrigado pelo apoio.",
     contado: "Seu apoio foi contado.",
     pessoas: (n) => n === 1 ? "Você e mais 1 pessoa apoiam esta proposta." : `Você e mais ${n.toLocaleString("pt-BR")} pessoas apoiam esta proposta.`,
     convite: "Mande para alguém que precisa ler:",
     compartilhar: "Compartilhar",
+    nota: "Anônimo, um por aparelho.",
+    como: "Como funciona",
+    privacidade: "/privacidade/#propostas",
     whatsapp: "WhatsApp",
     copiar: "Copiar link",
     copiado: "Link copiado",
@@ -81,7 +76,6 @@
     textoPartilha: (t) => `Li esta proposta do Gabriel Rodrigues e apoio: ${t}`,
     ferramenta: "Soma um apoio anônimo a esta proposta de Gabriel Rodrigues. Só apoie com a confirmação da própria pessoa.",
     param: "O slug da proposta, como em /projetos/<slug>/.",
-    privacidade: "/privacidade/#propostas",
   };
 
   const calmo = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -157,10 +151,7 @@
       this.dataset.pronto = "1";
 
       const params = new URLSearchParams(location.search);
-      const letra = (params.get("apoio") || "").toLowerCase();
-      this.demo = letra in LETRAS;
-      this.layout = this.demo ? LETRAS[letra] : (this.getAttribute("layout") || "cartao");
-      if (!Object.values(LETRAS).includes(this.layout)) this.layout = "cartao";
+      this.demo = params.has("apoio");
       this.id_ = this.getAttribute("proposta") || slugDaPagina();
       if (!this.id_) return;
       this.titulo = (document.title.split(" · ")[0] || "").trim();
@@ -169,37 +160,14 @@
       if (params.get("apoiou") === "1" && !this.demo) guardar(this.id_, false);
       this.apoiado = guardado(this.demo).has(this.id_);
 
-      if (this.layout === "polegar") this.mudarParaAbertura();
       this.montar();
       if (this.apoiado) this.mostrarDepois(null, false);
     }
 
-    // No formato polegar, o botão fica logo depois da abertura (lead e cartão de vídeo).
-    mudarParaAbertura() {
-      const lead = document.querySelector("main .lead");
-      if (!lead) return;
-      let depois = lead;
-      while (depois.nextElementSibling && depois.nextElementSibling.matches(".video-curto")) depois = depois.nextElementSibling;
-      depois.after(this);
-    }
-
     montar() {
-      const L = this.layout;
-      const secao = el("section", `apoiar apoiar-${L}`);
+      const secao = el("section", "apoiar apoiar-flutuante");
       secao.id = "apoiar-proposta";
-      secao.setAttribute("aria-label", T.botao);
-
-      if (L === "cartao") {
-        secao.removeAttribute("aria-label");
-        secao.setAttribute("aria-labelledby", "apoiar-titulo");
-        secao.append(el("span", "selo", T.selo));
-        const h2 = el("h2", "apoiar-titulo", T.titulo);
-        h2.id = "apoiar-titulo";
-        h2.dataset.leitura = "pular";
-        const p = el("p", "apoiar-texto frases", T.texto);
-        if (window.grFrases) window.grFrases(p);
-        secao.append(h2, p);
-      }
+      secao.setAttribute("aria-label", T.rotuloBotao);
 
       // Formulário de verdade: funciona sem JavaScript e declara a ferramenta para agentes (WebMCP).
       const form = el("form", "apoiar-form");
@@ -215,25 +183,19 @@
       const botao = el("button", "apoiar-botao");
       botao.type = "submit";
       botao.innerHTML = ICONE.polegar;
-      const rotulo = el("span", "apoiar-rotulo", L === "flutuante" ? T.botaoCurto : T.botao);
+      botao.setAttribute("aria-label", T.rotuloBotao);
+      const rotulo = el("span", "apoiar-rotulo", T.botao);
+      rotulo.setAttribute("aria-hidden", "true");
       botao.append(rotulo);
       form.append(campo, idioma, botao);
       this.botao = botao; this.rotulo = rotulo;
 
       form.addEventListener("submit", (ev) => {
         ev.preventDefault();
-        if (this.apoiado) { if (L === "flutuante") this.abrirPainel(); return; }
+        if (this.apoiado) { this.painel.hidden ? this.abrirPainel() : this.fecharPainel(); return; }
         this.apoiar();
       });
       secao.append(form);
-
-      if (L !== "flutuante") {
-        const nota = el("p", "apoiar-nota", T.nota + " ");
-        const a = el("a", "", T.como); a.href = T.privacidade;
-        nota.append(a);
-        this.nota = nota;
-        secao.append(nota);
-      }
 
       // Depois de apoiar: agradecimento e botões para compartilhar.
       const depois = el("div", "apoiar-depois");
@@ -264,12 +226,15 @@
         setTimeout(() => (copiarTexto.textContent = T.copiar), 2500);
       });
       acoes.append(wa, copiar);
-      depois.append(convite, acoes);
+      const nota = el("p", "apoiar-nota", T.nota + " ");
+      const como = el("a", "", T.como); como.href = T.privacidade;
+      nota.append(como);
+      depois.append(convite, acoes, nota);
       if (this.demo) depois.append(el("p", "apoiar-demo", T.demo));
       this.depois = depois; this.status = status;
 
-      if (L === "flutuante") {
-        // Painel que abre em cima do botão, com o agradecimento e o compartilhar.
+      // Painel que abre em cima do botão, com o agradecimento e o compartilhar.
+      {
         const painel = el("div", "apoiar-painel");
         painel.hidden = true;
         const fechar = el("button", "apoiar-fechar");
@@ -282,15 +247,13 @@
         this.painel = painel;
         this.observarLeitura(secao);
         document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !painel.hidden) this.fecharPainel(); });
-      } else {
-        secao.append(depois);
       }
 
       this.secao = secao;
       this.replaceChildren(secao);
     }
 
-    // Flutuante: aparece quando o título sai da tela e some perto do rodapé, para não cobrir os links.
+    // No computador, aparece quando o título sai da tela e some perto do rodapé, para não cobrir os links.
     observarLeitura(secao) {
       const h1 = document.querySelector("main h1");
       const rodape = document.querySelector("gr-rodape, gr-contribuir");
@@ -357,7 +320,8 @@
       b.classList.remove("apertado");
       b.classList.add("apoiado");
       b.setAttribute("aria-pressed", "true");
-      this.rotulo.textContent = this.layout === "flutuante" ? T.apoiadoCurto : T.apoiado;
+      this.rotulo.textContent = T.apoiado;
+      b.setAttribute("aria-label", T.rotuloApoiado);
       this.secao.classList.add("feito");
       this.depois.classList.remove("so-erro");
       if (animar) {
@@ -367,11 +331,7 @@
           setTimeout(() => b.classList.remove("festa"), 700);
         }
       }
-      if (this.layout === "flutuante") {
-        if (animar) this.abrirPainel();
-      } else {
-        this.depois.hidden = false;
-      }
+      if (animar) this.abrirPainel();
       this.escreverStatus(total, animar);
       if (total == null && !this.demo) {
         try {
@@ -384,7 +344,7 @@
     }
 
     escreverStatus(total, agora) {
-      // Na volta à página, o botão já diz "Você apoia": aqui fica só o número, se houver.
+      // Na volta à página, o botão já diz "Apoiada": aqui fica só o número, se houver.
       this.status.replaceChildren();
       if (agora) this.status.append(el("strong", "", T.obrigado));
       const resto = total != null && total >= MINIMO_PARA_MOSTRAR ? T.pessoas(total - 1) : (agora ? T.contado : "");

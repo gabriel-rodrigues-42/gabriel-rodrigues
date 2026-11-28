@@ -12,7 +12,7 @@
 // Com o atributo ordem="apoios" (em /projetos/), a galeria busca em /api/propostas quantos apoios
 // cada proposta tem (o polegar de <gr-apoiar>, apoiar.js) e mostra primeiro as mais apoiadas.
 // Empate fica na ordem de propostas.js. Aparece um seletor para voltar à ordem "Em destaque".
-// O número só aparece no cartão a partir de 10 apoios. Prévia com números de exemplo: ?apoio=demo.
+// O número só aparece no cartão a partir de 10 apoios. Teste com números de exemplo: ?apoio=demo.
 
 (function () {
   "use strict";
@@ -146,7 +146,7 @@
       this.replaceChildren(this.ul);
 
       let apoios = {};
-      // Prévia (/previa-apoio/): ?apoio=demo usa números de exemplo, para ver a ordem mudar.
+      // Teste: ?apoio=demo usa números de exemplo, para ver a ordem mudar.
       if (new URLSearchParams(location.search).has("apoio")) {
         apoios = { "cidade-esponja": 128, "regulacao-da-cannabis": 87, "moradia-que-vira-sua": 54, "reindustrializacao": 31, "cartorio-digital": 9 };
       } else try {

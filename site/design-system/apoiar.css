@@ -1,11 +1,12 @@
 /* Apoiar a proposta com um toque <gr-apoiar> (apoiar.js). Só variáveis de tokens.css.
-   Três formatos: .apoiar-polegar (depois da abertura), .apoiar-cartao (fim da página) e
-   .apoiar-flutuante (botão no canto que acompanha a leitura). */
+   Computador: botão "Apoiar" no canto de baixo, que acompanha a leitura.
+   Celular: polegar no meio da barra de baixo (.moldura-barra de moldura.css), que abre espaço
+   para ele sem tirar nenhum atalho. Não cobre o texto. */
 gr-apoiar { display: block; }
 .apoiar { font-family: var(--fonte); color: var(--texto); }
 .apoiar-form { margin: 0; }
 
-/* Botão com o polegar: base comum aos três formatos. */
+/* Botão com o polegar. */
 .apoiar-botao {
   position: relative; display: inline-flex; align-items: center; justify-content: center; gap: var(--espaco-2);
   font: inherit; font-weight: var(--peso-forte); font-size: var(--tamanho-2); line-height: 1.2; cursor: pointer;
@@ -38,12 +39,11 @@ gr-apoiar { display: block; }
   100% { opacity: 0; transform: translate(var(--x), var(--y)) scale(1); }
 }
 
-.apoiar-nota { font-size: var(--tamanho-1); color: var(--texto-suave); margin: var(--espaco-2) 0 0; }
+.apoiar-nota { font-size: var(--tamanho-1); color: var(--texto-suave); margin: var(--espaco-3) 0 0; }
 .apoiar-nota a { color: var(--azul); }
-.apoiar.feito .apoiar-nota { display: none; }
 
 /* Depois de apoiar: agradecimento e compartilhar. */
-.apoiar-depois { margin-top: var(--espaco-3); }
+.apoiar-depois { margin: 0; }
 .apoiar-status { margin: 0; font-size: var(--tamanho-2); color: var(--texto); }
 .apoiar-status:empty { display: none; }
 .apoiar-status strong { color: var(--verde-escuro); }
@@ -61,34 +61,9 @@ gr-apoiar { display: block; }
 .apoiar-acao.principal { background: var(--azul); color: var(--branco); border-color: var(--azul); }
 .apoiar-acao svg { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 .apoiar-demo { margin: var(--espaco-3) 0 0; font-size: var(--tamanho-1); color: var(--texto-suave); font-style: italic; }
-.apoiar.feito .apoiar-depois:not([hidden]) { animation: apoiar-entra .35s ease-out; }
 @keyframes apoiar-entra { from { opacity: 0; transform: translateY(6px); } }
 
-/* ---------- A: polegar logo depois da abertura ---------- */
-.apoiar-polegar { margin: var(--espaco-4) 0 0; }
-
-/* ---------- B: cartão no fim da página ---------- */
-gr-apoiar:has(.apoiar-cartao) { max-width: 760px; margin: var(--espaco-7) auto 0; padding: 0 var(--espaco-4); box-sizing: border-box; }
-.apoiar-cartao {
-  background: var(--branco); border: 2px solid var(--azul-claro); border-radius: var(--forma-cartao);
-  box-shadow: var(--sombra-cartao); padding: var(--espaco-5);
-}
-.apoiar-cartao .apoiar-titulo { font-size: var(--tamanho-5); line-height: 1.15; color: var(--azul); margin: var(--espaco-3) 0 var(--espaco-2); text-wrap: balance; hyphens: manual; }
-.apoiar-cartao .apoiar-texto { font-size: var(--tamanho-3); margin: 0 0 var(--espaco-4); }
-.apoiar-cartao .apoiar-botao { width: 100%; min-height: 56px; font-size: var(--tamanho-3); background: var(--verde-fundo); color: var(--branco); border-color: var(--verde-fundo); }
-.apoiar-cartao .apoiar-botao:hover { background: var(--verde-escuro); border-color: var(--verde-escuro); }
-.apoiar-cartao .apoiar-botao.apoiado { background: var(--verde-claro); color: var(--verde-escuro); border-color: var(--verde-claro); }
-.apoiar-cartao .apoiar-botao.apoiado .icone-polegar path:last-child { fill: var(--amarelo); stroke: var(--verde-escuro); }
-.apoiar-cartao.feito { border-color: var(--verde-claro); }
-.apoiar-cartao .apoiar-nota { text-align: center; }
-@media (min-width: 600px) {
-  .apoiar-cartao .apoiar-botao { width: auto; padding-inline: 28px 32px; }
-  .apoiar-cartao .apoiar-nota { text-align: left; }
-}
-/* Logo depois do cartão vem o <gr-contribuir>: menos espaço entre os dois. */
-gr-apoiar:has(.apoiar-cartao) + gr-contribuir .contribuir { margin-top: var(--espaco-5); }
-
-/* ---------- C: botão flutuante que acompanha a leitura ---------- */
+/* ---------- Computador: botão no canto que acompanha a leitura ---------- */
 .apoiar-flutuante {
   position: fixed; z-index: 24; right: var(--espaco-4);
   bottom: calc(var(--barra-altura, 0px) + env(safe-area-inset-bottom, 0px) + var(--espaco-4));
@@ -120,8 +95,45 @@ gr-apoiar:has(.apoiar-cartao) + gr-contribuir .contribuir { margin-top: var(--es
 .apoiar-fechar svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
 .apoiar-painel:not([hidden]) { animation: apoiar-entra .3s ease-out; transform-origin: bottom right; }
 
+/* ---------- Celular: polegar no meio da barra de baixo ----------
+   A barra passa de 4 para 5 colunas e o polegar fica na do meio, um pouco acima da borda,
+   como o botão principal. Os quatro atalhos continuam lá, com o mesmo tamanho de toque. */
+@media (max-width: 719px) {
+  body:has(.apoiar-flutuante) .moldura-barra { grid-template-columns: repeat(2, minmax(0, 1fr)) 68px repeat(2, minmax(0, 1fr)); }
+  body:has(.apoiar-flutuante) .moldura-barra > :nth-child(3) { grid-column: 4; }
+  body:has(.apoiar-flutuante) .moldura-barra .moldura-barra-icone { width: min(56px, 100%); }
+  /* Em telas estreitas (até uns 360px), letra um pouco menor para "Propostas" caber na coluna. */
+  body:has(.apoiar-flutuante) .moldura-barra { padding-inline: var(--espaco-1); }
+  body:has(.apoiar-flutuante) .moldura-barra :is(a, button), .apoiar-flutuante .apoiar-botao { font-size: clamp(11px, 3.4vw, 13px); }
+  .apoiar-flutuante, .apoiar-flutuante.visivel {
+    left: 0; right: 0; bottom: 0; max-width: none; align-items: center; gap: var(--espaco-2);
+    padding: 0 var(--espaco-4) calc(env(safe-area-inset-bottom, 0px) + 4px);
+    opacity: 1; transform: none; pointer-events: none; z-index: 26; transition: none;
+  }
+  .apoiar-flutuante > * { pointer-events: auto; }
+  .apoiar-flutuante .apoiar-form { order: 2; width: 68px; height: calc(var(--barra-altura) - 4px); display: grid; place-items: end center; }
+  .apoiar-flutuante .apoiar-painel { order: 1; width: 100%; max-width: 420px; margin-bottom: var(--espaco-2); transform-origin: bottom center; }
+  .apoiar-flutuante .apoiar-botao,
+  .apoiar-flutuante .apoiar-botao:hover,
+  .apoiar-flutuante .apoiar-botao.apoiado {
+    flex-direction: column; gap: 2px; min-height: 0; padding: 0 0 2px; border: 0; border-radius: 0;
+    background: none; box-shadow: none; color: var(--azul);
+  }
+  .apoiar-flutuante .apoiar-botao svg {
+    box-sizing: border-box; width: 52px; height: 52px; padding: 13px; margin-top: -18px; border-radius: 50%;
+    background: var(--verde-fundo); color: var(--branco); border: 3px solid var(--creme);
+    box-shadow: 0 4px 0 -1px var(--verde-escuro), 0 6px 14px rgba(0, 39, 118, .2);
+  }
+  .apoiar-flutuante .apoiar-botao.apoiado svg { background: var(--verde-claro); color: var(--verde-escuro); box-shadow: 0 4px 0 -1px var(--verde), 0 6px 14px rgba(0, 39, 118, .14); }
+  .apoiar-flutuante .apoiar-botao.apoiado { color: var(--verde-escuro); }
+  .apoiar-flutuante .apoiar-botao:focus-visible { outline: 3px solid var(--azul); outline-offset: -3px; border-radius: 12px; }
+  .apoiar-flutuante .apoiar-botao.apertado { transform: none; }
+  .apoiar-flutuante .apoiar-botao.apertado svg { transform: scale(.92); }
+  .apoiar-flutuante .apoiar-estrelas { left: 50%; top: 4px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .apoiar-botao, .apoiar-flutuante { transition: none; }
-  .apoiar-botao.festa svg, .apoiar.feito .apoiar-depois:not([hidden]), .apoiar-painel:not([hidden]) { animation: none; }
+  .apoiar-botao.festa svg, .apoiar-painel:not([hidden]) { animation: none; }
   .apoiar-estrelas { display: none; }
 }
