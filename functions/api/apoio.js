@@ -31,6 +31,12 @@ const CRIAR_TABELA = `CREATE TABLE IF NOT EXISTS apoios (
   versao_privacidade TEXT NOT NULL
 )`;
 
+// Só um número: quantos envios o formulário já recebeu (o "Apoio nº" do cartão). Sem dado de ninguém.
+const CRIAR_NUMERO = `CREATE TABLE IF NOT EXISTS apoios_numero (
+  id INTEGER PRIMARY KEY CHECK (id = 1),
+  ultimo INTEGER NOT NULL
+)`;
+
 const limpar = (v, max) => String(v ?? "").replace(/\s+/g, " ").trim().slice(0, max);
 
 export async function onRequestPost({ request, env }) {
@@ -64,28 +70,47 @@ export async function onRequestPost({ request, env }) {
 
   let posicao = null;
   try {
-    // Cria a tabela (se ainda não existe), grava e conta, numa transação só.
-    // Quem reenvia o mesmo email sai e entra de novo no fim da fila: o número devolvido é sempre
-    // o total depois deste envio. Assim a resposta não revela se um email já estava na lista
-    // (apoio político é dado sensível, LGPD art. 5º, II): quem testar o email de outra pessoa
-    // só descobre o total, que já aparece na página a partir de 1.000.
+    // Tudo numa transação só (o batch do D1): cria as tabelas se faltarem, grava o apoio e
+    // pega o número do cartão.
+    //
+    // Duas contas diferentes, de propósito:
+    //
+    // 1. O número do cartão "Apoio nº" é o número do ENVIO, não o da pessoa. Cada envio do
+    //    formulário ganha o próximo número de apoios_numero, e esse número nunca volta para a
+    //    fila. Dois cartões nunca mostram o mesmo número.
+    //    Quem reenvia o mesmo email ganha um número novo, como qualquer pessoa. Isso é de
+    //    propósito: se o reenvio devolvesse o número antigo (ou "você já apoiou"), qualquer um
+    //    poderia digitar o email de outra pessoa e descobrir se ela apoia o Gabriel. Apoio
+    //    político é dado sensível (LGPD, art. 5º, II). Por isso a resposta é igual para email
+    //    novo e repetido, e o número do cartão pode passar do número de pessoas reais.
+    //
+    // 2. A contagem oficial é a de emails únicos: a tabela apoios tem o email como chave, então
+    //    cada email aparece uma vez só, por mais que seja enviado. O reenvio só atualiza nome,
+    //    cidade, UF e o consentimento, e mantém o lugar original da pessoa na ordem (rowid).
+    //    O contador público (/api/apoios, "Mais de 1.000 pessoas") e qualquer número que o
+    //    Gabriel divulgue vêm de SELECT COUNT(*) FROM apoios, nunca de apoios_numero.
     const resultados = await env.DB.batch([
       env.DB.prepare(CRIAR_TABELA),
-      env.DB.prepare("DELETE FROM apoios WHERE email = ?1").bind(email),
+      env.DB.prepare(CRIAR_NUMERO),
+      // Na primeira vez, o contador começa do total de hoje, para não repetir números já mostrados.
+      env.DB.prepare("INSERT OR IGNORE INTO apoios_numero (id, ultimo) SELECT 1, COUNT(*) FROM apoios"),
       env.DB.prepare(
         `INSERT INTO apoios (email, nome, cidade, uf, consentido_em, versao_privacidade)
-         VALUES (?1, ?2, ?3, ?4, ?5, ?6)`
+         VALUES (?1, ?2, ?3, ?4, ?5, ?6)
+         ON CONFLICT(email) DO UPDATE SET
+           nome = excluded.nome, cidade = excluded.cidade, uf = excluded.uf,
+           consentido_em = excluded.consentido_em, versao_privacidade = excluded.versao_privacidade`
       ).bind(email, nome || null, cidade || null, uf || null, new Date().toISOString(), VERSAO_PRIVACIDADE),
-      env.DB.prepare("SELECT COUNT(*) AS total FROM apoios"),
+      env.DB.prepare("UPDATE apoios_numero SET ultimo = ultimo + 1 WHERE id = 1 RETURNING ultimo"),
     ]);
-    posicao = resultados.at(-1)?.results?.[0]?.total ?? null;
+    posicao = resultados.at(-1)?.results?.[0]?.ultimo ?? null;
   } catch (erro) {
     // Aparece em Workers & Pages > gabriel-rodrigues > Functions > Real-time logs (sem dados da pessoa).
     console.error("apoio: falha ao gravar no D1:", erro?.message || erro);
     return responder(request, 500, { ok: false, erro: "Não consegui guardar agora. Tente de novo em alguns minutos." });
   }
 
-  // Só o número da própria pessoa, para ela guardar ("Apoio nº 1"). Nenhum dado de outra pessoa sai daqui.
+  // Só o número deste envio, para a pessoa guardar ("Apoio nº 9"). Nenhum dado de outra pessoa sai daqui.
   return responder(request, 200, { ok: true, posicao }, idioma);
 }
 
