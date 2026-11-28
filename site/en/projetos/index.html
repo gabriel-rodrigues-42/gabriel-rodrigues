@@ -45,7 +45,11 @@
   .capa img { width: min(100%, 300px); height: auto; justify-self: center; }
   h1 { font-size: var(--tamanho-6); line-height: 1.1; color: var(--azul); margin: 0 0 var(--espaco-3); hyphens: manual; }
   .lead { font-size: var(--tamanho-3); color: var(--texto-suave); margin: 0; }
-  .fases { list-style: none; padding: 0; margin: var(--espaco-4) 0 0; display: flex; flex-wrap: wrap; gap: var(--espaco-2); counter-reset: fase; }
+  /* As fases e o seletor de ordem (galeria.js) dividem a mesma linha quando cabem. */
+  .fases-linha { display: flex; flex-wrap: wrap; align-items: center; gap: var(--espaco-2); margin-top: var(--espaco-4); }
+  .fases-linha .galeria-ordem { margin: 0; gap: var(--espaco-2); }
+  .fases-linha .galeria-ordem-opcao { font-size: var(--tamanho-1); min-height: 36px; padding: 4px 14px; }
+  .fases { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: var(--espaco-2); counter-reset: fase; }
   .fases li { counter-increment: fase; font-size: var(--tamanho-1); font-weight: var(--peso-forte); color: var(--azul); background: var(--branco); padding: 4px 12px 4px 4px; border-radius: var(--forma-pilula); box-shadow: var(--sombra-cartao); display: flex; align-items: center; gap: 6px; }
   .fases li::before { content: counter(fase); width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: var(--amarelo-escuro); color: var(--branco); }
   .fases li:last-child::before { background: var(--verde-fundo); }
@@ -55,6 +59,8 @@
     .fases li { font-size: clamp(12px, 3.6vw, 13px); padding: 3px clamp(5px, 2vw, 10px) 3px 3px; gap: clamp(4px, 1.3vw, 5px); }
     .fases li::before { width: clamp(17px, 5.2vw, 20px); height: clamp(17px, 5.2vw, 20px); }
   }
+  /* Celular: o título cabe numa linha só. */
+  @media (max-width: 719px) { h1 { white-space: nowrap; font-size: clamp(22px, 7.6vw, 40px); } }
   .sem-js { display: grid; gap: var(--espaco-3); padding: 0; list-style: none; }
   @media (min-width: 720px) {
     .capa { grid-template-columns: minmax(0, 1fr) 280px; gap: var(--espaco-6); }
@@ -71,12 +77,12 @@
     <div>
       <h1>Proposals in <span class="destaque">progress</span></h1>
       <p class="lead frases">Each proposal explains a system everyone uses, shows where it gets stuck and proposes an improvement, with data and sources. I'm developing all of them in public: the meter shows which stage each one is at.</p>
-      <ol class="fases" aria-label="The four stages of a proposal"><li>Idea</li><li>Research</li><li>Proposal</li><li>Live</li></ol>
+      <div class="fases-linha"><ol class="fases" aria-label="The four stages of a proposal"><li>Idea</li><li>Research</li><li>Proposal</li><li>Live</li></ol><div id="ordem-propostas"></div></div>
     </div>
   </div>
   <!-- A galeria vem de /projetos/propostas.js (novas propostas entram lá; a skill pagina-de-projeto faz isso).
        A lista abaixo é só para quem está sem JavaScript e para buscadores; a galeria a substitui. -->
-  <gr-propostas ordem="apoios">
+  <gr-propostas ordem="apoios" seletor="#ordem-propostas">
     <ul class="sem-js">
       <li><a href="/en/projetos/desafio-dumont/">Dumont Challenge</a></li>
       <li><a href="/en/projetos/cartorio-digital/">Digital notary office</a></li>

@@ -11,7 +11,8 @@
 //
 // Com o atributo ordem="apoios" (em /projetos/), a galeria busca em /api/propostas quantos apoios
 // cada proposta tem (o polegar de <gr-apoiar>, apoiar.js) e mostra primeiro as mais apoiadas.
-// Empate fica na ordem de propostas.js. Aparece um seletor para voltar à ordem "Em destaque".
+// Empate fica na ordem de propostas.js. Aparece um seletor para voltar à ordem "Em destaque"
+// (no começo da galeria, ou no elemento indicado em seletor="#id").
 // O número só aparece no cartão a partir de 10 apoios. Teste com números de exemplo: ?apoio=demo.
 
 (function () {
@@ -157,7 +158,9 @@
       this.porApoios = this.lista.map((p, i) => [p, i])
         .sort((a, b) => b[0].apoios - a[0].apoios || a[1] - b[1]).map(([p]) => p);
       this.desenhar(this.porApoios);
-      this.prepend(opcoes);
+      // Com seletor="#id", o seletor de ordem vai para esse lugar da página (em /projetos/, ao lado das fases).
+      const lugar = this.getAttribute("seletor") && document.querySelector(this.getAttribute("seletor"));
+      if (lugar) lugar.replaceChildren(opcoes); else this.prepend(opcoes);
     }
   }
 
