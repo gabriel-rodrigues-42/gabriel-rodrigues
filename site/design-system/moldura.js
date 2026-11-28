@@ -157,6 +157,117 @@
     if (!noInicio) fim.then(() => { location.href = marca.href; });
   });
 
+  // ---------- Estrela-guia do Apoiar ----------
+  // Ao tocar num link para o formulário de apoio (#apoiar, como o Apoiar do cabeçalho), uma das estrelas
+  // do logo sai do link, faz uma curva enquanto a página desce e pousa na palavra em destaque do título
+  // ("tentar"), que ganha um sublinhado amarelo. Vindo de outra página, a estrela sai do Apoiar quando
+  // o formulário aparece. Quem pediu menos movimento só pula para o formulário. CSS em moldura.css.
+  const ESTRELA = '<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 0Q11.4 8.6 20 10Q11.4 11.4 10 20Q8.6 11.4 0 10Q8.6 8.6 10 0Z"/></svg>';
+  const suave = (t) => (t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
+  // Onde a página para, com o formulário logo abaixo do topo (respeita o scroll-padding-top).
+  function destinoApoio(secao) {
+    const folga = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    return Math.max(0, Math.min(max, scrollY + secao.getBoundingClientRect().top - folga));
+  }
+
+  // Rolagem feita aqui (e não com behavior: "smooth") para a estrela saber onde a palavra vai estar e quando.
+  function rolarAte(ate, duracao) {
+    const de = scrollY;
+    return new Promise((pronto) => {
+      if (Math.abs(ate - de) < 2) { scrollTo(0, ate); pronto(); return; }
+      const inicio = performance.now();
+      const passo = (agora) => {
+        const t = Math.min(1, (agora - inicio) / duracao);
+        scrollTo(0, de + (ate - de) * suave(t));
+        if (t < 1) requestAnimationFrame(passo); else pronto();
+      };
+      requestAnimationFrame(passo);
+    });
+  }
+
+  // Leva a estrela de (x0, y0) até (x1, y1) na tela, numa curva, e no fim ela brilha e some.
+  async function voarEstrela(x0, y0, x1, y1, duracao) {
+    const astro = document.createElement("span");
+    astro.className = "moldura-estrela";
+    astro.innerHTML = ESTRELA;
+    document.body.append(astro);
+    const cx = Math.min(innerWidth * .2, x1 - 60), cy = (y0 + y1) / 2 + innerHeight * .15;
+    const quadros = [];
+    for (let i = 0; i <= 12; i++) {
+      const t = i / 12, u = 1 - t;
+      const x = u * u * x0 + 2 * u * t * cx + t * t * x1;
+      const y = u * u * y0 + 2 * u * t * cy + t * t * y1;
+      quadros.push({ transform: `translate(${x - 10}px, ${y - 10}px) rotate(${t * 360}deg) scale(${1 + Math.sin(t * Math.PI) * .9})` });
+    }
+    await astro.animate(quadros, { duration: duracao, easing: "cubic-bezier(.45, 0, .25, 1)", fill: "both" }).finished;
+    const aqui = `translate(${x1 - 10}px, ${y1 - 10}px)`;
+    await astro.animate([
+      { opacity: 1, transform: `${aqui} rotate(360deg) scale(1)` },
+      { opacity: 1, transform: `${aqui} rotate(400deg) scale(1.5)`, offset: .4 },
+      { opacity: 0, transform: `${aqui} rotate(450deg) scale(.4)` },
+    ], { duration: 520, easing: "ease-out", fill: "both" }).finished;
+    astro.remove();
+  }
+
+  function sublinhar(palavra) {
+    palavra.classList.remove("moldura-sublinhado");
+    void palavra.offsetWidth;
+    palavra.classList.add("moldura-sublinhado");
+    palavra.addEventListener("animationend", () => palavra.classList.remove("moldura-sublinhado"), { once: true });
+  }
+
+  // O foco vai para o título do formulário, para quem usa teclado ou leitor de tela seguir dali.
+  function focarApoio(secao) {
+    const titulo = secao.querySelector("h2");
+    if (!titulo) return;
+    titulo.setAttribute("tabindex", "-1");
+    titulo.focus({ preventScroll: true });
+  }
+
+  let estrelaVoando = false;
+  document.addEventListener("click", async (e) => {
+    const link = e.target.closest('a[href$="#apoiar"]');
+    const secao = document.getElementById("apoiar");
+    if (!link || !secao || link.pathname !== location.pathname || e.defaultPrevented
+      || e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0) return;
+    e.preventDefault();
+    if (estrelaVoando) return;
+    history.pushState(null, "", "#apoiar");
+    const para = destinoApoio(secao);
+    const palavra = secao.querySelector("h2 .destaque");
+    if (menosMovimento() || !palavra) { scrollTo(0, para); focarApoio(secao); return; }
+    estrelaVoando = true;
+    const b = link.getBoundingClientRect();
+    const p = palavra.getBoundingClientRect();
+    const DURACAO = 700;
+    // O ponto final é onde a palavra vai estar quando a rolagem acabar: a pontinha de cima, à direita.
+    await Promise.all([
+      voarEstrela(b.left + b.width / 2, b.top + b.height / 2, p.right + 6, p.top - (para - scrollY) + 4, DURACAO + 150),
+      rolarAte(para, DURACAO).then(() => sublinhar(palavra)),
+    ]);
+    focarApoio(secao);
+    estrelaVoando = false;
+  });
+
+  // Chegou de outra página pelo Apoiar (/#apoiar): a estrela sai do Apoiar do cabeçalho (ou do canto de cima,
+  // se ele estiver fora da tela) e pousa na palavra, que já está na tela.
+  addEventListener("load", () => {
+    if (location.hash !== "#apoiar" || menosMovimento()) return;
+    const palavra = document.querySelector("#apoiar h2 .destaque");
+    if (!palavra) return;
+    setTimeout(() => {
+      const p = palavra.getBoundingClientRect();
+      if (p.bottom < 0 || p.top > innerHeight) return;
+      const b = document.querySelector(".moldura-apoiar")?.getBoundingClientRect();
+      const visivel = b && b.bottom > 0 && b.width;
+      const x0 = visivel ? b.left + b.width / 2 : innerWidth - 24, y0 = visivel ? b.top + b.height / 2 : 0;
+      voarEstrela(x0, y0, p.right + 6, p.top + 4, 650);
+      setTimeout(() => sublinhar(palavra), 650);
+    }, 150);
+  });
+
   // ---------- Revelar ao rolar ----------
   // Todo elemento com .revelar aparece quando entra na tela (o CSS está em componentes.css).
   function revelarAoRolar() {
