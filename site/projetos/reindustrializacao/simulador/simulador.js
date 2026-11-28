@@ -106,6 +106,8 @@
     pt: {
       ficticia: 'Empresa fictícia', faixa: n => n === 4 ? 'Trilha Moradia' : `Faixa ${n}`, faixaCurta: n => n === 4 ? 'Moradia' : `Faixa ${n}`,
       retorno: 'Retorno em', anos: a => `${a} anos`, seguro: 'Seguro até',
+      faixaInfo: (f, a, s) => (f === 4 ? 'Fora das faixas. ' : '') + `Retorno em ${a} anos. Seguro até ${s}.` + (f === 1 ? ' Precisa ter pelo menos 40% do aporte.' : '') + (f === 3 ? ' Precisa ter pelo menos uma.' : ''),
+      posicao: (i, n) => `${i} de ${n}`,
       escolher: 'Escolher', escolhida: 'Na carteira ✓', peso: 'Parte do aporte',
       conc: a => `Tirada: concorre com quem atua em ${a.toLowerCase()}.`,
       forn: a => `Tirada: fornece para quem atua em ${a.toLowerCase()}.`,
@@ -181,6 +183,8 @@
     en: {
       ficticia: 'Fictional company', faixa: n => n === 4 ? 'Housing track' : `Tier ${n}`, faixaCurta: n => n === 4 ? 'Housing' : `Tier ${n}`,
       retorno: 'Returns in', anos: a => `${a} years`, seguro: 'Insurance up to',
+      faixaInfo: (f, a, s) => (f === 4 ? 'Outside the tiers. ' : '') + `Returns in ${a} years. Insurance up to ${s}.` + (f === 1 ? ' Needs at least 40% of the investment.' : '') + (f === 3 ? ' Needs at least one.' : ''),
+      posicao: (i, n) => `${i} of ${n}`,
       escolher: 'Pick', escolhida: 'In portfolio ✓', peso: 'Share of the investment',
       conc: a => `Removed: competes with people in ${a.toLowerCase()}.`,
       forn: a => `Removed: supplies people in ${a.toLowerCase()}.`,
@@ -354,38 +358,81 @@
 
   // Passo 2
   const lista = $('#sim-empresas');
+  // Abas por faixa: uma faixa por vez, num carrossel que se arrasta para o lado.
+  let faixaVista = 1, entrando = true, acabouDeEscolher = '';
+  const abasFaixa = $('#sim-faixas');
+  abasFaixa.innerHTML = [1, 2, 3, 4].map(f => `<label><input type="radio" name="faixa-ver" value="${f}"${f === 1 ? ' checked' : ''}>${esc(T.faixaCurta(f))}<span class="conta" data-conta="${f}" hidden></span></label>`).join('');
+  abasFaixa.addEventListener('change', ev => {
+    faixaVista = +ev.target.value; entrando = true;
+    lista.scrollLeft = 0;
+    desenharEmpresas();
+  });
+  function mover(dir) {
+    const card = lista.querySelector('.empresa');
+    if (!card) return;
+    const passo = card.getBoundingClientRect().width + parseFloat(getComputedStyle(lista).columnGap || 0);
+    lista.scrollBy({ left: dir * passo, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  }
+  document.querySelectorAll('.carrossel .seta').forEach(b => b.addEventListener('click', () => mover(+b.dataset.dir)));
+  function atualizarPosicao() {
+    const cards = [...lista.querySelectorAll('.empresa')];
+    const nav = $('.carrossel-nav');
+    const cabe = lista.scrollWidth <= lista.clientWidth + 2;
+    nav.hidden = cabe;
+    if (cabe || !cards.length) return;
+    const larg = cards[0].getBoundingClientRect().width;
+    const i = Math.min(cards.length, Math.round(lista.scrollLeft / larg) + 1);
+    $('#sim-posicao').textContent = T.posicao(i, cards.length);
+    const [ant, prox] = nav.querySelectorAll('.seta');
+    ant.disabled = lista.scrollLeft < 4;
+    prox.disabled = lista.scrollLeft + lista.clientWidth >= lista.scrollWidth - 4;
+  }
+  lista.addEventListener('scroll', atualizarPosicao, { passive: true });
+  addEventListener('resize', atualizarPosicao, { passive: true });
   function desenharEmpresas() {
     const fora = EMPRESAS.filter(conflito);
     const aviso = $('#sim-conflitos');
     aviso.innerHTML = `<p>${esc(!estado.area ? T.semArea : T.conflitos(estado.area === 'nenhuma' ? 0 : fora.length, nomeArea(estado.area)))}</p>`;
     const total = totalPeso();
-    // Disponíveis primeiro, depois as tiradas
-    const ordem = [...EMPRESAS.filter(e => !conflito(e)), ...fora];
-    lista.innerHTML = ordem.map(e => {
+    // Contagem de escolhidas em cada aba
+    [1, 2, 3, 4].forEach(f => {
+      const n = EMPRESAS.filter(e => e.f === f && estado.sel.has(e.id)).length;
+      const el = abasFaixa.querySelector(`[data-conta="${f}"]`);
+      el.textContent = n; el.hidden = !n;
+    });
+    $('#sim-faixa-info').textContent = T.faixaInfo(faixaVista, FAIXAS[faixaVista].prazo, fmtPct(FAIXAS[faixaVista].seguro));
+    // Só a faixa da aba: disponíveis primeiro, depois as tiradas
+    const daFaixa = e => e.f === faixaVista;
+    const ordem = [...EMPRESAS.filter(e => daFaixa(e) && !conflito(e)), ...fora.filter(daFaixa)];
+    const rolagem = lista.scrollLeft;
+    lista.classList.toggle('entrando', entrando);
+    lista.innerHTML = ordem.map((e, i) => {
       const motivo = conflito(e);
       const tx = e[L];
       const naCarteira = estado.sel.has(e.id);
       const pct = naCarteira && total ? estado.sel.get(e.id) / total : 0;
-      return `<article class="empresa${motivo ? ' conflito' : ''}${naCarteira ? ' escolhida' : ''}" data-id="${e.id}">
+      return `<article class="empresa${motivo ? ' conflito' : ''}${naCarteira ? ' escolhida' : ''}${e.id === acabouDeEscolher ? ' acabou' : ''}" data-id="${e.id}" style="--i:${i}">
         <div class="empresa-topo"><span class="faixa f${e.f}">${esc(T.faixa(e.f))}</span><span class="ficticia">${esc(T.ficticia)}</span></div>
         <h3>${esc(e.nome)}</h3>
         <p class="setor">${esc(tx[0])}</p>
         <p>${esc(tx[1])}</p>
         ${e.prop ? `<a class="link-seta" href="${EN ? '/en' : ''}/projetos/${e.prop}/">${esc(T.proposta)} →</a>` : ''}
-        <dl><div><dt>${esc(T.retorno)}</dt><dd>${esc(T.anos(FAIXAS[e.f].prazo))}</dd></div><div><dt>${esc(T.seguro)}</dt><dd>${fmtPct(FAIXAS[e.f].seguro)}</dd></div></dl>
         ${motivo ? `<p class="motivo">${esc(motivo)}</p>` : `
         <button type="button" class="botao${naCarteira ? '' : ' secundario'}" aria-pressed="${naCarteira}" data-acao="alternar">${esc(naCarteira ? T.escolhida : T.escolher)}<span class="visualmente-oculto"> ${esc(e.nome)}</span></button>
         ${naCarteira ? `<div class="peso"><label for="peso-${e.id}"><span>${esc(T.peso)}</span><span data-pct>${fmtParte(pct)} · ${fmt(pct * valorUsado())}</span></label>
           <input id="peso-${e.id}" type="range" min="5" max="100" step="5" value="${estado.sel.get(e.id)}" data-acao="peso"></div>` : ''}`}
       </article>`;
     }).join('');
+    lista.scrollLeft = rolagem;
+    entrando = false; acabouDeEscolher = '';
+    atualizarPosicao();
   }
 
   lista.addEventListener('click', ev => {
     const b = ev.target.closest('[data-acao="alternar"]');
     if (!b) return;
     const id = b.closest('.empresa').dataset.id;
-    if (estado.sel.has(id)) estado.sel.delete(id); else estado.sel.set(id, 50);
+    if (estado.sel.has(id)) estado.sel.delete(id); else { estado.sel.set(id, 50); acabouDeEscolher = id; }
     desenhar();
     const novo = lista.querySelector(`[data-id="${id}"] [data-acao="alternar"]`);
     if (novo) novo.focus();
