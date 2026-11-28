@@ -359,7 +359,7 @@
   // Passo 2
   const lista = $('#sim-empresas');
   // Abas por faixa: uma faixa por vez, num carrossel que se arrasta para o lado.
-  let faixaVista = 1, entrando = true, acabouDeEscolher = '';
+  let faixaVista = 1, entrando = true, pulsar = new Set(), contasPop = false;
   const abasFaixa = $('#sim-faixas');
   abasFaixa.innerHTML = [1, 2, 3, 4].map(f => `<label><input type="radio" name="faixa-ver" value="${f}"${f === 1 ? ' checked' : ''}>${esc(T.faixaCurta(f))}<span class="conta" data-conta="${f}" hidden></span></label>`).join('');
   abasFaixa.addEventListener('change', ev => {
@@ -388,6 +388,37 @@
     prox.disabled = lista.scrollLeft + lista.clientWidth >= lista.scrollWidth - 4;
   }
   lista.addEventListener('scroll', atualizarPosicao, { passive: true });
+  // Com o mouse, dá para arrastar os cartões para o lado (fora de botões, links e da régua).
+  // No toque, o próprio navegador já rola.
+  (function arrastar() {
+    let ini = null, moveu = false;
+    lista.addEventListener('pointerdown', ev => {
+      if (ev.pointerType !== 'mouse' || ev.button !== 0 || ev.target.closest('button, a, input, label')) return;
+      ini = { x: ev.clientX, s: lista.scrollLeft }; moveu = false;
+    });
+    addEventListener('pointermove', ev => {
+      if (!ini) return;
+      const dx = ev.clientX - ini.x;
+      if (!moveu && Math.abs(dx) < 5) return;
+      if (!moveu) { moveu = true; lista.classList.add('arrastando'); }
+      lista.scrollLeft = ini.s - dx;
+      ev.preventDefault();
+    });
+    addEventListener('pointerup', () => {
+      if (!ini) return;
+      ini = null;
+      if (!moveu) return;
+      // Solta e deixa o carrossel encaixar no cartão mais perto.
+      const card = lista.querySelector('.empresa');
+      lista.classList.remove('arrastando');
+      if (card) {
+        const passo = card.getBoundingClientRect().width + parseFloat(getComputedStyle(lista).columnGap || 0);
+        lista.scrollTo({ left: Math.round(lista.scrollLeft / passo) * passo, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      }
+    });
+    // Evita que soltar o mouse depois de arrastar conte como clique.
+    lista.addEventListener('click', ev => { if (moveu) { ev.stopPropagation(); ev.preventDefault(); moveu = false; } }, true);
+  })();
   addEventListener('resize', atualizarPosicao, { passive: true });
   function desenharEmpresas() {
     const fora = EMPRESAS.filter(conflito);
@@ -399,6 +430,8 @@
       const n = EMPRESAS.filter(e => e.f === f && estado.sel.has(e.id)).length;
       const el = abasFaixa.querySelector(`[data-conta="${f}"]`);
       el.textContent = n; el.hidden = !n;
+      el.classList.remove('pop');
+      if (contasPop && n) { void el.offsetWidth; el.style.setProperty('--d', `${(f - 1) * 150}ms`); el.classList.add('pop'); }
     });
     $('#sim-faixa-info').textContent = T.faixaInfo(faixaVista, FAIXAS[faixaVista].prazo, fmtPct(FAIXAS[faixaVista].seguro));
     // Só a faixa da aba: disponíveis primeiro, depois as tiradas
@@ -411,7 +444,7 @@
       const tx = e[L];
       const naCarteira = estado.sel.has(e.id);
       const pct = naCarteira && total ? estado.sel.get(e.id) / total : 0;
-      return `<article class="empresa${motivo ? ' conflito' : ''}${naCarteira ? ' escolhida' : ''}${e.id === acabouDeEscolher ? ' acabou' : ''}" data-id="${e.id}" style="--i:${i}">
+      return `<article class="empresa${motivo ? ' conflito' : ''}${naCarteira ? ' escolhida' : ''}${pulsar.has(e.id) ? ' acabou' : ''}" data-id="${e.id}" style="--i:${i}">
         <div class="empresa-topo"><span class="faixa f${e.f}">${esc(T.faixa(e.f))}</span><span class="ficticia">${esc(T.ficticia)}</span></div>
         <h3>${esc(e.nome)}</h3>
         <p class="setor">${esc(tx[0])}</p>
@@ -424,7 +457,7 @@
       </article>`;
     }).join('');
     lista.scrollLeft = rolagem;
-    entrando = false; acabouDeEscolher = '';
+    entrando = false; pulsar = new Set(); contasPop = false;
     atualizarPosicao();
   }
 
@@ -432,7 +465,7 @@
     const b = ev.target.closest('[data-acao="alternar"]');
     if (!b) return;
     const id = b.closest('.empresa').dataset.id;
-    if (estado.sel.has(id)) estado.sel.delete(id); else { estado.sel.set(id, 50); acabouDeEscolher = id; }
+    if (estado.sel.has(id)) estado.sel.delete(id); else { estado.sel.set(id, 50); pulsar = new Set([id]); }
     desenhar();
     const novo = lista.querySelector(`[data-id="${id}"] [data-acao="alternar"]`);
     if (novo) novo.focus();
@@ -465,7 +498,16 @@
     if (f2.length) estado.sel.set(f2[0].id, 20);
     estado.sel.set(f3[0].id, f2.length ? 30 : 50);
     status.textContent = T.pronta;
+    // Mostra a escolha acontecendo: volta para a Faixa 1, os cartões entram e os escolhidos pulsam.
+    faixaVista = 1; marcar('faixa-ver', '1');
+    lista.scrollLeft = 0;
+    entrando = true; contasPop = true;
+    pulsar = new Set(estado.sel.keys());
     desenhar();
+    // Rola até os botões, logo abaixo do cabeçalho e da barra de passos, para ver os cartões entrando.
+    const fixos = [...document.querySelectorAll('.passos > gr-progresso, gr-cabecalho')].reduce((m, el) => Math.max(m, el.getBoundingClientRect().bottom), 0);
+    const topo = $('#passo-2 .acoes').getBoundingClientRect().top + scrollY - fixos - 12;
+    if (Math.abs(topo - scrollY) > 40) scrollTo({ top: topo, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   });
   $('#sim-limpar').addEventListener('click', () => { estado.sel.clear(); $('#sim-status-carteira').textContent = ''; desenhar(); });
 

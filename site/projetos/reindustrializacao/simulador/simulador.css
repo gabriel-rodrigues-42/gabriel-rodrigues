@@ -45,20 +45,29 @@ h3 { color: var(--azul); margin: 0 0 var(--espaco-2); }
 .faixa-info { font-size: var(--tamanho-2); color: var(--texto-suave); margin: var(--espaco-2) 0 0; min-height: 1.5em; }
 /* Carrossel: uma faixa por vez, arrasta para o lado */
 .carrossel { margin-top: var(--espaco-3); }
-.empresas { display: flex; align-items: flex-start; gap: var(--espaco-4); overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; padding: var(--espaco-2) 4px var(--espaco-4); margin: 0 -4px; scrollbar-width: thin; }
+.empresas { display: flex; align-items: flex-start; gap: var(--espaco-4); overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; padding: var(--espaco-2) 4px var(--espaco-4); margin: 0 -4px; scrollbar-width: none; cursor: grab; }
+/* Sem barra de rolagem: as setas, o arrastar e o teclado (Tab nos botões) levam aos outros cartões. */
+.empresas::-webkit-scrollbar { display: none; }
+.empresas.arrastando { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+.empresas .botao, .empresas a, .empresas input { cursor: pointer; }
+.conta.pop { animation: pop-conta .45s cubic-bezier(.3, 1.6, .5, 1) both; animation-delay: var(--d, 0ms); }
+@keyframes pop-conta { 0% { transform: scale(0); } 100% { transform: scale(1); } }
 .empresas > .empresa { flex: 0 0 min(82%, 300px); scroll-snap-align: start; }
-.carrossel-nav { display: flex; align-items: center; justify-content: center; gap: var(--espaco-3); }
+.faixa-topo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--espaco-2) var(--espaco-3); margin-top: var(--espaco-2); }
+.faixa-topo .faixa-info { margin: 0; flex: 1 1 16em; }
+.carrossel-nav { display: flex; align-items: center; gap: var(--espaco-2); margin-left: auto; }
 .carrossel-nav[hidden] { display: none; }
 .carrossel-nav span { font-size: var(--tamanho-2); color: var(--texto-suave); min-width: 4.5em; text-align: center; font-variant-numeric: tabular-nums; }
-.seta { width: 44px; height: 44px; border-radius: var(--forma-pilula); border: 2px solid var(--azul-claro); background-color: var(--branco); color: var(--azul); font: inherit; font-size: var(--tamanho-3); cursor: pointer; }
+.seta { width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border-radius: var(--forma-pilula); border: 2px solid var(--azul-claro); background-color: var(--branco); color: var(--azul); font: inherit; font-size: var(--tamanho-3); cursor: pointer; }
 .seta:disabled { opacity: .4; cursor: default; }
 .seta:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
 .entrando > .empresa { animation: entra .45s cubic-bezier(.2, .8, .3, 1) both; animation-delay: calc(var(--i) * 70ms); }
 @keyframes entra { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: none; } }
 .empresa.acabou { animation: escolhe .5s cubic-bezier(.3, 1.6, .5, 1); }
+.entrando > .empresa.acabou { animation: entra .45s cubic-bezier(.2, .8, .3, 1) both, escolhe .5s cubic-bezier(.3, 1.6, .5, 1); animation-delay: calc(var(--i) * 70ms), calc(var(--i) * 70ms + 450ms); }
 @keyframes escolhe { 0% { transform: scale(1); } 40% { transform: scale(1.04); } 100% { transform: scale(1); } }
 .empresa { transition: border-color .25s, box-shadow .25s; }
-@media (prefers-reduced-motion: reduce) { .entrando > .empresa, .empresa.acabou { animation: none; } .empresa { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .entrando > .empresa, .empresa.acabou, .entrando > .empresa.acabou, .conta.pop { animation: none; } .empresa { transition: none; } }
 .empresa { position: relative; background: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); padding: var(--espaco-4) var(--espaco-4) var(--espaco-5); display: flex; flex-direction: column; gap: var(--espaco-2); border: 3px solid transparent; min-width: 0; }
 .empresa.escolhida { border-color: var(--verde); }
 .empresa.conflito { background: var(--creme); box-shadow: none; border: 2px dashed var(--azul-claro); }
