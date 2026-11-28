@@ -13,7 +13,7 @@
       "id": "abertura-canal",
       "tipo": "fala",
       "titulo": "Apresentação do canal",
-      "texto": "Oi, eu sou o Gabriel Rodrigues, de Inhumas. Trabalho com software há mais de dez anos. Aqui eu explico, de um jeito simples, os sistemas que decidem a vida da gente.",
+      "texto": "Oi, eu sou o Gabriel Rodrigues. Nasci em Inhumas e moro em Goiânia. Trabalho com software há mais de dez anos. Aqui eu explico, de um jeito simples, os sistemas que decidem a vida da gente.",
       "lugares": ["escritorio", "feira", "rua"],
       "tags": ["fixo"],
       "origem": "/sobre/"
@@ -22,7 +22,7 @@
       "id": "abertura-curta",
       "tipo": "fala",
       "titulo": "Apresentação curta (Shorts)",
-      "texto": "Eu sou o Gabriel, de Inhumas, e trabalho com software.",
+      "texto": "Eu sou o Gabriel, moro em Goiânia e trabalho com software.",
       "lugares": ["rua", "carro", "feira"],
       "tags": ["fixo", "shorts"],
       "origem": "/sobre/"

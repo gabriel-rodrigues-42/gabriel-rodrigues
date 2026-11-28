@@ -77,7 +77,7 @@ Fica de fora o que não ajuda a responder essas perguntas, mesmo que seja verdad
 
 **Post ou legenda de vídeo.** Gancho em uma frase, um fato, uma pergunta para conversar e a hashtag. Nada além disso.
 
-**Bio curta** (até 3 linhas). Nome, de onde é, o que faz, o que quer mudar. Exemplo: "Gabriel Rodrigues, de Inhumas (GO). Desenvolvedor de software, oito anos na Europa. Estuda em público como consertar os sistemas que travam a vida de quem trabalha."
+**Bio curta** (até 3 linhas). Nome, onde nasceu e onde mora, o que faz, o que quer mudar. Exemplo: "Gabriel Rodrigues, nasceu em Inhumas e mora em Goiânia (GO). Desenvolvedor de software, oito anos na Europa. Estuda em público como consertar os sistemas que travam a vida de quem trabalha."
 
 ## 6. Política e lei
 
