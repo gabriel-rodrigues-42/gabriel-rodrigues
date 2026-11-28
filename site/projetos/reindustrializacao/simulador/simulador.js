@@ -121,15 +121,16 @@
       bomNota: 'Como os fundos que ficaram entre os melhores: 12,65 pontos por ano acima da média.',
       cdiNota: c => `Supondo o CDI de hoje (${fmtPct(c / 100)}) por todo o prazo, sem risco de perder.`,
       grupoFsri: 'FSRI, com a sua carteira', grupoOutras: 'O mesmo dinheiro em outras aplicações',
-      lucroGrande: 'Lucro no fim do prazo, já sem o imposto e sem os juros do empréstimo.',
-      lucroMenor: 'Lucro no fim do prazo, já sem o imposto.',
+      lucroGrande: 'Quanto sobra ou falta no fim do prazo, depois do imposto e de pagar o banco.',
+      lucroMenor: 'Quanto sobra no fim do prazo, depois do imposto.',
       cdb: 'Tesouro Selic ou CDB', lca: 'LCI, LCA ou debênture incentivada', fii: 'Fundo imobiliário', acoes: 'Ações',
-      cdbNota: c => `Rende 100% do CDI (${fmtPct(c / 100)}), sem risco de perder.`,
+      cdbNota: (c, g) => g ? `O CDB não perde dinheiro, mas rende 100% do CDI (${fmtPct(c / 100)}), menos que os juros do banco.` : `Rende 100% do CDI (${fmtPct(c / 100)}), sem risco de perder.`,
       lcaNota: 'Supomos 85% do CDI, que empata com o CDB depois do imposto. O banco pode pagar mais ou menos.',
-      fiiNota: 'Se repetir o IFIX de 2021 a 2025.',
+      fiiNota: 'Se repetir o IFIX de 2021 a 2025. Supõe rendimento isento: cotista com menos de 10% do fundo.',
       acoesNota: 'Se repetir o Ibovespa de 2021 a 2025.',
       isentoCurto: 'Isento',
-      desconto: v => `Inclui ${v} de desconto no imposto mínimo (2% do aporte por ano, por 5 anos). Vale se o seu imposto mínimo do ano for pelo menos o dobro desse desconto anual.`,
+      desconto: v => `Inclui ${v} de desconto no imposto (2% do aporte por ano, por 5 anos, corrigido pelo CDI até o fim do prazo). Só vale inteiro se o seu imposto do ano for pelo menos o dobro desse desconto.`,
+      exemploMargem: v => `Com o banco cobrando 2 pontos a mais que o CDI, o cenário médio ficaria em ${v}. A conta também não inclui o IOF do empréstimo nem o risco de o banco pedir mais garantia se as ações caírem.`,
       juros: (v, taxa) => `Os juros do empréstimo somam ${v} no prazo (${taxa} ao ano) e já saíram de cada linha. Pegar empréstimo para aplicar em CDB dá prejuízo, porque o banco cobra mais do que o CDB paga.`,
       quebraT: 'E se todas as empresas quebrarem?',
       quebra: (perde, volta) => `Você perde pelo menos <b>${perde}</b>. O seguro devolve no máximo <b>${volta}</b>, e só se a falência for comprovada por auditoria.`,
@@ -188,15 +189,16 @@
       bomNota: 'Like the funds that ended up among the best: 12.65 points a year above average.',
       cdiNota: c => `Assuming today's CDI (${fmtPct(c / 100)}) for the whole period, with no risk of loss.`,
       grupoFsri: 'FSRI, with your portfolio', grupoOutras: 'The same money in other investments',
-      lucroGrande: 'Profit at the end of the period, after tax and after the loan interest.',
-      lucroMenor: 'Profit at the end of the period, after tax.',
+      lucroGrande: 'What is left over, or missing, at the end of the period, after tax and after paying the bank.',
+      lucroMenor: 'What is left over at the end of the period, after tax.',
       cdb: 'Treasury Selic or bank CD', lca: 'LCI, LCA or infrastructure bond', fii: 'Real-estate fund', acoes: 'Stocks',
-      cdbNota: c => `Earns 100% of the CDI (${fmtPct(c / 100)}), with no risk of loss.`,
+      cdbNota: (c, g) => g ? `A bank CD doesn't lose money, but it earns 100% of the CDI (${fmtPct(c / 100)}), less than the bank's interest.` : `Earns 100% of the CDI (${fmtPct(c / 100)}), with no risk of loss.`,
       lcaNota: 'We assume 85% of the CDI, which matches a bank CD after tax. Banks may pay more or less.',
-      fiiNota: 'If it repeats the IFIX from 2021 to 2025.',
+      fiiNota: 'If it repeats the IFIX from 2021 to 2025. Assumes tax-exempt income: holder with less than 10% of the fund.',
       acoesNota: 'If it repeats the Ibovespa from 2021 to 2025.',
       isentoCurto: 'Tax-exempt',
-      desconto: v => `Includes ${v} of discount on the minimum tax (2% of the investment a year, for 5 years). Applies if your yearly minimum tax is at least twice that yearly discount.`,
+      desconto: v => `Includes ${v} of tax discount (2% of the investment a year, for 5 years, grown at the CDI to the end of the period). It only applies in full if your yearly tax is at least twice that discount.`,
+      exemploMargem: v => `If the bank charges 2 points above the CDI, the average scenario would be ${v}. The math also leaves out the loan's IOF tax and the risk of the bank asking for more collateral if the shares fall.`,
       juros: (v, taxa) => `Loan interest adds up to ${v} over the period (${taxa} a year) and is already taken out of every line. Borrowing to buy a bank CD loses money, because the bank charges more than the CD pays.`,
       quebraT: 'What if every company goes under?',
       quebra: (perde, volta) => `You lose at least <b>${perde}</b>. Insurance pays back at most <b>${volta}</b>, and only if an audit confirms the bankruptcy.`,
@@ -432,13 +434,15 @@
     tx.ruim = Math.max(-0.99, tx.medio - MEIA_DIFERENCA);
     tx.bom = tx.medio + MEIA_DIFERENCA;
     const impF = isento ? 0 : IR;
-    const desconto = grande && a.ok ? V * DESCONTO_ANO * ANOS_DESCONTO : 0;
+    // Cada desconto anual vira dinheiro na mão naquele ano; corrigimos pelo CDI até o fim do prazo.
+    let desconto = 0;
+    if (grande && a.ok) for (let k = 1; k <= ANOS_DESCONTO; k++) desconto += V * DESCONTO_ANO * Math.pow(1 + cdiR, n - k);
     const jurosR = cdiR + estado.margem / 100;
     const juros = grande ? V * (Math.pow(1 + jurosR, n) - 1) : 0;
     const lucro = (v, extra = 0) => v + extra - V - juros;
     const ruim = fim(tx.ruim, impF), medio = fim(tx.medio, impF), bom = fim(tx.bom, impF), cdi = fim(cdiR, IR);
     const outras = [
-      { cls: 'cdi', nome: T.cdb, taxa: cdiR, nota: T.cdbNota(estado.cdi), imp: T.comIR, lucro: lucro(cdi) },
+      { cls: 'cdi', nome: T.cdb, taxa: cdiR, nota: T.cdbNota(estado.cdi, grande), imp: T.comIR, lucro: lucro(cdi) },
       { cls: 'outra', nome: T.lca, taxa: cdiR * LCA_DO_CDI, nota: T.lcaNota, imp: T.isentoCurto, lucro: lucro(fim(cdiR * LCA_DO_CDI, 0)) },
       { cls: 'outra', nome: T.fii, taxa: IFIX_AA, nota: T.fiiNota, imp: T.isentoCurto, lucro: lucro(fim(IFIX_AA, 0)) },
       { cls: 'outra', nome: T.acoes, taxa: IBOV_AA, nota: T.acoesNota, imp: T.comIR, lucro: lucro(fim(IBOV_AA, IR)) },
@@ -446,6 +450,7 @@
     const seguro = a.itens.reduce((s, i) => s + V * i.w * FAIXAS[i.e.f].seguro, 0);
     return { a, V, n, isento, grande, tx, ruim, medio, bom, cdi, cdiR, jurosR, juros, desconto, outras,
       lucros: { ruim: lucro(ruim, desconto), medio: lucro(medio, desconto), bom: lucro(bom, desconto) },
+      medioMargem2: medio + desconto - V - V * (Math.pow(1 + cdiR + 0.02, n) - 1),
       seguro, perde: V - seguro };
   }
 
@@ -481,6 +486,7 @@
     const notas = [];
     if (c.desconto) notas.push(T.desconto(fmt(c.desconto)));
     if (c.grande) notas.push(T.juros(fmt(c.juros), fmtPct(c.jurosR)));
+    if (c.grande && estado.margem === 0) notas.push(T.exemploMargem(sinal(c.medioMargem2)));
     alvo.innerHTML = `<p class="pequeno">${esc(c.grande ? T.lucroGrande : T.lucroMenor)}</p>
     <h3 class="grupo">${esc(T.grupoFsri)}</h3>
     <div class="cenarios">
