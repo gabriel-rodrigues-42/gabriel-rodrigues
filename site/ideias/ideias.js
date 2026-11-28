@@ -32,7 +32,7 @@ window.IDEIAS = [
     ],
     proposta: [
       "Criar o Fundo Soberano de Reindustrialização e Inovação, o FSRI. O investidor continua tomando crédito com as ações como garantia. A diferença é que o dinheiro vai para indústrias e plataformas novas no Brasil.",
-      "Em troca, ele ganha isenção progressiva no imposto sobre ganho de capital e sobre dividendos. Só se o dinheiro ficar investido pelo prazo mínimo, em produção real no país.",
+      "Em troca, por 5 anos, o aporte abate uma parte do imposto mínimo. Depois de 5 anos, o lucro sai sem imposto. Só vale se o dinheiro for para produção real no país.",
       "Os projetos ficam em três faixas de risco. Plataformas digitais, indústria de base e tecnologia de ponta, como chips. O Estado garante parte do prejuízo: até 20%, 35% ou 50%, conforme a faixa.",
       "Cada aporte precisa ter um projeto de retorno rápido e um de longo prazo. O rápido paga os juros do empréstimo. O longo constrói o futuro.",
       "O dinheiro chega por um funil público. Maratona nacional de inovação, quatro meses de aceleração, banca transmitida ao vivo e liberação só por metas auditadas.",
@@ -40,7 +40,7 @@ window.IDEIAS = [
     criticas: [
       {
         critica: "Isso é isenção de imposto para rico.",
-        resposta: "Esse patrimônio já paga pouco hoje, porque não é vendido. A isenção do fundo só existe se o dinheiro virar fábrica, patente ou plataforma nova no Brasil.",
+        resposta: "Hoje o rico já tem papéis isentos, como LCA e debênture incentivada, sem dar nada em troca. O desconto do fundo só existe se o dinheiro virar fábrica, patente ou plataforma nova no Brasil, e tem teto.",
       },
       {
         critica: "O Estado vai pagar a conta quando der errado.",

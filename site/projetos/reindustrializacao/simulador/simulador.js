@@ -19,12 +19,19 @@
   const MIN_F1 = 0.40;          // Faixa 1 com no mínimo 40% do aporte
   const TETO_MENOR = 20000;     // R$ 20 mil por ano (Resolução CVM 88/2022)
   const IR = 0.15;              // IR sobre o lucro em aplicação de mais de 2 anos
-  // Fundos brasileiros de PE e VC, 1994-2022 (Insper, Spectra e ABVCAP):
-  // média de 12,7% ao ano e 25,3 pontos entre os melhores e os piores fundos.
-  const MEDIA = 0.127, DIFERENCA = 0.253;
-  // Os quartis exatos estão só em imagem no estudo. Usamos a média mais ou menos
-  // metade da diferença: 12,7 ± 12,65 ≈ 0% e 25% ao ano.
-  const CENARIOS = { ruim: 0, medio: MEDIA, bom: 0.25 };
+  // Fundos brasileiros de PE e VC, 1994-2022 (Insper, Spectra e ABVCAP): terminaram,
+  // na média, com 1,1 vez o que o CDI daria no mesmo tempo, e 25,3 pontos por ano
+  // separam os melhores dos piores. O cenário médio segue o CDI que a pessoa escolhe
+  // (1,1 vez o CDI no fim do prazo); o ruim e o bom ficam a meia distância para cada lado.
+  const VEZES_CDI = 1.1, MEIA_DIFERENCA = 0.253 / 2;
+  // Desconto no imposto mínimo (parâmetro da proposta): 2% do aporte por ano, por 5 anos,
+  // até metade do imposto mínimo do ano.
+  const DESCONTO_ANO = 0.02, ANOS_DESCONTO = 5;
+  // Outras aplicações. LCI/LCA: 85% do CDI, isenta, empata com o CDB de 100% do CDI depois
+  // dos 15% (suposição, não média de mercado). Ações e fundos imobiliários: repetem o
+  // Ibovespa (+35,4%) e o IFIX (+31,5%) de 2021 a 2025 (B3, via Monte Bravo/Bloomberg).
+  const LCA_DO_CDI = 0.85;
+  const IBOV_AA = Math.pow(1.354, 1 / 5) - 1, IFIX_AA = Math.pow(1.315, 1 / 5) - 1;
   // Referência levada ao G20 (relatório Zucman, 2024): piso de 2% ao ano, só para bilionários em dólar.
   const PISO_G20 = 0.02;
   const CDI_PADRAO = 13.65; // Selic de 13,75% (Copom, 4/11/2026) menos 0,10 ponto
@@ -101,23 +108,33 @@
       forn: a => `Tirada: fornece para quem atua em ${a.toLowerCase()}.`,
       conflitos: (n, a) => n === 0 ? `Nenhuma empresa tem conflito com a sua área.` : `${n === 1 ? '1 empresa saiu' : n + ' empresas saíram'} da sua lista por conflito de interesse com a sua área (${a.toLowerCase()}).`,
       semArea: 'Escolha a sua área no passo 1 para o sistema tirar as empresas com conflito.',
-      r1: 'Pelo menos 2 empresas',
       r2: 'Pelo menos uma da Faixa 1 e uma da Faixa 3',
       r3: p => `Faixa 1 com no mínimo 40% do aporte (agora: ${p})`,
-      sim: 'Aporte incentivado. Depois de 5 anos, o lucro fica livre de imposto.',
-      nao: 'Ainda sem incentivo. Assim, o lucro paga 15% de imposto. Cumpra as regras acima para ganhar a isenção.',
+      sim: 'Aporte incentivado. Por 5 anos, ele abate parte do imposto mínimo. Depois, o lucro fica livre de imposto.',
+      nao: 'Ainda sem incentivo: sem desconto no imposto mínimo, e o lucro paga 15% de imposto. Cumpra as regras acima.',
       vazio: 'Escolha pelo menos uma empresa no passo 2 para ver a simulação.',
       ruim: 'Cenário ruim', medio: 'Cenário médio', bom: 'Cenário bom', cdi: 'CDI',
       aa: v => `${fmtPct(v)} ao ano`,
       isento: 'Lucro livre de imposto (isento)', comIR: 'Já sem os 15% de imposto sobre o lucro',
-      ruimNota: 'Fundos que ficaram entre os piores. O dinheiro só empata.',
-      medioNota: 'A média de 387 fundos brasileiros, de 1994 a 2022.',
-      bomNota: 'Fundos que ficaram entre os melhores.',
+      ruimNota: 'Como os fundos que ficaram entre os piores: 12,65 pontos por ano abaixo da média.',
+      medioNota: 'Termina com 1,1 vez o que o CDI daria, como a média de 387 fundos brasileiros (1994 a 2022).',
+      bomNota: 'Como os fundos que ficaram entre os melhores: 12,65 pontos por ano acima da média.',
       cdiNota: c => `Supondo o CDI de hoje (${fmtPct(c / 100)}) por todo o prazo, sem risco de perder.`,
+      grupoFsri: 'FSRI, com a sua carteira', grupoOutras: 'O mesmo dinheiro em outras aplicações',
+      lucroGrande: 'Lucro no fim do prazo, já sem o imposto e sem os juros do empréstimo.',
+      lucroMenor: 'Lucro no fim do prazo, já sem o imposto.',
+      cdb: 'Tesouro Selic ou CDB', lca: 'LCI, LCA ou debênture incentivada', fii: 'Fundo imobiliário', acoes: 'Ações',
+      cdbNota: c => `Rende 100% do CDI (${fmtPct(c / 100)}), sem risco de perder.`,
+      lcaNota: 'Supomos 85% do CDI, que empata com o CDB depois do imposto. O banco pode pagar mais ou menos.',
+      fiiNota: 'Se repetir o IFIX de 2021 a 2025.',
+      acoesNota: 'Se repetir o Ibovespa de 2021 a 2025.',
+      isentoCurto: 'Isento',
+      desconto: v => `Inclui ${v} de desconto no imposto mínimo (2% do aporte por ano, por 5 anos). Vale se o seu imposto mínimo do ano for pelo menos o dobro desse desconto anual.`,
+      juros: (v, taxa) => `Os juros do empréstimo somam ${v} no prazo (${taxa} ao ano) e já saíram de cada linha. Pegar empréstimo para aplicar em CDB dá prejuízo, porque o banco cobra mais do que o CDB paga.`,
       quebraT: 'E se todas as empresas quebrarem?',
       quebra: (perde, volta) => `Você perde pelo menos <b>${perde}</b>. O seguro devolve no máximo <b>${volta}</b>, e só se a falência for comprovada por auditoria.`,
       quebraNota: 'Em startup, perder tudo é comum. Só entre com dinheiro que você não vai precisar numa data certa.',
-      grande: 'Atenção: na porta grande você investe com dinheiro emprestado. A simulação não desconta os juros do empréstimo. E se o investimento der errado, você ainda deve ao banco.',
+      grande: 'Atenção: na porta grande você investe com dinheiro emprestado. O passo 3 desconta os juros do empréstimo. E se o investimento der errado, você ainda deve ao banco.',
       teto: v => `O teto da porta menor é ${v} por ano. A simulação usa esse valor.`,
       pronta: 'Montamos uma carteira pronta, como faria um gestor. Você pode mudar à vontade.',
       prontaFalta: 'Não sobrou empresa da Faixa 1 e da Faixa 3 sem conflito para montar a carteira pronta.',
@@ -132,7 +149,7 @@
         cada: p => `Em ${p} anos, cada R$ 100 viraria:`,
         rodape1: 'Simulação com dados de fundos reais (Insper, Spectra e ABVCAP, 1994-2022).',
         rodape2: 'Não é promessa de retorno. Empresas inventadas.',
-        incentivo: 'Aporte incentivado: lucro sem imposto depois de 5 anos',
+        incentivo: 'Aporte incentivado: desconto no imposto e lucro isento',
         semIncentivo: 'Sem incentivo: lucro paga 15% de imposto',
       },
       imp: {
@@ -145,8 +162,8 @@
         lei: 'Lei em vigor (Lei 15.270, de 2025)',
         leiNota: 'Não cobra sobre o patrimônio, e sim sobre a renda: até 10% para quem ganha mais de R$ 600 mil por ano, desde 2026.',
         fsri: 'Aporte no FSRI',
-        fsriTexto: (n, v) => `continua seu. No cenário médio, vira ${v} em ${n} anos, se as empresas derem certo.`,
-        nota: 'Conta simplificada: o patrimônio fica igual todos os anos. O imposto não volta. O aporte no FSRI pode voltar maior, menor ou não voltar.',
+        fsriTexto: (n, v) => `continua seu. No cenário médio, vira ${v} em ${n} anos, se as empresas derem certo, antes de pagar o empréstimo.`,
+        nota: 'Conta simplificada: o patrimônio fica igual todos os anos. O imposto não volta. O aporte no FSRI pode voltar maior, menor ou não voltar, e o empréstimo continua devido.',
       },
       arquivo: 'minha-carteira-fsri.png',
     },
@@ -158,23 +175,33 @@
       forn: a => `Removed: supplies people in ${a.toLowerCase()}.`,
       conflitos: (n, a) => n === 0 ? `No company conflicts with your field.` : `${n === 1 ? '1 company was' : n + ' companies were'} removed from your list for a conflict of interest with your field (${a.toLowerCase()}).`,
       semArea: 'Pick your field in step 1 so the system removes companies with a conflict.',
-      r1: 'At least 2 companies',
       r2: 'At least one from Tier 1 and one from Tier 3',
       r3: p => `Tier 1 with at least 40% of the investment (now: ${p})`,
-      sim: 'Incentivized investment. After 5 years, the profit is tax-free.',
-      nao: 'No incentive yet, so the profit pays 15% tax. Meet the rules above to get the exemption.',
+      sim: 'Incentivized investment. For 5 years, it takes part off the minimum tax. After that, the profit is tax-free.',
+      nao: 'No incentive yet: no discount on the minimum tax, and the profit pays 15% tax. Meet the rules above.',
       vazio: 'Pick at least one company in step 2 to see the simulation.',
       ruim: 'Bad scenario', medio: 'Average scenario', bom: 'Good scenario', cdi: 'CDI',
       aa: v => `${fmtPct(v)} a year`,
       isento: 'Tax-free profit (exempt)', comIR: 'After the 15% tax on the profit',
-      ruimNota: 'Funds that ended up among the worst. The money only breaks even.',
-      medioNota: 'The average of 387 Brazilian funds, from 1994 to 2022.',
-      bomNota: 'Funds that ended up among the best.',
+      ruimNota: 'Like the funds that ended up among the worst: 12.65 points a year below average.',
+      medioNota: 'Ends with 1.1 times what the CDI would pay, like the average of 387 Brazilian funds (1994 to 2022).',
+      bomNota: 'Like the funds that ended up among the best: 12.65 points a year above average.',
       cdiNota: c => `Assuming today's CDI (${fmtPct(c / 100)}) for the whole period, with no risk of loss.`,
+      grupoFsri: 'FSRI, with your portfolio', grupoOutras: 'The same money in other investments',
+      lucroGrande: 'Profit at the end of the period, after tax and after the loan interest.',
+      lucroMenor: 'Profit at the end of the period, after tax.',
+      cdb: 'Treasury Selic or bank CD', lca: 'LCI, LCA or infrastructure bond', fii: 'Real-estate fund', acoes: 'Stocks',
+      cdbNota: c => `Earns 100% of the CDI (${fmtPct(c / 100)}), with no risk of loss.`,
+      lcaNota: 'We assume 85% of the CDI, which matches a bank CD after tax. Banks may pay more or less.',
+      fiiNota: 'If it repeats the IFIX from 2021 to 2025.',
+      acoesNota: 'If it repeats the Ibovespa from 2021 to 2025.',
+      isentoCurto: 'Tax-exempt',
+      desconto: v => `Includes ${v} of discount on the minimum tax (2% of the investment a year, for 5 years). Applies if your yearly minimum tax is at least twice that yearly discount.`,
+      juros: (v, taxa) => `Loan interest adds up to ${v} over the period (${taxa} a year) and is already taken out of every line. Borrowing to buy a bank CD loses money, because the bank charges more than the CD pays.`,
       quebraT: 'What if every company goes under?',
       quebra: (perde, volta) => `You lose at least <b>${perde}</b>. Insurance pays back at most <b>${volta}</b>, and only if an audit confirms the bankruptcy.`,
       quebraNota: 'Losing everything is common with startups. Only put in money you won\'t need back on a set date.',
-      grande: 'Heads up: through the large-wealth door you invest with borrowed money. The simulation does not subtract the loan interest. And if the investment goes wrong, you still owe the bank.',
+      grande: 'Heads up: through the large-wealth door you invest with borrowed money. Step 3 subtracts the loan interest. And if the investment goes wrong, you still owe the bank.',
       teto: v => `The smaller-wealth cap is ${v} a year. The simulation uses that amount.`,
       pronta: 'We built a ready-made portfolio, the way a manager would. Change it as you like.',
       prontaFalta: 'There is no Tier 1 and Tier 3 company left without a conflict to build the ready-made portfolio.',
@@ -189,7 +216,7 @@
         cada: p => `In ${p} years, every R$100 would become:`,
         rodape1: 'Simulation with data from real funds (Insper, Spectra and ABVCAP, 1994-2022).',
         rodape2: 'Not a promise of returns. Made-up companies.',
-        incentivo: 'Incentivized: tax-free profit after 5 years',
+        incentivo: 'Incentivized: tax discount and tax-free profit',
         semIncentivo: 'No incentive: profit pays 15% tax',
       },
       imp: {
@@ -202,8 +229,8 @@
         lei: 'Law in force (Law 15,270 of 2025)',
         leiNota: 'It does not tax net worth but income: up to 10% for people earning more than R$600,000 a year, since 2026.',
         fsri: 'FSRI investment',
-        fsriTexto: (n, v) => `stays yours. In the average scenario it becomes ${v} in ${n} years, if the companies succeed.`,
-        nota: 'Simplified math: net worth stays the same every year. Tax never comes back. The FSRI investment may come back larger, smaller or not at all.',
+        fsriTexto: (n, v) => `stays yours. In the average scenario it becomes ${v} in ${n} years, if the companies succeed, before repaying the loan.`,
+        nota: 'Simplified math: net worth stays the same every year. Tax never comes back. The FSRI investment may come back larger, smaller or not at all, and the loan is still owed.',
       },
       arquivo: 'my-fsri-portfolio.png',
     },
@@ -219,13 +246,14 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
   // Estado: tudo só na memória da página.
-  const estado = { porta: 'grande', valor: 10000000, patrimonio: 50000000, area: '', sel: new Map(), prazo: 10, cdi: CDI_PADRAO };
+  const estado = { porta: 'grande', valor: 10000000, patrimonio: 50000000, area: '', sel: new Map(), prazo: 10, cdi: CDI_PADRAO, margem: 0 };
 
   const form = $('#sim-form');
   const campoValor = $('#sim-valor');
   const campoArea = $('#sim-area');
   const campoPrazo = $('#sim-prazo');
   const campoCdi = $('#sim-cdi');
+  const campoMargem = $('#sim-margem');
 
   campoArea.insertAdjacentHTML('beforeend', AREAS.map(a => `<option value="${a[0]}">${esc(EN ? a[2] : a[1])}</option>`).join(''));
 
@@ -291,6 +319,7 @@
 
   function desenharNotaValor() {
     $('#campo-patrimonio').hidden = estado.porta !== 'grande';
+    $('#campo-margem').hidden = estado.porta !== 'grande';
     const nota = $('#sim-nota-valor');
     const partes = [];
     if (estado.porta === 'menor' && estado.valor > TETO_MENOR) partes.push(`<span class="nota-teto">${esc(T.teto(fmt(TETO_MENOR)))}</span>`);
@@ -375,16 +404,15 @@
     const total = totalPeso();
     const itens = [...estado.sel].map(([id, p]) => ({ e: EMPRESAS.find(x => x.id === id), w: total ? p / total : 0 }));
     const f1 = itens.filter(i => i.e.f === 1).reduce((s, i) => s + i.w, 0);
-    const r1 = itens.length >= 2;
     const r2 = itens.some(i => i.e.f === 1) && itens.some(i => i.e.f === 3);
     const r3 = f1 >= MIN_F1 - 1e-9;
-    return { itens, f1, r1, r2, r3, ok: r1 && r2 && r3 };
+    return { itens, f1, r2, r3, ok: r2 && r3 };
   }
 
   function desenharRegras() {
     const a = analisar();
     const li = (ok, txt) => `<li class="${ok ? 'ok' : ''}"><span class="marca" aria-hidden="true">${ok ? '✓' : '·'}</span><span><span class="visualmente-oculto">${ok ? (EN ? 'Done: ' : 'Cumprida: ') : (EN ? 'Missing: ' : 'Falta: ')}</span>${esc(txt)}</span></li>`;
-    $('#sim-regras').innerHTML = li(a.r1, T.r1) + li(a.r2, T.r2) + li(a.r3, T.r3(fmtParte(Math.floor(a.f1 * 100) / 100)));
+    $('#sim-regras').innerHTML = li(a.r2, T.r2) + li(a.r3, T.r3(fmtParte(Math.floor(a.f1 * 100) / 100)));
     const selo = $('#sim-incentivo');
     selo.className = 'selo-incentivo ' + (a.ok ? 'sim' : 'nao');
     selo.textContent = a.ok ? T.sim : T.nao;
@@ -396,11 +424,29 @@
     const V = valorUsado();
     const n = estado.prazo;
     const isento = a.ok && n >= 5;
-    const fsri = r => { const g = V * (Math.pow(1 + r, n) - 1); return V + (isento ? g : g * (1 - IR)); };
+    const grande = estado.porta === 'grande';
+    // Valor no fim do prazo, já sem o imposto sobre o lucro (prejuízo não paga imposto).
+    const fim = (r, imp) => { const g = V * (Math.pow(1 + r, n) - 1); return V + (g > 0 ? g * (1 - imp) : g); };
     const cdiR = estado.cdi / 100;
-    const cdi = V + V * (Math.pow(1 + cdiR, n) - 1) * (1 - IR);
+    const tx = { medio: Math.pow(VEZES_CDI, 1 / n) * (1 + cdiR) - 1 };
+    tx.ruim = Math.max(-0.99, tx.medio - MEIA_DIFERENCA);
+    tx.bom = tx.medio + MEIA_DIFERENCA;
+    const impF = isento ? 0 : IR;
+    const desconto = grande && a.ok ? V * DESCONTO_ANO * ANOS_DESCONTO : 0;
+    const jurosR = cdiR + estado.margem / 100;
+    const juros = grande ? V * (Math.pow(1 + jurosR, n) - 1) : 0;
+    const lucro = (v, extra = 0) => v + extra - V - juros;
+    const ruim = fim(tx.ruim, impF), medio = fim(tx.medio, impF), bom = fim(tx.bom, impF), cdi = fim(cdiR, IR);
+    const outras = [
+      { cls: 'cdi', nome: T.cdb, taxa: cdiR, nota: T.cdbNota(estado.cdi), imp: T.comIR, lucro: lucro(cdi) },
+      { cls: 'outra', nome: T.lca, taxa: cdiR * LCA_DO_CDI, nota: T.lcaNota, imp: T.isentoCurto, lucro: lucro(fim(cdiR * LCA_DO_CDI, 0)) },
+      { cls: 'outra', nome: T.fii, taxa: IFIX_AA, nota: T.fiiNota, imp: T.isentoCurto, lucro: lucro(fim(IFIX_AA, 0)) },
+      { cls: 'outra', nome: T.acoes, taxa: IBOV_AA, nota: T.acoesNota, imp: T.comIR, lucro: lucro(fim(IBOV_AA, IR)) },
+    ];
     const seguro = a.itens.reduce((s, i) => s + V * i.w * FAIXAS[i.e.f].seguro, 0);
-    return { a, V, n, isento, ruim: fsri(CENARIOS.ruim), medio: fsri(CENARIOS.medio), bom: fsri(CENARIOS.bom), cdi, cdiR, seguro, perde: V - seguro };
+    return { a, V, n, isento, grande, tx, ruim, medio, bom, cdi, cdiR, jurosR, juros, desconto, outras,
+      lucros: { ruim: lucro(ruim, desconto), medio: lucro(medio, desconto), bom: lucro(bom, desconto) },
+      seguro, perde: V - seguro };
   }
 
   function blocoImposto(c) {
@@ -424,18 +470,29 @@
     const comp = $('#sim-compartilhar');
     if (!estado.sel.size) { alvo.innerHTML = `<p class="vazio">${esc(T.vazio)}</p>`; comp.hidden = true; return; }
     const c = calcular();
-    const max = Math.max(c.bom, c.cdi);
-    const linha = (cls, nome, taxa, valor, nota, imp) => `<div class="cenario ${cls}">
-      <div class="cenario-topo"><strong>${esc(nome)} · ${esc(T.aa(taxa))}</strong><b>${fmt(valor)}</b></div>
-      <div class="barra" aria-hidden="true"><div style="width:${Math.max(2, valor / max * 100).toFixed(1)}%"></div></div>
+    const todos = [c.lucros.ruim, c.lucros.medio, c.lucros.bom, ...c.outras.map(o => o.lucro)];
+    const max = Math.max(...todos.map(Math.abs)) || 1;
+    const sinal = v => (v < 0 ? '−' : '+') + fmt(Math.abs(v));
+    const linha = (cls, nome, taxa, valor, nota, imp) => `<div class="cenario ${cls}${valor < 0 ? ' negativo' : ''}">
+      <div class="cenario-topo"><strong>${esc(nome)} · ${esc(T.aa(taxa))}</strong><b>${sinal(valor)}</b></div>
+      <div class="barra" aria-hidden="true"><div style="width:${Math.max(2, Math.abs(valor) / max * 100).toFixed(1)}%"></div></div>
       <p class="pequeno">${esc(nota)} ${esc(imp)}.</p></div>`;
     const impF = c.isento ? T.isento : T.comIR;
-    alvo.innerHTML = `<div class="cenarios">
-      ${linha('ruim', T.ruim, CENARIOS.ruim, c.ruim, T.ruimNota, impF)}
-      ${linha('medio', T.medio, CENARIOS.medio, c.medio, T.medioNota, impF)}
-      ${linha('bom', T.bom, CENARIOS.bom, c.bom, T.bomNota, impF)}
-      ${linha('cdi', T.cdi, c.cdiR, c.cdi, T.cdiNota(estado.cdi), T.comIR)}
+    const notas = [];
+    if (c.desconto) notas.push(T.desconto(fmt(c.desconto)));
+    if (c.grande) notas.push(T.juros(fmt(c.juros), fmtPct(c.jurosR)));
+    alvo.innerHTML = `<p class="pequeno">${esc(c.grande ? T.lucroGrande : T.lucroMenor)}</p>
+    <h3 class="grupo">${esc(T.grupoFsri)}</h3>
+    <div class="cenarios">
+      ${linha('ruim', T.ruim, c.tx.ruim, c.lucros.ruim, T.ruimNota, impF)}
+      ${linha('medio', T.medio, c.tx.medio, c.lucros.medio, T.medioNota, impF)}
+      ${linha('bom', T.bom, c.tx.bom, c.lucros.bom, T.bomNota, impF)}
     </div>
+    <h3 class="grupo">${esc(T.grupoOutras)}</h3>
+    <div class="cenarios">
+      ${c.outras.map(o => linha(o.cls, o.nome, o.taxa, o.lucro, o.nota, o.imp)).join('')}
+    </div>
+    ${notas.map(n => `<p class="pequeno nota-conta">${esc(n)}</p>`).join('')}
     <div class="quebra"><h3>${esc(T.quebraT)}</h3><p>${T.quebra(fmt(c.perde), fmt(c.seguro))}</p><p>${esc(T.quebraNota)}</p></div>`;
     if (estado.porta === 'grande') alvo.insertAdjacentHTML('beforeend', blocoImposto(c));
     comp.hidden = false;
@@ -447,6 +504,11 @@
   campoCdi.addEventListener('input', () => {
     const v = parseFloat(String(campoCdi.value).replace(',', '.'));
     estado.cdi = Number.isFinite(v) && v >= 0 && v < 100 ? v : CDI_PADRAO;
+    desenharResultado();
+  });
+  campoMargem.addEventListener('input', () => {
+    const v = parseFloat(String(campoMargem.value).replace(',', '.'));
+    estado.margem = Number.isFinite(v) && v >= 0 && v < 50 ? v : 0;
     desenharResultado();
   });
 
@@ -612,6 +674,7 @@
   })();
 
   campoCdi.value = String(CDI_PADRAO).replace('.', EN ? '.' : ',');
+  campoMargem.value = '0';
   desenhar();
   // Redesenha a imagem quando a fonte terminar de carregar
   if (document.fonts) document.fonts.ready.then(() => { if (estado.sel.size) desenharCartao(calcular()); });

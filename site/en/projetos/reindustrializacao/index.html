@@ -128,16 +128,29 @@
   .legenda-barra .l-privado::before { background: var(--azul); }
   .legenda-barra .l-estado::before { background: var(--amarelo); }
 
-  /* Haltere (barbell) */
-  .haltere { display: grid; grid-template-columns: 1fr 2fr 1fr; align-items: center; margin: var(--espaco-5) 0 var(--espaco-3); }
-  .peso { aspect-ratio: 1; display: grid; place-items: center; text-align: center; padding: var(--espaco-2); font-weight: var(--peso-forte); font-size: var(--tamanho-2); line-height: 1.2; box-shadow: var(--sombra-clay); }
-  .peso.rapido { background: var(--verde-fundo); color: var(--branco); border-radius: var(--forma-bolha-1); }
-  .peso.longo { background: var(--azul); color: var(--branco); border-radius: var(--forma-bolha-3); }
-  .barra-haltere { height: 14px; background: var(--amarelo); border-radius: var(--forma-pilula); box-shadow: var(--sombra-clay); }
-  .haltere-texto { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-4); font-size: var(--tamanho-2); }
-  .haltere-texto p:last-child { text-align: right; }
-  @media (max-width: 520px) { .haltere-texto { grid-template-columns: 1fr; } .haltere-texto p:last-child { text-align: left; } }
-
+  /* Regras numa olhada só */
+  .regras { margin: var(--espaco-5) 0; padding: var(--espaco-5); background: var(--verde-claro); box-shadow: none; }
+  .regras h3 { margin-top: 0; }
+  .regras > p { margin: var(--espaco-4) 0 0; }
+  .regras-colunas { display: grid; gap: var(--espaco-4); }
+  .regras-colunas strong { display: block; color: var(--azul); }
+  .regras-colunas ul { margin: var(--espaco-2) 0 0; padding-left: 1.1em; }
+  .regras-colunas li + li { margin-top: var(--espaco-2); }
+  .regras-colunas b { color: var(--verde-escuro); }
+  @media (min-width: 720px) { .regras-colunas { grid-template-columns: 1fr 1fr; } }
+  /* Onde o dinheiro grande fica hoje */
+  .aplicacoes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--espaco-3); margin: var(--espaco-4) 0 var(--espaco-3); }
+  .aplicacao { padding: var(--espaco-4); }
+  .aplicacao > strong { display: block; color: var(--azul); font-size: var(--tamanho-3); line-height: 1.25; }
+  .aplicacao .risco { display: inline-block; margin: var(--espaco-2) 0 var(--espaco-3); font-size: var(--tamanho-1); font-weight: var(--peso-forte); padding: 3px 10px; border-radius: var(--forma-pilula); }
+  .risco.baixo { background: var(--verde-claro); color: var(--verde-escuro); }
+  .risco.medio { background: var(--amarelo-claro); color: var(--texto); }
+  .risco.alto { background: var(--areia); color: var(--texto); }
+  .aplicacao dl { margin: 0; font-size: var(--tamanho-2); }
+  .aplicacao dt { font-size: var(--tamanho-1); font-weight: var(--peso-forte); text-transform: uppercase; letter-spacing: .05em; color: var(--texto-suave); margin-top: var(--espaco-2); }
+  .aplicacao dd { margin: 0; }
+  .aplicacao dd b { color: var(--verde-escuro); font-size: var(--tamanho-3); }
+  .aplicacao.fsri { outline: 3px solid var(--amarelo); }
   /* Travas */
   .travas { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--espaco-4); margin-top: var(--espaco-4); }
   .trava { padding: var(--espaco-4) var(--espaco-5); }
@@ -248,6 +261,7 @@
       <div class="cartao passo"><div class="bola">2</div><div><strong>Borrow</strong>Use those shares as collateral to take credit from the bank.</div></div>
       <div class="cartao passo"><div class="bola">3</div><div><strong>Never sell</strong><em>"Die": hold until the end</em>Live on that credit. The wealth sits still and pays almost no tax.</div></div>
     </div>
+    <p>Until 2025, this worked almost tax-free. Since 2026, anyone earning more than R$ 600,000 a year pays a minimum tax of up to 10% on income (Law 15,270 of 2025). But the same law leaves out real-estate and agribusiness credit notes (LCI and LCA), tax-exempt infrastructure bonds and real-estate funds. A very wealthy person can keep money in those and pay no minimum tax on them.</p>
     <p>The most common reaction is: then let's tax large fortunes. The problem is that this idea usually hits two walls.</p>
     <div class="duas">
       <div class="cartao contra">
@@ -273,13 +287,38 @@
   <section class="capitulo revelar" style="margin-top: 0">
     <span class="ato">Chapter 3 · The turn</span>
     <h2>The path of the money</h2>
-    <p>Investors keep doing what they already do: borrow with their shares as collateral. The difference is where that money goes.</p>
+    <p>The investor keeps doing what they already do: borrowing with shares as collateral. What changes is where that money goes.</p>
     <ol class="fluxo">
-      <li><span class="n">1</span><div><strong>The credit leaves the bank</strong>The high-income investor takes a private credit line, with their own shares or stakes as collateral.</div></li>
-      <li><span class="n">2</span><div><strong>It goes to qualified projects</strong>Instead of sitting still, the money is invested in projects approved by the FSRI.</div></li>
-      <li><span class="n">3</span><div><strong>Tax becomes a reward for productivity</strong>If the capital stays invested for at least 5 years, the investor gets a progressive exemption or discount on the tax due when the shares are sold and on the profits the company pays out. Without real productive investment in the country, there is no benefit.</div></li>
-      <li><span class="n">4</span><div><strong>The company grows and goes public on B3</strong>Once it matures, the company lists on the Brazilian stock exchange. The investor sells their stake tax-free, pays off the original loan and takes the profit.</div></li>
+      <li><span class="n">1</span><div><strong>The credit leaves the bank</strong>The investor takes a loan with their own shares or stakes as collateral.</div></li>
+      <li><span class="n">2</span><div><strong>It goes to approved projects</strong>The money goes into companies approved by a public FSRI panel, following the rules below.</div></li>
+      <li><span class="n">3</span><div><strong>Part of the tax becomes investment</strong>For 5 years, the investment takes part off the investor's minimum tax. After 5 years, the FSRI profit comes out tax-free.</div></li>
+      <li><span class="n">4</span><div><strong>The company grows and the investor exits</strong>The company lists on B3, the Brazilian stock exchange, or is sold. The investor sells their stake, pays off the loan and keeps what's left.</div></li>
     </ol>
+
+    <div class="cartao regras" id="rules">
+      <h3>The rules, at a glance</h3>
+      <div class="regras-colunas">
+        <div>
+          <strong>For the investment to get the incentive</strong>
+          <ul>
+            <li>At least one Tier 1 project, with a quick return, and one Tier 3 project, in cutting-edge technology.</li>
+            <li>At least 40% of the investment in Tier 1. Housing doesn't count toward that 40%.</li>
+            <li>The money stays invested for at least 5 years.</li>
+            <li>No companies that compete with yours or sell to them. A system removes those from the list.</li>
+          </ul>
+        </div>
+        <div>
+          <strong>What the investor gets</strong>
+          <ul>
+            <li><b>A discount on the minimum tax.</b> For 5 years, it takes off 2% of the amount invested each year, up to half of that year's minimum tax.</li>
+            <li><b>Tax-free profit.</b> After 5 years, the FSRI profit is exempt and left out of the minimum tax, as already happens with LCA notes.</li>
+            <li><b>Insurance.</b> If the company goes bankrupt, with an audit, the State returns part of the loss: up to 20%, 35% or 50%, depending on the tier.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="pequeno suave">Anyone who leaves before 5 years pays back the discount they used, and the profit pays normal tax. The shares used as collateral keep their usual tax.</p>
+    </div>
+    <p>Tier 1 makes a profit early and helps pay the loan interest. Tier 3 takes years, but that's where the chip and the technology the country lacks are. Without the rule, hardly anyone would choose the hard bet.</p>
   </section>
 
   <!-- ATO 4 -->
@@ -325,7 +364,7 @@
         <div class="fato"><small>State insurance</small><b>up to 50%</b></div>
         <div class="fato"><small>Rule</small><b>mandatory</b></div>
       </div>
-      <p class="pequeno suave">Having at least one project in this tier is mandatory to unlock the exemptions of Tiers 1 and 2.</p>
+      <p class="pequeno suave">Every incentivized investment needs at least one project in this tier.</p>
     </div>
 
     <div class="cartao trilha-moradia">
@@ -340,23 +379,7 @@
       <p class="pequeno suave">An investment with housing still needs one Tier 1 and one Tier 3 project. <a href="/en/projetos/moradia-que-vira-sua/">See the housing proposal</a>.</p>
     </div>
 
-    <h3 style="margin-top: var(--espaco-6)">One quick project and one slow one, together</h3>
-    <p>Each incentivized contribution must include at least two projects with opposite profiles. One with a quick return and one that takes years.</p>
-    <div class="haltere" aria-hidden="true">
-      <div class="peso rapido">Tier 1<br>quick</div>
-      <div class="barra-haltere"></div>
-      <div class="peso longo">Tier 3<br>long</div>
-    </div>
-    <div class="haltere-texto">
-      <p><strong>Pays the bills.</strong> The quick return covers the interest on the investor's loan.</p>
-      <p><strong>Builds the future.</strong> Money that can wait funds heavy industry and cutting-edge technology.</p>
-    </div>
-  </section>
-
-  <!-- ATO 5 -->
-  <section class="capitulo revelar">
-    <span class="ato">Chapter 5 · No party with public money</span>
-    <h2>If the project fails, who pays?</h2>
+    <h3 class="subtitulo">If the project fails, who pays?</h3>
     <p>That's the question everyone should ask. The proposal's answer: the investor always pays most of it. Pick a tier and see how a loss splits, for every R$ 100 invested, in a project that truly went bankrupt.</p>
     <div class="cartao simulador">
       <div class="opcoes" role="radiogroup">
@@ -381,59 +404,68 @@
   </section>
 
   <section class="capitulo revelar" id="return">
-    <span class="ato">Chapter 6 · The investor's math</span>
-    <h2>How much does the investor make?</h2>
-    <p>Nobody knows yet. The FSRI doesn't exist, so there is no measured return. Any number I put here would be a guess.</p>
-    <p>What I can show is how the money comes back, how much similar funds have earned in Brazil, and what happens if everything goes wrong.</p>
+    <span class="ato">Chapter 5 · The investor's math</span>
+    <h2>How much is left for the investor?</h2>
+    <p>Nobody knows yet how much the FSRI would earn. It doesn't exist, so any number would be a guess.</p>
+    <p>What we can do is compare it with where big money already sits today and show what happens if everything goes wrong.</p>
 
     <h3 class="subtitulo">Who gets in</h3>
-    <p>Instead of only taxing large fortunes, the FSRI gives them a reason to invest here. But the fund doesn't depend on them. If large fortunes don't want to come in, the money of many people put together does the same job.</p>
+    <p>Instead of only taxing large fortunes, the FSRI gives them a reason to invest here. But the fund doesn't depend on them. If large fortunes don't want in, the pooled money of many people plays the same role.</p>
     <div class="saidas">
-      <div class="cartao saida"><strong>Large wealth</strong><p>People who already borrow from banks using their shares as collateral. They don't need to sell investments or dip into their cash: they change where a loan they would take anyway goes. If the project fails, the bank loan is still there.</p></div>
-      <div class="cartao saida"><strong>Smaller wealth</strong><p>Buys low-priced shares in the fund. To protect people who can't afford to lose, there's a yearly cap and a clear risk warning before getting in.</p></div>
+      <div class="cartao saida"><strong>Large wealth</strong><p>People who already borrow from the bank with shares as collateral and pay the minimum tax. They change where a loan they'd take anyway goes. If the project fails, the debt with the bank remains.</p></div>
+      <div class="cartao saida"><strong>Smaller wealth</strong><p>Buys low-priced fund shares, capped at R$ 20,000 a year, as the CVM already does for startups (CVM Resolution 88 of 2022). Before getting in, they see a clear risk warning.</p></div>
     </div>
-    <p>The cap can follow what Brazil's securities regulator (CVM) already uses for online startup investing: up to R$ 20,000 a year for most people (CVM Resolution 88, 2022). In startups, losing everything is common.</p>
 
     <h3 class="subtitulo">Who picks the companies</h3>
-    <p>Investors build their own portfolio from the projects approved by the public panel. First, a system removes from their list anything with a conflict of interest: competitors and suppliers of the companies they already own a stake in. That way nobody uses the fund to buy out a competitor and become a monopoly.</p>
-    <p>Those who don't want to choose buy shares in a ready-made portfolio, put together by a professional manager and supervised by the CVM. Either way, the investor doesn't run the company. The fund publishes open reports: where the money is, which goal each company met, and what each stake is worth.</p>
+    <p>The investor builds their own portfolio from the projects approved by the public panel. Those who don't want to choose buy shares of a ready-made portfolio, built by a manager and supervised by the CVM, Brazil's securities regulator.</p>
+    <p>Either way, the investor doesn't run the company. The fund publishes open reports: where the money is, which milestone each company met and what each stake is worth.</p>
 
     <h3 class="subtitulo">How the money comes back</h3>
     <div class="saidas">
-      <div class="cartao saida"><strong>Shared profit</strong><p>Tier 1 companies, which turn a profit sooner, pay part of it to their shareholders. That pays the interest on the loan.</p></div>
-      <div class="cartao saida"><strong>Sale on the stock exchange</strong><p>The company goes public on the B3 and the investor sells their stake.</p></div>
-      <div class="cartao saida"><strong>Sale to another company</strong><p>A larger company buys the whole startup, and each shareholder gets their part.</p></div>
-      <div class="cartao saida"><strong>Sale of the fund share</strong><p>The investor sells their share in the fund to another investor. Leaving before 5 years means losing the tax exemption.</p></div>
+      <div class="cartao saida"><strong>Shared profit</strong><p>Tier 1 companies make a profit earlier and share part of it with partners. It helps pay the loan interest. Before 5 years, that profit pays normal tax.</p></div>
+      <div class="cartao saida"><strong>Sale on the stock exchange</strong><p>The company lists on B3 and the investor sells their stake.</p></div>
+      <div class="cartao saida"><strong>Sale to another company</strong><p>A bigger company buys the whole startup, and each partner gets their share.</p></div>
+      <div class="cartao saida"><strong>Sale of the fund share</strong><p>The investor sells their part of the fund to another investor.</p></div>
     </div>
 
     <h3 class="subtitulo">How much similar funds have earned</h3>
     <p>Insper, Spectra and the industry association (ABVCAP) measured 387 Brazilian funds that buy stakes in companies, from 1994 to 2022.</p>
     <div class="fatos elevados">
-      <div class="fato"><small>Average per year</small><b>12.7%</b><span class="pequeno">in reais, after fees</span></div>
-      <div class="fato"><small>Compared to CDI</small><b>1.1 times</b><span class="pequeno">beat the CDI by a little</span></div>
+      <div class="fato"><small>Yearly average</small><b>12.7%</b><span class="pequeno">in reais, after fees</span></div>
+      <div class="fato"><small>Compared with the CDI</small><b>1.1 times</b><span class="pequeno">what the CDI would pay in the same time</span></div>
       <div class="fato"><small>Best versus worst</small><b>25 points</b><span class="pequeno">of difference per year</span></div>
     </div>
-    <p>On average, this kind of investment beat the CDI, Brazil's benchmark interest rate, by a small margin. The gap between good and bad funds was huge. Choosing who manages the money matters more than the sector.</p>
-    <p>That's why the FSRI changes the math with rules: the insurance cuts part of the loss, the exemption increases what's left of the profit, and pairing a fast project with a slow one pays the interest while the slow one matures.</p>
+    <p>On average, this kind of investment beat the CDI, Brazil's benchmark interbank rate, by a little. The gap between good and bad funds was huge. Choosing well matters more than the sector.</p>
+
+    <h3 class="subtitulo">Where big money sits today</h3>
+    <p>Each card shows the risk, the tax for individuals and what R$ 100 invested at the start of 2021 became by the end of 2025, before tax.</p>
+    <div class="aplicacoes">
+      <div class="cartao aplicacao"><strong>Treasury Selic bonds and bank CDs (CDB)</strong><span class="risco baixo">Low risk</span><dl><dt>Tax</dt><dd>15% on the profit, after 2 years</dd><dt>Minimum tax</dt><dd>Counts, but the 15% already paid is deducted</dd><dt>2021 to 2025</dt><dd><b>R$ 168</b> (CDI)</dd></dl></div>
+      <div class="cartao aplicacao"><strong>LCI, LCA and tax-exempt infrastructure bonds</strong><span class="risco baixo">Low to medium risk</span><dl><dt>Tax</dt><dd>Exempt</dd><dt>Minimum tax</dt><dd>Left out</dd><dt>2021 to 2025</dt><dd>Close to the CDI, or inflation plus interest, depending on the bond</dd></dl></div>
+      <div class="cartao aplicacao"><strong>Real-estate funds</strong><span class="risco medio">Medium risk</span><dl><dt>Tax</dt><dd>Income exempt, if the fund trades on the exchange and has at least 100 holders</dd><dt>Minimum tax</dt><dd>Left out</dd><dt>2021 to 2025</dt><dd><b>R$ 132</b> (IFIX)</dd></dl></div>
+      <div class="cartao aplicacao"><strong>Stocks</strong><span class="risco alto">High risk</span><dl><dt>Tax</dt><dd>15% on the gain when sold. Dividends above R$ 50,000 a month from the same company have 10% withheld</dd><dt>Minimum tax</dt><dd>Counts</dd><dt>2021 to 2025</dt><dd><b>R$ 135</b> (Ibovespa)</dd></dl></div>
+      <div class="cartao aplicacao"><strong>Funds that buy stakes in companies</strong><span class="risco alto">High risk</span><dl><dt>Tax</dt><dd>15% on the profit</dd><dt>Minimum tax</dt><dd>Counts</dd><dt>Track record</dt><dd><b>1.1 times</b> the CDI (1994 to 2022)</dd></dl></div>
+      <div class="cartao aplicacao fsri"><strong>FSRI (proposal)</strong><span class="risco alto">High risk, with insurance</span><dl><dt>Tax</dt><dd>Discount on the minimum tax for 5 years. After that, tax-free profit</dd><dt>Minimum tax</dt><dd>The profit is left out after 5 years</dd><dt>2021 to 2025</dt><dd>Doesn't exist yet</dd></dl></div>
+    </div>
+    <p class="pequeno suave">In the same period, inflation was 33% (IPCA, IBGE). R$ 100 at the start of 2021 bought the same as R$ 133 at the end of 2025. B3 indexes (CDI, Ibovespa and IFIX), compiled by Monte Bravo with Bloomberg data (January 2026). Taxes: Laws 11,033 of 2004, 12,431 of 2011 and 15,270 of 2025.</p>
 
     <h3 class="subtitulo">Who this makes sense for</h3>
-    <p>Looking only at returns, the FSRI does not beat fixed income. Similar funds earned 1.1 times the CDI, with much more risk.</p>
-    <p>Through the large-wealth door, the math is even tighter. The money comes from a loan, and the bank charges interest that tracks the CDI, because that is what money costs the bank, plus a margin. That interest eats almost all of the difference.</p>
-    <p>The advantage is in the tax. Since 2026, anyone earning more than R$ 600,000 a year pays a minimum tax on their total income, reaching 10% from R$ 1.2 million. Dividends above R$ 50,000 a month from the same company have 10% withheld at the source (Law 15,270 of 2025).</p>
-    <p>For that person, the comparison is not FSRI versus fixed income. It is FSRI versus paying the tax. In the FSRI, the money becomes a factory here and, after 5 years, the profit is tax-free.</p>
-    <p>For people who pay little tax, fixed income is still the right choice: it earns about the same with no risk of loss. The smaller-wealth door exists for people who want to back a Brazilian company and accept that risk.</p>
+    <p>For people who pay little tax, fixed income is the right choice. It earns close to the CDI and has no risk of losing everything. The FSRI's smaller door is for those who want to back a Brazilian company and accept that risk.</p>
+    <p>For people with large wealth, the competition is LCA notes and tax-exempt infrastructure bonds. They are already exempt, left out of the minimum tax and almost risk-free. If the FSRI only matched the exemption, nobody would switch.</p>
+    <p>That's why the FSRI gives something extra: the discount on the minimum tax. It's money that would go to the government and becomes a factory, patent or platform here. The discount only exists if the investment follows the rules and stays 5 years.</p>
+    <p>Through the large door, the money comes from a loan, and the bank charges interest that tracks the CDI, plus a margin. In the average scenario, the FSRI earns a little more than the CDI. If the bank charges only the CDI, a little is left. If it charges a margin, what's left shrinks or disappears, and the tax discount helps close the gap.</p>
 
     <div class="pior-caso">
       <h3>What if everything goes wrong?</h3>
-      <p>If every project in an investment fails, the insurance returns a part and the investor loses the rest. In Tier 3, they lose at least half. In Tier 1, at least 80%.</p>
-      <p>In the CDI, the same money would have earned without that risk. That's why the FSRI is not for anyone who needs the money back on a set date.</p>
+      <p>If every project in an investment fails, the insurance returns part of it and the investor loses the rest. In Tier 3, they lose at least half. In Tier 1, at least 80%.</p>
+      <p>In the CDI, the same money would have earned without that risk. That's why the FSRI isn't for anyone who needs the money back on a set date.</p>
     </div>
   </section>
 
   <!-- ATO 6: história ilustrativa -->
   <section class="capitulo revelar">
     <div class="historia">
-      <span class="ato">Chapter 7 · How an idea gets funded</span>
+      <span class="ato">Chapter 6 · How an idea gets funded</span>
       <h2>From a real problem to the stock exchange</h2>
       <p>The money doesn't go to whoever knows somebody. It goes through a public funnel, in four stages. To see how it would work, follow an imaginary team.</p>
       <p class="aviso-ficcao">Illustrative story. The team is made up; the stages and rules are those of the proposal.</p>
@@ -471,8 +503,9 @@
   </section>
 
   <!-- ATO 7 -->
+  <!-- ATO 7 -->
   <section class="capitulo revelar">
-    <span class="ato">Chapter 8 · An unfair fight</span>
+    <span class="ato">Chapter 7 · Fair competition</span>
     <h2>When the giant sells below cost</h2>
     <p>A new Brazilian platform usually fails not because it's worse, but because it faces a well-known game: winner takes all.</p>
     <div class="linha-tempo">
@@ -488,34 +521,17 @@
       <div class="quadro bom"><b>The money levels the field</b><p>What is collected reduces taxes and the fees of the national platform under attack, for as long as the attack lasts.</p></div>
     </div>
     <p style="margin-top: var(--espaco-4)">The more the giant sells below cost, the more money goes to its Brazilian competitor.</p>
-  </section>
 
-  <!-- ATO 8 -->
-  <section class="capitulo revelar">
-    <span class="ato">Chapter 9 · Who wins</span>
-    <h2>More income stays with those who work</h2>
-    <p>Tier 1 platforms are born integrated with Gov.br, the federal government's digital ID, and Pix. That slashes the cost of winning each customer and allows micro-fees. The proposal mentions something like 2% to 5%, against the 25% to 30% it estimates for large foreign platforms.</p>
+    <h3 class="subtitulo">Who wins</h3>
+    <p>Tier 1 platforms are born connected to Gov.br, the federal government's digital ID, and to Pix. That slashes the cost of winning each customer and lets them charge lower fees than the big foreign platforms.</p>
     <p>An example that already exists: <a href="/en/projetos/galera-club/">galera.club</a>, a Brazilian link-in-bio page, with Pix on the page and no fee per sale.</p>
     <div class="ganhadores">
       <div class="cartao ganhador"><strong>The driver</strong><p>Keeps a bigger share of each ride.</p></div>
       <div class="cartao ganhador"><strong>The event producer</strong><p>Sells tickets without handing a huge cut to the ticketing platform.</p></div>
       <div class="cartao ganhador"><strong>The consumer</strong><p>Pays lower fees and gets real competition.</p></div>
       <div class="cartao ganhador"><strong>The researcher</strong><p>Sees the lab become a product, with a patent registered in Brazil.</p></div>
-      <div class="cartao ganhador"><strong>The investor</strong><p>Swaps tax for productive investment and exits through the Brazilian stock exchange.</p></div>
+      <div class="cartao ganhador"><strong>The investor</strong><p>Swaps part of the tax for productive investment and exits through the Brazilian stock exchange.</p></div>
       <div class="cartao ganhador"><strong>The country</strong><p>Depends less on others and keeps the value that today goes away.</p></div>
-    </div>
-  </section>
-
-  <!-- ATO 9 -->
-  <section class="capitulo revelar">
-    <span class="ato">Chapter 10 · Starting with Goiás</span>
-    <h2>Goiás as a laboratory</h2>
-    <p>The model can get a regional arm, building on what Goiás is already good at.</p>
-    <div class="goias">
-      <div class="cartao"><span class="onde">North and Northeast Goiás</span><h3>Rare earths with added value</h3><p>Goiás has significant reserves of critical minerals and rare earths, such as in Minaçu and the surrounding region. Tier 2 and 3 investments can fund local refining, instead of exporting only raw ore.</p></div>
-      <div class="cartao"><span class="onde">Anápolis · DAIA</span><h3>Medicine and equipment made here</h3><p>Use the pharmaceutical cluster of the Anápolis Agro-Industrial District to make active pharmaceutical ingredients and medical and hospital equipment.</p></div>
-      <div class="cartao"><span class="onde">Southwest Goiás</span><h3>From agribusiness to agtech</h3><p>Hackathons on precision agriculture, drones, soil sensors and bio-inputs, with UFG, IF Goiano and research centers. Agribusiness capital funds new technology, with no conflict of interest.</p></div>
-      <div class="cartao"><span class="onde">The whole state</span><h3>Brazilian technology on trial</h3><p>Pilot programs, through public procurement of innovation under Brazil's Startup Legal Framework, to test <a href="/en/projetos/cartorio-digital/">digital notary offices</a>, mobility and public management created in local innovation marathons.</p></div>
     </div>
   </section>
 
@@ -529,7 +545,7 @@
         <li>Pick a door, large or smaller wealth, and how much you would invest.</li>
         <li>Tell it your field of work. The system removes companies that compete with you or sell to you.</li>
         <li>Build the portfolio following the rules, or use the ready-made one.</li>
-        <li>See the bad, average and good scenarios next to the CDI, and share the result.</li>
+        <li>Compare the profit with bank CDs, LCA notes, stocks and real-estate funds, after tax and, through the large door, after the loan interest.</li>
       </ol>
       <a class="botao verde" href="/en/projetos/reindustrializacao/simulador/">Open the simulator</a>
     </div>
@@ -537,7 +553,7 @@
 
   <!-- CRÍTICAS -->
   <section class="capitulo revelar" id="criticas">
-    <span class="ato">Chapter 11 · The criticism</span>
+    <span class="ato">Chapter 8 · The criticism</span>
     <h2>The toughest criticism, and the answers</h2>
     <p>These are the objections I'd expect to hear, answered with the proposal's own rules.</p>
 
@@ -545,14 +561,15 @@
       <summary>Why would I risk my wealth on companies I don't know and don't control?</summary>
       <div class="resposta">
         <p>If you need that money, you shouldn't. Brazilian funds of this kind earned, on average, only a little more than the CDI, and the gap between the best and the worst was huge (Insper, Spectra and ABVCAP, 2022).</p>
-        <p>The FSRI doesn't promise a return. It changes the math: the insurance cuts part of the loss, the exemption raises the profit, and a portfolio of several projects spreads the risk. People with smaller wealth get in with a yearly cap. The rules are in <a href="#return">chapter 6</a>.</p>
+        <p>The FSRI doesn't promise a return. It changes the math: the insurance cuts part of the loss, the discount and the exemption raise what's left, and a portfolio of several projects spreads the risk. People with smaller wealth get in with a yearly cap. The comparison with other investments is in <a href="#return">chapter 5</a>.</p>
       </div>
     </details>
 
     <details class="critica">
       <summary>This is a tax break for the rich.</summary>
       <div class="resposta">
-        <p>Today that wealth already pays little tax, because it isn't sold. The FSRI exemption only exists if the money turns into real productive investment in the country, stays invested for at least 5 years and includes at least one high-tech-risk project.</p>
+        <p>Today the rich already get exemptions without giving anything back: LCI, LCA, tax-exempt infrastructure bonds and real-estate funds are left out of the minimum tax (Law 15,270 of 2025).</p>
+        <p>The FSRI asks for more. The discount only applies if the money becomes real investment in the country, stays 5 years and includes a cutting-edge technology project. And it has a cap: at most half of that year's minimum tax.</p>
         <p>No new factory, patent or platform, no benefit.</p>
       </div>
     </details>
@@ -560,7 +577,7 @@
     <details class="critica">
       <summary>The State will foot the bill when it goes wrong.</summary>
       <div class="resposta">
-        <p>The insurance has a cap: 20%, 35% or 50%, depending on the risk. The investor bears at least half of the loss, even in the worst case.</p>
+        <p>The insurance has a cap: 20%, 35% or 50%, depending on the risk, and 10% for housing. The investor bears at least half of the loss, even in the worst case.</p>
         <p>The insurance is only triggered by an audited bankruptcy, with no bad faith. And when a high-risk project succeeds, the State keeps 10% to 15% to refill the fund.</p>
       </div>
     </details>
@@ -588,19 +605,26 @@
         <p>Pairing a quick project with a slow one ensures the investor gets a quick return in Tier 1 while waiting for Tier 3 to mature.</p>
       </div>
     </details>
+    <details class="critica">
+      <summary>The tax discount is money the government stops collecting.</summary>
+      <div class="resposta">
+        <p>True, and that's why it has a cap. The discount is at most 2% of the investment per year, for 5 years, and never more than half of that year's minimum tax.</p>
+        <p>In return, the money stays in Brazil, in a new company, for at least 5 years. Anyone who leaves early pays the discount back.</p>
+      </div>
+    </details>
   </section>
 
   <!-- LEI -->
   <section class="capitulo revelar">
-    <span class="ato">Chapter 12 · How it leaves the paper</span>
+    <span class="ato">Chapter 9 · How it leaves the paper</span>
     <h2>The roadmap to becoming law</h2>
     <div class="esferas">
       <div class="cartao">
         <span class="selo azul">Federal · Chamber of Deputies</span>
         <p>A Complementary Law bill that creates the FSRI and defines:</p>
         <ul>
-          <li>the rules of the conditional exemption on capital gains;</li>
-          <li>the sovereign insurance through BNDES and FINEP;</li>
+          <li>the discount on the minimum tax and the exemption of profit after 5 years, only for investments that follow the rules;</li>
+          <li>the insurance through BNDES and Finep, with a cap per tier;</li>
           <li>the CIDE-Concorrencial trigger within the Brazilian Competition Defense System (Law 12.529/2011).</li>
         </ul>
       </div>
@@ -612,6 +636,15 @@
           <li>a Goiás Circuit of Industrial Hackathons, with FAPEG, UFG and the productive sector.</li>
         </ul>
       </div>
+    </div>
+
+    <h3 class="subtitulo">Starting with Goiás</h3>
+    <p>The model can get a regional arm, building on what Goiás is already good at.</p>
+    <div class="goias">
+      <div class="cartao"><span class="onde">North and Northeast Goiás</span><h3>Rare earths with added value</h3><p>Goiás has significant reserves of critical minerals and rare earths, such as in Minaçu and the surrounding region. Tier 2 and 3 investments can fund local refining, instead of exporting only raw ore.</p></div>
+      <div class="cartao"><span class="onde">Anápolis · DAIA</span><h3>Medicine and equipment made here</h3><p>Use the pharmaceutical cluster of the Anápolis Agro-Industrial District to make active pharmaceutical ingredients and medical and hospital equipment.</p></div>
+      <div class="cartao"><span class="onde">Southwest Goiás</span><h3>From agribusiness to agtech</h3><p>Hackathons on precision agriculture, drones, soil sensors and bio-inputs, with UFG, IF Goiano and research centers. Agribusiness capital funds new technology, with no conflict of interest.</p></div>
+      <div class="cartao"><span class="onde">The whole state</span><h3>Brazilian technology on trial</h3><p>Pilot programs, through public procurement of innovation under Brazil's Startup Legal Framework, to test <a href="/en/projetos/cartorio-digital/">digital notary offices</a>, mobility and public management created in local innovation marathons.</p></div>
     </div>
   </section>
 
@@ -632,11 +665,14 @@
   <section class="capitulo">
     <h3>Sources and references <small>(in Portuguese)</small></h3>
     <ul class="fontes">
-      <li>Public Policy Proposal: Sovereign Fund for Reindustrialization and Innovation (FSRI), working paper, 2026. The proposal's percentages, terms and amounts come from it and are proposed parameters, not measured data. The exception is the figures on existing funds, in chapter 6.</li>
+      <li>Public Policy Proposal: Sovereign Fund for Reindustrialization and Innovation (FSRI), working paper, 2026. The proposal's percentages, terms and amounts come from it and are proposed parameters, not measured data. That also applies to the 2% a year discount on the minimum tax. The exception is the figures on existing investments and funds, in chapter 5.</li>
       <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12529.htm">Law 12.529 of November 30, 2011</a>, which structures the Brazilian Competition Defense System (Planalto).</li>
       <li><a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp182.htm">Complementary Law 182 of June 1, 2021</a>, Brazil's Startup Legal Framework (Planalto).</li>
-      <li><a href="https://spectrainvest.com/en/estudo/performance-of-brazilian-private-equity-and-venture-capital-funds-1994-2022-2/">Performance of Brazilian Private Equity and Venture Capital Funds (1994-2022)</a>, Insper, Spectra Investments and ABVCAP, data through December 2022. Source of the numbers in chapter 6.</li>
-      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/L15270.htm">Law 15,270 of November 26, 2025</a>, which creates the minimum tax on incomes above R$ 600,000 a year, at up to 10%, and 10% withholding on dividends above R$ 50,000 a month (Office of the President of Brazil).</li>
+      <li><a href="https://spectrainvest.com/en/estudo/performance-of-brazilian-private-equity-and-venture-capital-funds-1994-2022-2/">Performance of Brazilian Private Equity and Venture Capital Funds (1994-2022)</a>, Insper, Spectra Investments and ABVCAP, data through December 2022. Source of the fund numbers in chapter 5.</li>
+      <li><a href="https://www.montebravo.com.br/wp-content/uploads/2025/12/Tabela-Periodica-Monte-Bravo-Janeiro-2026.pdf">Periodic table of returns</a>, Monte Bravo, with Bloomberg data through 12/31/2025: CDI, Ibovespa and IFIX (B3 indexes) and IPCA (IBGE) from 2021 to 2025.</li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/lei/l11.033.htm">Law 11,033 of December 21, 2004</a>, tax on fixed income and stocks and the exemption of LCI, LCA and real-estate funds (Planalto).</li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12431.htm">Law 12,431 of June 24, 2011</a>, exemption of infrastructure bonds for individuals (Planalto).</li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/L15270.htm">Law 15,270 of November 26, 2025</a>, which creates the minimum tax on incomes above R$ 600,000 a year, at up to 10%, and 10% withholding on dividends above R$ 50,000 a month. Article 16-A leaves out savings accounts, LCI, LCA, CRI, CRA, infrastructure bonds and real-estate funds (Office of the President of Brazil).</li>
       <li><a href="https://conteudo.cvm.gov.br/export/sites/cvm/legislacao/resolucoes/anexos/001/resol088.pdf">CVM Resolution 88 of April 27, 2022</a>, which regulates investing in startups through online platforms and caps most people at R$ 20,000 a year (CVM).</li>
     </ul>
   </section>

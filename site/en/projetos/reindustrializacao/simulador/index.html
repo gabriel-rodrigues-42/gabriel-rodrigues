@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FSRI investment simulator · Gabriel Rodrigues</title>
-<meta name="description" content="Build a portfolio of fictional companies under the FSRI rules and compare bad, average and good scenarios with the CDI, using data from real Brazilian funds.">
+<meta name="description" content="Build a portfolio of fictional companies under the FSRI rules and compare the after-tax profit with bank CDs, LCA notes, stocks and real-estate funds, using data from real Brazilian funds.">
 <link rel="canonical" href="https://gabriel-rodrigues.com/en/projetos/reindustrializacao/simulador/">
 <link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/projetos/reindustrializacao/simulador/">
 <link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/reindustrializacao/simulador/">
@@ -21,14 +21,14 @@
 <meta property="og:site_name" content="Gabriel Rodrigues">
 <meta property="og:url" content="https://gabriel-rodrigues.com/en/projetos/reindustrializacao/simulador/">
 <meta property="og:title" content="FSRI investment simulator · Gabriel Rodrigues">
-<meta property="og:description" content="Build a portfolio of fictional companies under the FSRI rules and compare bad, average and good scenarios with the CDI, using data from real Brazilian funds.">
+<meta property="og:description" content="Build a portfolio of fictional companies under the FSRI rules and compare the after-tax profit with bank CDs, LCA notes, stocks and real-estate funds, using data from real Brazilian funds.">
 <meta property="og:image" content="https://gabriel-rodrigues.com/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Gabriel Rodrigues, software engineering at the service of Brazil">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="FSRI investment simulator · Gabriel Rodrigues">
-<meta name="twitter:description" content="Build a portfolio of fictional companies under the FSRI rules and compare bad, average and good scenarios with the CDI, using data from real Brazilian funds.">
+<meta name="twitter:description" content="Build a portfolio of fictional companies under the FSRI rules and compare the after-tax profit with bank CDs, LCA notes, stocks and real-estate funds, using data from real Brazilian funds.">
 <meta name="twitter:image" content="https://gabriel-rodrigues.com/og.jpg">
 <link rel="stylesheet" href="/design-system/tokens.css">
 <link rel="stylesheet" href="/design-system/componentes.css">
@@ -53,7 +53,7 @@
   <div class="aviso-risco">
     <p><strong>The companies are made up.</strong> The FSRI does not exist yet. The names, sectors and numbers on each card are only there to show the rules.</p>
     <p>The scenarios use what similar Brazilian funds returned from 1994 to 2022. This is not a promise of returns.</p>
-    <p><strong>The FSRI's advantage is in the tax, not in the return.</strong> It was designed for people with very high incomes who would pay a lot of tax. For people who pay little tax, fixed income earns about the same with no risk.</p>
+    <p><strong>The FSRI's advantage is in the tax, not in the return.</strong> For people with very high incomes, the investment takes part off the minimum tax. For people who pay little tax, fixed income earns about the same with no risk.</p>
   </div>
 
   <div class="passos">
@@ -107,16 +107,16 @@
     <div class="recebida" id="sim-recebida" hidden></div>
     <div class="empresas" id="sim-empresas"></div>
 
-    <h3 style="margin-top: var(--espaco-6)">The rules to get the tax exemption</h3>
+    <h3 style="margin-top: var(--espaco-6)">The rules to get the incentive</h3>
     <ul class="regras" id="sim-regras" aria-live="polite"></ul>
     <p class="selo-incentivo" id="sim-incentivo"></p>
-    <p class="pequeno">There is a fourth rule: the money stays invested for at least 5 years. That is why the shortest period in the simulation is 5 years.</p>
+    <p class="pequeno">The simulator already meets the other two rules: the money stays at least 5 years, and companies with a conflict of interest leave the list on their own.</p>
   </section>
 
   <section class="passo" id="passo-3" aria-labelledby="t-passo-3">
     <span class="passo-num">Step 3 of 3</span>
     <h2 id="t-passo-3">What could happen</h2>
-    <p>Each scenario shows what the money would become at the end of the period, after tax. The CDI (Brazil's interbank rate) is the benchmark for money left in the bank with no risk.</p>
+    <p>Each line shows the profit at the end of the period, after tax. On top, the FSRI with your portfolio. Below, the same money in other investments. The CDI is Brazil's interbank rate.</p>
     <div class="ajustes">
       <div class="campo">
         <label for="sim-prazo">Period</label>
@@ -127,12 +127,17 @@
         <input id="sim-cdi" inputmode="decimal" autocomplete="off">
         <p class="pequeno">13.65% is the CDI with the Selic policy rate at 13.75% (Central Bank, Nov 4, 2026). You can change it.</p>
       </div>
+      <div class="campo" id="campo-margem">
+        <label for="sim-margem">Loan interest: CDI plus (points)</label>
+        <input id="sim-margem" inputmode="decimal" autocomplete="off">
+        <p class="pequeno">Zero is the best case: the bank charges only the CDI. In practice there is a margin. Enter your bank's.</p>
+      </div>
     </div>
     <div id="sim-resultado" aria-live="polite"></div>
     <div class="leitura-resultado">
       <h3>What this result means</h3>
-      <p>In the average scenario, the FSRI ends up close to the CDI. The difference comes from the tax exemption, not from a higher return.</p>
-      <p>For people who pay little tax, fixed income is still the right choice. The advantage shows up for people earning more than R$ 600,000 a year, who pay the minimum tax of up to 10% on their income (Law 15,270 of 2025). For them, the comparison is FSRI versus paying the tax.</p>
+      <p>In the average scenario, the FSRI earns a little more than the CDI. Through the large door, the loan interest eats almost all of that difference, and the minimum-tax discount is what makes the math work.</p>
+      <p>LCA notes and infrastructure bonds are already tax-exempt and left out of the minimum tax (Law 15,270 of 2025). That's why the FSRI gives the discount: without it, wealthy people would stay in LCA notes. For people who pay little tax, fixed income is still the right choice.</p>
     </div>
 
     <div class="compartilhar" id="sim-compartilhar" hidden>
@@ -151,17 +156,21 @@
 
   <section class="passo" aria-labelledby="t-conta">
     <h2 id="t-conta">How the math works</h2>
-    <p>The average scenario uses the average of 387 Brazilian funds that buy stakes in companies: 12.7% a year, after fees. Between the best and the worst funds, the gap was 25.3 points a year. The bad and good scenarios sit half that gap below and above the average: about 0% and 25% a year.</p>
-    <p>The same rate applies to the whole portfolio, because the study does not split funds by the FSRI tiers. If the rules are not met, the profit pays 15% tax, like the CDI after two years. With the rules met, the profit is tax-free.</p>
+    <p>The 387 Brazilian funds that buy stakes in companies ended, on average, with 1.1 times what the CDI would pay in the same time. The average scenario does the same with the CDI you choose. Between the best and the worst funds, the gap was 25.3 points a year. The bad and good scenarios sit half that gap below and above the average.</p>
+    <p>The same rate applies to the whole portfolio, because the study does not split funds by the FSRI tiers. If the rules are not met, the profit pays 15% tax, like a bank CD after two years. With the rules met, the profit is tax-free and, through the large door, the investment takes 2% of its value a year off the minimum tax, for 5 years.</p>
+    <p>Through the large door, loan interest grows with the CDI plus the margin you enter, and comes out of every line. LCA notes assume 85% of the CDI. Stocks and real-estate funds repeat the Ibovespa (+35.4%) and the IFIX (+31.5%) from 2021 to 2025.</p>
     <p>Insurance only pays if the company really goes bankrupt, confirmed by an audit. It does not cover profit that never came.</p>
     <h3>Sources</h3>
     <ul class="fontes">
       <li><a href="https://spectrainvest.com/en/estudo/performance-of-brazilian-private-equity-and-venture-capital-funds-1994-2022-2/">Insper, Spectra and ABVCAP, Performance of Brazilian Private Equity and Venture Capital Funds (1994-2022), 2023</a></li>
       <li><a href="https://www.bcb.gov.br/controleinflacao/historicotaxasjuros">Central Bank of Brazil, Selic rate history (Copom meeting of Nov 4, 2026)</a></li>
       <li><a href="https://gabriel-zucman.eu/files/report-g20.pdf">Gabriel Zucman, report to the G20 on minimum taxation of billionaires (2024)</a></li>
+      <li><a href="https://www.montebravo.com.br/wp-content/uploads/2025/12/Tabela-Periodica-Monte-Bravo-Janeiro-2026.pdf">Monte Bravo, periodic table of returns with Bloomberg data through 12/31/2025 (Ibovespa and IFIX, B3 indexes, from 2021 to 2025)</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/lei/l11.033.htm">Law 11,033 of 2004 (tax on fixed income and stocks; exemption of LCI, LCA and real-estate funds)</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12431.htm">Law 12,431 of 2011 (exemption of infrastructure bonds)</a></li>
       <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/L15270.htm">Law 15,270 of 2025 (minimum tax on incomes above R$ 600,000 a year)</a></li>
       <li><a href="https://conteudo.cvm.gov.br/export/sites/cvm/legislacao/resolucoes/anexos/001/resol088.pdf">CVM, Resolution 88, 2022 (online startup investing)</a></li>
-      <li><a href="/en/projetos/reindustrializacao/">The FSRI proposal: tiers, insurance, exemption and conflict of interest</a></li>
+      <li><a href="/en/projetos/reindustrializacao/">The FSRI proposal: tiers, insurance, tax discount, exemption and conflict of interest</a></li>
     </ul>
   </section>
 </main>

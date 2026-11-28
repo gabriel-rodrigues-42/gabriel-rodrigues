@@ -116,3 +116,10 @@ h3 { color: var(--azul); margin: 0 0 var(--espaco-2); }
 .comp.fsri { background: var(--verde-claro); }
 .comp.fsri b { color: var(--verde-escuro); }
 .campo[hidden] { display: none; }
+/* Comparativo de lucro */
+#sim-resultado .grupo { margin: var(--espaco-5) 0 0; font-size: var(--tamanho-3); color: var(--azul); }
+#sim-resultado > p.pequeno:first-child { margin: var(--espaco-3) 0 0; }
+.cenario.outra .barra > div { background: var(--azul-medio); }
+.cenario.negativo .barra > div { background: var(--amarelo-escuro); }
+.cenario.negativo { background: var(--amarelo-claro); }
+.nota-conta { margin: var(--espaco-3) 0 0; }
