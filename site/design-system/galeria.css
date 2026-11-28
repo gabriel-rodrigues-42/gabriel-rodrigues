@@ -112,3 +112,19 @@ gr-propostas { display: block; }
   .slot > a:hover, .slot:nth-child(even) > a:hover, .slot > a:hover .slot-palco img { transform: none; }
   .slot-status.no-ar::before { animation: none; }
 }
+
+/* Ordem da galeria em /projetos/ (ordem="apoios"): mais apoiadas ou em destaque. */
+.galeria-ordem { display: flex; flex-wrap: wrap; gap: var(--espaco-2); margin: 0 0 var(--espaco-4); }
+.galeria-ordem-opcao {
+  font: inherit; font-size: var(--tamanho-2); font-weight: var(--peso-forte); cursor: pointer; min-height: 40px;
+  padding: 6px 16px; border-radius: var(--forma-pilula); background: var(--branco); color: var(--azul); border: 2px solid var(--azul-claro);
+}
+.galeria-ordem-opcao[aria-pressed="true"] { background: var(--azul); color: var(--branco); border-color: var(--azul); }
+.galeria-ordem-opcao:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
+/* Número de apoios no canto de baixo da miniatura (só a partir de 10). */
+.slot-apoios {
+  position: absolute; left: var(--espaco-2); bottom: var(--espaco-2); display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px 2px 6px; border-radius: var(--forma-pilula); background: var(--branco); color: var(--verde-escuro);
+  font-size: 12px; font-weight: var(--peso-forte);
+}
+.slot-apoios svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
