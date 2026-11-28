@@ -391,6 +391,28 @@
     }
   }
 
+  // Carimbo (escolhido pelo Gabriel em 2026-11-28): só no voto feito agora, não ao reabrir a página.
+  // O selo "Seu voto" cai na borda do cartão como um carimbo e o contorno amarelo se fecha. Sem animação com prefers-reduced-motion.
+  const calmo = matchMedia("(prefers-reduced-motion: reduce)");
+  function apertar(botao) {
+    if (!calmo.matches && botao) botao.animate([{ transform: "scale(1)" }, { transform: "scale(.92)" }, { transform: "scale(1)" }], { duration: 180, easing: "ease-out" });
+  }
+  function carimbar(escolha) {
+    const cartao = cartoes.find((c) => c.dataset.opcao === escolha);
+    if (calmo.matches || !cartao) return;
+    const amarelo = getComputedStyle(document.documentElement).getPropertyValue("--amarelo").trim();
+    cartao.animate([{ outlineOffset: "16px", outlineColor: "transparent" }, { outlineOffset: "2px", outlineColor: amarelo }], { duration: 380, easing: "cubic-bezier(.2,.8,.2,1)" });
+    cartao.querySelector(".voto-seu").animate(
+      [
+        { transform: "translateY(-50%) scale(2.4) rotate(-14deg)", opacity: 0 },
+        { transform: "translateY(-50%) scale(.9) rotate(3deg)", opacity: 1, offset: 0.7 },
+        { transform: "translateY(-50%) scale(1) rotate(0)", opacity: 1 },
+      ],
+      { duration: 440, delay: 140, easing: "cubic-bezier(.3,.7,.3,1)", fill: "backwards" }
+    );
+    cartao.animate([{ transform: "none" }, { transform: "translateY(3px)" }, { transform: "none" }], { duration: 220, delay: 420 });
+  }
+
   // Voltou de um envio sem JavaScript (?lema=entrega) ou já votou neste aparelho: mostra o resultado.
   const vindo = new URLSearchParams(location.search).get("lema");
   if (["entrega", "conversa"].includes(vindo)) guardar(vindo);
@@ -400,6 +422,7 @@
   formLema.addEventListener("submit", (e) => {
     e.preventDefault();
     const opcao = e.submitter?.value || new FormData(formLema).get("opcao");
+    apertar(e.submitter);
     const envio = votar(opcao);
     if (e.agentInvoked && typeof e.respondWith === "function") e.respondWith(envio);
   });
@@ -412,7 +435,7 @@
     try {
       const r = await fetch(formLema.action, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ opcao }) });
       const corpo = await r.json().catch(() => ({}));
-      if (r.ok && corpo.ok) { guardar(opcao); mostrarResultado(corpo.pct, opcao); return (respostaLema.textContent = "Thank you! Your vote was counted."); }
+      if (r.ok && corpo.ok) { guardar(opcao); mostrarResultado(corpo.pct, opcao); carimbar(opcao); return (respostaLema.textContent = "Thank you! Your vote was counted."); }
       return (respostaLema.textContent = r.status === 503 ? "Voting is still being set up. Come back in a few days." : corpo.erro || "I couldn't save your vote. Please try again.");
     } catch {
       return (respostaLema.textContent = "No connection. Please try again.");
