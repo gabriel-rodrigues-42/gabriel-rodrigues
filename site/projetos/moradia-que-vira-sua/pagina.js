@@ -209,8 +209,8 @@
   const form = document.getElementById("calculadora");
   if (form) {
     const fmt = new Intl.NumberFormat(EN ? "en-US" : "pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
-    // Faixas de renda urbana da Lei 14.620/2023, art. 5º (valores da lei; o ministério atualiza todo ano).
-    const pct = (renda) => renda <= 2640 ? .10 : renda <= 4400 ? .15 : renda <= 8000 ? .20 : .30;
+    // Faixas urbanas do Minha Casa, Minha Vida, Portaria MCID 333, de 30/03/2026: até R$ 3.200, 5.000 e 9.600.
+    const pct = (renda) => renda <= 3200 ? .10 : renda <= 5000 ? .15 : renda <= 9600 ? .20 : .30;
     const num = (campo) => Number(String(campo.value).replace(/\D/g, "")) || 0;
     const fmtNum = new Intl.NumberFormat(EN ? "en-US" : "pt-BR");
     // Formata os campos de dinheiro enquanto a pessoa digita: "R$ 20.000".
