@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Simulador de aporte do FSRI · Gabriel Rodrigues</title>
-<meta name="description" content="Monte uma carteira de empresas fictícias com as regras do FSRI e compare cenários ruim, médio e bom com o CDI, usando dados de fundos brasileiros reais.">
+<meta name="description" content="Monte uma carteira de empresas fictícias com as regras do FSRI e compare o lucro, já sem imposto, com CDB, LCA, ações e fundo imobiliário, usando dados de fundos brasileiros reais.">
 <link rel="canonical" href="https://gabriel-rodrigues.com/projetos/reindustrializacao/simulador/">
 <link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/projetos/reindustrializacao/simulador/">
 <link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/projetos/reindustrializacao/simulador/">
@@ -21,14 +21,14 @@
 <meta property="og:site_name" content="Gabriel Rodrigues">
 <meta property="og:url" content="https://gabriel-rodrigues.com/projetos/reindustrializacao/simulador/">
 <meta property="og:title" content="Simulador de aporte do FSRI · Gabriel Rodrigues">
-<meta property="og:description" content="Monte uma carteira de empresas fictícias com as regras do FSRI e compare cenários ruim, médio e bom com o CDI, usando dados de fundos brasileiros reais.">
+<meta property="og:description" content="Monte uma carteira de empresas fictícias com as regras do FSRI e compare o lucro, já sem imposto, com CDB, LCA, ações e fundo imobiliário, usando dados de fundos brasileiros reais.">
 <meta property="og:image" content="https://gabriel-rodrigues.com/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Gabriel Rodrigues, engenharia de software a serviço do Brasil">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Simulador de aporte do FSRI · Gabriel Rodrigues">
-<meta name="twitter:description" content="Monte uma carteira de empresas fictícias com as regras do FSRI e compare cenários ruim, médio e bom com o CDI, usando dados de fundos brasileiros reais.">
+<meta name="twitter:description" content="Monte uma carteira de empresas fictícias com as regras do FSRI e compare o lucro, já sem imposto, com CDB, LCA, ações e fundo imobiliário, usando dados de fundos brasileiros reais.">
 <meta name="twitter:image" content="https://gabriel-rodrigues.com/og.jpg">
 <link rel="stylesheet" href="/design-system/tokens.css">
 <link rel="stylesheet" href="/design-system/componentes.css">
@@ -53,7 +53,7 @@
   <div class="aviso-risco">
     <p><strong>As empresas são inventadas.</strong> O FSRI ainda não existe. Os nomes, os setores e os números de cada cartão servem só para mostrar as regras.</p>
     <p>Os cenários usam o que fundos brasileiros parecidos renderam de 1994 a 2022. Não é promessa de retorno.</p>
-    <p><strong>A vantagem do FSRI está no imposto, não no retorno.</strong> Ele foi pensado para quem tem renda muito alta e pagaria muito imposto. Para quem paga pouco imposto, a renda fixa rende parecido e não tem risco.</p>
+    <p><strong>A vantagem do FSRI está no imposto, não no retorno.</strong> Para quem tem renda muito alta, o aporte abate parte do imposto de renda. Para quem paga pouco imposto, a renda fixa rende parecido e não tem risco.</p>
   </div>
 
   <div class="passos">
@@ -105,34 +105,73 @@
     </div>
     <p class="status" id="sim-status-carteira" aria-live="polite"></p>
     <div class="recebida" id="sim-recebida" hidden></div>
-    <div class="empresas" id="sim-empresas"></div>
+    <fieldset class="segmento abas-faixa">
+      <legend class="visualmente-oculto">Ver as empresas de qual faixa?</legend>
+      <div class="segmento-opcoes" id="sim-faixas"></div>
+    </fieldset>
+    <div class="faixa-topo">
+      <p class="faixa-info" id="sim-faixa-info" aria-live="polite"></p>
+      <div class="carrossel-nav">
+        <button type="button" class="seta" data-dir="-1" aria-label="Empresa anterior"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <span id="sim-posicao" aria-hidden="true"></span>
+        <button type="button" class="seta" data-dir="1" aria-label="Próxima empresa"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+    <div class="carrossel">
+      <div class="empresas" id="sim-empresas"></div>
+    </div>
 
-    <h3 style="margin-top: var(--espaco-6)">As regras para ganhar a isenção</h3>
+    <h3 style="margin-top: var(--espaco-6)">As regras para ganhar o incentivo</h3>
     <ul class="regras" id="sim-regras" aria-live="polite"></ul>
     <p class="selo-incentivo" id="sim-incentivo"></p>
-    <p class="pequeno">Há ainda uma quarta regra: o dinheiro fica investido pelo menos 5 anos. Por isso o prazo mínimo da simulação é de 5 anos.</p>
+    <p class="pequeno">As outras duas regras o simulador já cumpre: o dinheiro fica pelo menos 5 anos, e as empresas com conflito de interesse saem da lista sozinhas.</p>
   </section>
 
   <section class="passo" id="passo-3" aria-labelledby="t-passo-3">
     <span class="passo-num">Passo 3 de 3</span>
     <h2 id="t-passo-3">O que poderia acontecer</h2>
-    <p>Cada cenário mostra quanto o dinheiro viraria no fim do prazo, já sem imposto. O CDI é a referência de quem deixa o dinheiro no banco, sem risco.</p>
+    <p>Cada linha mostra quanto sobra no fim do prazo, já sem imposto. Em cima, o FSRI com a sua carteira. Embaixo, o mesmo dinheiro em outras aplicações.</p>
     <div class="ajustes">
-      <div class="campo">
-        <label for="sim-prazo">Prazo</label>
-        <select id="sim-prazo"><option value="5">5 anos</option><option value="10" selected>10 anos</option><option value="15">15 anos</option></select>
-      </div>
-      <div class="campo">
-        <label for="sim-cdi">CDI ao ano (%)</label>
+      <fieldset class="segmento">
+        <legend>Prazo</legend>
+        <div class="segmento-opcoes">
+          <label><input type="radio" name="prazo" value="5">5 anos</label>
+          <label><input type="radio" name="prazo" value="10" checked>10 anos</label>
+          <label><input type="radio" name="prazo" value="15">15 anos</label>
+        </div>
+      </fieldset>
+      <fieldset class="segmento">
+        <legend>Juros nesse prazo</legend>
+        <div class="segmento-opcoes">
+          <label><input type="radio" name="juros" value="hoje" checked>Como hoje</label>
+          <label><input type="radio" name="juros" value="focus">Caindo</label>
+        </div>
+      </fieldset>
+      <div class="campo" id="campo-cdi">
+        <label for="sim-cdi">CDI hoje (% ao ano)</label>
         <input id="sim-cdi" inputmode="decimal" autocomplete="off">
-        <p class="pequeno">13,65% é o CDI com a Selic de 13,75% (Copom, 4/11/2026). Pode trocar.</p>
+        <p class="pequeno">Com a Selic de 13,75% (Copom, 4/11/2026). Pode trocar.</p>
+      </div>
+      <div class="campo caminho-juros" id="campo-focus" hidden>
+        <p class="rotulo">Selic que o mercado espera</p>
+        <ol class="degraus">
+          <li><small>Fim de 2027</small><b>13%</b></li>
+          <li><small>2028</small><b>11%</b></li>
+          <li><small>2029 em diante</small><b>10,5%</b></li>
+        </ol>
+        <p class="pequeno">Boletim Focus, Banco Central, novembro de 2026. É projeção, não promessa.</p>
+      </div>
+      <div class="campo" id="campo-margem">
+        <label for="sim-margem">Margem do banco (pontos acima do CDI)</label>
+        <input id="sim-margem" inputmode="decimal" autocomplete="off">
+        <p class="pequeno">Zero é o melhor caso. Ponha a do seu banco.</p>
       </div>
     </div>
     <div id="sim-resultado" aria-live="polite"></div>
     <div class="leitura-resultado">
       <h3>O que esse resultado quer dizer</h3>
-      <p>No cenário médio, o FSRI fica perto do CDI. A diferença vem da isenção, não de um retorno maior.</p>
-      <p>Para quem paga pouco imposto, a renda fixa continua sendo a escolha certa. A vantagem aparece para quem ganha mais de R$ 600 mil por ano e paga o imposto mínimo de até 10% sobre a renda (Lei 15.270, de 2025). Para essa pessoa, a comparação é FSRI contra pagar o imposto.</p>
+      <p>No cenário médio, o FSRI rende um pouco mais que o CDI. Na porta grande, os juros do empréstimo comem quase toda essa diferença, e o desconto no imposto de renda pode fazer a conta fechar.</p>
+      <p>A LCA e a debênture incentivada já são isentas e ficam fora do imposto mínimo (Lei 15.270, de 2025). Por isso o FSRI dá o desconto no imposto de renda: sem ele, quem tem muito dinheiro ficaria na LCA. Para quem paga pouco imposto, a renda fixa continua sendo a escolha certa.</p>
     </div>
 
     <div class="compartilhar" id="sim-compartilhar" hidden>
@@ -151,17 +190,22 @@
 
   <section class="passo" aria-labelledby="t-conta">
     <h2 id="t-conta">Como a conta é feita</h2>
-    <p>O cenário médio usa a média de 387 fundos brasileiros que compram parte de empresas: 12,7% ao ano, já sem as taxas. Entre os melhores e os piores fundos, a diferença foi de 25,3 pontos por ano. O ruim e o bom ficam a meia distância da média para cada lado: cerca de 0% e 25% ao ano.</p>
-    <p>A mesma taxa vale para a carteira toda, porque o estudo não separa os fundos pelas faixas do FSRI. Sem as regras cumpridas, o lucro paga 15% de imposto, como no CDI depois de dois anos. Com as regras, o lucro fica livre de imposto.</p>
+    <p>Os 387 fundos brasileiros que compram parte de empresas terminaram, na média, com 1,1 vez o que o CDI daria no mesmo tempo. O cenário médio faz o mesmo com o CDI que você escolher, em qualquer prazo. É uma simplificação: o estudo mede a vida inteira de cada fundo. Entre o quarto de fundos de cima e o de baixo, a diferença foi de 25,3 pontos por ano. O ruim e o bom ficam a meia distância da média para cada lado. O ruim não é o pior caso: o pior é perder tudo, e está no quadro "E se todas as empresas quebrarem?".</p>
+    <p>A mesma taxa vale para a carteira toda, porque o estudo não separa os fundos pelas faixas do FSRI. Sem as regras cumpridas, o lucro paga 15% de imposto, como no CDB depois de dois anos. Com as regras, o lucro fica livre de imposto e, na porta grande, o aporte abate 2% do valor por ano do imposto de renda, por 5 anos, até metade do imposto do ano.</p>
+    <p>Na porta grande, os juros do empréstimo crescem com o CDI mais a margem que você puser, e saem de todas as linhas. A LCA supõe 85% do CDI. Com os juros "Caindo", o CDI de cada ano segue a Selic projetada no Boletim Focus menos 0,10 ponto, e fica em 10,4% depois de 2029. O retorno das empresas do FSRI continua o do CDI de hoje: assim a diferença mostra só o efeito dos juros mais baixos. Ações e fundo imobiliário repetem o Ibovespa (+35,4%) e o IFIX (+31,5%) de 2021 a 2025.</p>
     <p>O seguro só entra se a empresa falir de verdade, com auditoria. Ele não cobre lucro que não veio.</p>
     <h3>Fontes</h3>
     <ul class="fontes">
       <li><a href="https://spectrainvest.com/en/estudo/performance-of-brazilian-private-equity-and-venture-capital-funds-1994-2022-2/">Insper, Spectra e ABVCAP, Performance of Brazilian Private Equity and Venture Capital Funds (1994-2022), 2023</a></li>
       <li><a href="https://www.bcb.gov.br/controleinflacao/historicotaxasjuros">Banco Central, histórico da taxa Selic (Copom de 4/11/2026)</a></li>
+      <li><a href="https://www.bcb.gov.br/publicacoes/focus">Banco Central, Boletim Focus (novembro de 2026): mediana da Selic de 13% no fim de 2027, 11% em 2028 e 10,5% em 2029</a></li>
       <li><a href="https://gabriel-zucman.eu/files/report-g20.pdf">Gabriel Zucman, relatório ao G20 sobre tributação mínima de bilionários (2024)</a></li>
+      <li><a href="https://www.montebravo.com.br/wp-content/uploads/2025/12/Tabela-Periodica-Monte-Bravo-Janeiro-2026.pdf">Monte Bravo, tabela periódica de retornos com dados da Bloomberg até 31/12/2025 (Ibovespa e IFIX, índices da B3, de 2021 a 2025)</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/lei/l11.033.htm">Lei 11.033, de 2004 (imposto sobre renda fixa e bolsa; isenção de LCI, LCA e fundo imobiliário)</a></li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12431.htm">Lei 12.431, de 2011 (isenção das debêntures de infraestrutura)</a></li>
       <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/L15270.htm">Lei 15.270, de 2025 (imposto mínimo sobre rendas acima de R$ 600 mil por ano)</a></li>
       <li><a href="https://conteudo.cvm.gov.br/export/sites/cvm/legislacao/resolucoes/anexos/001/resol088.pdf">CVM, Resolução 88, de 2022 (investimento em startups pela internet)</a></li>
-      <li><a href="/projetos/reindustrializacao/">A proposta do FSRI: faixas, seguro, isenção e conflito de interesse</a></li>
+      <li><a href="/projetos/reindustrializacao/">A proposta do FSRI: faixas, seguro, desconto no imposto, isenção e conflito de interesse</a></li>
     </ul>
   </section>
 </main>

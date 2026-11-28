@@ -88,6 +88,8 @@
   .duas .contra { background: var(--areia); box-shadow: none; }
   .duas .pro { background: var(--verde-claro); box-shadow: none; }
   .duas ul { margin: var(--espaco-2) 0 0; padding-left: 1.1em; }
+  .futuros { margin-bottom: var(--espaco-4); }
+  .futuros li + li { margin-top: var(--espaco-2); }
   @media (max-width: 560px) { .duas { grid-template-columns: 1fr; } }
 
   /* Fluxo do dinheiro */
@@ -128,16 +130,29 @@
   .legenda-barra .l-privado::before { background: var(--azul); }
   .legenda-barra .l-estado::before { background: var(--amarelo); }
 
-  /* Haltere (barbell) */
-  .haltere { display: grid; grid-template-columns: 1fr 2fr 1fr; align-items: center; margin: var(--espaco-5) 0 var(--espaco-3); }
-  .peso { aspect-ratio: 1; display: grid; place-items: center; text-align: center; padding: var(--espaco-2); font-weight: var(--peso-forte); font-size: var(--tamanho-2); line-height: 1.2; box-shadow: var(--sombra-clay); }
-  .peso.rapido { background: var(--verde-fundo); color: var(--branco); border-radius: var(--forma-bolha-1); }
-  .peso.longo { background: var(--azul); color: var(--branco); border-radius: var(--forma-bolha-3); }
-  .barra-haltere { height: 14px; background: var(--amarelo); border-radius: var(--forma-pilula); box-shadow: var(--sombra-clay); }
-  .haltere-texto { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-4); font-size: var(--tamanho-2); }
-  .haltere-texto p:last-child { text-align: right; }
-  @media (max-width: 520px) { .haltere-texto { grid-template-columns: 1fr; } .haltere-texto p:last-child { text-align: left; } }
-
+  /* Regras numa olhada só */
+  .regras { margin: var(--espaco-5) 0; padding: var(--espaco-5); background: var(--verde-claro); box-shadow: none; }
+  .regras h3 { margin-top: 0; }
+  .regras > p { margin: var(--espaco-4) 0 0; }
+  .regras-colunas { display: grid; gap: var(--espaco-4); }
+  .regras-colunas strong { display: block; color: var(--azul); }
+  .regras-colunas ul { margin: var(--espaco-2) 0 0; padding-left: 1.1em; }
+  .regras-colunas li + li { margin-top: var(--espaco-2); }
+  .regras-colunas b { color: var(--verde-escuro); }
+  @media (min-width: 720px) { .regras-colunas { grid-template-columns: 1fr 1fr; } }
+  /* Onde o dinheiro grande fica hoje */
+  .aplicacoes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--espaco-3); margin: var(--espaco-4) 0 var(--espaco-3); }
+  .aplicacao { padding: var(--espaco-4); }
+  .aplicacao > strong { display: block; color: var(--azul); font-size: var(--tamanho-3); line-height: 1.25; }
+  .aplicacao .risco { display: inline-block; margin: var(--espaco-2) 0 var(--espaco-3); font-size: var(--tamanho-1); font-weight: var(--peso-forte); padding: 3px 10px; border-radius: var(--forma-pilula); }
+  .risco.baixo { background: var(--verde-claro); color: var(--verde-escuro); }
+  .risco.medio { background: var(--amarelo-claro); color: var(--texto); }
+  .risco.alto { background: var(--areia); color: var(--texto); }
+  .aplicacao dl { margin: 0; font-size: var(--tamanho-2); }
+  .aplicacao dt { font-size: var(--tamanho-1); font-weight: var(--peso-forte); text-transform: uppercase; letter-spacing: .05em; color: var(--texto-suave); margin-top: var(--espaco-2); }
+  .aplicacao dd { margin: 0; }
+  .aplicacao dd b { color: var(--verde-escuro); font-size: var(--tamanho-3); }
+  .aplicacao.fsri { outline: 3px solid var(--amarelo); }
   /* Travas */
   .travas { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--espaco-4); margin-top: var(--espaco-4); }
   .trava { padding: var(--espaco-4) var(--espaco-5); }
@@ -242,12 +257,13 @@
   <section class="capitulo revelar">
     <span class="ato">Capítulo 2 · O segredo de quem tem muito</span>
     <h2>Compra, pega emprestado, nunca vende</h2>
-    <p>Quem tem um patrimônio muito grande quase nunca vende as próprias ações. Vender gera imposto sobre ganho de capital. Então a estratégia é outra. Nos Estados Unidos ela tem até nome: <em>Buy, Borrow, Die</em>, ou compra, pega emprestado e nunca vende.</p>
+    <p>Quem tem um patrimônio muito grande quase nunca vende as próprias ações. Vender gera imposto sobre ganho de capital. Então a estratégia é outra. Nos Estados Unidos ela tem até nome: <em>Buy, Borrow, Die</em>: compra, pega emprestado e deixa de herança.</p>
     <div class="passos">
       <div class="cartao passo"><div class="bola">1</div><div><strong>Compra</strong><em>Buy</em>Junta ações e participações em empresas.</div></div>
       <div class="cartao passo"><div class="bola">2</div><div><strong>Pega emprestado</strong><em>Borrow</em>Usa essas ações como garantia para tomar crédito no banco.</div></div>
       <div class="cartao passo"><div class="bola">3</div><div><strong>Nunca vende</strong><em>Die</em>Vive desse crédito. O patrimônio fica parado e quase não paga imposto.</div></div>
     </div>
+    <p>Desde 2026, quem ganha mais de R$ 600 mil por ano paga um imposto mínimo sobre a renda, que chega a 10% a partir de R$ 1,2 milhão (Lei 15.270, de 2025). Mas ficam fora dessa conta a LCI e a LCA (títulos de banco ligados a imóvel e agro), a debênture incentivada (título de obra de infraestrutura) e o fundo imobiliário.</p>
     <p>A reação mais comum é dizer: então vamos taxar as grandes fortunas. O problema é que essa ideia costuma esbarrar em duas paredes.</p>
     <div class="duas">
       <div class="cartao contra">
@@ -273,20 +289,22 @@
   <section class="capitulo revelar" style="margin-top: 0">
     <span class="ato">Capítulo 3 · A virada</span>
     <h2>O caminho do dinheiro</h2>
-    <p>O investidor continua fazendo o que já faz: pega crédito dando as ações como garantia. A diferença está no destino desse dinheiro.</p>
+    <p>O investidor continua pegando crédito com as ações como garantia. Só muda o destino do dinheiro.</p>
     <ol class="fluxo">
-      <li><span class="n">1</span><div><strong>O crédito sai do banco</strong>O investidor de alta renda toma uma linha de crédito privada, com as próprias ações ou participações como garantia.</div></li>
-      <li><span class="n">2</span><div><strong>Vai para projetos habilitados</strong>Em vez de ficar parado, o dinheiro é aportado em projetos aprovados pelo FSRI.</div></li>
-      <li><span class="n">3</span><div><strong>O imposto vira prêmio por produtividade</strong>Se o capital ficar investido por pelo menos 5 anos, o investidor ganha isenção ou desconto progressivo no imposto sobre o lucro quando vender as ações e sobre os lucros que a empresa distribuir. Sem investimento produtivo real no país, não tem benefício.</div></li>
-      <li><span class="n">4</span><div><strong>A empresa cresce e abre capital na B3</strong>Quando amadurece, a empresa vai para a bolsa brasileira. O investidor vende a parte dele com isenção, quita o empréstimo original e fica com o lucro.</div></li>
+      <li><span class="n">1</span><div><strong>O crédito sai do banco</strong>Com as ações do investidor como garantia.</div></li>
+      <li><span class="n">2</span><div><strong>Vai para empresas aprovadas</strong>Projetos escolhidos numa banca pública do FSRI.</div></li>
+      <li><span class="n">3</span><div><strong>Parte do imposto vira investimento</strong>Por 5 anos, o aporte abate parte do imposto de renda. Depois, o lucro sai sem imposto.</div></li>
+      <li><span class="n">4</span><div><strong>O investidor sai</strong>A empresa abre capital na bolsa (B3) ou é vendida. Ele vende a parte dele e quita o empréstimo.</div></li>
     </ol>
+
+    <p>As faixas de risco e as regras do incentivo vêm no próximo capítulo.</p>
   </section>
 
   <!-- ATO 4 -->
   <section class="capitulo revelar">
     <span class="ato">Capítulo 4 · Risco do tamanho certo</span>
     <h2>Três faixas, do aplicativo ao chip</h2>
-    <p>Ninguém sério coloca dinheiro num chip brasileiro que leva 15 anos para dar retorno. A não ser que o risco seja dividido. Por isso o Estado entra como garantidor de parte do prejuízo, pelo BNDES e pela Finep (o banco de desenvolvimento e a agência de inovação do governo federal) e com dinheiro do próprio fundo. Quanto maior o risco, maior a proteção.</p>
+    <p>Ninguém põe dinheiro num chip brasileiro que leva 15 anos para dar retorno, a não ser que o risco seja dividido. Por isso o Estado, pelo BNDES e pela Finep (o banco de desenvolvimento e a agência de inovação do governo federal), cobre parte do prejuízo. Quanto maior o risco, maior a proteção.</p>
 
     <div class="abas" role="tablist">
       <button class="aba" role="tab" id="aba-1" aria-controls="faixa-1" aria-selected="true" type="button">Faixa 1</button>
@@ -303,7 +321,7 @@
         <div class="fato"><small>Seguro estatal</small><b>até 20%</b></div>
         <div class="fato"><small>Parte do aporte</small><b>no mínimo 40%</b></div>
       </div>
-      <p class="pequeno suave">É a faixa que paga as contas: dá lucro rápido para o investidor pagar os juros e abater o empréstimo.</p>
+      <p class="pequeno suave">É a faixa que paga as contas: dá lucro cedo para pagar os juros do empréstimo.</p>
     </div>
     <div class="cartao faixa-painel" role="tabpanel" id="faixa-2" aria-labelledby="aba-2" hidden>
       <span class="selo azul">Médio risco · indústria de base</span>
@@ -325,13 +343,13 @@
         <div class="fato"><small>Seguro estatal</small><b>até 50%</b></div>
         <div class="fato"><small>Regra</small><b>obrigatória</b></div>
       </div>
-      <p class="pequeno suave">Ter pelo menos um projeto nesta faixa é obrigatório para destravar as isenções das Faixas 1 e 2.</p>
+      <p class="pequeno suave">Todo aporte incentivado precisa de pelo menos um projeto desta faixa.</p>
     </div>
 
     <div class="cartao trilha-moradia">
       <span class="selo">Fora das faixas · trilha própria</span>
       <h3>Moradia: risco baixo, prazo longo</h3>
-      <p>Prédio de moradia não cabe em nenhuma faixa. O risco é menor que o da Faixa 1: o prédio é a garantia, parte dos apartamentos paga preço de mercado e o governo paga a parte social. Mas o prédio leva anos para ficar pronto e décadas para se pagar. Funciona como um fundo imobiliário de renda, com risco menor e lucro limitado.</p>
+      <p>O risco é menor que o da Faixa 1, porque o prédio é a garantia e o governo paga a parte social. Mas leva décadas para se pagar, por isso tem trilha própria, com seguro menor.</p>
       <div class="fatos">
         <div class="fato"><small>Renda</small><b>desde o 2º ano</b></div>
         <div class="fato"><small>Seguro estatal</small><b>até 10%</b></div>
@@ -340,24 +358,32 @@
       <p class="pequeno suave">O aporte com moradia continua precisando de um projeto da Faixa 1 e um da Faixa 3. <a href="/projetos/moradia-que-vira-sua/">Veja a proposta de moradia</a>.</p>
     </div>
 
-    <h3 style="margin-top: var(--espaco-6)">Um projeto rápido e um demorado, juntos</h3>
-    <p>Cada aporte incentivado precisa ter pelo menos dois projetos de perfis opostos. Um que dá retorno rápido e um que leva anos.</p>
-    <div class="haltere" aria-hidden="true">
-      <div class="peso rapido">Faixa 1<br>rápido</div>
-      <div class="barra-haltere"></div>
-      <div class="peso longo">Faixa 3<br>longo</div>
+    <div class="cartao regras" id="regras">
+      <h3>As regras, numa olhada só</h3>
+      <div class="regras-colunas">
+        <div>
+          <strong>Para o aporte ganhar o incentivo</strong>
+          <ul>
+            <li>Um projeto da Faixa 1, de retorno rápido, e um da Faixa 3, de tecnologia de ponta.</li>
+            <li>No mínimo 40% do aporte na Faixa 1. Moradia não conta.</li>
+            <li>Pelo menos 5 anos investido.</li>
+            <li>Nada de concorrente ou fornecedor das suas empresas.</li>
+          </ul>
+        </div>
+        <div>
+          <strong>O que o investidor ganha</strong>
+          <ul>
+            <li><b>Desconto no imposto de renda:</b> 2% do aporte por ano, por 5 anos, até metade do imposto de renda do ano.</li>
+            <li><b>Lucro isento</b> depois de 5 anos, fora do imposto mínimo, como a LCA.</li>
+            <li><b>Seguro</b> de 20%, 35% ou 50% da perda, conforme a faixa, em falência auditada.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="pequeno suave">Quem sai antes de 5 anos devolve o desconto. As ações dadas como garantia seguem o imposto de sempre.</p>
     </div>
-    <div class="haltere-texto">
-      <p><strong>Paga as contas.</strong> O retorno rápido cobre os juros do empréstimo do investidor.</p>
-      <p><strong>Constrói o futuro.</strong> O dinheiro que pode esperar financia a indústria pesada e a tecnologia de ponta.</p>
-    </div>
-  </section>
 
-  <!-- ATO 5 -->
-  <section class="capitulo revelar">
-    <span class="ato">Capítulo 5 · Sem farra com dinheiro público</span>
-    <h2>Se o projeto quebrar, quem paga?</h2>
-    <p>Esta é a pergunta que todo mundo deveria fazer. A resposta da proposta: o investidor sempre paga a maior parte. Escolha uma faixa e veja como fica um prejuízo, a cada R$ 100 aportados, num projeto que faliu de verdade.</p>
+    <h3 class="subtitulo">Se o projeto quebrar, quem paga?</h3>
+    <p>O investidor sempre paga a maior parte. Escolha uma faixa e veja como fica o prejuízo, a cada R$ 100, num projeto que faliu de verdade.</p>
     <div class="cartao simulador">
       <div class="opcoes" role="radiogroup">
         <button class="opcao" type="button" role="radio" aria-checked="false" data-estado="20">Faixa 1</button>
@@ -373,149 +399,132 @@
     </div>
 
     <div class="travas">
-      <div class="cartao trava"><div class="cadeado"><svg><use href="#i-cadeado"/></svg></div><strong>O investidor perde primeiro</strong><p>Mesmo na faixa mais arriscada, o investidor arca com pelo menos metade do prejuízo. Quem arrisca o próprio dinheiro escolhe e fiscaliza melhor.</p></div>
-      <div class="cartao trava"><div class="cadeado"><svg><use href="#i-cadeado"/></svg></div><strong>Só falência auditada</strong><p>O seguro não cobre lucro que não veio. Só paga em liquidação comprovada por auditoria independente, sem sinal de má-fé ou desvio.</p></div>
-      <div class="cartao trava"><div class="cadeado"><svg><use href="#i-cadeado"/></svg></div><strong>Se der certo, o Estado ganha junto</strong><p>Nos projetos da Faixa 3 que fizerem sucesso, o Estado fica com 10% a 15%, em ações com direitos especiais ou numa parte das vendas, e esse dinheiro volta para o fundo de seguros.</p></div>
-      <div class="cartao trava"><div class="cadeado"><svg><use href="#i-cadeado"/></svg></div><strong>Nada de investir em si mesmo</strong><p>É proibido aplicar dinheiro incentivado em empresas ou setores onde o investidor já tem participação relevante ou controle. O fundo cria concorrentes, não monopólios.</p></div>
+      <div class="cartao trava"><div class="cadeado"><svg><use href="#i-cadeado"/></svg></div><strong>Só falência auditada</strong><p>O seguro só paga em falência comprovada por auditoria, sem má-fé. Não cobre lucro que não veio.</p></div>
+      <div class="cartao trava"><div class="cadeado"><svg><use href="#i-cadeado"/></svg></div><strong>Se der certo, o Estado ganha junto</strong><p>Nos projetos da Faixa 3 que derem certo, o Estado fica com 10% a 15%, que voltam para o fundo de seguros.</p></div>
     </div>
   </section>
 
   <section class="capitulo revelar" id="retorno">
-    <span class="ato">Capítulo 6 · A conta de quem investe</span>
-    <h2>Quanto o investidor ganha?</h2>
-    <p>Ninguém sabe ainda. O FSRI não existe, então não tem retorno medido. Qualquer número que eu pusesse aqui seria chute.</p>
-    <p>O que dá para mostrar é como o dinheiro volta, quanto fundos parecidos já renderam no Brasil e o que acontece se tudo der errado.</p>
+    <span class="ato">Capítulo 5 · A conta de quem investe</span>
+    <h2>Quanto sobra para o investidor?</h2>
+    <p>O FSRI não existe, então qualquer número de retorno seria chute. O que dá para fazer é comparar com onde o dinheiro grande já está hoje.</p>
 
     <h3 class="subtitulo">Quem entra</h3>
-    <p>Em vez de só taxar as grandes fortunas, o FSRI dá a elas um motivo para investir aqui. Mas o fundo não depende delas. Se os grandes patrimônios não quiserem entrar, o dinheiro de muita gente junta faz o mesmo papel.</p>
     <div class="saidas">
-      <div class="cartao saida"><strong>Patrimônio grande</strong><p>Quem já pega crédito no banco dando ações como garantia. Não precisa vender investimentos nem tirar dinheiro do caixa: muda o destino de um empréstimo que já faria. Se o projeto quebrar, a dívida com o banco continua.</p></div>
-      <div class="cartao saida"><strong>Patrimônio menor</strong><p>Compra cotas do fundo com valor baixo. Para proteger quem não pode perder, tem teto por ano e aviso claro de risco antes de entrar.</p></div>
+      <div class="cartao saida"><strong>Patrimônio grande</strong><p>Já pega crédito dando ações como garantia e paga o imposto mínimo. Se o projeto quebrar, a dívida com o banco continua.</p></div>
+      <div class="cartao saida"><strong>Patrimônio menor</strong><p>Compra cotas com teto de R$ 20 mil por ano, como a CVM já faz com startups (Resolução CVM 88, de 2022).</p></div>
     </div>
-    <p>O teto pode seguir o que a CVM já usa para investimento em startups pela internet: até R$ 20 mil por ano para a maioria das pessoas (Resolução CVM 88, de 2022). Em startup, perder tudo é comum.</p>
-
-    <h3 class="subtitulo">Quem escolhe as empresas</h3>
-    <p>O próprio investidor monta a carteira dele, entre os projetos aprovados na banca pública. Antes, um sistema tira da lista dele tudo que tem conflito de interesse: concorrentes e fornecedores das empresas onde ele já tem participação. Assim ninguém usa o fundo para comprar o concorrente e virar monopólio.</p>
-    <p>Quem não quer escolher compra cotas de uma carteira pronta, montada por um gestor profissional e fiscalizada pela CVM. Nos dois casos, o investidor não manda na empresa. O fundo publica relatórios abertos: onde o dinheiro está, que meta cada empresa cumpriu e quanto vale cada parte.</p>
-
-    <h3 class="subtitulo">Como o dinheiro volta</h3>
-    <div class="saidas">
-      <div class="cartao saida"><strong>Lucro dividido</strong><p>Empresas da Faixa 1, que dão lucro mais cedo, dividem parte dele com os sócios. É o que paga os juros do empréstimo.</p></div>
-      <div class="cartao saida"><strong>Venda na bolsa</strong><p>A empresa abre capital na B3 e o investidor vende a parte dele.</p></div>
-      <div class="cartao saida"><strong>Venda para outra empresa</strong><p>Uma empresa maior compra a startup inteira, e cada sócio recebe a sua parte.</p></div>
-      <div class="cartao saida"><strong>Venda da cota</strong><p>O investidor vende a parte dele no fundo para outro investidor. Se sair antes de 5 anos, perde a isenção.</p></div>
-    </div>
+    <p>O investidor escolhe as empresas entre as aprovadas, ou compra uma carteira pronta, feita por um gestor fiscalizado pela CVM, que cuida do mercado de ações. Ele recebe quando a empresa divide lucro, abre capital na B3 ou é vendida.</p>
 
     <h3 class="subtitulo">Quanto fundos parecidos já renderam</h3>
-    <p>Insper, Spectra e a associação do setor (ABVCAP) mediram 387 fundos brasileiros que compram parte de empresas, de 1994 a 2022.</p>
+    <p>Insper, Spectra e ABVCAP mediram 387 fundos brasileiros que compram parte de empresas, de 1994 a 2022.</p>
     <div class="fatos elevados">
       <div class="fato"><small>Média por ano</small><b>12,7%</b><span class="pequeno">em reais, já sem as taxas</span></div>
-      <div class="fato"><small>Comparado ao CDI</small><b>1,1 vez</b><span class="pequeno">ganhou do CDI por pouco</span></div>
-      <div class="fato"><small>Melhores contra piores</small><b>25 pontos</b><span class="pequeno">de diferença por ano</span></div>
+      <div class="fato"><small>Comparado ao CDI</small><b>1,1 vez</b><span class="pequeno">a cada R$ 100 que o CDI daria, deram R$ 110</span></div>
+      <div class="fato"><small>Fundos bons contra ruins</small><b>25 pontos</b><span class="pequeno">por ano, entre o quarto de cima e o de baixo</span></div>
     </div>
-    <p>Na média, esse tipo de investimento ganhou do CDI por pouco. A diferença entre os fundos bons e os ruins foi enorme. Escolher bem quem administra pesa mais que o setor.</p>
-    <p>É por isso que o FSRI muda a conta com regras: o seguro corta parte da perda, a isenção aumenta o que sobra do lucro, e a mistura de um projeto rápido com um demorado paga os juros enquanto o demorado amadurece.</p>
+    <p>O CDI é quanto rende o dinheiro deixado no banco, sem risco. Na média, esses fundos ganharam dele por pouco. Escolher bem pesa mais que o setor.</p>
 
-    <h3 class="subtitulo">Para quem isso faz sentido</h3>
-    <p>Olhando só o retorno, o FSRI não ganha da renda fixa. Fundos parecidos renderam 1,1 vez o CDI, com muito mais risco.</p>
-    <p>Na porta grande, a conta fica ainda mais apertada. O dinheiro vem de um empréstimo, e o banco cobra juros que acompanham o CDI, porque é quanto o dinheiro custa para ele, mais uma margem. Esses juros comem quase toda a diferença.</p>
-    <p>A vantagem está no imposto. Desde 2026, quem ganha mais de R$ 600 mil por ano paga um imposto mínimo sobre a renda toda, que chega a 10% a partir de R$ 1,2 milhão. Dividendos acima de R$ 50 mil por mês de uma mesma empresa têm 10% retidos na fonte (Lei 15.270, de 2025).</p>
-    <p>Para essa pessoa, a comparação não é FSRI contra renda fixa. É FSRI contra pagar o imposto. No FSRI, o dinheiro vira fábrica aqui e, depois de 5 anos, o lucro sai isento.</p>
-    <p>Para quem paga pouco imposto, a renda fixa continua sendo a escolha certa: rende parecido e não tem risco de perder. A porta menor existe para quem quer apoiar uma empresa nacional e aceita esse risco.</p>
+    <h3 class="subtitulo">Onde o dinheiro grande fica hoje</h3>
+    <p>Risco, imposto e quanto R$ 100 do começo de 2021 viraram no fim de 2025, antes do imposto.</p>
+    <div class="aplicacoes">
+      <div class="cartao aplicacao"><strong>Tesouro Selic e CDB</strong><span class="risco baixo">Risco baixo</span><dl><dt>Imposto</dt><dd>15% sobre o lucro, depois de 2 anos</dd><dt>Imposto mínimo</dt><dd>Entra, mas os 15% já pagos descontam</dd><dt>2021 a 2025</dt><dd><b>R$ 168</b> (CDI)</dd></dl></div>
+      <div class="cartao aplicacao"><strong>LCI, LCA e debênture incentivada</strong><span class="risco baixo">Risco baixo a médio</span><dl><dt>Imposto</dt><dd>Isento</dd><dt>Imposto mínimo</dt><dd>Fica de fora</dd><dt>2021 a 2025</dt><dd>Perto do CDI, ou inflação mais juros, conforme o papel</dd></dl></div>
+      <div class="cartao aplicacao"><strong>Fundo imobiliário</strong><span class="risco medio">Risco médio</span><dl><dt>Imposto</dt><dd>Rendimento isento, se o fundo é da bolsa, tem pelo menos 100 cotistas e você tem menos de 10% das cotas. Na venda, 20% sobre o ganho</dd><dt>Imposto mínimo</dt><dd>Fica de fora</dd><dt>2021 a 2025</dt><dd><b>R$ 132</b> (IFIX)</dd></dl></div>
+      <div class="cartao aplicacao"><strong>Ações na bolsa</strong><span class="risco alto">Risco alto</span><dl><dt>Imposto</dt><dd>15% sobre o ganho na venda. Se uma empresa paga mais de R$ 50 mil de dividendo no mês, retém 10% do total</dd><dt>Imposto mínimo</dt><dd>Entra</dd><dt>2021 a 2025</dt><dd><b>R$ 135</b> (Ibovespa)</dd></dl></div>
+      <div class="cartao aplicacao"><strong>Fundos que compram parte de empresas</strong><span class="risco alto">Risco alto</span><dl><dt>Imposto</dt><dd>15% sobre o lucro</dd><dt>Imposto mínimo</dt><dd>Entra</dd><dt>Histórico</dt><dd><b>1,1 vez</b> o CDI (1994 a 2022)</dd></dl></div>
+      <div class="cartao aplicacao fsri"><strong>FSRI (proposta)</strong><span class="risco alto">Risco alto, com seguro</span><dl><dt>Imposto</dt><dd>Desconto no imposto de renda por 5 anos. Depois, lucro isento</dd><dt>Imposto mínimo</dt><dd>O lucro fica de fora depois de 5 anos</dd><dt>2021 a 2025</dt><dd>Ainda não existe</dd></dl></div>
+    </div>
+    <p class="pequeno suave">Inflação no período: 33% (IPCA, IBGE). Índices da B3 compilados pela Monte Bravo com dados da Bloomberg (janeiro de 2026). Impostos: Leis 11.033, de 2004, 12.431, de 2011, e 15.270, de 2025.</p>
+
+    <h3 class="subtitulo">Dois futuros possíveis</h3>
+    <p class="frases">Ninguém sabe o futuro. Mas dá para ver para onde cada caminho leva, com os números de hoje.</p>
+    <div class="duas futuros">
+      <div class="cartao contra">
+        <strong>Se nada mudar</strong>
+        <ul>
+          <li>A dívida do governo passou de 52% do PIB em 2013 para 83% em setembro de 2026 (Banco Central).</li>
+          <li>Em 12 meses, o setor público gastou R$&nbsp;1,2 trilhão só com juros. É 9% de tudo o que o país produz (Banco Central, setembro de 2026).</li>
+          <li>Quanto maior a dívida, mais juro o mercado cobra para emprestar ao Brasil (Banco Central, Relatório de Política Monetária, junho de 2025).</li>
+          <li>O dinheiro grande continua emprestado ao governo. A dívida cresce, os juros ficam altos, e quem paga a conta é quem pega crédito: o cidadão e a pequena empresa.</li>
+        </ul>
+      </div>
+      <div class="cartao pro">
+        <strong>Com o FSRI</strong>
+        <ul>
+          <li>Parte desse dinheiro vira fábrica, patente e plataforma. As empresas são escolhidas em maratona e banca públicas, e o dinheiro sai por metas.</li>
+          <li>A Faixa 1 dá lucro cedo e segura a carteira. A Faixa 3 constrói o que o país ainda não tem.</li>
+          <li>As empresas novas pagam imposto e contratam. O governo arrecada mais sem criar imposto.</li>
+          <li>O mercado já espera a Selic cair de 13,75% para 10,5% até 2029 (Boletim Focus, Banco Central, novembro de 2026). Com a dívida sob controle, ela pode cair mais. Com juros menores, o empréstimo fica mais barato e investir em empresa passa a valer mais.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="frases">O FSRI não promete esse futuro. Ele cria regras para que o dinheiro grande ajude a chegar lá: o investidor só ganha se o país ganhar.</p>
+    <p>Quem paga pouco imposto, ou precisa do dinheiro numa data certa, fica melhor na renda fixa. O <a href="/projetos/reindustrializacao/simulador/">simulador</a> faz a conta com os juros do seu banco, com os juros de hoje ou <a href="/projetos/reindustrializacao/simulador/?j=focus">caindo como o mercado espera</a>.</p>
 
     <div class="pior-caso">
       <h3>E se tudo der errado?</h3>
-      <p>Se todos os projetos de um aporte quebrarem, o seguro devolve uma parte e o investidor perde o resto. Na Faixa 3, perde pelo menos metade. Na Faixa 1, pelo menos 80%.</p>
-      <p>No CDI, o mesmo dinheiro teria rendido sem esse risco. Por isso o FSRI não serve para quem precisa do dinheiro de volta numa data certa.</p>
+      <p>O seguro devolve uma parte e o investidor perde o resto: pelo menos metade na Faixa 3 e 80% na Faixa 1, antes do desconto no imposto. Por isso o FSRI não serve para quem precisa do dinheiro numa data certa.</p>
     </div>
   </section>
 
   <!-- ATO 6: história ilustrativa -->
   <section class="capitulo revelar">
     <div class="historia">
-      <span class="ato">Capítulo 7 · Como uma ideia recebe dinheiro</span>
+      <span class="ato">Capítulo 6 · Como uma ideia recebe dinheiro</span>
       <h2>De um problema real até a bolsa</h2>
-      <p>O dinheiro não vai para quem conhece alguém. Ele passa por um funil público, em quatro etapas. Para ver como seria, acompanhe uma equipe imaginária.</p>
+      <p>O dinheiro não vai para quem conhece alguém. Ele passa por um funil público, em quatro etapas. Acompanhe uma equipe imaginária.</p>
       <p class="aviso-ficcao">História ilustrativa. A equipe é inventada; as etapas e as regras são as da proposta.</p>
       <ol class="cenas">
         <li class="cena">
           <span class="quando">Etapa 1 · Maratona nacional de inovação</span>
           <h3>O desafio é publicado</h3>
-          <p>O Estado e os conselhos setoriais publicam um problema concreto: desenvolver sensores hospitalares nacionais.</p>
-          <p>Uma equipe de três pessoas, uma engenheira, um técnico de enfermagem e um programador, se inscreve. Pela primeira vez, uma equipe assim tem um caminho aberto até o investidor.</p>
+          <p>O governo publica um problema concreto: sensores hospitalares nacionais. Uma engenheira, um técnico de enfermagem e um programador se inscrevem.</p>
         </li>
         <li class="cena">
           <span class="quando">Etapa 2 · Aceleração · 4 meses</span>
           <h3>Do papel ao protótipo</h3>
-          <p>A equipe vence e recebe capital semente, na faixa de R$ 200 mil a R$ 500 mil, mais mentoria numa instituição de excelência, como ITA, Unicamp, USP, Fiocruz, CEITEC ou uma universidade federal.</p>
-          <p>Em quatro meses, sai um protótipo funcional e um plano de negócios auditado.</p>
+          <p>A equipe vence e recebe de R$ 200 mil a R$ 500 mil, mais mentoria numa universidade ou instituto de pesquisa. Em quatro meses, sai um protótipo e um plano de negócios auditado.</p>
         </li>
         <li class="cena">
           <span class="quando">Etapa 3 · Banca pública</span>
           <h3>Uma banca técnica, ao vivo</h3>
-          <p>A equipe apresenta o projeto numa sessão transmitida para todo mundo ver. Na banca, engenheiros sêniores, especialistas do setor e os investidores habilitados no fundo.</p>
-          <p>Qualquer pessoa pode assistir e entender por que um projeto foi aprovado e outro não.</p>
+          <p>Engenheiros, especialistas e investidores avaliam o projeto numa sessão transmitida. Todo mundo vê por que um projeto passou e outro não.</p>
         </li>
         <li class="cena">
           <span class="quando">Etapa 4 · Liberação por metas</span>
           <h3>O dinheiro chega em partes</h3>
-          <p>O investimento aprovado não cai na conta de uma vez. Cada parte só é liberada quando a equipe cumpre uma meta técnica, regulatória e financeira, conferida por auditoria.</p>
+          <p>Cada parte só sai quando a equipe cumpre uma meta conferida por auditoria.</p>
         </li>
         <li class="cena">
           <span class="quando">Anos depois</span>
           <h3>Um sensor brasileiro no hospital da sua cidade</h3>
-          <p>A empresa amadurece e abre capital na B3. O investidor vende a parte dele, quita o empréstimo e lucra. A patente está registrada no Brasil. Os empregos estão aqui.</p>
+          <p>A empresa abre capital na B3. O investidor vende a parte dele e quita o empréstimo. A patente e os empregos ficam aqui.</p>
         </li>
       </ol>
     </div>
   </section>
 
   <!-- ATO 7 -->
+  <!-- ATO 7 -->
   <section class="capitulo revelar">
-    <span class="ato">Capítulo 8 · A briga desigual</span>
+    <span class="ato">Capítulo 7 · Concorrência justa</span>
     <h2>Quando o gigante vende abaixo do custo</h2>
-    <p>Uma plataforma brasileira nova costuma quebrar não por ser pior, mas por enfrentar um jogo conhecido: o vencedor leva tudo.</p>
-    <div class="linha-tempo">
-      <div class="quadro"><b>Primeiro</b><p>Uma gigante estrangeira cobra abaixo do custo por anos e banca o prejuízo.</p></div>
-      <div class="quadro"><b>Depois</b><p>As concorrentes locais não aguentam perder dinheiro tanto tempo e fecham.</p></div>
-      <div class="quadro"><b>No fim</b><p>Sem concorrência, vêm o monopólio e as taxas altas para quem trabalha e para quem consome.</p></div>
-    </div>
-    <div class="seta-baixo" aria-hidden="true">↓</div>
+    <p>Plataforma brasileira nova costuma quebrar por um jogo conhecido. Uma gigante cobra abaixo do custo por anos, as concorrentes fecham, e depois vêm o monopólio e as taxas altas.</p>
     <h3>O antídoto: uma defesa automática</h3>
     <div class="linha-tempo">
-      <div class="quadro bom"><b>O CADE enxerga</b><p>O órgão que fiscaliza a concorrência cruza nota fiscal eletrônica e dados do Pix e acompanha margens e preços médios de cada setor, em cada cidade.</p></div>
-      <div class="quadro bom"><b>A taxa dispara sozinha</b><p>Se a empresa opera sistematicamente abaixo do custo para eliminar concorrentes, passa a pagar a CIDE-Concorrencial, uma contribuição nova, sobre as vendas naquela cidade.</p></div>
-      <div class="quadro bom"><b>O dinheiro equilibra o jogo</b><p>O que é arrecadado reduz tributos e a taxa da plataforma nacional atacada, enquanto durar o ataque.</p></div>
+      <div class="quadro bom"><b>O CADE enxerga</b><p>O órgão que fiscaliza a concorrência cruza nota fiscal e Pix para acompanhar preços e margens de cada setor, em cada cidade.</p></div>
+      <div class="quadro bom"><b>A taxa dispara</b><p>Quem vende abaixo do custo para quebrar concorrente paga a CIDE-Concorrencial, uma contribuição nova, naquela cidade.</p></div>
+      <div class="quadro bom"><b>O jogo se equilibra</b><p>O dinheiro arrecadado baixa as taxas da plataforma nacional atacada.</p></div>
     </div>
-    <p style="margin-top: var(--espaco-4)">Quanto mais a gigante vende abaixo do custo, mais dinheiro vai para a concorrente brasileira.</p>
-  </section>
 
-  <!-- ATO 8 -->
-  <section class="capitulo revelar">
-    <span class="ato">Capítulo 9 · Quem ganha</span>
-    <h2>Mais renda fica com quem trabalha</h2>
-    <p>As plataformas da Faixa 1 nascem integradas ao Gov.br e ao Pix. Isso derruba o custo de conquistar cada cliente e permite cobrar microtaxas. A proposta fala em algo como 2% a 5%, contra os 25% a 30% que estima para as grandes plataformas estrangeiras.</p>
-    <p>Um exemplo que já existe: o <a href="/projetos/galera-club/">galera.club</a>, uma página de link na bio brasileira, com Pix na página e nenhuma taxa por venda.</p>
+    <h3 class="subtitulo">Quem ganha</h3>
+    <p>As plataformas da Faixa 1 nascem ligadas ao Gov.br e ao Pix. Isso baixa o custo de cada cliente e deixa cobrar taxas menores. Um exemplo que já existe é o <a href="/projetos/galera-club/">galera.club</a>.</p>
     <div class="ganhadores">
-      <div class="cartao ganhador"><strong>O motorista</strong><p>Fica com uma parte maior de cada corrida.</p></div>
-      <div class="cartao ganhador"><strong>O produtor cultural</strong><p>Vende ingresso sem entregar uma fatia enorme para a bilheteria.</p></div>
-      <div class="cartao ganhador"><strong>O consumidor</strong><p>Paga menos taxa e ganha concorrência de verdade.</p></div>
-      <div class="cartao ganhador"><strong>O pesquisador</strong><p>Vê o laboratório virar produto, com patente registrada no Brasil.</p></div>
-      <div class="cartao ganhador"><strong>O investidor</strong><p>Troca imposto por investimento produtivo e sai pela bolsa brasileira.</p></div>
-      <div class="cartao ganhador"><strong>O país</strong><p>Depende menos de fora e guarda o valor que hoje vai embora.</p></div>
-    </div>
-  </section>
-
-  <!-- ATO 9 -->
-  <section class="capitulo revelar">
-    <span class="ato">Capítulo 10 · Começando por Goiás</span>
-    <h2>Goiás como laboratório</h2>
-    <p>O modelo pode ganhar um braço regional, aproveitando o que Goiás já tem de vocação.</p>
-    <div class="goias">
-      <div class="cartao"><span class="onde">Norte e Nordeste goiano</span><h3>Terras raras com valor agregado</h3><p>Goiás tem reservas relevantes de minerais críticos e terras raras, como em Minaçu e região. Aportes das Faixas 2 e 3 podem financiar refino local, em vez de exportar só minério bruto.</p></div>
-      <div class="cartao"><span class="onde">Anápolis · DAIA</span><h3>Remédio e equipamento feito aqui</h3><p>Aproveitar o polo farmoquímico do Distrito Agroindustrial de Anápolis para fabricar insumos farmacêuticos ativos e equipamentos médico-hospitalares.</p></div>
-      <div class="cartao"><span class="onde">Sudoeste goiano</span><h3>Do agro à tecnologia no campo</h3><p>Maratonas de inovação em agricultura de precisão, drones, sensores de solo e bioinsumos, com UFG, IF Goiano e centros de pesquisa. O capital do agro financia tecnologia nova, sem conflito de interesses.</p></div>
-      <div class="cartao"><span class="onde">Todo o estado</span><h3>Tecnologia brasileira em teste</h3><p>Programas piloto, com compras públicas de inovação do Marco Legal das Startups, para testar <a href="/projetos/cartorio-digital/">cartórios digitais</a>, mobilidade e gestão pública criados nas maratonas de inovação locais.</p></div>
+      <div class="cartao ganhador"><strong>Quem trabalha</strong><p>O motorista e o produtor cultural ficam com mais de cada corrida e de cada ingresso.</p></div>
+      <div class="cartao ganhador"><strong>O consumidor</strong><p>Paga menos taxa e ganha concorrência.</p></div>
+      <div class="cartao ganhador"><strong>O pesquisador</strong><p>Vê o laboratório virar produto, com patente no Brasil.</p></div>
+      <div class="cartao ganhador"><strong>O país</strong><p>Depende menos de fora.</p></div>
     </div>
   </section>
 
@@ -529,7 +538,7 @@
         <li>Escolha a porta, patrimônio grande ou menor, e quanto aplicaria.</li>
         <li>Diga a sua área de atuação. O sistema tira as empresas que concorrem com você ou vendem para você.</li>
         <li>Monte a carteira seguindo as regras, ou use a carteira pronta.</li>
-        <li>Veja os cenários ruim, médio e bom ao lado do CDI e compartilhe o resultado.</li>
+        <li>Compare o lucro com CDB, LCA, ações e fundo imobiliário, já sem o imposto e, na porta grande, com os juros do empréstimo.</li>
       </ol>
       <a class="botao verde" href="/projetos/reindustrializacao/simulador/">Abrir o simulador</a>
     </div>
@@ -537,70 +546,89 @@
 
   <!-- CRÍTICAS -->
   <section class="capitulo revelar" id="criticas">
-    <span class="ato">Capítulo 11 · As críticas</span>
+    <span class="ato">Capítulo 8 · As críticas</span>
     <h2>As críticas mais duras, e as respostas</h2>
-    <p>Estas são as objeções que eu esperaria ouvir, respondidas com as regras da própria proposta.</p>
 
     <details class="critica">
       <summary>Por que eu arriscaria meu patrimônio em empresas que não conheço e não controlo?</summary>
       <div class="resposta">
-        <p>Se você precisa desse dinheiro, não deveria. Fundos brasileiros desse tipo renderam, na média, só um pouco mais que o CDI, e a diferença entre os melhores e os piores foi enorme (Insper, Spectra e ABVCAP, 2022).</p>
-        <p>O FSRI não promete retorno. Ele muda a conta: o seguro corta parte da perda, a isenção aumenta o lucro e a carteira com vários projetos dilui o risco. Quem tem patrimônio menor entra com teto por ano. As regras estão no <a href="#retorno">capítulo 6</a>.</p>
+        <p>Se você precisa desse dinheiro, não deveria. Fundos assim renderam só um pouco mais que o CDI, com muita diferença entre bons e ruins.</p>
+        <p>O FSRI não promete retorno. O seguro corta parte da perda, e o desconto e a isenção aumentam o que sobra. Compare no <a href="#retorno">capítulo 5</a>.</p>
       </div>
     </details>
 
     <details class="critica">
       <summary>Isso é isenção de imposto para rico.</summary>
       <div class="resposta">
-        <p>Hoje esse patrimônio já paga pouco imposto, porque não é vendido. A isenção do FSRI só existe se o dinheiro virar investimento produtivo real no país, ficar aplicado por pelo menos 5 anos e incluir pelo menos um projeto de alto risco tecnológico.</p>
-        <p>Sem fábrica, patente ou plataforma nova, não tem benefício.</p>
+        <p>Hoje o rico já tem papéis isentos sem dar nada em troca: LCI, LCA, debênture incentivada e fundo imobiliário ficam fora do imposto mínimo (Lei 15.270, de 2025).</p>
+        <p>O FSRI só dá desconto se o dinheiro virar fábrica, patente ou plataforma aqui, por 5 anos.</p>
+      </div>
+    </details>
+
+    <details class="critica">
+      <summary>O desconto no imposto é dinheiro que o governo deixa de arrecadar.</summary>
+      <div class="resposta">
+        <p>Por isso tem teto: no máximo 2% do aporte por ano e metade do imposto de renda do ano.</p>
+        <p>Quem sai antes de 5 anos devolve.</p>
       </div>
     </details>
 
     <details class="critica">
       <summary>O Estado vai pagar a conta quando der errado.</summary>
       <div class="resposta">
-        <p>O seguro tem teto: 20%, 35% ou 50%, conforme o risco. O investidor arca com pelo menos metade do prejuízo, mesmo no pior caso.</p>
-        <p>O seguro só é acionado em falência auditada, sem má-fé. E quando um projeto de alto risco dá certo, o Estado fica com 10% a 15% para reabastecer o fundo.</p>
+        <p>O seguro tem teto, e o investidor arca com pelo menos metade do prejuízo.</p>
+        <p>Quando um projeto da Faixa 3 dá certo, o Estado fica com 10% a 15%.</p>
       </div>
     </details>
 
     <details class="critica">
       <summary>Vai virar cabide para os mesmos grupos de sempre.</summary>
       <div class="resposta">
-        <p>A seleção é pública: maratona de inovação aberta, banca transmitida ao vivo e dinheiro liberado só por metas auditadas.</p>
-        <p>E o investidor não pode colocar dinheiro incentivado em empresa ou setor onde já manda. O fundo existe para criar concorrentes.</p>
+        <p>A seleção é aberta, a banca é transmitida ao vivo e o dinheiro sai por metas auditadas.</p>
+        <p>E ninguém investe em concorrente ou fornecedor das próprias empresas.</p>
       </div>
     </details>
 
     <details class="critica">
       <summary>Taxa automática sobre empresa estrangeira afasta investimento.</summary>
       <div class="resposta">
-        <p>A CIDE-Concorrencial não incide sobre empresa estrangeira por ser estrangeira. Ela só incide quando se constata operação sistemática abaixo do custo com a finalidade de eliminar a concorrência, e só naquela localidade.</p>
-        <p>Quem compete de forma honesta não paga nada.</p>
+        <p>A CIDE-Concorrencial não olha a origem da empresa.</p>
+        <p>Só incide em quem vende abaixo do custo para quebrar concorrente, e só naquela cidade.</p>
       </div>
     </details>
 
     <details class="critica">
       <summary>Chip brasileiro? O Brasil não tem como competir nisso.</summary>
       <div class="resposta">
-        <p>Por isso a Faixa 3 tem o horizonte mais longo, de 10 a 15 anos, e a maior proteção. E por isso é obrigatória: sem ela, ninguém escolheria a aposta difícil.</p>
-        <p>A regra de juntar um projeto rápido e um demorado garante que o investidor tenha retorno rápido na Faixa 1 enquanto espera a Faixa 3 amadurecer.</p>
+        <p>Por isso a Faixa 3 tem o prazo mais longo e a maior proteção, e é obrigatória.</p>
+        <p>Sem a regra, ninguém escolheria a aposta difícil.</p>
       </div>
     </details>
   </section>
 
+  <section class="capitulo revelar">
+    <span class="ato">Capítulo 9 · Começando por Goiás</span>
+    <h2>Goiás como laboratório</h2>
+    <p>O FSRI pode ganhar um braço regional, a partir do que Goiás já faz bem.</p>
+    <div class="goias">
+      <div class="cartao"><span class="onde">Norte goiano</span><h3>Terras raras com valor agregado</h3><p>Refinar aqui os minerais críticos de Minaçu e região, em vez de exportar minério bruto.</p></div>
+      <div class="cartao"><span class="onde">Anápolis · DAIA</span><h3>Remédio e equipamento feito aqui</h3><p>Usar o polo farmoquímico para fabricar insumos de remédio e equipamentos médicos.</p></div>
+      <div class="cartao"><span class="onde">Sudoeste goiano</span><h3>Do agro à tecnologia no campo</h3><p>Maratonas de inovação em drones, sensores de solo e bioinsumos, com UFG e IF Goiano.</p></div>
+      <div class="cartao"><span class="onde">Todo o estado</span><h3>Tecnologia brasileira em teste</h3><p>Compras públicas de inovação para testar <a href="/projetos/cartorio-digital/">cartórios digitais</a>, mobilidade e gestão pública.</p></div>
+    </div>
+  </section>
+
   <!-- LEI -->
   <section class="capitulo revelar">
-    <span class="ato">Capítulo 12 · Como sai do papel</span>
+    <span class="ato">Capítulo 10 · Como sai do papel</span>
     <h2>O roteiro para virar lei</h2>
     <div class="esferas">
       <div class="cartao">
         <span class="selo azul">Federal · Câmara dos Deputados</span>
-        <p>Um Projeto de Lei Complementar que institui o FSRI e define:</p>
+        <p>Um projeto de lei que cria o FSRI e muda a lei do imposto de renda (Lei 9.250, inclusive o art. 16-A do imposto mínimo), com o custo para o governo estimado e um teto por ano. Ele define:</p>
         <ul>
-          <li>as regras da isenção condicionada sobre ganho de capital;</li>
-          <li>o seguro soberano via BNDES e FINEP;</li>
+          <li>o desconto no imposto de renda e a isenção do lucro depois de 5 anos, só para aporte que cumpre as regras;</li>
+          <li>o seguro via BNDES e Finep, com teto por faixa;</li>
           <li>o gatilho da CIDE-Concorrencial dentro do Sistema Brasileiro de Defesa da Concorrência (Lei nº 12.529/2011).</li>
         </ul>
       </div>
@@ -632,11 +660,17 @@
   <section class="capitulo">
     <h3>Fontes e referências</h3>
     <ul class="fontes">
-      <li>Proposta de Política Pública: Fundo Soberano de Reindustrialização e Inovação (FSRI), documento de trabalho, 2026. Os percentuais, prazos e valores da proposta vêm dela e são parâmetros propostos, não dados medidos. A exceção são os números de fundos que já existem, no capítulo 6.</li>
+      <li>Proposta de Política Pública: Fundo Soberano de Reindustrialização e Inovação (FSRI), documento de trabalho, 2026. Os percentuais, prazos e valores da proposta vêm dela e são parâmetros propostos, não dados medidos. Isso vale também para o desconto de 2% ao ano no imposto de renda. A exceção são os números de aplicações e fundos que já existem, no capítulo 5.</li>
       <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12529.htm">Lei nº 12.529, de 30 de novembro de 2011</a>, que estrutura o Sistema Brasileiro de Defesa da Concorrência (Planalto).</li>
       <li><a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp182.htm">Lei Complementar nº 182, de 1º de junho de 2021</a>, o Marco Legal das Startups (Planalto).</li>
-      <li><a href="https://spectrainvest.com/en/estudo/performance-of-brazilian-private-equity-and-venture-capital-funds-1994-2022-2/">Performance of Brazilian Private Equity and Venture Capital Funds (1994-2022)</a>, Insper, Spectra Investments e ABVCAP, dados até dezembro de 2022 (em inglês). Fonte dos números do capítulo 6.</li>
-      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/L15270.htm">Lei nº 15.270, de 26 de novembro de 2025</a>, que cria o imposto mínimo sobre rendas acima de R$ 600 mil por ano, com alíquota de até 10%, e a retenção de 10% sobre dividendos acima de R$ 50 mil por mês (Presidência da República).</li>
+      <li><a href="https://spectrainvest.com/en/estudo/performance-of-brazilian-private-equity-and-venture-capital-funds-1994-2022-2/">Performance of Brazilian Private Equity and Venture Capital Funds (1994-2022)</a>, Insper, Spectra Investments e ABVCAP, dados até dezembro de 2022 (em inglês). Fonte dos números de fundos do capítulo 5.</li>
+      <li><a href="https://www.montebravo.com.br/wp-content/uploads/2025/12/Tabela-Periodica-Monte-Bravo-Janeiro-2026.pdf">Tabela periódica de retornos</a>, Monte Bravo, com dados da Bloomberg até 31/12/2025: CDI, Ibovespa e IFIX (índices da B3) e IPCA (IBGE) de 2021 a 2025.</li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/lei/l11.033.htm">Lei nº 11.033, de 21 de dezembro de 2004</a>, imposto sobre renda fixa e bolsa e isenção de LCI, LCA e fundo imobiliário (Planalto).</li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12431.htm">Lei nº 12.431, de 24 de junho de 2011</a>, isenção das debêntures de infraestrutura para pessoa física (Planalto).</li>
+      <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/L15270.htm">Lei nº 15.270, de 26 de novembro de 2025</a>, que cria o imposto mínimo sobre rendas acima de R$ 600 mil por ano, com alíquota de até 10%, e a retenção de 10% sobre dividendos acima de R$ 50 mil por mês. O art. 16-A deixa fora da conta poupança, LCI, LCA, CRI, CRA, debêntures incentivadas e fundos imobiliários (Presidência da República).</li>
+      <li><a href="https://www.bcb.gov.br/estatisticas/estatisticasfiscais">Estatísticas fiscais</a>, Banco Central: dívida bruta do governo geral (51,5% do PIB em dezembro de 2013, 82,9% em setembro de 2026) e juros nominais do setor público (R$ 1,205 trilhão, 8,99% do PIB, em 12 meses até setembro de 2026). Nota de 29/10/2026.</li>
+      <li><a href="https://www.bcb.gov.br/publicacoes/rpm">Relatório de Política Monetária</a>, Banco Central, junho de 2025, boxe "Determinantes do prêmio de risco nas taxas nominais brasileiras": quanto maior a dívida bruta, maior o prêmio de risco.</li>
+      <li><a href="https://www.bcb.gov.br/publicacoes/focus">Boletim Focus</a>, Banco Central, novembro de 2026: mediana da Selic de 13,75% no fim de 2026, 13% em 2027, 11% em 2028 e 10,5% em 2029.</li>
       <li><a href="https://conteudo.cvm.gov.br/export/sites/cvm/legislacao/resolucoes/anexos/001/resol088.pdf">Resolução CVM nº 88, de 27 de abril de 2022</a>, que regula o investimento em startups por plataformas na internet e limita a R$ 20 mil por ano o aporte da maioria das pessoas (CVM).</li>
     </ul>
   </section>

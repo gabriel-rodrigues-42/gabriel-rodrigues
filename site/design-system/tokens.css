@@ -93,6 +93,7 @@
   /* Formas orgânicas: nenhum canto é igual ao outro */
   --forma-cartao: 28px 34px 30px 26px;
   --forma-opcao: 18px 22px 20px 16px;
+  --forma-opcao-dentro: 14px 18px 16px 12px; /* opção dentro de uma caixa com --forma-opcao e 4px de folga */
   --forma-selo: 999px 999px 999px 4px;
   --forma-pilula: 999px;
   --forma-bolha-1: 42% 58% 55% 45% / 48% 40% 60% 52%;
