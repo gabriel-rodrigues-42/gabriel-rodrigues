@@ -1,0 +1,52 @@
+/* Prévia das animações do botão Apoiar. Página de teste: sai do site quando o Gabriel escolher uma. */
+
+/* Painel de escolha */
+.previa { background: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); padding: var(--espaco-4); margin-bottom: var(--espaco-6); }
+.previa h2 { font-size: var(--tamanho-4); margin: var(--espaco-2) 0 var(--espaco-1); }
+.previa > p { margin: 0 0 var(--espaco-3); color: var(--texto-suave); font-size: var(--tamanho-2); }
+.previa-opcoes { border: 0; margin: 0; padding: 0; display: grid; gap: var(--espaco-2); }
+.previa-opcoes label { display: flex; gap: var(--espaco-3); align-items: flex-start; padding: var(--espaco-3); border-radius: var(--forma-opcao); background: var(--azul-claro); cursor: pointer; font-size: var(--tamanho-2); color: var(--texto-suave); }
+.previa-opcoes label:has(input:checked) { background: var(--amarelo-claro); outline: 2px solid var(--amarelo-escuro); }
+.previa-opcoes input { width: 20px; height: 20px; margin: 2px 0 0; flex: none; accent-color: var(--azul); }
+.previa-opcoes strong { display: block; color: var(--azul); font-size: var(--tamanho-3); }
+.previa-reduzido { display: flex; gap: var(--espaco-2); align-items: center; margin-top: var(--espaco-3); font-size: var(--tamanho-1); color: var(--texto-suave); }
+.previa-reduzido input { width: 18px; height: 18px; margin: 0; accent-color: var(--azul); }
+.previa-voltar { margin-top: var(--espaco-4); }
+.previa-voltar[hidden] { display: none; }
+.previa-voltar .botao { color: var(--branco); border-color: var(--branco-vidro-forte); width: 100%; justify-content: center; }
+#titulo-apoio:focus { outline: none; }
+
+/* A. O cartão acende uma vez: um anel amarelo que abre e some, e o campo de email pisca de leve. */
+.apoio { position: relative; }
+.apoio.anim-acender::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  box-shadow: 0 0 0 0 var(--amarelo); animation: anim-anel 900ms cubic-bezier(.2, .7, .3, 1) both;
+}
+@keyframes anim-anel {
+  0% { box-shadow: 0 0 0 0 var(--amarelo); opacity: 1; }
+  35% { box-shadow: 0 0 0 6px var(--amarelo); opacity: 1; }
+  100% { box-shadow: 0 0 0 18px var(--amarelo); opacity: 0; }
+}
+.anim-campo { animation: anim-campo 900ms ease-out both; }
+@keyframes anim-campo {
+  0%, 100% { border-color: transparent; }
+  30%, 60% { border-color: var(--amarelo); }
+}
+
+/* B. A capa que sai do botão, cobre a tela e vira o cartão. */
+.anim-capa { position: fixed; inset: 0; z-index: 60; background: var(--azul); pointer-events: none; will-change: clip-path; }
+
+/* C. A estrela e o sublinhado de "tentar". */
+.anim-estrela { position: fixed; top: 0; left: 0; z-index: 60; width: 20px; height: 20px; pointer-events: none; will-change: transform; }
+.anim-estrela svg { display: block; width: 100%; height: 100%; fill: var(--amarelo); filter: drop-shadow(0 1px 2px rgba(0, 39, 118, .35)); }
+.apoio h2 .destaque { background-image: linear-gradient(var(--amarelo), var(--amarelo)); background-repeat: no-repeat; background-position: 0 100%; background-size: 0 3px; padding-bottom: 2px; }
+.apoio h2 .destaque.anim-sublinhado { animation: anim-sublinhado 1.6s ease-out both; }
+@keyframes anim-sublinhado {
+  0% { background-size: 0 3px; }
+  30%, 80% { background-size: 100% 3px; }
+  100% { background-size: 100% 3px; opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .apoio.anim-acender::after, .anim-campo, .apoio h2 .destaque.anim-sublinhado { animation: none; }
+}
