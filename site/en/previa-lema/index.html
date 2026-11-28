@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Prévia temporária para o Gabriel escolher a animação. Fica fora do menu, do sitemap e da busca; sai do site depois da escolha. -->
+<meta name="robots" content="noindex">
+<title>Preview: slogan vote animation · Gabriel Rodrigues</title>
+<meta name="description" content="Three animations for the I prefer this one button in the slogan vote. Temporary page for Gabriel to pick one.">
+<link rel="canonical" href="https://gabriel-rodrigues.com/en/previa-lema/">
+<link rel="alternate" hreflang="pt-BR" href="https://gabriel-rodrigues.com/previa-lema/">
+<link rel="alternate" hreflang="en" href="https://gabriel-rodrigues.com/en/previa-lema/">
+<link rel="alternate" hreflang="x-default" href="https://gabriel-rodrigues.com/previa-lema/">
+<meta name="author" content="Gabriel Rodrigues">
+<meta name="theme-color" content="#fbf8ef">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:site_name" content="Gabriel Rodrigues">
+<meta property="og:url" content="https://gabriel-rodrigues.com/en/previa-lema/">
+<meta property="og:title" content="Preview: slogan vote animation · Gabriel Rodrigues">
+<meta property="og:description" content="Three animations for the I prefer this one button in the slogan vote. Temporary page for Gabriel to pick one.">
+<meta property="og:image" content="https://gabriel-rodrigues.com/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Preview: slogan vote animation · Gabriel Rodrigues">
+<meta name="twitter:description" content="Three animations for the I prefer this one button in the slogan vote. Temporary page for Gabriel to pick one.">
+<link rel="stylesheet" href="/design-system/tokens.css">
+<link rel="stylesheet" href="/design-system/componentes.css">
+<link rel="stylesheet" href="/design-system/moldura.css">
+<script src="/design-system/moldura.js"></script>
+<link rel="stylesheet" href="/previa-lema/previa.css">
+<script src="/previa-lema/previa.js" defer></script>
+</head>
+<body>
+<gr-cabecalho></gr-cabecalho>
+<div class="bolha amarela"></div><div class="bolha verde"></div>
+<main>
+  <h1>Which animation for the <span class="destaque">vote</span>?</h1>
+  <p class="lead frases">Tap “I prefer this one” in each example and pick the best one. The numbers are examples and nothing is sent.</p>
+  <p class="previa-aviso frases">People who turn on reduced motion see the result right away, with no animation.</p>
+
+  <section class="demo" data-animacao="carimbo" aria-labelledby="t-carimbo">
+    <h2 id="t-carimbo">A. Stamp</h2>
+    <p class="frases">The button presses in and the “Your vote” badge lands on the card’s edge like a stamp. The yellow outline closes around it.</p>
+    <div class="votacao-opcoes">
+      <div class="voto" data-opcao="entrega">
+        <span class="selo amarelo voto-seu" hidden>Your vote</span>
+        <p class="voto-frase">More delivery, less tax, more trust.</p>
+        <p class="voto-porque frases">High interest rates also come from low trust. A government that delivers without heavy taxes earns that trust.</p>
+        <button class="botao verde" type="button">I prefer this one</button>
+        <div class="voto-resultado" hidden><span class="voto-barra"><span></span></span><strong class="voto-pct"></strong></div>
+      </div>
+      <div class="voto" data-opcao="conversa">
+        <span class="selo amarelo voto-seu" hidden>Your vote</span>
+        <p class="voto-frase">The conversation that matters.</p>
+        <p class="voto-porque frases">Politics explained simply, with official data, listening to the people who live the problem.</p>
+        <button class="botao" type="button">I prefer this one</button>
+        <div class="voto-resultado" hidden><span class="voto-barra"><span></span></span><strong class="voto-pct"></strong></div>
+      </div>
+    </div>
+    <button class="botao secundario demo-repetir" type="button" data-repetir>Play again</button>
+  </section>
+
+  <section class="demo" data-animacao="vira-barra" aria-labelledby="t-vira-barra">
+    <h2 id="t-vira-barra">B. The button becomes the bar</h2>
+    <p class="frases">Each button shrinks into its result bar, and the bar fills up. The badge drops onto the edge.</p>
+    <div class="votacao-opcoes">
+      <div class="voto" data-opcao="entrega">
+        <span class="selo amarelo voto-seu" hidden>Your vote</span>
+        <p class="voto-frase">More delivery, less tax, more trust.</p>
+        <p class="voto-porque frases">High interest rates also come from low trust. A government that delivers without heavy taxes earns that trust.</p>
+        <button class="botao verde" type="button">I prefer this one</button>
+        <div class="voto-resultado" hidden><span class="voto-barra"><span></span></span><strong class="voto-pct"></strong></div>
+      </div>
+      <div class="voto" data-opcao="conversa">
+        <span class="selo amarelo voto-seu" hidden>Your vote</span>
+        <p class="voto-frase">The conversation that matters.</p>
+        <p class="voto-porque frases">Politics explained simply, with official data, listening to the people who live the problem.</p>
+        <button class="botao" type="button">I prefer this one</button>
+        <div class="voto-resultado" hidden><span class="voto-barra"><span></span></span><strong class="voto-pct"></strong></div>
+      </div>
+    </div>
+    <button class="botao secundario demo-repetir" type="button" data-repetir>Play again</button>
+  </section>
+
+  <section class="demo" data-animacao="confete" aria-labelledby="t-confete">
+    <h2 id="t-confete">C. Flag confetti</h2>
+    <p class="frases">Small green, yellow and blue pieces burst from the button, and the badge pops in.</p>
+    <div class="votacao-opcoes">
+      <div class="voto" data-opcao="entrega">
+        <span class="selo amarelo voto-seu" hidden>Your vote</span>
+        <p class="voto-frase">More delivery, less tax, more trust.</p>
+        <p class="voto-porque frases">High interest rates also come from low trust. A government that delivers without heavy taxes earns that trust.</p>
+        <button class="botao verde" type="button">I prefer this one</button>
+        <div class="voto-resultado" hidden><span class="voto-barra"><span></span></span><strong class="voto-pct"></strong></div>
+      </div>
+      <div class="voto" data-opcao="conversa">
+        <span class="selo amarelo voto-seu" hidden>Your vote</span>
+        <p class="voto-frase">The conversation that matters.</p>
+        <p class="voto-porque frases">Politics explained simply, with official data, listening to the people who live the problem.</p>
+        <button class="botao" type="button">I prefer this one</button>
+        <div class="voto-resultado" hidden><span class="voto-barra"><span></span></span><strong class="voto-pct"></strong></div>
+      </div>
+    </div>
+    <button class="botao secundario demo-repetir" type="button" data-repetir>Play again</button>
+  </section>
+</main>
+<gr-rodape></gr-rodape>
+</body>
+</html>

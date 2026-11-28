@@ -1,0 +1,41 @@
+/* Prévia temporária: três animações para o botão "Prefiro este" da votação do lema.
+   O estilo dos cartões copia o da página inicial (site/index.html, #lema), já com o selo novo. */
+main { max-width: 960px; margin: 0 auto; padding: var(--espaco-6) var(--espaco-4) var(--espaco-7); }
+.previa-aviso { color: var(--texto-suave); }
+.demo { margin-top: var(--espaco-7); }
+.demo h2 { margin-bottom: var(--espaco-2); }
+.demo > p { margin: 0; color: var(--texto-suave); }
+.demo-repetir { margin-top: var(--espaco-4); }
+
+.votacao-opcoes { container-type: inline-size; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--espaco-5); margin-top: var(--espaco-5); }
+@media (min-width: 640px) { .votacao-opcoes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.voto { position: relative; display: flex; flex-direction: column; gap: var(--espaco-3); background: var(--branco); border-radius: var(--forma-cartao); padding: var(--espaco-5); box-shadow: var(--sombra-cartao); }
+.voto::before { content: ""; width: 48px; height: 8px; border-radius: var(--forma-pilula); background: var(--verde-fundo); }
+.voto + .voto::before { background: var(--azul-medio); }
+.voto-frase { margin: 0; font-size: var(--tamanho-4); font-weight: 900; line-height: 1.15; color: var(--azul); text-wrap: balance; hyphens: manual; }
+.voto-porque { margin: 0; font-size: var(--tamanho-2); color: var(--texto-suave); flex: 1; }
+.voto .botao { align-self: flex-start; }
+.voto-resultado { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--espaco-3); }
+.voto-resultado[hidden], .voto-seu[hidden], .voto .botao[hidden] { display: none; }
+.voto-barra { height: 14px; background: var(--azul-claro); border-radius: var(--forma-pilula); overflow: hidden; }
+.voto-barra span { display: block; height: 100%; width: calc(var(--pct, 0) * 1%); background: var(--verde-fundo); border-radius: inherit; transition: width .6s ease-out; }
+.voto + .voto .voto-barra span { background: var(--azul-medio); }
+.voto-pct { font-size: var(--tamanho-4); font-weight: 900; color: var(--azul); font-variant-numeric: tabular-nums; }
+.voto-seu { position: absolute; top: 0; right: var(--espaco-5); transform: translateY(-50%); box-shadow: 0 0 0 4px var(--creme); }
+.voto.escolhido { outline: 3px solid var(--amarelo); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .voto-barra span { transition: none; } }
+@media (max-width: 719px) {
+  .voto { gap: var(--espaco-2); padding: var(--espaco-4); }
+  .voto::before { width: 36px; height: 6px; }
+  .voto-frase { font-size: var(--tamanho-3); }
+  .voto-porque { font-size: var(--tamanho-1); line-height: 1.45; }
+  .voto .botao { padding: 8px 18px; }
+  .voto-pct { font-size: var(--tamanho-3); }
+  .voto-seu { right: var(--espaco-4); }
+}
+
+/* C. Confete: pedacinhos nas cores da bandeira saem do botão. Podem sair do cartão: o body corta o que passar da tela (overflow-x: clip), então não há rolagem lateral. */
+.confete { position: absolute; inset: 0; pointer-events: none; }
+.confete i { position: absolute; width: 9px; height: 9px; border-radius: 50%; }
+.confete i.tira { width: 12px; height: 5px; border-radius: 2px; }
+.confete i.estrela { width: 12px; height: 12px; border-radius: 0; clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }

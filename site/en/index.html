@@ -169,7 +169,8 @@
   .voto-barra span { display: block; height: 100%; width: calc(var(--pct, 0) * 1%); background: var(--verde-fundo); border-radius: inherit; transition: width .6s ease-out; }
   .voto + .voto .voto-barra span { background: var(--azul-medio); }
   .voto-pct { font-size: var(--tamanho-4); font-weight: 900; color: var(--azul); font-variant-numeric: tabular-nums; }
-  .voto-seu { position: absolute; top: var(--espaco-4); right: var(--espaco-4); }
+  /* Selo "Seu voto" pendurado na borda de cima do cartão, longe do título. O anel creme separa o selo do contorno amarelo. */
+  .voto-seu { position: absolute; top: 0; right: var(--espaco-5); transform: translateY(-50%); box-shadow: 0 0 0 4px var(--creme); }
   .voto.escolhido { outline: 3px solid var(--amarelo); outline-offset: 2px; }
   .votacao-nota { margin: var(--espaco-4) 0 0; font-size: var(--tamanho-2); color: var(--texto-suave); }
   .votacao-resposta { margin: var(--espaco-2) 0 0; min-height: 1.5em; font-weight: 700; color: var(--verde-escuro); }
@@ -179,14 +180,14 @@
   @media (max-width: 719px) {
     #lema h2 { font-size: var(--tamanho-4); margin-bottom: 0; }
     #lema .lead { font-size: var(--tamanho-2); margin: var(--espaco-1) 0 0; text-wrap: balance; }
-    .votacao-opcoes { gap: var(--espaco-3); margin-top: var(--espaco-3); }
+    .votacao-opcoes { gap: var(--espaco-5); margin-top: var(--espaco-5); }
     .voto { gap: var(--espaco-2); padding: var(--espaco-4); }
     .voto::before { width: 36px; height: 6px; }
     .voto-frase { font-size: var(--tamanho-3); }
     .voto-porque { font-size: var(--tamanho-1); line-height: 1.45; }
     .voto .botao { padding: 8px 18px; }
     .voto-pct { font-size: var(--tamanho-3); }
-    .voto-seu { top: var(--espaco-3); right: var(--espaco-3); }
+    .voto-seu { right: var(--espaco-4); }
     .votacao-nota { margin-top: var(--espaco-3); font-size: var(--tamanho-1); }
   }
 </style>
