@@ -15,28 +15,51 @@ gr-apoiar { display: block; }
   transition: background .2s, color .2s, border-color .2s, transform .15s;
   -webkit-tap-highlight-color: transparent;
 }
-.apoiar-botao svg { width: 22px; height: 22px; flex: none; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: fill .2s; }
+.apoiar-botao .icone-polegar { width: 22px; height: 22px; flex: none; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: fill .2s; }
 .apoiar-botao:hover { border-color: var(--verde); }
+.apoiar-botao { touch-action: manipulation; } /* sem a espera do toque duplo no celular */
 .apoiar-botao:focus-visible { outline: 3px solid var(--azul); outline-offset: 2px; }
-.apoiar-botao.apertado { transform: scale(.95); }
-.apoiar-botao:disabled { cursor: progress; }
+.apoiar-botao:focus:not(:focus-visible) { outline: none; } /* no toque, sem contorno; no teclado, fica */
 .apoiar-botao.apoiado { background: var(--verde-fundo); color: var(--branco); border-color: var(--verde-fundo); }
 .apoiar-botao.apoiado .icone-polegar path:last-child { fill: var(--amarelo); stroke: var(--branco); }
-.apoiar-botao.festa svg { animation: apoiar-polegar .6s cubic-bezier(.3, 1.6, .5, 1); }
-@keyframes apoiar-polegar {
-  0% { transform: scale(1) rotate(0); }
-  35% { transform: scale(1.35) rotate(-14deg); }
-  100% { transform: scale(1) rotate(0); }
-}
 
-/* Estrelas do logo que saem do polegar. */
-.apoiar-estrelas { position: absolute; left: 26px; top: 50%; width: 0; height: 0; pointer-events: none; }
-.apoiar-estrela { position: absolute; left: -7px; top: -7px; width: 14px; height: 14px; opacity: 0; animation: apoiar-estrela .8s ease-out var(--atraso, 0ms) forwards; }
-.apoiar-estrela svg { width: 100%; height: 100%; fill: var(--amarelo-escuro); stroke: none; }
+/* Animação ao apoiar (apoiar.js põe .festa e data-anim). Três opções para escolher:
+   pulo     o polegar pula para cima, gira um pouco e aterrissa com um leve amasso
+   pulso    o polegar cresce e um anel amarelo se abre em volta, uma vez
+   estrela  pulo menor e uma estrela do logo sobe da ponta do polegar */
+.icone-polegar { overflow: visible; }
+.icone-polegar .polegar { transform-box: fill-box; transform-origin: 50% 100%; }
+.apoiar-botao.festa[data-anim="pulo"] .polegar { animation: apoiar-pulo .65s cubic-bezier(.3, .7, .4, 1); }
+.apoiar-botao.festa[data-anim="estrela"] .polegar { animation: apoiar-pulo-curto .5s cubic-bezier(.3, .7, .4, 1); }
+.apoiar-botao.festa[data-anim="pulso"] .polegar { transform-origin: 50% 50%; animation: apoiar-cresce .45s cubic-bezier(.3, 1.5, .5, 1); }
+.apoiar-botao.festa[data-anim="pulso"] .icone-polegar { animation: apoiar-anel .6s ease-out; }
+@keyframes apoiar-pulo {
+  0% { transform: translateY(0) rotate(0); }
+  35% { transform: translateY(-75%) rotate(-16deg) scale(1.15); }
+  62% { transform: translateY(0) rotate(0) scale(1.1, .85); }
+  80% { transform: translateY(-12%) scale(.97, 1.03); }
+  100% { transform: none; }
+}
+@keyframes apoiar-pulo-curto {
+  0% { transform: none; }
+  40% { transform: translateY(-35%) rotate(-10deg); }
+  75% { transform: scale(1.05, .92); }
+  100% { transform: none; }
+}
+@keyframes apoiar-cresce { 0% { transform: scale(1); } 45% { transform: scale(1.3); } 100% { transform: scale(1); } }
+@keyframes apoiar-anel {
+  from { box-shadow: 0 0 0 0 var(--amarelo); }
+  to { box-shadow: 0 0 0 16px transparent; }
+}
+.apoiar-estrela {
+  position: absolute; left: 27px; top: 50%; width: 22px; height: 22px; margin: -11px 0 0 -11px; pointer-events: none;
+  animation: apoiar-estrela .85s ease-out forwards;
+}
+.apoiar-estrela svg { display: block; width: 100%; height: 100%; fill: var(--amarelo-escuro); stroke: none; }
 @keyframes apoiar-estrela {
-  0% { opacity: 0; transform: translate(0, 0) scale(.4); }
-  25% { opacity: 1; }
-  100% { opacity: 0; transform: translate(var(--x), var(--y)) scale(1); }
+  0% { opacity: 0; transform: translate(4px, -4px) scale(.3) rotate(0); }
+  20% { opacity: 1; }
+  100% { opacity: 0; transform: translate(10px, -46px) scale(1.2) rotate(90deg); }
 }
 
 .apoiar-nota { font-size: var(--tamanho-1); color: var(--texto-suave); margin: var(--espaco-3) 0 0; }
@@ -119,21 +142,20 @@ gr-apoiar { display: block; }
     flex-direction: column; gap: 2px; min-height: 0; padding: 0 0 2px; border: 0; border-radius: 0;
     background: none; box-shadow: none; color: var(--azul);
   }
-  .apoiar-flutuante .apoiar-botao svg {
+  .apoiar-flutuante .apoiar-botao .icone-polegar {
     box-sizing: border-box; width: 52px; height: 52px; padding: 13px; margin-top: -18px; border-radius: 50%;
     background: var(--verde-fundo); color: var(--branco); border: 3px solid var(--creme);
     box-shadow: 0 4px 0 -1px var(--verde-escuro), 0 6px 14px rgba(0, 39, 118, .2);
   }
-  .apoiar-flutuante .apoiar-botao.apoiado svg { background: var(--verde-claro); color: var(--verde-escuro); box-shadow: 0 4px 0 -1px var(--verde), 0 6px 14px rgba(0, 39, 118, .14); }
+  .apoiar-flutuante .apoiar-botao.apoiado .icone-polegar { background: var(--verde-claro); color: var(--verde-escuro); box-shadow: 0 4px 0 -1px var(--verde), 0 6px 14px rgba(0, 39, 118, .14); }
   .apoiar-flutuante .apoiar-botao.apoiado { color: var(--verde-escuro); }
   .apoiar-flutuante .apoiar-botao:focus-visible { outline: 3px solid var(--azul); outline-offset: -3px; border-radius: 12px; }
-  .apoiar-flutuante .apoiar-botao.apertado { transform: none; }
-  .apoiar-flutuante .apoiar-botao.apertado svg { transform: scale(.92); }
-  .apoiar-flutuante .apoiar-estrelas { left: 50%; top: 4px; }
+  .apoiar-flutuante .apoiar-botao:active .icone-polegar { transform: scale(.94); }
+  .apoiar-flutuante .apoiar-estrela { left: 50%; top: 8px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .apoiar-botao, .apoiar-flutuante { transition: none; }
-  .apoiar-botao.festa svg, .apoiar-painel:not([hidden]) { animation: none; }
-  .apoiar-estrelas { display: none; }
+  .apoiar-botao.festa .polegar, .apoiar-botao.festa .icone-polegar, .apoiar-painel:not([hidden]) { animation: none; }
+  .apoiar-estrela { display: none; }
 }

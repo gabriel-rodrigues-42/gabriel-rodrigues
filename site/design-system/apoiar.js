@@ -17,6 +17,7 @@
 //               o texto e sem tirar nenhum atalho da barra (CSS em apoiar.css)
 // Depois do toque, abre um painel com o agradecimento e os botões de compartilhar.
 // Teste sem gravar nada: ?apoio=demo em qualquer proposta (o número é de exemplo).
+// A animação do toque pode ser trocada com &anim=pulo|pulso|estrela (padrão: pulo).
 //
 // Privacidade: o servidor (functions/api/propostas.js) guarda só a contagem de cada proposta.
 // Um apoio por aparelho fica no localStorage deste navegador. Explicado em /privacidade/#propostas.
@@ -81,7 +82,7 @@
   const calmo = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const ICONE = {
-    polegar: '<svg viewBox="0 0 24 24" aria-hidden="true" class="icone-polegar"><path d="M7 10v11"/><path d="M15 5.9 14 10h5.8a2 2 0 0 1 1.9 2.6l-2.3 8a2 2 0 0 1-1.9 1.4H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.8a2 2 0 0 0 1.8-1.1L12 2a3.1 3.1 0 0 1 3 3.9Z"/></svg>',
+    polegar: '<svg viewBox="0 0 24 24" aria-hidden="true" class="icone-polegar"><g class="polegar"><path d="M7 10v11"/><path d="M15 5.9 14 10h5.8a2 2 0 0 1 1.9 2.6l-2.3 8a2 2 0 0 1-1.9 1.4H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.8a2 2 0 0 0 1.8-1.1L12 2a3.1 3.1 0 0 1 3 3.9Z"/></g></svg>',
     estrela: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2Q13.3 10.7 22 12Q13.3 13.3 12 22Q10.7 13.3 2 12Q10.7 10.7 12 2Z"/></svg>',
     partilha: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>',
     whatsapp: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.2-4A8 8 0 1 1 8 18.8Z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-1.8-.9-.8.8a4 4 0 0 1-2.3-2.3l.8-.8-.9-1.8z"/></svg>',
@@ -95,6 +96,13 @@
       const s = demo ? sessionStorage : localStorage;
       return new Set(JSON.parse(s.getItem(CHAVE + (demo ? "-demo" : "")) || "[]"));
     } catch { return new Set(); }
+  }
+  function esquecer(id, demo) {
+    try {
+      const s = demo ? sessionStorage : localStorage;
+      const lista = guardado(demo); lista.delete(id);
+      s.setItem(CHAVE + (demo ? "-demo" : ""), JSON.stringify([...lista]));
+    } catch { /* sem armazenamento */ }
   }
   function guardar(id, demo) {
     try {
@@ -121,24 +129,23 @@
     return c ? c.href : location.origin + location.pathname;
   }
 
-  // Estrelas do logo que saem do polegar (só a festa; nada depende delas).
-  function estrelas(alvo) {
+  // Animação do polegar ao apoiar (só enfeite; nada depende dela). Três opções para o Gabriel
+  // escolher, testadas com ?apoio=demo&anim=pulo|pulso|estrela. Padrão: pulo.
+  const ANIMACOES = ["pulo", "pulso", "estrela"];
+  function animar_(botao, tipo) {
     if (calmo()) return;
-    const caixa = el("span", "apoiar-estrelas");
-    caixa.setAttribute("aria-hidden", "true");
-    const n = 6;
-    for (let i = 0; i < n; i++) {
+    botao.dataset.anim = tipo;
+    botao.classList.remove("festa");
+    void botao.offsetWidth; // reinicia a animação
+    botao.classList.add("festa");
+    if (tipo === "estrela") {
       const s = el("span", "apoiar-estrela");
+      s.setAttribute("aria-hidden", "true");
       s.innerHTML = ICONE.estrela;
-      const ang = (-90 + (i - (n - 1) / 2) * 34) * Math.PI / 180;
-      const dist = 34 + (i % 2) * 14;
-      s.style.setProperty("--x", `${Math.cos(ang) * dist}px`);
-      s.style.setProperty("--y", `${Math.sin(ang) * dist}px`);
-      s.style.setProperty("--atraso", `${i * 25}ms`);
-      caixa.append(s);
+      botao.append(s);
+      setTimeout(() => s.remove(), 900);
     }
-    alvo.append(caixa);
-    setTimeout(() => caixa.remove(), 1000);
+    setTimeout(() => botao.classList.remove("festa"), 900);
   }
 
   class Apoiar extends HTMLElement {
@@ -152,6 +159,7 @@
 
       const params = new URLSearchParams(location.search);
       this.demo = params.has("apoio");
+      this.anim = ANIMACOES.includes(params.get("anim")) ? params.get("anim") : "pulo";
       this.id_ = this.getAttribute("proposta") || slugDaPagina();
       if (!this.id_) return;
       this.titulo = (document.title.split(" · ")[0] || "").trim();
@@ -240,13 +248,14 @@
         const fechar = el("button", "apoiar-fechar");
         fechar.type = "button"; fechar.innerHTML = ICONE.fechar;
         fechar.setAttribute("aria-label", T.fechar);
-        fechar.addEventListener("click", () => this.fecharPainel());
+        // detail 0 = clique pelo teclado: só então o foco volta ao polegar (no toque, nada de contorno).
+        fechar.addEventListener("click", (e) => this.fecharPainel(e.detail === 0));
         depois.hidden = false;
         painel.append(fechar, depois);
         secao.prepend(painel);
         this.painel = painel;
         this.observarLeitura(secao);
-        document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !painel.hidden) this.fecharPainel(); });
+        document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !painel.hidden) this.fecharPainel(true); });
       }
 
       this.secao = secao;
@@ -270,40 +279,39 @@
       this.painel.hidden = false;
       this.atualizarVisivel?.();
     }
-    fecharPainel() {
+    fecharPainel(teclado) {
       this.painel.hidden = true;
       this.atualizarVisivel?.();
-      this.botao.focus();
+      if (teclado) this.botao.focus();
     }
 
+    // Resposta na hora: o polegar muda e o painel abre no toque, sem esperar o servidor.
+    // Se o servidor recusar, o botão volta ao normal e o painel mostra o erro.
     async apoiar() {
       const b = this.botao;
-      b.disabled = true;
-      b.classList.add("apertado");
-      let total = null;
-      if (this.demo) {
-        total = DEMO_TOTAL;
-        await new Promise((r) => setTimeout(r, 250));
-      } else {
-        try {
-          const resp = await fetch("/api/propostas", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ proposta: this.id_, idioma: EN ? "en" : "pt" }),
-          });
-          const dados = await resp.json().catch(() => ({}));
-          if (!resp.ok || !dados.ok) throw new Error(dados.erro || T.erro);
-          total = dados.total;
-        } catch (erro) {
-          b.disabled = false;
-          b.classList.remove("apertado");
-          this.mostrarErro(erro.message || T.erro);
-          return;
-        }
-      }
       guardar(this.id_, this.demo);
       this.apoiado = true;
-      this.mostrarDepois(total, true);
+      this.mostrarDepois(null, true);
+      if (this.demo) { this.escreverStatus(DEMO_TOTAL, true); return; }
+      try {
+        const resp = await fetch("/api/propostas", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ proposta: this.id_, idioma: EN ? "en" : "pt" }),
+        });
+        const dados = await resp.json().catch(() => ({}));
+        if (!resp.ok || !dados.ok) throw new Error(dados.erro || T.erro);
+        this.escreverStatus(dados.total, true);
+      } catch (erro) {
+        esquecer(this.id_, false);
+        this.apoiado = false;
+        b.classList.remove("apoiado");
+        b.setAttribute("aria-pressed", "false");
+        b.setAttribute("aria-label", T.rotuloBotao);
+        this.rotulo.textContent = T.botao;
+        this.secao.classList.remove("feito");
+        this.mostrarErro(erro.message || T.erro);
+      }
     }
 
     mostrarErro(msg) {
@@ -316,8 +324,6 @@
     // Estado de quem já apoiou. Na volta à página (animar = false), busca o número no servidor.
     async mostrarDepois(total, animar) {
       const b = this.botao;
-      b.disabled = false;
-      b.classList.remove("apertado");
       b.classList.add("apoiado");
       b.setAttribute("aria-pressed", "true");
       this.rotulo.textContent = T.apoiado;
@@ -325,14 +331,11 @@
       this.secao.classList.add("feito");
       this.depois.classList.remove("so-erro");
       if (animar) {
-        estrelas(b);
-        if (!calmo()) {
-          b.classList.add("festa");
-          setTimeout(() => b.classList.remove("festa"), 700);
-        }
+        animar_(b, this.anim);
+        this.abrirPainel();
       }
-      if (animar) this.abrirPainel();
       this.escreverStatus(total, animar);
+      if (animar) return; // o número vem da resposta do envio (apoiar)
       if (total == null && !this.demo) {
         try {
           const dados = await (await fetch("/api/propostas")).json();
