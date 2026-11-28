@@ -123,6 +123,11 @@
         <select id="sim-prazo"><option value="5">5 years</option><option value="10" selected>10 years</option><option value="15">15 years</option></select>
       </div>
       <div class="campo">
+        <label for="sim-juros">Interest rates over the period</label>
+        <select id="sim-juros"><option value="hoje" selected>Stay as they are today</option><option value="focus">Fall as the market expects</option></select>
+        <p class="pequeno">"Fall" follows the Selic rate projected in the Central Bank's Focus survey (November 2026): 13% at the end of 2027, 11% in 2028 and 10.5% in 2029.</p>
+      </div>
+      <div class="campo" id="campo-cdi">
         <label for="sim-cdi">CDI per year (%)</label>
         <input id="sim-cdi" inputmode="decimal" autocomplete="off">
         <p class="pequeno">13.65% is the CDI with the Selic policy rate at 13.75% (Central Bank, Nov 4, 2026). You can change it.</p>
@@ -158,12 +163,13 @@
     <h2 id="t-conta">How the math works</h2>
     <p>The 387 Brazilian funds that buy stakes in companies ended, on average, with 1.1 times what the CDI would pay in the same time. The average scenario does the same with the CDI you choose, for any period. That's a simplification: the study measures each fund's whole life. Between the top and bottom quarters of funds, the gap was 25.3 points a year. The bad and good scenarios sit half that gap below and above the average. The bad one isn't the worst case: the worst is losing everything, shown in "What if every company goes under?".</p>
     <p>The same rate applies to the whole portfolio, because the study does not split funds by the FSRI tiers. If the rules are not met, the profit pays 15% tax, like a bank CD after two years. With the rules met, the profit is tax-free and, through the large door, the investment takes 2% of its value a year off income tax, for 5 years, up to half of that year's tax.</p>
-    <p>Through the large door, loan interest grows with the CDI plus the margin you enter, and comes out of every line. LCA notes assume 85% of the CDI. Stocks and real-estate funds repeat the Ibovespa (+35.4%) and the IFIX (+31.5%) from 2021 to 2025.</p>
+    <p>Through the large door, loan interest grows with the CDI plus the margin you enter, and comes out of every line. LCA notes assume 85% of the CDI. With "fall", each year's CDI follows the Selic rate projected in the Focus survey minus 0.10 point, and stays at 10.4% after 2029. FSRI company returns keep today's CDI, so the difference shows only the effect of lower rates. Stocks and real-estate funds repeat the Ibovespa (+35.4%) and the IFIX (+31.5%) from 2021 to 2025.</p>
     <p>Insurance only pays if the company really goes bankrupt, confirmed by an audit. It does not cover profit that never came.</p>
     <h3>Sources</h3>
     <ul class="fontes">
       <li><a href="https://spectrainvest.com/en/estudo/performance-of-brazilian-private-equity-and-venture-capital-funds-1994-2022-2/">Insper, Spectra and ABVCAP, Performance of Brazilian Private Equity and Venture Capital Funds (1994-2022), 2023</a></li>
       <li><a href="https://www.bcb.gov.br/controleinflacao/historicotaxasjuros">Central Bank of Brazil, Selic rate history (Copom meeting of Nov 4, 2026)</a></li>
+      <li><a href="https://www.bcb.gov.br/publicacoes/focus">Central Bank of Brazil, Focus survey (November 2026): median Selic of 13% at the end of 2027, 11% in 2028 and 10.5% in 2029 (in Portuguese)</a></li>
       <li><a href="https://gabriel-zucman.eu/files/report-g20.pdf">Gabriel Zucman, report to the G20 on minimum taxation of billionaires (2024)</a></li>
       <li><a href="https://www.montebravo.com.br/wp-content/uploads/2025/12/Tabela-Periodica-Monte-Bravo-Janeiro-2026.pdf">Monte Bravo, periodic table of returns with Bloomberg data through 12/31/2025 (Ibovespa and IFIX, B3 indexes, from 2021 to 2025)</a></li>
       <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/lei/l11.033.htm">Law 11,033 of 2004 (tax on fixed income and stocks; exemption of LCI, LCA and real-estate funds)</a></li>

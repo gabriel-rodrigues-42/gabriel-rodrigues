@@ -35,6 +35,9 @@
   // Referência levada ao G20 (relatório Zucman, 2024): piso de 2% ao ano, só para bilionários em dólar.
   const PISO_G20 = 0.02;
   const CDI_PADRAO = 13.65; // Selic de 13,75% (Copom, 4/11/2026) menos 0,10 ponto
+  // Cenário "juros em queda": medianas da Selic no fim de 2027, 2028 e 2029 no Boletim Focus
+  // de novembro de 2026 (Banco Central), menos 0,10 ponto para virar CDI. Depois de 2029, fica igual.
+  const CDI_FOCUS = [12.90, 10.90, 10.40];
 
   const AREAS = [
     ['nenhuma', 'Outra área, ou não tenho empresa', 'Another field, or I have no business'],
@@ -124,7 +127,8 @@
       lucroGrande: 'Quanto sobra ou falta no fim do prazo, depois do imposto e de pagar o banco.',
       lucroMenor: 'Quanto sobra no fim do prazo, depois do imposto.',
       cdb: 'Tesouro Selic ou CDB', lca: 'LCI, LCA ou debênture incentivada', fii: 'Fundo imobiliário', acoes: 'Ações',
-      cdbNota: (c, g) => g ? `O CDB não perde dinheiro, mas rende 100% do CDI (${fmtPct(c / 100)}), menos que os juros do banco.` : `Rende 100% do CDI (${fmtPct(c / 100)}), sem risco de perder.`,
+      cdbNota: (c, g, q) => (q ? `Com os juros caindo, o CDI dá ${fmtPct(c / 100)} por ano, na média do prazo. ` : '') + (g ? `O CDB não perde dinheiro, mas rende 100% do CDI${q ? '' : ` (${fmtPct(c / 100)})`}, menos que os juros do banco.` : `Rende 100% do CDI${q ? '' : ` (${fmtPct(c / 100)})`}, sem risco de perder.`),
+      quedaNota: 'Juros em queda: o CDI segue o que o mercado espera para a Selic (13% no fim de 2027, 11% em 2028 e 10,5% em 2029, Boletim Focus de novembro de 2026) e depois fica igual. É projeção, não promessa. O empréstimo, o CDB e a LCA seguem esse caminho. O retorno das empresas do FSRI fica igual ao do cenário de hoje, para mostrar só o efeito dos juros.',
       lcaNota: 'Supomos 85% do CDI, que empata com o CDB depois do imposto. O banco pode pagar mais ou menos.',
       fiiNota: 'Se repetir o IFIX de 2021 a 2025. Supõe rendimento isento: cotista com menos de 10% do fundo.',
       acoesNota: 'Se repetir o Ibovespa de 2021 a 2025.',
@@ -192,7 +196,8 @@
       lucroGrande: 'What is left over, or missing, at the end of the period, after tax and after paying the bank.',
       lucroMenor: 'What is left over at the end of the period, after tax.',
       cdb: 'Treasury Selic or bank CD', lca: 'LCI, LCA or infrastructure bond', fii: 'Real-estate fund', acoes: 'Stocks',
-      cdbNota: (c, g) => g ? `A bank CD doesn't lose money, but it earns 100% of the CDI (${fmtPct(c / 100)}), less than the bank's interest.` : `Earns 100% of the CDI (${fmtPct(c / 100)}), with no risk of loss.`,
+      cdbNota: (c, g, q) => (q ? `With rates falling, the CDI pays ${fmtPct(c / 100)} a year on average over the period. ` : '') + (g ? `A bank CD doesn't lose money, but it earns 100% of the CDI${q ? '' : ` (${fmtPct(c / 100)})`}, less than the bank's interest.` : `Earns 100% of the CDI${q ? '' : ` (${fmtPct(c / 100)})`}, with no risk of loss.`),
+      quedaNota: 'Falling rates: the CDI follows what the market expects for the Selic rate (13% at the end of 2027, 11% in 2028 and 10.5% in 2029, Banco Central Focus survey, November 2026) and then holds. It is a projection, not a promise. The loan, the bank CD and the LCA follow that path. FSRI company returns stay the same as in today\'s scenario, to show only the effect of interest rates.',
       lcaNota: 'We assume 85% of the CDI, which matches a bank CD after tax. Banks may pay more or less.',
       fiiNota: 'If it repeats the IFIX from 2021 to 2025. Assumes tax-exempt income: holder with less than 10% of the fund.',
       acoesNota: 'If it repeats the Ibovespa from 2021 to 2025.',
@@ -248,7 +253,7 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
   // Estado: tudo só na memória da página.
-  const estado = { porta: 'grande', valor: 10000000, patrimonio: 50000000, area: '', sel: new Map(), prazo: 10, cdi: CDI_PADRAO, margem: 0 };
+  const estado = { porta: 'grande', valor: 10000000, patrimonio: 50000000, area: '', sel: new Map(), prazo: 10, cdi: CDI_PADRAO, margem: 0, juros: 'hoje' };
 
   const form = $('#sim-form');
   const campoValor = $('#sim-valor');
@@ -256,6 +261,7 @@
   const campoPrazo = $('#sim-prazo');
   const campoCdi = $('#sim-cdi');
   const campoMargem = $('#sim-margem');
+  const campoJuros = $('#sim-juros');
 
   campoArea.insertAdjacentHTML('beforeend', AREAS.map(a => `<option value="${a[0]}">${esc(EN ? a[2] : a[1])}</option>`).join(''));
 
@@ -430,27 +436,36 @@
     // Valor no fim do prazo, já sem o imposto sobre o lucro (prejuízo não paga imposto).
     const fim = (r, imp) => { const g = V * (Math.pow(1 + r, n) - 1); return V + (g > 0 ? g * (1 - imp) : g); };
     const cdiR = estado.cdi / 100;
+    // CDI de cada ano: o de hoje o prazo todo, ou o caminho do Focus.
+    const queda = estado.juros === 'focus';
+    const cdiAno = k => (queda ? CDI_FOCUS[Math.min(k, CDI_FOCUS.length) - 1] : estado.cdi) / 100;
+    // Quanto R$ 1 vira do ano de+1 até o ano ate, rendendo o CDI vezes m mais a margem.
+    const fator = (de, ate, m = 1, extra = 0) => { let f = 1; for (let k = de + 1; k <= ate; k++) f *= 1 + cdiAno(k) * m + extra; return f; };
+    const anual = f => Math.pow(f, 1 / n) - 1;
+    // O retorno das empresas do FSRI fica preso ao CDI de hoje nos dois casos (suposição).
     const tx = { medio: Math.pow(VEZES_CDI, 1 / n) * (1 + cdiR) - 1 };
     tx.ruim = Math.max(-0.99, tx.medio - MEIA_DIFERENCA);
     tx.bom = tx.medio + MEIA_DIFERENCA;
     const impF = isento ? 0 : IR;
     // Cada desconto anual vira dinheiro na mão naquele ano; corrigimos pelo CDI até o fim do prazo.
     let desconto = 0;
-    if (grande && a.ok) for (let k = 1; k <= ANOS_DESCONTO; k++) desconto += V * DESCONTO_ANO * Math.pow(1 + cdiR, n - k);
-    const jurosR = cdiR + estado.margem / 100;
-    const juros = grande ? V * (Math.pow(1 + jurosR, n) - 1) : 0;
+    if (grande && a.ok) for (let k = 1; k <= ANOS_DESCONTO; k++) desconto += V * DESCONTO_ANO * fator(k, n);
+    const fJuros = fator(0, n, 1, estado.margem / 100);
+    const jurosR = anual(fJuros);
+    const juros = grande ? V * (fJuros - 1) : 0;
+    const cdiMedio = anual(fator(0, n)), lcaMedio = anual(fator(0, n, LCA_DO_CDI));
     const lucro = (v, extra = 0) => v + extra - V - juros;
-    const ruim = fim(tx.ruim, impF), medio = fim(tx.medio, impF), bom = fim(tx.bom, impF), cdi = fim(cdiR, IR);
+    const ruim = fim(tx.ruim, impF), medio = fim(tx.medio, impF), bom = fim(tx.bom, impF), cdi = fim(cdiMedio, IR);
     const outras = [
-      { cls: 'cdi', nome: T.cdb, taxa: cdiR, nota: T.cdbNota(estado.cdi, grande), imp: T.comIR, lucro: lucro(cdi) },
-      { cls: 'outra', nome: T.lca, taxa: cdiR * LCA_DO_CDI, nota: T.lcaNota, imp: T.isentoCurto, lucro: lucro(fim(cdiR * LCA_DO_CDI, 0)) },
+      { cls: 'cdi', nome: T.cdb, taxa: cdiMedio, nota: T.cdbNota(cdiMedio * 100, grande, queda), imp: T.comIR, lucro: lucro(cdi) },
+      { cls: 'outra', nome: T.lca, taxa: lcaMedio, nota: T.lcaNota, imp: T.isentoCurto, lucro: lucro(fim(lcaMedio, 0)) },
       { cls: 'outra', nome: T.fii, taxa: IFIX_AA, nota: T.fiiNota, imp: T.isentoCurto, lucro: lucro(fim(IFIX_AA, 0)) },
       { cls: 'outra', nome: T.acoes, taxa: IBOV_AA, nota: T.acoesNota, imp: T.comIR, lucro: lucro(fim(IBOV_AA, IR)) },
     ];
     const seguro = a.itens.reduce((s, i) => s + V * i.w * FAIXAS[i.e.f].seguro, 0);
-    return { a, V, n, isento, grande, tx, ruim, medio, bom, cdi, cdiR, jurosR, juros, desconto, outras,
+    return { a, V, n, isento, grande, queda, tx, ruim, medio, bom, cdi, cdiR, jurosR, juros, desconto, outras,
       lucros: { ruim: lucro(ruim, desconto), medio: lucro(medio, desconto), bom: lucro(bom, desconto) },
-      medioMargem2: medio + desconto - V - V * (Math.pow(1 + cdiR + 0.02, n) - 1),
+      medioMargem2: medio + desconto - V - V * (fator(0, n, 1, 0.02) - 1),
       seguro, perde: V - seguro };
   }
 
@@ -487,6 +502,7 @@
     if (c.desconto) notas.push(T.desconto(fmt(c.desconto)));
     if (c.grande) notas.push(T.juros(fmt(c.juros), fmtPct(c.jurosR)));
     if (c.grande && estado.margem === 0) notas.push(T.exemploMargem(sinal(c.medioMargem2)));
+    if (c.queda) notas.push(T.quedaNota);
     alvo.innerHTML = `<p class="pequeno">${esc(c.grande ? T.lucroGrande : T.lucroMenor)}</p>
     <h3 class="grupo">${esc(T.grupoFsri)}</h3>
     <div class="cenarios">
@@ -512,6 +528,11 @@
     estado.cdi = Number.isFinite(v) && v >= 0 && v < 100 ? v : CDI_PADRAO;
     desenharResultado();
   });
+  campoJuros.addEventListener('change', () => {
+    estado.juros = campoJuros.value === 'focus' ? 'focus' : 'hoje';
+    $('#campo-cdi').hidden = estado.juros === 'focus';
+    desenharResultado();
+  });
   campoMargem.addEventListener('input', () => {
     const v = parseFloat(String(campoMargem.value).replace(',', '.'));
     estado.margem = Number.isFinite(v) && v >= 0 && v < 50 ? v : 0;
@@ -532,6 +553,7 @@
     u.search = ''; u.hash = '';
     u.searchParams.set('c', c);
     u.searchParams.set('p', String(estado.prazo));
+    if (estado.juros === 'focus') u.searchParams.set('j', 'focus');
     return u.toString();
   }
   function atualizarLink() {
@@ -637,6 +659,7 @@
     const c = q.get('c');
     const p = +q.get('p');
     if ([5, 10, 15].includes(p)) { estado.prazo = p; campoPrazo.value = String(p); }
+    if (q.get('j') === 'focus') { estado.juros = 'focus'; campoJuros.value = 'focus'; $('#campo-cdi').hidden = true; }
     if (!c) return;
     c.split('-').forEach(par => {
       const [id, peso] = par.split('.');

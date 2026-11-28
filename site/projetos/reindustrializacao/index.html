@@ -88,6 +88,8 @@
   .duas .contra { background: var(--areia); box-shadow: none; }
   .duas .pro { background: var(--verde-claro); box-shadow: none; }
   .duas ul { margin: var(--espaco-2) 0 0; padding-left: 1.1em; }
+  .futuros { margin-bottom: var(--espaco-4); }
+  .futuros li + li { margin-top: var(--espaco-2); }
   @media (max-width: 560px) { .duas { grid-template-columns: 1fr; } }
 
   /* Fluxo do dinheiro */
@@ -435,9 +437,30 @@
     </div>
     <p class="pequeno suave">Inflação no período: 33% (IPCA, IBGE). Índices da B3 compilados pela Monte Bravo com dados da Bloomberg (janeiro de 2026). Impostos: Leis 11.033, de 2004, 12.431, de 2011, e 15.270, de 2025.</p>
 
-    <h3 class="subtitulo">Para quem isso faz sentido</h3>
-    <p>Para quem paga pouco imposto, a renda fixa é a escolha certa: rende perto do CDI e não tem risco de perder tudo.</p>
-    <p>Para patrimônio grande, a disputa é com a LCA e a debênture incentivada, que já são isentas e quase sem risco. Por isso o FSRI dá um desconto no imposto de renda. Ele vale mesmo para quem quase não paga o imposto mínimo. Na porta grande, os juros do empréstimo comem quase todo o ganho. No cenário médio, o desconto pode fechar a conta. No ruim, você perde. O <a href="/projetos/reindustrializacao/simulador/">simulador</a> faz a conta com os juros do seu banco.</p>
+    <h3 class="subtitulo">Dois futuros possíveis</h3>
+    <p class="frases">Ninguém sabe o futuro. Mas dá para ver para onde cada caminho leva, com os números de hoje.</p>
+    <div class="duas futuros">
+      <div class="cartao contra">
+        <strong>Se nada mudar</strong>
+        <ul>
+          <li>A dívida do governo passou de 52% do PIB em 2013 para 83% em setembro de 2026 (Banco Central).</li>
+          <li>Em 12 meses, o setor público gastou R$&nbsp;1,2 trilhão só com juros. É 9% de tudo o que o país produz (Banco Central, setembro de 2026).</li>
+          <li>Quanto maior a dívida, mais juro o mercado cobra para emprestar ao Brasil (Banco Central, Relatório de Política Monetária, junho de 2025).</li>
+          <li>O dinheiro grande continua emprestado ao governo. A dívida cresce, os juros ficam altos, e quem paga a conta é quem pega crédito: o cidadão e a pequena empresa.</li>
+        </ul>
+      </div>
+      <div class="cartao pro">
+        <strong>Com o FSRI</strong>
+        <ul>
+          <li>Parte desse dinheiro vira fábrica, patente e plataforma. As empresas são escolhidas em maratona e banca públicas, e o dinheiro sai por metas.</li>
+          <li>A Faixa 1 dá lucro cedo e segura a carteira. A Faixa 3 constrói o que o país ainda não tem.</li>
+          <li>As empresas novas pagam imposto e contratam. O governo arrecada mais sem criar imposto.</li>
+          <li>O mercado já espera a Selic cair de 13,75% para 10,5% até 2029 (Boletim Focus, Banco Central, novembro de 2026). Com a dívida sob controle, ela pode cair mais. Com juros menores, o empréstimo fica mais barato e investir em empresa passa a valer mais.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="frases">O FSRI não promete esse futuro. Ele cria regras para que o dinheiro grande ajude a chegar lá: o investidor só ganha se o país ganhar.</p>
+    <p>Quem paga pouco imposto, ou precisa do dinheiro numa data certa, fica melhor na renda fixa. O <a href="/projetos/reindustrializacao/simulador/">simulador</a> faz a conta com os juros do seu banco, com os juros de hoje ou <a href="/projetos/reindustrializacao/simulador/?j=focus">caindo como o mercado espera</a>.</p>
 
     <div class="pior-caso">
       <h3>E se tudo der errado?</h3>
@@ -645,6 +668,9 @@
       <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/lei/l11.033.htm">Lei nº 11.033, de 21 de dezembro de 2004</a>, imposto sobre renda fixa e bolsa e isenção de LCI, LCA e fundo imobiliário (Planalto).</li>
       <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12431.htm">Lei nº 12.431, de 24 de junho de 2011</a>, isenção das debêntures de infraestrutura para pessoa física (Planalto).</li>
       <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/L15270.htm">Lei nº 15.270, de 26 de novembro de 2025</a>, que cria o imposto mínimo sobre rendas acima de R$ 600 mil por ano, com alíquota de até 10%, e a retenção de 10% sobre dividendos acima de R$ 50 mil por mês. O art. 16-A deixa fora da conta poupança, LCI, LCA, CRI, CRA, debêntures incentivadas e fundos imobiliários (Presidência da República).</li>
+      <li><a href="https://www.bcb.gov.br/estatisticas/estatisticasfiscais">Estatísticas fiscais</a>, Banco Central: dívida bruta do governo geral (51,5% do PIB em dezembro de 2013, 82,9% em setembro de 2026) e juros nominais do setor público (R$ 1,205 trilhão, 8,99% do PIB, em 12 meses até setembro de 2026). Nota de 29/10/2026.</li>
+      <li><a href="https://www.bcb.gov.br/publicacoes/rpm">Relatório de Política Monetária</a>, Banco Central, junho de 2025, boxe "Determinantes do prêmio de risco nas taxas nominais brasileiras": quanto maior a dívida bruta, maior o prêmio de risco.</li>
+      <li><a href="https://www.bcb.gov.br/publicacoes/focus">Boletim Focus</a>, Banco Central, novembro de 2026: mediana da Selic de 13,75% no fim de 2026, 13% em 2027, 11% em 2028 e 10,5% em 2029.</li>
       <li><a href="https://conteudo.cvm.gov.br/export/sites/cvm/legislacao/resolucoes/anexos/001/resol088.pdf">Resolução CVM nº 88, de 27 de abril de 2022</a>, que regula o investimento em startups por plataformas na internet e limita a R$ 20 mil por ano o aporte da maioria das pessoas (CVM).</li>
     </ul>
   </section>

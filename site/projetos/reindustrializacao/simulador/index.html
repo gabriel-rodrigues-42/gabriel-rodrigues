@@ -123,6 +123,11 @@
         <select id="sim-prazo"><option value="5">5 anos</option><option value="10" selected>10 anos</option><option value="15">15 anos</option></select>
       </div>
       <div class="campo">
+        <label for="sim-juros">Juros ao longo do prazo</label>
+        <select id="sim-juros"><option value="hoje" selected>Ficam como hoje</option><option value="focus">Caem como o mercado espera</option></select>
+        <p class="pequeno">"Caem" segue a Selic projetada no Boletim Focus do Banco Central (novembro de 2026): 13% no fim de 2027, 11% em 2028 e 10,5% em 2029.</p>
+      </div>
+      <div class="campo" id="campo-cdi">
         <label for="sim-cdi">CDI ao ano (%)</label>
         <input id="sim-cdi" inputmode="decimal" autocomplete="off">
         <p class="pequeno">13,65% é o CDI com a Selic de 13,75% (Copom, 4/11/2026). Pode trocar.</p>
@@ -158,12 +163,13 @@
     <h2 id="t-conta">Como a conta é feita</h2>
     <p>Os 387 fundos brasileiros que compram parte de empresas terminaram, na média, com 1,1 vez o que o CDI daria no mesmo tempo. O cenário médio faz o mesmo com o CDI que você escolher, em qualquer prazo. É uma simplificação: o estudo mede a vida inteira de cada fundo. Entre o quarto de fundos de cima e o de baixo, a diferença foi de 25,3 pontos por ano. O ruim e o bom ficam a meia distância da média para cada lado. O ruim não é o pior caso: o pior é perder tudo, e está no quadro "E se todas as empresas quebrarem?".</p>
     <p>A mesma taxa vale para a carteira toda, porque o estudo não separa os fundos pelas faixas do FSRI. Sem as regras cumpridas, o lucro paga 15% de imposto, como no CDB depois de dois anos. Com as regras, o lucro fica livre de imposto e, na porta grande, o aporte abate 2% do valor por ano do imposto de renda, por 5 anos, até metade do imposto do ano.</p>
-    <p>Na porta grande, os juros do empréstimo crescem com o CDI mais a margem que você puser, e saem de todas as linhas. A LCA supõe 85% do CDI. Ações e fundo imobiliário repetem o Ibovespa (+35,4%) e o IFIX (+31,5%) de 2021 a 2025.</p>
+    <p>Na porta grande, os juros do empréstimo crescem com o CDI mais a margem que você puser, e saem de todas as linhas. A LCA supõe 85% do CDI. Com "juros caem", o CDI de cada ano segue a Selic projetada no Boletim Focus menos 0,10 ponto, e fica em 10,4% depois de 2029. O retorno das empresas do FSRI continua o do CDI de hoje: assim a diferença mostra só o efeito dos juros mais baixos. Ações e fundo imobiliário repetem o Ibovespa (+35,4%) e o IFIX (+31,5%) de 2021 a 2025.</p>
     <p>O seguro só entra se a empresa falir de verdade, com auditoria. Ele não cobre lucro que não veio.</p>
     <h3>Fontes</h3>
     <ul class="fontes">
       <li><a href="https://spectrainvest.com/en/estudo/performance-of-brazilian-private-equity-and-venture-capital-funds-1994-2022-2/">Insper, Spectra e ABVCAP, Performance of Brazilian Private Equity and Venture Capital Funds (1994-2022), 2023</a></li>
       <li><a href="https://www.bcb.gov.br/controleinflacao/historicotaxasjuros">Banco Central, histórico da taxa Selic (Copom de 4/11/2026)</a></li>
+      <li><a href="https://www.bcb.gov.br/publicacoes/focus">Banco Central, Boletim Focus (novembro de 2026): mediana da Selic de 13% no fim de 2027, 11% em 2028 e 10,5% em 2029</a></li>
       <li><a href="https://gabriel-zucman.eu/files/report-g20.pdf">Gabriel Zucman, relatório ao G20 sobre tributação mínima de bilionários (2024)</a></li>
       <li><a href="https://www.montebravo.com.br/wp-content/uploads/2025/12/Tabela-Periodica-Monte-Bravo-Janeiro-2026.pdf">Monte Bravo, tabela periódica de retornos com dados da Bloomberg até 31/12/2025 (Ibovespa e IFIX, índices da B3, de 2021 a 2025)</a></li>
       <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/lei/l11.033.htm">Lei 11.033, de 2004 (imposto sobre renda fixa e bolsa; isenção de LCI, LCA e fundo imobiliário)</a></li>

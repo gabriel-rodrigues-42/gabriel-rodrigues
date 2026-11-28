@@ -88,6 +88,8 @@
   .duas .contra { background: var(--areia); box-shadow: none; }
   .duas .pro { background: var(--verde-claro); box-shadow: none; }
   .duas ul { margin: var(--espaco-2) 0 0; padding-left: 1.1em; }
+  .futuros { margin-bottom: var(--espaco-4); }
+  .futuros li + li { margin-top: var(--espaco-2); }
   @media (max-width: 560px) { .duas { grid-template-columns: 1fr; } }
 
   /* Fluxo do dinheiro */
@@ -435,9 +437,30 @@
     </div>
     <p class="pequeno suave">Inflation in the period: 33% (IPCA, IBGE). B3 indexes compiled by Monte Bravo with Bloomberg data (January 2026). Taxes: Laws 11,033 of 2004, 12,431 of 2011 and 15,270 of 2025.</p>
 
-    <h3 class="subtitulo">Who this makes sense for</h3>
-    <p>For people who pay little tax, fixed income is the right choice: it earns close to the CDI with no risk of losing everything.</p>
-    <p>For large wealth, the competition is LCA notes and infrastructure bonds, which are already tax-exempt and nearly risk-free. That's why the FSRI gives an income-tax discount. It works even for people who pay almost no minimum tax. Through the large door, loan interest eats almost all the gain. In the average scenario, the discount may close the gap. In the bad one, you lose. The <a href="/en/projetos/reindustrializacao/simulador/">simulator</a> does the math with your bank's interest.</p>
+    <h3 class="subtitulo">Two possible futures</h3>
+    <p class="frases">Nobody knows the future. But today's numbers show where each path leads.</p>
+    <div class="duas futuros">
+      <div class="cartao contra">
+        <strong>If nothing changes</strong>
+        <ul>
+          <li>Government debt went from 52% of GDP in 2013 to 83% in September 2026 (Central Bank of Brazil).</li>
+          <li>In 12 months, the public sector spent R$&nbsp;1.2 trillion on interest alone. That's 9% of everything the country produces (Central Bank of Brazil, September 2026).</li>
+          <li>The higher the debt, the more interest the market charges to lend to Brazil (Central Bank of Brazil, Monetary Policy Report, June 2025).</li>
+          <li>Big money keeps being lent to the government. Debt grows, rates stay high, and the bill goes to whoever borrows: ordinary people and small businesses.</li>
+        </ul>
+      </div>
+      <div class="cartao pro">
+        <strong>With the FSRI</strong>
+        <ul>
+          <li>Part of that money becomes factories, patents and platforms. Companies are chosen through public marathons and panels, and money is released by milestones.</li>
+          <li>Tier 1 turns a profit early and steadies the portfolio. Tier 3 builds what the country doesn't have yet.</li>
+          <li>The new companies pay taxes and hire. The government collects more without creating a tax.</li>
+          <li>The market already expects the Selic rate to fall from 13.75% to 10.5% by 2029 (Focus survey, Central Bank of Brazil, November 2026). With debt under control, it can fall further. With lower rates, loans get cheaper and investing in companies is worth more.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="frases">The FSRI doesn't promise that future. It sets rules so big money helps get there: investors only win if the country wins.</p>
+    <p>People who pay little tax, or need the money on a set date, are better off in fixed income. The <a href="/en/projetos/reindustrializacao/simulador/">simulator</a> does the math with your bank's interest, at today's rates or <a href="/en/projetos/reindustrializacao/simulador/?j=focus">falling as the market expects</a>.</p>
 
     <div class="pior-caso">
       <h3>What if everything goes wrong?</h3>
@@ -645,6 +668,9 @@
       <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/lei/l11.033.htm">Law 11,033 of December 21, 2004</a>, tax on fixed income and stocks and the exemption of LCI, LCA and real-estate funds (Planalto).</li>
       <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12431.htm">Law 12,431 of June 24, 2011</a>, exemption of infrastructure bonds for individuals (Planalto).</li>
       <li><a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2025/lei/L15270.htm">Law 15,270 of November 26, 2025</a>, which creates the minimum tax on incomes above R$ 600,000 a year, at up to 10%, and 10% withholding on dividends above R$ 50,000 a month. Article 16-A leaves out savings accounts, LCI, LCA, CRI, CRA, infrastructure bonds and real-estate funds (Office of the President of Brazil).</li>
+      <li><a href="https://www.bcb.gov.br/estatisticas/estatisticasfiscais">Fiscal statistics</a>, Central Bank of Brazil: general government gross debt (51.5% of GDP in December 2013, 82.9% in September 2026) and public sector nominal interest (R$ 1.205 trillion, 8.99% of GDP, in the 12 months to September 2026). Release of Oct 29, 2026 (in Portuguese).</li>
+      <li><a href="https://www.bcb.gov.br/publicacoes/rpm">Monetary Policy Report</a>, Central Bank of Brazil, June 2025, box on the determinants of the risk premium in Brazilian nominal rates: the higher the gross debt, the higher the risk premium (in Portuguese).</li>
+      <li><a href="https://www.bcb.gov.br/publicacoes/focus">Focus survey</a>, Central Bank of Brazil, November 2026: median Selic of 13.75% at the end of 2026, 13% in 2027, 11% in 2028 and 10.5% in 2029 (in Portuguese).</li>
       <li><a href="https://conteudo.cvm.gov.br/export/sites/cvm/legislacao/resolucoes/anexos/001/resol088.pdf">CVM Resolution 88 of April 27, 2022</a>, which regulates investing in startups through online platforms and caps most people at R$ 20,000 a year (CVM).</li>
     </ul>
   </section>
