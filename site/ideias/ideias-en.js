@@ -19,7 +19,7 @@ window.IDEIAS = [
     ],
     proposta: [
       "Create the Sovereign Fund for Reindustrialization and Innovation, the FSRI. Investors keep borrowing with their shares as collateral. The difference is that the money goes to new industries and platforms in Brazil.",
-      "In return, for 5 years, the investment takes part off their minimum tax. After 5 years, the profit comes out tax-free. Only if the money goes into real production in the country.",
+      "In return, for 5 years, the investment takes part off their income tax. After 5 years, the profit comes out tax-free. Only if the money goes into real production in the country.",
       "Projects fall into three risk tiers. Digital platforms, basic industry and cutting-edge technology, such as chips. The State guarantees part of the loss: up to 20%, 35% or 50%, depending on the tier.",
       "Each contribution must pair a quick-return project with a long-term one. The quick one pays the loan interest. The long one builds the future.",
       "The money arrives through a public funnel. A national hackathon, four months of acceleration, a judging panel streamed live and funds released only against audited milestones.",

@@ -24,8 +24,8 @@
   // separam os melhores dos piores. O cenário médio segue o CDI que a pessoa escolhe
   // (1,1 vez o CDI no fim do prazo); o ruim e o bom ficam a meia distância para cada lado.
   const VEZES_CDI = 1.1, MEIA_DIFERENCA = 0.253 / 2;
-  // Desconto no imposto mínimo (parâmetro da proposta): 2% do aporte por ano, por 5 anos,
-  // até metade do imposto mínimo do ano.
+  // Desconto no imposto de renda (parâmetro da proposta): 2% do aporte por ano, por 5 anos,
+  // até metade do IR do ano. Sai do IR total porque o imposto mínimo de muitos ricos fica perto de zero.
   const DESCONTO_ANO = 0.02, ANOS_DESCONTO = 5;
   // Outras aplicações. LCI/LCA: 85% do CDI, isenta, empata com o CDB de 100% do CDI depois
   // dos 15% (suposição, não média de mercado). Ações e fundos imobiliários: repetem o
@@ -110,8 +110,8 @@
       semArea: 'Escolha a sua área no passo 1 para o sistema tirar as empresas com conflito.',
       r2: 'Pelo menos uma da Faixa 1 e uma da Faixa 3',
       r3: p => `Faixa 1 com no mínimo 40% do aporte (agora: ${p})`,
-      sim: 'Aporte incentivado. Por 5 anos, ele abate parte do imposto mínimo. Depois, o lucro fica livre de imposto.',
-      nao: 'Ainda sem incentivo: sem desconto no imposto mínimo, e o lucro paga 15% de imposto. Cumpra as regras acima.',
+      sim: 'Aporte incentivado. Por 5 anos, ele abate parte do imposto de renda. Depois, o lucro fica livre de imposto.',
+      nao: 'Ainda sem incentivo: sem desconto no imposto de renda, e o lucro paga 15% de imposto. Cumpra as regras acima.',
       vazio: 'Escolha pelo menos uma empresa no passo 2 para ver a simulação.',
       ruim: 'Cenário ruim', medio: 'Cenário médio', bom: 'Cenário bom', cdi: 'CDI',
       aa: v => `${fmtPct(v)} ao ano`,
@@ -129,7 +129,7 @@
       fiiNota: 'Se repetir o IFIX de 2021 a 2025. Supõe rendimento isento: cotista com menos de 10% do fundo.',
       acoesNota: 'Se repetir o Ibovespa de 2021 a 2025.',
       isentoCurto: 'Isento',
-      desconto: v => `Inclui ${v} de desconto no imposto (2% do aporte por ano, por 5 anos, corrigido pelo CDI até o fim do prazo). Só vale inteiro se o seu imposto do ano for pelo menos o dobro desse desconto.`,
+      desconto: v => `Inclui ${v} de desconto no imposto (2% do aporte por ano, por 5 anos, corrigido pelo CDI até o fim do prazo). Só vale inteiro se o seu imposto de renda do ano for pelo menos o dobro desse desconto.`,
       exemploMargem: v => `Com o banco cobrando 2 pontos a mais que o CDI, o cenário médio ficaria em ${v}. A conta também não inclui o IOF do empréstimo nem o risco de o banco pedir mais garantia se as ações caírem.`,
       juros: (v, taxa) => `Os juros do empréstimo somam ${v} no prazo (${taxa} ao ano) e já saíram de cada linha. Pegar empréstimo para aplicar em CDB dá prejuízo, porque o banco cobra mais do que o CDB paga.`,
       quebraT: 'E se todas as empresas quebrarem?',
@@ -178,8 +178,8 @@
       semArea: 'Pick your field in step 1 so the system removes companies with a conflict.',
       r2: 'At least one from Tier 1 and one from Tier 3',
       r3: p => `Tier 1 with at least 40% of the investment (now: ${p})`,
-      sim: 'Incentivized investment. For 5 years, it takes part off the minimum tax. After that, the profit is tax-free.',
-      nao: 'No incentive yet: no discount on the minimum tax, and the profit pays 15% tax. Meet the rules above.',
+      sim: 'Incentivized investment. For 5 years, it takes part off income tax. After that, the profit is tax-free.',
+      nao: 'No incentive yet: no income-tax discount, and the profit pays 15% tax. Meet the rules above.',
       vazio: 'Pick at least one company in step 2 to see the simulation.',
       ruim: 'Bad scenario', medio: 'Average scenario', bom: 'Good scenario', cdi: 'CDI',
       aa: v => `${fmtPct(v)} a year`,
@@ -197,7 +197,7 @@
       fiiNota: 'If it repeats the IFIX from 2021 to 2025. Assumes tax-exempt income: holder with less than 10% of the fund.',
       acoesNota: 'If it repeats the Ibovespa from 2021 to 2025.',
       isentoCurto: 'Tax-exempt',
-      desconto: v => `Includes ${v} of tax discount (2% of the investment a year, for 5 years, grown at the CDI to the end of the period). It only applies in full if your yearly tax is at least twice that discount.`,
+      desconto: v => `Includes ${v} of tax discount (2% of the investment a year, for 5 years, grown at the CDI to the end of the period). It only applies in full if your yearly income tax is at least twice that discount.`,
       exemploMargem: v => `If the bank charges 2 points above the CDI, the average scenario would be ${v}. The math also leaves out the loan's IOF tax and the risk of the bank asking for more collateral if the shares fall.`,
       juros: (v, taxa) => `Loan interest adds up to ${v} over the period (${taxa} a year) and is already taken out of every line. Borrowing to buy a bank CD loses money, because the bank charges more than the CD pays.`,
       quebraT: 'What if every company goes under?',
