@@ -118,24 +118,39 @@
     <h2 id="t-passo-3">What could happen</h2>
     <p>Each line shows what is left over at the end of the period, after tax. On top, the FSRI with your portfolio. Below, the same money in other investments. The CDI is Brazil's interbank rate.</p>
     <div class="ajustes">
-      <div class="campo">
-        <label for="sim-prazo">Period</label>
-        <select id="sim-prazo"><option value="5">5 years</option><option value="10" selected>10 years</option><option value="15">15 years</option></select>
-      </div>
-      <div class="campo">
-        <label for="sim-juros">Interest rates over the period</label>
-        <select id="sim-juros"><option value="hoje" selected>Stay as they are today</option><option value="focus">Fall as the market expects</option></select>
-        <p class="pequeno">"Fall" follows the Selic rate projected in the Central Bank's Focus survey (November 2026): 13% at the end of 2027, 11% in 2028 and 10.5% in 2029.</p>
-      </div>
+      <fieldset class="segmento">
+        <legend>Period</legend>
+        <div class="segmento-opcoes">
+          <label><input type="radio" name="prazo" value="5">5 years</label>
+          <label><input type="radio" name="prazo" value="10" checked>10 years</label>
+          <label><input type="radio" name="prazo" value="15">15 years</label>
+        </div>
+      </fieldset>
+      <fieldset class="segmento">
+        <legend>Interest rates over the period</legend>
+        <div class="segmento-opcoes">
+          <label><input type="radio" name="juros" value="hoje" checked>As today</label>
+          <label><input type="radio" name="juros" value="focus">Falling</label>
+        </div>
+      </fieldset>
       <div class="campo" id="campo-cdi">
-        <label for="sim-cdi">CDI per year (%)</label>
+        <label for="sim-cdi">CDI today (% a year)</label>
         <input id="sim-cdi" inputmode="decimal" autocomplete="off">
-        <p class="pequeno">13.65% is the CDI with the Selic policy rate at 13.75% (Central Bank, Nov 4, 2026). You can change it.</p>
+        <p class="pequeno">With the Selic rate at 13.75% (Central Bank, Nov 4, 2026). You can change it.</p>
+      </div>
+      <div class="campo caminho-juros" id="campo-focus" hidden>
+        <p class="rotulo">Selic rate the market expects</p>
+        <ol class="degraus">
+          <li><small>End of 2027</small><b>13%</b></li>
+          <li><small>2028</small><b>11%</b></li>
+          <li><small>2029 onward</small><b>10.5%</b></li>
+        </ol>
+        <p class="pequeno">Focus survey, Central Bank of Brazil, November 2026. A projection, not a promise.</p>
       </div>
       <div class="campo" id="campo-margem">
-        <label for="sim-margem">How much the bank charges above the CDI (points a year)</label>
+        <label for="sim-margem">Bank margin (points above the CDI)</label>
         <input id="sim-margem" inputmode="decimal" autocomplete="off">
-        <p class="pequeno">Zero is the best case: the bank charges only the CDI. In practice there is a margin. Enter your bank's.</p>
+        <p class="pequeno">Zero is the best case. Enter your bank's.</p>
       </div>
     </div>
     <div id="sim-resultado" aria-live="polite"></div>
@@ -163,7 +178,7 @@
     <h2 id="t-conta">How the math works</h2>
     <p>The 387 Brazilian funds that buy stakes in companies ended, on average, with 1.1 times what the CDI would pay in the same time. The average scenario does the same with the CDI you choose, for any period. That's a simplification: the study measures each fund's whole life. Between the top and bottom quarters of funds, the gap was 25.3 points a year. The bad and good scenarios sit half that gap below and above the average. The bad one isn't the worst case: the worst is losing everything, shown in "What if every company goes under?".</p>
     <p>The same rate applies to the whole portfolio, because the study does not split funds by the FSRI tiers. If the rules are not met, the profit pays 15% tax, like a bank CD after two years. With the rules met, the profit is tax-free and, through the large door, the investment takes 2% of its value a year off income tax, for 5 years, up to half of that year's tax.</p>
-    <p>Through the large door, loan interest grows with the CDI plus the margin you enter, and comes out of every line. LCA notes assume 85% of the CDI. With "fall", each year's CDI follows the Selic rate projected in the Focus survey minus 0.10 point, and stays at 10.4% after 2029. FSRI company returns keep today's CDI, so the difference shows only the effect of lower rates. Stocks and real-estate funds repeat the Ibovespa (+35.4%) and the IFIX (+31.5%) from 2021 to 2025.</p>
+    <p>Through the large door, loan interest grows with the CDI plus the margin you enter, and comes out of every line. LCA notes assume 85% of the CDI. With rates "Falling", each year's CDI follows the Selic rate projected in the Focus survey minus 0.10 point, and stays at 10.4% after 2029. FSRI company returns keep today's CDI, so the difference shows only the effect of lower rates. Stocks and real-estate funds repeat the Ibovespa (+35.4%) and the IFIX (+31.5%) from 2021 to 2025.</p>
     <p>Insurance only pays if the company really goes bankrupt, confirmed by an audit. It does not cover profit that never came.</p>
     <h3>Sources</h3>
     <ul class="fontes">

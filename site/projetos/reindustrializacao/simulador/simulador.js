@@ -158,17 +158,23 @@
         semIncentivo: 'Sem incentivo: lucro paga 15% de imposto',
       },
       imp: {
-        titulo: 'Imposto sobre grandes fortunas ou FSRI?',
-        intro: v => `Com patrimônio de ${v}, veja o que um imposto sobre o patrimônio cobraria por ano e o que acontece com o aporte no FSRI.`,
-        porAno: 'por ano',
-        noPrazo: (n, v) => `${v} em ${n} anos, que não voltam`,
-        g20: 'Referência levada ao G20 (2024)',
-        g20Nota: 'Piso de 2% ao ano proposto por Gabriel Zucman. Na proposta, vale só para bilionários em dólar e desconta o imposto que a pessoa já paga. Aqui aparece só para comparar.',
-        lei: 'Lei em vigor (Lei 15.270, de 2025)',
-        leiNota: 'Não cobra sobre o patrimônio, e sim sobre a renda: até 10% para quem ganha mais de R$ 600 mil por ano, desde 2026.',
+        titulo: 'Imposto sobre fortuna ou FSRI?',
+        intro: (v, n) => `Patrimônio de ${v}, em ${n} anos. Veja para onde vai o dinheiro e quem sai ganhando.`,
+        g20: 'Imposto de 2% ao ano sobre o patrimônio',
+        g20Sub: 'Referência levada ao G20 (2024)',
         fsri: 'Aporte no FSRI',
-        fsriTexto: (n, v) => `continua seu. No cenário médio, vira ${v} em ${n} anos, se as empresas derem certo, antes de pagar o empréstimo.`,
-        nota: 'Conta simplificada: o patrimônio fica igual todos os anos. O imposto não volta. O aporte no FSRI pode voltar maior, menor ou não voltar, e o empréstimo continua devido.',
+        fsriSub: 'Com as regras do incentivo',
+        voce: 'Você', pais: 'O país',
+        deVoce: 'Seu patrimônio', governo: 'Orçamento do governo', empresas: 'Empresas no Brasil', volta: 'lucro volta',
+        perdeVoce: 'não volta',
+        paisImp: 'entra no orçamento. Nenhuma fábrica nova.',
+        ganhaVoce: 'no cenário médio, já pagando o banco',
+        paisFsri: 'em fábrica, tecnologia e emprego. Empresas que pagam imposto.',
+        perde: 'perde', ganha: 'ganha',
+        veredito: 'Os dois podem ganhar',
+        vereditoTexto: r => `No imposto, um lado perde para o outro ganhar. No FSRI, o investidor só ganha se as empresas derem certo, e aí o país ganha junto. No cenário ruim, você perde ${r}, mas o dinheiro foi para empresas no Brasil, não ficou parado.`,
+        vereditoNao: 'Com esses juros, o cenário médio não fecha a conta para você. Mesmo assim, o dinheiro vira empresa no Brasil. Experimente juros caindo ou uma margem menor.',
+        nota: 'Conta simplificada: o patrimônio fica igual todos os anos. O piso de 2% do G20 vale só para bilionários em dólar e desconta o imposto já pago; aqui serve só para comparar. A lei em vigor (Lei 15.270, de 2025) não cobra sobre o patrimônio, e sim até 10% sobre renda acima de R$ 600 mil por ano.',
       },
       arquivo: 'minha-carteira-fsri.png',
     },
@@ -228,16 +234,22 @@
       },
       imp: {
         titulo: 'Wealth tax or the FSRI?',
-        intro: v => `With a net worth of ${v}, see what a wealth tax would charge each year and what happens to the FSRI investment.`,
-        porAno: 'a year',
-        noPrazo: (n, v) => `${v} over ${n} years, never coming back`,
-        g20: 'Benchmark taken to the G20 (2024)',
-        g20Nota: '2% yearly floor proposed by Gabriel Zucman. In the proposal it applies only to dollar billionaires and subtracts taxes already paid. Shown here only for comparison.',
-        lei: 'Law in force (Law 15,270 of 2025)',
-        leiNota: 'It does not tax net worth but income: up to 10% for people earning more than R$600,000 a year, since 2026.',
+        intro: (v, n) => `Net worth of ${v}, over ${n} years. See where the money goes and who comes out ahead.`,
+        g20: '2% yearly tax on net worth',
+        g20Sub: 'Benchmark taken to the G20 (2024)',
         fsri: 'FSRI investment',
-        fsriTexto: (n, v) => `stays yours. In the average scenario it becomes ${v} in ${n} years, if the companies succeed, before repaying the loan.`,
-        nota: 'Simplified math: net worth stays the same every year. Tax never comes back. The FSRI investment may come back larger, smaller or not at all, and the loan is still owed.',
+        fsriSub: 'Following the incentive rules',
+        voce: 'You', pais: 'The country',
+        deVoce: 'Your wealth', governo: 'Government budget', empresas: 'Companies in Brazil', volta: 'profit comes back',
+        perdeVoce: 'never comes back',
+        paisImp: 'goes into the budget. No new factory.',
+        ganhaVoce: 'in the average scenario, after paying the bank',
+        paisFsri: 'in factories, technology and jobs. Companies that pay taxes.',
+        perde: 'loses', ganha: 'wins',
+        veredito: 'Both sides can win',
+        vereditoTexto: r => `With the tax, one side loses so the other gains. With the FSRI, investors only win if the companies succeed, and then the country wins too. In the bad scenario you lose ${r}, but the money went into companies in Brazil instead of sitting still.`,
+        vereditoNao: "At these interest rates, the average scenario doesn't add up for you. Even so, the money becomes companies in Brazil. Try falling rates or a smaller margin.",
+        nota: 'Simplified math: net worth stays the same every year. The G20 2% floor applies only to dollar billionaires and subtracts taxes already paid; it is shown only for comparison. The law in force (Law 15,270 of 2025) does not tax net worth but income: up to 10% above R$600,000 a year.',
       },
       arquivo: 'my-fsri-portfolio.png',
     },
@@ -258,10 +270,14 @@
   const form = $('#sim-form');
   const campoValor = $('#sim-valor');
   const campoArea = $('#sim-area');
-  const campoPrazo = $('#sim-prazo');
+  const radios = nome => [...document.querySelectorAll(`input[name=${nome}]`)];
+  const marcar = (nome, v) => radios(nome).forEach(r => { r.checked = r.value === v; });
   const campoCdi = $('#sim-cdi');
   const campoMargem = $('#sim-margem');
-  const campoJuros = $('#sim-juros');
+  function mostrarJuros() {
+    $('#campo-cdi').hidden = estado.juros === 'focus';
+    $('#campo-focus').hidden = estado.juros !== 'focus';
+  }
 
   campoArea.insertAdjacentHTML('beforeend', AREAS.map(a => `<option value="${a[0]}">${esc(EN ? a[2] : a[1])}</option>`).join(''));
 
@@ -469,20 +485,61 @@
       seguro, perde: V - seguro };
   }
 
+  // Imposto ou FSRI: dois caminhos para o mesmo patrimônio, com placar para você e para o país.
   function blocoImposto(c) {
     const pat = estado.patrimonio, n = c.n;
-    const g20 = pat * PISO_G20;
+    const g20 = pat * PISO_G20 * n;
     const I = T.imp;
+    const sinal = v => (v < 0 ? '−' : '+') + fmt(Math.abs(v));
+    const conta = (v, cls) => `<b class="${cls}" data-valor="${Math.round(v)}">${sinal(v)}</b>`;
+    const ganhaMedio = c.lucros.medio >= 0;
+    const placa = (quem, ok) => `<span class="placa ${ok ? 'ganha' : 'perde'}">${esc(quem)}: ${esc(ok ? I.ganha : I.perde)}</span>`;
     return `<div class="comparativo">
       <h3>${esc(I.titulo)}</h3>
-      <p>${esc(I.intro(fmt(pat)))}</p>
-      <div class="comp-linhas">
-        <div class="comp"><strong>${esc(I.g20)}</strong><b>${fmt(g20)} ${esc(I.porAno)}</b><span>${esc(I.noPrazo(n, fmt(g20 * n)))}</span><small>${esc(I.g20Nota)}</small></div>
-        <div class="comp"><strong>${esc(I.lei)}</strong><small>${esc(I.leiNota)}</small></div>
-        <div class="comp fsri"><strong>${esc(I.fsri)}</strong><b>${fmt(c.V)}</b><span>${esc(I.fsriTexto(n, fmt(c.medio)))}</span></div>
+      <p>${esc(I.intro(fmt(pat), n))}</p>
+      <div class="dois-caminhos">
+        <div class="caminho imposto">
+          <strong>${esc(I.g20)}</strong><small>${esc(I.g20Sub)}</small>
+          <div class="trilho" aria-hidden="true"><span class="ponta">${esc(I.deVoce)}</span><span class="linha"><i></i><i></i><i></i></span><span class="ponta">${esc(I.governo)}</span></div>
+          <dl class="placar">
+            <div><dt>${esc(I.voce)}</dt><dd>${conta(-g20, 'menos')}<small>${esc(I.perdeVoce)}</small></dd></div>
+            <div><dt>${esc(I.pais)}</dt><dd>${conta(g20, 'mais')}<small>${esc(I.paisImp)}</small></dd></div>
+          </dl>
+          <p class="placas">${placa(I.voce, false)}${placa(I.pais, true)}</p>
+        </div>
+        <div class="caminho fsri">
+          <strong>${esc(I.fsri)}</strong><small>${esc(I.fsriSub)}</small>
+          <div class="trilho" aria-hidden="true"><span class="ponta">${esc(I.deVoce)}</span><span class="linha"><i></i><i></i><i></i><em class="retorno"><i></i><i></i><i></i></em></span><span class="ponta">${esc(I.empresas)}</span></div>
+          <dl class="placar">
+            <div><dt>${esc(I.voce)}</dt><dd>${conta(c.lucros.medio, ganhaMedio ? 'mais' : 'menos')}<small>${esc(I.ganhaVoce)}</small></dd></div>
+            <div><dt>${esc(I.pais)}</dt><dd>${conta(c.V, 'mais')}<small>${esc(I.paisFsri)}</small></dd></div>
+          </dl>
+          <p class="placas">${placa(I.voce, ganhaMedio)}${placa(I.pais, true)}</p>
+        </div>
       </div>
+      <div class="veredito${ganhaMedio ? '' : ' nao'}">${ganhaMedio ? `<strong>${esc(I.veredito)}</strong>` : ''}<p>${esc(ganhaMedio ? I.vereditoTexto(fmt(Math.abs(c.lucros.ruim))) : I.vereditoNao)}</p></div>
       <p class="pequeno">${esc(I.nota)}</p>
     </div>`;
+  }
+
+  // Anima o quadro na primeira vez que ele aparece na tela: o dinheiro corre pelo trilho e os números sobem.
+  let impostoVisto = false;
+  function animarImposto() {
+    const bloco = $('.comparativo');
+    if (!bloco) return;
+    if (impostoVisto || matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) { bloco.classList.add('parado'); return; }
+    const obs = new IntersectionObserver(ent => {
+      if (!ent[0].isIntersecting) return;
+      obs.disconnect(); impostoVisto = true;
+      bloco.classList.add('animar');
+      const sinal = v => (v < 0 ? '−' : '+') + fmt(Math.abs(v));
+      bloco.querySelectorAll('[data-valor]').forEach(el => {
+        const alvo = +el.dataset.valor, t0 = performance.now(), dur = 1200;
+        const passo = t => { const k = Math.min(1, (t - t0) / dur); el.textContent = sinal(alvo * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(passo); };
+        requestAnimationFrame(passo);
+      });
+    }, { threshold: 0.35 });
+    obs.observe(bloco);
   }
 
   function desenharResultado() {
@@ -516,23 +573,23 @@
     </div>
     ${notas.map(n => `<p class="pequeno nota-conta">${esc(n)}</p>`).join('')}
     <div class="quebra"><h3>${esc(T.quebraT)}</h3><p>${T.quebra(fmt(c.perde), fmt(c.seguro))}</p><p>${esc(T.quebraNota)}</p></div>`;
-    if (estado.porta === 'grande') alvo.insertAdjacentHTML('beforeend', blocoImposto(c));
+    if (estado.porta === 'grande') { alvo.insertAdjacentHTML('beforeend', blocoImposto(c)); animarImposto(); }
     comp.hidden = false;
     atualizarLink();
     desenharCartao(c);
   }
 
-  campoPrazo.addEventListener('change', () => { estado.prazo = +campoPrazo.value; desenharResultado(); });
+  radios('prazo').forEach(r => r.addEventListener('change', () => { estado.prazo = +r.value; desenharResultado(); }));
   campoCdi.addEventListener('input', () => {
     const v = parseFloat(String(campoCdi.value).replace(',', '.'));
     estado.cdi = Number.isFinite(v) && v >= 0 && v < 100 ? v : CDI_PADRAO;
     desenharResultado();
   });
-  campoJuros.addEventListener('change', () => {
-    estado.juros = campoJuros.value === 'focus' ? 'focus' : 'hoje';
-    $('#campo-cdi').hidden = estado.juros === 'focus';
+  radios('juros').forEach(r => r.addEventListener('change', () => {
+    estado.juros = r.value === 'focus' ? 'focus' : 'hoje';
+    mostrarJuros();
     desenharResultado();
-  });
+  }));
   campoMargem.addEventListener('input', () => {
     const v = parseFloat(String(campoMargem.value).replace(',', '.'));
     estado.margem = Number.isFinite(v) && v >= 0 && v < 50 ? v : 0;
@@ -658,8 +715,8 @@
     const q = new URLSearchParams(location.search);
     const c = q.get('c');
     const p = +q.get('p');
-    if ([5, 10, 15].includes(p)) { estado.prazo = p; campoPrazo.value = String(p); }
-    if (q.get('j') === 'focus') { estado.juros = 'focus'; campoJuros.value = 'focus'; $('#campo-cdi').hidden = true; }
+    if ([5, 10, 15].includes(p)) { estado.prazo = p; marcar('prazo', String(p)); }
+    if (q.get('j') === 'focus') { estado.juros = 'focus'; marcar('juros', 'focus'); mostrarJuros(); }
     if (!c) return;
     c.split('-').forEach(par => {
       const [id, peso] = par.split('.');

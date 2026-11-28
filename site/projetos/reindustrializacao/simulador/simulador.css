@@ -90,7 +90,23 @@ h3 { color: var(--azul); margin: 0 0 var(--espaco-2); }
 .quebra p { margin: 0; }
 .quebra p + p { margin-top: var(--espaco-2); }
 .quebra b { color: var(--amarelo); }
-.ajustes { display: grid; gap: var(--espaco-4); grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-top: var(--espaco-4); }
+.ajustes { display: grid; gap: var(--espaco-4) var(--espaco-5); grid-template-columns: 1fr; align-items: start; margin-top: var(--espaco-4); }
+@media (min-width: 640px) { .ajustes { grid-template-columns: 1fr 1fr; } }
+/* Escolha em botões lado a lado (poucas opções: cabe tudo à vista, um toque) */
+.segmento { border: 0; padding: 0; margin: 0; min-width: 0; }
+.segmento legend { font-weight: var(--peso-forte); margin-bottom: var(--espaco-1); padding: 0; }
+.segmento-opcoes { display: flex; background: var(--branco); border: 2px solid var(--azul-claro); border-radius: var(--forma-opcao); padding: 4px; gap: 4px; }
+.segmento-opcoes label { flex: 1; text-align: center; padding: 10px 8px; border-radius: calc(var(--forma-opcao) - 4px); cursor: pointer; font-size: var(--tamanho-campo); color: var(--texto); white-space: nowrap; transition: background-color .2s, color .2s; }
+.segmento-opcoes input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.segmento-opcoes label:has(input:checked) { background: var(--verde-fundo); color: var(--branco); font-weight: var(--peso-forte); }
+.segmento-opcoes label:has(input:focus-visible) { outline: 3px solid var(--azul); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .segmento-opcoes label { transition: none; } }
+/* Caminho da Selic no cenário "caindo" */
+.caminho-juros .rotulo { font-weight: var(--peso-forte); margin: 0 0 var(--espaco-1); }
+.degraus { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+.degraus li { background: var(--verde-claro); border-radius: var(--forma-opcao); padding: 8px 10px; display: grid; }
+.degraus small { color: var(--texto-suave); font-size: var(--tamanho-1); }
+.degraus b { color: var(--verde-escuro); font-size: var(--tamanho-3); }
 .fontes { font-size: var(--tamanho-2); color: var(--texto-suave); }
 .fontes li + li { margin-top: var(--espaco-1); }
 
@@ -108,13 +124,57 @@ h3 { color: var(--azul); margin: 0 0 var(--espaco-2); }
 .leitura-resultado p + p { margin-top: var(--espaco-2); }
 .comparativo { margin-top: var(--espaco-5); background: var(--branco); border-radius: var(--forma-cartao); box-shadow: var(--sombra-cartao); padding: var(--espaco-5); }
 .comparativo > p { margin: 0 0 var(--espaco-3); }
-.comp-linhas { display: grid; gap: var(--espaco-3); margin-bottom: var(--espaco-3); }
-.comp { background: var(--creme); border-radius: var(--forma-opcao); padding: var(--espaco-3) var(--espaco-4); display: grid; gap: var(--espaco-1); }
-.comp strong { color: var(--azul); }
-.comp b { font-size: var(--tamanho-4); color: var(--texto); }
-.comp small { color: var(--texto-suave); font-size: var(--tamanho-2); }
-.comp.fsri { background: var(--verde-claro); }
-.comp.fsri b { color: var(--verde-escuro); }
+.comparativo h3 { margin-top: 0; }
+/* Imposto ou FSRI: dois caminhos lado a lado, com placar */
+.dois-caminhos { display: grid; gap: var(--espaco-3); grid-template-columns: 1fr; }
+@media (min-width: 640px) { .dois-caminhos { grid-template-columns: 1fr 1fr; } }
+.caminho { border-radius: var(--forma-opcao); padding: var(--espaco-4); display: grid; align-content: start; gap: var(--espaco-1); background: var(--creme); }
+.caminho.fsri { background: var(--verde-claro); }
+.caminho > strong { color: var(--azul); font-size: var(--tamanho-3); }
+.caminho > small { color: var(--texto-suave); font-size: var(--tamanho-2); }
+.trilho { display: grid; grid-template-columns: auto auto; grid-template-areas: "de para" "linha linha"; justify-content: space-between; align-items: center; gap: var(--espaco-1) var(--espaco-2); margin: var(--espaco-3) 0; }
+.trilho .ponta:first-child { grid-area: de; } .trilho .ponta:last-child { grid-area: para; }
+.trilho .linha { grid-area: linha; }
+.trilho .ponta { background: var(--branco); border-radius: var(--forma-opcao); padding: 6px 10px; font-size: var(--tamanho-1); font-weight: var(--peso-forte); color: var(--azul); text-align: center; max-width: 9em; }
+.trilho .linha { position: relative; height: 34px; }
+.trilho .linha::before { content: ""; position: absolute; left: 0; right: 0; top: 10px; border-top: 3px dashed var(--amarelo-escuro); }
+.trilho .linha > i, .trilho .retorno i { position: absolute; top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--amarelo); box-shadow: inset 0 0 0 2px var(--amarelo-escuro); }
+.trilho .linha > i:nth-child(1) { left: 15%; } .trilho .linha > i:nth-child(2) { left: 45%; } .trilho .linha > i:nth-child(3) { left: 75%; }
+.trilho .retorno { position: absolute; inset: 0; }
+.trilho .retorno::before { content: ""; position: absolute; left: 0; right: 0; top: 26px; border-top: 3px dashed var(--verde); }
+.trilho .retorno i { top: 20px; background: var(--verde); box-shadow: none; }
+.trilho .retorno i:nth-child(1) { left: 25%; } .trilho .retorno i:nth-child(2) { left: 55%; } .trilho .retorno i:nth-child(3) { left: 85%; }
+.caminho.imposto .trilho .linha { height: 22px; }
+.animar .trilho .linha > i { animation: ida 1.6s ease-in-out 3 both; }
+.animar .trilho .retorno i { animation: volta 1.6s ease-in-out .8s 3 both; }
+.animar .trilho .linha > i:nth-child(2), .animar .trilho .retorno i:nth-child(2) { animation-delay: .3s; }
+.animar .trilho .linha > i:nth-child(3), .animar .trilho .retorno i:nth-child(3) { animation-delay: .6s; }
+.animar .trilho .retorno i:nth-child(2) { animation-delay: 1.1s; }
+.animar .trilho .retorno i:nth-child(3) { animation-delay: 1.4s; }
+.animar .trilho .linha > i, .animar .trilho .retorno i { animation-fill-mode: none; }
+@keyframes ida { 0% { left: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { left: calc(100% - 14px); opacity: 0; } }
+@keyframes volta { 0% { left: calc(100% - 14px); opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { left: 0; opacity: 0; } }
+.placar { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espaco-3); margin: 0; }
+.placar dt { font-size: var(--tamanho-1); font-weight: var(--peso-forte); color: var(--texto-suave); text-transform: uppercase; letter-spacing: .04em; }
+.placar dd { margin: 0; display: grid; gap: 2px; }
+.placar b { font-size: var(--tamanho-3); font-variant-numeric: tabular-nums; }
+.placar b.mais { color: var(--verde-escuro); }
+.placar b.menos { color: var(--texto); }
+.placar small { color: var(--texto-suave); font-size: var(--tamanho-1); line-height: 1.4; }
+.placas { display: flex; flex-wrap: wrap; gap: var(--espaco-2); margin: var(--espaco-3) 0 0; }
+.placa { border-radius: 999px; padding: 4px 12px; font-size: var(--tamanho-1); font-weight: var(--peso-forte); }
+.placa.ganha { background: var(--verde-fundo); color: var(--branco); }
+.placa.perde { background: var(--amarelo-claro); color: var(--texto); box-shadow: inset 0 0 0 2px var(--amarelo-escuro); }
+.animar .placa { animation: aparece .4s ease-out 1.3s both; }
+.animar .caminho.fsri .placa { animation-delay: 1.7s; }
+.veredito { margin: var(--espaco-4) 0 var(--espaco-3); background: var(--azul); color: var(--branco); border-radius: var(--forma-opcao); padding: var(--espaco-4); }
+.veredito strong { display: block; font-size: var(--tamanho-4); color: var(--amarelo); }
+.veredito p { margin: var(--espaco-1) 0 0; }
+.veredito.nao { background: var(--amarelo-claro); color: var(--texto); }
+.veredito.nao p { margin: 0; }
+.animar .veredito { animation: aparece .5s ease-out 2.1s both; }
+@keyframes aparece { from { opacity: 0; transform: scale(.92); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .animar .trilho i, .animar .placa, .animar .veredito { animation: none; } }
 .campo[hidden] { display: none; }
 /* Comparativo de lucro */
 #sim-resultado .grupo { margin: var(--espaco-5) 0 0; font-size: var(--tamanho-3); color: var(--azul); }
