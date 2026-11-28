@@ -17,7 +17,6 @@
 //               o texto e sem tirar nenhum atalho da barra (CSS em apoiar.css)
 // Depois do toque, abre um painel com o agradecimento e os botões de compartilhar.
 // Teste sem gravar nada: ?apoio=demo em qualquer proposta (o número é de exemplo).
-// A animação do toque pode ser trocada com &anim=pulo|pulso|estrela (padrão: pulo).
 //
 // Privacidade: o servidor (functions/api/propostas.js) guarda só a contagem de cada proposta.
 // Um apoio por aparelho fica no localStorage deste navegador. Explicado em /privacidade/#propostas.
@@ -129,22 +128,18 @@
     return c ? c.href : location.origin + location.pathname;
   }
 
-  // Animação do polegar ao apoiar (só enfeite; nada depende dela). Três opções para o Gabriel
-  // escolher, testadas com ?apoio=demo&anim=pulo|pulso|estrela. Padrão: pulo.
-  const ANIMACOES = ["pulo", "pulso", "estrela"];
-  function animar_(botao, tipo) {
+  // Animação do polegar ao apoiar (só enfeite; nada depende dela): pulo curto e uma estrela
+  // do logo que sobe da ponta do polegar.
+  function animar_(botao) {
     if (calmo()) return;
-    botao.dataset.anim = tipo;
     botao.classList.remove("festa");
     void botao.offsetWidth; // reinicia a animação
     botao.classList.add("festa");
-    if (tipo === "estrela") {
-      const s = el("span", "apoiar-estrela");
-      s.setAttribute("aria-hidden", "true");
-      s.innerHTML = ICONE.estrela;
-      botao.append(s);
-      setTimeout(() => s.remove(), 900);
-    }
+    const s = el("span", "apoiar-estrela");
+    s.setAttribute("aria-hidden", "true");
+    s.innerHTML = ICONE.estrela;
+    botao.append(s);
+    setTimeout(() => s.remove(), 900);
     setTimeout(() => botao.classList.remove("festa"), 900);
   }
 
@@ -159,7 +154,6 @@
 
       const params = new URLSearchParams(location.search);
       this.demo = params.has("apoio");
-      this.anim = ANIMACOES.includes(params.get("anim")) ? params.get("anim") : "pulo";
       this.id_ = this.getAttribute("proposta") || slugDaPagina();
       if (!this.id_) return;
       this.titulo = (document.title.split(" · ")[0] || "").trim();
@@ -331,7 +325,7 @@
       this.secao.classList.add("feito");
       this.depois.classList.remove("so-erro");
       if (animar) {
-        animar_(b, this.anim);
+        animar_(b);
         this.abrirPainel();
       }
       this.escreverStatus(total, animar);
